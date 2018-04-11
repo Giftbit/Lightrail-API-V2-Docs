@@ -4,13 +4,13 @@ HOST: https://api.lightrail.com/v1/
 # Lightrail Documentation
 Welcome to Lightrail V2. Lightrail is a platform for managing value.
 
-Contact us anytime at hello@lightrail.com — we are here to help you solidify your use-case and implementation.
+Contact us anytime at hello@lightrail.com — we are here to help you solidify your use-case and implementation.         
 
 ## Getting Started
-[Sign up](https://www.lightrail.com/app/#/register) for a Lightrail account.
+[Sign up](https://www.lightrail.com/app/#/register) for a Lightrail account. 
 
 ### API Keys and Authorization
-Create your API key in the [Integrations](https://www.lightrail.com/app/#/account/api) section of your account.
+Create your API key in the [Integrations](https://www.lightrail.com/app/#/account/api) section of your account. 
 
 To make an API call Lightrail requires the HTTP header `Authorization: Bearer `.
 
@@ -22,12 +22,12 @@ To test your authorization use our `ping` endpoint.
 
 ```curl https://api.lightrail.com/v1/ping --header "Authorization: Bearer <apiKey>"```
 
-### Testing
-When you first sign into your account you will be in test mode. Test mode is used for development allowing you to build in and test functionality. It comes with sample data to give you a sense of what your Lightrail account will look like.
+### Testing 
+When you first sign into your account you will be in test mode. Test mode is used for development allowing you to build in and test functionality. It comes with sample data to give you a sense of what your Lightrail account will look like. 
 
 ## Support
-We have [client libraries](https://www.lightrail.com/docs/#client-libraries/client-libraries) in many languages to speed up your integration.
-We also have a sample [Drop-In Gift Card application]((https://github.com/Giftbit/stripe-integration-sample-webapp)) containing examples in JavaScript and PHP with Java and Ruby coming soon.
+We have [client libraries](https://www.lightrail.com/docs/#client-libraries/client-libraries) in many languages to speed up your integration. 
+We also have a sample [Drop-In Gift Card application]((https://github.com/Giftbit/stripe-integration-sample-webapp)) containing examples in JavaScript and PHP with Java and Ruby coming soon.   
 
 Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
 
@@ -35,34 +35,33 @@ Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
 Use these endpoints to create and manage your Gift Cards and Account Cards.
 
 ---
-### [POST /transactions/debit]
+### Debit [POST /transactions/debit]
 ---
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
     + Attributes
         + transactionId (string, required) - Unique idempotent id for the transaction.\
-        + currency (string, required) -
-        + lineItems ()
-
-    + Body
-
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + lineItems (array[LineItem])
+        
+    + Body 
+    
             {"userSuppliedId":"activate-giftcard-a45etsraw"}
-
+    
 + Response 200
     + Attributes
-        + transaction (Transaction[LineItem])
 
     + Body
-
-            { // todo }
+    
+            { }
 
 # Data Structures
 
 ## LineItem (object)
 + type (string) - Must belong to "product", "shipping", or "tax".
-+ unitCost (number) - The unit cost of the item.
-+ quantity (number, optional) - The number of items. Defaults to 1 if not provided.
++ unitCost (number) - The unit cost of the item. 
++ quantity (number, optional) - The number of items. Defaults to 1 if not provided. 
 + taxRate (number, optional) - Tax rate for the item. This is needed when a transaction contains items that have different tax rates.

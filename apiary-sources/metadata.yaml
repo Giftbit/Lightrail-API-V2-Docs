@@ -1,4 +1,5 @@
-transaction:
-  transactionId: "Unique idempotent id for the transaction."
+currency: "Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`."
 header:
   authorization: "Authorization: Bearer <API_KEY>"
+transaction:
+  transactionId: "Unique idempotent id for the transaction."
