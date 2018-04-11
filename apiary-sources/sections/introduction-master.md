@@ -1,0 +1,1 @@
+{% include 'sections/welcome.md' %}

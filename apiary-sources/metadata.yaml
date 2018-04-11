@@ -1,0 +1,4 @@
+transaction:
+  transactionId: "Unique idempotent id for the transaction."
+header:
+  authorization: "Authorization: Bearer <API_KEY>"
