@@ -54,9 +54,9 @@
                 "transactionId": "unique-id-123",
                 "currency": "USD",
                 "totalPrice": 1199,
-                "discounted": 300,
+                "totalDiscounted": 300,
                 "tax": 67,
-                "totalWithTax": 966,                
+                "totalPayable": 966,                
                 "lineItems": [
                     {
                         "type": "product",
@@ -80,10 +80,11 @@
                             }
                         ],
                         "totalPrice": 1000,
-                        "discounted": 280,
+                        "preTaxDiscount": 280,
                         "totalTaxable": 720,
                         "tax": 58,
-                        "totalWithTax": 778
+                        "postTaxDiscount": 0,
+                        "totalPayable": 778
                     },
                     {
                         "type": "product",
@@ -100,10 +101,11 @@
                             }
                         ],
                         "totalPrice": 199,
-                        "discounted": 20,
+                        "preTaxDiscount": 20,
                         "totalTaxable": 179,
                         "tax": 9,
-                        "totalWithTax": 188
+                        "postTaxDiscount: 0,
+                        "totalPayable": 188
                     }
                 ],
                 "paymentSources": [
