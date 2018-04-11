@@ -19,7 +19,7 @@
                     {
                         "type": "product",
                         "id": "pid_12345", 
-                        "unitCost": 500,
+                        "unitPrice": 500,
                         "taxRate": 0.08, 
                         "description": "Socks.", 
                         "quantity": 2
@@ -27,9 +27,15 @@
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitCost": 199,
+                        "unitPrice": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar."
+                    },
+                    {
+                        "type": "shipping",
+                        "id": "standard-shipping",
+                        "unitPrice": 349,
+                        "taxRate": 0
                     }
                 ],
                 "paymentSources": [
@@ -53,10 +59,10 @@
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "subtotal": 1199,
-                "discounted": 300,
+                "subtotal": 1548,
+                "discount": 350,
                 "tax": 67,
-                "payable": 966,                
+                "payable": 1265,                
                 "lineItems": [
                     {
                         "type": "product",
@@ -103,6 +109,13 @@
                                 "ruleExplanation": "Take 10% off order if over $10.",
                                 "amount": 20,
                                 "pretax": true
+                            },
+                            {
+                                "type": "ITEM_DISCOUNT",
+                                "valueStoreId": "2018-50cent-chocobar-credit",
+                                "ruleExplanation": "50 cents towards chocolate bars.",
+                                "amount": 50,
+                                "pretax": false
                             }
                         ],
                         "lineTotal": {
@@ -110,17 +123,33 @@
                             "preTaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
-                            "postTaxDiscount: 0,
-                            "payable": 188
+                            "postTaxDiscount: 50,
+                            "payable": 138
                         }
-                    }
+                    },
+                    {
+                        "type": "shipping",
+                        "id": "standard-shipping", 
+                        "unitCost": 349,
+                        "taxRate": 0, 
+                        "promotions": [
+                        ],
+                        "lineTotal": {
+                            "price": 349,
+                            "preTaxDiscount": 0,
+                            "taxable": 349,
+                            "tax": 0,
+                            "postTaxDiscount: 0,
+                            "payable": 349
+                        }
+                    }                    
                 ],
                 "paymentSources": [
                     {
                         "rail": "lightrail",
                         "customerEmail": "alice@example.com",
                         "valueStores": [
-                            "alice-account-USD", "2018-alice-socks-promo"
+                            "alice-account-USD", "2018-alice-socks-promo", "2018-50cent-chocobar-credit"
                         ]
                     },
                     {
@@ -135,17 +164,22 @@
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
-                        "currency": "USD"
+                        "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over10-orders",
                         "amount": -100,
-                        "currency": "USD"
+                        "type": "PROMOTION"
+                    },
+                    {
+                        "valueStoreId": "2018-50cent-chocobar-credit",
+                        "amount": -50,
+                        "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "alice-account-USD",
-                        "amount": -666,
-                        "currency": "USD"
+                        "amount": -1265,
+                        "type": "PREPAID"
                     }
                 ]
             }
