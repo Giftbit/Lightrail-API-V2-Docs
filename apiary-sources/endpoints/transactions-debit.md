@@ -55,8 +55,8 @@
                 "currency": "USD",
                 "totalPrice": 1199,
                 "discounted": 300,
-                "tax": 77,
-                "totalWithTax": 976,                
+                "tax": 67,
+                "totalWithTax": 966,                
                 "lineItems": [
                     {
                         "type": "product",
@@ -135,7 +135,7 @@
                     },
                     {
                         "valueStoreId": "alice-account-USD",
-                        "amount": -676,
+                        "amount": -666,
                         "currency": "USD"
                     }
                 ]
