@@ -16,6 +16,7 @@
     
 + Response 200
     + Attributes
+        + lineItems (array[LineItemResponse])
 
     + Body
     
