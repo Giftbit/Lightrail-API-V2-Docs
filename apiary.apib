@@ -90,38 +90,42 @@ Use these endpoints to create and manage your Gift Cards and Account Cards.
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "totalPrice": 1199,
-                "totalDiscounted": 300,
+                "subtotal": 1199,
+                "discounted": 300,
                 "tax": 67,
-                "totalPayable": 966,                
+                "payable": 966,                
                 "lineItems": [
                     {
                         "type": "product",
                         "id": "pid_12345", 
-                        "unitCost": 500,
+                        "unitPrice": 500,
                         "taxRate": 0.08, 
                         "description": "Socks.", 
                         "quantity": 2,
                         "promotions": [
                             {
                                 "type": "ITEM_DISCOUNT",
+                                "valueStoreId": "2018-alice-socks-promo",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": 200,
                                 "pretax": true
                             },
                             {
                                 "type": "CART_DISCOUNT",
+                                "valueStoreId": "2018-10percent-off-over10-orders",
                                 "ruleExplanation": "Take 10% off order if over $10.",
                                 "amount": 80,
                                 "pretax": true
                             }
                         ],
-                        "totalPrice": 1000,
-                        "preTaxDiscount": 280,
-                        "totalTaxable": 720,
-                        "tax": 58,
-                        "postTaxDiscount": 0,
-                        "totalPayable": 778
+                        "lineTotal": {
+                            "price": 1000,
+                            "preTaxDiscount": 280,
+                            "taxable": 720,
+                            "tax": 58,
+                            "postTaxDiscount": 0,
+                            "payable": 778
+                        }  
                     },
                     {
                         "type": "product",
@@ -132,17 +136,20 @@ Use these endpoints to create and manage your Gift Cards and Account Cards.
                         "promotions": [
                             {
                                 "type": "CART_DISCOUNT",
+                                "valueStoreId": "2018-10percent-off-over10-orders",
                                 "ruleExplanation": "Take 10% off order if over $10.",
                                 "amount": 20,
                                 "pretax": true
                             }
                         ],
-                        "totalPrice": 199,
-                        "preTaxDiscount": 20,
-                        "totalTaxable": 179,
-                        "tax": 9,
-                        "postTaxDiscount: 0,
-                        "totalPayable": 188
+                        "lineTotal": {
+                            "price": 199,
+                            "preTaxDiscount": 20,
+                            "taxable": 179,
+                            "tax": 9,
+                            "postTaxDiscount: 0,
+                            "payable": 188
+                        }
                     }
                 ],
                 "paymentSources": [
