@@ -27,7 +27,7 @@ Note:
     
 + Response 200
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}\
+        + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + amount (integer, required) - {{valueStore.value}}
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
