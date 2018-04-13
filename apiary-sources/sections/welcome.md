@@ -27,3 +27,22 @@ We have [client libraries](https://www.lightrail.com/docs/#client-libraries/clie
 We also have a sample [Drop-In Gift Card application]((https://github.com/Giftbit/stripe-integration-sample-webapp)) containing examples in JavaScript and PHP with Java and Ruby coming soon.   
 
 Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
+
+
+## Value Store Types
+```
+ValueStore:
+- "type of value" - $ value, % off
+- appliesTo: "item" | "cart"
+- preTax: boolean;
+- type: "GIFT_CARD", "ACCOUNT", "PROMOTION" // doesn't really matter
+```
+
+| Type          | accessed by   | valueType     | uses          |         preTax|     appliesTo | exclusivity   | assumptions   |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Promotion  | unique code<br> generic code<br> customer | $ value<br> % off (100% off can represent units)  | 1+ or unlimited | true, false | cart, items   | can be limited |            |
+| Gift Card  | unique code<br> customer  | $ value | unlimited | false | cart | not limited | GC is sent: interaction between 2 customers |  
+| Account | customer | $ value | unlimited | false | cart | not limited | maybe one account per customer per currency? | 
+| Loyalty Point | cuomster | $ value | unlimited | false | cart | not limited |-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers | 
+| Voucher | | | | | | | This might be how customers view a promotion that is sent C to C |
+
