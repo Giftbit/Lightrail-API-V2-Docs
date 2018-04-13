@@ -30,6 +30,7 @@ Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
 
 
 ## Value Store Types
+
 ```
 ValueStore:
 - "type of value" - $ value, % off
@@ -38,11 +39,71 @@ ValueStore:
 - type: "GIFT_CARD", "ACCOUNT", "PROMOTION" // doesn't really matter
 ```
 
-| Type          | accessed by   | valueType     | uses          |         preTax|     appliesTo | exclusivity   | assumptions   |
-| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
-| Promotion  | unique code<br> generic code<br> customer | $ value<br> % off (100% off can represent units)  | 1+ or unlimited | true, false | cart, items   | can be limited |            |
-| Gift Card  | unique code<br> customer  | $ value | unlimited | false | cart | not limited | GC is sent: interaction between 2 customers |  
-| Account | customer | $ value | unlimited | false | cart | not limited | maybe one account per customer per currency? | 
-| Loyalty Point | cuomster | $ value | unlimited | false | cart | not limited |-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers | 
-| Voucher | | | | | | | This might be how customers view a promotion that is sent C to C |
-
+<table style="width:100%">
+  <tr>
+    <th>type</th>
+    <th>accessed by</th> 
+    <th>type of value</th>
+    <th>uses</th>
+    <th>preTax</th>
+    <th>appliesTo</th>
+    <th>exclusivity</th>
+    <th>assumptions</th>
+  </tr>
+  <tr>
+    <td>Promotion</td>
+    <td>unique code<br> 
+        generic code<br> 
+        customer</td> 
+    <td>$ value<br> 
+        % off (100% off can represent units)</td>
+    <td>1+ or unlimited</td>
+    <td>true<br>
+        false</td>
+    <td>cart<br> 
+        items</td> 
+    <td>can be limited</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gift Card</td>
+    <td>unique code<br> 
+        customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>GC is sent: interaction between 2 customers</td>
+  </tr>
+  <tr>
+    <td>Account</td>
+    <td>customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>maybe one account per customer per currency?</td>
+  </tr>
+  <tr>
+    <td>Loyalty Point</td>
+    <td>customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers</td>
+  </tr>
+  <tr>
+    <td>Voucher</td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td>This might be how customers view a promotion that is sent C to C</td>
+  </tr>
+</table>
