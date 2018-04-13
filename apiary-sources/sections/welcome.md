@@ -87,7 +87,7 @@ ValueStore:
     <td>maybe one account per customer per currency?</td>
   </tr>
   <tr>
-    <td>Loyalty Point</td>
+    <td>Loyalty Point (probably just an account in a different currency)</td>
     <td>customer</td> 
     <td>$ value</td>
     <td>unlimited</td>
@@ -97,7 +97,7 @@ ValueStore:
     <td>-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers</td>
   </tr>
   <tr>
-    <td>Voucher</td>
+    <td>Voucher (functionally this is just a promotion)</td>
     <td></td> 
     <td></td>
     <td></td>
