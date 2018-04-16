@@ -1,24 +1,25 @@
-### Credit [POST /transactions/credit]
+### Credit [POST /valueStores/{valueStoreId}/credit]
 
 Use cases:
 - Crediting an account
--
+- 
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-
 
 ---
 + Request (application/json)
     + Headers
 
         {{header.authorization}}
+        
+    + Parameters
+        + valueStoreId (string, required) - The ValueStore ID. 
 
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
-        + amount (integer, required) - {{valueStore.value}}
-        + valueStoreId (string, required) - {{valueStore.valueStoreId}}
+        + amount (number, required) - {{valueStore.value}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -34,7 +35,7 @@ Note:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
-        + amount (integer, required) - {{valueStore.value}}
+        + amount (number, required) - {{valueStore.value}}
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
 
     + Body

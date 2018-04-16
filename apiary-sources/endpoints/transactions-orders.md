@@ -1,4 +1,4 @@
-### Debit [POST /transactions/debit]
+### Debit [POST /valueStores/{id}/credit]
 
 Data used in example:
 
@@ -17,7 +17,7 @@ Purchasing:
 
 Notes:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-- *Isn't this endpoint actually something like `/orders/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
+- *Isn't this endpoint actually something like `/orders/create` `/transactions/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
 
 ---
 + Request (application/json)
@@ -93,15 +93,15 @@ Notes:
                         "quantity": 2,
                         "promotions": [
                             {
-                                "type": "ITEM_DISCOUNT",
                                 "valueStoreId": "2018-alice-socks-promo",
+                                "rule": "order.lineItems.item.productId == "pid_12345",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": 200,
                                 "pretax": true
                             },
                             {
-                                "type": "CART_DISCOUNT",
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "rule": "order.total > 500", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 80,
                                 "pretax": true
@@ -124,15 +124,15 @@ Notes:
                         "description": "Chocolate bar.",
                         "promotions": [
                             {
-                                "type": "CART_DISCOUNT",
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "rule": "order.total > 500", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 20,
                                 "pretax": true
                             },
                             {
-                                "type": "ITEM_DISCOUNT",
                                 "valueStoreId": "2018-50cent-chocobar-credit",
+                                "rule": "order.lineItems.item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": 50,
                                 "pretax": false
