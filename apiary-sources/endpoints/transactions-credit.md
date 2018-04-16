@@ -1,5 +1,9 @@
 ### Credit [POST /transactions/credit]
 
+Use cases:
+- Crediting an account
+-
+
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
 
@@ -15,6 +19,7 @@ Note:
         + currency (string, required) - {{currency}}
         + amount (integer, required) - {{valueStore.value}}
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
+        + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
 

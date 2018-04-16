@@ -16,6 +16,7 @@ Note:
         + amount (integer, required) - {{valueStore.value}}
         + from (string, required) - {{valueStore.valueStoreId}}
         + to (string, required) - {{valueStore.valueStoreId}}
+        + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
 
