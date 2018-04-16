@@ -1,4 +1,4 @@
-### Debit [POST /valueStores/{id}/credit]
+### Create Order [POST /transactions/orders]
 
 Data used in example:
 
