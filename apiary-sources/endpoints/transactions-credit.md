@@ -17,7 +17,7 @@ Note:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
-        + amount (integer, required) - {{valueStore.value}}
+        + amount (number, required) - {{valueStore.value}}
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
         + metadata (object, optional) - {{transaction.metadata}}
 
@@ -34,7 +34,7 @@ Note:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
-        + amount (integer, required) - {{valueStore.value}}
+        + amount (number, required) - {{valueStore.value}}
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
 
     + Body
