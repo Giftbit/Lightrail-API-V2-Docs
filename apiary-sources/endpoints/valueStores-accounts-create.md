@@ -1,4 +1,4 @@
-### Create Account [POST /valueStores/accounts]
+### Create an Account [POST /valueStores/accounts]
 
 + Request (application/json)
     + Headers
@@ -20,10 +20,9 @@
                 "value": 2500,
                 "accessedBy": [
                     {
-                        "customerId": "cus_123"        
+                        "customerId": "cus_123"
                     }
                 ]
-                
             }
     
 + Response 200
@@ -42,6 +41,9 @@
                 "accessedBy": [
                     {
                         "customerId": "cus_123"        
+                    },
+                    {
+                        "customerId": "cus_456"        
                     }
                 ]
             }

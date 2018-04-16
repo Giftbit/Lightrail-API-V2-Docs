@@ -21,9 +21,6 @@
                 "accessedBy": [
                     {
                         "code": "MY-OWN-CODE"
-                    },
-                    {
-                        "customerId": "cus_123"
                     }
                 ]
             }
@@ -40,9 +37,6 @@
                 "accessedBy": [
                     {
                         "code": "MY-OWN-CODE"        
-                    },
-                    {
-                        "customerId": "cus_123"
                     }
                 ]
             }
