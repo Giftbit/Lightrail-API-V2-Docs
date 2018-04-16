@@ -86,7 +86,7 @@ ValueStore:
 ## Transactions [/transactions/]
 
 ---
-### Debit [POST /transactions/debit]
+### Debit [POST /valueStores/{id}/credit]
 
 Data used in example:
 
@@ -105,7 +105,7 @@ Purchasing:
 
 Notes:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-- *Isn't this endpoint actually something like `/orders/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
+- *Isn't this endpoint actually something like `/orders/create` `/transactions/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
 
 ---
 + Request (application/json)
@@ -181,15 +181,15 @@ Notes:
                         "quantity": 2,
                         "promotions": [
                             {
-                                "type": "ITEM_DISCOUNT",
                                 "valueStoreId": "2018-alice-socks-promo",
+                                "rule": "order.lineItems.item.productId == "pid_12345",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": 200,
                                 "pretax": true
                             },
                             {
-                                "type": "CART_DISCOUNT",
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "rule": "order.total > 500", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 80,
                                 "pretax": true
@@ -212,15 +212,15 @@ Notes:
                         "description": "Chocolate bar.",
                         "promotions": [
                             {
-                                "type": "CART_DISCOUNT",
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "rule": "order.total > 500", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 20,
                                 "pretax": true
                             },
                             {
-                                "type": "ITEM_DISCOUNT",
                                 "valueStoreId": "2018-50cent-chocobar-credit",
+                                "rule": "order.lineItems.item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": 50,
                                 "pretax": false
@@ -290,101 +290,6 @@ Notes:
                         "type": "PREPAID"
                     }
                 ]
-            }
-
-### Credit [POST /transactions/credit]
-
-Use cases:
-- Crediting an account
--
-
-Note:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-
-
----
-+ Request (application/json)
-    + Headers
-
-        Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-        + metadata (object, optional) - Arbitrary data associated with the transaction
-
-    + Body
-
-            {
-                "transactionId": "unique-id-123",
-                "currency": "USD",
-                "amount": 2500,
-                "valueStoreId": "vs_1"
-            }
-    
-+ Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-
-    + Body
-
-            {
-                "transactionId": "unique-id-123",
-                "currency": "USD",
-                "amount": 2500
-                "valueStoreId": "vs_1"
-            }
-
-### Transfer [POST /transactions/transfer]
-
-Note:
-- Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
-
-
----
-+ Request (application/json)
-    + Headers
-
-        Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + from (string, required) - Unique idempotent id for the ValueStore.
-        + to (string, required) - Unique idempotent id for the ValueStore.
-        + metadata (object, optional) - Arbitrary data associated with the transaction
-
-    + Body
-
-            {
-                "transactionId": "unique-id-123",
-                "currency": "USD",
-                "amount": 2500,
-                "from": "vs_1",
-                "to": "alice-account-USD"
-            }
-
-+ Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-
-    + Body
-
-            {
-                "transactionId": "unique-id-123",
-                "currency": "USD",
-                "amount": 2500,
-                "from": "vs_1",
-                "to": "alice-account-USD"
             }
 
 ## ValueStores [/valueStores/]
@@ -540,6 +445,152 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
                         "customerId": "cus_123"        
                     }
                 ]
+            }
+
+### Debit [POST /valueStores/{valueStoreId}/debit]
+
+Use cases:
+- Debiting an account
+- Does it make sense to not have `/accounts` or `/giftCards` in the path? It's pretty strange to a debit or credit a promotion.
+- What if we add more types? `Loyalty Points, Voucher`? These are things biz may want.
+
+Note:
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+
+---
++ Request (application/json)
+    + Headers
+
+        Authorization: Bearer <API_KEY>
+        
+        
+    + Parameters
+        + valueStoreId (string, required) - The ValueStore ID. 
+        
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + metadata (object, optional) - Arbitrary data associated with the transaction
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": -2500
+            }
+    
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": -2500
+                "valueStoreId": "vs_1"
+            }
+
+### Credit [POST /valueStores/{valueStoreId}/credit]
+
+Use cases:
+- Crediting an account
+- 
+
+Note:
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+
+---
++ Request (application/json)
+    + Headers
+
+        Authorization: Bearer <API_KEY>
+        
+    + Parameters
+        + valueStoreId (string, required) - The ValueStore ID. 
+
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + metadata (object, optional) - Arbitrary data associated with the transaction
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "valueStoreId": "vs_1"
+            }
+    
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500
+                "valueStoreId": "vs_1"
+            }
+
+### Transfer [POST /valueStores/transfer]
+
+Note:
+- Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
+
+
+---
++ Request (application/json)
+    + Headers
+
+        Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + source (string, required) - Unique idempotent id for the ValueStore.
+        + destination (string, required) - Unique idempotent id for the ValueStore.
+        + metadata (object, optional) - Arbitrary data associated with the transaction
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "source": "vs_1",
+                "destination": "alice-account-USD"
+            }
+
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "source": "vs_1",
+                "destination": "alice-account-USD"
             }
 
 # Data Structures

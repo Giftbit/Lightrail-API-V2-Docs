@@ -1,21 +1,25 @@
-### Transfer [POST /transactions/transfer]
+### Credit [POST /valueStores/{valueStoreId}/credit]
+
+Use cases:
+- Crediting an account
+- 
 
 Note:
-- Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
-
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
 
 ---
 + Request (application/json)
     + Headers
 
         {{header.authorization}}
+        
+    + Parameters
+        + valueStoreId (string, required) - The ValueStore ID. 
 
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + amount (number, required) - {{valueStore.value}}
-        + from (string, required) - {{valueStore.valueStoreId}}
-        + to (string, required) - {{valueStore.valueStoreId}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -24,10 +28,9 @@ Note:
                 "transactionId": "unique-id-123",
                 "currency": "USD",
                 "amount": 2500,
-                "from": "vs_1",
-                "to": "alice-account-USD"
+                "valueStoreId": "vs_1"
             }
-
+    
 + Response 200
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
@@ -40,7 +43,6 @@ Note:
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "amount": 2500,
-                "from": "vs_1",
-                "to": "alice-account-USD"
+                "amount": 2500
+                "valueStoreId": "vs_1"
             }
