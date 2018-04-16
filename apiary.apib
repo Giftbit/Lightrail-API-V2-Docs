@@ -2,37 +2,88 @@ FORMAT: 1A
 HOST: https://api.lightrail.com/v1/
 
 # Lightrail Documentation
-Welcome to Lightrail V2. Lightrail is a platform for managing value.
+Welcome to Lightrail V2. Incentivize with promotions and loyalty programs, enable gift cards and collect payment all in one unified checkout solution.
 
-Contact us anytime at hello@lightrail.com — we are here to help you solidify your use-case and implementation.         
+## Value Store Types
 
-## Getting Started
-[Sign up](https://www.lightrail.com/app/#/register) for a Lightrail account. 
+```
+ValueStore:
+- "type of value" - $ value, % off
+- appliesTo: "item" | "cart"
+- preTax: boolean;
+- type: "GIFT_CARD", "ACCOUNT", "PROMOTION" // doesn't really matter
+```
 
-### API Keys and Authorization
-Create your API key in the [Integrations](https://www.lightrail.com/app/#/account/api) section of your account. 
-
-To make an API call Lightrail requires the HTTP header `Authorization: Bearer `.
-
-#### Base URL
-The base URL for the Lightrail API is `https://api.lightrail.com/v1/`.
-
-#### First Call
-To test your authorization use our `ping` endpoint.
-
-```curl https://api.lightrail.com/v1/ping --header "Authorization: Bearer <apiKey>"```
-
-### Testing 
-When you first sign into your account you will be in test mode. Test mode is used for development allowing you to build in and test functionality. It comes with sample data to give you a sense of what your Lightrail account will look like. 
-
-## Support
-We have [client libraries](https://www.lightrail.com/docs/#client-libraries/client-libraries) in many languages to speed up your integration. 
-We also have a sample [Drop-In Gift Card application]((https://github.com/Giftbit/stripe-integration-sample-webapp)) containing examples in JavaScript and PHP with Java and Ruby coming soon.   
-
-Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
+<table style="width:100%">
+  <tr>
+    <th>type</th>
+    <th>accessed by</th> 
+    <th>type of value</th>
+    <th>uses</th>
+    <th>preTax</th>
+    <th>appliesTo</th>
+    <th>exclusivity</th>
+    <th>assumptions</th>
+  </tr>
+  <tr>
+    <td>Promotion</td>
+    <td>unique code<br> 
+        generic code<br> 
+        customer</td> 
+    <td>$ value<br> 
+        % off (100% off can represent units)</td>
+    <td>1+ or unlimited</td>
+    <td>true<br>
+        false</td>
+    <td>cart<br> 
+        items</td> 
+    <td>can be limited</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gift Card</td>
+    <td>unique code<br> 
+        customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>GC is sent: interaction between 2 customers</td>
+  </tr>
+  <tr>
+    <td>Account</td>
+    <td>customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>maybe one account per customer per currency?</td>
+  </tr>
+  <tr>
+    <td>Loyalty Point (probably just an account in a different currency)</td>
+    <td>customer</td> 
+    <td>$ value</td>
+    <td>unlimited</td>
+    <td>false</td>
+    <td>cart</td> 
+    <td>not limited</td>
+    <td>-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers</td>
+  </tr>
+  <tr>
+    <td>Voucher (functionally this is just a promotion)</td>
+    <td></td> 
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td> 
+    <td></td>
+    <td>This might be how customers view a promotion that is sent C to C</td>
+  </tr>
+</table>
 
 ## Transactions [/transactions/]
-Use these endpoints to create and manage your Gift Cards and Account Cards.
 
 ---
 ### Debit [POST /transactions/debit]
@@ -51,6 +102,11 @@ Purchasing:
     - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
 - Generic code for 10% off orders over $5 (does not apply to shipping). 
 
+
+Notes:
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+- *Isn't this endpoint actually something like `/orders/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
+
 ---
 + Request (application/json)
     + Headers
@@ -58,7 +114,7 @@ Purchasing:
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the transaction.\
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
         + lineItems (array[LineItem])
         
@@ -232,6 +288,256 @@ Purchasing:
                         "valueStoreId": "alice-account-USD",
                         "amount": -1265,
                         "type": "PREPAID"
+                    }
+                ]
+            }
+
+### Credit [POST /transactions/credit]
+
+Use cases:
+- Crediting an account
+-
+
+Note:
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+
+
+---
++ Request (application/json)
+    + Headers
+
+        Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (integer, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + metadata (object, optional) - Arbitrary data associated with the transaction
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "valueStoreId": "vs_1"
+            }
+    
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (integer, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500
+                "valueStoreId": "vs_1"
+            }
+
+### Transfer [POST /transactions/transfer]
+
+Note:
+- Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
+
+
+---
++ Request (application/json)
+    + Headers
+
+        Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (integer, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + from (string, required) - Unique idempotent id for the ValueStore.
+        + to (string, required) - Unique idempotent id for the ValueStore.
+        + metadata (object, optional) - Arbitrary data associated with the transaction
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "from": "vs_1",
+                "to": "alice-account-USD"
+            }
+
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent id for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + amount (integer, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "USD",
+                "amount": 2500,
+                "from": "vs_1",
+                "to": "alice-account-USD"
+            }
+
+## ValueStores [/valueStores/]
+
+---
+### Create an Account [POST /valueStores/accounts]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + expires (string, optional) - The expiry in ISO-8601
+        + active (boolean, optional) - 
+        
+    + Body 
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500,
+                "accessedBy": [
+                    {
+                        "customerId": "cus_123"
+                    }
+                ]
+            }
+    
++ Response 200
+
+    + Body
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500, 
+                "type": "ACCOUNT",
+                "preTax": false,
+                "appliesTo": "cart",
+                "expires": "never",
+                "active": true,
+                "accessedBy": [
+                    {
+                        "customerId": "cus_123"        
+                    },
+                    {
+                        "customerId": "cus_456"        
+                    }
+                ]
+            }
+
+### Create Gift Card [POST /valueStores/giftCards]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + expires (string, optional) - The expiry in ISO-8601
+        + active (boolean, optional) - 
+        
+    + Body 
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500,
+                "accessedBy": [
+                    {
+                        "code": "MY-OWN-CODE"
+                    }
+                ]
+            }
+    
++ Response 200
+
+    + Body
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500, 
+                "type": "GIFT_CARD",
+                "accessedBy": [
+                    {
+                        "code": "MY-OWN-CODE"        
+                    }
+                ]
+            }
+
+### Create a Promotion [POST /valueStores/accounts]
+
+Notes:
+Sort of a strange relationship between `appliesTo: "item"` and the redemption rule. How do we know the rule actually relates to an item. 
+What if the rule is if the transaction is over $50? Parsing rules to understand them seems somewhat infeasible.   
+
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + expires (string, optional) - The expiry in ISO-8601
+        + active (boolean, optional) - 
+        + appliesTo (string, required) - "cart" or "item". or maybe: "item": { SOME_IDENTIFIER: SOME_VALUE } 
+        + preTax (string, optional) - Determines whether the promotion should apply before or after tax.
+        
+    + Body 
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500,
+                "accessedBy": [
+                    {
+                        "customerId": "cus_123"        
+                    }
+                ],
+                "appliesTo": "item",
+                "rule": "transaction.lineItems.item.id == pid_123",
+                "preTax": true,
+                "uses": 1,
+                "limitation": "ONE_PER_ITEM"
+            }
+    
++ Response 200
+
+    + Body
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500, 
+                "type": "PROMOTION",
+                "preTax": true,
+                "appliesTo": "item",
+                "expires": "never",
+                "active": true,
+                "accessedBy": [
+                    {
+                        "customerId": "cus_123"        
                     }
                 ]
             }
