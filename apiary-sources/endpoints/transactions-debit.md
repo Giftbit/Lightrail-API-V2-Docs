@@ -14,6 +14,11 @@ Purchasing:
     - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
 - Generic code for 10% off orders over $5 (does not apply to shipping). 
 
+
+Notes:
+- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+- *Isn't this endpoint actually something like `/orders/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
+
 ---
 + Request (application/json)
     + Headers
@@ -21,7 +26,7 @@ Purchasing:
             {{header.authorization}}
 
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}\
+        + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + lineItems (array[LineItem])
         
