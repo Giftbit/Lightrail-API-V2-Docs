@@ -1,4 +1,4 @@
-### Transfer [POST /valueStores/transfer]
+### Transfer [POST /transactions/transfer]
 
 Note:
 - Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
@@ -25,7 +25,10 @@ Note:
                 "currency": "USD",
                 "amount": 2500,
                 "source": "vs_1",
-                "destination": "alice-account-USD"
+                "destination": "alice-account-USD",
+                "metadata": {
+                    "reference": "frequent-shopper-bonus-072301"
+                }
             }
 
 + Response 200
@@ -40,7 +43,23 @@ Note:
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "amount": 2500,
-                "source": "vs_1",
-                "destination": "alice-account-USD"
+                "transactionSteps": [
+                    {
+                        "valueStoreId": "vs_1",
+                        "valueStoreType": "GIFT_CARD",
+                        "valueBefore": 2500,
+                        "valueAfter": 0,
+                        "valueChange": -2500
+                    },
+                    {
+                        "valueStoreId": "alice-account-USD",
+                        "valueStoreType": "ACCOUNT",
+                        "valueBefore": 5000,
+                        "valueAfter": 7500,
+                        "valueChange": 2500
+                    }
+                ]
+                "metadata": {
+                    "reference": "loyalty-bonus-072301"
+                }
             }

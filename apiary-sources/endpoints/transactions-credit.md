@@ -1,8 +1,7 @@
-### Credit [POST /valueStores/{valueStoreId}/credit]
+### Credit [POST /transactions/credit]
 
 Use cases:
-- Crediting an account
-- 
+- Crediting a valueStore that has prepaid value (account or gift card)
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
@@ -13,22 +12,23 @@ Note:
 
         {{header.authorization}}
         
-    + Parameters
-        + valueStoreId (string, required) - The ValueStore ID. 
-
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + amount (number, required) - {{valueStore.value}}
+        + valueStoreId (string, optional) - The ValueStore ID.
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "USD",
+                "valueStoreId": "vs_1",
+                "currency": "XXX",
                 "amount": 2500,
-                "valueStoreId": "vs_1"
+                "metadata": {
+                    "note": "Frequent buyer bonus"
+                }
             }
     
 + Response 200
@@ -42,7 +42,17 @@ Note:
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "USD",
-                "amount": 2500
-                "valueStoreId": "vs_1"
+                "currency": "XXX",
+                "transactionSteps": [
+                    {
+                        "valueStoreId": "vs_1",
+                        "valueStoreType": "ACCOUNT",
+                        "valueBefore": 1500,
+                        "valueAfter": 4000,
+                        "valueChange": 2500
+                    }
+                ]
+                "metadata": {
+                    "note": "Frequent buyer bonus"
+                }
             }
