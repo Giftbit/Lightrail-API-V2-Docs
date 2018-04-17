@@ -1,6 +1,16 @@
 ## ValueStores [/valueStores/]
 
-## Value Store Types
+### Value Store Types
+
+From investigating transactions with multiple payment sources (gift cards, accounts, promotions, etc) that operate on shopping carts the following properties were identified in order for payment resolution.
+
+```
+ValueStore:
+- type of value: 
+    - dollar or points value (points is just a different currency). 
+    - percent off
+
+```   
 
 ```
 ValueStore:
