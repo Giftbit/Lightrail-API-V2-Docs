@@ -8,3 +8,5 @@
 {% include 'endpoints/transactions-credit.md' %}
 
 {% include 'endpoints/transactions-transfer.md' %}
+
+{% include 'endpoints/transactions-get.md' %}

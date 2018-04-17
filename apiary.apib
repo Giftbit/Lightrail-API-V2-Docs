@@ -36,6 +36,10 @@ Notes:
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + lineItems (array[LineItem])
+        + sources (array[TransactionParty])
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
         
     + Body 
     
@@ -65,7 +69,7 @@ Notes:
                         "taxRate": 0
                     }
                 ],
-                "paymentSources": [
+                "sources": [
                     {
                         "rail": "lightrail",
                         "customerEmail": "alice@example.com"
@@ -79,17 +83,24 @@ Notes:
     
 + Response 200
     + Attributes
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + transactionType (string, required) - `order`
         + lineItems (array[LineItemResponse])
+        + steps (array[TransactionStep], required) - An array of transaction steps.
+        + remainder (number, required) - The remainder of value that could not be debited.
+        + simulated (boolean, optional) - True if the transaction was simulated.
+        + createdDate (string, required) - ISO date for when the transaction was created.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
     
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "subtotal": 1548,
-                "discount": 350,
-                "tax": 67,
-                "payable": 1265,                
+                "subtotal": 1548,   // can we group these?  maybe with line items?
+                "discount": 350,    // maybe with payment sources? they all kind of
+                "tax": 67,          // break down the same total in different ways.
+                "payable": 1265,    //
                 "lineItems": [
                     {
                         "type": "product",
@@ -187,7 +198,7 @@ Notes:
                         ]
                     }
                 ],
-                "transactionSteps": [
+                "steps": [
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
@@ -213,10 +224,11 @@ Notes:
 
 ### Debit [POST /transactions/debit]
 
+Debit (remove value from) a payment rail.
+
 Use cases:
-- Debiting a valueStore that has prepaid value (account or gift card)
-- Does it make sense to not have `/accounts` or `/giftCards` in the path? It's pretty strange to debit or credit a promotion.
-- What if we add more types? `Loyalty Points, Voucher`? These are things biz may want.
+- Manual fixing of an account balance
+- Clearing all value from an account (choose a large value and set `allowRemainder` to `true`)
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
@@ -258,6 +270,8 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
+        + createdDate (string, required) - ISO date for when the transaction was created.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
@@ -277,6 +291,7 @@ Note:
                 ],
                 "remainder": 0,
                 "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -284,8 +299,11 @@ Note:
 
 ### Credit [POST /transactions/credit]
 
+Credit (add value to) a payment rail.
+
 Use cases:
-- Crediting a ValueStore that has prepaid value (account or gift card)
+- Customer service giving account credit
+- Partial refunding of a transaction
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
@@ -326,6 +344,8 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - `0`
         + simulated (boolean, optional) - True if the transaction was simulated.
+        + createdDate (string, required) - ISO date for when the transaction was created.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
@@ -345,6 +365,7 @@ Note:
                 ],
                 "remainder": 0,
                 "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }
@@ -352,9 +373,10 @@ Note:
 
 ### Transfer [POST /transactions/transfer]
 
+Transfer value from one value store to another.
+
 Note:
 - Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
-
 
 ---
 + Request (application/json)
@@ -398,6 +420,8 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
+        + createdDate (string, required) - ISO date for when the transaction was created.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
@@ -422,9 +446,117 @@ Note:
                         "valueAfter": 7500,
                         "valueChange": 2500
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "reference": "loyalty-bonus-072301"
+                }
+            }
+
+### Get Transactions [GET /transactions{?count}{?limit}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+
+Get multiple Transactions.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + transactionType (string, optional) - Filter by the transactionType.
+    + minCreatedDate (string, optional) - Filter by the minimum createdDate.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate.
+
++ Response 200
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + transactions (array[Transaction], required) - the list of transactions.
+
+    + Body
+
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "transactions": [
+                    {
+                        "transactionId": "unique-id-123",
+                        "currency": "loyalty-bucks",
+                        "steps": [
+                            {
+                                "rail": "lightrail",
+                                "valueStoreId": "vs_1",
+                                "valueStoreType": "ACCOUNT",
+                                "currency": "XXX",
+                                "valueBefore": 5500,
+                                "valueAfter": 3000,
+                                "valueChange": -2500
+                            }
+                        ],
+                        "remainder": 0,
+                        "simulated": false,
+                        "metadata": {
+                            "note": "Reduce loyalty points after 3mo customer inactivity"
+                        }
+                    }
+                ]
+            }
+
+
+### Get Transaction by transactionId [GET /transactions/{transactionId}]
+
+Get Transaction by transactionId.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + transactionId (string) - the transactionId of the Transaction to get.
+
++ Response 200
+    + Attributes
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
+        + steps (array[TransactionStep], required) - An array of transaction steps.
+        + remainder (number, required) - The remainder of value that could not be debited.
+        + simulated (boolean, optional) - True if the transaction was simulated.
+        + createdDate (string, required) - ISO date for when the transaction was created.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "currency": "loyalty-bucks",
+                "steps": [
+                    {
+                        "rail": "lightrail",
+                        "valueStoreId": "vs_1",
+                        "valueStoreType": "ACCOUNT",
+                        "currency": "XXX",
+                        "valueBefore": 5500,
+                        "valueAfter": 3000,
+                        "valueChange": -2500
+                    }
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {
+                    "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
             }
 
@@ -686,6 +818,14 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 
 ## LineItemResponse (LineItem)
 + someNewField (string) - Blah blah blah
+## Transaction (object)
++ transactionId (string, required) - Unique idempotent ID for the Transaction.
++ transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
++ steps (array[TransactionStep], required) - An array of transaction steps.
++ remainder (number, required) - The remainder of value that could not be debited.
++ simulated (boolean, optional) - True if the transaction was simulated.
++ createdDate (string, required) - ISO date for when the transaction was created.
++ metadata (object, optional) - Arbitrary data associated with the Transaction.
 ## TransactionParty (object)
 A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.
 + rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.

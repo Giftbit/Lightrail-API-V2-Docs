@@ -45,6 +45,8 @@ Note:
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - `0`
         + simulated (boolean, optional) - {{transaction.simulated}}
+        + createdDate (string, required) - {{transaction.createdDate}}
+        + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
 
@@ -64,6 +66,7 @@ Note:
                 ],
                 "remainder": 0,
                 "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }
