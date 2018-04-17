@@ -31,7 +31,7 @@ The following table, looks at the primary types of ValueStore in the system and 
     <th>accessed by</th> 
     <th>type of value</th>
     <th>uses</th>
-    <th>preTax</th>
+    <th>pretax</th>
     <th>appliesTo</th>
     <th>exclusivity</th>
     <th>assumptions</th>

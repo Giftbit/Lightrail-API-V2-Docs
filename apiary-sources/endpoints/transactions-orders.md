@@ -87,7 +87,7 @@ Notes:
                         "id": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
-                        "description": "Socks.", 
+                        "tags": ["clothing"],
                         "quantity": 2,
                         "promotions": [
                             {
@@ -107,7 +107,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "preTaxDiscount": 280,
+                            "pretaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
                             "postTaxDiscount": 0,
@@ -117,9 +117,9 @@ Notes:
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitCost": 199,
+                        "unitPrice": 199,
                         "taxRate": 0.05, 
-                        "description": "Chocolate bar.",
+                        "tags": ["food"],
                         "promotions": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -138,7 +138,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "preTaxDiscount": 20,
+                            "pretaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
                             "postTaxDiscount: 50,
@@ -148,13 +148,13 @@ Notes:
                     {
                         "type": "shipping",
                         "id": "standard-shipping", 
-                        "unitCost": 349,
+                        "unitPrice": 349,
                         "taxRate": 0, 
                         "promotions": [
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "preTaxDiscount": 0,
+                            "pretaxDiscount": 0,
                             "taxable": 349,
                             "tax": 0,
                             "postTaxDiscount: 0,

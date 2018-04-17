@@ -96,7 +96,7 @@ Notes:
                         "id": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
-                        "description": "Socks.", 
+                        "tags": ["clothing"],
                         "quantity": 2,
                         "promotions": [
                             {
@@ -116,7 +116,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "preTaxDiscount": 280,
+                            "pretaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
                             "postTaxDiscount": 0,
@@ -126,9 +126,9 @@ Notes:
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitCost": 199,
+                        "unitPrice": 199,
                         "taxRate": 0.05, 
-                        "description": "Chocolate bar.",
+                        "tags": ["food"],
                         "promotions": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -147,7 +147,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "preTaxDiscount": 20,
+                            "pretaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
                             "postTaxDiscount: 50,
@@ -157,13 +157,13 @@ Notes:
                     {
                         "type": "shipping",
                         "id": "standard-shipping", 
-                        "unitCost": 349,
+                        "unitPrice": 349,
                         "taxRate": 0, 
                         "promotions": [
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "preTaxDiscount": 0,
+                            "pretaxDiscount": 0,
                             "taxable": 349,
                             "tax": 0,
                             "postTaxDiscount: 0,
@@ -434,7 +434,7 @@ The following table, looks at the primary types of ValueStore in the system and 
     <th>accessed by</th> 
     <th>type of value</th>
     <th>uses</th>
-    <th>preTax</th>
+    <th>pretax</th>
     <th>appliesTo</th>
     <th>exclusivity</th>
     <th>assumptions</th>
@@ -534,7 +534,7 @@ The following table, looks at the primary types of ValueStore in the system and 
                 "currency": "USD",
                 "value": 2500, 
                 "type": "ACCOUNT",
-                "preTax": false,
+                "pretax": false,
                 "appliesTo": "cart",
                 "expires": "never",
                 "active": true,
@@ -610,7 +610,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
         + expires (string, optional) - The expiry in ISO-8601
         + active (boolean, optional) - 
         + appliesTo (string, required) - "cart" or "item". or maybe: "item": { SOME_IDENTIFIER: SOME_VALUE } 
-        + preTax (string, optional) - Determines whether the promotion should apply before or after tax.
+        + pretax (string, optional) - Determines whether the promotion should apply before or after tax.
         
     + Body 
     
@@ -625,7 +625,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
                 ],
                 "appliesTo": "item",
                 "rule": "transaction.lineItems.item.id == pid_123",
-                "preTax": true,
+                "pretax": true,
                 "uses": 1,
                 "limitation": "ONE_PER_ITEM"
             }
@@ -639,7 +639,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
                 "currency": "USD",
                 "value": 2500, 
                 "type": "PROMOTION",
-                "preTax": true,
+                "pretax": true,
                 "appliesTo": "item",
                 "expires": "never",
                 "active": true,
@@ -663,4 +663,20 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + metadata (object, optional) - Any additional data you want to store for the item.
 
 ## LineItemResponse (LineItem)
-+ someNewField (string) - Blah blah blah
++ promotions (array[LineItemPromotions])
++ lineTotal (LineTotal)
+
+## LineItemPromotions (Object)
++ valueStoreId (string) - The ID of the ValueStore.
++ rule (string) - The redemption rule.
++ ruleExplanation (string) - Description of the rule.
++ amount (number) - How value of the promotion.
++ pretax (boolean) - Whether the ValueStore applies before or after tax.
+
+## LineTotal (Object)
++ price (number) - The total cost of the items. ie `unitPrice * quantity`.
++ pretaxDiscount (number) - The discount before tax is calculated.
++ taxable (number) - The taxable amount. ie `price - pretaxDiscount`.
++ tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
++ postTaxDiscount (number) - The discount after tax has been added.
++ payable (number) - The cost of the line item after tax and discounts have been applied.

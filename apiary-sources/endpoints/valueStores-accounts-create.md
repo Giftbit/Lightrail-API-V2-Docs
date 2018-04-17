@@ -34,7 +34,7 @@
                 "currency": "USD",
                 "value": 2500, 
                 "type": "ACCOUNT",
-                "preTax": false,
+                "pretax": false,
                 "appliesTo": "cart",
                 "expires": "never",
                 "active": true,
