@@ -16,8 +16,6 @@ Purchasing:
 
 
 Notes:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-- *Isn't this endpoint actually something like `/orders/create` `/transactions/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
 
 ---
 + Request (application/json)
@@ -38,7 +36,7 @@ Notes:
                 "lineItems": [
                     {
                         "type": "product",
-                        "id": "pid_12345", 
+                        "productId": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
                         "description": "Socks.", 
@@ -46,14 +44,14 @@ Notes:
                     },
                     {
                         "type": "product",
-                        "id": "pid_41234", 
+                        "productId": "pid_41234", 
                         "unitPrice": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar."
                     },
                     {
                         "type": "shipping",
-                        "id": "standard-shipping",
+                        "productId": "standard-shipping",
                         "unitPrice": 349,
                         "taxRate": 0
                     }

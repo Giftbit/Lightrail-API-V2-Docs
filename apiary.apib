@@ -104,8 +104,6 @@ Purchasing:
 
 
 Notes:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-- *Isn't this endpoint actually something like `/orders/create` `/transactions/create`? Should there be a `/transactions/debit` for a single valueStore than corresponds to `/transactions/credit`?*
 
 ---
 + Request (application/json)
@@ -126,7 +124,7 @@ Notes:
                 "lineItems": [
                     {
                         "type": "product",
-                        "id": "pid_12345", 
+                        "productId": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
                         "description": "Socks.", 
@@ -134,14 +132,14 @@ Notes:
                     },
                     {
                         "type": "product",
-                        "id": "pid_41234", 
+                        "productId": "pid_41234", 
                         "unitPrice": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar."
                     },
                     {
                         "type": "shipping",
-                        "id": "standard-shipping",
+                        "productId": "standard-shipping",
                         "unitPrice": 349,
                         "taxRate": 0
                     }
@@ -636,12 +634,14 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 # Data Structures
 
 ## LineItem (object)
-+ type (string, required) - Must be either `product`, `shipping`, or `tax`.
-+ productId (string, optional) - If the type is `product` productId must be provided.
-+ unitCost (number, required) - The unit cost of the item. 
++ type (string, required) - Must be either `product`, `shipping` or `fee`.
++ productId (string, optional) - The ID of the product. 
++ variantId (string, optional) - The variant ID of a product. (Can be used to store SKU.)
++ unitPrice (number, required) - The unit price of the item. 
 + quantity (number, optional) - The number of items. Defaults to 1 if not provided. 
 + taxRate (number, optional) - Tax rate for the item. This is needed when a transaction contains items that have different tax rates.
-+ description (string, optional) - Description for the item.
++ tags (Array[string], optional) - A list of tags associated with the item. For example, "seasonal" or "clothing".
++ metadata (object, optional) - Any additional data you want to store for the item.
 
 ## LineItemResponse (LineItem)
 + someNewField (string) - Blah blah blah
