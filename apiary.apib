@@ -36,6 +36,7 @@ Notes:
         + transactionId (string, required) - Unique idempotent id for the Transaction.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
         + lineItems (array[LineItem])
+        + paymentSources (array[PaymentSource])
         
     + Body 
     
@@ -680,3 +681,10 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
 + postTaxDiscount (number) - The discount after tax has been added.
 + payable (number) - The cost of the line item after tax and discounts have been applied.
+
+## PaymentSource (object)
++ rail (string, required) - The payment rail. Must belong to `[lightrail, stripe]`. Must be used in combination with one of the following identifiers.
++ customerId (string, optional) - The customerId in Lightrail.
++ code (string, optional) - The code of a gift card or promotion.
++ valueStoreId (string, optional) - The ID of a ValueStore.
++ cardToken (string, optional) - A tokenized credit card for Stripe.  

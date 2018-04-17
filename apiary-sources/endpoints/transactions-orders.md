@@ -27,6 +27,7 @@ Notes:
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + lineItems (array[LineItem])
+        + paymentSources (array[PaymentSource])
         
     + Body 
     
