@@ -12,14 +12,14 @@
 + promotions (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
-## LineItemPromotions (Object)
+## LineItemPromotions (object)
 + valueStoreId (string) - The ID of the ValueStore.
 + rule (string) - The redemption rule.
 + ruleExplanation (string) - Description of the rule.
 + amount (number) - How value of the promotion.
 + pretax (boolean) - Whether the ValueStore applies before or after tax.
 
-## LineTotal (Object)
+## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
 + pretaxDiscount (number) - The discount before tax is calculated.
 + taxable (number) - The taxable amount. ie `price - pretaxDiscount`.
