@@ -6,10 +6,6 @@ From investigating transactions with multiple payment sources (gift cards, accou
 
 ```
 ValueStore:
-- accessed by:
-    - unique code
-    - generic code
-    - customer 
 - type of value: 
     - dollar or points value (points is just a different currency). 
     - percent off
