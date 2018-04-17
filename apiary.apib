@@ -33,8 +33,8 @@ Notes:
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + lineItems (array[LineItem])
         
     + Body 
@@ -224,23 +224,28 @@ Note:
 ---
 + Request (application/json)
     + Headers
-
-        Authorization: Bearer <API_KEY>
+    
+            Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + valueStoreId (string, required) - The ValueStore ID.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + metadata (object, optional) - Arbitrary data associated with the transaction
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + amount (number, required) - The amount to credit, > 0.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "valueStoreId": "vs_1",
-                "currency": "loyalty-bucks",
-                "amount": -2500,
+                "source": {
+                    "rail": "lightrail",
+                    "valueStoreId": "vs_1"
+                },
+                "amount": 2500,
+                "currency": "XXX",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -248,25 +253,30 @@ Note:
     
 + Response 200
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + transactionType (string, required) - `debit`
+        + steps (array[TransactionStep], required) - An array of transaction steps.
+        + remainder (number, required) - The remainder of value that could not be debited.
+        + simulated (boolean, optional) - True if the transaction was simulated.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
                 "currency": "loyalty-bucks",
-                "transactionSteps": [
+                "steps": [
                     {
+                        "rail": "lightrail",
                         "valueStoreId": "vs_1",
                         "valueStoreType": "ACCOUNT",
+                        "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
                         "valueChange": -2500
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -275,7 +285,7 @@ Note:
 ### Credit [POST /transactions/credit]
 
 Use cases:
-- Crediting a valueStore that has prepaid value (account or gift card)
+- Crediting a ValueStore that has prepaid value (account or gift card)
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
@@ -283,23 +293,27 @@ Note:
 ---
 + Request (application/json)
     + Headers
-
-        Authorization: Bearer <API_KEY>
+    
+            Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, optional) - The ValueStore ID.
-        + metadata (object, optional) - Arbitrary data associated with the transaction
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + amount (number, required) - The amount to debit, > 0.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "valueStoreId": "vs_1",
-                "currency": "XXX",
+                "destination": {
+                    "rail": "lightrail",
+                    "valueStoreId": "vs_1"
+                },
                 "amount": 2500,
+                "currency": "XXX",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }
@@ -307,25 +321,30 @@ Note:
     
 + Response 200
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + transactionType (string, required) - `credit`
+        + steps (array[TransactionStep], required) - An array of transaction steps.
+        + remainder (number, required) - `0`
+        + simulated (boolean, optional) - True if the transaction was simulated.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "XXX",
-                "transactionSteps": [
+                "transactionType": "credit",
+                "steps": [
                     {
+                        "rail": "lightrail",
                         "valueStoreId": "vs_1",
                         "valueStoreType": "ACCOUNT",
+                        "currency": "XXX",
                         "valueBefore": 1500,
                         "valueAfter": 4000,
                         "valueChange": 2500
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }
@@ -340,25 +359,33 @@ Note:
 ---
 + Request (application/json)
     + Headers
-
-        Authorization: Bearer <API_KEY>
+    
+            Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + source (string, required) - Unique idempotent id for the ValueStore.
-        + destination (string, required) - Unique idempotent id for the ValueStore.
-        + metadata (object, optional) - Arbitrary data associated with the transaction
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + amount (number, required) - The amount to transfer, > 0.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "USD",
+                "source": {
+                    "rail": "lightrail",
+                    "valueStoreId": "vs_1"
+                },
+                "destination": {
+                    "rail": "lightrail",
+                    "valueStoreId": "alice-account-USD"
+                },
                 "amount": 2500,
-                "source": "vs_1",
-                "destination": "alice-account-USD",
+                "currency": "USD",
                 "metadata": {
                     "reference": "frequent-shopper-bonus-072301"
                 }
@@ -366,27 +393,31 @@ Note:
 
 + Response 200
     + Attributes
-        + transactionId (string, required) - Unique idempotent id for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
-        + amount (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + transactionType (string, required) - `transfer`
+        + steps (array[TransactionStep], required) - An array of transaction steps.
+        + remainder (number, required) - The remainder of value that could not be debited.
+        + simulated (boolean, optional) - True if the transaction was simulated.
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "USD",
                 "transactionSteps": [
                     {
+                        "rail": "lightrail",
                         "valueStoreId": "vs_1",
                         "valueStoreType": "GIFT_CARD",
+                        "currency": "USD",
                         "valueBefore": 2500,
                         "valueAfter": 0,
                         "valueChange": -2500
                     },
                     {
+                        "rail": "lightrail",
                         "valueStoreId": "alice-account-USD",
                         "valueStoreType": "ACCOUNT",
+                        "currency": "USD",
                         "valueBefore": 5000,
                         "valueAfter": 7500,
                         "valueChange": 2500
@@ -498,7 +529,7 @@ ValueStore:
 
     + Attributes
         + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + expires (string, optional) - The expiry in ISO-8601
         + active (boolean, optional) - 
@@ -548,7 +579,7 @@ ValueStore:
 
     + Attributes
         + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + expires (string, optional) - The expiry in ISO-8601
         + active (boolean, optional) - 
@@ -596,7 +627,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 
     + Attributes
         + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD, CAD but can also be any branded currency ie `megabucks`.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + expires (string, optional) - The expiry in ISO-8601
         + active (boolean, optional) - 
@@ -655,3 +686,60 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 
 ## LineItemResponse (LineItem)
 + someNewField (string) - Blah blah blah
+## TransactionParty (object)
+A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.
++ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
+
+## LightrailValueStoreIdTransactionParty (TransactionParty)
++ rail (string, required) - `lightrail`
++ valueStoreId (string, required) - the ValueStore's valueStoreId to transact with.
+
+## LightrailCodeTransactionParty (TransactionParty)
++ rail (string, required) - `lightrail`
++ code (string, required) - the ValueStore's code to transact with.
+
+## LightrailCustomerIdTransactionParty (TransactionParty)
+This refers to *all* ValueStores associated with the customer.
++ rail (string, required) - `lightrail`
++ customerId (string, required) - the Customer's customerId.
+
+## StripeTransactionParty (TransactionParty)
++ rail (string, required) - `stripe`
++ token (string, required) - the Stripe token.
+
+## InternalTransactionParty (TransactionParty)
+Represents an existing storage for value outside of Lightrail.  This value store can be debited for up to its total value.  The Lightrail system cannot protect against double billing for this value store so manual precautions must be taken.
+
+This is intended as a stop gap solution while transitioning from a legacy system.
+
++ rail (string, required) - `internal`
++ id (string, required) - the ID of the value.
++ value (number, required) - the amount of value.
++ appliedFirst (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
+## TransactionStep (object)
+A step taken as part of the transaction.
++ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
+
+## LightrailTransactionStep (TransactionStep)
++ rail (string, required) - `lightrail`
++ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
++ valueStoreType (string, required) - the valueStoreType of the ValueStore transacted with.
++ currency (string, required) - the currency of the ValueStore transacted with.
++ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ codeLastFour (string, optional) - the last 4 digits of the code the ValueStore was accessed with.
++ valueBefore (number, required) - the value of the ValueStore before the transaction.
++ valueAfter (number, required) - the value of the ValueStore after the transaction.
++ valueChange (number, required) - the net change of the ValueStore for the transaction.
+
+## StripeTransactionStep (TransactionStep)
++ rail (string, required) - `stripe`
++ amount (number, required) - the amount of the charge.
++ chargeId (string, optional) - the ID of the Stripe charge, if applicable.
++ charge (object, optional) - the Stripe Charge object, if applicable.
+
+## InternalTransactionStep (TransactionStep)
++ rail (string, required) - `internal`
++ id (string, required) - the ID of the internal value store transacted with.
++ valueBefore (number, required) - the value of the ValueStore before the transaction.
++ valueAfter (number, required) - the value of the ValueStore after the transaction.
++ valueChange (number, required) - the net change of the ValueStore for the transaction.

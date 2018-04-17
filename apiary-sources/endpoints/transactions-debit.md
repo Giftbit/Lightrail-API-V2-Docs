@@ -1,9 +1,10 @@
 ### Debit [POST /transactions/debit]
 
+Debit (remove value from) a payment rail.
+
 Use cases:
-- Debiting a valueStore that has prepaid value (account or gift card)
-- Does it make sense to not have `/accounts` or `/giftCards` in the path? It's pretty strange to debit or credit a promotion.
-- What if we add more types? `Loyalty Points, Voucher`? These are things biz may want.
+- Manual fixing of an account balance
+- Clearing all value from an account (choose a large value and set `allowRemainder` to `true`)
 
 Note:
 - Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
@@ -11,23 +12,28 @@ Note:
 ---
 + Request (application/json)
     + Headers
-
-        {{header.authorization}}
+    
+            {{header.authorization}}
         
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
-        + valueStoreId (string, required) - The ValueStore ID.
+        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - {{currency}}
-        + amount (number, required) - {{valueStore.value}}
+        + simulate (boolean, optional) - {{transaction.simulate}}
+        + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "valueStoreId": "vs_1",
-                "currency": "loyalty-bucks",
-                "amount": -2500,
+                "source": {
+                    "rail": "lightrail",
+                    "valueStoreId": "vs_1"
+                },
+                "amount": 2500,
+                "currency": "XXX",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -36,24 +42,29 @@ Note:
 + Response 200
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
-        + currency (string, required) - {{currency}}
-        + amount (number, required) - {{valueStore.value}}
-        + valueStoreId (string, required) - {{valueStore.valueStoreId}}
+        + transactionType (string, required) - `debit`
+        + steps (array[TransactionStep], required) - {{transaction.steps}}
+        + remainder (number, required) - {{transaction.remainder}}
+        + simulated (boolean, optional) - {{transaction.simulated}}
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
                 "currency": "loyalty-bucks",
-                "transactionSteps": [
+                "steps": [
                     {
+                        "rail": "lightrail",
                         "valueStoreId": "vs_1",
                         "valueStoreType": "ACCOUNT",
+                        "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
                         "valueChange": -2500
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }

@@ -1,7 +1,7 @@
 ## Transactions [/transactions/]
 
 ---
-{% include 'endpoints/transactions-orders.md' %}
+{% include 'endpoints/transactions-order.md' %}
 
 {% include 'endpoints/transactions-debit.md' %}
 

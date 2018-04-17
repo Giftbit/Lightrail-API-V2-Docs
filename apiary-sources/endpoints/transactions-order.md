@@ -27,6 +27,10 @@ Notes:
         + transactionId (string, required) - {{transaction.transactionId}}
         + currency (string, required) - {{currency}}
         + lineItems (array[LineItem])
+        + sources (array[TransactionParty])
+        + simulate (boolean, optional) - {{transaction.simulate}}
+        + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
+        + metadata (object, optional) - {{transaction.metadata}}
         
     + Body 
     
@@ -56,7 +60,7 @@ Notes:
                         "taxRate": 0
                     }
                 ],
-                "paymentSources": [
+                "sources": [
                     {
                         "rail": "lightrail",
                         "customerEmail": "alice@example.com"
@@ -70,17 +74,22 @@ Notes:
     
 + Response 200
     + Attributes
+        + transactionId (string, required) - {{transaction.transactionId}}
+        + transactionType (string, required) - `order`
         + lineItems (array[LineItemResponse])
+        + steps (array[TransactionStep], required) - {{transaction.steps}}
+        + remainder (number, required) - {{transaction.remainder}}
+        + simulated (boolean, optional) - {{transaction.simulated}}
 
     + Body
     
             {
                 "transactionId": "unique-id-123",
                 "currency": "USD",
-                "subtotal": 1548,
-                "discount": 350,
-                "tax": 67,
-                "payable": 1265,                
+                "subtotal": 1548,   // can we group these?  maybe with line items?
+                "discount": 350,    // maybe with payment sources? they all kind of
+                "tax": 67,          // break down the same total in different ways.
+                "payable": 1265,    //
                 "lineItems": [
                     {
                         "type": "product",
@@ -178,7 +187,7 @@ Notes:
                         ]
                     }
                 ],
-                "transactionSteps": [
+                "steps": [
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
