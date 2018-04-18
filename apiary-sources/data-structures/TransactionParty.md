@@ -1,30 +1,9 @@
 ## TransactionParty (object)
-A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.
-+ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
-
-## LightrailValueStoreIdTransactionParty (TransactionParty)
-+ rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the ValueStore's valueStoreId to transact with.
-
-## LightrailCodeTransactionParty (TransactionParty)
-+ rail (string, required) - `lightrail`
-+ code (string, required) - the ValueStore's code to transact with.
-
-## LightrailCustomerIdTransactionParty (TransactionParty)
-This refers to *all* ValueStores associated with the customer.
-+ rail (string, required) - `lightrail`
-+ customerId (string, required) - the Customer's customerId.
-
-## StripeTransactionParty (TransactionParty)
-+ rail (string, required) - `stripe`
-+ token (string, required) - the Stripe token.
-
-## InternalTransactionParty (TransactionParty)
-Represents an existing storage for value outside of Lightrail.  This value store can be debited for up to its total value.  The Lightrail system cannot protect against double billing for this value store so manual precautions must be taken.
-
-This is intended as a stop gap solution while transitioning from a legacy system.
-
-+ rail (string, required) - `internal`
-+ id (string, required) - the ID of the value.
-+ value (number, required) - the amount of value.
-+ appliedFirst (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
++ customerId (string, optional) - `lightrail`: the Customer's customerId.
++ code (string, optional) - `lightrail`: the code of a gift card or promotion.
++ valueStoreId (string, optional) - `lightrail`: The ID of a ValueStore.
++ token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
++ id (string, optional) - `internal`: the ID of the value.
++ value (number, optional) - `internal`: the amount of value.
++ appliedFirst (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.

@@ -13,7 +13,7 @@ Create a new Customer.
         + firstName (string, optional) - {{customer.firstName}}
         + lastName (string, optional) - {{customer.lastName}}
         + email (string, optional) - {{customer.email}}
-        + metadata (string, optional) - {{customer.metadata}}
+        + metadata (object, optional) - {{customer.metadata}}
 
     + Body
 

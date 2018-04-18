@@ -25,7 +25,7 @@ Get multiple Customers.
         + limit (number, required) - {{pagination.limit}}
         + offset (number, required) - {{pagination.offset}}
         + maxLimit (number, required) - {{pagination.maxLimit}}
-        + transactions (array[Customer], required) - the list of Customers.
+        + customers (array[Customer], required) - the list of Customers.
 
     + Body
 

@@ -22,7 +22,7 @@ Create a new Customer.
         + firstName (string, optional) - The Customer's first name.
         + lastName (string, optional) - The Customer's last name.
         + email (string, optional) - The Customer's email.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + metadata (object, optional) - Arbitrary data associated with the Customer.
 
     + Body
 
@@ -148,7 +148,7 @@ Get multiple Customers.
         + limit (number, required) - The max number of items to get.
         + offset (number, required) - The number of items to skip.
         + maxLimit (number, required) - The `limit` available`.
-        + transactions (array[Customer], required) - the list of Customers.
+        + customers (array[Customer], required) - the list of Customers.
 
     + Body
 
@@ -1019,7 +1019,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + firstName (string, optional) - The Customer's first name.
 + lastName (string, optional) - The Customer's last name.
 + email (string, optional) - The Customer's email.
-+ metadata (string, optional) - Arbitrary data associated with the Customer.
++ metadata (object, optional) - Arbitrary data associated with the Customer.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
 
@@ -1052,13 +1052,6 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + postTaxDiscount (number) - The discount after tax has been added.
 + payable (number) - The cost of the line item after tax and discounts have been applied.
 
-## PaymentSource (object)
-+ rail (string, required) - The payment rail. Must belong to `[lightrail, stripe]`. Must be used in combination with one of the following identifiers.
-+ customerId (string, optional) - The customerId in Lightrail.
-+ code (string, optional) - The code of a gift card or promotion.
-+ valueStoreId (string, optional) - The ID of a ValueStore.
-+ cardToken (string, optional) - A tokenized credit card for Stripe.  
-
 ## Transaction (object)
 + transactionId (string, required) - Unique idempotent ID for the Transaction.
 + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
@@ -1070,35 +1063,14 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
 ## TransactionParty (object)
-A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.
-+ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
-
-## LightrailValueStoreIdTransactionParty (TransactionParty)
-+ rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the ValueStore's valueStoreId to transact with.
-
-## LightrailCodeTransactionParty (TransactionParty)
-+ rail (string, required) - `lightrail`
-+ code (string, required) - the ValueStore's code to transact with.
-
-## LightrailCustomerIdTransactionParty (TransactionParty)
-This refers to *all* ValueStores associated with the customer.
-+ rail (string, required) - `lightrail`
-+ customerId (string, required) - the Customer's customerId.
-
-## StripeTransactionParty (TransactionParty)
-+ rail (string, required) - `stripe`
-+ token (string, required) - the Stripe token.
-
-## InternalTransactionParty (TransactionParty)
-Represents an existing storage for value outside of Lightrail.  This value store can be debited for up to its total value.  The Lightrail system cannot protect against double billing for this value store so manual precautions must be taken.
-
-This is intended as a stop gap solution while transitioning from a legacy system.
-
-+ rail (string, required) - `internal`
-+ id (string, required) - the ID of the value.
-+ value (number, required) - the amount of value.
-+ appliedFirst (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
++ customerId (string, optional) - `lightrail`: the Customer's customerId.
++ code (string, optional) - `lightrail`: the code of a gift card or promotion.
++ valueStoreId (string, optional) - `lightrail`: The ID of a ValueStore.
++ token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
++ id (string, optional) - `internal`: the ID of the value.
++ value (number, optional) - `internal`: the amount of value.
++ appliedFirst (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
 
 ## TransactionStep (object)
 A step taken as part of the transaction.
