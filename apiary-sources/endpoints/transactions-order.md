@@ -76,6 +76,8 @@ Notes:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + transactionType (string, required) - `order`
+        + currency (string, required) - {{currency}}
+        + totals (object, required) - Totals for the transaction.
         + lineItems (array[LineItemResponse])
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - {{transaction.remainder}}
@@ -87,18 +89,21 @@ Notes:
     
             {
                 "transactionId": "unique-id-123",
+                "transactionType": "order",
                 "currency": "USD",
-                "subtotal": 1548,   // can we group these?  maybe with line items?
-                "discount": 350,    // maybe with payment sources? they all kind of
-                "tax": 67,          // break down the same total in different ways.
-                "payable": 1265,    //            
+                "totals": {
+                    "subtotal": 1548,
+                    "discount": 350,
+                    "tax": 67,
+                    "payable": 1265
+                },
                 "lineItems": [
                     {
                         "type": "product",
                         "id": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
-                        "tags": ["clothing"],
+                        "description": "Socks.", 
                         "quantity": 2,
                         "promotions": [
                             {
@@ -118,7 +123,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "pretaxDiscount": 280,
+                            "preTaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
                             "postTaxDiscount": 0,
@@ -128,9 +133,9 @@ Notes:
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitPrice": 199,
+                        "unitCost": 199,
                         "taxRate": 0.05, 
-                        "tags": ["food"],
+                        "description": "Chocolate bar.",
                         "promotions": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -149,7 +154,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "pretaxDiscount": 20,
+                            "preTaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
                             "postTaxDiscount: 50,
@@ -159,13 +164,13 @@ Notes:
                     {
                         "type": "shipping",
                         "id": "standard-shipping", 
-                        "unitPrice": 349,
+                        "unitCost": 349,
                         "taxRate": 0, 
                         "promotions": [
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "pretaxDiscount": 0,
+                            "preTaxDiscount": 0,
                             "taxable": 349,
                             "tax": 0,
                             "postTaxDiscount: 0,
@@ -173,46 +178,32 @@ Notes:
                         }
                     }                    
                 ],
-                "paymentSources": [
-                    {
-                        "rail": "lightrail",
-                        "customerEmail": "alice@example.com",
-                        "valueStores": [
-                            "alice-account-USD", "2018-alice-socks-promo", "2018-50cent-chocobar-credit"
-                        ]
-                    },
-                    {
-                        "rail": "lightrail",
-                        "code": "SAVE10PERCENT",
-                        "valueStores": [
-                            "2018-10percent-off-over-5-orders"
-                        ]
-                    }
-                ],
                 "steps": [
                     {
                         "valueStoreId": "2018-alice-socks-promo",
-                        "valueChange": -200,
-                        "valueAfter": null,
+                        "amount": -200,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over-5-orders",
-                        "valueChange": -100,
-                        "valueAfter": null,
-                        "type": "PROMOTION"
+                        "amount": -100,
+                        "type": "PROMOTION",
+                        "code": "SAVE10PERCENT"
                     },
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
-                        "valueChange": -50,
-                        "valueAfter": null,
+                        "amount": -50,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "alice-account-USD",
-                        "valueChange": -1265,
-                        "valueAfter": 735,
-                        "type": "PREPAID"
+                        "amount": -1265,
+                        "type": "PREPAID",
+                        "customerId": "alice"
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {}
             }

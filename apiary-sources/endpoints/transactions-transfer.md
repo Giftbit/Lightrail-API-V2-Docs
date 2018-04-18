@@ -44,6 +44,7 @@ Note:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + transactionType (string, required) - `transfer`
+        + currency (string, required) - {{currency}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - {{transaction.remainder}}
         + simulated (boolean, optional) - {{transaction.simulated}}
@@ -54,7 +55,9 @@ Note:
 
             {
                 "transactionId": "unique-id-123",
-                "transactionSteps": [
+                "transactionType": "transfer",
+                "currency": "USD",
+                "steps": [
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",

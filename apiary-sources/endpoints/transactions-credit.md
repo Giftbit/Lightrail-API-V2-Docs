@@ -42,6 +42,7 @@ Note:
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + transactionType (string, required) - `credit`
+        + currency (string, required) - {{currency}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - `0`
         + simulated (boolean, optional) - {{transaction.simulated}}
@@ -53,6 +54,7 @@ Note:
             {
                 "transactionId": "unique-id-123",
                 "transactionType": "credit",
+                "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",

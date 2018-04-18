@@ -33,7 +33,8 @@ Get multiple Transactions.
                 "transactions": [
                     {
                         "transactionId": "unique-id-123",
-                        "currency": "loyalty-bucks",
+                        "transctionType": "debit",
+                        "currency": "XXX",
                         "steps": [
                             {
                                 "rail": "lightrail",
@@ -72,6 +73,7 @@ Get Transaction by transactionId.
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
         + transactionType (string, required) - {{transaction.transactionType}}
+        + currency (string, required) - {{currency}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - {{transaction.remainder}}
         + simulated (boolean, optional) - {{transaction.simulated}}
@@ -82,7 +84,8 @@ Get Transaction by transactionId.
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "loyalty-bucks",
+                "transctionType": "debit",
+                "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
