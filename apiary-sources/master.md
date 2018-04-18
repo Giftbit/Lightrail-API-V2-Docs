@@ -1,7 +1,9 @@
 FORMAT: 1A
-HOST: https://api.lightrail.com/v1/
+HOST: https://api.lightrail.com/v2/
 
 {% include 'sections/introduction-master.md' %}
+
+{% include 'api-sections/customers.md' %}
 
 {% include 'api-sections/transactions.md' %}
 
