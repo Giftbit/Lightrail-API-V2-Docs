@@ -1,4 +1,4 @@
-### Create Order [POST /transactions/orders]
+### Process an order [POST /transactions/orders]
 
 Data used in example:
 
