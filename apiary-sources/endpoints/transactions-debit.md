@@ -6,9 +6,6 @@ Use cases:
 - Manual fixing of an account balance
 - Clearing all value from an account (choose a large value and set `allowRemainder` to `true`)
 
-Note:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
-
 ---
 + Request (application/json)
     + Headers
