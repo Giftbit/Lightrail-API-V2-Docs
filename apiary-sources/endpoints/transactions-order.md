@@ -176,7 +176,7 @@ Notes:
                             "postTaxDiscount: 0,
                             "payable": 349
                         }
-                    }                    
+                    }
                 ],
                 "steps": [
                     {

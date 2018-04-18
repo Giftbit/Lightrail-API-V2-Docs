@@ -37,14 +37,7 @@ Create a new Customer.
             }
     
 + Response 200
-    + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
-        + createdDate (string, required) - ISO date for when the Customer was created.
-        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+    + Attributes (Customer)
 
     + Body
             
@@ -92,14 +85,7 @@ Update a Customer by customerId.
     + customerId (string) - the customerId of the Customer to update.
     
 + Response 200
-    + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
-        + createdDate (string, required) - ISO date for when the Customer was created.
-        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+    + Attributes (Customer)
 
     + Body
             
@@ -201,14 +187,7 @@ Get Customer by customerId.
     + customerId (string) - the customerId of the Customer to get.
 
 + Response 200
-    + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
-        + createdDate (string, required) - ISO date for when the Customer was created.
-        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+    + Attributes (Customer)
 
     + Body
 
@@ -305,6 +284,8 @@ Notes:
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `order`
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + totals (object, required) - Totals for the transaction.
         + lineItems (array[LineItemResponse])
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
@@ -316,18 +297,21 @@ Notes:
     
             {
                 "transactionId": "unique-id-123",
+                "transactionType": "order",
                 "currency": "USD",
-                "subtotal": 1548,   // can we group these?  maybe with line items?
-                "discount": 350,    // maybe with payment sources? they all kind of
-                "tax": 67,          // break down the same total in different ways.
-                "payable": 1265,    //            
+                "totals": {
+                    "subtotal": 1548,
+                    "discount": 350,
+                    "tax": 67,
+                    "payable": 1265
+                },
                 "lineItems": [
                     {
                         "type": "product",
                         "id": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
-                        "tags": ["clothing"],
+                        "description": "Socks.", 
                         "quantity": 2,
                         "promotions": [
                             {
@@ -347,7 +331,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "pretaxDiscount": 280,
+                            "preTaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
                             "postTaxDiscount": 0,
@@ -357,9 +341,9 @@ Notes:
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitPrice": 199,
+                        "unitCost": 199,
                         "taxRate": 0.05, 
-                        "tags": ["food"],
+                        "description": "Chocolate bar.",
                         "promotions": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -378,7 +362,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "pretaxDiscount": 20,
+                            "preTaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
                             "postTaxDiscount: 50,
@@ -388,62 +372,48 @@ Notes:
                     {
                         "type": "shipping",
                         "id": "standard-shipping", 
-                        "unitPrice": 349,
+                        "unitCost": 349,
                         "taxRate": 0, 
                         "promotions": [
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "pretaxDiscount": 0,
+                            "preTaxDiscount": 0,
                             "taxable": 349,
                             "tax": 0,
                             "postTaxDiscount: 0,
                             "payable": 349
                         }
-                    }                    
-                ],
-                "paymentSources": [
-                    {
-                        "rail": "lightrail",
-                        "customerEmail": "alice@example.com",
-                        "valueStores": [
-                            "alice-account-USD", "2018-alice-socks-promo", "2018-50cent-chocobar-credit"
-                        ]
-                    },
-                    {
-                        "rail": "lightrail",
-                        "code": "SAVE10PERCENT",
-                        "valueStores": [
-                            "2018-10percent-off-over-5-orders"
-                        ]
                     }
                 ],
                 "steps": [
                     {
                         "valueStoreId": "2018-alice-socks-promo",
-                        "valueChange": -200,
-                        "valueAfter": null,
+                        "amount": -200,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over-5-orders",
-                        "valueChange": -100,
-                        "valueAfter": null,
-                        "type": "PROMOTION"
+                        "amount": -100,
+                        "type": "PROMOTION",
+                        "code": "SAVE10PERCENT"
                     },
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
-                        "valueChange": -50,
-                        "valueAfter": null,
+                        "amount": -50,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "alice-account-USD",
-                        "valueChange": -1265,
-                        "valueAfter": 735,
-                        "type": "PREPAID"
+                        "amount": -1265,
+                        "type": "PREPAID",
+                        "customerId": "alice"
                     }
-                ]
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {}
             }
 
 ### Debit [POST /transactions/debit]
@@ -491,6 +461,7 @@ Note:
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `debit`
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
@@ -501,7 +472,8 @@ Note:
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "loyalty-bucks",
+                "transactionType": "debit",
+                "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
@@ -565,6 +537,7 @@ Note:
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `credit`
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - `0`
         + simulated (boolean, optional) - True if the transaction was simulated.
@@ -576,6 +549,7 @@ Note:
             {
                 "transactionId": "unique-id-123",
                 "transactionType": "credit",
+                "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
@@ -641,6 +615,7 @@ Note:
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
@@ -651,7 +626,9 @@ Note:
 
             {
                 "transactionId": "unique-id-123",
-                "transactionSteps": [
+                "transactionType": "transfer",
+                "currency": "USD",
+                "steps": [
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
@@ -714,7 +691,8 @@ Get multiple Transactions.
                 "transactions": [
                     {
                         "transactionId": "unique-id-123",
-                        "currency": "loyalty-bucks",
+                        "transctionType": "debit",
+                        "currency": "XXX",
                         "steps": [
                             {
                                 "rail": "lightrail",
@@ -753,6 +731,7 @@ Get Transaction by transactionId.
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
@@ -763,7 +742,8 @@ Get Transaction by transactionId.
 
             {
                 "transactionId": "unique-id-123",
-                "currency": "loyalty-bucks",
+                "transctionType": "debit",
+                "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
@@ -1042,6 +1022,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + metadata (string, optional) - Arbitrary data associated with the Customer.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
+
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
 + productId (string, optional) - The ID of the product. 
@@ -1070,49 +1051,24 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
 + postTaxDiscount (number) - The discount after tax has been added.
 + payable (number) - The cost of the line item after tax and discounts have been applied.
-## Transaction (object)
-+ transactionId (string, required) - Unique idempotent ID for the Transaction.
-+ transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
-+ steps (array[TransactionStep], required) - An array of transaction steps.
-+ remainder (number, required) - The remainder of value that could not be debited.
-+ simulated (boolean, optional) - True if the transaction was simulated.
-+ createdDate (string, required) - ISO date for when the Transaction was created.
-+ metadata (object, optional) - Arbitrary data associated with the Transaction.
-## TransactionStep (object)
-A step taken as part of the transaction.
-+ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
 
-## LightrailTransactionStep (TransactionStep)
-+ rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
-+ valueStoreType (string, required) - the valueStoreType of the ValueStore transacted with.
-+ currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
-+ codeLastFour (string, optional) - the last 4 digits of the code the ValueStore was accessed with.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
-
-## StripeTransactionStep (TransactionStep)
-+ rail (string, required) - `stripe`
-+ amount (number, required) - the amount of the charge.
-+ chargeId (string, optional) - the ID of the Stripe charge, if applicable.
-+ charge (object, optional) - the Stripe Charge object, if applicable.
-
-## InternalTransactionStep (TransactionStep)
-+ rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal value store transacted with.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
-
-<!-- TODO Decide between these two approaches of documenting this concept -->
 ## PaymentSource (object)
 + rail (string, required) - The payment rail. Must belong to `[lightrail, stripe]`. Must be used in combination with one of the following identifiers.
 + customerId (string, optional) - The customerId in Lightrail.
 + code (string, optional) - The code of a gift card or promotion.
 + valueStoreId (string, optional) - The ID of a ValueStore.
 + cardToken (string, optional) - A tokenized credit card for Stripe.  
+
+## Transaction (object)
++ transactionId (string, required) - Unique idempotent ID for the Transaction.
++ transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
++ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ steps (array[TransactionStep], required) - An array of transaction steps.
++ remainder (number, required) - The remainder of value that could not be debited.
++ simulated (boolean, optional) - True if the transaction was simulated.
++ createdDate (string, required) - ISO date for when the Transaction was created.
++ metadata (object, optional) - Arbitrary data associated with the Transaction.
+
 ## TransactionParty (object)
 A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.
 + rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
@@ -1143,3 +1099,31 @@ This is intended as a stop gap solution while transitioning from a legacy system
 + id (string, required) - the ID of the value.
 + value (number, required) - the amount of value.
 + appliedFirst (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
+
+## TransactionStep (object)
+A step taken as part of the transaction.
++ rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
+
+## LightrailTransactionStep (TransactionStep)
++ rail (string, required) - `lightrail`
++ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
++ valueStoreType (string, required) - the valueStoreType of the ValueStore transacted with.
++ currency (string, required) - the currency of the ValueStore transacted with.
++ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ codeLastFour (string, optional) - the last 4 digits of the code the ValueStore was accessed with.
++ valueBefore (number, required) - the value of the ValueStore before the transaction.
++ valueAfter (number, required) - the value of the ValueStore after the transaction.
++ valueChange (number, required) - the net change of the ValueStore for the transaction.
+
+## StripeTransactionStep (TransactionStep)
++ rail (string, required) - `stripe`
++ amount (number, required) - the amount of the charge.
++ chargeId (string, optional) - the ID of the Stripe charge, if applicable.
++ charge (object, optional) - the Stripe Charge object, if applicable.
+
+## InternalTransactionStep (TransactionStep)
++ rail (string, required) - `internal`
++ id (string, required) - the ID of the internal value store transacted with.
++ valueBefore (number, required) - the value of the ValueStore before the transaction.
++ valueAfter (number, required) - the value of the ValueStore after the transaction.
++ valueChange (number, required) - the net change of the ValueStore for the transaction.
