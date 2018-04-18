@@ -1,8 +1,226 @@
 FORMAT: 1A
-HOST: https://api.lightrail.com/v1/
+HOST: https://api.lightrail.com/v2/
 
 # Lightrail Documentation
 Welcome to Lightrail V2. Incentivize with promotions and loyalty programs, enable gift cards and collect payment all in one unified checkout solution.
+
+## Customers [/customers/]
+
+---
+### Create Customer [POST /customers]
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + customerId (string, required) - Unique idempotent ID for the Customer.
+        + firstName (string, optional) - The Customer's first name.
+        + lastName (string, optional) - The Customer's last name.
+        + email (string, optional) - The Customer's email.
+        + metadata (string, optional) - Arbitrary data associated with the Customer.
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                }
+            }
+    
++ Response 200
+    + Attributes
+        + customerId (string, required) - Unique idempotent ID for the Customer.
+        + firstName (string, optional) - The Customer's first name.
+        + lastName (string, optional) - The Customer's last name.
+        + email (string, optional) - The Customer's email.
+        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + createdDate (string, required) - ISO date for when the Customer was created.
+        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+
+    + Body
+            
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Update Customer [PUT /customers/{customerId}]
+
+Update a Customer by customerId.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + customerId (string, required) - Unique idempotent ID for the Customer.
+        + firstName (string, optional) - The Customer's first name.
+        + lastName (string, optional) - The Customer's last name.
+        + email (string, optional) - The Customer's email.
+        + metadata (string, optional) - Arbitrary data associated with the Customer.
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                }
+            }
+            
++ Parameter
+    + customerId (string) - the customerId of the Customer to update.
+    
++ Response 200
+    + Attributes
+        + customerId (string, required) - Unique idempotent ID for the Customer.
+        + firstName (string, optional) - The Customer's first name.
+        + lastName (string, optional) - The Customer's last name.
+        + email (string, optional) - The Customer's email.
+        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + createdDate (string, required) - ISO date for when the Customer was created.
+        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+
+    + Body
+            
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:58:19.036Z"
+            }
+### Delete Customer [DELETE /customers/{customerId}]
+
+Delete Customer by customerId.  The customer can only be deleted if it is not associated with any ValueStores.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + customerId (string) - the customerId of the Customer to delete.
+
++ Response 200
+
+    + Body
+
+            {
+                "success": true
+            }
+### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
+Get multiple Customers.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + firstName (string, optional) - Filter by the firstName.
+    + lastName (string, optional) - Filter by the lastName.
+    + email (string, optional) - Filter by the email.
+    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
+    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    
++ Response 200
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + transactions (array[Customer], required) - the list of Customers.
+
+    + Body
+
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "customers": [
+                    {
+                        "customerId": "unique-id-123",
+                        "firstName": "Jeffrey",
+                        "lastName": "Lebowski",
+                        "email": "thedude@example.com",
+                        "metadata": {
+                            "alias": "El Duderino"
+                        },
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    }
+                ]
+            }
+
+### Get Customer [GET /customers/{customerId}]
+
+Get Customer by customerId.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + customerId (string) - the customerId of the Customer to get.
+
++ Response 200
+    + Attributes
+        + customerId (string, required) - Unique idempotent ID for the Customer.
+        + firstName (string, optional) - The Customer's first name.
+        + lastName (string, optional) - The Customer's last name.
+        + email (string, optional) - The Customer's email.
+        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + createdDate (string, required) - ISO date for when the Customer was created.
+        + updatedDate (string, required) - ISO date for when the Customer was last updated.
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
 
 ## Transactions [/transactions/]
 
@@ -89,7 +307,7 @@ Notes:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the transaction was created.
+        + createdDate (string, required) - ISO date for when the Transaction was created.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -270,7 +488,7 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the transaction was created.
+        + createdDate (string, required) - ISO date for when the Transaction was created.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -344,7 +562,7 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - `0`
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the transaction was created.
+        + createdDate (string, required) - ISO date for when the Transaction was created.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -420,7 +638,7 @@ Note:
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the transaction was created.
+        + createdDate (string, required) - ISO date for when the Transaction was created.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -455,7 +673,7 @@ Note:
                 }
             }
 
-### Get Transactions [GET /transactions{?count}{?limit}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
 Get multiple Transactions.
 
@@ -469,8 +687,8 @@ Get multiple Transactions.
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
     + transactionType (string, optional) - Filter by the transactionType.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate.
+    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
 + Response 200
     + Attributes
@@ -511,8 +729,7 @@ Get multiple Transactions.
                 ]
             }
 
-
-### Get Transaction by transactionId [GET /transactions/{transactionId}]
+### Get Transaction [GET /transactions/{transactionId}]
 
 Get Transaction by transactionId.
 
@@ -533,7 +750,7 @@ Get Transaction by transactionId.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the transaction was created.
+        + createdDate (string, required) - ISO date for when the Transaction was created.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -806,6 +1023,14 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 
 # Data Structures
 
+## Customer (object)
++ customerId (string, required) - Unique idempotent ID for the Customer.
++ firstName (string, optional) - The Customer's first name.
++ lastName (string, optional) - The Customer's last name.
++ email (string, optional) - The Customer's email.
++ metadata (string, optional) - Arbitrary data associated with the Customer.
++ createdDate (string, required) - ISO date for when the Customer was created.
++ updatedDate (string, required) - ISO date for when the Customer was last updated.
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
 + productId (string, optional) - The ID of the product. 
@@ -824,7 +1049,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + steps (array[TransactionStep], required) - An array of transaction steps.
 + remainder (number, required) - The remainder of value that could not be debited.
 + simulated (boolean, optional) - True if the transaction was simulated.
-+ createdDate (string, required) - ISO date for when the transaction was created.
++ createdDate (string, required) - ISO date for when the Transaction was created.
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 ## TransactionParty (object)
 A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific account and some may be capable of referring to multiple accounts.

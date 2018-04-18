@@ -1,4 +1,4 @@
-### Get Transactions [GET /transactions{?count}{?limit}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
 Get multiple Transactions.
 
@@ -12,8 +12,8 @@ Get multiple Transactions.
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
     + transactionType (string, optional) - Filter by the transactionType.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate.
+    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
 + Response 200
     + Attributes
@@ -54,8 +54,7 @@ Get multiple Transactions.
                 ]
             }
 
-
-### Get Transaction by transactionId [GET /transactions/{transactionId}]
+### Get Transaction [GET /transactions/{transactionId}]
 
 Get Transaction by transactionId.
 

@@ -1,5 +1,12 @@
 currency: "Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`."
-
+customer:
+  createdDate: "ISO date for when the Customer was created."
+  customerId: "Unique idempotent ID for the Customer."
+  email: "The Customer's email."
+  firstName: "The Customer's first name."
+  lastName: "The Customer's last name."
+  metadata: "Arbitrary data associated with the Customer."
+  updatedDate: "ISO date for when the Customer was last updated."
 header:
   authorization: "Authorization: Bearer <API_KEY>"
 pagination:
@@ -9,7 +16,7 @@ pagination:
   offset: "The number of items to skip."
 transaction:
   allowRemainder: "If true the transaction will go through without all value being debited, and the remainder indicated."
-  createdDate: "ISO date for when the transaction was created."
+  createdDate: "ISO date for when the Transaction was created."
   remainder: "The remainder of value that could not be debited."
   simulate: "If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change."
   simulated: "True if the transaction was simulated."
