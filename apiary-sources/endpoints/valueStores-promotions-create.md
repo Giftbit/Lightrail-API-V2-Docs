@@ -17,7 +17,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
         + expires (string, optional) - {{valueStore.expires}}
         + active (boolean, optional) - {{valueStore.active}}
         + appliesTo (string, required) - "cart" or "item". or maybe: "item": { SOME_IDENTIFIER: SOME_VALUE } 
-        + preTax (string, optional) - Determines whether the promotion should apply before or after tax.
+        + pretax (string, optional) - Determines whether the promotion should apply before or after tax.
         
     + Body 
     
@@ -32,7 +32,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
                 ],
                 "appliesTo": "item",
                 "rule": "transaction.lineItems.item.id == pid_123",
-                "preTax": true,
+                "pretax": true,
                 "uses": 1,
                 "limitation": "ONE_PER_ITEM"
             }
@@ -46,7 +46,7 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
                 "currency": "USD",
                 "value": 2500, 
                 "type": "PROMOTION",
-                "preTax": true,
+                "pretax": true,
                 "appliesTo": "item",
                 "expires": "never",
                 "active": true,

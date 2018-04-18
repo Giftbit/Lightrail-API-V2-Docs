@@ -91,14 +91,14 @@ Notes:
                 "subtotal": 1548,   // can we group these?  maybe with line items?
                 "discount": 350,    // maybe with payment sources? they all kind of
                 "tax": 67,          // break down the same total in different ways.
-                "payable": 1265,    //
+                "payable": 1265,    //            
                 "lineItems": [
                     {
                         "type": "product",
                         "id": "pid_12345", 
                         "unitPrice": 500,
                         "taxRate": 0.08, 
-                        "description": "Socks.", 
+                        "tags": ["clothing"],
                         "quantity": 2,
                         "promotions": [
                             {
@@ -118,7 +118,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "preTaxDiscount": 280,
+                            "pretaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
                             "postTaxDiscount": 0,
@@ -128,9 +128,9 @@ Notes:
                     {
                         "type": "product",
                         "id": "pid_41234", 
-                        "unitCost": 199,
+                        "unitPrice": 199,
                         "taxRate": 0.05, 
-                        "description": "Chocolate bar.",
+                        "tags": ["food"],
                         "promotions": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -149,7 +149,7 @@ Notes:
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "preTaxDiscount": 20,
+                            "pretaxDiscount": 20,
                             "taxable": 179,
                             "tax": 9,
                             "postTaxDiscount: 50,
@@ -159,13 +159,13 @@ Notes:
                     {
                         "type": "shipping",
                         "id": "standard-shipping", 
-                        "unitCost": 349,
+                        "unitPrice": 349,
                         "taxRate": 0, 
                         "promotions": [
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "preTaxDiscount": 0,
+                            "pretaxDiscount": 0,
                             "taxable": 349,
                             "tax": 0,
                             "postTaxDiscount: 0,
@@ -192,22 +192,26 @@ Notes:
                 "steps": [
                     {
                         "valueStoreId": "2018-alice-socks-promo",
-                        "amount": -200,
+                        "valueChange": -200,
+                        "valueAfter": null,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over-5-orders",
-                        "amount": -100,
+                        "valueChange": -100,
+                        "valueAfter": null,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
-                        "amount": -50,
+                        "valueChange": -50,
+                        "valueAfter": null,
                         "type": "PROMOTION"
                     },
                     {
                         "valueStoreId": "alice-account-USD",
-                        "amount": -1265,
+                        "valueChange": -1265,
+                        "valueAfter": 735,
                         "type": "PREPAID"
                     }
                 ]

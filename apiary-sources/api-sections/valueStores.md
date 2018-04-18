@@ -9,16 +9,21 @@ ValueStore:
 - type of value: 
     - dollar or points value (points is just a different currency). 
     - percent off
-
+- appliesTo:  
+    - item 
+    - cart
+- pretax: 
+    - true
+    - false
+- uses:
+    - 1 to unlimted
+- type: Usable by biz. Might only affect ordering of pretax=false ValueStores.   
+    - GIFT_CARD
+    - ACCOUNT (maybe loyalty point becomes a thing)
+    - PROMOTION (maybe VOUCHER becomes a thing)
 ```   
 
-```
-ValueStore:
-- "type of value" - $ value, % off
-- appliesTo: "item" | "cart"
-- preTax: boolean;
-- type: "GIFT_CARD", "ACCOUNT", "PROMOTION" // doesn't really matter
-```
+The following table, looks at the primary types of ValueStore in the system and provides sensible defaults for these properties.
 
 <table style="width:100%">
   <tr>
@@ -26,7 +31,7 @@ ValueStore:
     <th>accessed by</th> 
     <th>type of value</th>
     <th>uses</th>
-    <th>preTax</th>
+    <th>pretax</th>
     <th>appliesTo</th>
     <th>exclusivity</th>
     <th>assumptions</th>
