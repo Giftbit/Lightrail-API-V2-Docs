@@ -127,7 +127,7 @@ Data used in example:
                         "lineTotal": {
                             "price": 1000,
                             "taxable": 720,
-                            "tax": 58,
+                            "tax": 58
                         }  
                     },
                     {
