@@ -91,10 +91,8 @@ Data used in example:
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
-                    "subtotal": 1548,
-                    "discount": 350,
-                    "tax": 67,
-                    "payable": 1265
+                    "subtotal": 1548, 
+                    "tax": 67
                 },
                 "lineItems": [
                     {
@@ -104,29 +102,32 @@ Data used in example:
                         "taxRate": 0.08, 
                         "description": "Socks.", 
                         "quantity": 2,
-                        "promotions": [
+                        "valueStoresApplied": [
                             {
                                 "valueStoreId": "2018-alice-socks-promo",
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
-                                "amount": 200,
+                                "amount": -200,
                                 "pretax": true
-                            },
+                            }, 
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
-                                "amount": 80,
+                                "amount": -80,
                                 "pretax": true
+                            },
+                            {
+                                // this isn't relevant. this is more a function of how value stores are applied to lineItems.
+                                "valueStoreId": "alice-account-USD",
+                                "amount": -778,
+                                "pretax": false
                             }
                         ],
                         "lineTotal": {
                             "price": 1000,
-                            "preTaxDiscount": 280,
                             "taxable": 720,
                             "tax": 58,
-                            "postTaxDiscount": 0,
-                            "payable": 778
                         }  
                     },
                     {
@@ -135,29 +136,31 @@ Data used in example:
                         "unitCost": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar.",
-                        "promotions": [
+                        "valueStoresApplied": [
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
-                                "amount": 20,
+                                "amount": -20,
                                 "pretax": true
                             },
                             {
                                 "valueStoreId": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
-                                "amount": 50,
+                                "amount": -50,
+                                "pretax": false
+                            },
+                            {
+                                "valueStoreId": "alice-account-USD",
+                                "amount": -138,
                                 "pretax": false
                             }
                         ],
                         "lineTotal": {
                             "price": 199,
-                            "preTaxDiscount": 20,
                             "taxable": 179,
-                            "tax": 9,
-                            "postTaxDiscount: 50,
-                            "payable": 138
+                            "tax": 9
                         }
                     },
                     {
@@ -165,15 +168,17 @@ Data used in example:
                         "id": "standard-shipping", 
                         "unitCost": 349,
                         "taxRate": 0, 
-                        "promotions": [
+                        "valueStoresApplied": [
+                            {
+                                "valueStoreId": "alice-account-USD",
+                                "amount": -349,
+                                "pretax": false
+                            }
                         ],
                         "lineTotal": {
                             "price": 349,
-                            "preTaxDiscount": 0,
                             "taxable": 349,
-                            "tax": 0,
-                            "postTaxDiscount: 0,
-                            "payable": 349
+                            "tax": 0
                         }
                     }
                 ],
@@ -181,24 +186,26 @@ Data used in example:
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
-                        "type": "PROMOTION"
+                        "customerEmail": "alice@example.com",
+                        "tags": ["customer-promotions", "clothing-promos"] 
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over-5-orders",
                         "amount": -100,
-                        "type": "PROMOTION",
-                        "code": "SAVE10PERCENT"
+                        "code": "SAVE10PERCENT",
+                        "tags": ["generic-code"]
                     },
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
                         "amount": -50,
-                        "type": "PROMOTION"
+                        "customerEmail": "alice@example.com"
+                        "tags": ["customer-promotions", "food-promos"]
                     },
                     {
                         "valueStoreId": "alice-account-USD",
                         "amount": -1265,
-                        "type": "PREPAID",
-                        "customerId": "alice"
+                        "customerEmail": "alice@example.com",
+                        "tags": ["customer-accounts"]
                     }
                 ],
                 "remainder": 0,
