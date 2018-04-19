@@ -6,4 +6,4 @@
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
 + id (string, optional) - `internal`: the ID of the value.
 + value (number, optional) - `internal`: the amount of value.
-+ appliedFirst (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ beforeLightrail (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.

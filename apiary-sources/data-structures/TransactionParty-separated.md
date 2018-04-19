@@ -27,4 +27,4 @@ This is intended as a stop gap solution while transitioning from a legacy system
 + rail (string, required) - `internal`
 + id (string, required) - the ID of the value.
 + value (number, required) - the amount of value.
-+ appliedFirst (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ beforeLightrail (boolean, optional) - if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
