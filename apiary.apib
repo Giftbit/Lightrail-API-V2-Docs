@@ -6,6 +6,8 @@ Welcome to Lightrail V2. Incentivize with promotions and loyalty programs, enabl
 
 ## Customers [/customers/]
 
+Customers are the people or businesses who buy products or services from you.  They're identified by a unique `customerId`.
+
 ---
 ### Create Customer [POST /customers]
 
@@ -203,10 +205,66 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
+## ValueStores [/valueStores/]
+
+Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique `valueStoreId` but may also be referenced by a code or associated with a Customer.
+
+---
+### Create a Value Store [POST /valueStores]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
+        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
+        + uses (number, optional) - The number of times the value store can be transacted with.
+        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value Store.
+        
+    + Body 
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500
+            }
+    
++ Response 200
+    + Attributes (ValueStore)
+
+    + Body
+    
+            {
+                "valueStoreId": "vs-1",
+                "currency": "USD",
+                "value": 2500, 
+                "pretax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
 ## Transactions [/transactions/]
 
 ---
-### Create Order [POST /transactions/orders]
+### Process an order [POST /transactions/orders]
 
 Data used in example:
 
@@ -423,9 +481,6 @@ Debit (remove value from) a payment rail.
 Use cases:
 - Manual fixing of an account balance
 - Clearing all value from an account (choose a large value and set `allowRemainder` to `true`)
-
-Note:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
 
 ---
 + Request (application/json)
@@ -763,255 +818,6 @@ Get Transaction by transactionId.
                 }
             }
 
-## ValueStores [/valueStores/]
-
-### Value Store Types
-
-From investigating transactions with multiple payment sources (gift cards, accounts, promotions, etc) that operate on shopping carts the following properties were identified in order for payment resolution.
-
-```
-ValueStore:
-- type of value: 
-    - dollar or points value (points is just a different currency). 
-    - percent off
-- appliesTo:  
-    - item 
-    - cart
-- pretax: 
-    - true
-    - false
-- uses:
-    - 1 to unlimted
-- type: Usable by biz. Might only affect ordering of pretax=false ValueStores.   
-    - GIFT_CARD
-    - ACCOUNT (maybe loyalty point becomes a thing)
-    - PROMOTION (maybe VOUCHER becomes a thing)
-```   
-
-The following table, looks at the primary types of ValueStore in the system and provides sensible defaults for these properties.
-
-<table style="width:100%">
-  <tr>
-    <th>type</th>
-    <th>accessed by</th> 
-    <th>type of value</th>
-    <th>uses</th>
-    <th>pretax</th>
-    <th>appliesTo</th>
-    <th>exclusivity</th>
-    <th>assumptions</th>
-  </tr>
-  <tr>
-    <td>Promotion</td>
-    <td>unique code<br> 
-        generic code<br> 
-        customer</td> 
-    <td>$ value<br> 
-        % off (100% off can represent units)</td>
-    <td>1+ or unlimited</td>
-    <td>true<br>
-        false</td>
-    <td>cart<br> 
-        items</td> 
-    <td>can be limited</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>Gift Card</td>
-    <td>unique code<br> 
-        customer</td> 
-    <td>$ value</td>
-    <td>unlimited</td>
-    <td>false</td>
-    <td>cart</td> 
-    <td>not limited</td>
-    <td>GC is sent: interaction between 2 customers</td>
-  </tr>
-  <tr>
-    <td>Account</td>
-    <td>customer</td> 
-    <td>$ value</td>
-    <td>unlimited</td>
-    <td>false</td>
-    <td>cart</td> 
-    <td>not limited</td>
-    <td>maybe one account per customer per currency?</td>
-  </tr>
-  <tr>
-    <td>Loyalty Point (probably just an account in a different currency)</td>
-    <td>customer</td> 
-    <td>$ value</td>
-    <td>unlimited</td>
-    <td>false</td>
-    <td>cart</td> 
-    <td>not limited</td>
-    <td>-accrues on purchase<br>-converted to account $ or redeemable for units<br>-Conversion rate?<br>-Linked to membership tiers: get more points per purchase at higher tiers</td>
-  </tr>
-  <tr>
-    <td>Voucher (functionally this is just a promotion)</td>
-    <td></td> 
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td> 
-    <td></td>
-    <td>This might be how customers view a promotion that is sent C to C</td>
-  </tr>
-</table>
-
----
-### Create an Account [POST /valueStores/accounts]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + expires (string, optional) - The expiry in ISO-8601
-        + active (boolean, optional) - 
-        
-    + Body 
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500,
-                "accessedBy": [
-                    {
-                        "customerId": "cus_123"
-                    }
-                ]
-            }
-    
-+ Response 200
-
-    + Body
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500, 
-                "type": "ACCOUNT",
-                "pretax": false,
-                "appliesTo": "cart",
-                "expires": "never",
-                "active": true,
-                "accessedBy": [
-                    {
-                        "customerId": "cus_123"        
-                    },
-                    {
-                        "customerId": "cus_456"        
-                    }
-                ]
-            }
-
-### Create Gift Card [POST /valueStores/giftCards]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + expires (string, optional) - The expiry in ISO-8601
-        + active (boolean, optional) - 
-        
-    + Body 
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500,
-                "accessedBy": [
-                    {
-                        "code": "MY-OWN-CODE"
-                    }
-                ]
-            }
-    
-+ Response 200
-
-    + Body
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500, 
-                "type": "GIFT_CARD",
-                "accessedBy": [
-                    {
-                        "code": "MY-OWN-CODE"        
-                    }
-                ]
-            }
-
-### Create a Promotion [POST /valueStores/promotions]
-
-Notes:
-Sort of a strange relationship between `appliesTo: "item"` and the redemption rule. How do we know the rule actually relates to an item. 
-What if the rule is if the transaction is over $50? Parsing rules to understand them seems somewhat infeasible.   
-
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.\
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + value (number, required) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + expires (string, optional) - The expiry in ISO-8601
-        + active (boolean, optional) - 
-        + appliesTo (string, required) - "cart" or "item". or maybe: "item": { SOME_IDENTIFIER: SOME_VALUE } 
-        + pretax (string, optional) - Determines whether the promotion should apply before or after tax.
-        
-    + Body 
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500,
-                "accessedBy": [
-                    {
-                        "customerId": "cus_123"        
-                    }
-                ],
-                "appliesTo": "item",
-                "rule": "transaction.lineItems.item.id == pid_123",
-                "pretax": true,
-                "uses": 1,
-                "limitation": "ONE_PER_ITEM"
-            }
-    
-+ Response 200
-
-    + Body
-    
-            {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500, 
-                "type": "PROMOTION",
-                "pretax": true,
-                "appliesTo": "item",
-                "expires": "never",
-                "active": true,
-                "accessedBy": [
-                    {
-                        "customerId": "cus_123"        
-                    }
-                ]
-            }
-
 # Data Structures
 
 ## Customer (object)
@@ -1051,6 +857,10 @@ What if the rule is if the transaction is over $50? Parsing rules to understand 
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
 + postTaxDiscount (number) - The discount after tax has been added.
 + payable (number) - The cost of the line item after tax and discounts have been applied.
+
+## Rule (object)
++ rule (string, required) - the Lightrail Rule text of the rule.
++ explanation (string, required) - a plain explanation of the rule seen by customers.
 
 ## Transaction (object)
 + transactionId (string, required) - Unique idempotent ID for the Transaction.
@@ -1099,3 +909,19 @@ A step taken as part of the transaction.
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
 + valueChange (number, required) - the net change of the ValueStore for the transaction.
+
+## ValueStore (object)
++ valueStoreId (string, required) - Unique idempotent id for the ValueStore.
++ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
++ pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
++ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
++ frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
++ uses (number, optional) - The number of times the value store can be transacted with.
++ startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
++ endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
++ metadata (number, optional) - Arbitrary data associated with the Value Store.
++ createdDate (string, required) - ISO date for when the Customer was created.
++ updatedDate (string, required) - ISO date for when the Customer was last updated.
