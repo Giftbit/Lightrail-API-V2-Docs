@@ -2,12 +2,7 @@
 
 Credit (add value to) a payment rail.
 
-Use cases:
-- Customer service giving account credit
-- Partial refunding of a transaction
-
-Note:
-- Throws error if posted against a valueStore with `valueType: percentOff` or `valueType: valueOff`
+Currently only the `lightrail` payment rail is supported.
 
 ---
 + Request (application/json)

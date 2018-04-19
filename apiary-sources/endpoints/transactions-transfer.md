@@ -2,8 +2,7 @@
 
 Transfer value from one value store to another.
 
-Note:
-- Throws error if either valueStore specified has `valueType: percentOff` or `valueType: valueOff`
+Currently only the `lightrail` payment rail is supported.
 
 ---
 + Request (application/json)

@@ -2,9 +2,7 @@
 
 Debit (remove value from) a payment rail.
 
-Use cases:
-- Manual fixing of an account balance
-- Clearing all value from an account (choose a large value and set `allowRemainder` to `true`)
+Currently only the `lightrail` payment rail is supported.
 
 ---
 + Request (application/json)

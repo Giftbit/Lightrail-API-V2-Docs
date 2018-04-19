@@ -1,15 +1,20 @@
-### Create a Value Store [POST /valueStores]
+### Update a Value Store [PATCH /valueStores/{valueStoreId}]
 
-Create a new Value Store.
+Update fields that are sent and leave unspecified values at their default.
 
-+ Request (application/json)
+In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to modify.
+
++ Request (application/merge-patch+json)
     + Headers
     
             {{header.authorization}}
 
     + Attributes
-        + valueStoreId (string, required) - {{valueStore.valueStoreId}}
-        + currency (string, required) - {{currency}}
+        + valueStoreId (string, optional) - {{valueStore.valueStoreId}}  If present must match the valueStoreId in the path.
+        + currency (string, optional) - {{currency}}
         + value (number, optional) - {{valueStore.value}}
         + pretax (boolean, optional) - {{valueStore.pretax}}
         + active (boolean, optional) - {{valueStore.active}}
@@ -24,9 +29,7 @@ Create a new Value Store.
     + Body
     
             {
-                "valueStoreId": "vs-1",
-                "currency": "USD",
-                "value": 2500
+                "frozen": true
             }
     
 + Response 200
@@ -40,7 +43,7 @@ Create a new Value Store.
                 "value": 2500, 
                 "pretax": false,
                 "active": true,
-                "frozen": false,
+                "frozen": true,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
