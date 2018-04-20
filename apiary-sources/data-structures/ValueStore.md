@@ -13,3 +13,5 @@
 + metadata (number, optional) - {{valueStore.metadata}}
 + createdDate (string, required) - {{customer.createdDate}}
 + updatedDate (string, required) - {{customer.updatedDate}}
++ discount (boolean, optional) - {{valueStore.discount}}
++ tags (array[string], optional) - {{valueStore.tags}}

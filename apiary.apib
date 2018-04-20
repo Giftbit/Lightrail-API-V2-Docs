@@ -230,11 +230,11 @@ Create a new program to create value stores from.
         + accessType (string, optional) - `ENCRYPTED_CODE, GENERIC_CODE, CUSTOMER_ID`
         + createInactive (boolean, optional) - The ValueStore will be created as inactive if this is true. 
         + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + discount (boolean, optional) 
+        + discount (boolean, optional) - A boolean that indicates whether the value store represents a discount to the customer.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
         + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
         + uses (number, optional) - The number of times the value store can be transacted with.
-        + tags (array[string]) - Tags that represent this type of value.
+        + tags (array[string]) - Tags that represent the type of value. Ex: gift cards, accounts, promotions, ...
         
     + Body
     
@@ -1198,3 +1198,5 @@ A step taken as part of the transaction.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
++ discount (boolean, optional) - A boolean that indicates whether the value store represents a discount to the customer.
++ tags (array[string], optional) - Tags that represent the type of value. Ex: gift cards, accounts, promotions, ...

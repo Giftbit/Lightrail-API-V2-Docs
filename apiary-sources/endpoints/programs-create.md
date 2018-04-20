@@ -16,11 +16,11 @@ Create a new program to create value stores from.
         + accessType (string, optional) - `ENCRYPTED_CODE, GENERIC_CODE, CUSTOMER_ID`
         + createInactive (boolean, optional) - The ValueStore will be created as inactive if this is true. 
         + pretax (boolean, optional) - {{valueStore.pretax}}
-        + discount (boolean, optional) 
+        + discount (boolean, optional) - {{valueStore.discount}}
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
         + valueRule (number, optional) - {{valueStore.valueRule}}
         + uses (number, optional) - {{valueStore.uses}}
-        + tags (array[string]) - Tags that represent this type of value.
+        + tags (array[string]) - {{valueStore.tags}}
         
     + Body
     
