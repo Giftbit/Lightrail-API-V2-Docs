@@ -4,3 +4,5 @@ Programs determine how ValueStores are created. Programs are used to define the 
 
 ---
 {% include 'endpoints/programs-create.md' %}
+
+{% include 'endpoints/programs-valueStores-create.md' %}
