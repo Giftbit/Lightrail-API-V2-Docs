@@ -2,11 +2,6 @@
 
 Create a new program to create value stores from.
 
-Can we express things like:
-- value stores have to have a customerId or a code?
-- can it specify details about the code? generic unencrypted vs encrypted.
-- starts activated
-
 + Request (application/json)
     + Headers
     
@@ -17,7 +12,9 @@ Can we express things like:
         + currency (string, required) - {{currency}}
         + defaultInitialValue (number, optional) - Initial Value of the value store.
         + maxInitialValue (number, optional)
-        + maxInitialValue (number, optional)
+        + maxInitialValue (number, optional) 
+        + accessType (string, optional) - `ENCRYPTED_CODE, GENERIC_CODE, CUSTOMER_ID`
+        + createInactive (boolean, optional) - The ValueStore will be created as inactive if this is true. 
         + pretax (boolean, optional) - {{valueStore.pretax}}
         + discount (boolean, optional) 
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
@@ -32,9 +29,9 @@ Can we express things like:
                 "currency": "USD",
                 "minInitialValue": 500,
                 "maxInitialValue": 100000,
+                "accessType": "ENCRYPTED_CODE",
                 "tags": ["gift cards"],
                 "discount": false, 
-                
             }
     
 + Response 200
@@ -47,7 +44,8 @@ Can we express things like:
                 "currency": "USD",
                 "minInitialValue": 500,
                 "maxInitialValue": 100000,
-                "tags": ["gift cards"],
+                "accessType": "ENCRYPTED_CODE",
+                "tags": ["giftcard"],
                 "uses": "infinite",
                 "discount": false, 
             }
@@ -86,7 +84,7 @@ Create a new program to create value stores from.
                 "valueStoreId": "v1",
                 "currency": "USD",
                 "value": 2500,
-                "tags": ["gift cards"],
+                "tags": ["giftcard"],
                 "uses": "infinite",
                 "discount": false, 
             }
