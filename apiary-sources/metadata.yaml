@@ -14,6 +14,14 @@ pagination:
   limit: "The max number of items to get."
   maxLimit: "The `limit` available`."
   offset: "The number of items to skip."
+program:
+  createdDate: "ISO date for when the Program was created."
+  programId: "Unique idempotent ID for the Program."
+  metadata: "Arbitrary data associated with the Program."
+  maxValue: "The maximum value the Value Store can be created with."
+  minValue: "The minimum value the Value Store can be created with."
+  name: "A human-readable name for the Program."
+  updatedDate: "ISO date for when the Program was last updated."
 transaction:
   allowRemainder: "If true the transaction will go through without all value being debited, and the remainder indicated."
   createdDate: "ISO date for when the Transaction was created."
@@ -28,6 +36,7 @@ valueStore:
   active: "Whether the ValueStore is active and can be used upon creation."
   endDate: "ISO date for when the valueStore can last be transacted with."
   frozen: "If true the Value Store is frozen and cannot be transacted with."
+  isSavings: "If true the Value Store will be noted as savings for the customer in orders."
   metadata: "Arbitrary data associated with the Value Store."
   pretax: "If true the Value Store's value is applied before tax is calculated."
   redemptionRule: "A Redemption Rule controlling when the Value Store can be used in an order."
