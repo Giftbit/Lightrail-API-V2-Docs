@@ -2,6 +2,11 @@
 
 Create a new program to create value stores from.
 
+Can we express things like:
+- value stores have to have a customerId or a code?
+- can it specify details about the code? generic unencrypted vs encrypted.
+- starts activated
+
 + Request (application/json)
     + Headers
     
@@ -28,7 +33,7 @@ Create a new program to create value stores from.
                 "minInitialValue": 500,
                 "maxInitialValue": 100000,
                 "tags": ["gift cards"],
-                "discount": true, 
+                "discount": false, 
                 
             }
     
@@ -44,7 +49,7 @@ Create a new program to create value stores from.
                 "maxInitialValue": 100000,
                 "tags": ["gift cards"],
                 "uses": "infinite",
-                "discount": true, 
+                "discount": false, 
             }
 
 ### Create a ValueStore From a Program [POST /programs/{programId}/valueStores]
@@ -83,5 +88,5 @@ Create a new program to create value stores from.
                 "value": 2500,
                 "tags": ["gift cards"],
                 "uses": "infinite",
-                "discount": true, 
+                "discount": false, 
             }

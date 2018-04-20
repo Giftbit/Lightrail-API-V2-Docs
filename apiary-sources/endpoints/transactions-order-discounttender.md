@@ -91,10 +91,10 @@ Data used in example:
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
-                    "subtotal": 1548, 
+                    "subtotal": 1548, // pretax and prediscount 
                     "tax": 67,
                     "discount": 350,
-                    "tender": 1265
+                    "payable": 1265 // subtotal + tax - discount.
                 },
                 "lineItems": [
                     {
