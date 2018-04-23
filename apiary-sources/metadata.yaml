@@ -1,5 +1,10 @@
 currency: "Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`."
 tags: "Segmentation tags."
+currencies:
+  code: "Currency code, eg: 'USD'."
+  decimalPlaces: "The number of decimal places used in formatting."
+  name: "Name for the currency, eg: 'Dollars'."
+  symbol: "Currency symbol, eg: '$'."
 customer:
   createdDate: "ISO date for when the Customer was created."
   customerId: "Unique idempotent ID for the Customer."

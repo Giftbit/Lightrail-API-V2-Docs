@@ -5,9 +5,11 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/customers.md' %}
 
-{% include 'api-sections/valueStores.md' %}
+{% include 'api-sections/currencies.md' %}
 
 {% include 'api-sections/programs.md' %}
+
+{% include 'api-sections/valueStores.md' %}
 
 {% include 'api-sections/transactions.md' %}
 
