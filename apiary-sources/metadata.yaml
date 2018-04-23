@@ -38,7 +38,7 @@ valueStore:
   active: "Whether the ValueStore is active and can be used upon creation."
   endDate: "ISO date for when the valueStore can last be transacted with."
   frozen: "If true the Value Store is frozen and cannot be transacted with."
-  isSavings: "If true the Value Store will be noted as savings for the customer in orders."
+  discount: "If true the Value Store will be noted as a discount for the customer in orders."
   metadata: "Arbitrary data associated with the Value Store."
   pretax: "If true the Value Store's value is applied before tax is calculated."
   programId: "The programId of the Program this ValueStore is in."

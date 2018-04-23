@@ -16,7 +16,7 @@ Create a new Program.
             + `customerId` - must be associated with a customerId.
             + `generatedCode` - automatic code generated.
             + `setCode` - a code must be manually set.
-        + isSavings (boolean, optional) - {{valueStore.isSavings}}
+        + discount (boolean, optional) - {{valueStore.discount}}
         + pretax (boolean, optional) - {{valueStore.pretax}}
         + active (boolean, optional) - {{valueStore.active}}
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
@@ -52,7 +52,7 @@ Create a new Program.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,

@@ -37,7 +37,7 @@ Value Stores that have already been created will not be changed.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,

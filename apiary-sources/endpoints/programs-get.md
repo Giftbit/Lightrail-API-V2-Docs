@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?isSavings}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -14,7 +14,7 @@ Get multiple Value Stores.
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
-    + isSavings (string, optional) - Filter by isSavings.
+    + discount (string, optional) - Filter by discount.
     + pretax (string, optional) - Filter by pretax.
     + active (boolean, optional) - Filter active/inactive.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -46,7 +46,7 @@ Get multiple Value Stores.
                         "name": "Giftcard programm",
                         "currency": "CAD",
                         "access": "generatedCode",
-                        "isSavings": "false",
+                        "discount": "false",
                         "pretax": "false",
                         "active": "true",
                         "redemptionRule": null,
@@ -91,7 +91,7 @@ Get Program by programId
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,

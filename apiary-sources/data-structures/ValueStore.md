@@ -9,7 +9,7 @@
 + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
 + valueRule (number, optional) - {{valueStore.valueRule}}
 + uses (number, optional) - {{valueStore.uses}}
-+ isSavings (boolean, optional) - {{valueStore.isSavings}}
++ discount (boolean, optional) - {{valueStore.discount}}
 + startDate (number, optional) - {{valueStore.startDate}}
 + endDate (number, optional) - {{valueStore.endDate}}
 + metadata (number, optional) - {{valueStore.metadata}}

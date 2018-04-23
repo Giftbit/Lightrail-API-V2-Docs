@@ -6,7 +6,7 @@
     + `customerId` - must be associated with a customerId.
     + `generatedCode` - automatic code generated.
     + `setCode` - a code must be manually set.
-+ isSavings (boolean, required) - {{valueStore.isSavings}}
++ discount (boolean, required) - {{valueStore.discount}}
 + pretax (boolean, required) - {{valueStore.pretax}}
 + active (boolean, optional) - {{valueStore.active}}
 + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}

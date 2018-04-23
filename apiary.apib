@@ -451,7 +451,7 @@ Create a new Program.
             + `customerId` - must be associated with a customerId.
             + `generatedCode` - automatic code generated.
             + `setCode` - a code must be manually set.
-        + isSavings (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
+        + discount (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
         + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
@@ -487,7 +487,7 @@ Create a new Program.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,
@@ -545,7 +545,7 @@ Value Stores that have already been created will not be changed.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,
@@ -564,7 +564,7 @@ Value Stores that have already been created will not be changed.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?isSavings}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -580,7 +580,7 @@ Get multiple Value Stores.
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
-    + isSavings (string, optional) - Filter by isSavings.
+    + discount (string, optional) - Filter by discount.
     + pretax (string, optional) - Filter by pretax.
     + active (boolean, optional) - Filter active/inactive.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -612,7 +612,7 @@ Get multiple Value Stores.
                         "name": "Giftcard programm",
                         "currency": "CAD",
                         "access": "generatedCode",
-                        "isSavings": "false",
+                        "discount": "false",
                         "pretax": "false",
                         "active": "true",
                         "redemptionRule": null,
@@ -657,7 +657,7 @@ Get Program by programId
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "isSavings": "false",
+                "discount": "false",
                 "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,
@@ -1327,7 +1327,7 @@ A step taken as part of the transaction.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
 + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
 + uses (number, optional) - The number of times the value store can be transacted with.
-+ isSavings (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
++ discount (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
 + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
 + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.
