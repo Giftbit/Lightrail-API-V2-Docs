@@ -53,3 +53,6 @@ valueStore:
   value: "An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
   valueRule: "A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`."
   valueStoreId: "Unique idempotent id for the ValueStore."
+  code:
+    code: "The code if it is publicly viewable."
+    codeLastFour: "The last four digits of the code if it is secure."

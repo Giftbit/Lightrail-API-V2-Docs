@@ -5,6 +5,6 @@ Programs group together Value Stores and control default behavior.  Programs can
 ---
 {% include 'endpoints/programs-create.md' %}
 
-{% include 'endpoints/programs-patch.md' %}
+{% include 'endpoints/programs-update.md' %}
 
 {% include 'endpoints/programs-get.md' %}

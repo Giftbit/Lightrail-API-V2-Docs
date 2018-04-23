@@ -455,7 +455,7 @@ Value Stores that have already been created will not be changed.
         + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
         + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (number, optional) - Arbitrary data associated with the Program.  
+        + metadata (number, optional) - Arbitrary data associated with the Program.
         
     + Body
     
@@ -825,6 +825,182 @@ Get Value Store by valueStoreId.
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### Get Value Store Code [GET /valueStores/{valueStoreId}/code]
+
+Get a Value Store's code.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to get the code of.
+
++ Response 200
+    + Attributes
+        + code (string, optional) - The code if it is publicly viewable.
+        + codeLastFour (string, optional) - The last four digits of the code if it is secure.
+
+    + Body
+
+            {
+                "code": "BLACKFRIDAY20%"
+            }
+
+### Set Value Store Code [PUT /valueStores/{valueStoreId}/code]
+
+Set a Value Store's code.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.
+        + secure (boolean, optional) - If true the code is stored securely and only shown as `codeLastFour`.
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure" true
+            }
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
+
++ Response 200
+    + Attributes
+        + code (string, optional) - The code if it is publicly viewable.
+        + codeLastFour (string, optional) - The last four digits of the code if it is secure.
+
+    + Body
+
+            {
+                "codeLastFour": "e1b1"
+            }
+
+### Delete Value Store Code [DELETE /valueStores/{valueStoreId}/code]
+
+Delete a Value Store's code.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
+
++ Response 200
+
+    + Body
+
+            {
+                "success": true
+            }
+
+### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
+
+Get a Value Store's customer.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+
++ Response 200
+    + Attributes (Customer)
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
+
+Set a Value Store's Customer.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
+        
+    + Body
+    
+            {
+                "customerId": "unique-id-123"
+            }
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+
++ Response 200
+    + Attributes (Customer)
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### Delete Value Store Customer [DELETE /valueStores/{valueStoreId}/customer]
+
+Remove the Customer as the owner of a Value Store.  The Customer's info is not deleted.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
+
++ Response 200
+
+    + Body
+
+            {
+                "success": true
             }
 
 ## Transactions [/transactions/]

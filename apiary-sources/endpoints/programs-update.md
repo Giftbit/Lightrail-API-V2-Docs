@@ -19,7 +19,7 @@ Value Stores that have already been created will not be changed.
         + maxInitialValue (number, optional) - {{program.maxInitialValue}}
         + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - {{tags}}
-        + metadata (number, optional) - {{program.metadata}}  
+        + metadata (number, optional) - {{program.metadata}}
         
     + Body
     
