@@ -20,8 +20,8 @@
 + preTax (boolean) - {{valueStore.preTax}}
 
 ## LineTotal (object)
-+ price (number) - The total cost of the items. ie `unitPrice * quantity`.
-+ taxable (number) - The taxable amount. ie `price - preTaxDiscount`.
-+ tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
-+ discount (number) - The discount
-+ payable (number) - The cost of the line item after tax and discounts have been applied.
++ price (number) - {{transaction.lineItem.lineTotal.price}}
++ taxable (number) - {{transaction.lineItem.lineTotal.taxable}}
++ tax (number) - {{transaction.lineItem.lineTotal.tax}}
++ discount (number) - {{transaction.lineItem.lineTotal.discount}}
++ payable (number) - {{transaction.lineItem.lineTotal.payable}}
