@@ -9,7 +9,7 @@
 + metadata (object, optional) - {{transaction.lineItem.metadata}}
 
 ## LineItemResponse (LineItem)
-+ discounts (array[LineItemPromotions])
++ valueStoresApplied (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
