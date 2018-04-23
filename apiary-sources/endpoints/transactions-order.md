@@ -127,7 +127,7 @@ Data used in example:
                             "taxable": 720,
                             "tax": 58,
                             "discount": 280,
-                            "tender": 778
+                            "payable": 778
                         }  
                     },
                     {
@@ -159,7 +159,7 @@ Data used in example:
                             "taxable": 179,
                             "tax": 9,
                             "discount": 70,
-                            "tender": 138
+                            "payable": 138
                         }
                     },
                     {
@@ -180,7 +180,7 @@ Data used in example:
                             "taxable": 349,
                             "tax": 0,
                             "discount": 0,
-                            "tender": 349
+                            "payable": 349
                         }
                     }
                 ],
