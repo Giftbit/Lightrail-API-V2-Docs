@@ -110,14 +110,14 @@ Data used in example:
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": 200,
-                                "pretax": true
+                                "preTax": true
                             },
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 80,
-                                "pretax": true
+                                "preTax": true
                             }
                         ],
                         "lineTotal": {
@@ -141,14 +141,14 @@ Data used in example:
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": 20,
-                                "pretax": true
+                                "preTax": true
                             },
                             {
                                 "valueStoreId": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": 50,
-                                "pretax": false
+                                "preTax": false
                             }
                         ],
                         "lineTotal": {
