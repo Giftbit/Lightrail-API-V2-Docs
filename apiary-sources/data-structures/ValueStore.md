@@ -2,7 +2,7 @@
 + valueStoreId (string, required) - {{valueStore.valueStoreId}}
 + currency (string, required) - {{currency}}
 + value (number, optional) - {{valueStore.value}}
-+ pretax (boolean, optional) - {{valueStore.pretax}}
++ preTax (boolean, optional) - {{valueStore.preTax}}
 + active (boolean, optional) - {{valueStore.active}}
 + frozen (boolean, optional) - {{valueStore.frozen}}
 + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}

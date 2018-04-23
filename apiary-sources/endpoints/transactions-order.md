@@ -91,10 +91,10 @@ Data used in example:
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
-                    "subtotal": 1548, // pretax and prediscount 
+                    "subtotal": 1548, 
                     "tax": 67,
                     "discount": 350,
-                    "payable": 1265 // subtotal + tax - discount.
+                    "payable": 1265 
                 },
                 "lineItems": [
                     {
@@ -110,7 +110,7 @@ Data used in example:
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
                             }, 
                             {
@@ -118,15 +118,8 @@ Data used in example:
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
-                            },
-                            {
-                                // this isn't relevant. this is more a function of how value stores are applied to lineItems.
-                                "valueStoreId": "alice-account-USD",
-                                "amount": -778,
-                                "pretax": false,
-                                "discount": false
                             }
                         ],
                         "lineTotal": {
@@ -149,7 +142,7 @@ Data used in example:
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
                             },
                             {
@@ -157,14 +150,8 @@ Data used in example:
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
-                                "pretax": false,
+                                "preTax": false,
                                 "discount": true
-                            },
-                            {
-                                "valueStoreId": "alice-account-USD",
-                                "amount": -138,
-                                "pretax": false,
-                                "discount": false
                             }
                         ],
                         "lineTotal": {
@@ -184,7 +171,7 @@ Data used in example:
                             {
                                 "valueStoreId": "alice-account-USD",
                                 "amount": -349,
-                                "pretax": false,
+                                "preTax": false,
                                 "discount": false
                             }
                         ],

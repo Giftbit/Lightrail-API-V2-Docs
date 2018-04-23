@@ -225,7 +225,7 @@ Create a new Value Store.
         + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
+        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
@@ -252,7 +252,7 @@ Create a new Value Store.
                 "valueStoreId": "vs-1",
                 "currency": "USD",
                 "value": 2500, 
-                "pretax": false,
+                "preTax": false,
                 "active": true,
                 "frozen": false,
                 "redemptionRule": null,
@@ -283,7 +283,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
         + valueStoreId (string, optional) - Unique idempotent id for the ValueStore.  If present must match the valueStoreId in the path.
         + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
+        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
@@ -308,7 +308,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "valueStoreId": "vs-1",
                 "currency": "USD",
                 "value": 2500, 
-                "pretax": false,
+                "preTax": false,
                 "active": true,
                 "frozen": true,
                 "redemptionRule": null,
@@ -370,7 +370,7 @@ Get multiple Value Stores.
                         "valueStoreId": "vs-1",
                         "currency": "USD",
                         "value": 2500, 
-                        "pretax": false,
+                        "preTax": false,
                         "active": true,
                         "frozen": false,
                         "redemptionRule": null,
@@ -408,7 +408,7 @@ Get Value Store by valueStoreId.
                 "valueStoreId": "vs-1",
                 "currency": "USD",
                 "value": 2500, 
-                "pretax": false,
+                "preTax": false,
                 "active": true,
                 "frozen": false,
                 "redemptionRule": null,
@@ -517,10 +517,10 @@ Data used in example:
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
-                    "subtotal": 1548, // pretax and prediscount 
+                    "subtotal": 1548, 
                     "tax": 67,
                     "discount": 350,
-                    "payable": 1265 // subtotal + tax - discount.
+                    "payable": 1265 
                 },
                 "lineItems": [
                     {
@@ -536,7 +536,7 @@ Data used in example:
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
                             }, 
                             {
@@ -544,15 +544,8 @@ Data used in example:
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
-                            },
-                            {
-                                // this isn't relevant. this is more a function of how value stores are applied to lineItems.
-                                "valueStoreId": "alice-account-USD",
-                                "amount": -778,
-                                "pretax": false,
-                                "discount": false
                             }
                         ],
                         "lineTotal": {
@@ -575,7 +568,7 @@ Data used in example:
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
-                                "pretax": true,
+                                "preTax": true,
                                 "discount": true
                             },
                             {
@@ -583,14 +576,8 @@ Data used in example:
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
-                                "pretax": false,
+                                "preTax": false,
                                 "discount": true
-                            },
-                            {
-                                "valueStoreId": "alice-account-USD",
-                                "amount": -138,
-                                "pretax": false,
-                                "discount": false
                             }
                         ],
                         "lineTotal": {
@@ -610,7 +597,7 @@ Data used in example:
                             {
                                 "valueStoreId": "alice-account-USD",
                                 "amount": -349,
-                                "pretax": false,
+                                "preTax": false,
                                 "discount": false
                             }
                         ],
@@ -1008,31 +995,30 @@ Get Transaction by transactionId.
 
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
-+ productId (string, optional) - The ID of the product. 
++ productId (string, optional) -  The ID of the product.
 + variantId (string, optional) - The variant ID of a product. (Can be used to store SKU.)
-+ unitPrice (number, required) - The unit price of the item. 
-+ quantity (number, optional) - The number of items. Defaults to 1 if not provided. 
++ unitPrice (number, required) -  The unit price of the item.
++ quantity (number, optional) -  The number of items. Defaults to 1 if not provided.
 + taxRate (number, optional) - Tax rate for the item. This is needed when a transaction contains items that have different tax rates.
-+ tags (array[string], optional) - A list of tags associated with the item. For example, "seasonal" or "clothing".
++ tags (array[string], optional) - A list of tags associated with the item. For example, 'seasonal' or 'clothing'.
 + metadata (object, optional) - Any additional data you want to store for the item.
 
 ## LineItemResponse (LineItem)
-+ promotions (array[LineItemPromotions])
++ discounts (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueStoreId (string) - The ID of the ValueStore.
-+ rule (string) - The redemption rule.
-+ ruleExplanation (string) - Description of the rule.
-+ amount (number) - How value of the promotion.
-+ pretax (boolean) - Whether the ValueStore applies before or after tax.
++ valueStoreId (string) - Unique idempotent id for the ValueStore.
++ redemptionRule (string) - A Redemption Rule controlling when the Value Store can be used in an order.
++ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
++ amount (number) - The value of the discount.
++ preTax (boolean) - If true the Value Store's value is applied before tax is calculated.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
-+ pretaxDiscount (number) - The discount before tax is calculated.
-+ taxable (number) - The taxable amount. ie `price - pretaxDiscount`.
++ taxable (number) - The taxable amount. ie `price - preTaxDiscount`.
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
-+ postTaxDiscount (number) - The discount after tax has been added.
++ discount (number) - The discount
 + payable (number) - The cost of the line item after tax and discounts have been applied.
 
 ## Rule (object)
@@ -1091,7 +1077,7 @@ A step taken as part of the transaction.
 + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
++ preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
