@@ -17,13 +17,14 @@ Create a new Program.
             + `generatedCode` - automatic code generated.
             + `setCode` - a code must be manually set.
         + isSavings (boolean, optional) - {{valueStore.isSavings}}
-        + preTax (boolean, optional) - {{valueStore.pretax}}
+        + pretax (boolean, optional) - {{valueStore.pretax}}
         + active (boolean, optional) - {{valueStore.active}}
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
         + valueRule (number, optional) - {{valueStore.valueRule}}
-        + minValue (number, optional) - {{program.minValue}}
-        + maxValue (number, optional) - {{program.maxValue}}
-        + fixedValues (array[number], option) - A list of values the Value Store can be created with.
+        + minInitialValue (number, optional) - {{program.minInitialValue}}
+        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
+        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
 
@@ -34,7 +35,7 @@ Create a new Program.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "fixedValues": [
+                "fixedInitialValues": [
                     500,
                     1500,
                     2500
@@ -52,16 +53,18 @@ Create a new Program.
                 "currency": "CAD",
                 "access": "generatedCode",
                 "isSavings": "false",
-                "preTax": "false",
+                "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minValue": null,
-                "maxValue": null,
-                "fixedValues": [
+                "minInitialValue": null,
+                "maxInitialValue": null,
+                "fixedInitialValues": [
                     500,
                     1500,
                     2500
                 ],
+                "uses": null,
+                "tags": [],
                 "metadata": null
             }

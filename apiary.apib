@@ -450,13 +450,14 @@ Create a new Program.
             + `generatedCode` - automatic code generated.
             + `setCode` - a code must be manually set.
         + isSavings (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
+        + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
         + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + minValue (number, optional) - The minimum value the Value Store can be created with.
-        + maxValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedValues (array[number], option) - A list of values the Value Store can be created with.
+        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
+        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
+        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
 
@@ -467,7 +468,7 @@ Create a new Program.
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
-                "fixedValues": [
+                "fixedInitialValues": [
                     500,
                     1500,
                     2500
@@ -485,17 +486,19 @@ Create a new Program.
                 "currency": "CAD",
                 "access": "generatedCode",
                 "isSavings": "false",
-                "preTax": "false",
+                "pretax": "false",
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minValue": null,
-                "maxValue": null,
-                "fixedValues": [
+                "minInitialValue": null,
+                "maxInitialValue": null,
+                "fixedInitialValues": [
                     500,
                     1500,
                     2500
                 ],
+                "uses": null,
+                "tags": [],
                 "metadata": null
             }
 

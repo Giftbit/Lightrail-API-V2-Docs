@@ -1,4 +1,5 @@
 currency: "Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`."
+tags: "Segmentation tags."
 customer:
   createdDate: "ISO date for when the Customer was created."
   customerId: "Unique idempotent ID for the Customer."
@@ -18,8 +19,8 @@ program:
   createdDate: "ISO date for when the Program was created."
   programId: "Unique idempotent ID for the Program."
   metadata: "Arbitrary data associated with the Program."
-  maxValue: "The maximum value the Value Store can be created with."
-  minValue: "The minimum value the Value Store can be created with."
+  maxInitialValue: "The maximum value the Value Store can be created with."
+  minInitialValue: "The minimum value the Value Store can be created with."
   name: "A human-readable name for the Program."
   programId: "Unique idempotent ID for the Program."
   updatedDate: "ISO date for when the Program was last updated."
