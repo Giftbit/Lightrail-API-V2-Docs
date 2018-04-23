@@ -207,102 +207,6 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Programs [/programs/]
-
-Programs determine how ValueStores are created. Programs are used to define the type of value your business wishes to assign such as gift cards, accounts, and promotions. 
-
----
-### Create a Program [POST /programs]
-
-Create a new program to create value stores from.
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + programId (string, required) 
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + defaultInitialValue (number, optional) - Initial Value of the value store.
-        + maxInitialValue (number, optional)
-        + maxInitialValue (number, optional) 
-        + accessType (string, optional) - `ENCRYPTED_CODE, GENERIC_CODE, CUSTOMER_ID`
-        + createInactive (boolean, optional) - The ValueStore will be created as inactive if this is true. 
-        + pretax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + discount (boolean, optional) - A boolean that indicates whether the value store represents a discount to the customer.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + uses (number, optional) - The number of times the value store can be transacted with.
-        + tags (array[string]) - Tags that represent the type of value. Ex: gift cards, accounts, promotions, ...
-        
-    + Body
-    
-            {
-                "programId": "p1",
-                "currency": "USD",
-                "minInitialValue": 500,
-                "maxInitialValue": 100000,
-                "accessType": "ENCRYPTED_CODE",
-                "tags": ["gift cards"],
-                "discount": false, 
-            }
-    
-+ Response 200
-    + Attributes (ValueStore)
-
-    + Body
-    
-            {
-                "programId": "p1",
-                "currency": "USD",
-                "minInitialValue": 500,
-                "maxInitialValue": 100000,
-                "accessType": "ENCRYPTED_CODE",
-                "tags": ["giftcard"],
-                "uses": "infinite",
-                "discount": false, 
-            }
-
-### Create a ValueStore From a Program [POST /programs/{programId}/valueStores]
-
-Create a ValueStore from a program.
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-        + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value Store.
-        
-    + Body
-    
-            {
-                "valueStoreId": "v1",
-                "value": 2500
-            }
-    
-+ Response 200
-    + Attributes (ValueStore)
-
-    + Body
-    
-            {
-                "valueStoreId": "v1",
-                "currency": "USD",
-                "value": 2500,
-                "tags": ["giftcard"],
-                "uses": "infinite",
-                "discount": false, 
-            }
-
 ## ValueStores [/valueStores/]
 
 Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique valueStoreId but may also be referenced by a code or associated with a Customer.
@@ -1198,5 +1102,3 @@ A step taken as part of the transaction.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
-+ discount (boolean, optional) - A boolean that indicates whether the value store represents a discount to the customer.
-+ tags (array[string], optional) - Tags that represent the type of value. Ex: gift cards, accounts, promotions, ...
