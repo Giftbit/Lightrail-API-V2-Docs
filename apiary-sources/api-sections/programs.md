@@ -3,6 +3,8 @@
 Programs group together Value Stores and control default behavior.  Programs can be set up for the various ways your organization uses values such as gift cards, loyalty and promotions.
 
 ---
-{% include 'endpoints/program-create.md' %}
+{% include 'endpoints/programs-create.md' %}
 
-Get, patch, etc...
+{% include 'endpoints/programs-patch.md' %}
+
+{% include 'endpoints/programs-get.md' %}

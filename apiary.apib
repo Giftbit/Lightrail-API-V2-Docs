@@ -430,6 +430,8 @@ Get Value Store by valueStoreId.
 
 ## ValueStores [/programs/]
 
+Programs group together Value Stores and control default behavior.  Programs can be set up for the various ways your organization uses values such as gift cards, loyalty and promotions.
+
 ---
 ### Create Program [POST /programs]
 
@@ -499,10 +501,180 @@ Create a new Program.
                 ],
                 "uses": null,
                 "tags": [],
-                "metadata": null
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-Get, patch, etc...
+### Update a Program [PATCH /programs/{programId}]
+
+Update fields that are sent and leave unspecified values at their default.
+
+Value Stores that have already been created will not be changed.
+
++ Parameter
+    + programId (string) - the programId of the Program to modify.
+
++ Request (application/merge-patch+json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + programId (string, optional) - Unique idempotent ID for the Program.  If present must match the programId in the path.
+        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
+        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
+        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
+        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + metadata (number, optional) - Arbitrary data associated with the Program.  
+        
+    + Body
+    
+            {
+                "tags": ["internal"]
+            }
+    
++ Response 200
+    + Attributes (Program)
+
+    + Body
+    
+            {
+                "programId": "unique-id-123",
+                "name": "Giftcard programm",
+                "currency": "CAD",
+                "access": "generatedCode",
+                "isSavings": "false",
+                "pretax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialValue": null,
+                "maxInitialValue": null,
+                "fixedInitialValues": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "uses": null,
+                "tags": ["internal"],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?isSavings}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
+Get multiple Value Stores.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + programId (string, optional) - Filter by programId.
+    + currency (string, optional) - Filter by currency.
+    + access (string, optional) - Filter by access.
+    + isSavings (string, optional) - Filter by isSavings.
+    + pretax (string, optional) - Filter by pretax.
+    + active (boolean, optional) - Filter active/inactive.
+    + minUses (number, optional) - Filter by minimum uses, inclusive.
+    + maxUses (number, optional) - Filter by maximum uses, inclusive.
+    + tags (number, optional) - Filter by tags.
+    + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
+    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    
++ Response 200
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + programs (array[Program], required) - the list of Programs.
+
+    + Body
+
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "programs": [
+                    {
+                        "programId": "unique-id-123",
+                        "name": "Giftcard programm",
+                        "currency": "CAD",
+                        "access": "generatedCode",
+                        "isSavings": "false",
+                        "pretax": "false",
+                        "active": "true",
+                        "redemptionRule": null,
+                        "valueRule": null,
+                        "minInitialValue": null,
+                        "maxInitialValue": null,
+                        "fixedInitialValues": [
+                            500,
+                            1500,
+                            2500
+                        ],
+                        "uses": null,
+                        "tags": [],
+                        "metadata": null,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    }
+                ]
+            }
+
+### Get Program [GET /programs/{programId}]
+
+Get Program by programId
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + programId (string) - the programId of the Program to get.
+
++ Response 200
+    + Attributes (Program)
+
+    + Body
+
+            {
+                "programId": "unique-id-123",
+                "name": "Giftcard programm",
+                "currency": "CAD",
+                "access": "generatedCode",
+                "isSavings": "false",
+                "pretax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialValue": null,
+                "maxInitialValue": null,
+                "fixedInitialValues": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "uses": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
 
 ## Transactions [/transactions/]
 
