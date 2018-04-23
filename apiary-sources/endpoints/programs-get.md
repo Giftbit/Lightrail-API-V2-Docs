@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 

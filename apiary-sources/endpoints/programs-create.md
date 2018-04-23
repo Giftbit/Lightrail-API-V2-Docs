@@ -23,7 +23,7 @@ Create a new Program.
         + valueRule (number, optional) - {{valueStore.valueRule}}
         + minInitialValue (number, optional) - {{program.minInitialValue}}
         + maxInitialValue (number, optional) - {{program.maxInitialValue}}
-        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 

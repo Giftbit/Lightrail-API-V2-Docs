@@ -6,6 +6,8 @@
 
 {% include 'data-structures/LineItem.md' %}
 
+{% include 'data-structures/Program.md' %}
+
 {% include 'data-structures/Rule.md' %}
 
 {% include 'data-structures/Transaction.md' %}

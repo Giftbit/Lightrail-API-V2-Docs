@@ -387,7 +387,7 @@ Create a new Program.
         + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
         + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
         + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -453,7 +453,7 @@ Value Stores that have already been created will not be changed.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
         + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], option) - A list of values the Value Store can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.  
         
@@ -492,7 +492,7 @@ Value Stores that have already been created will not be changed.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -724,7 +724,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -1420,6 +1420,28 @@ Get Transaction by transactionId.
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses "bankers rounding".
 + postTaxDiscount (number) - The discount after tax has been added.
 + payable (number) - The cost of the line item after tax and discounts have been applied.
+
+## Program (object)
++ programId (string, required) - Unique idempotent ID for the Program.
++ name (string, optional) - A human-readable name for the Program.
++ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ access (enum[string], required) - How the valueStores can be accessed
+    + `customerId` - must be associated with a customerId.
+    + `secureCode` - a code is generated or supplied and is stored securely.
+    + `publicCode` - a code is generated or supplied and can be displayed.
++ discount (boolean, required) - If true the Value Store will be noted as a discount for the customer in orders.
++ preTax (boolean, required) - If true the Value Store's value is applied before tax is calculated.
++ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
++ minInitialValue (number, optional) - 
++ maxInitialValue (number, optional) - 
++ fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
++ uses (number, optional) - If set the number of uses the Value Store will be created with.  Set `null` or omit for infinite uses.
++ tags (array[string], optional) - Segmentation tags.
++ createdDate (string, required) - ISO date for when the Program was created.
++ updatedDate (string, required) - ISO date for when the Program was last updated.
++ metadata (object, optional) - Arbitrary data associated with the Program.
 
 ## Rule (object)
 + rule (string, required) - the Lightrail Rule text of the rule.
