@@ -10,9 +10,11 @@ Create a new Value Store.
     + Attributes
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
         + programId (string, optional) - Associate with and copy default values from the given Program.
+        + customerId (string, optional) - Associate the Value Store with the given Customer.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `customerId`.
         + currency (string, optional) - {{currency}} Required if `programId` is not set.
         + value (number, optional) - {{valueStore.value}}
-        + pretax (boolean, optional) - {{valueStore.pretax}}
+        + preTax (boolean, optional) - {{valueStore.preTax}}
         + active (boolean, optional) - {{valueStore.active}}
         + frozen (boolean, optional) - {{valueStore.frozen}}
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
@@ -41,7 +43,7 @@ Create a new Value Store.
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
-                "pretax": false,
+                "preTax": false,
                 "active": true,
                 "frozen": false,
                 "redemptionRule": null,

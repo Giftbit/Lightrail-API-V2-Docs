@@ -4,10 +4,10 @@
 + currency (string, required) - {{currency}}
 + access (enum[string], required) - How the valueStores can be accessed
     + `customerId` - must be associated with a customerId.
-    + `generatedCode` - automatic code generated.
-    + `setCode` - a code must be manually set.
+    + `secureCode` - a code is generated or supplied and is stored securely.
+    + `publicCode` - a code is generated or supplied and can be displayed.
 + discount (boolean, required) - {{valueStore.discount}}
-+ pretax (boolean, required) - {{valueStore.pretax}}
++ preTax (boolean, required) - {{valueStore.preTax}}
 + active (boolean, optional) - {{valueStore.active}}
 + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
 + valueRule (number, optional) - {{valueStore.valueRule}}

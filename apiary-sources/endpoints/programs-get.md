@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?pretax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -15,7 +15,7 @@ Get multiple Value Stores.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
     + discount (string, optional) - Filter by discount.
-    + pretax (string, optional) - Filter by pretax.
+    + preTax (string, optional) - Filter by preTax.
     + active (boolean, optional) - Filter active/inactive.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
@@ -47,7 +47,7 @@ Get multiple Value Stores.
                         "currency": "CAD",
                         "access": "generatedCode",
                         "discount": "false",
-                        "pretax": "false",
+                        "preTax": "false",
                         "active": "true",
                         "redemptionRule": null,
                         "valueRule": null,
@@ -92,7 +92,7 @@ Get Program by programId
                 "currency": "CAD",
                 "access": "generatedCode",
                 "discount": "false",
-                "pretax": "false",
+                "preTax": "false",
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,

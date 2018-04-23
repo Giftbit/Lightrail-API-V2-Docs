@@ -17,7 +17,7 @@
 + rule (string) - The redemption rule.
 + ruleExplanation (string) - Description of the rule.
 + amount (number) - How value of the promotion.
-+ pretax (boolean) - Whether the ValueStore applies before or after tax.
++ preTax (boolean) - Whether the ValueStore applies before or after tax.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.

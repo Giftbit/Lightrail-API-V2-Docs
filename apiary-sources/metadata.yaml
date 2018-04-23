@@ -40,7 +40,7 @@ valueStore:
   frozen: "If true the Value Store is frozen and cannot be transacted with."
   discount: "If true the Value Store will be noted as a discount for the customer in orders."
   metadata: "Arbitrary data associated with the Value Store."
-  pretax: "If true the Value Store's value is applied before tax is calculated."
+  preTax: "If true the Value Store's value is applied before tax is calculated."
   programId: "The programId of the Program this ValueStore is in."
   redemptionRule: "A Redemption Rule controlling when the Value Store can be used in an order."
   startDate: "ISO date for when the valueStore can start to be transacted with."

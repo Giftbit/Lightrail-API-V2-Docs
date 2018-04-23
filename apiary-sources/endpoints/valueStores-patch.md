@@ -16,7 +16,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
         + valueStoreId (string, optional) - {{valueStore.valueStoreId}}  If present must match the valueStoreId in the path.
         + currency (string, optional) - {{currency}}
         + value (number, optional) - {{valueStore.value}}
-        + pretax (boolean, optional) - {{valueStore.pretax}}
+        + preTax (boolean, optional) - {{valueStore.preTax}}
         + active (boolean, optional) - {{valueStore.active}}
         + frozen (boolean, optional) - {{valueStore.frozen}}
         + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
@@ -42,7 +42,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
-                "pretax": false,
+                "preTax": false,
                 "active": true,
                 "frozen": true,
                 "redemptionRule": null,

@@ -38,7 +38,7 @@ Value Stores that have already been created will not be changed.
                 "currency": "CAD",
                 "access": "generatedCode",
                 "discount": "false",
-                "pretax": "false",
+                "preTax": "false",
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
