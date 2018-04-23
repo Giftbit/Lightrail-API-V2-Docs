@@ -1,8 +1,12 @@
 # Data Structures
 
+{% include 'data-structures/Currency.md' %}
+
 {% include 'data-structures/Customer.md' %}
 
 {% include 'data-structures/LineItem.md' %}
+
+{% include 'data-structures/Program.md' %}
 
 {% include 'data-structures/Rule.md' %}
 

@@ -1,4 +1,4 @@
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Value Stores.
 
@@ -13,16 +13,13 @@ Get multiple Value Stores.
     + offset (number, optional) - {{pagination.offset}}
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
-    + minValue (number, optional) - Filter by minimumm value, inclusive.
-    + maxValue (number, optional) - Filter by maximum value, inclusive.
+    + access (string, optional) - Filter by access.
+    + discount (string, optional) - Filter by discount.
+    + preTax (string, optional) - Filter by preTax.
     + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by he maximum endDate, inclusive.
+    + tags (number, optional) - Filter by tags.
     + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
@@ -34,7 +31,7 @@ Get multiple Value Stores.
         + limit (number, required) - {{pagination.limit}}
         + offset (number, required) - {{pagination.offset}}
         + maxLimit (number, required) - {{pagination.maxLimit}}
-        + valueStores (array[ValueStore], required) - the list of Value Stores.
+        + programs (array[Program], required) - the list of Programs.
 
     + Body
 
@@ -43,20 +40,26 @@ Get multiple Value Stores.
                 "limit": 100,
                 "offset": 0,
                 "maxLimit": 1000,
-                "valueStores": [
+                "programs": [
                     {
-                        "valueStoreId": "vs-1",
-                        "programId": "giftcards",
-                        "currency": "USD",
-                        "value": 2500, 
-                        "preTax": false,
-                        "active": true,
-                        "frozen": false,
+                        "programId": "unique-id-123",
+                        "name": "Giftcard programm",
+                        "currency": "CAD",
+                        "access": "generatedCode",
+                        "discount": "false",
+                        "preTax": "false",
+                        "active": "true",
                         "redemptionRule": null,
                         "valueRule": null,
+                        "minInitialValue": null,
+                        "maxInitialValue": null,
+                        "fixedInitialValues": [
+                            500,
+                            1500,
+                            2500
+                        ],
                         "uses": null,
-                        "startDate": null,
-                        "endDate": null,
+                        "tags": [],
                         "metadata": null,
                         "createdDate": "2018-04-17T23:20:08.404Z",
                         "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -64,9 +67,9 @@ Get multiple Value Stores.
                 ]
             }
 
-### Get Value Store [GET /valueStores/{valueStoreId}]
+### Get Program [GET /programs/{programId}]
 
-Get Value Store by valueStoreId.
+Get Program by programId
 
 ---
 
@@ -76,26 +79,32 @@ Get Value Store by valueStoreId.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get.
+    + programId (string) - the programId of the Program to get.
 
 + Response 200
-    + Attributes (ValueStore)
+    + Attributes (Program)
 
     + Body
 
             {
-                "valueStoreId": "vs-1",
-                "programId": "giftcards",
-                "currency": "USD",
-                "value": 2500, 
-                "preTax": false,
-                "active": true,
-                "frozen": false,
+                "programId": "unique-id-123",
+                "name": "Giftcard programm",
+                "currency": "CAD",
+                "access": "generatedCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
+                "minInitialValue": null,
+                "maxInitialValue": null,
+                "fixedInitialValues": [
+                    500,
+                    1500,
+                    2500
+                ],
                 "uses": null,
-                "startDate": null,
-                "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

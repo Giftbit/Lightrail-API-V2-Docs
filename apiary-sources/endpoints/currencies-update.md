@@ -1,0 +1,36 @@
+### Update a Currency [PATCH /currencies/{code}]
+
+Update fields that are sent and leave unspecified values at their default.
+
++ Parameter
+    + code (string) - the code of the Currency to modify.
+
++ Request (application/merge-patch+json)
+    + Headers
+    
+            {{header.authorization}}
+
+    + Attributes
+        + code (string, optional) - {{currency.code}} If present must match the code in the path.
+        + name (number, optional) - {{currency.name}}
+        + symbol (string, optional) - {{currency.symbol}}
+        + decimalPlaces (number, optional) - {{currency.decimalPlaces}}
+        
+    + Body
+    
+            {
+                "name": "Zimbabwe Dollars",
+                "symbol": "Z$"
+            }
+    
++ Response 200
+    + Attributes (Program)
+
+    + Body
+    
+            {
+                "code": "ZWD",
+                "name": "Zimbabwe Dollars",
+                "symbol": "Z$",
+                "decimalPlaces": 2
+            }
