@@ -219,14 +219,14 @@ Create a new Currency.
 ---
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
-
+        
     + Attributes
-        + code (string, required) -
-        + name (number, required) -
-        + symbol (number, required) -
-        + decimalPlaces (number, required) -
+        + code (string, required) - 
+        + name (number, required) - 
+        + symbol (number, required) - 
+        + decimalPlaces (number, required) - 
 
     + Body
 
@@ -236,12 +236,12 @@ Create a new Currency.
                 "symbol": "$",
                 "decimalPlaces": 2
             }
-
+    
 + Response 200
     + Attributes (Customer)
 
     + Body
-
+            
             {
                 "code": "USD",
                 "name": "Dollars",
@@ -257,27 +257,27 @@ Update fields that are sent and leave unspecified values at their default.
 
 + Request (application/merge-patch+json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
     + Attributes
         + code (string, optional) -  If present must match the code in the path.
-        + name (number, optional) -
-        + symbol (string, optional) -
-        + decimalPlaces (number, optional) -
-
+        + name (number, optional) - 
+        + symbol (string, optional) - 
+        + decimalPlaces (number, optional) - 
+        
     + Body
-
+    
             {
                 "name": "Zimbabwe Dollars",
                 "symbol": "Z$"
             }
-
+    
 + Response 200
     + Attributes (Program)
 
     + Body
-
+    
             {
                 "code": "ZWD",
                 "name": "Zimbabwe Dollars",
@@ -294,7 +294,7 @@ The Currency can only be deleted if it is not used by any Value Stores or Progra
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -314,7 +314,7 @@ Get all the Currencies.
 ---
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Response 200
@@ -339,7 +339,7 @@ Get Currency by code.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -369,12 +369,12 @@ Create a new Program.
 ---
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
-
+        
     + Attributes
         + programId (string, required) - Unique idempotent ID for the Program.
-        + name (string, optional) -
+        + name (string, optional) - 
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + access (enum[string], required) - How the valueStores can be accessed
             + `customerId` - must be associated with a customerId.
@@ -404,12 +404,12 @@ Create a new Program.
                     2500
                 ]
             }
-
+    
 + Response 200
     + Attributes (Customer)
 
     + Body
-
+            
             {
                 "programId": "unique-id-123",
                 "name": "Giftcard programm",
@@ -445,7 +445,7 @@ Value Stores that have already been created will not be changed.
 
 + Request (application/merge-patch+json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
     + Attributes
@@ -456,18 +456,18 @@ Value Stores that have already been created will not be changed.
         + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
-
+        
     + Body
-
+    
             {
                 "tags": ["internal"]
             }
-
+    
 + Response 200
     + Attributes (Program)
 
     + Body
-
+    
             {
                 "programId": "unique-id-123",
                 "name": "Giftcard programm",
@@ -499,9 +499,9 @@ Get multiple Value Stores.
 ---
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
-
+        
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
@@ -518,7 +518,7 @@ Get multiple Value Stores.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
-
+    
 + Response 200
     + Attributes
         + count (number, required) - The number of items returned.
@@ -569,7 +569,7 @@ Get Program by programId
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -835,7 +835,7 @@ Get a Value Store's code.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -860,15 +860,15 @@ Set a Value Store's code.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
     + Attributes
         + code (string, required) - The code to set.
         + secure (boolean, optional) - If true the code is stored securely and only shown as `codeLastFour`.
-
+        
     + Body
-
+    
             {
                 "code": "c3d177ff950b4e2796e341f65976e1b1",
                 "secure" true
@@ -896,7 +896,7 @@ Delete a Value Store's code.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -918,7 +918,7 @@ Get a Value Store's customer.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -949,14 +949,14 @@ Set a Value Store's Customer.
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
     + Attributes
         + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
-
+        
     + Body
-
+    
             {
                 "customerId": "unique-id-123"
             }
@@ -989,7 +989,7 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
 
 + Request (application/json)
     + Headers
-
+    
             Authorization: Bearer <API_KEY>
 
 + Parameter
@@ -1099,10 +1099,10 @@ Data used in example:
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
-                    "subtotal": 1548,
+                    "subtotal": 1548, 
                     "tax": 67,
                     "discount": 350,
-                    "payable": 1265
+                    "payable": 1265 
                 },
                 "lineItems": [
                     {
@@ -1120,7 +1120,7 @@ Data used in example:
                                 "amount": -200,
                                 "preTax": true,
                                 "discount": true
-                            },
+                            }, 
                             {
                                 "valueStoreId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
@@ -1198,7 +1198,7 @@ Data used in example:
                         "amount": -200,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-promotions", "clothing-promos"],
-                        "discount": true
+                        "discount": true 
                     },
                     {
                         "valueStoreId": "2018-10percent-off-over-5-orders",
@@ -1567,10 +1567,10 @@ Get Transaction by transactionId.
 # Data Structures
 
 ## Currency (object)
-+ code (string, required) -
-+ name (number, required) -
-+ symbol (number, required) -
-+ decimalPlaces (number, required) -
++ code (string, required) - 
++ name (number, required) - 
++ symbol (number, required) - 
++ decimalPlaces (number, required) - 
 
 ## Customer (object)
 + customerId (string, required) - Unique idempotent ID for the Customer.
@@ -1596,11 +1596,11 @@ Get Transaction by transactionId.
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueStoreId (string) - The ID of the ValueStore.
-+ rule (string) - The redemption rule.
-+ ruleExplanation (string) - Description of the rule.
-+ amount (number) - How value of the promotion.
-+ preTax (boolean) - Whether the ValueStore applies before or after tax.
++ valueStoreId (string) - Unique idempotent id for the ValueStore.
++ redemptionRule (string) - A Redemption Rule controlling when the Value Store can be used in an order.
++ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
++ amount (number) - The value of the discount.
++ preTax (boolean) - If true the Value Store's value is applied before tax is calculated.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
@@ -1622,8 +1622,8 @@ Get Transaction by transactionId.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
 + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-+ minInitialValue (number, optional) -
-+ maxInitialValue (number, optional) -
++ minInitialValue (number, optional) - 
++ maxInitialValue (number, optional) - 
 + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
 + uses (number, optional) - If set the number of uses the Value Store will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
