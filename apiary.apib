@@ -428,6 +428,79 @@ Get Value Store by valueStoreId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
+## ValueStores [/programs/]
+
+---
+### Create Program [POST /programs]
+
+Create a new Program.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + programId (string, required) - Unique idempotent ID for the Program.
+        + name (string, optional) - 
+        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + access (enum[string], required) - How the valueStores can be accessed
+            + `customerId` - must be associated with a customerId.
+            + `generatedCode` - automatic code generated.
+            + `setCode` - a code must be manually set.
+        + isSavings (boolean, optional) - If true the Value Store will be noted as savings for the customer in orders.
+        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
+        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
+        + minValue (number, optional) - The minimum value the Value Store can be created with.
+        + maxValue (number, optional) - The maximum value the Value Store can be created with.
+        + fixedValues (array[number], option) - A list of values the Value Store can be created with.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+
+    + Body
+
+            {
+                "programId": "unique-id-123",
+                "name": "Giftcard programm",
+                "currency": "CAD",
+                "access": "generatedCode",
+                "fixedValues": [
+                    500,
+                    1500,
+                    2500
+                ]
+            }
+    
++ Response 200
+    + Attributes (Customer)
+
+    + Body
+            
+            {
+                "programId": "unique-id-123",
+                "name": "Giftcard programm",
+                "currency": "CAD",
+                "access": "generatedCode",
+                "isSavings": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minValue": null,
+                "maxValue": null,
+                "fixedValues": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "metadata": null
+            }
+
+Get, patch, etc...
+
 ## Transactions [/transactions/]
 
 ---
