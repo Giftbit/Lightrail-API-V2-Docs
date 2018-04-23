@@ -11,6 +11,7 @@ Get multiple Value Stores.
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
+    + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
     + minValue (number, optional) - Filter by minimumm value, inclusive.
     + maxValue (number, optional) - Filter by maximum value, inclusive.
@@ -45,6 +46,7 @@ Get multiple Value Stores.
                 "valueStores": [
                     {
                         "valueStoreId": "vs-1",
+                        "programId": "giftcards",
                         "currency": "USD",
                         "value": 2500, 
                         "pretax": false,
@@ -83,6 +85,7 @@ Get Value Store by valueStoreId.
 
             {
                 "valueStoreId": "vs-1",
+                "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
                 "pretax": false,

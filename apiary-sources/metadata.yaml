@@ -21,6 +21,7 @@ program:
   maxValue: "The maximum value the Value Store can be created with."
   minValue: "The minimum value the Value Store can be created with."
   name: "A human-readable name for the Program."
+  programId: "Unique idempotent ID for the Program."
   updatedDate: "ISO date for when the Program was last updated."
 transaction:
   allowRemainder: "If true the transaction will go through without all value being debited, and the remainder indicated."
@@ -39,6 +40,7 @@ valueStore:
   isSavings: "If true the Value Store will be noted as savings for the customer in orders."
   metadata: "Arbitrary data associated with the Value Store."
   pretax: "If true the Value Store's value is applied before tax is calculated."
+  programId: "The programId of the Program this ValueStore is in."
   redemptionRule: "A Redemption Rule controlling when the Value Store can be used in an order."
   startDate: "ISO date for when the valueStore can start to be transacted with."
   uses: "The number of times the value store can be transacted with."

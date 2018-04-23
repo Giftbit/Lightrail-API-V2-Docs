@@ -9,7 +9,7 @@ Create a new Program.
             {{header.authorization}}
         
     + Attributes
-        + programId (string, required) - {{transaction.transactionId}}
+        + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{transaction.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - How the valueStores can be accessed

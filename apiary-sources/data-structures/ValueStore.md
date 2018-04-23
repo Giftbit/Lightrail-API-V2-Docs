@@ -1,5 +1,6 @@
 ## ValueStore (object)
 + valueStoreId (string, required) - {{valueStore.valueStoreId}}
++ programId (string, optional) - {{valueStore.programId}}
 + currency (string, required) - {{currency}}
 + value (number, optional) - {{valueStore.value}}
 + pretax (boolean, optional) - {{valueStore.pretax}}

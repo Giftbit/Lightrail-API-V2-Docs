@@ -39,6 +39,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
     
             {
                 "valueStoreId": "vs-1",
+                "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
                 "pretax": false,
