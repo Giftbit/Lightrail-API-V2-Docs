@@ -10,7 +10,7 @@ Create a new Currency.
         
     + Attributes
         + code (string, required) - {{currency.code}}
-        + name (number, required) - {{currency.name}}
+        + name (string, required) - {{currency.name}}
         + symbol (number, required) - {{currency.symbol}}
         + decimalPlaces (number, required) - {{currency.decimalPlaces}}
 
@@ -24,7 +24,7 @@ Create a new Currency.
             }
     
 + Response 200
-    + Attributes (Customer)
+    + Attributes (Currency)
 
     + Body
             

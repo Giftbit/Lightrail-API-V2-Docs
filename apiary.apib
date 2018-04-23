@@ -224,7 +224,7 @@ Create a new Currency.
         
     + Attributes
         + code (string, required) - 
-        + name (number, required) - 
+        + name (string, required) - 
         + symbol (number, required) - 
         + decimalPlaces (number, required) - 
 
@@ -238,7 +238,7 @@ Create a new Currency.
             }
     
 + Response 200
-    + Attributes (Customer)
+    + Attributes (Currency)
 
     + Body
             
@@ -262,7 +262,7 @@ Update fields that are sent and leave unspecified values at their default.
 
     + Attributes
         + code (string, optional) -  If present must match the code in the path.
-        + name (number, optional) - 
+        + name (string, optional) - 
         + symbol (string, optional) - 
         + decimalPlaces (number, optional) - 
         
@@ -274,7 +274,7 @@ Update fields that are sent and leave unspecified values at their default.
             }
     
 + Response 200
-    + Attributes (Program)
+    + Attributes (Currency)
 
     + Body
     
@@ -346,7 +346,7 @@ Get Currency by code.
     + code (string) - the code of the Currency to get.
 
 + Response 200
-    + Attributes (Program)
+    + Attributes (Currency)
 
     + Body
 
@@ -357,7 +357,7 @@ Get Currency by code.
                 "decimalPlaces": 2
             }
 
-## ValueStores [/programs/]
+## Programs [/programs/]
 
 Programs group together Value Stores and control default behavior.  Programs can be set up for the various ways your organization uses values such as gift cards, loyalty and promotions.
 
@@ -1037,6 +1037,7 @@ Data used in example:
         + sources (array[TransactionParty])
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
         
     + Body 
@@ -1080,17 +1081,7 @@ Data used in example:
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + transactionType (string, required) - `order`
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + totals (object, required) - Totals for the transaction.
-        + lineItems (array[LineItemResponse])
-        + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of value that could not be debited.
-        + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the Transaction was created.
-        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+    + Attributes (Transaction)
 
     + Body
     
@@ -1212,6 +1203,7 @@ Data used in example:
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {}
             }
 
@@ -1234,6 +1226,7 @@ Currently only the `lightrail` payment rail is supported.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -1252,15 +1245,7 @@ Currently only the `lightrail` payment rail is supported.
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + transactionType (string, required) - `debit`
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of value that could not be debited.
-        + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the Transaction was created.
-        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+    + Attributes (Transaction)
 
     + Body
 
@@ -1272,7 +1257,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1282,6 +1266,7 @@ Currently only the `lightrail` payment rail is supported.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -1305,6 +1290,7 @@ Currently only the `lightrail` payment rail is supported.
         + amount (number, required) - The amount to debit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -1323,15 +1309,7 @@ Currently only the `lightrail` payment rail is supported.
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + transactionType (string, required) - `credit`
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - `0`
-        + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the Transaction was created.
-        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+    + Attributes (Transaction)
 
     + Body
 
@@ -1343,7 +1321,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 1500,
                         "valueAfter": 4000,
@@ -1353,6 +1330,7 @@ Currently only the `lightrail` payment rail is supported.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }
@@ -1378,6 +1356,7 @@ Currently only the `lightrail` payment rail is supported.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -1408,6 +1387,7 @@ Currently only the `lightrail` payment rail is supported.
         + remainder (number, required) - The remainder of value that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
         + createdDate (string, required) - ISO date for when the Transaction was created.
+        + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -1420,7 +1400,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "GIFT_CARD",
                         "currency": "USD",
                         "valueBefore": 2500,
                         "valueAfter": 0,
@@ -1429,7 +1408,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "alice-account-USD",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "USD",
                         "valueBefore": 5000,
                         "valueAfter": 7500,
@@ -1479,13 +1457,12 @@ Get multiple Transactions.
                 "transactions": [
                     {
                         "transactionId": "unique-id-123",
-                        "transctionType": "debit",
+                        "transactionType": "debit",
                         "currency": "XXX",
                         "steps": [
                             {
                                 "rail": "lightrail",
                                 "valueStoreId": "vs_1",
-                                "valueStoreType": "ACCOUNT",
                                 "currency": "XXX",
                                 "valueBefore": 5500,
                                 "valueAfter": 3000,
@@ -1494,6 +1471,8 @@ Get multiple Transactions.
                         ],
                         "remainder": 0,
                         "simulated": false,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z",
                         "metadata": {
                             "note": "Reduce loyalty points after 3mo customer inactivity"
                         }
@@ -1516,27 +1495,18 @@ Get Transaction by transactionId.
     + transactionId (string) - the transactionId of the Transaction to get.
 
 + Response 200
-    + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of value that could not be debited.
-        + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the Transaction was created.
-        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+    + Attributes (Transaction)
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "transctionType": "debit",
+                "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1546,6 +1516,93 @@ Get Transaction by transactionId.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {
+                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                }
+            }
+
+### Capture Pending Transaction [POST /transactions/{transactionId}/capture]
+
+Capture a pending Transaction by transactionId.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + transactionId (string) - the transactionId of the pending Transaction to capture.
+
++ Response 200
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "transactionType": "debit",
+                "currency": "XXX",
+                "steps": [
+                    {
+                        "rail": "lightrail",
+                        "valueStoreId": "vs_1",
+                        "currency": "XXX",
+                        "valueBefore": 5500,
+                        "valueAfter": 3000,
+                        "valueChange": -2500
+                    }
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "pending": "capture",
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:58:19.036Z"
+                "metadata": {
+                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                }
+            }
+
+### Void Pending Transaction [POST /transactions/{transactionId}/void]
+
+Void a pending Transaction by transactionId.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + transactionId (string) - the transactionId of the pending Transaction to void.
+
++ Response 200
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "transactionId": "unique-id-123",
+                "transactionType": "debit",
+                "currency": "XXX",
+                "steps": [
+                    {
+                        "rail": "lightrail",
+                        "valueStoreId": "vs_1",
+                        "currency": "XXX",
+                        "valueBefore": 5500,
+                        "valueAfter": 3000,
+                        "valueChange": -2500
+                    }
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "pending": "void",
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
@@ -1601,7 +1658,7 @@ Get Transaction by transactionId.
 + programId (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-+ access (enum[string], required) - How the valueStores can be accessed
++ access (enum[string], required) - How the valueStores can be accessed.
     + `customerId` - must be associated with a customerId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
@@ -1630,7 +1687,12 @@ Get Transaction by transactionId.
 + steps (array[TransactionStep], required) - An array of transaction steps.
 + remainder (number, required) - The remainder of value that could not be debited.
 + simulated (boolean, optional) - True if the transaction was simulated.
++ pending (enum[string], optional) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
+    + `pending` - created pending and unresolved.
+    + `capture` - created pending and captured.  The Transaction is final.
+    + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string, required) - ISO date for when the Transaction was created.
++ updatedDate (string, required) - ISO date for when the Customer was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
 ## TransactionParty (object)
@@ -1650,10 +1712,10 @@ A step taken as part of the transaction.
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
 + valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
-+ valueStoreType (string, required) - the valueStoreType of the ValueStore transacted with.
 + currency (string, required) - the currency of the ValueStore transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
-+ codeLastFour (string, optional) - the last 4 digits of the code the ValueStore was accessed with.
++ code (string, optional) - the code the Value Store was accessed with.
++ codeLastFour (string, optional) - the last 4 digits of the secure code the ValueStore was accessed with.
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
 + valueChange (number, required) - the net change of the ValueStore for the transaction.

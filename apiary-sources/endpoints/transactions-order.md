@@ -29,6 +29,7 @@ Data used in example:
         + sources (array[TransactionParty])
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
         
     + Body 
@@ -72,17 +73,7 @@ Data used in example:
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
-        + transactionType (string, required) - `order`
-        + currency (string, required) - {{currency}}
-        + totals (object, required) - Totals for the transaction.
-        + lineItems (array[LineItemResponse])
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainder}}
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
     
@@ -204,5 +195,6 @@ Data used in example:
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {}
             }

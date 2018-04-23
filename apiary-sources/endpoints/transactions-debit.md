@@ -17,6 +17,7 @@ Currently only the `lightrail` payment rail is supported.
         + currency (string, required) - {{currency}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -35,15 +36,7 @@ Currently only the `lightrail` payment rail is supported.
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
-        + transactionType (string, required) - `debit`
-        + currency (string, required) - {{currency}}
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainder}}
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
 
@@ -55,7 +48,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -65,6 +57,7 @@ Currently only the `lightrail` payment rail is supported.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }

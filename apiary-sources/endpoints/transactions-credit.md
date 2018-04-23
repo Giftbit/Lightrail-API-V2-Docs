@@ -16,6 +16,7 @@ Currently only the `lightrail` payment rail is supported.
         + amount (number, required) - The amount to debit, > 0.
         + currency (string, required) - {{currency}}
         + simulate (boolean, optional) - {{transaction.simulate}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -34,15 +35,7 @@ Currently only the `lightrail` payment rail is supported.
             }
     
 + Response 200
-    + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
-        + transactionType (string, required) - `credit`
-        + currency (string, required) - {{currency}}
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - `0`
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
 
@@ -54,7 +47,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 1500,
                         "valueAfter": 4000,
@@ -64,6 +56,7 @@ Currently only the `lightrail` payment rail is supported.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }

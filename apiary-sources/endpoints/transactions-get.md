@@ -33,13 +33,12 @@ Get multiple Transactions.
                 "transactions": [
                     {
                         "transactionId": "unique-id-123",
-                        "transctionType": "debit",
+                        "transactionType": "debit",
                         "currency": "XXX",
                         "steps": [
                             {
                                 "rail": "lightrail",
                                 "valueStoreId": "vs_1",
-                                "valueStoreType": "ACCOUNT",
                                 "currency": "XXX",
                                 "valueBefore": 5500,
                                 "valueAfter": 3000,
@@ -48,6 +47,8 @@ Get multiple Transactions.
                         ],
                         "remainder": 0,
                         "simulated": false,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z",
                         "metadata": {
                             "note": "Reduce loyalty points after 3mo customer inactivity"
                         }
@@ -70,27 +71,18 @@ Get Transaction by transactionId.
     + transactionId (string) - the transactionId of the Transaction to get.
 
 + Response 200
-    + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
-        + transactionType (string, required) - {{transaction.transactionType}}
-        + currency (string, required) - {{currency}}
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainder}}
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
 
             {
                 "transactionId": "unique-id-123",
-                "transctionType": "debit",
+                "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -100,6 +92,7 @@ Get Transaction by transactionId.
                 "remainder": 0,
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo customer inactivity"
                 }
