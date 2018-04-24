@@ -7,8 +7,7 @@ A step taken as part of the transaction.
 + valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
 + currency (string, required) - the currency of the ValueStore transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
-+ code (string, optional) - the code the Value Store was accessed with.
-+ codeLastFour (string, optional) - the last 4 digits of the secure code the ValueStore was accessed with.
++ code (string, optional) - {{valueStore.code}}.
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
 + valueChange (number, required) - the net change of the ValueStore for the transaction.

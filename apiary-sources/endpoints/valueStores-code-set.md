@@ -11,7 +11,7 @@ Set a Value Store's code.
 
     + Attributes
         + code (string, required) - The code to set.
-        + secure (boolean, optional) - If true the code is stored securely and only shown as `codeLastFour`.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
         
     + Body
     
@@ -25,11 +25,10 @@ Set a Value Store's code.
 
 + Response 200
     + Attributes
-        + code (string, optional) - {{valueStore.code.code}}
-        + codeLastFour (string, optional) - {{valueStore.code.codeLastFour}}
+        + code (string, optional) - {{valueStore.code}}
 
     + Body
 
             {
-                "codeLastFour": "e1b1"
+                "code": "…e1b1"
             }

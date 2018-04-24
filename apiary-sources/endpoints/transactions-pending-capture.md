@@ -33,7 +33,7 @@ Capture a pending Transaction by transactionId.
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "pending": "capture",
+                "pending": "captured",
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {

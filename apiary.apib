@@ -843,8 +843,7 @@ Get a Value Store's code.
 
 + Response 200
     + Attributes
-        + code (string, optional) - The code if it is publicly viewable.
-        + codeLastFour (string, optional) - The last four digits of the code if it is secure.
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
     + Body
 
@@ -865,7 +864,7 @@ Set a Value Store's code.
 
     + Attributes
         + code (string, required) - The code to set.
-        + secure (boolean, optional) - If true the code is stored securely and only shown as `codeLastFour`.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
         
     + Body
     
@@ -879,13 +878,12 @@ Set a Value Store's code.
 
 + Response 200
     + Attributes
-        + code (string, optional) - The code if it is publicly viewable.
-        + codeLastFour (string, optional) - The last four digits of the code if it is secure.
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
     + Body
 
             {
-                "codeLastFour": "e1b1"
+                "code": "…e1b1"
             }
 
 ### Delete Value Store Code [DELETE /valueStores/{valueStoreId}/code]
@@ -1570,7 +1568,7 @@ Capture a pending Transaction by transactionId.
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "pending": "capture",
+                "pending": "captured",
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
@@ -1701,7 +1699,7 @@ Void a pending Transaction by transactionId.
 + simulated (boolean, optional) - True if the transaction was simulated.
 + pending (enum[string], optional) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
     + `pending` - created pending and unresolved.
-    + `capture` - created pending and captured.  The Transaction is final.
+    + `captured` - created pending and captured.  The Transaction is final.
     + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string, required) - ISO date for when the Transaction was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
@@ -1726,8 +1724,7 @@ A step taken as part of the transaction.
 + valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
 + currency (string, required) - the currency of the ValueStore transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
-+ code (string, optional) - the code the Value Store was accessed with.
-+ codeLastFour (string, optional) - the last 4 digits of the secure code the ValueStore was accessed with.
++ code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
 + valueChange (number, required) - the net change of the ValueStore for the transaction.

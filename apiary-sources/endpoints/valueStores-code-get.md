@@ -14,8 +14,7 @@ Get a Value Store's code.
 
 + Response 200
     + Attributes
-        + code (string, optional) - {{valueStore.code.code}}
-        + codeLastFour (string, optional) - {{valueStore.code.codeLastFour}}
+        + code (string, optional) - {{valueStore.code}}
 
     + Body
 
