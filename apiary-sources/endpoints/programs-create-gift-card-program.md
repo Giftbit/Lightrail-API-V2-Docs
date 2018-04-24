@@ -30,7 +30,7 @@ Create a new Gift Card Program.
                 "access": "secureCode",
                 minInitialValue: 500,
                 maxInitialValue: 100000,
-                "tags": ["gift-card"]
+                "tags": ["giftcard"]
             }
     
 + Response 200
@@ -52,7 +52,7 @@ Create a new Gift Card Program.
                 "maxInitialValue": 100000,
                 "fixedInitialValues": null,
                 "uses": null,
-                "tags": ["gift-card"],
+                "tags": ["giftcard"],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

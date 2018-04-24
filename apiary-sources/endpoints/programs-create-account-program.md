@@ -25,7 +25,7 @@ Create a new Account/Points Program.
                 "name": "Accounts USD",
                 "currency": "USD",
                 "access": "customerId",
-                "tags": ["accounts-usd"]
+                "tags": ["account"]
             }
     
 + Response 200
@@ -47,7 +47,7 @@ Create a new Account/Points Program.
                 "maxInitialValue": null,
                 "fixedInitialValues": null
                 "uses": null,
-                "tags": ["accounts-usd"],
+                "tags": ["account"],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
