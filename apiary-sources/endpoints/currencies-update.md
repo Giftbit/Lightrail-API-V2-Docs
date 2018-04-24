@@ -12,7 +12,7 @@ Update fields that are sent and leave unspecified values at their default.
 
     + Attributes
         + code (string, optional) - {{currency.code}} If present must match the code in the path.
-        + name (number, optional) - {{currency.name}}
+        + name (string, optional) - {{currency.name}}
         + symbol (string, optional) - {{currency.symbol}}
         + decimalPlaces (number, optional) - {{currency.decimalPlaces}}
         
@@ -24,7 +24,7 @@ Update fields that are sent and leave unspecified values at their default.
             }
     
 + Response 200
-    + Attributes (Program)
+    + Attributes (Currency)
 
     + Body
     

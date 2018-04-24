@@ -2,7 +2,7 @@
 + programId (string, required) - {{program.programId}}
 + name (string, optional) - {{program.name}}
 + currency (string, required) - {{currency}}
-+ access (enum[string], required) - How the valueStores can be accessed
++ access (enum[string], required) - How the valueStores can be accessed.
     + `customerId` - must be associated with a customerId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.

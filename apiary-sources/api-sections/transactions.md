@@ -10,3 +10,7 @@
 {% include 'endpoints/transactions-transfer.md' %}
 
 {% include 'endpoints/transactions-get.md' %}
+
+{% include 'endpoints/transactions-pending-capture.md' %}
+
+{% include 'endpoints/transactions-pending-void.md' %}

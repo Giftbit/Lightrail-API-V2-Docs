@@ -37,7 +37,7 @@ Get Currency by code.
     + code (string) - the code of the Currency to get.
 
 + Response 200
-    + Attributes (Program)
+    + Attributes (Currency)
 
     + Body
 

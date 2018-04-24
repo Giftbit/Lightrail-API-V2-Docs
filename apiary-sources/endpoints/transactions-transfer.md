@@ -18,6 +18,7 @@ Currently only the `lightrail` payment rail is supported.
         + currency (string, required) - {{currency}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -48,6 +49,7 @@ Currently only the `lightrail` payment rail is supported.
         + remainder (number, required) - {{transaction.remainder}}
         + simulated (boolean, optional) - {{transaction.simulated}}
         + createdDate (string, required) - {{transaction.createdDate}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -60,7 +62,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "vs_1",
-                        "valueStoreType": "GIFT_CARD",
                         "currency": "USD",
                         "valueBefore": 2500,
                         "valueAfter": 0,
@@ -69,7 +70,6 @@ Currently only the `lightrail` payment rail is supported.
                     {
                         "rail": "lightrail",
                         "valueStoreId": "alice-account-USD",
-                        "valueStoreType": "ACCOUNT",
                         "currency": "USD",
                         "valueBefore": 5000,
                         "valueAfter": 7500,

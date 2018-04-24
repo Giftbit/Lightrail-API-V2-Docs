@@ -32,6 +32,8 @@ program:
 transaction:
   allowRemainder: "If true the transaction will go through without all value being debited, and the remainder indicated."
   createdDate: "ISO date for when the Transaction was created."
+  metadata: "Arbitrary data associated with the Transaction."
+  pending: "If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured."
   remainder: "The remainder of value that could not be debited."
   simulate: "If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change."
   simulated: "True if the transaction was simulated."
@@ -57,6 +59,7 @@ transaction:
 
 valueStore:
   active: "Whether the ValueStore is active and can be used upon creation."
+  code: "The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`."
   endDate: "ISO date for when the valueStore can last be transacted with."
   frozen: "If true the Value Store is frozen and cannot be transacted with."
   discount: "If true the Value Store will be noted as a discount for the customer in orders."
@@ -70,7 +73,3 @@ valueStore:
   value: "An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
   valueRule: "A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`."
   valueStoreId: "Unique idempotent id for the ValueStore."
-  code:
-    code: "The code if it is publicly viewable."
-    codeLastFour: "The last four digits of the code if it is secure."
-
