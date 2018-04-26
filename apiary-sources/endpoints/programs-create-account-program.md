@@ -10,7 +10,7 @@ Create a new Account/Points Program.
         
     + Attributes
         + programId (string, required) - {{program.programId}}
-        + name (string, optional) - {{transaction.name}}
+        + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - {{valueStore.access.description}}
             + `customerId` - {{valueStore.access.types.customerId}}

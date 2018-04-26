@@ -10,7 +10,7 @@ Create a new Gift Card Program.
         
     + Attributes
         + programId (string, required) - {{program.programId}}
-        + name (string, optional) - {{transaction.name}}
+        + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - {{valueStore.access.description}}
             + `secureCode` - {{valueStore.access.types.secureCode}}
@@ -28,8 +28,8 @@ Create a new Gift Card Program.
                 "name": "Gift Cards USD",
                 "currency": "USD",
                 "access": "secureCode",
-                minInitialValue: 500,
-                maxInitialValue: 100000,
+                "minInitialValue": 500,
+                "maxInitialValue": 100000,
                 "tags": ["giftcard"]
             }
     
