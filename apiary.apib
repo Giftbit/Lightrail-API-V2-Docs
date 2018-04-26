@@ -207,159 +207,15 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Currencies [/currencies/]
-
-Currencies that can be used in Value Stores and Programs.  ISO currency codes will be automatically created when used.  Custom currencies must be created first.
-
----
-### Create a Currency [POST /currencies]
-
-Create a new Currency.
-
----
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + code (string, required) - 
-        + name (string, required) - 
-        + symbol (number, required) - 
-        + decimalPlaces (number, required) - 
-
-    + Body
-
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-    
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-            
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-### Update a Currency [PATCH /currencies/{code}]
-
-Update fields that are sent and leave unspecified values at their default.
-
-+ Parameter
-    + code (string) - the code of the Currency to modify.
-
-+ Request (application/merge-patch+json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + code (string, optional) -  If present must match the code in the path.
-        + name (string, optional) - 
-        + symbol (string, optional) - 
-        + decimalPlaces (number, optional) - 
-        
-    + Body
-    
-            {
-                "name": "Zimbabwe Dollars",
-                "symbol": "Z$"
-            }
-    
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-    
-            {
-                "code": "ZWD",
-                "name": "Zimbabwe Dollars",
-                "symbol": "Z$",
-                "decimalPlaces": 2
-            }
-### Delete Currency [DELETE /currencies/{code}]
-
-Delete a Currency by code.
-
-The Currency can only be deleted if it is not used by any Value Stores or Programs.
-
----
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Currency to delete.
-
-+ Response 200
-
-    + Body
-
-            {
-                "success": true
-            }
-### Get Currencies [GET /currencies]
-
-Get all the Currencies.
-
----
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Response 200
-    + Attributes (array[Currency])
-
-    + Body
-
-            [
-                {
-                    "code": "USD",
-                    "name": "Dollars",
-                    "symbol": "$",
-                    "decimalPlaces": 2
-                }
-            ]
-
-### Get Currency [GET /currencies/{code}]
-
-Get Currency by code.
-
----
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Currency to get.
-
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-
 ## Programs [/programs/]
 
-Programs group together Value Stores and control default behavior.  Programs can be set up for the various ways your organization uses values such as gift cards, loyalty and promotions.
+Programs act as a template to set properties of ValueStores for the type of value you wish to issue. 
+A few common examples of the types of value you may want to issue and define as Programs are:
+- Gift Cards
+- Accounts or Points
+- Promotions  
+
+Below are examples of how you'd create a Program for the common types listed above.
 
 ---
 ### Create Program [POST /programs]
@@ -374,7 +230,7 @@ Create a new Program.
         
     + Attributes
         + programId (string, required) - Unique idempotent ID for the Program.
-        + name (string, optional) - 
+        + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + access (enum[string], required) - How the valueStores can be accessed
             + `customerId` - must be associated with a customerId.
@@ -1747,13 +1603,13 @@ A step taken as part of the transaction.
 + programId (string, optional) - The programId of the Program this ValueStore is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
++ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
 + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
 + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
 + uses (number, optional) - The number of times the value store can be transacted with.
-+ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
 + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
 + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.
