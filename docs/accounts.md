@@ -1,19 +1,19 @@
 # Accounts and Loyalty Points
 Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
-Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "Account" associated with the customer.  
+Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "account" associated with the customer.  
 
 Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in app rewards or promotions. 
 
-Like all other Lightrail value, Accounts are backed by `ValueStores`. You’ll need to set up an Account program to establish the default parameters for your customer accounts.
+Like all other Lightrail value, accounts are backed by `ValueStores`. 
 
 ## Getting Started with Accounts
-To get started with Accounts, you first need to create a Program which defines common properties of your Accounts.
+To get started with accounts, you first need to create a `Program` which defines the default parameters for you accounts.
 
 ### Creating a Program
-The Program will define the basic properties like currency and tags for the accounts (`ValueStores`) that will be created from it. 
-Below are the required and optional attributes needed for creating an Account or Loyalty Points Program.   
+The `Program` will define the basic properties like currency for the accounts (`ValueStores`) that will be created from it. 
+Below are the required and optional attributes needed for creating a `Program` for an account or a loyalty points use-case.   
 
-How to create an Account Program through the API. Note, typically Programs are created through the app (coming soon!). 
+Creating an account `Program`. Note, typically Programs are created through the app (coming soon!). 
 
 `POST https://api.lightrail.com/v2/programs`
 ```json
@@ -36,7 +36,7 @@ Below is the list of attributes used when creating an Account Program.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ## Creating an Account
-Creating Accounts for your customers is easy. Below is the call to do this. 
+Request to create an account.  
 
 `POST https://api.lightrail.com/v2/valueStores`
 ```json
@@ -49,14 +49,14 @@ Creating Accounts for your customers is easy. Below is the call to do this.
 ``` 
 
 ### Attributes
-Below is the list of attributes used when creating an Account from a Program.
+Below is the list of attributes used when creating an account from a Program.
 - **valueStoreId** (_required_): Unique idempotent id for the ValueStore.
 - **programId** (_required_): The programId of the Program this ValueStore is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
-## Common Account Requests  
-Below are the most common requests made when interacting with Accounts.
+## Common Requests  
+Below are the most common requests made when interacting with accounts.
 
 ### Crediting
 Crediting is used when adding value to an account.
@@ -111,7 +111,7 @@ Checkout is done using the `/transactions/orders` endpoint. To use an account di
 }
 ```
 
-Alternatively, since the account is associated with the customer, you can directly use the `customerId` as a payment source. This will consider all value associated with the customer.
+Alternatively, since the account is associated with the customer, you can directly use the `customerId` as a payment source. This will consider all `ValueStores` associated with the customer.
 ```json
 {
     "rail": "lightrail",
@@ -119,5 +119,7 @@ Alternatively, since the account is associated with the customer, you can direct
 }
 ```
 
+See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order) for full documentation of `/transactions/orders` endpoint.
+
 ## Support
-Please [contact us](mailto:hello@lightrail.com) any time, we're here to help.
+Want more information on your accounts or loyalty points use-case? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
