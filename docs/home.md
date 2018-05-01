@@ -1,6 +1,7 @@
 # Welcome
 
-Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
+Welcome to Lightrail V2. 
+Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
 
 The Lightrail system revolves around two core concepts:
 
