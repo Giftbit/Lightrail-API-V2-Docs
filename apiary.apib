@@ -121,7 +121,7 @@ Update a Customer by customerId.
 
 Delete a Customer by customerId.
 
-The customer can only be deleted if it is not associated with any ValueStores.
+The Customer can only be deleted if it is not associated with any Value Stores.
 
 ---
 
@@ -361,6 +361,30 @@ Value Stores that have already been created will not be changed.
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### Delete Program [DELETE /program/{programId}]
+
+Delete a Program by programId.
+
+The Program can only be deleted if it is not associated with any Value Stores.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + programId (string) - the programId of the Program to delete.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
             }
 
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]

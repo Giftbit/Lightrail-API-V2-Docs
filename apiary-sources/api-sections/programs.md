@@ -13,4 +13,6 @@ See [here](http://localhost:8181/docs) to see examples of how you'd create a Pro
 
 {% include 'endpoints/programs-update.md' %}
 
+{% include 'endpoints/programs-delete.md' %}
+
 {% include 'endpoints/programs-get.md' %}
