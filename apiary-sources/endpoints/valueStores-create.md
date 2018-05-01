@@ -33,7 +33,7 @@ Create a new Value Store.
                 "value": 2500
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body

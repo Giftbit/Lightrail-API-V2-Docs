@@ -72,7 +72,7 @@ Data used in example:
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body

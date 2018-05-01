@@ -34,7 +34,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body

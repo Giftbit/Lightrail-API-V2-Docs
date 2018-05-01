@@ -19,7 +19,7 @@ Get multiple Customers.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - {{pagination.count}}
         + limit (number, required) - {{pagination.limit}}
@@ -63,7 +63,7 @@ Get Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

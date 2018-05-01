@@ -41,7 +41,7 @@ Create a new Program.
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

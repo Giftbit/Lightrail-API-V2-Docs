@@ -28,7 +28,7 @@ Create a new Account/Points Program.
                 "tags": ["account"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

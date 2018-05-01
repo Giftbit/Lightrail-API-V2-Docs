@@ -4,7 +4,7 @@
 
             {{header.authorization}}
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + username (string) - The email address associated with the account.
         + mode (string) - String indicating whether the credentials provided are for TEST or LIVE mode.

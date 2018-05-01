@@ -30,7 +30,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "frozen": true
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body

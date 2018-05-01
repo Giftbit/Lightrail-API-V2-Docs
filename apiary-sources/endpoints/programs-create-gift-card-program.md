@@ -33,7 +33,7 @@ Create a new Gift Card Program.
                 "tags": ["giftcard"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

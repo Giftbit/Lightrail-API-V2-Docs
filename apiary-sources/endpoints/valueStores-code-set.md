@@ -23,7 +23,7 @@ Set a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + code (string, optional) - {{valueStore.code}}
 

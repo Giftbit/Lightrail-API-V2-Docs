@@ -21,7 +21,7 @@
                 "value": 500
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body

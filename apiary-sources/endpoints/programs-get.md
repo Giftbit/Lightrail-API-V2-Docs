@@ -25,7 +25,7 @@ Get multiple Value Stores.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - {{pagination.count}}
         + limit (number, required) - {{pagination.limit}}
@@ -81,7 +81,7 @@ Get Program by programId
 + Parameter
     + programId (string) - the programId of the Program to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body

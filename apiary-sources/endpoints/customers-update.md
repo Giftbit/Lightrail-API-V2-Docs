@@ -30,7 +30,7 @@ Update a Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to update.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

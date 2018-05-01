@@ -38,7 +38,7 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
                 "tags": ["promotion", "spring-promotion-usd"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

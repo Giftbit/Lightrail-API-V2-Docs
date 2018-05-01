@@ -14,7 +14,7 @@ The customer can only be deleted if it is not associated with any ValueStores.
 + Parameter
     + customerId (string) - the customerId of the Customer to delete.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 

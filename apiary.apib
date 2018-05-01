@@ -53,7 +53,7 @@ Create a new Customer.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -101,7 +101,7 @@ Update a Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to update.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -133,7 +133,7 @@ The customer can only be deleted if it is not associated with any ValueStores.
 + Parameter
     + customerId (string) - the customerId of the Customer to delete.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -161,7 +161,7 @@ Get multiple Customers.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - The number of items returned.
         + limit (number, required) - The max number of items to get.
@@ -205,7 +205,7 @@ Get Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -276,7 +276,7 @@ Create a new Program.
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -334,7 +334,7 @@ Value Stores that have already been created will not be changed.
                 "tags": ["internal"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body
@@ -390,7 +390,7 @@ Get multiple Value Stores.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - The number of items returned.
         + limit (number, required) - The max number of items to get.
@@ -446,7 +446,7 @@ Get Program by programId
 + Parameter
     + programId (string) - the programId of the Program to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body
@@ -515,7 +515,7 @@ Create a new Value Store.
                 "value": 2500
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -570,7 +570,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "frozen": true
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -623,7 +623,7 @@ Get multiple Value Stores.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - The number of items returned.
         + limit (number, required) - The max number of items to get.
@@ -673,7 +673,7 @@ Get Value Store by valueStoreId.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -710,7 +710,7 @@ Get a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get the code of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
@@ -745,7 +745,7 @@ Set a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
@@ -769,7 +769,7 @@ Delete a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -791,7 +791,7 @@ Get a Value Store's customer.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -831,7 +831,7 @@ Set a Value Store's Customer.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -862,7 +862,7 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -947,7 +947,7 @@ Data used in example:
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1124,7 +1124,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1188,7 +1188,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1258,7 +1258,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
@@ -1319,7 +1319,7 @@ Get multiple Transactions.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - The number of items returned.
         + limit (number, required) - The max number of items to get.
@@ -1374,7 +1374,7 @@ Get Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the Transaction to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1416,7 +1416,7 @@ Capture a pending Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the pending Transaction to capture.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1459,7 +1459,7 @@ Void a pending Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the pending Transaction to void.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1518,7 +1518,7 @@ Create a new Currency.
                 "decimalPlaces": 2
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body
@@ -1554,7 +1554,7 @@ Update fields that are sent and leave unspecified values at their default.
                 "symbol": "Z$"
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body
@@ -1581,7 +1581,7 @@ The Currency can only be deleted if it is not used by any Value Stores or Progra
 + Parameter
     + code (string) - the code of the Currency to delete.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -1598,7 +1598,7 @@ Get all the Currencies.
     
             Authorization: Bearer <API_KEY>
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (array[Currency])
 
     + Body
@@ -1626,7 +1626,7 @@ Get Currency by code.
 + Parameter
     + code (string) - the code of the Currency to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body

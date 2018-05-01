@@ -27,7 +27,7 @@ Create a new Customer.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

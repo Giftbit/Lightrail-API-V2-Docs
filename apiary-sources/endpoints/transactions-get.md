@@ -15,7 +15,7 @@ Get multiple Transactions.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + count (number, required) - {{pagination.count}}
         + limit (number, required) - {{pagination.limit}}
@@ -70,7 +70,7 @@ Get Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the Transaction to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body

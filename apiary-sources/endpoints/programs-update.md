@@ -27,7 +27,7 @@ Value Stores that have already been created will not be changed.
                 "tags": ["internal"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body

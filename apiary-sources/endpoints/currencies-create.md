@@ -23,7 +23,7 @@ Create a new Currency.
                 "decimalPlaces": 2
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body
