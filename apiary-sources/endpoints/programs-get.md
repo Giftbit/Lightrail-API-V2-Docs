@@ -26,46 +26,42 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - {{pagination.count}}
-        + limit (number, required) - {{pagination.limit}}
-        + offset (number, required) - {{pagination.offset}}
-        + maxLimit (number, required) - {{pagination.maxLimit}}
-        + programs (array[Program], required) - the list of Programs.
+    + Headers
+        
+        Limit: 100
+        MaxLimit: 1000
+        Offset: 0
+        Count: 1
+        
+    + Attributes (array[Program])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "programs": [
-                    {
-                        "programId": "unique-id-123",
-                        "name": "Giftcard programm",
-                        "currency": "CAD",
-                        "access": "generatedCode",
-                        "discount": "false",
-                        "preTax": "false",
-                        "active": "true",
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "minInitialValue": null,
-                        "maxInitialValue": null,
-                        "fixedInitialValues": [
-                            500,
-                            1500,
-                            2500
-                        ],
-                        "uses": null,
-                        "tags": [],
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "programId": "unique-id-123",
+                    "name": "Giftcard programm",
+                    "currency": "CAD",
+                    "access": "generatedCode",
+                    "discount": "false",
+                    "preTax": "false",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "minInitialValue": null,
+                    "maxInitialValue": null,
+                    "fixedInitialValues": [
+                        500,
+                        1500,
+                        2500
+                    ],
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Program [GET /programs/{programId}]
 

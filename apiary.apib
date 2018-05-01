@@ -162,34 +162,30 @@ Get multiple Customers.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + customers (array[Customer], required) - the list of Customers.
+    + Headers
+        
+        Limit: 100
+        MaxLimit: 1000
+        Offset: 0
+        Count: 1
+
+    + Attributes (array[Customer])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "customers": [
-                    {
-                        "customerId": "unique-id-123",
-                        "firstName": "Jeffrey",
-                        "lastName": "Lebowski",
-                        "email": "thedude@example.com",
-                        "metadata": {
-                            "alias": "El Duderino"
-                        },
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "customerId": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Customer [GET /customers/{customerId}]
 
@@ -391,46 +387,42 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + programs (array[Program], required) - the list of Programs.
+    + Headers
+        
+        Limit: 100
+        MaxLimit: 1000
+        Offset: 0
+        Count: 1
+        
+    + Attributes (array[Program])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "programs": [
-                    {
-                        "programId": "unique-id-123",
-                        "name": "Giftcard programm",
-                        "currency": "CAD",
-                        "access": "generatedCode",
-                        "discount": "false",
-                        "preTax": "false",
-                        "active": "true",
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "minInitialValue": null,
-                        "maxInitialValue": null,
-                        "fixedInitialValues": [
-                            500,
-                            1500,
-                            2500
-                        ],
-                        "uses": null,
-                        "tags": [],
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "programId": "unique-id-123",
+                    "name": "Giftcard programm",
+                    "currency": "CAD",
+                    "access": "generatedCode",
+                    "discount": "false",
+                    "preTax": "false",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "minInitialValue": null,
+                    "maxInitialValue": null,
+                    "fixedInitialValues": [
+                        500,
+                        1500,
+                        2500
+                    ],
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Program [GET /programs/{programId}]
 
@@ -624,40 +616,36 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + valueStores (array[ValueStore], required) - the list of Value Stores.
+    + Headers
+        
+        Limit: 100
+        MaxLimit: 1000
+        Offset: 0
+        Count: 1
+        
+    + Attributes (array[ValueStore])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "valueStores": [
-                    {
-                        "valueStoreId": "vs-1",
-                        "programId": "giftcards",
-                        "currency": "USD",
-                        "value": 2500, 
-                        "preTax": false,
-                        "active": true,
-                        "frozen": false,
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "uses": null,
-                        "startDate": null,
-                        "endDate": null,
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "valueStoreId": "vs-1",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "value": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Value Store [GET /valueStores/{valueStoreId}]
 
@@ -1320,45 +1308,41 @@ Get multiple Transactions.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + transactions (array[Transaction], required) - the list of transactions.
+    + Headers
+        
+        Limit: 100
+        MaxLimit: 1000
+        Offset: 0
+        Count: 1
+        
+    + Attributes (array[Transaction])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "transactions": [
-                    {
-                        "transactionId": "unique-id-123",
-                        "transactionType": "debit",
-                        "currency": "XXX",
-                        "steps": [
-                            {
-                                "rail": "lightrail",
-                                "valueStoreId": "vs_1",
-                                "currency": "XXX",
-                                "valueBefore": 5500,
-                                "valueAfter": 3000,
-                                "valueChange": -2500
-                            }
-                        ],
-                        "remainder": 0,
-                        "simulated": false,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z",
-                        "metadata": {
-                            "note": "Reduce loyalty points after 3mo customer inactivity"
+            [
+                {
+                    "transactionId": "unique-id-123",
+                    "transactionType": "debit",
+                    "currency": "XXX",
+                    "steps": [
+                        {
+                            "rail": "lightrail",
+                            "valueStoreId": "vs_1",
+                            "currency": "XXX",
+                            "valueBefore": 5500,
+                            "valueAfter": 3000,
+                            "valueChange": -2500
                         }
+                    ],
+                    "remainder": 0,
+                    "simulated": false,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z",
+                    "metadata": {
+                        "note": "Reduce loyalty points after 3mo customer inactivity"
                     }
-                ]
-            }
+                }
+            ]
 
 ### Get Transaction [GET /transactions/{transactionId}]
 
