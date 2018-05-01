@@ -5,7 +5,7 @@ Value Stores are (naturally) where value is stored in the Lightrail system.  The
 ---
 {% include 'endpoints/valueStores-create.md' %}
 
-{% include 'endpoints/valueStores-patch.md' %}
+{% include 'endpoints/valueStores-update.md' %}
 
 {% include 'endpoints/valueStores-get.md' %}
 

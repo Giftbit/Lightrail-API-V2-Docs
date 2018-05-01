@@ -1,6 +1,6 @@
 ## Currencies [/currencies/]
 
-Currencies that can be used in Value Stores and Programs.  ISO currency codes will be automatically created when used.  Custom currencies must be created first.
+Currencies that can be used in Value Stores and Programs.  Currency codes can be up to 16 characters in length.
 
 ---
 {% include 'endpoints/currencies-create.md' %}

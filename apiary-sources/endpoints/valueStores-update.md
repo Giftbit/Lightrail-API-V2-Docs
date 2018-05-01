@@ -14,8 +14,6 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
     + Attributes
         + valueStoreId (string, optional) - {{valueStore.valueStoreId}}  If present must match the valueStoreId in the path.
-        + currency (string, optional) - {{currency}}
-        + value (number, optional) - {{valueStore.value}}
         + preTax (boolean, optional) - {{valueStore.preTax}}
         + active (boolean, optional) - {{valueStore.active}}
         + frozen (boolean, optional) - {{valueStore.frozen}}
