@@ -1,4 +1,4 @@
-# Accounts and Loyalty Points
+# Accounts and Points
 Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
 Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "account" associated with the customer.  
 
