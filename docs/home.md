@@ -3,13 +3,13 @@ Welcome to Lightrail V2.
 
 Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution.
 
-
 The checkout solution allows you to submit a customer's shopping cart along with a list of sources to pay for the order. The payment sources can be value held by that customer in Lightrail along with external value, such as a credit card, to pay for any remainder on the order. Lightrail takes care of the complexity of this split-tender transaction, ensuring value in Lightrail and external credit cards are charged the correct amount.
 
 ## Checkout with Lightrail
-Let's look at an example. Suppose a customer has $20 account credits and also you're running a Facebook ad campaign for 20% all orders that use the promotion code `EASYMONEY`.
+Let's look at an example. 
 
-Now, perhaps that customer of yours wants to buy a $30 product enters the `EASYMONEY` code during checkout. Using the `/orders` endpoint it is easy to complete this entire transaction in a single request.
+Suppose you're running an ad campaign for 20% all orders that use the promotion code `EASYMONEY`. 
+Perhaps a customer who has $20 account credits visits your store, enters the promotion code, and wants to purchase a $30 product. Using the `/orders` endpoint it is easy to complete the payment for this entire transaction in a single request.
 
 **Request**: `POST /transactions/orders`
 ```json
@@ -40,7 +40,7 @@ Now, perhaps that customer of yours wants to buy a $30 product enters the `EASYM
 ```       
 
 You can see lineItems contain the basic information required to represent this purchase. Also, note the sources property in the request. 
-It includes two Lightrail sources. First, `"customerId": "cus_123"` will us any value associated with that customer in Lightrail and the other is the `EASYMOENY` promotion code. 
+It includes two Lightrail sources. The source `"customerId": "cus_123"` will us any value associated with that customer in Lightrail and the other is the `EASYMOENY` promotion code. 
 The customer has also entered their credit card to pay for any remaining balances and this is supplied as a tokenized card from Stripe.  
  
 **Response**: `200 OK`
