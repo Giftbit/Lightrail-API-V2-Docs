@@ -9,7 +9,7 @@ The checkout solution allows you to submit a customer's shopping cart along with
 Let's look at an example. 
 
 Suppose you're running an ad campaign for 20% all orders that use the promotion code `EASYMONEY`. 
-Perhaps a customer who has $20 account credits visits your store, enters the promotion code, and wants to purchase a $30 product. Using the `/orders` endpoint it is easy to complete the payment for this entire transaction in a single request.
+Perhaps a customer who has $20 account credits visits your store, enters the promotion code, and wants to purchase a $30 product. Using the orders endpoint it is easy to complete the payment for this entire transaction in a single request.
 
 **Request**: `POST /transactions/orders`
 ```json
@@ -39,9 +39,12 @@ Perhaps a customer who has $20 account credits visits your store, enters the pro
 }
 ```       
 
-You can see lineItems contain the basic information required to represent this purchase. Also, note the sources property in the request. 
-It includes two Lightrail sources. The source `"customerId": "cus_123"` will us any value associated with that customer in Lightrail and the other is the `EASYMOENY` promotion code. 
-The customer has also entered their credit card to pay for any remaining balances and this is supplied as a tokenized card from Stripe.  
+You can see `lineItems` contains the basic shopping cart information. 
+
+Also, note the sources property in the request. It includes three sources, two of which are value stored in Lightrail, the other is a tokenized card from Stripe.
+- `"customerId": "cus_123"`: will us any value associated with that customer in Lightrail. 
+- `"code: "EASYMONEY"`: represents the promotion code entered during checkout.
+- `"cardToken": "tok_12345"`: tokenized card using Stripe elements.  
  
 **Response**: `200 OK`
 ```json
@@ -99,14 +102,14 @@ Different types of value are represented by modifying the properties of `ValueSt
 
 ### Programs
 Programs define default properties for the `ValueStores` issued from them. 
-Whether running a "25% off everything this weekend" site-promotion, selectively giving your top customers extra loyalty points, or selling gift cards these `ValueStores` are issued from Programs created to represent the type of value they represent. 
+Whether running a advertised promotion code, selectively giving your top customers extra loyalty points, or selling gift cards the `ValueStores` are issued from Programs.
+
 Programs also define how the ValueStore is referenced. There are three types:
 - `secureCode` - a unique, unguessable code (used for gift cards or unique promotion codes)
 - `publicCode` - a code you supply which will be distributed publicly (ie, `EASYMONEY`)
 - `customerId` - attached to a customer
 
-### Customers
-You can attach value directly to **Customers** in the Lightrail system. This is common for things like accounts and registered gift cards, and can also be used for personalized promotions and discounts. Customers records in Lightrail are linked to records in your existing system through a shared identifier, so you can easily track spending behaviour. 
+Lightrail makes it very easy to associate many types of value directly with your customers. This allows you to incentivize your customers through personalized promotions and loyalty programs, all of which work together in a seamless checkout experience. 
 
 ## Getting Started
-See our examples below to get started with gift cards, account credit, or promotions. 
+See our examples below to get started with [gift cards](https://localhost:8181/docs#gift-cards), [accounts and loyalty points](https://localhost:8181/docs#accounts), or [promotions](https://localhost:8181/docs#promotions). 
