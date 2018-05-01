@@ -112,4 +112,10 @@ Programs also define how the ValueStore is referenced. There are three types:
 Lightrail makes it very easy to associate many types of value directly with your customers. This allows you to incentivize your customers through personalized promotions and loyalty programs, all of which work together in a seamless checkout experience. 
 
 ## Getting Started
-See our examples below to get started with [gift cards](https://localhost:8181/docs#gift-cards), [accounts and loyalty points](https://localhost:8181/docs#accounts), or [promotions](https://localhost:8181/docs#promotions). 
+See our examples below to get started with,
+- [gift cards](https://localhost:8181/docs#gift-cards)
+- [accounts and loyalty points](https://localhost:8181/docs#accounts)
+- [promotions](https://localhost:8181/docs#promotions)
+- [checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
+ 
+[Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
