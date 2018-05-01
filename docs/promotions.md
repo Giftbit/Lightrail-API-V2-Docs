@@ -1,34 +1,31 @@
 # Promotions
 Lightrail enables a wide variety of promotion use-cases. A few common examples are:
- - Personalized promotion associated with a customer.
- - A site wide promotion code that can be applied during checkout.
- - Unique  
-  
+ 1. Personalized promotion associated with a customer.
+ 2. A site wide promotion code that can be entered during checkout.
+ 3. Unique promotion code delivered to a potential customer.  
  
- 
-Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "account" associated with the customer.  
+These types of promotions are differentiated primarily based on the `accessType` property.
+In addition to how the promotion is accessed, they type of value they hold can also differ. 
+Promotions can be valid for a number of dollars or points off, but they can also represent a percent discount.
+These variations are all determine by properties on the `ValueStore` which represents the promotion.
 
-Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in app rewards or promotions. 
-
-Like all other Lightrail value, accounts are backed by `ValueStores`. 
-
-## Getting Started with Accounts
-To get started with accounts, you first need to create a `Program` which defines the default parameters for you accounts.
+## Getting Started with Promotions
+To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
 
 ### Creating a Program
-The `Program` will define the basic properties like currency for the accounts (`ValueStores`) that will be created from it. 
-Below are the required and optional attributes needed for creating a `Program` for an account or a loyalty points use-case.   
+The `Program` will define the basic properties like `currency`, `accessType` and `value` for the (`ValueStores`) that will be created from it. 
+Below are the required and optional attributes needed for creating a `Program` for a promotion.
 
-Creating an account `Program`. Note, typically Programs are created through the app (coming soon!). 
+Creating a promotion `Program`. Note, typically Programs are created through the app (coming soon!). 
 
 `POST https://api.lightrail.com/v2/programs`
 ```json
 {
-    "programId": "customer-accounts-usd",
+    "programId": "sign-up-promotion-10off",
     "currency": "USD",
     "access": "customerId",
-    "name": "Accounts USD",
-    "tags": ["accounts-usd"]
+    "name": "Sign-up $10",
+    "tags": ["promotion", "sign-up"]
 }
 ``` 
 
