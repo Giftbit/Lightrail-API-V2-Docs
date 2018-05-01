@@ -113,9 +113,9 @@ Lightrail makes it very easy to associate many types of value directly with your
 
 ## Getting Started
 See our examples below to get started with:
-- [gift cards](https://localhost:8181/docs/#gift-cards/gift-cards)
-- [accounts and loyalty points](https://localhost:8181/docs/#accounts/accounts-and-points)
-- [promotions](https://localhost:8181/docs/#discounts/promotions) 
-- [checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
+- [Gift cards](https://localhost:8181/docs/#gift-cards/gift-cards)
+- [Accounts and loyalty points](https://localhost:8181/docs/#accounts/accounts-and-points)
+- [Promotions](https://localhost:8181/docs/#discounts/promotions) 
+- [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
  
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
