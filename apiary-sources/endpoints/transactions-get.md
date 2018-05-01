@@ -18,10 +18,10 @@ Get multiple Transactions.
 + Response 200 (application/json)
     + Headers
         
-        Limit: 100
-        MaxLimit: 1000
-        Offset: 0
-        Count: 1
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
         
     + Attributes (array[Transaction])
 
