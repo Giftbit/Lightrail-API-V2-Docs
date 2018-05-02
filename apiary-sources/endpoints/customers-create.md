@@ -13,6 +13,7 @@ Create a new Customer.
         + firstName (string, optional) - {{customer.firstName}}
         + lastName (string, optional) - {{customer.lastName}}
         + email (string, optional) - {{customer.email}}
+        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{customer.metadata}}
 
     + Body
@@ -36,7 +37,8 @@ Create a new Customer.
                 "customerId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
-                "email": "thedude@example.com",
+                "email": "thedude@example.com",'
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },

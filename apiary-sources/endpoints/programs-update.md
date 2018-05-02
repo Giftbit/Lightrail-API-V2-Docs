@@ -1,6 +1,6 @@
 ### Update a Program [PATCH /programs/{programId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
 Value Stores that have already been created will not be changed.
 
