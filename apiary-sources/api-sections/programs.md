@@ -6,7 +6,7 @@ A few common examples of the types of value you may want to issue and define as 
 - Accounts, points 
 - Promotions  
 
-See [here](http://localhost:8181/docs) to see examples of how you'd create a Program for the common types listed above.
+See [here](https://localhost:8181/docs/) to see examples of how you'd create a Program for the common types listed above.
 
 ---
 {% include 'endpoints/programs-create.md' %}
