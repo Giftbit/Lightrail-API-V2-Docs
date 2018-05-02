@@ -16,45 +16,41 @@ Get multiple Transactions.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - {{pagination.count}}
-        + limit (number, required) - {{pagination.limit}}
-        + offset (number, required) - {{pagination.offset}}
-        + maxLimit (number, required) - {{pagination.maxLimit}}
-        + transactions (array[Transaction], required) - the list of transactions.
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Transaction])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "transactions": [
-                    {
-                        "transactionId": "unique-id-123",
-                        "transactionType": "debit",
-                        "currency": "XXX",
-                        "steps": [
-                            {
-                                "rail": "lightrail",
-                                "valueStoreId": "vs_1",
-                                "currency": "XXX",
-                                "valueBefore": 5500,
-                                "valueAfter": 3000,
-                                "valueChange": -2500
-                            }
-                        ],
-                        "remainder": 0,
-                        "simulated": false,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z",
-                        "metadata": {
-                            "note": "Reduce loyalty points after 3mo customer inactivity"
+            [
+                {
+                    "transactionId": "unique-id-123",
+                    "transactionType": "debit",
+                    "currency": "XXX",
+                    "steps": [
+                        {
+                            "rail": "lightrail",
+                            "valueStoreId": "vs_1",
+                            "currency": "XXX",
+                            "valueBefore": 5500,
+                            "valueAfter": 3000,
+                            "valueChange": -2500
                         }
+                    ],
+                    "remainder": 0,
+                    "simulated": false,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z",
+                    "metadata": {
+                        "note": "Reduce loyalty points after 3mo customer inactivity"
                     }
-                ]
-            }
+                }
+            ]
 
 ### Get Transaction [GET /transactions/{transactionId}]
 

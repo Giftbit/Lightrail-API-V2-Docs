@@ -21,35 +21,31 @@ Get multiple Customers.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - {{pagination.count}}
-        + limit (number, required) - {{pagination.limit}}
-        + offset (number, required) - {{pagination.offset}}
-        + maxLimit (number, required) - {{pagination.maxLimit}}
-        + customers (array[Customer], required) - the list of Customers.
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+
+    + Attributes (array[Customer])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "customers": [
-                    {
-                        "customerId": "unique-id-123",
-                        "firstName": "Jeffrey",
-                        "lastName": "Lebowski",
-                        "email": "thedude@example.com",
-                        "tags": [],
-                        "metadata": {
-                            "alias": "El Duderino"
-                        },
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "customerId": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Customer [GET /customers/{customerId}]
 

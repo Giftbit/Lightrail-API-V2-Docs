@@ -29,40 +29,36 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Attributes
-        + count (number, required) - {{pagination.count}}
-        + limit (number, required) - {{pagination.limit}}
-        + offset (number, required) - {{pagination.offset}}
-        + maxLimit (number, required) - {{pagination.maxLimit}}
-        + valueStores (array[ValueStore], required) - the list of Value Stores.
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[ValueStore])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "valueStores": [
-                    {
-                        "valueStoreId": "vs-1",
-                        "programId": "giftcards",
-                        "currency": "USD",
-                        "value": 2500, 
-                        "preTax": false,
-                        "active": true,
-                        "frozen": false,
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "uses": null,
-                        "startDate": null,
-                        "endDate": null,
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "valueStoreId": "vs-1",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "value": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Value Store [GET /valueStores/{valueStoreId}]
 
