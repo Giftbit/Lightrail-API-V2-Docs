@@ -23,7 +23,7 @@ Update fields that are sent and leave unspecified values at their default.
                 "symbol": "Z$"
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body

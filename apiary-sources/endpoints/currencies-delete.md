@@ -14,7 +14,7 @@ The Currency can only be deleted if it is not used by any Value Stores or Progra
 + Parameter
     + code (string) - the code of the Currency to delete.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 

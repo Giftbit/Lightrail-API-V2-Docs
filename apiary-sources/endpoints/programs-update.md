@@ -1,6 +1,6 @@
 ### Update a Program [PATCH /programs/{programId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
 Value Stores that have already been created will not be changed.
 
@@ -27,7 +27,7 @@ Value Stores that have already been created will not be changed.
                 "tags": ["internal"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body

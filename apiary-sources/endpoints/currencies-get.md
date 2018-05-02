@@ -8,7 +8,7 @@ Get all the Currencies.
     
             {{header.authorization}}
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (array[Currency])
 
     + Body
@@ -36,7 +36,7 @@ Get Currency by code.
 + Parameter
     + code (string) - the code of the Currency to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Currency)
 
     + Body

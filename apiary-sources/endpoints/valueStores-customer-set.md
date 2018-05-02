@@ -21,7 +21,7 @@ Set a Value Store's Customer.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body

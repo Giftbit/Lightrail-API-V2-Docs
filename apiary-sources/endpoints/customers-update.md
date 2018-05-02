@@ -1,6 +1,6 @@
 ### Update Customer [PUT /customers/{customerId}]
 
-Update a Customer by customerId.
+Update fields that are sent and leave unspecified values unchanged.
 
 ---
 + Request (application/json)
@@ -13,15 +13,12 @@ Update a Customer by customerId.
         + firstName (string, optional) - {{customer.firstName}}
         + lastName (string, optional) - {{customer.lastName}}
         + email (string, optional) - {{customer.email}}
+        + tags (array[string], optional) - {{tags}}
         + metadata (string, optional) - {{customer.metadata}}
 
     + Body
 
             {
-                "customerId": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
                 "metadata": {
                     "alias": "El Duderino"
                 }
@@ -30,7 +27,7 @@ Update a Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to update.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -40,6 +37,7 @@ Update a Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },

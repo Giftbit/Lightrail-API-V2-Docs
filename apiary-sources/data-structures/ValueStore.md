@@ -3,13 +3,13 @@
 + programId (string, optional) - {{valueStore.programId}}
 + currency (string, required) - {{currency}}
 + value (number, optional) - {{valueStore.value}}
++ discount (boolean, optional) - {{valueStore.discount}}
 + preTax (boolean, optional) - {{valueStore.preTax}}
 + active (boolean, optional) - {{valueStore.active}}
 + frozen (boolean, optional) - {{valueStore.frozen}}
 + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
 + valueRule (number, optional) - {{valueStore.valueRule}}
 + uses (number, optional) - {{valueStore.uses}}
-+ discount (boolean, optional) - {{valueStore.discount}}
 + startDate (number, optional) - {{valueStore.startDate}}
 + endDate (number, optional) - {{valueStore.endDate}}
 + metadata (number, optional) - {{valueStore.metadata}}

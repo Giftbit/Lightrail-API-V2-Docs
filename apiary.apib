@@ -2,7 +2,22 @@ FORMAT: 1A
 HOST: https://api.lightrail.com/v2/
 
 # Lightrail Documentation
-Welcome to Lightrail V2. Incentivize with promotions and loyalty programs, enable gift cards and collect payment all in one unified checkout solution.
+
+Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
+
+The Lightrail system revolves around two core concepts:
+
+**Programs** allow you to specify how value is made available to your customers, whether that means running a "25% off everything this weekend" site-promotion, selectively giving your top customers extra loyalty points, or selling gift cards. 
+
+**Value Stores** are created based on a particular Program and represent the actual value available to your customers, from unique coupon codes to reloadable accounts. 
+
+Once you've created a Program, you can use it to generate as many Value Stores as you like. This means you can set the rules once for how your customers will interact with a particular kind of value, and then let the actual value creation and distribution happen independently, however it fits best with your existing marketing flow. 
+
+For example, you can create a Program for giving first-time customers 10 loyalty points when they sign up. Then you can add some simple logic to automatically generate a new Value Store from this Program every time a customer joins, so they can immediately start collecting points.  
+
+You can attach value directly to **Customers** in the Lightrail system. This is common for things like accounts and registered gift cards, and can also be used for personalized promotions and discounts. Customers records in Lightrail are linked to records in your existing system through a shared identifier, so you can easily track spending behaviour. 
+
+See our examples below to get started with gift cards, account credit, or promotions. 
 
 ## Customers [/customers/]
 
@@ -24,6 +39,7 @@ Create a new Customer.
         + firstName (string, optional) - The Customer's first name.
         + lastName (string, optional) - The Customer's last name.
         + email (string, optional) - The Customer's email.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Customer.
 
     + Body
@@ -38,7 +54,7 @@ Create a new Customer.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -47,7 +63,8 @@ Create a new Customer.
                 "customerId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
-                "email": "thedude@example.com",
+                "email": "thedude@example.com",'
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -56,7 +73,7 @@ Create a new Customer.
             }
 ### Update Customer [PUT /customers/{customerId}]
 
-Update a Customer by customerId.
+Update fields that are sent and leave unspecified values unchanged.
 
 ---
 + Request (application/json)
@@ -69,15 +86,12 @@ Update a Customer by customerId.
         + firstName (string, optional) - The Customer's first name.
         + lastName (string, optional) - The Customer's last name.
         + email (string, optional) - The Customer's email.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (string, optional) - Arbitrary data associated with the Customer.
 
     + Body
 
             {
-                "customerId": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
                 "metadata": {
                     "alias": "El Duderino"
                 }
@@ -86,7 +100,7 @@ Update a Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to update.
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -96,6 +110,7 @@ Update a Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -106,7 +121,7 @@ Update a Customer by customerId.
 
 Delete a Customer by customerId.
 
-The customer can only be deleted if it is not associated with any ValueStores.
+The Customer can only be deleted if it is not associated with any Value Stores.
 
 ---
 
@@ -118,14 +133,14 @@ The customer can only be deleted if it is not associated with any ValueStores.
 + Parameter
     + customerId (string) - the customerId of the Customer to delete.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
             {
                 "success": true
             }
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Customers.
 
@@ -141,40 +156,38 @@ Get multiple Customers.
     + firstName (string, optional) - Filter by the firstName.
     + lastName (string, optional) - Filter by the lastName.
     + email (string, optional) - Filter by the email.
+    + tags (number, optional) - Filter by tags.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + customers (array[Customer], required) - the list of Customers.
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+
+    + Attributes (array[Customer])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "customers": [
-                    {
-                        "customerId": "unique-id-123",
-                        "firstName": "Jeffrey",
-                        "lastName": "Lebowski",
-                        "email": "thedude@example.com",
-                        "metadata": {
-                            "alias": "El Duderino"
-                        },
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "customerId": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Customer [GET /customers/{customerId}]
 
@@ -190,7 +203,7 @@ Get Customer by customerId.
 + Parameter
     + customerId (string) - the customerId of the Customer to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -200,6 +213,7 @@ Get Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -207,159 +221,15 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Currencies [/currencies/]
-
-Currencies that can be used in Value Stores and Programs.  ISO currency codes will be automatically created when used.  Custom currencies must be created first.
-
----
-### Create a Currency [POST /currencies]
-
-Create a new Currency.
-
----
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + code (string, required) - 
-        + name (string, required) - 
-        + symbol (number, required) - 
-        + decimalPlaces (number, required) - 
-
-    + Body
-
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-    
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-            
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-### Update a Currency [PATCH /currencies/{code}]
-
-Update fields that are sent and leave unspecified values at their default.
-
-+ Parameter
-    + code (string) - the code of the Currency to modify.
-
-+ Request (application/merge-patch+json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + code (string, optional) -  If present must match the code in the path.
-        + name (string, optional) - 
-        + symbol (string, optional) - 
-        + decimalPlaces (number, optional) - 
-        
-    + Body
-    
-            {
-                "name": "Zimbabwe Dollars",
-                "symbol": "Z$"
-            }
-    
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-    
-            {
-                "code": "ZWD",
-                "name": "Zimbabwe Dollars",
-                "symbol": "Z$",
-                "decimalPlaces": 2
-            }
-### Delete Currency [DELETE /currencies/{code}]
-
-Delete a Currency by code.
-
-The Currency can only be deleted if it is not used by any Value Stores or Programs.
-
----
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Currency to delete.
-
-+ Response 200
-
-    + Body
-
-            {
-                "success": true
-            }
-### Get Currencies [GET /currencies]
-
-Get all the Currencies.
-
----
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Response 200
-    + Attributes (array[Currency])
-
-    + Body
-
-            [
-                {
-                    "code": "USD",
-                    "name": "Dollars",
-                    "symbol": "$",
-                    "decimalPlaces": 2
-                }
-            ]
-
-### Get Currency [GET /currencies/{code}]
-
-Get Currency by code.
-
----
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Currency to get.
-
-+ Response 200
-    + Attributes (Currency)
-
-    + Body
-
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
-            }
-
 ## Programs [/programs/]
 
-Programs group together Value Stores and control default behavior.  Programs can be set up for the various ways your organization uses values such as gift cards, loyalty and promotions.
+Programs act as a template to set properties of ValueStores for the type of value you wish to issue. 
+A few common examples of the types of value you may want to issue and define as Programs are:
+- Gift cards
+- Accounts, points 
+- Promotions  
+
+See [here](http://localhost:8181/docs) to see examples of how you'd create a Program for the common types listed above.
 
 ---
 ### Create Program [POST /programs]
@@ -374,7 +244,7 @@ Create a new Program.
         
     + Attributes
         + programId (string, required) - Unique idempotent ID for the Program.
-        + name (string, optional) - 
+        + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + access (enum[string], required) - How the valueStores can be accessed
             + `customerId` - must be associated with a customerId.
@@ -405,7 +275,7 @@ Create a new Program.
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -436,7 +306,7 @@ Create a new Program.
 
 ### Update a Program [PATCH /programs/{programId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
 Value Stores that have already been created will not be changed.
 
@@ -463,7 +333,7 @@ Value Stores that have already been created will not be changed.
                 "tags": ["internal"]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body
@@ -492,9 +362,33 @@ Value Stores that have already been created will not be changed.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
+### Delete Program [DELETE /program/{programId}]
+
+Delete a Program by programId.
+
+The Program can only be deleted if it is not associated with any Value Stores.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + programId (string) - the programId of the Program to delete.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
+Get multiple Programs.
 
 ---
 + Request (application/json)
@@ -519,47 +413,43 @@ Get multiple Value Stores.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + programs (array[Program], required) - the list of Programs.
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Program])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "programs": [
-                    {
-                        "programId": "unique-id-123",
-                        "name": "Giftcard programm",
-                        "currency": "CAD",
-                        "access": "generatedCode",
-                        "discount": "false",
-                        "preTax": "false",
-                        "active": "true",
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "minInitialValue": null,
-                        "maxInitialValue": null,
-                        "fixedInitialValues": [
-                            500,
-                            1500,
-                            2500
-                        ],
-                        "uses": null,
-                        "tags": [],
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "programId": "unique-id-123",
+                    "name": "Giftcard programm",
+                    "currency": "CAD",
+                    "access": "generatedCode",
+                    "discount": "false",
+                    "preTax": "false",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "minInitialValue": null,
+                    "maxInitialValue": null,
+                    "fixedInitialValues": [
+                        500,
+                        1500,
+                        2500
+                    ],
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Program [GET /programs/{programId}]
 
@@ -575,7 +465,7 @@ Get Program by programId
 + Parameter
     + programId (string) - the programId of the Program to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Program)
 
     + Body
@@ -644,7 +534,7 @@ Create a new Value Store.
                 "value": 2500
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -669,7 +559,7 @@ Create a new Value Store.
 
 ### Update a Value Store [PATCH /valueStores/{valueStoreId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
@@ -683,8 +573,6 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
     + Attributes
         + valueStoreId (string, optional) - Unique idempotent id for the ValueStore.  If present must match the valueStoreId in the path.
-        + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
@@ -701,7 +589,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "frozen": true
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -754,41 +642,37 @@ Get multiple Value Stores.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
-+ Response 200
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + valueStores (array[ValueStore], required) - the list of Value Stores.
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[ValueStore])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "valueStores": [
-                    {
-                        "valueStoreId": "vs-1",
-                        "programId": "giftcards",
-                        "currency": "USD",
-                        "value": 2500, 
-                        "preTax": false,
-                        "active": true,
-                        "frozen": false,
-                        "redemptionRule": null,
-                        "valueRule": null,
-                        "uses": null,
-                        "startDate": null,
-                        "endDate": null,
-                        "metadata": null,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z"
-                    }
-                ]
-            }
+            [
+                {
+                    "valueStoreId": "vs-1",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "value": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ### Get Value Store [GET /valueStores/{valueStoreId}]
 
@@ -804,7 +688,7 @@ Get Value Store by valueStoreId.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body
@@ -841,7 +725,7 @@ Get a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get the code of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
@@ -876,7 +760,7 @@ Set a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 
@@ -900,7 +784,7 @@ Delete a Value Store's code.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -922,7 +806,7 @@ Get a Value Store's customer.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -962,7 +846,7 @@ Set a Value Store's Customer.
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Customer)
 
     + Body
@@ -993,7 +877,7 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
 + Parameter
     + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
 
-+ Response 200
++ Response 200 (application/json)
 
     + Body
 
@@ -1078,7 +962,7 @@ Data used in example:
                 ]
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1255,7 +1139,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1319,7 +1203,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1389,7 +1273,7 @@ Currently only the `lightrail` payment rail is supported.
                 }
             }
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
@@ -1450,46 +1334,42 @@ Get multiple Transactions.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
-+ Response 200
-    + Attributes
-        + count (number, required) - The number of items returned.
-        + limit (number, required) - The max number of items to get.
-        + offset (number, required) - The number of items to skip.
-        + maxLimit (number, required) - The `limit` available`.
-        + transactions (array[Transaction], required) - the list of transactions.
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Transaction])
 
     + Body
 
-            {
-                "count": 1,
-                "limit": 100,
-                "offset": 0,
-                "maxLimit": 1000,
-                "transactions": [
-                    {
-                        "transactionId": "unique-id-123",
-                        "transactionType": "debit",
-                        "currency": "XXX",
-                        "steps": [
-                            {
-                                "rail": "lightrail",
-                                "valueStoreId": "vs_1",
-                                "currency": "XXX",
-                                "valueBefore": 5500,
-                                "valueAfter": 3000,
-                                "valueChange": -2500
-                            }
-                        ],
-                        "remainder": 0,
-                        "simulated": false,
-                        "createdDate": "2018-04-17T23:20:08.404Z",
-                        "updatedDate": "2018-04-17T23:20:08.404Z",
-                        "metadata": {
-                            "note": "Reduce loyalty points after 3mo customer inactivity"
+            [
+                {
+                    "transactionId": "unique-id-123",
+                    "transactionType": "debit",
+                    "currency": "XXX",
+                    "steps": [
+                        {
+                            "rail": "lightrail",
+                            "valueStoreId": "vs_1",
+                            "currency": "XXX",
+                            "valueBefore": 5500,
+                            "valueAfter": 3000,
+                            "valueChange": -2500
                         }
+                    ],
+                    "remainder": 0,
+                    "simulated": false,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z",
+                    "metadata": {
+                        "note": "Reduce loyalty points after 3mo customer inactivity"
                     }
-                ]
-            }
+                }
+            ]
 
 ### Get Transaction [GET /transactions/{transactionId}]
 
@@ -1505,7 +1385,7 @@ Get Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the Transaction to get.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1547,7 +1427,7 @@ Capture a pending Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the pending Transaction to capture.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1590,7 +1470,7 @@ Void a pending Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the pending Transaction to void.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -1619,6 +1499,156 @@ Void a pending Transaction by transactionId.
                 }
             }
 
+## Currencies [/currencies/]
+
+Currencies that can be used in Value Stores and Programs.  Currency codes can be up to 16 characters in length.
+
+---
+### Create a Currency [POST /currencies]
+
+Create a new Currency.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + code (string, required) - 
+        + name (string, required) - 
+        + symbol (number, required) - 
+        + decimalPlaces (number, required) - 
+
+    + Body
+
+            {
+                "code": "USD",
+                "name": "Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Currency)
+
+    + Body
+            
+            {
+                "code": "USD",
+                "name": "Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
+### Update a Currency [PATCH /currencies/{code}]
+
+Update fields that are sent and leave unspecified values at their default.
+
++ Parameter
+    + code (string) - the code of the Currency to modify.
+
++ Request (application/merge-patch+json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, optional) -  If present must match the code in the path.
+        + name (string, optional) - 
+        + symbol (string, optional) - 
+        + decimalPlaces (number, optional) - 
+        
+    + Body
+    
+            {
+                "name": "Zimbabwe Dollars",
+                "symbol": "Z$"
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Currency)
+
+    + Body
+    
+            {
+                "code": "ZWD",
+                "name": "Zimbabwe Dollars",
+                "symbol": "Z$",
+                "decimalPlaces": 2
+            }
+### Delete Currency [DELETE /currencies/{code}]
+
+Delete a Currency by code.
+
+The Currency can only be deleted if it is not used by any Value Stores or Programs.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Currency to delete.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+### Get Currencies [GET /currencies]
+
+Get all the Currencies.
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Response 200 (application/json)
+    + Attributes (array[Currency])
+
+    + Body
+
+            [
+                {
+                    "code": "USD",
+                    "name": "Dollars",
+                    "symbol": "$",
+                    "decimalPlaces": 2
+                }
+            ]
+
+### Get Currency [GET /currencies/{code}]
+
+Get Currency by code.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Currency to get.
+
++ Response 200 (application/json)
+    + Attributes (Currency)
+
+    + Body
+
+            {
+                "code": "USD",
+                "name": "Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
+
 # Data Structures
 
 ## Currency (object)
@@ -1632,6 +1662,7 @@ Void a pending Transaction by transactionId.
 + firstName (string, optional) - The Customer's first name.
 + lastName (string, optional) - The Customer's last name.
 + email (string, optional) - The Customer's email.
++ tags (array[string], optional) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Customer.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
@@ -1747,13 +1778,13 @@ A step taken as part of the transaction.
 + programId (string, optional) - The programId of the Program this ValueStore is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
++ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
 + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
 + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
 + uses (number, optional) - The number of times the value store can be transacted with.
-+ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
 + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
 + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.

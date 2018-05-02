@@ -12,7 +12,7 @@ Capture a pending Transaction by transactionId.
 + Parameter
     + transactionId (string) - the transactionId of the pending Transaction to capture.
 
-+ Response 200
++ Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body

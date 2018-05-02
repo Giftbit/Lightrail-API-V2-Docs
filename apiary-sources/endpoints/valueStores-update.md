@@ -1,6 +1,6 @@
 ### Update a Value Store [PATCH /valueStores/{valueStoreId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
@@ -14,8 +14,6 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
     + Attributes
         + valueStoreId (string, optional) - {{valueStore.valueStoreId}}  If present must match the valueStoreId in the path.
-        + currency (string, optional) - {{currency}}
-        + value (number, optional) - {{valueStore.value}}
         + preTax (boolean, optional) - {{valueStore.preTax}}
         + active (boolean, optional) - {{valueStore.active}}
         + frozen (boolean, optional) - {{valueStore.frozen}}
@@ -32,7 +30,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "frozen": true
             }
     
-+ Response 200
++ Response 200 (application/json)
     + Attributes (ValueStore)
 
     + Body

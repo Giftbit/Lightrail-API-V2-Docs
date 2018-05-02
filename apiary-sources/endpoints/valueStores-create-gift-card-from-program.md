@@ -1,6 +1,4 @@
-### Create a Value Store [POST /valueStores]
-
-Create a new Value Store.
+### Create a Value Store from a Gift Card Program [POST /valueStores]
 
 + Request (application/json)
     + Headers
@@ -9,17 +7,8 @@ Create a new Value Store.
 
     + Attributes
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
-        + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value Store with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `customerId`.
-        + currency (string, optional) - {{currency}} Required if `programId` is not set.
-        + value (number, optional) - {{valueStore.value}}
-        + preTax (boolean, optional) - {{valueStore.preTax}}
-        + active (boolean, optional) - {{valueStore.active}}
-        + frozen (boolean, optional) - {{valueStore.frozen}}
-        + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
-        + valueRule (number, optional) - {{valueStore.valueRule}}
-        + uses (number, optional) - {{valueStore.uses}}
+        + programId (string, required) - Associate with and copy default values from the given Program.
+        + value (number, required) - {{valueStore.value}}
         + startDate (number, optional) - {{valueStore.startDate}}
         + endDate (number, optional) - {{valueStore.endDate}}
         + metadata (number, optional) - {{valueStore.metadata}}
@@ -28,8 +17,7 @@ Create a new Value Store.
     
             {
                 "valueStoreId": "vs-1",
-                "programId": "giftcards",
-                "currency": "USD",
+                "programId": "gift-cards-usd",
                 "value": 2500
             }
     
@@ -40,9 +28,10 @@ Create a new Value Store.
     
             {
                 "valueStoreId": "vs-1",
-                "programId": "giftcards",
+                "programId": "gift-cards-usd",
                 "currency": "USD",
                 "value": 2500, 
+                "discount": false, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,
