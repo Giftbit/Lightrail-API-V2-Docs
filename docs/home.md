@@ -105,10 +105,25 @@ Different types of value are represented by modifying the properties of `ValueSt
 `Programs` define default properties for `ValueStores`. 
 Whether running an advertised promotion code, selectively giving your top customers extra loyalty points, or selling gift cards the `ValueStores` are issued from `Programs`.
 
-`Programs` also define how the `ValueStores` are accessed. Whether they are attached to a customer or referenced via a secure or public code, this is how you reference the `ValueStores` as a payment `source` in checkout. For
-- `secureCode` - a unique, unguessable code (used for gift cards or unique promotion codes)
-- `publicCode` - a code you supply which will be distributed publicly (ie, "EASYMONEY")
-- `customerId` - attached to a customer
+`Programs` also define how the `ValueStores` are accessed. Whether they are attached to a customer or referenced via a secure or public code, this is how the `ValueStores` is referenced in the `sources` property for checkout. For example:
+```json
+
+    [
+        {
+            "rail": "lightrail",
+            "customerId": "cus_123"
+        },
+        {
+            "rail": "lightrail",
+            "secureCode": "ABCD-EFGH-IJKLM"
+        },
+        {
+            "rail": "lightrail",
+            "publicCode": "EASYMONEY"
+        }
+    ]
+
+```
 
 Lightrail makes it very easy to associate many types of value directly with your customers. This allows you to incentivize your customers through personalized promotions and loyalty programs, all of which work together in a seamless checkout experience. 
 
