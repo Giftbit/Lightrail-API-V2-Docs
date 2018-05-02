@@ -1,6 +1,6 @@
 ### Update a Value Store [PATCH /valueStores/{valueStoreId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 

@@ -2,7 +2,7 @@
 
 Delete a Customer by customerId.
 
-The customer can only be deleted if it is not associated with any ValueStores.
+The Customer can only be deleted if it is not associated with any Value Stores.
 
 ---
 

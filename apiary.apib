@@ -39,6 +39,7 @@ Create a new Customer.
         + firstName (string, optional) - The Customer's first name.
         + lastName (string, optional) - The Customer's last name.
         + email (string, optional) - The Customer's email.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Customer.
 
     + Body
@@ -62,7 +63,8 @@ Create a new Customer.
                 "customerId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
-                "email": "thedude@example.com",
+                "email": "thedude@example.com",'
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -71,7 +73,7 @@ Create a new Customer.
             }
 ### Update Customer [PUT /customers/{customerId}]
 
-Update a Customer by customerId.
+Update fields that are sent and leave unspecified values unchanged.
 
 ---
 + Request (application/json)
@@ -84,15 +86,12 @@ Update a Customer by customerId.
         + firstName (string, optional) - The Customer's first name.
         + lastName (string, optional) - The Customer's last name.
         + email (string, optional) - The Customer's email.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (string, optional) - Arbitrary data associated with the Customer.
 
     + Body
 
             {
-                "customerId": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
                 "metadata": {
                     "alias": "El Duderino"
                 }
@@ -111,6 +110,7 @@ Update a Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -121,7 +121,7 @@ Update a Customer by customerId.
 
 Delete a Customer by customerId.
 
-The customer can only be deleted if it is not associated with any ValueStores.
+The Customer can only be deleted if it is not associated with any Value Stores.
 
 ---
 
@@ -140,7 +140,7 @@ The customer can only be deleted if it is not associated with any ValueStores.
             {
                 "success": true
             }
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Customers.
 
@@ -156,36 +156,42 @@ Get multiple Customers.
     + firstName (string, optional) - Filter by the firstName.
     + lastName (string, optional) - Filter by the lastName.
     + email (string, optional) - Filter by the email.
+    + tags (number, optional) - Filter by tags.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-
-    + Attributes (array[Customer])
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + customers (array[Customer], required) - the list of Customers.
 
     + Body
 
-            [
-                {
-                    "customerId": "unique-id-123",
-                    "firstName": "Jeffrey",
-                    "lastName": "Lebowski",
-                    "email": "thedude@example.com",
-                    "metadata": {
-                        "alias": "El Duderino"
-                    },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "customers": [
+                    {
+                        "customerId": "unique-id-123",
+                        "firstName": "Jeffrey",
+                        "lastName": "Lebowski",
+                        "email": "thedude@example.com",
+                        "tags": [],
+                        "metadata": {
+                            "alias": "El Duderino"
+                        },
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    }
+                ]
+            }
 
 ### Get Customer [GET /customers/{customerId}]
 
@@ -211,6 +217,7 @@ Get Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -303,7 +310,7 @@ Create a new Program.
 
 ### Update a Program [PATCH /programs/{programId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
 Value Stores that have already been created will not be changed.
 
@@ -359,9 +366,33 @@ Value Stores that have already been created will not be changed.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
+### Delete Program [DELETE /program/{programId}]
+
+Delete a Program by programId.
+
+The Program can only be deleted if it is not associated with any Value Stores.
+
+---
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + programId (string) - the programId of the Program to delete.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
+Get multiple Programs.
 
 ---
 + Request (application/json)
@@ -387,42 +418,46 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Program])
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + programs (array[Program], required) - the list of Programs.
 
     + Body
 
-            [
-                {
-                    "programId": "unique-id-123",
-                    "name": "Giftcard programm",
-                    "currency": "CAD",
-                    "access": "generatedCode",
-                    "discount": "false",
-                    "preTax": "false",
-                    "active": "true",
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "minInitialValue": null,
-                    "maxInitialValue": null,
-                    "fixedInitialValues": [
-                        500,
-                        1500,
-                        2500
-                    ],
-                    "uses": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "programs": [
+                    {
+                        "programId": "unique-id-123",
+                        "name": "Giftcard programm",
+                        "currency": "CAD",
+                        "access": "generatedCode",
+                        "discount": "false",
+                        "preTax": "false",
+                        "active": "true",
+                        "redemptionRule": null,
+                        "valueRule": null,
+                        "minInitialValue": null,
+                        "maxInitialValue": null,
+                        "fixedInitialValues": [
+                            500,
+                            1500,
+                            2500
+                        ],
+                        "uses": null,
+                        "tags": [],
+                        "metadata": null,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    }
+                ]
+            }
 
 ### Get Program [GET /programs/{programId}]
 
@@ -532,7 +567,7 @@ Create a new Value Store.
 
 ### Update a Value Store [PATCH /valueStores/{valueStoreId}]
 
-Update fields that are sent and leave unspecified values at their default.
+Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
 
@@ -616,36 +651,40 @@ Get multiple Value Stores.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[ValueStore])
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + valueStores (array[ValueStore], required) - the list of Value Stores.
 
     + Body
 
-            [
-                {
-                    "valueStoreId": "vs-1",
-                    "programId": "giftcards",
-                    "currency": "USD",
-                    "value": 2500, 
-                    "preTax": false,
-                    "active": true,
-                    "frozen": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "valueStores": [
+                    {
+                        "valueStoreId": "vs-1",
+                        "programId": "giftcards",
+                        "currency": "USD",
+                        "value": 2500, 
+                        "preTax": false,
+                        "active": true,
+                        "frozen": false,
+                        "redemptionRule": null,
+                        "valueRule": null,
+                        "uses": null,
+                        "startDate": null,
+                        "endDate": null,
+                        "metadata": null,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    }
+                ]
+            }
 
 ### Get Value Store [GET /valueStores/{valueStoreId}]
 
@@ -1308,41 +1347,45 @@ Get multiple Transactions.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
 
 + Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Transaction])
+    + Attributes
+        + count (number, required) - The number of items returned.
+        + limit (number, required) - The max number of items to get.
+        + offset (number, required) - The number of items to skip.
+        + maxLimit (number, required) - The `limit` available`.
+        + transactions (array[Transaction], required) - the list of transactions.
 
     + Body
 
-            [
-                {
-                    "transactionId": "unique-id-123",
-                    "transactionType": "debit",
-                    "currency": "XXX",
-                    "steps": [
-                        {
-                            "rail": "lightrail",
-                            "valueStoreId": "vs_1",
-                            "currency": "XXX",
-                            "valueBefore": 5500,
-                            "valueAfter": 3000,
-                            "valueChange": -2500
+            {
+                "count": 1,
+                "limit": 100,
+                "offset": 0,
+                "maxLimit": 1000,
+                "transactions": [
+                    {
+                        "transactionId": "unique-id-123",
+                        "transactionType": "debit",
+                        "currency": "XXX",
+                        "steps": [
+                            {
+                                "rail": "lightrail",
+                                "valueStoreId": "vs_1",
+                                "currency": "XXX",
+                                "valueBefore": 5500,
+                                "valueAfter": 3000,
+                                "valueChange": -2500
+                            }
+                        ],
+                        "remainder": 0,
+                        "simulated": false,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z",
+                        "metadata": {
+                            "note": "Reduce loyalty points after 3mo customer inactivity"
                         }
-                    ],
-                    "remainder": 0,
-                    "simulated": false,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z",
-                    "metadata": {
-                        "note": "Reduce loyalty points after 3mo customer inactivity"
                     }
-                }
-            ]
+                ]
+            }
 
 ### Get Transaction [GET /transactions/{transactionId}]
 
@@ -1635,6 +1678,7 @@ Get Currency by code.
 + firstName (string, optional) - The Customer's first name.
 + lastName (string, optional) - The Customer's last name.
 + email (string, optional) - The Customer's email.
++ tags (array[string], optional) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Customer.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.

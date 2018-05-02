@@ -1,4 +1,4 @@
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Customers.
 
@@ -14,6 +14,7 @@ Get multiple Customers.
     + firstName (string, optional) - Filter by the firstName.
     + lastName (string, optional) - Filter by the lastName.
     + email (string, optional) - Filter by the email.
+    + tags (number, optional) - Filter by tags.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
@@ -37,6 +38,7 @@ Get multiple Customers.
                     "firstName": "Jeffrey",
                     "lastName": "Lebowski",
                     "email": "thedude@example.com",
+                    "tags": [],
                     "metadata": {
                         "alias": "El Duderino"
                     },
@@ -69,6 +71,7 @@ Get Customer by customerId.
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
