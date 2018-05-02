@@ -9,12 +9,12 @@ In addition to how the promotion is accessed, they type of value they hold can a
 Promotions can be valid for a number of dollars or points off, but they can also represent a percent discount.
 These variations are all determine by properties on the `ValueStore` which represents the promotion.
 
-## Getting Started with Promotions
+### Getting Started with Promotions
 To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
 
 Let's look at an example of creating a sign-up promotion which will be attached to new sign-ups.  
 
-### Creating a Program for a Customer Promotion
+#### Creating a Program for a Customer Promotion
 The `Program` will define the basic properties like `currency`, `accessType` and `value` for the (`ValueStores`) that will be created from it. 
 Below are the required and optional attributes needed for creating a `Program` for a promotion.
 
@@ -36,7 +36,7 @@ Example of creating a `Program` for a promotion that will be directly attached t
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an Account Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
@@ -49,7 +49,7 @@ Below is the list of attributes used when creating an Account Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
-## Request to add the Promotion to a Customer 
+### Request to add the Promotion to a Customer 
 Request to add a promotion to a customer.  
 
 `POST https://api.lightrail.com/v2/valueStores`
@@ -62,14 +62,14 @@ Request to add a promotion to a customer.
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an account from a Program.
 - **valueStoreId** (_required_): Unique idempotent id for the ValueStore.
 - **programId** (_required_): The programId of the Program this ValueStore is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_required_): In this case, must match the value defined in `fixedInitialValues`. 
 
-### Using the Promotion as a Payment Source in Checkout
+#### Using the Promotion as a Payment Source in Checkout
 Checkout is done using the `/transactions/orders` endpoint. Since the account is associated with the customer, you can directly use the `customerId` as a payment source. 
 This will automatically use the promotion along with any other ValueStores associated with the customer.  
 
@@ -82,5 +82,5 @@ This will automatically use the promotion along with any other ValueStores assoc
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order) for full documentation of `/transactions/orders` endpoint.
 
-## Support
+### Support
 Want more information on promotions? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

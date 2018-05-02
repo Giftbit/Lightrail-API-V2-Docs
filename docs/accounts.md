@@ -6,10 +6,10 @@ Your customer's account may represent value that can be used during checkout or 
 
 Like all other Lightrail value, accounts are backed by `ValueStores`. 
 
-## Getting Started with Accounts
+### Getting Started with Accounts
 To get started with accounts, you first need to create a `Program` which defines the default parameters for you accounts.
 
-### Creating a Program
+#### Creating a Program
 The `Program` will define the basic properties like currency for the accounts (`ValueStores`) that will be created from it. 
 Below are the required and optional attributes needed for creating a `Program` for an account or a loyalty points use-case.   
 
@@ -26,7 +26,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an Account Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
@@ -35,7 +35,7 @@ Below is the list of attributes used when creating an Account Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
-## Creating an Account
+### Creating an Account
 Request to create an account.  
 
 `POST https://api.lightrail.com/v2/valueStores`
@@ -48,17 +48,17 @@ Request to create an account.
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an account from a Program.
 - **valueStoreId** (_required_): Unique idempotent id for the ValueStore.
 - **programId** (_required_): The programId of the Program this ValueStore is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
-## Common Requests  
+### Common Requests  
 Below are the most common requests made when interacting with accounts.
 
-### Crediting
+#### Crediting
 Crediting is used when adding value to an account.
 
 `POST https://api.lightrail.com/v2/transactions/credit`
@@ -80,7 +80,7 @@ Crediting is used when adding value to an account.
 
 See full credit endpoint [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/credit). 
 
-### Debiting
+#### Debiting
 Debiting is used when removing value from an account.
 
 `POST https://api.lightrail.com/v2/transactions/credit`
@@ -101,7 +101,7 @@ Debiting is used when removing value from an account.
 
 See full debit endpoint [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/debit).
 
-### Using Accounts as a Payment Source in Checkout
+#### Using Accounts as a Payment Source in Checkout
 Checkout is done using the `/transactions/orders` endpoint. To use an account directly as a payment source simply provide the following in the sources property of the request. 
 
 ```json
@@ -121,5 +121,5 @@ Alternatively, since the account is associated with the customer, you can direct
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order) for full documentation of `/transactions/orders` endpoint.
 
-## Support
+### Support
 Want more information on your accounts or loyalty points use-case? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

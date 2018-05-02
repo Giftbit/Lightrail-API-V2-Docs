@@ -3,10 +3,10 @@ Allow your customers to purchase gift cards from your store and redeem them dire
 
 Like all other Lightrail value, gift cards are backed by `ValueStores`. You’ll need to set up a Gift Card program to establish the default parameters for your gift cards.
 
-## Getting Started with Gift Cards
+### Getting Started with Gift Cards
 To get started with gift cards, you first need to create a `Program` which defines the default parameters for your gift cards.
 
-### Creating a Program
+#### Creating a Program
 The Program will define the basic properties like currency and allowed value ranges for your gift cards (`ValueStores`). 
 Below are the required and optional attributes needed for creating a Program for gift cards.   
 
@@ -25,7 +25,7 @@ How to create a Gift Card Program through the API. Note, typically Programs are 
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an Account Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **name** (_optional_): A human-readable name for the Program.
@@ -38,7 +38,7 @@ Below is the list of attributes used when creating an Account Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
-## Issuing a Gift Card
+### Issuing a Gift Card
 Creating Gift Cards is easy. Below is the call to do this. 
 
 `POST https://api.lightrail.com/v2/valueStores`
@@ -50,16 +50,16 @@ Creating Gift Cards is easy. Below is the call to do this.
 }
 ``` 
 
-### Attributes
+#### Attributes
 Below is the list of attributes used when creating an Account from a Program.
 - **valueStoreId** (_required_): Unique idempotent id for the ValueStore.
 - **programId** (_required_): The programId of the Program this ValueStore is in.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
-## Common Requests  
+### Common Requests  
 Below are the most common requests made when interacting with Gift Cards.
 
-### Retrieve Gift Code
+#### Retrieve Gift Code
 The unique code that's generated for a Gift Card must be retrieved via the following endpoint. It is not returned with the Gift Card (`ValueStore`) for security purposes.
 
 `GET https://api.lightrail.com/v2/valueStores/<valueStoreId>/code`
@@ -72,7 +72,7 @@ Example response:
 }
 ``` 
 
-### Using a Gift Card as a Payment Source in Checkout
+#### Using a Gift Card as a Payment Source in Checkout
 Checkout is done using the `/transactions/orders` endpoint. To use a Gift Card as a payment source simply provide the following in the sources property of the request. 
 
 ```json
@@ -84,5 +84,5 @@ Checkout is done using the `/transactions/orders` endpoint. To use a Gift Card a
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order) for full documentation of `/transactions/orders` endpoint.
 
-## Support
+### Support
 Want more information on your gift card use-case? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

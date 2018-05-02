@@ -43,9 +43,9 @@ You can see `lineItems` contains the basic shopping cart information.
 
 Also, note the sources property in the request. It includes three sources, two of which are value stored in Lightrail, the other is a tokenized card from Stripe.
 
- - `"customerId": "cus_123"`: will us any value associated with that customer in Lightrail. 
- - `"code: "EASYMONEY"`: represents the promotion code entered during checkout.
- - `"cardToken": "tok_12345"`: tokenized card using Stripe elements.  
+- `"customerId": "cus_123"`: will us any value associated with that customer in Lightrail. 
+- `"code: "EASYMONEY"`: represents the promotion code entered during checkout.
+- `"cardToken": "tok_12345"`: tokenized card using Stripe elements.  
  
 **Response**: `200 OK`
 ```json
@@ -116,9 +116,9 @@ Lightrail makes it very easy to associate many types of value directly with your
 ## Getting Started
 See our examples below to get started with:
 
- - [Gift cards](https://localhost:8181/docs/#gift-cards/gift-cards)
- - [Accounts and loyalty points](https://localhost:8181/docs/#accounts/accounts-and-points)
- - [Promotions](https://localhost:8181/docs/#discounts/promotions) 
- - [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
+- [Gift cards](https://localhost:8181/docs/#gift-cards/gift-cards)
+- [Accounts and loyalty points](https://localhost:8181/docs/#accounts/accounts-and-points)
+- [Promotions](https://localhost:8181/docs/#discounts/promotions) 
+- [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
  
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
