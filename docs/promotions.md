@@ -7,7 +7,7 @@ Lightrail enables a wide variety of promotion use-cases. A few common examples a
 These types of promotions are differentiated primarily based on the `accessType` property.
 In addition to how the promotion is accessed, they type of value they hold can also differ. 
 Promotions can be valid for a number of dollars or points off, but they can also represent a percent discount.
-These variations are all determine by properties on the `ValueStore` which represents the promotion.
+These variations are all determined by properties on the `ValueStore` which represents the promotion.
 
 ### Getting Started with Promotions
 To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
@@ -37,7 +37,7 @@ Example of creating a `Program` for a promotion that will be directly attached t
 ``` 
 
 #### Attributes
-Below is the list of attributes used when creating an Account Program.
+Below is the list of attributes used when creating a Promotion Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **access** (_required_): In this case use `customerId` for attaching to a customer.
