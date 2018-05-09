@@ -34,9 +34,21 @@ An Issuance issues Value Stores from a Value Template.  They define:
 - start date
 - end date
 
-### Value Store
+### Value Stores
 
 An instance created from an issuance.  Has all the properties specified by both the template and the issuance.
+
+### Transactions
+
+A transaction moves money in and out of payment rails.  This includes Lightrail Value Stores, Stripe and Square.
+
+There are multiple transaction types:
+- order
+- credit
+- debit
+- transfer
+
+All transaction types can be queried together.
 
 ### Customer
 
