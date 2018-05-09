@@ -12,7 +12,7 @@ This document can become something we save and refer to internally, or something
 
 ### Value Template
 
-A Value Template describes everything about a value store including:
+A Value Template describes how value behaves.  They define:
 - currency
 - value
 - value rule
@@ -21,7 +21,7 @@ A Value Template describes everything about a value store including:
 - combinability
 - number of uses
 
-### Issuances
+### Issuance
 
 An Issuance issues Value Stores from a Value Template.  They define:
 - access
@@ -34,11 +34,11 @@ An Issuance issues Value Stores from a Value Template.  They define:
 - start date
 - end date
 
-### Value Stores
+### Value Store
 
 An instance created from an issuance.  Has all the properties specified by both the template and the issuance.
 
-### Transactions
+### Transaction
 
 A transaction moves money in and out of payment rails.  This includes Lightrail Value Stores, Stripe and Square.
 
