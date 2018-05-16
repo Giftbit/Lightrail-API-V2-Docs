@@ -13,7 +13,7 @@ Create a new Value.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
         + currency (string, optional) - {{currency}} Required if `programId` is not set.
-        + value (number, optional) - {{value.value}}
+        + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
@@ -30,7 +30,7 @@ Create a new Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500
+                "balance": 2500
             }
     
 + Response 200 (application/json)
@@ -42,7 +42,7 @@ Create a new Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,

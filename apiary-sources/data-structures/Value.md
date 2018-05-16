@@ -2,7 +2,7 @@
 + valueId (string, required) - {{value.valueId}}
 + programId (string, optional) - {{value.programId}}
 + currency (string, required) - {{currency}}
-+ value (number, optional) - {{value.value}}
++ balance (number, optional) - {{value.balance}}
 + discount (boolean, optional) - {{value.discount}}
 + preTax (boolean, optional) - {{value.preTax}}
 + active (boolean, optional) - {{value.active}}

@@ -19,8 +19,8 @@ How to create a Gift Card Program through the API. Note, typically Programs are 
     "name": "Gift Cards USD",
     "currency": "USD",
     "access": "secureCode",
-    "minInitialValue": 500,
-    "maxInitialValue": 100000,
+    "minInitialBalance": 500,
+    "maxInitialBalance": 100000,
     "tags": ["giftcard"]
 }
 ``` 
@@ -33,7 +33,7 @@ Below is the list of attributes used when creating an Account Program.
  - **access** (_required_): Always use value `secureCode` for creating account programs. This means the gift card will be created using a unique unguessable code.
  - **active** (_optional_): Whether the Value is active and can be used upon creation.
  - **minInitialValue** (_optional_): The minimum value the Value can be created with.
- - **maxInitialValue** (_optional_): The maximum value the Value can be created with.  
+ - **maxInitialBalance** (_optional_): The maximum value the Value can be created with.  
  - **fixedInitialValues** (_optional_): A list of values the Value can be created with.  
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.

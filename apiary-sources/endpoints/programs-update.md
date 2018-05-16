@@ -15,8 +15,8 @@ Values that have already been created will not be changed.
     + Attributes
         + programId (string, optional) - {{program.programId}}  If present must match the programId in the path.
         + active (boolean, optional) - {{value.active}}
-        + minInitialValue (number, optional) - {{program.minInitialValue}}
-        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
@@ -42,8 +42,8 @@ Values that have already been created will not be changed.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,

@@ -223,8 +223,8 @@ Get Customer by customerId.
 
 ## Programs [/programs/]
 
-Programs act as a template to set properties of Values for the type of value you wish to issue. 
-A few common examples of the types of value you may want to issue and define as Programs are:
+Programs act as a template to set properties for the type of Value you wish to issue. 
+A few common examples of the types of Value you may want to issue and define as Programs are:
 - Gift cards
 - Accounts, points 
 - Promotions  
@@ -251,12 +251,12 @@ Create a new Program.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
         + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
-        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
-        + minInitialValue (number, optional) - The minimum value the Value can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value can be created with.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
@@ -290,8 +290,8 @@ Create a new Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -321,8 +321,8 @@ Values that have already been created will not be changed.
     + Attributes
         + programId (string, optional) - Unique idempotent ID for the Program.  If present must match the programId in the path.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + minInitialValue (number, optional) - The minimum value the Value can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value can be created with.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
@@ -348,8 +348,8 @@ Values that have already been created will not be changed.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -436,8 +436,8 @@ Get multiple Programs.
                     "active": "true",
                     "redemptionRule": null,
                     "valueRule": null,
-                    "minInitialValue": null,
-                    "maxInitialValue": null,
+                    "minInitialBalance": null,
+                    "maxInitialBalance": null,
                     "fixedInitialValues": [
                         500,
                         1500,
@@ -480,8 +480,8 @@ Get Program by programId
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -514,15 +514,15 @@ Create a new Value.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
         + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`. Required if `programId` is not set.
-        + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
-        + startDate (number, optional) - ISO date for when the value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the value can last be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
         + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -531,7 +531,7 @@ Create a new Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500
+                "balance": 2500
             }
     
 + Response 200 (application/json)
@@ -543,7 +543,7 @@ Create a new Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,
@@ -573,14 +573,14 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
 
     + Attributes
         + valueId (string, optional) - Unique idempotent id for the Value.  If present must match the valueId in the path.
-        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
-        + startDate (number, optional) - ISO date for when the value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the value can last be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
         + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -598,7 +598,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": true,
@@ -627,8 +627,8 @@ Get multiple Values.
     + offset (number, optional) - The number of items to skip.
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
-    + minValue (number, optional) - Filter by minimumm value, inclusive.
-    + maxValue (number, optional) - Filter by maximum value, inclusive.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -659,7 +659,7 @@ Get multiple Values.
                     "valueId": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
-                    "value": 2500, 
+                    "balance": 2500, 
                     "preTax": false,
                     "active": true,
                     "frozen": false,
@@ -697,7 +697,7 @@ Get Value by valueId.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,
@@ -917,8 +917,8 @@ Data used in example:
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
         
@@ -1119,8 +1119,8 @@ Currently only the `lightrail` payment rail is supported.
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
@@ -1153,9 +1153,9 @@ Currently only the `lightrail` payment rail is supported.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1184,7 +1184,7 @@ Currently only the `lightrail` payment rail is supported.
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
@@ -1217,9 +1217,9 @@ Currently only the `lightrail` payment rail is supported.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 1500,
-                        "valueAfter": 4000,
-                        "valueChange": 2500
+                        "balanceBefore": 1500,
+                        "balanceAfter": 4000,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1249,8 +1249,8 @@ Currently only the `lightrail` payment rail is supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
@@ -1279,7 +1279,7 @@ Currently only the `lightrail` payment rail is supported.
         + transactionType (string, required) - `transfer`
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of value that could not be debited.
+        + remainder (number, required) - The remainder of balance that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
         + createdDate (string, required) - ISO date for when the Transaction was created.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1296,17 +1296,17 @@ Currently only the `lightrail` payment rail is supported.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "USD",
-                        "valueBefore": 2500,
-                        "valueAfter": 0,
-                        "valueChange": -2500
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
                         "valueId": "alice-account-USD",
                         "currency": "USD",
-                        "valueBefore": 5000,
-                        "valueAfter": 7500,
-                        "valueChange": 2500
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1356,9 +1356,9 @@ Get multiple Transactions.
                             "rail": "lightrail",
                             "valueId": "vs_1",
                             "currency": "XXX",
-                            "valueBefore": 5500,
-                            "valueAfter": 3000,
-                            "valueChange": -2500
+                            "balanceBefore": 5500,
+                            "balanceAfter": 3000,
+                            "balanceChange": -2500
                         }
                     ],
                     "remainder": 0,
@@ -1399,9 +1399,9 @@ Get Transaction by transactionId.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1441,9 +1441,9 @@ Capture a pending Transaction by transactionId.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1484,9 +1484,9 @@ Void a pending Transaction by transactionId.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1686,7 +1686,7 @@ Get Currency by code.
 + redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
 + amount (number) - The value of the discount.
-+ preTax (boolean) - If true the Value's value is applied before tax is calculated.
++ preTax (boolean) - If true the Value's balance is applied before tax is calculated.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
@@ -1704,12 +1704,12 @@ Get Currency by code.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
 + discount (boolean, required) - If true the Value will be noted as a discount for the customer in orders.
-+ preTax (boolean, required) - If true the Value's value is applied before tax is calculated.
++ preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
-+ minInitialValue (number, optional) - 
-+ maxInitialValue (number, optional) - 
++ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ minInitialBalance (number, optional) - 
++ maxInitialBalance (number, optional) - 
 + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
 + uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
@@ -1726,7 +1726,7 @@ Get Currency by code.
 + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + steps (array[TransactionStep], required) - An array of transaction steps.
-+ remainder (number, required) - The remainder of value that could not be debited.
++ remainder (number, required) - The remainder of balance that could not be debited.
 + simulated (boolean, optional) - True if the transaction was simulated.
 + pending (enum[string], optional) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
     + `pending` - created pending and unresolved.
@@ -1742,9 +1742,9 @@ Get Currency by code.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
 + valueId (string, optional) - `lightrail`: The ID of a Value.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
-+ id (string, optional) - `internal`: the ID of the value.
-+ value (number, optional) - `internal`: the amount of value.
-+ beforeLightrail (boolean, optional) - `internal`: if true this Value is applied before Lightrail Values, otherwise it will be applied after.
++ id (string, optional) - `internal`: the ID of the internal value.
++ balance (number, optional) - `internal`: the amount of internal value.
++ beforeLightrail (boolean, optional) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
 
 ## TransactionStep (object)
 A step taken as part of the transaction.
@@ -1756,9 +1756,9 @@ A step taken as part of the transaction.
 + currency (string, required) - the currency of the Value transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
-+ valueBefore (number, required) - the value of the Value before the transaction.
-+ valueAfter (number, required) - the value of the Value after the transaction.
-+ valueChange (number, required) - the net change of the Value for the transaction.
++ balanceBefore (number, required) - the balance of the Value before the transaction.
++ balanceAfter (number, required) - the balance of the Value after the transaction.
++ balanceChange (number, required) - the net balance change of the Value for the transaction.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -1768,25 +1768,25 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal Value transacted with.
-+ valueBefore (number, required) - the value of the Value before the transaction.
-+ valueAfter (number, required) - the value of the Value after the transaction.
-+ valueChange (number, required) - the net change of the Value for the transaction.
++ id (string, required) - the ID of the internal value transacted with.
++ balanceBefore (number, required) - the balance of the internal value before the transaction.
++ balanceAfter (number, required) - the balance of the internal value after the transaction.
++ balanceChange (number, required) - the net balance change of the internal value for the transaction.
 
 ## Value (object)
 + valueId (string, required) - Unique idempotent id for the Value.
 + programId (string, optional) - The programId of the Program this Value is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-+ value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
++ balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
-+ preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
++ preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
++ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + uses (number, optional) - The number of times the Value can be transacted with.
-+ startDate (number, optional) - ISO date for when the value can start to be transacted with.
-+ endDate (number, optional) - ISO date for when the value can last be transacted with.
++ startDate (number, optional) - ISO date for when the Value can start to be transacted with.
++ endDate (number, optional) - ISO date for when the Value can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.

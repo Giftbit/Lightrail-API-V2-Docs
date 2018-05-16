@@ -11,8 +11,8 @@
 + active (boolean, optional) - {{value.active}}
 + redemptionRule (Rule, optional) - {{value.redemptionRule}}
 + valueRule (number, optional) - {{value.valueRule}}
-+ minInitialValue (number, optional) - {{program.minValue}}
-+ maxInitialValue (number, optional) - {{program.maxValue}}
++ minInitialBalance (number, optional) - {{program.minValue}}
++ maxInitialBalance (number, optional) - {{program.maxValue}}
 + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
 + uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - {{tags}}

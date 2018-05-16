@@ -49,9 +49,9 @@ Currently only the `lightrail` payment rail is supported.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,

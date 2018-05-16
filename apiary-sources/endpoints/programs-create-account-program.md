@@ -43,8 +43,8 @@ Create a new Account/Points Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": null
                 "uses": null,
                 "tags": ["account"],

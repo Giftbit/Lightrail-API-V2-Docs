@@ -42,8 +42,8 @@ Below is the list of attributes used when creating a Promotion Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **access** (_required_): In this case use `customerId` for attaching to a customer.
  - **discount** (_required_): Set to `true`. 
- - **minInitialValue** (_optional_): The minimum value the Value can be created with.
- - **maxInitialValue** (_optional_): The maximum value the Value can be created with.  
+ - **minInitialBalance** (_optional_): The minimum value the Value can be created with.
+ - **maxInitialBalance** (_optional_): The maximum value the Value can be created with.  
  - **fixedInitialValues** (_optional_): A list of values the Value can be created with.    
  - **name** (_optional_): A human-readable name for the Program.
  - **tags** (_optional_): Segmentation tags.

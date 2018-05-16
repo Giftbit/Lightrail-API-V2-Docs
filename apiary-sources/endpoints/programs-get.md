@@ -48,8 +48,8 @@ Get multiple Programs.
                     "active": "true",
                     "redemptionRule": null,
                     "valueRule": null,
-                    "minInitialValue": null,
-                    "maxInitialValue": null,
+                    "minInitialBalance": null,
+                    "maxInitialBalance": null,
                     "fixedInitialValues": [
                         500,
                         1500,
@@ -92,8 +92,8 @@ Get Program by programId
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,

@@ -39,7 +39,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": true,

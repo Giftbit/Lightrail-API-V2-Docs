@@ -8,9 +8,9 @@ A step taken as part of the transaction.
 + currency (string, required) - the currency of the Value transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - {{value.code}}.
-+ valueBefore (number, required) - the value of the Value before the transaction.
-+ valueAfter (number, required) - the value of the Value after the transaction.
-+ valueChange (number, required) - the net change of the Value for the transaction.
++ balanceBefore (number, required) - the balance of the Value before the transaction.
++ balanceAfter (number, required) - the balance of the Value after the transaction.
++ balanceChange (number, required) - the net balance change of the Value for the transaction.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -20,7 +20,7 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal Value transacted with.
-+ valueBefore (number, required) - the value of the Value before the transaction.
-+ valueAfter (number, required) - the value of the Value after the transaction.
-+ valueChange (number, required) - the net change of the Value for the transaction.
++ id (string, required) - the ID of the internal value transacted with.
++ balanceBefore (number, required) - the balance of the internal value before the transaction.
++ balanceAfter (number, required) - the balance of the internal value after the transaction.
++ balanceChange (number, required) - the net balance change of the internal value for the transaction.

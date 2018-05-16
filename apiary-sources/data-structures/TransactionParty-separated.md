@@ -1,5 +1,5 @@
 ## TransactionParty (object)
-A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific Value and some may be capable of referring to multiple value stores.  Not all transactions support the ability to transact with multiple value stores or support all rails.
+A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific Value and some may be capable of referring to multiple Values.  Not all transactions support the ability to transact with multiple Values or support all rails.
 + rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
 
 ## LightrailvalueIdTransactionParty (TransactionParty)
@@ -25,6 +25,6 @@ Represents an existing storage for value outside of Lightrail.  This Value can b
 This is intended as a stop gap solution while transitioning from a legacy system.
 
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the value.
-+ value (number, required) - the amount of value.
-+ beforeLightrail (boolean, optional) - if true this Value is applied before Lightrail Values, otherwise it will be applied after.
++ id (string, required) - the ID of the internal value.
++ balance (number, required) - the amount of internal value.
++ beforeLightrail (boolean, optional) - if true this value is applied before Lightrail Values, otherwise it will be applied after.

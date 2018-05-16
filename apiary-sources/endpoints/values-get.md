@@ -13,8 +13,8 @@ Get multiple Values.
     + offset (number, optional) - {{pagination.offset}}
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
-    + minValue (number, optional) - Filter by minimumm value, inclusive.
-    + maxValue (number, optional) - Filter by maximum value, inclusive.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -45,7 +45,7 @@ Get multiple Values.
                     "valueId": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
-                    "value": 2500, 
+                    "balance": 2500, 
                     "preTax": false,
                     "active": true,
                     "frozen": false,
@@ -83,7 +83,7 @@ Get Value by valueId.
                 "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,

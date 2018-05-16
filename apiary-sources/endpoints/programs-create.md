@@ -21,8 +21,8 @@ Create a new Program.
         + active (boolean, optional) - {{value.active}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + valueRule (number, optional) - {{value.valueRule}}
-        + minInitialValue (number, optional) - {{program.minInitialValue}}
-        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
@@ -56,8 +56,8 @@ Create a new Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,

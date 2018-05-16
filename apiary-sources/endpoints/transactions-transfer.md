@@ -63,17 +63,17 @@ Currently only the `lightrail` payment rail is supported.
                         "rail": "lightrail",
                         "valueId": "vs_1",
                         "currency": "USD",
-                        "valueBefore": 2500,
-                        "valueAfter": 0,
-                        "valueChange": -2500
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
                         "valueId": "alice-account-USD",
                         "currency": "USD",
-                        "valueBefore": 5000,
-                        "valueAfter": 7500,
-                        "valueChange": 2500
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
