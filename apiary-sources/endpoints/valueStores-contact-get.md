@@ -1,6 +1,6 @@
-### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
+### Get Value Store's Contact [GET /valueStores/{valueStoreId}/contact]
 
-Set a Value Store's Customer.
+Get a Value Store's contact.
 
 ---
 
@@ -9,25 +9,16 @@ Set a Value Store's Customer.
     
             {{header.authorization}}
 
-    + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
-        
-    + Body
-    
-            {
-                "customerId": "unique-id-123"
-            }
-
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+    + valueStoreId (string) - the valueStoreId of the Value Store to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

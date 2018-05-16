@@ -3,7 +3,7 @@ HOST: https://api.lightrail.com/v2/
 
 # Lightrail Documentation
 
-Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
+Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage contact account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
 
 You are viewing the reference api documentation. For an overview and detailed use case examples please view our [docs home](https://localhost:8181/docs/).
 
@@ -19,14 +19,14 @@ Authorization: Bearer <API_KEY>
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help.
 
 
-## Customers [/customers/]
+## Contacts [/contacts/]
 
-Customers are the people or businesses who buy products or services from you.  They're identified by a unique `customerId`.
+Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `contactId`.
 
 ---
-### Create Customer [POST /customers]
+### Create Contact [POST /contacts]
 
-Create a new Customer.
+Create a new Contact.
 
 ---
 + Request (application/json)
@@ -35,17 +35,17 @@ Create a new Customer.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
+        + contactId (string, required) - Unique idempotent ID for the Contact.
+        + firstName (string, optional) - The Contact's first name.
+        + lastName (string, optional) - The Contact's last name.
+        + email (string, optional) - The Contact's email.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (object, optional) - Arbitrary data associated with the Customer.
+        + metadata (object, optional) - Arbitrary data associated with the Contact.
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -55,12 +55,12 @@ Create a new Customer.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",'
@@ -71,7 +71,7 @@ Create a new Customer.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update Customer [PUT /customers/{customerId}]
+### Update Contact [PUT /contacts/{contactId}]
 
 Update fields that are sent and leave unspecified values unchanged.
 
@@ -82,12 +82,12 @@ Update fields that are sent and leave unspecified values unchanged.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
+        + contactId (string, required) - Unique idempotent ID for the Contact.
+        + firstName (string, optional) - The Contact's first name.
+        + lastName (string, optional) - The Contact's last name.
+        + email (string, optional) - The Contact's email.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + metadata (string, optional) - Arbitrary data associated with the Contact.
 
     + Body
 
@@ -98,15 +98,15 @@ Update fields that are sent and leave unspecified values unchanged.
             }
             
 + Parameter
-    + customerId (string) - the customerId of the Customer to update.
+    + contactId (string) - the contactId of the Contact to update.
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -117,11 +117,11 @@ Update fields that are sent and leave unspecified values unchanged.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Delete Customer [DELETE /customers/{customerId}]
+### Delete Contact [DELETE /contacts/{contactId}]
 
-Delete a Customer by customerId.
+Delete a Contact by contactId.
 
-The Customer can only be deleted if it is not associated with any Value Stores.
+The Contact can only be deleted if it is not associated with any Value Stores.
 
 ---
 
@@ -131,7 +131,7 @@ The Customer can only be deleted if it is not associated with any Value Stores.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to delete.
+    + contactId (string) - the contactId of the Contact to delete.
 
 + Response 200 (application/json)
 
@@ -140,9 +140,9 @@ The Customer can only be deleted if it is not associated with any Value Stores.
             {
                 "success": true
             }
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Customers.
+Get multiple Contacts.
 
 ---
 + Request (application/json)
@@ -170,13 +170,13 @@ Get multiple Customers.
             Offset: 0
             Count: 1
 
-    + Attributes (array[Customer])
+    + Attributes (array[Contact])
 
     + Body
 
             [
                 {
-                    "customerId": "unique-id-123",
+                    "contactId": "unique-id-123",
                     "firstName": "Jeffrey",
                     "lastName": "Lebowski",
                     "email": "thedude@example.com",
@@ -189,9 +189,9 @@ Get multiple Customers.
                 }
             ]
 
-### Get Customer [GET /customers/{customerId}]
+### Get Contact [GET /contacts/{contactId}]
 
-Get Customer by customerId.
+Get Contact by contactId.
 
 ---
 
@@ -201,15 +201,15 @@ Get Customer by customerId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to get.
+    + contactId (string) - the contactId of the Contact to get.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -247,10 +247,10 @@ Create a new Program.
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + access (enum[string], required) - How the valueStores can be accessed
-            + `customerId` - must be associated with a customerId.
+            + `contactId` - must be associated with a contactId.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
+        + discount (boolean, optional) - If true the Value Store will be noted as a discount for the contact in orders.
         + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
         + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
@@ -276,7 +276,7 @@ Create a new Program.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
@@ -496,7 +496,7 @@ Get Program by programId
 
 ## ValueStores [/valueStores/]
 
-Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique valueStoreId but may also be referenced by a code or associated with a Customer.
+Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique valueStoreId but may also be referenced by a code or associated with a Contact.
 
 ---
 ### Create a Value Store [POST /valueStores]
@@ -511,8 +511,8 @@ Create a new Value Store.
     + Attributes
         + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
         + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value Store with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `customerId`.
+        + contactId (string, optional) - Associate the Value Store with the given Contact.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `contactId`.
         + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`. Required if `programId` is not set.
         + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
@@ -792,9 +792,9 @@ Delete a Value Store's code.
                 "success": true
             }
 
-### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
+### Get Value Store's Contact [GET /valueStores/{valueStoreId}/contact]
 
-Get a Value Store's customer.
+Get a Value Store's contact.
 
 ---
 
@@ -804,15 +804,15 @@ Get a Value Store's customer.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+    + valueStoreId (string) - the valueStoreId of the Value Store to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -823,9 +823,9 @@ Get a Value Store's customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
+### Set Value Store Contact [PUT /valueStores/{valueStoreId}/contact]
 
-Set a Value Store's Customer.
+Set a Value Store's Contact.
 
 ---
 
@@ -835,24 +835,24 @@ Set a Value Store's Customer.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
+        + contactId (string, required) - The contactId to set as the Contact owning the Value Store.
         
     + Body
     
             {
-                "customerId": "unique-id-123"
+                "contactId": "unique-id-123"
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+    + valueStoreId (string) - the valueStoreId of the Value Store to set the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -863,9 +863,9 @@ Set a Value Store's Customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Delete Value Store Customer [DELETE /valueStores/{valueStoreId}/customer]
+### Delete Value Store Contact [DELETE /valueStores/{valueStoreId}/contact]
 
-Remove the Customer as the owner of a Value Store.  The Customer's info is not deleted.
+Remove the Contact as the owner of a Value Store.  The Contact's info is not deleted.
 
 ---
 
@@ -875,7 +875,7 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
+    + valueStoreId (string) - the valueStoreId of the Value Store to remove the Contact from.
 
 + Response 200 (application/json)
 
@@ -900,7 +900,7 @@ Data used in example:
     - 1x $1.99 chocolate bar  (5% tax rate)
     - 1x $3.49 shipping (0% tax rate)
 - Payment Sources:
-    - Customer with prepaid account, and a sock and chocolate bar promotion.
+    - Contact with prepaid account, and a sock and chocolate bar promotion.
         - Account has $20.
         - Sock promo is for 20% off retail price of socks.
         - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
@@ -953,7 +953,7 @@ Data used in example:
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "customerEmail": "alice@example.com"
+                        "contactEmail": "alice@example.com"
                     },
                     {
                         "rail": "lightrail",
@@ -1069,8 +1069,8 @@ Data used in example:
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-promotions", "clothing-promos"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
@@ -1083,15 +1083,15 @@ Data used in example:
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
                         "amount": -50,
-                        "customerEmail": "alice@example.com"
-                        "tags": ["customer-promotions", "food-promos"],
+                        "contactEmail": "alice@example.com"
+                        "tags": ["contact-promotions", "food-promos"],
                         "discount": true
                     },
                     {
                         "valueStoreId": "alice-account-USD",
                         "amount": -1265,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-accounts"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-accounts"],
                         "discount": false
                     }
                 ],
@@ -1135,7 +1135,7 @@ Currently only the `lightrail` payment rail is supported.
                 "amount": 2500,
                 "currency": "XXX",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
     
@@ -1163,7 +1163,7 @@ Currently only the `lightrail` payment rail is supported.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
@@ -1366,7 +1366,7 @@ Get multiple Transactions.
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z",
                     "metadata": {
-                        "note": "Reduce loyalty points after 3mo customer inactivity"
+                        "note": "Reduce loyalty points after 3mo contact inactivity"
                     }
                 }
             ]
@@ -1409,7 +1409,7 @@ Get Transaction by transactionId.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
@@ -1452,7 +1452,7 @@ Capture a pending Transaction by transactionId.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
@@ -1495,7 +1495,7 @@ Void a pending Transaction by transactionId.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
@@ -1657,15 +1657,15 @@ Get Currency by code.
 + symbol (number, required) - 
 + decimalPlaces (number, required) - 
 
-## Customer (object)
-+ customerId (string, required) - Unique idempotent ID for the Customer.
-+ firstName (string, optional) - The Customer's first name.
-+ lastName (string, optional) - The Customer's last name.
-+ email (string, optional) - The Customer's email.
+## Contact (object)
++ contactId (string, required) - Unique idempotent ID for the Contact.
++ firstName (string, optional) - The Contact's first name.
++ lastName (string, optional) - The Contact's last name.
++ email (string, optional) - The Contact's email.
 + tags (array[string], optional) - Segmentation tags.
-+ metadata (object, optional) - Arbitrary data associated with the Customer.
-+ createdDate (string, required) - ISO date for when the Customer was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ metadata (object, optional) - Arbitrary data associated with the Contact.
++ createdDate (string, required) - ISO date for when the Contact was created.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.
 
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
@@ -1684,7 +1684,7 @@ Get Currency by code.
 ## LineItemPromotions (object)
 + valueStoreId (string) - Unique idempotent id for the ValueStore.
 + redemptionRule (string) - A Redemption Rule controlling when the Value Store can be used in an order.
-+ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
++ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
 + preTax (boolean) - If true the Value Store's value is applied before tax is calculated.
 
@@ -1700,10 +1700,10 @@ Get Currency by code.
 + name (string, optional) - A human-readable name for the Program.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + access (enum[string], required) - How the valueStores can be accessed.
-    + `customerId` - must be associated with a customerId.
+    + `contactId` - must be associated with a contactId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - If true the Value Store will be noted as a discount for the customer in orders.
++ discount (boolean, required) - If true the Value Store will be noted as a discount for the contact in orders.
 + preTax (boolean, required) - If true the Value Store's value is applied before tax is calculated.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
@@ -1719,7 +1719,7 @@ Get Currency by code.
 
 ## Rule (object)
 + rule (string, required) - the Lightrail Rule text of the rule.
-+ explanation (string, required) - a plain explanation of the rule seen by customers.
++ explanation (string, required) - a plain explanation of the rule seen by contacts.
 
 ## Transaction (object)
 + transactionId (string, required) - Unique idempotent ID for the Transaction.
@@ -1733,12 +1733,12 @@ Get Currency by code.
     + `captured` - created pending and captured.  The Transaction is final.
     + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string, required) - ISO date for when the Transaction was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
 ## TransactionParty (object)
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ customerId (string, optional) - `lightrail`: the Customer's customerId.
++ contactId (string, optional) - `lightrail`: the Contact's contactId.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
 + valueStoreId (string, optional) - `lightrail`: The ID of a ValueStore.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
@@ -1754,7 +1754,7 @@ A step taken as part of the transaction.
 + rail (string, required) - `lightrail`
 + valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
 + currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ contactId (string, optional) - the contactId of the Contact associated with the ValueStore.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
@@ -1778,7 +1778,7 @@ A step taken as part of the transaction.
 + programId (string, optional) - The programId of the Program this ValueStore is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
++ discount (boolean, optional) - If true the Value Store will be noted as a discount for the contact in orders.
 + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
 + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
@@ -1788,5 +1788,5 @@ A step taken as part of the transaction.
 + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
 + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value Store.
-+ createdDate (string, required) - ISO date for when the Customer was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ createdDate (string, required) - ISO date for when the Contact was created.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.

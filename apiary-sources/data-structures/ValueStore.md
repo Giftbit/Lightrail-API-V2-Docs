@@ -13,5 +13,5 @@
 + startDate (number, optional) - {{valueStore.startDate}}
 + endDate (number, optional) - {{valueStore.endDate}}
 + metadata (number, optional) - {{valueStore.metadata}}
-+ createdDate (string, required) - {{customer.createdDate}}
-+ updatedDate (string, required) - {{customer.updatedDate}}
++ createdDate (string, required) - {{contact.createdDate}}
++ updatedDate (string, required) - {{contact.updatedDate}}

@@ -2,7 +2,7 @@
 
 {% include 'data-structures/Currency.md' %}
 
-{% include 'data-structures/Customer.md' %}
+{% include 'data-structures/Contact.md' %}
 
 {% include 'data-structures/LineItem.md' %}
 

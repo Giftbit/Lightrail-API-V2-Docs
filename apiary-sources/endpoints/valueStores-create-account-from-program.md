@@ -17,8 +17,8 @@
     
             {
                 "valueStoreId": "vs-1",
-                "programId": "customer-accounts-usd",
-                "customerId": "cus_123",
+                "programId": "contact-accounts-usd",
+                "contactId": "cus_123",
                 "value": 2500
             }
     
@@ -29,7 +29,7 @@
     
             {
                 "valueStoreId": "vs-1",
-                "programId": "customer-accounts-usd",
+                "programId": "contact-accounts-usd",
                 "currency": "USD",
                 "value": 2500, 
                 "discount": false,

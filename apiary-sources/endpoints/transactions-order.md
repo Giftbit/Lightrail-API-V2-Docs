@@ -10,7 +10,7 @@ Data used in example:
     - 1x $1.99 chocolate bar  (5% tax rate)
     - 1x $3.49 shipping (0% tax rate)
 - Payment Sources:
-    - Customer with prepaid account, and a sock and chocolate bar promotion.
+    - Contact with prepaid account, and a sock and chocolate bar promotion.
         - Account has $20.
         - Sock promo is for 20% off retail price of socks.
         - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
@@ -63,7 +63,7 @@ Data used in example:
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "customerEmail": "alice@example.com"
+                        "contactEmail": "alice@example.com"
                     },
                     {
                         "rail": "lightrail",
@@ -179,8 +179,8 @@ Data used in example:
                     {
                         "valueStoreId": "2018-alice-socks-promo",
                         "amount": -200,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-promotions", "clothing-promos"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
@@ -193,15 +193,15 @@ Data used in example:
                     {
                         "valueStoreId": "2018-50cent-chocobar-credit",
                         "amount": -50,
-                        "customerEmail": "alice@example.com"
-                        "tags": ["customer-promotions", "food-promos"],
+                        "contactEmail": "alice@example.com"
+                        "tags": ["contact-promotions", "food-promos"],
                         "discount": true
                     },
                     {
                         "valueStoreId": "alice-account-USD",
                         "amount": -1265,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-accounts"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-accounts"],
                         "discount": false
                     }
                 ],

@@ -5,14 +5,14 @@ currencies:
   decimalPlaces: "The number of decimal places used in formatting."
   name: "Name for the currency, eg: 'Dollars'."
   symbol: "Currency symbol, eg: '$'."
-customer:
-  createdDate: "ISO date for when the Customer was created."
-  customerId: "Unique idempotent ID for the Customer."
-  email: "The Customer's email."
-  firstName: "The Customer's first name."
-  lastName: "The Customer's last name."
-  metadata: "Arbitrary data associated with the Customer."
-  updatedDate: "ISO date for when the Customer was last updated."
+contact:
+  createdDate: "ISO date for when the Contact was created."
+  contactId: "Unique idempotent ID for the Contact."
+  email: "The Contact's email."
+  firstName: "The Contact's first name."
+  lastName: "The Contact's last name."
+  metadata: "Arbitrary data associated with the Contact."
+  updatedDate: "ISO date for when the Contact was last updated."
 header:
   authorization: "Authorization: Bearer <API_KEY>"
 pagination:
@@ -62,12 +62,12 @@ valueStore:
   code: "The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`."
   endDate: "ISO date for when the valueStore can last be transacted with."
   frozen: "If true the Value Store is frozen and cannot be transacted with."
-  discount: "If true the Value Store will be noted as a discount for the customer in orders."
+  discount: "If true the Value Store will be noted as a discount for the contact in orders."
   metadata: "Arbitrary data associated with the Value Store."
   preTax: "If true the Value Store's value is applied before tax is calculated."
   programId: "The programId of the Program this ValueStore is in."
   redemptionRule: "A Redemption Rule controlling when the Value Store can be used in an order."
-  ruleExplanation: "An explanation for the `redemptionRule` does that can be used to display to the customer."
+  ruleExplanation: "An explanation for the `redemptionRule` does that can be used to display to the contact."
   startDate: "ISO date for when the valueStore can start to be transacted with."
   uses: "The number of times the value store can be transacted with."
   value: "An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
@@ -76,6 +76,6 @@ valueStore:
   access:
     description: "How the valueStores can be accessed"
     types:
-      customerId: "must be associated with a customerId."
+      contactId: "must be associated with a contactId."
       secureCode: "a code is generated or supplied and is stored securely."
       publicCode: "a code is generated or supplied and can be displayed."

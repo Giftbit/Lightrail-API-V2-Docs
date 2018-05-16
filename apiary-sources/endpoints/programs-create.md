@@ -13,7 +13,7 @@ Create a new Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - {{valueStore.access.description}}
-            + `customerId` - {{valueStore.access.types.customerId}}
+            + `contactId` - {{valueStore.access.types.contactId}}
             + `secureCode` - {{valueStore.access.types.secureCode}}
             + `publicCode` - {{valueStore.access.types.publicCode}}
         + discount (boolean, optional) - {{valueStore.discount}}
@@ -42,7 +42,7 @@ Create a new Program.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             

@@ -6,7 +6,7 @@ A step taken as part of the transaction.
 + rail (string, required) - `lightrail`
 + valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
 + currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ contactId (string, optional) - the contactId of the Contact associated with the ValueStore.
 + code (string, optional) - {{valueStore.code}}.
 + valueBefore (number, required) - the value of the ValueStore before the transaction.
 + valueAfter (number, required) - the value of the ValueStore after the transaction.
