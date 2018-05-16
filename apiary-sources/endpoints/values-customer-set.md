@@ -1,4 +1,4 @@
-### Set Value Customer [PUT /values/{valueId}/customer]
+### Set Value Customer [PUT /values/{id}/customer]
 
 Set a Value's Customer.
 
@@ -19,7 +19,7 @@ Set a Value's Customer.
             }
 
 + Parameter
-    + valueId (string) - the valueId of the Value to set the Customer of.
+    + id (string) - the id of the Value to set the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

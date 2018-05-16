@@ -1,4 +1,4 @@
-### Delete Value Code [DELETE /values/{valueId}/code]
+### Delete Value Code [DELETE /values/{id}/code]
 
 Delete a Value's code.
 
@@ -10,7 +10,7 @@ Delete a Value's code.
             {{header.authorization}}
 
 + Parameter
-    + valueId (string) - the valueId of the Value to delete the code of.
+    + id (string) - the id of the Value to delete the code of.
 
 + Response 200 (application/json)
 

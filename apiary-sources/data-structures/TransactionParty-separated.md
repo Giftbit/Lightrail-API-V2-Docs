@@ -2,9 +2,9 @@
 A partner in the transaction; either a source or a destination for value.  Some TransactionParty objects refer to a single specific Value and some may be capable of referring to multiple Values.  Not all transactions support the ability to transact with multiple Values or support all rails.
 + rail (string, required) - Indicates the payment rail. Must be either `lightrail`, `stripe` or `internal`.
 
-## LightrailvalueIdTransactionParty (TransactionParty)
+## LightrailidTransactionParty (TransactionParty)
 + rail (string, required) - `lightrail`
-+ valueId (string, required) - the Value's valueId to transact with.
++ id (string, required) - the Value's id to transact with.
 
 ## LightrailCodeTransactionParty (TransactionParty)
 + rail (string, required) - `lightrail`

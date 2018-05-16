@@ -1,6 +1,6 @@
-### Capture Pending Transaction [POST /transactions/{transactionId}/capture]
+### Capture Pending Transaction [POST /transactions/{id}/capture]
 
-Capture a pending Transaction by transactionId.
+Capture a pending Transaction by id.
 
 ---
 
@@ -10,7 +10,7 @@ Capture a pending Transaction by transactionId.
             {{header.authorization}}
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to capture.
+    + id (string) - the id of the pending Transaction to capture.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -18,13 +18,13 @@ Capture a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,

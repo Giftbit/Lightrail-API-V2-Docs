@@ -1,6 +1,6 @@
 ## Values [/values/]
 
-Values (naturally) represent any value in the Lightrail system.  They are identified by a unique valueId but may also be referenced by a code or associated with a Customer.
+Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Customer.
 
 ---
 {% include 'endpoints/values-create.md' %}

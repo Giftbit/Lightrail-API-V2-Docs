@@ -13,7 +13,7 @@
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueId (string) - {{value.valueId}}
++ id (string) - {{value.id}}
 + redemptionRule (string) - {{value.redemptionRule}}
 + ruleExplanation (string) - {{value.ruleExplanation}}
 + amount (number) - The value of the discount.

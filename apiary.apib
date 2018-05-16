@@ -496,7 +496,7 @@ Get Program by programId
 
 ## Values [/values/]
 
-Values (naturally) represent any value in the Lightrail system.  They are identified by a unique valueId but may also be referenced by a code or associated with a Customer.
+Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Customer.
 
 ---
 ### Create a Value [POST /values]
@@ -509,7 +509,7 @@ Create a new Value.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueId (string, required) - Unique idempotent id for the Value.
+        + id (string, required) - Unique idempotent id for the Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
@@ -528,7 +528,7 @@ Create a new Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500
@@ -540,7 +540,7 @@ Create a new Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -557,14 +557,14 @@ Create a new Value.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Update a Value [PATCH /values/{valueId}]
+### Update a Value [PATCH /values/{id}]
 
 Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value.
 
 + Parameter
-    + valueId (string) - the valueId of the Value to modify.
+    + id (string) - the id of the Value to modify.
 
 + Request (application/merge-patch+json)
     + Headers
@@ -572,7 +572,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueId (string, optional) - Unique idempotent id for the Value.  If present must match the valueId in the path.
+        + id (string, optional) - Unique idempotent id for the Value.  If present must match the id in the path.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
@@ -595,7 +595,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -612,7 +612,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Values.
 
@@ -656,7 +656,7 @@ Get multiple Values.
 
             [
                 {
-                    "valueId": "vs-1",
+                    "id": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
                     "balance": 2500, 
@@ -674,9 +674,9 @@ Get multiple Values.
                 }
             ]
 
-### Get Value [GET /values/{valueId}]
+### Get Value [GET /values/{id}]
 
-Get Value by valueId.
+Get Value by id.
 
 ---
 
@@ -686,7 +686,7 @@ Get Value by valueId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get.
+    + id (string) - the id of the Value to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -694,7 +694,7 @@ Get Value by valueId.
     + Body
 
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -711,7 +711,7 @@ Get Value by valueId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Code [GET /values/{valueId}/code]
+### Get Value Code [GET /values/{id}/code]
 
 Get a Value's code.
 
@@ -723,7 +723,7 @@ Get a Value's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get the code of.
+    + id (string) - the id of the Value to get the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -735,7 +735,7 @@ Get a Value's code.
                 "code": "BLACKFRIDAY20%"
             }
 
-### Set Value Code [PUT /values/{valueId}/code]
+### Set Value Code [PUT /values/{id}/code]
 
 Set a Value's code.
 
@@ -758,7 +758,7 @@ Set a Value's code.
             }
 
 + Parameter
-    + valueId (string) - the valueId of the Value to update the code of.
+    + id (string) - the id of the Value to update the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -770,7 +770,7 @@ Set a Value's code.
                 "code": "…e1b1"
             }
 
-### Delete Value Code [DELETE /values/{valueId}/code]
+### Delete Value Code [DELETE /values/{id}/code]
 
 Delete a Value's code.
 
@@ -782,7 +782,7 @@ Delete a Value's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueId (string) - the valueId of the Value to delete the code of.
+    + id (string) - the id of the Value to delete the code of.
 
 + Response 200 (application/json)
 
@@ -792,7 +792,7 @@ Delete a Value's code.
                 "success": true
             }
 
-### Get Value's Customer [GET /values/{valueId}/customer]
+### Get Value's Customer [GET /values/{id}/customer]
 
 Get a Value's customer.
 
@@ -804,7 +804,7 @@ Get a Value's customer.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get the Customer of.
+    + id (string) - the id of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -823,7 +823,7 @@ Get a Value's customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Set Value Customer [PUT /values/{valueId}/customer]
+### Set Value Customer [PUT /values/{id}/customer]
 
 Set a Value's Customer.
 
@@ -844,7 +844,7 @@ Set a Value's Customer.
             }
 
 + Parameter
-    + valueId (string) - the valueId of the Value to set the Customer of.
+    + id (string) - the id of the Value to set the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -863,7 +863,7 @@ Set a Value's Customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Delete Value Customer [DELETE /values/{valueId}/customer]
+### Delete Value Customer [DELETE /values/{id}/customer]
 
 Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
 
@@ -875,7 +875,7 @@ Remove the Customer as the owner of a Value.  The Customer's info is not deleted
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueId (string) - the valueId of the Value to remove the Customer from.
+    + id (string) - the id of the Value to remove the Customer from.
 
 + Response 200 (application/json)
 
@@ -913,7 +913,7 @@ Data used in example:
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
@@ -925,7 +925,7 @@ Data used in example:
     + Body 
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "currency": "USD",
                 "lineItems": [
                     {
@@ -968,7 +968,7 @@ Data used in example:
     + Body
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
@@ -987,7 +987,7 @@ Data used in example:
                         "quantity": 2,
                         "valuesApplied": [
                             {
-                                "valueId": "2018-alice-socks-promo",
+                                "id": "2018-alice-socks-promo",
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
@@ -995,7 +995,7 @@ Data used in example:
                                 "discount": true
                             }, 
                             {
-                                "valueId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
@@ -1019,7 +1019,7 @@ Data used in example:
                         "description": "Chocolate bar.",
                         "valuesApplied": [
                             {
-                                "valueId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
@@ -1027,7 +1027,7 @@ Data used in example:
                                 "discount": true
                             },
                             {
-                                "valueId": "2018-50cent-chocobar-credit",
+                                "id": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
@@ -1050,7 +1050,7 @@ Data used in example:
                         "taxRate": 0, 
                         "valuesApplied": [
                             {
-                                "valueId": "alice-account-USD",
+                                "id": "alice-account-USD",
                                 "amount": -349,
                                 "preTax": false,
                                 "discount": false
@@ -1067,28 +1067,28 @@ Data used in example:
                 ],
                 "steps": [
                     {
-                        "valueId": "2018-alice-socks-promo",
+                        "id": "2018-alice-socks-promo",
                         "amount": -200,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
-                        "valueId": "2018-10percent-off-over-5-orders",
+                        "id": "2018-10percent-off-over-5-orders",
                         "amount": -100,
                         "code": "SAVE10PERCENT",
                         "tags": ["generic-code"],
                         "discount": true
                     },
                     {
-                        "valueId": "2018-50cent-chocobar-credit",
+                        "id": "2018-50cent-chocobar-credit",
                         "amount": -50,
                         "customerEmail": "alice@example.com"
                         "tags": ["customer-promotions", "food-promos"],
                         "discount": true
                     },
                     {
-                        "valueId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "amount": -1265,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-accounts"],
@@ -1115,7 +1115,7 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
@@ -1127,10 +1127,10 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueId": "vs_1"
+                    "id": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1145,13 +1145,13 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,
@@ -1180,9 +1180,9 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
-        + amount (number, required) - The amount to debit, > 0.
+        + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1191,10 +1191,10 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "destination": {
                     "rail": "lightrail",
-                    "valueId": "vs_1"
+                    "id": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1209,13 +1209,13 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "credit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 1500,
                         "balanceAfter": 4000,
@@ -1244,7 +1244,7 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
@@ -1257,14 +1257,14 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueId": "vs_1"
+                    "id": "vs_1"
                 },
                 "destination": {
                     "rail": "lightrail",
-                    "valueId": "alice-account-USD"
+                    "id": "alice-account-USD"
                 },
                 "amount": 2500,
                 "currency": "USD",
@@ -1275,7 +1275,7 @@ Currently only the `lightrail` payment rail is supported.
 
 + Response 200 (application/json)
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
@@ -1288,13 +1288,13 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "transfer",
                 "currency": "USD",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "USD",
                         "balanceBefore": 2500,
                         "balanceAfter": 0,
@@ -1302,7 +1302,7 @@ Currently only the `lightrail` payment rail is supported.
                     },
                     {
                         "rail": "lightrail",
-                        "valueId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "currency": "USD",
                         "balanceBefore": 5000,
                         "balanceAfter": 7500,
@@ -1348,13 +1348,13 @@ Get multiple Transactions.
 
             [
                 {
-                    "transactionId": "unique-id-123",
+                    "id": "unique-id-123",
                     "transactionType": "debit",
                     "currency": "XXX",
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "valueId": "vs_1",
+                            "id": "vs_1",
                             "currency": "XXX",
                             "balanceBefore": 5500,
                             "balanceAfter": 3000,
@@ -1371,9 +1371,9 @@ Get multiple Transactions.
                 }
             ]
 
-### Get Transaction [GET /transactions/{transactionId}]
+### Get Transaction [GET /transactions/{id}]
 
-Get Transaction by transactionId.
+Get Transaction by id.
 
 ---
 
@@ -1383,7 +1383,7 @@ Get Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the Transaction to get.
+    + id (string) - the id of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1391,13 +1391,13 @@ Get Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,
@@ -1413,9 +1413,9 @@ Get Transaction by transactionId.
                 }
             }
 
-### Capture Pending Transaction [POST /transactions/{transactionId}/capture]
+### Capture Pending Transaction [POST /transactions/{id}/capture]
 
-Capture a pending Transaction by transactionId.
+Capture a pending Transaction by id.
 
 ---
 
@@ -1425,7 +1425,7 @@ Capture a pending Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to capture.
+    + id (string) - the id of the pending Transaction to capture.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1433,13 +1433,13 @@ Capture a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,
@@ -1456,9 +1456,9 @@ Capture a pending Transaction by transactionId.
                 }
             }
 
-### Void Pending Transaction [POST /transactions/{transactionId}/void]
+### Void Pending Transaction [POST /transactions/{id}/void]
 
-Void a pending Transaction by transactionId.
+Void a pending Transaction by id.
 
 ---
 
@@ -1468,7 +1468,7 @@ Void a pending Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to void.
+    + id (string) - the id of the pending Transaction to void.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1476,13 +1476,13 @@ Void a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,
@@ -1682,7 +1682,7 @@ Get Currency by code.
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueId (string) - Unique idempotent id for the Value.
++ id (string) - Unique idempotent id for the Value.
 + redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
 + amount (number) - The value of the discount.
@@ -1722,7 +1722,7 @@ Get Currency by code.
 + explanation (string, required) - a plain explanation of the rule seen by customers.
 
 ## Transaction (object)
-+ transactionId (string, required) - Unique idempotent ID for the Transaction.
++ id (string, required) - Unique idempotent ID for the Transaction.
 + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + steps (array[TransactionStep], required) - An array of transaction steps.
@@ -1740,7 +1740,7 @@ Get Currency by code.
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + customerId (string, optional) - `lightrail`: the Customer's customerId.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
-+ valueId (string, optional) - `lightrail`: The ID of a Value.
++ id (string, optional) - `lightrail`: The ID of a Value.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
 + id (string, optional) - `internal`: the ID of the internal value.
 + balance (number, optional) - `internal`: the amount of internal value.
@@ -1752,7 +1752,7 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ valueId (string, required) - the valueId of the Value transacted with.
++ id (string, required) - the id of the Value transacted with.
 + currency (string, required) - the currency of the Value transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
@@ -1774,7 +1774,7 @@ A step taken as part of the transaction.
 + balanceChange (number, required) - the net balance change of the internal value for the transaction.
 
 ## Value (object)
-+ valueId (string, required) - Unique idempotent id for the Value.
++ id (string, required) - Unique idempotent id for the Value.
 + programId (string, optional) - The programId of the Program this Value is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.

@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 Get multiple Values.
 
@@ -42,7 +42,7 @@ Get multiple Values.
 
             [
                 {
-                    "valueId": "vs-1",
+                    "id": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
                     "balance": 2500, 
@@ -60,9 +60,9 @@ Get multiple Values.
                 }
             ]
 
-### Get Value [GET /values/{valueId}]
+### Get Value [GET /values/{id}]
 
-Get Value by valueId.
+Get Value by id.
 
 ---
 
@@ -72,7 +72,7 @@ Get Value by valueId.
             {{header.authorization}}
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get.
+    + id (string) - the id of the Value to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -80,7 +80,7 @@ Get Value by valueId.
     + Body
 
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 

@@ -41,7 +41,7 @@ Request to create an account.
 `POST https://api.lightrail.com/v2/values`
 ```json
 {
-    "valueId": "account-h54sya3",
+    "id": "account-h54sya3",
     "programId": "customer-accounts-usd",
     "customerId": "cus_123",
     "value": 2500
@@ -50,7 +50,7 @@ Request to create an account.
 
 #### Attributes
 Below is the list of attributes used when creating an account from a Program.
-- **valueId** (_required_): Unique idempotent id for the Value.
+- **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
@@ -64,10 +64,10 @@ Crediting is used when adding value to an account.
 `POST https://api.lightrail.com/v2/transactions/credit`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "destination": {
         "rail": "lightrail",
-        "valueId": "account-h54sya3"
+        "id": "account-h54sya3"
     },
     "amount": 2500,
     "currency": "USD",
@@ -86,10 +86,10 @@ Debiting is used when removing value from an account.
 `POST https://api.lightrail.com/v2/transactions/credit`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "source": {
         "rail": "lightrail",
-        "valueId": "account-h54sya3"
+        "id": "account-h54sya3"
     },
     "amount": 2500,
     "currency": "XXX",
@@ -107,7 +107,7 @@ Checkout is done using the `/transactions/orders` endpoint. To use an account di
 ```json
 {
     "rail": "lightrail",
-    "valueId": "account-h54sya3"
+    "id": "account-h54sya3"
 }
 ```
 

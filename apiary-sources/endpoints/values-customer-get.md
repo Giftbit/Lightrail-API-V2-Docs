@@ -1,4 +1,4 @@
-### Get Value's Customer [GET /values/{valueId}/customer]
+### Get Value's Customer [GET /values/{id}/customer]
 
 Get a Value's customer.
 
@@ -10,7 +10,7 @@ Get a Value's customer.
             {{header.authorization}}
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get the Customer of.
+    + id (string) - the id of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

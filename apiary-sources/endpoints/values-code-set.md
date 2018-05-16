@@ -1,4 +1,4 @@
-### Set Value Code [PUT /values/{valueId}/code]
+### Set Value Code [PUT /values/{id}/code]
 
 Set a Value's code.
 
@@ -21,7 +21,7 @@ Set a Value's code.
             }
 
 + Parameter
-    + valueId (string) - the valueId of the Value to update the code of.
+    + id (string) - the id of the Value to update the code of.
 
 + Response 200 (application/json)
     + Attributes

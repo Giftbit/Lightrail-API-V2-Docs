@@ -1,11 +1,11 @@
-### Update a Value [PATCH /values/{valueId}]
+### Update a Value [PATCH /values/{id}]
 
 Update fields that are sent and leave unspecified values unchanged.
 
 In particular this is how you activate/deactivate freeze/unfreeze a Value.
 
 + Parameter
-    + valueId (string) - the valueId of the Value to modify.
+    + id (string) - the id of the Value to modify.
 
 + Request (application/merge-patch+json)
     + Headers
@@ -13,7 +13,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
             {{header.authorization}}
 
     + Attributes
-        + valueId (string, optional) - {{value.valueId}}  If present must match the valueId in the path.
+        + id (string, optional) - {{value.id}}  If present must match the id in the path.
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
@@ -36,7 +36,7 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 

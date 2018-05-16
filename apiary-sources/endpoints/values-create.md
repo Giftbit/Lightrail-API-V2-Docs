@@ -8,7 +8,7 @@ Create a new Value.
             {{header.authorization}}
 
     + Attributes
-        + valueId (string, required) - {{value.valueId}}
+        + id (string, required) - {{value.id}}
         + programId (string, optional) - Associate with and copy default values from the given Program.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
@@ -27,7 +27,7 @@ Create a new Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500
@@ -39,7 +39,7 @@ Create a new Value.
     + Body
     
             {
-                "valueId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 

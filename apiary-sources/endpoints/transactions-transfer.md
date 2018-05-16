@@ -11,7 +11,7 @@ Currently only the `lightrail` payment rail is supported.
             {{header.authorization}}
 
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
+        + id (string, required) - {{transaction.id}}
         + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
@@ -24,14 +24,14 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueId": "vs_1"
+                    "id": "vs_1"
                 },
                 "destination": {
                     "rail": "lightrail",
-                    "valueId": "alice-account-USD"
+                    "id": "alice-account-USD"
                 },
                 "amount": 2500,
                 "currency": "USD",
@@ -42,7 +42,7 @@ Currently only the `lightrail` payment rail is supported.
 
 + Response 200 (application/json)
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
+        + id (string, required) - {{transaction.id}}
         + transactionType (string, required) - `transfer`
         + currency (string, required) - {{currency}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
@@ -55,13 +55,13 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "transfer",
                 "currency": "USD",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "USD",
                         "balanceBefore": 2500,
                         "balanceAfter": 0,
@@ -69,7 +69,7 @@ Currently only the `lightrail` payment rail is supported.
                     },
                     {
                         "rail": "lightrail",
-                        "valueId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "currency": "USD",
                         "balanceBefore": 5000,
                         "balanceAfter": 7500,

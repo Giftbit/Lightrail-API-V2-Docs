@@ -44,7 +44,7 @@ Creating Gift Cards is easy. Below is the call to do this.
 `POST https://api.lightrail.com/v2/values`
 ```json
 {
-    "valueId": "gc-n6se54",
+    "id": "gc-n6se54",
     "programId": "gift-cards-usd",
     "value": 2500
 }
@@ -52,7 +52,7 @@ Creating Gift Cards is easy. Below is the call to do this.
 
 #### Attributes
 Below is the list of attributes used when creating an Account from a Program.
-- **valueId** (_required_): Unique idempotent id for the Value.
+- **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
@@ -62,7 +62,7 @@ Below are the most common requests made when interacting with Gift Cards.
 #### Retrieve Gift Code
 The unique code that's generated for a Gift Card must be retrieved via the following endpoint. It is not returned with the Gift Card (`Value`) for security purposes.
 
-`GET https://api.lightrail.com/v2/values/<valueId>/code`
+`GET https://api.lightrail.com/v2/values/<id>/code`
 
 Example response:
 

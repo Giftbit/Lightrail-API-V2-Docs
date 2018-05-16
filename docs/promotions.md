@@ -55,7 +55,7 @@ Request to add a promotion to a customer.
 `POST https://api.lightrail.com/v2/values`
 ```json
 {
-    "valueId": "cus_123-sign-up-promotion",
+    "id": "cus_123-sign-up-promotion",
     "programId": "sign-up-promotion",
     "customerId": "cus_123",
     "value": 500
@@ -64,7 +64,7 @@ Request to add a promotion to a customer.
 
 #### Attributes
 Below is the list of attributes used when creating an account from a Program.
-- **valueId** (_required_): Unique idempotent id for the Value.
+- **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_required_): In this case, must match the value defined in `fixedInitialValues`. 

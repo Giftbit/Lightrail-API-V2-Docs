@@ -29,13 +29,13 @@ Get multiple Transactions.
 
             [
                 {
-                    "transactionId": "unique-id-123",
+                    "id": "unique-id-123",
                     "transactionType": "debit",
                     "currency": "XXX",
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "valueId": "vs_1",
+                            "id": "vs_1",
                             "currency": "XXX",
                             "balanceBefore": 5500,
                             "balanceAfter": 3000,
@@ -52,9 +52,9 @@ Get multiple Transactions.
                 }
             ]
 
-### Get Transaction [GET /transactions/{transactionId}]
+### Get Transaction [GET /transactions/{id}]
 
-Get Transaction by transactionId.
+Get Transaction by id.
 
 ---
 
@@ -64,7 +64,7 @@ Get Transaction by transactionId.
             {{header.authorization}}
 
 + Parameter
-    + transactionId (string) - the transactionId of the Transaction to get.
+    + id (string) - the id of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -72,13 +72,13 @@ Get Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,

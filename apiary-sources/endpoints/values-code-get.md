@@ -1,4 +1,4 @@
-### Get Value Code [GET /values/{valueId}/code]
+### Get Value Code [GET /values/{id}/code]
 
 Get a Value's code.
 
@@ -10,7 +10,7 @@ Get a Value's code.
             {{header.authorization}}
 
 + Parameter
-    + valueId (string) - the valueId of the Value to get the code of.
+    + id (string) - the id of the Value to get the code of.
 
 + Response 200 (application/json)
     + Attributes

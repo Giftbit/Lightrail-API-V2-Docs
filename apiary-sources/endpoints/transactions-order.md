@@ -23,7 +23,7 @@ Data used in example:
             {{header.authorization}}
 
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
+        + id (string, required) - {{transaction.id}}
         + currency (string, required) - {{currency}}
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
@@ -35,7 +35,7 @@ Data used in example:
     + Body 
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "currency": "USD",
                 "lineItems": [
                     {
@@ -78,7 +78,7 @@ Data used in example:
     + Body
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
@@ -97,7 +97,7 @@ Data used in example:
                         "quantity": 2,
                         "valuesApplied": [
                             {
-                                "valueId": "2018-alice-socks-promo",
+                                "id": "2018-alice-socks-promo",
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
@@ -105,7 +105,7 @@ Data used in example:
                                 "discount": true
                             }, 
                             {
-                                "valueId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
@@ -129,7 +129,7 @@ Data used in example:
                         "description": "Chocolate bar.",
                         "valuesApplied": [
                             {
-                                "valueId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
@@ -137,7 +137,7 @@ Data used in example:
                                 "discount": true
                             },
                             {
-                                "valueId": "2018-50cent-chocobar-credit",
+                                "id": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
@@ -160,7 +160,7 @@ Data used in example:
                         "taxRate": 0, 
                         "valuesApplied": [
                             {
-                                "valueId": "alice-account-USD",
+                                "id": "alice-account-USD",
                                 "amount": -349,
                                 "preTax": false,
                                 "discount": false
@@ -177,28 +177,28 @@ Data used in example:
                 ],
                 "steps": [
                     {
-                        "valueId": "2018-alice-socks-promo",
+                        "id": "2018-alice-socks-promo",
                         "amount": -200,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
-                        "valueId": "2018-10percent-off-over-5-orders",
+                        "id": "2018-10percent-off-over-5-orders",
                         "amount": -100,
                         "code": "SAVE10PERCENT",
                         "tags": ["generic-code"],
                         "discount": true
                     },
                     {
-                        "valueId": "2018-50cent-chocobar-credit",
+                        "id": "2018-50cent-chocobar-credit",
                         "amount": -50,
                         "customerEmail": "alice@example.com"
                         "tags": ["customer-promotions", "food-promos"],
                         "discount": true
                     },
                     {
-                        "valueId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "amount": -1265,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-accounts"],

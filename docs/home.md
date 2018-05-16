@@ -12,7 +12,7 @@ Perhaps a customer who has $20 account credits visits your store, enters the pro
 **Request**: `POST /transactions/orders`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "currency": "USD",
     "lineItems": [
         {
@@ -49,7 +49,7 @@ Also, note the `sources` property in the request. It includes three sources, two
 **Response**: `200 OK`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "currency": "USD",
     "totals": {
         "subtotal": 3000,
@@ -74,13 +74,13 @@ Also, note the `sources` property in the request. It includes three sources, two
     "steps": [
         {
             "rail": "lightrail",
-            "valueId": "easymoney-promo",
+            "id": "easymoney-promo",
             "amount": -600, 
             "discount": true
         },
         {
             "rail": "lightrail",
-            "valueId": "cus_123-account",
+            "id": "cus_123-account",
             "amount": -2000, 
             "discount": false
         },

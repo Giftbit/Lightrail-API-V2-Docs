@@ -1,5 +1,5 @@
 ## Value (object)
-+ valueId (string, required) - {{value.valueId}}
++ id (string, required) - {{value.id}}
 + programId (string, optional) - {{value.programId}}
 + currency (string, required) - {{currency}}
 + balance (number, optional) - {{value.balance}}

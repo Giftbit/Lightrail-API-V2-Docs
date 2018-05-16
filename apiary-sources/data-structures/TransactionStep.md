@@ -4,7 +4,7 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ valueId (string, required) - the valueId of the Value transacted with.
++ id (string, required) - the id of the Value transacted with.
 + currency (string, required) - the currency of the Value transacted with.
 + customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - {{value.code}}.
