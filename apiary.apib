@@ -121,7 +121,7 @@ Update fields that are sent and leave unspecified values unchanged.
 
 Delete a Customer by customerId.
 
-The Customer can only be deleted if it is not associated with any Value Stores.
+The Customer can only be deleted if it is not associated with any Values.
 
 ---
 
@@ -223,7 +223,7 @@ Get Customer by customerId.
 
 ## Programs [/programs/]
 
-Programs act as a template to set properties of ValueStores for the type of value you wish to issue. 
+Programs act as a template to set properties of Values for the type of value you wish to issue. 
 A few common examples of the types of value you may want to issue and define as Programs are:
 - Gift cards
 - Accounts, points 
@@ -246,18 +246,18 @@ Create a new Program.
         + programId (string, required) - Unique idempotent ID for the Program.
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + access (enum[string], required) - How the valueStores can be accessed
+        + access (enum[string], required) - How the values can be accessed
             + `customerId` - must be associated with a customerId.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
+        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
+        + minInitialValue (number, optional) - The minimum value the Value can be created with.
+        + maxInitialValue (number, optional) - The maximum value the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -308,7 +308,7 @@ Create a new Program.
 
 Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
-Value Stores that have already been created will not be changed.
+Values that have already been created will not be changed.
 
 + Parameter
     + programId (string) - the programId of the Program to modify.
@@ -320,10 +320,10 @@ Value Stores that have already been created will not be changed.
 
     + Attributes
         + programId (string, optional) - Unique idempotent ID for the Program.  If present must match the programId in the path.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialValue (number, optional) - The minimum value the Value can be created with.
+        + maxInitialValue (number, optional) - The maximum value the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
         
@@ -366,7 +366,7 @@ Value Stores that have already been created will not be changed.
 
 Delete a Program by programId.
 
-The Program can only be deleted if it is not associated with any Value Stores.
+The Program can only be deleted if it is not associated with any Values.
 
 ---
 
@@ -494,14 +494,14 @@ Get Program by programId
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## ValueStores [/valueStores/]
+## Values [/values/]
 
-Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique valueStoreId but may also be referenced by a code or associated with a Customer.
+Values (naturally) represent any value in the Lightrail system.  They are identified by a unique valueId but may also be referenced by a code or associated with a Customer.
 
 ---
-### Create a Value Store [POST /valueStores]
+### Create a Value [POST /values]
 
-Create a new Value Store.
+Create a new Value.
 
 + Request (application/json)
     + Headers
@@ -509,38 +509,38 @@ Create a new Value Store.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + valueId (string, required) - Unique idempotent id for the Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value Store with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `customerId`.
+        + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
         + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`. Required if `programId` is not set.
         + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + uses (number, optional) - The number of times the value store can be transacted with.
-        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value Store.
+        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500
             }
     
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
@@ -557,14 +557,14 @@ Create a new Value Store.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Update a Value Store [PATCH /valueStores/{valueStoreId}]
+### Update a Value [PATCH /values/{valueId}]
 
 Update fields that are sent and leave unspecified values unchanged.
 
-In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
+In particular this is how you activate/deactivate freeze/unfreeze a Value.
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to modify.
+    + valueId (string) - the valueId of the Value to modify.
 
 + Request (application/merge-patch+json)
     + Headers
@@ -572,16 +572,16 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueStoreId (string, optional) - Unique idempotent id for the ValueStore.  If present must match the valueStoreId in the path.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + uses (number, optional) - The number of times the value store can be transacted with.
-        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value Store.
+        + valueId (string, optional) - Unique idempotent id for the Value.  If present must match the valueId in the path.
+        + preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -590,12 +590,12 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
             }
     
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
@@ -612,9 +612,9 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
+Get multiple Values.
 
 ---
 + Request (application/json)
@@ -650,13 +650,13 @@ Get multiple Value Stores.
             Offset: 0
             Count: 1
         
-    + Attributes (array[ValueStore])
+    + Attributes (array[Value])
 
     + Body
 
             [
                 {
-                    "valueStoreId": "vs-1",
+                    "valueId": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
                     "value": 2500, 
@@ -674,9 +674,9 @@ Get multiple Value Stores.
                 }
             ]
 
-### Get Value Store [GET /valueStores/{valueStoreId}]
+### Get Value [GET /values/{valueId}]
 
-Get Value Store by valueStoreId.
+Get Value by valueId.
 
 ---
 
@@ -686,15 +686,15 @@ Get Value Store by valueStoreId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get.
+    + valueId (string) - the valueId of the Value to get.
 
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
 
             {
-                "valueStoreId": "vs-1",
+                "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 
@@ -711,9 +711,9 @@ Get Value Store by valueStoreId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Store Code [GET /valueStores/{valueStoreId}/code]
+### Get Value Code [GET /values/{valueId}/code]
 
-Get a Value Store's code.
+Get a Value's code.
 
 ---
 
@@ -723,7 +723,7 @@ Get a Value Store's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the code of.
+    + valueId (string) - the valueId of the Value to get the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -735,9 +735,9 @@ Get a Value Store's code.
                 "code": "BLACKFRIDAY20%"
             }
 
-### Set Value Store Code [PUT /valueStores/{valueStoreId}/code]
+### Set Value Code [PUT /values/{valueId}/code]
 
-Set a Value Store's code.
+Set a Value's code.
 
 ---
 
@@ -758,7 +758,7 @@ Set a Value Store's code.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
+    + valueId (string) - the valueId of the Value to update the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -770,9 +770,9 @@ Set a Value Store's code.
                 "code": "…e1b1"
             }
 
-### Delete Value Store Code [DELETE /valueStores/{valueStoreId}/code]
+### Delete Value Code [DELETE /values/{valueId}/code]
 
-Delete a Value Store's code.
+Delete a Value's code.
 
 ---
 
@@ -782,7 +782,7 @@ Delete a Value Store's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
+    + valueId (string) - the valueId of the Value to delete the code of.
 
 + Response 200 (application/json)
 
@@ -792,9 +792,9 @@ Delete a Value Store's code.
                 "success": true
             }
 
-### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
+### Get Value's Customer [GET /values/{valueId}/customer]
 
-Get a Value Store's customer.
+Get a Value's customer.
 
 ---
 
@@ -804,7 +804,7 @@ Get a Value Store's customer.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+    + valueId (string) - the valueId of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -823,9 +823,9 @@ Get a Value Store's customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
+### Set Value Customer [PUT /values/{valueId}/customer]
 
-Set a Value Store's Customer.
+Set a Value's Customer.
 
 ---
 
@@ -835,7 +835,7 @@ Set a Value Store's Customer.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
+        + customerId (string, required) - The customerId to set as the Customer owning the Value.
         
     + Body
     
@@ -844,7 +844,7 @@ Set a Value Store's Customer.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+    + valueId (string) - the valueId of the Value to set the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -863,9 +863,9 @@ Set a Value Store's Customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Delete Value Store Customer [DELETE /valueStores/{valueStoreId}/customer]
+### Delete Value Customer [DELETE /values/{valueId}/customer]
 
-Remove the Customer as the owner of a Value Store.  The Customer's info is not deleted.
+Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
 
 ---
 
@@ -875,7 +875,7 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
+    + valueId (string) - the valueId of the Value to remove the Customer from.
 
 + Response 200 (application/json)
 
@@ -985,9 +985,9 @@ Data used in example:
                         "taxRate": 0.08, 
                         "description": "Socks.", 
                         "quantity": 2,
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "2018-alice-socks-promo",
+                                "valueId": "2018-alice-socks-promo",
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
@@ -995,7 +995,7 @@ Data used in example:
                                 "discount": true
                             }, 
                             {
-                                "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "valueId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
@@ -1017,9 +1017,9 @@ Data used in example:
                         "unitCost": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar.",
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "valueId": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
@@ -1027,7 +1027,7 @@ Data used in example:
                                 "discount": true
                             },
                             {
-                                "valueStoreId": "2018-50cent-chocobar-credit",
+                                "valueId": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
@@ -1048,9 +1048,9 @@ Data used in example:
                         "id": "standard-shipping", 
                         "unitCost": 349,
                         "taxRate": 0, 
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "alice-account-USD",
+                                "valueId": "alice-account-USD",
                                 "amount": -349,
                                 "preTax": false,
                                 "discount": false
@@ -1067,28 +1067,28 @@ Data used in example:
                 ],
                 "steps": [
                     {
-                        "valueStoreId": "2018-alice-socks-promo",
+                        "valueId": "2018-alice-socks-promo",
                         "amount": -200,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
-                        "valueStoreId": "2018-10percent-off-over-5-orders",
+                        "valueId": "2018-10percent-off-over-5-orders",
                         "amount": -100,
                         "code": "SAVE10PERCENT",
                         "tags": ["generic-code"],
                         "discount": true
                     },
                     {
-                        "valueStoreId": "2018-50cent-chocobar-credit",
+                        "valueId": "2018-50cent-chocobar-credit",
                         "amount": -50,
                         "customerEmail": "alice@example.com"
                         "tags": ["customer-promotions", "food-promos"],
                         "discount": true
                     },
                     {
-                        "valueStoreId": "alice-account-USD",
+                        "valueId": "alice-account-USD",
                         "amount": -1265,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-accounts"],
@@ -1116,7 +1116,7 @@ Currently only the `lightrail` payment rail is supported.
         
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
@@ -1130,7 +1130,7 @@ Currently only the `lightrail` payment rail is supported.
                 "transactionId": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "valueId": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1151,7 +1151,7 @@ Currently only the `lightrail` payment rail is supported.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1181,7 +1181,7 @@ Currently only the `lightrail` payment rail is supported.
         
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
@@ -1194,7 +1194,7 @@ Currently only the `lightrail` payment rail is supported.
                 "transactionId": "unique-id-123",
                 "destination": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "valueId": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1215,7 +1215,7 @@ Currently only the `lightrail` payment rail is supported.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 1500,
                         "valueAfter": 4000,
@@ -1233,7 +1233,7 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Transfer [POST /transactions/transfer]
 
-Transfer value from one value store to another.
+Transfer balance from one Value to another.
 
 Currently only the `lightrail` payment rail is supported.
 
@@ -1245,8 +1245,8 @@ Currently only the `lightrail` payment rail is supported.
 
     + Attributes
         + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific ValueStore are supported.
-        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
+        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
@@ -1260,11 +1260,11 @@ Currently only the `lightrail` payment rail is supported.
                 "transactionId": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "valueId": "vs_1"
                 },
                 "destination": {
                     "rail": "lightrail",
-                    "valueStoreId": "alice-account-USD"
+                    "valueId": "alice-account-USD"
                 },
                 "amount": 2500,
                 "currency": "USD",
@@ -1294,7 +1294,7 @@ Currently only the `lightrail` payment rail is supported.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "USD",
                         "valueBefore": 2500,
                         "valueAfter": 0,
@@ -1302,7 +1302,7 @@ Currently only the `lightrail` payment rail is supported.
                     },
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "alice-account-USD",
+                        "valueId": "alice-account-USD",
                         "currency": "USD",
                         "valueBefore": 5000,
                         "valueAfter": 7500,
@@ -1354,7 +1354,7 @@ Get multiple Transactions.
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "valueStoreId": "vs_1",
+                            "valueId": "vs_1",
                             "currency": "XXX",
                             "valueBefore": 5500,
                             "valueAfter": 3000,
@@ -1397,7 +1397,7 @@ Get Transaction by transactionId.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1439,7 +1439,7 @@ Capture a pending Transaction by transactionId.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1482,7 +1482,7 @@ Void a pending Transaction by transactionId.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,
@@ -1501,7 +1501,7 @@ Void a pending Transaction by transactionId.
 
 ## Currencies [/currencies/]
 
-Currencies that can be used in Value Stores and Programs.  Currency codes can be up to 16 characters in length.
+Currencies that can be used in Values and Programs.  Currency codes can be up to 16 characters in length.
 
 ---
 ### Create a Currency [POST /currencies]
@@ -1580,7 +1580,7 @@ Update fields that are sent and leave unspecified values at their default.
 
 Delete a Currency by code.
 
-The Currency can only be deleted if it is not used by any Value Stores or Programs.
+The Currency can only be deleted if it is not used by any Values or Programs.
 
 ---
 
@@ -1678,15 +1678,15 @@ Get Currency by code.
 + metadata (object, optional) - Any additional data you want to store for the item.
 
 ## LineItemResponse (LineItem)
-+ valueStoresApplied (array[LineItemPromotions])
++ valuesApplied (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueStoreId (string) - Unique idempotent id for the ValueStore.
-+ redemptionRule (string) - A Redemption Rule controlling when the Value Store can be used in an order.
++ valueId (string) - Unique idempotent id for the Value.
++ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
 + amount (number) - The value of the discount.
-+ preTax (boolean) - If true the Value Store's value is applied before tax is calculated.
++ preTax (boolean) - If true the Value's value is applied before tax is calculated.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
@@ -1699,19 +1699,19 @@ Get Currency by code.
 + programId (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-+ access (enum[string], required) - How the valueStores can be accessed.
++ access (enum[string], required) - How the values can be accessed.
     + `customerId` - must be associated with a customerId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - If true the Value Store will be noted as a discount for the customer in orders.
-+ preTax (boolean, required) - If true the Value Store's value is applied before tax is calculated.
-+ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
++ discount (boolean, required) - If true the Value will be noted as a discount for the customer in orders.
++ preTax (boolean, required) - If true the Value's value is applied before tax is calculated.
++ active (boolean, optional) - Whether the Value is active and can be used upon creation.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
 + minInitialValue (number, optional) - 
 + maxInitialValue (number, optional) - 
-+ fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
-+ uses (number, optional) - If set the number of uses the Value Store will be created with.  Set `null` or omit for infinite uses.
++ fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
++ uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
 + createdDate (string, required) - ISO date for when the Program was created.
 + updatedDate (string, required) - ISO date for when the Program was last updated.
@@ -1740,11 +1740,11 @@ Get Currency by code.
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + customerId (string, optional) - `lightrail`: the Customer's customerId.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
-+ valueStoreId (string, optional) - `lightrail`: The ID of a ValueStore.
++ valueId (string, optional) - `lightrail`: The ID of a Value.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
 + id (string, optional) - `internal`: the ID of the value.
 + value (number, optional) - `internal`: the amount of value.
-+ beforeLightrail (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ beforeLightrail (boolean, optional) - `internal`: if true this Value is applied before Lightrail Values, otherwise it will be applied after.
 
 ## TransactionStep (object)
 A step taken as part of the transaction.
@@ -1752,13 +1752,13 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
-+ currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ valueId (string, required) - the valueId of the Value transacted with.
++ currency (string, required) - the currency of the Value transacted with.
++ customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ valueBefore (number, required) - the value of the Value before the transaction.
++ valueAfter (number, required) - the value of the Value after the transaction.
++ valueChange (number, required) - the net change of the Value for the transaction.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -1768,25 +1768,25 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal value store transacted with.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ id (string, required) - the ID of the internal Value transacted with.
++ valueBefore (number, required) - the value of the Value before the transaction.
++ valueAfter (number, required) - the value of the Value after the transaction.
++ valueChange (number, required) - the net change of the Value for the transaction.
 
-## ValueStore (object)
-+ valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-+ programId (string, optional) - The programId of the Program this ValueStore is in.
+## Value (object)
++ valueId (string, required) - Unique idempotent id for the Value.
++ programId (string, optional) - The programId of the Program this Value is in.
 + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
 + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
-+ preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-+ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-+ frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-+ uses (number, optional) - The number of times the value store can be transacted with.
-+ startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-+ endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-+ metadata (number, optional) - Arbitrary data associated with the Value Store.
++ discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
++ preTax (boolean, optional) - If true the Value's value is applied before tax is calculated.
++ active (boolean, optional) - Whether the Value is active and can be used upon creation.
++ frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the value of the Value in an Order.  To use this `value` must be set to `null`.
++ uses (number, optional) - The number of times the Value can be transacted with.
++ startDate (number, optional) - ISO date for when the value can start to be transacted with.
++ endDate (number, optional) - ISO date for when the value can last be transacted with.
++ metadata (number, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.

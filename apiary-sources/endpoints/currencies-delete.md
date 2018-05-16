@@ -2,7 +2,7 @@
 
 Delete a Currency by code.
 
-The Currency can only be deleted if it is not used by any Value Stores or Programs.
+The Currency can only be deleted if it is not used by any Values or Programs.
 
 ---
 

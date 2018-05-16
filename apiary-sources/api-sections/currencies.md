@@ -1,6 +1,6 @@
 ## Currencies [/currencies/]
 
-Currencies that can be used in Value Stores and Programs.  Currency codes can be up to 16 characters in length.
+Currencies that can be used in Values and Programs.  Currency codes can be up to 16 characters in length.
 
 ---
 {% include 'endpoints/currencies-create.md' %}

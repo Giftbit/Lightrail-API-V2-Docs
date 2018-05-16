@@ -107,7 +107,7 @@
     {
       "callId": "getCard1ValueStores",
       "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/valueStores"
+      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/values"
     },
     {
       "callId": "listCards1",
@@ -340,7 +340,7 @@
     {
       "callId": "addPromotionToAccount",
       "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores",
+      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values",
       "body": {
         "userSuppliedId":"{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}-promotion1",
         "currency": "USD",
@@ -351,15 +351,15 @@
     {
       "callId": "freezePromotionOnAccount",
       "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/freeze",
+      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/freeze",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}-freeze"
+        "userSuppliedId":"{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}-freeze"
       }
     },
     {
       "callId": "unfreezePromotionOnAccount",
       "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/unfreeze",
+      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/unfreeze",
       "body": {
         "userSuppliedId":"{REQUEST_REPLACEMENT:freezePromotionOnAccount.response.body.transaction.transactionId}-Unfreeze"
       }
@@ -367,7 +367,7 @@
     {
       "callId": "cancelPromotionOnAccount",
       "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/cancel",
+      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/cancel",
       "body": {
         "userSuppliedId":"{REQUEST_REPLACEMENT:unfreezePromotionOnAccount.response.body.transaction.transactionId}-cancel"
       }

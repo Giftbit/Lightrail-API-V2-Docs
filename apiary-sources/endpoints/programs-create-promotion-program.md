@@ -12,14 +12,14 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
-        + access (enum[string], required) - {{valueStore.access.description}}
-            + `customerId` - {{valueStore.access.types.customerId}}
-            + `secureCode` - {{valueStore.access.types.secureCode}}
-            + `publicCode` - {{valueStore.access.types.publicCode}}          
-        + active (boolean, optional) - {{valueStore.active}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `customerId` - {{value.access.types.customerId}}
+            + `secureCode` - {{value.access.types.secureCode}}
+            + `publicCode` - {{value.access.types.publicCode}}          
+        + active (boolean, optional) - {{value.active}}
         + minInitialValue (number, optional) - {{program.minInitialValue}}
         + maxInitialValue (number, optional) - {{program.maxInitialValue}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 

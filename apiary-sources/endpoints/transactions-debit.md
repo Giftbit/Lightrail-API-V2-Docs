@@ -12,7 +12,7 @@ Currently only the `lightrail` payment rail is supported.
         
     + Attributes
         + transactionId (string, required) - {{transaction.transactionId}}
-        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + currency (string, required) - {{currency}}
         + simulate (boolean, optional) - {{transaction.simulate}}
@@ -26,7 +26,7 @@ Currently only the `lightrail` payment rail is supported.
                 "transactionId": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "valueId": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -47,7 +47,7 @@ Currently only the `lightrail` payment rail is supported.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,

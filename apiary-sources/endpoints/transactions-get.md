@@ -35,7 +35,7 @@ Get multiple Transactions.
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "valueStoreId": "vs_1",
+                            "valueId": "vs_1",
                             "currency": "XXX",
                             "valueBefore": 5500,
                             "valueAfter": 3000,
@@ -78,7 +78,7 @@ Get Transaction by transactionId.
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "valueId": "vs_1",
                         "currency": "XXX",
                         "valueBefore": 5500,
                         "valueAfter": 3000,

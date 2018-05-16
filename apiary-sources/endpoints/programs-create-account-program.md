@@ -12,9 +12,9 @@ Create a new Account/Points Program.
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
-        + access (enum[string], required) - {{valueStore.access.description}}
-            + `customerId` - {{valueStore.access.types.customerId}}
-        + active (boolean, optional) - {{valueStore.active}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `customerId` - {{value.access.types.customerId}}
+        + active (boolean, optional) - {{value.active}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 

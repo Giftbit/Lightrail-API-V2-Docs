@@ -1,6 +1,6 @@
-### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
+### Get Value's Customer [GET /values/{valueId}/customer]
 
-Get a Value Store's customer.
+Get a Value's customer.
 
 ---
 
@@ -10,7 +10,7 @@ Get a Value Store's customer.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+    + valueId (string) - the valueId of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

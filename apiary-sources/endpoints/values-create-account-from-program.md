@@ -1,4 +1,4 @@
-### Create a Value Store from a Gift Card Program [POST /valueStores]
+### Create a Value from an Account/Points Program [POST /values]
 
 + Request (application/json)
     + Headers
@@ -6,32 +6,33 @@
             {{header.authorization}}
 
     + Attributes
-        + valueStoreId (string, required) - {{valueStore.valueStoreId}}
+        + valueId (string, required) - {{value.valueId}}
         + programId (string, required) - Associate with and copy default values from the given Program.
-        + value (number, required) - {{valueStore.value}}
-        + startDate (number, optional) - {{valueStore.startDate}}
-        + endDate (number, optional) - {{valueStore.endDate}}
-        + metadata (number, optional) - {{valueStore.metadata}}
+        + value (number, required) - {{value.value}}
+        + startDate (number, optional) - {{value.startDate}}
+        + endDate (number, optional) - {{value.endDate}}
+        + metadata (number, optional) - {{value.metadata}}
         
     + Body
     
             {
-                "valueStoreId": "vs-1",
-                "programId": "gift-cards-usd",
+                "valueId": "vs-1",
+                "programId": "customer-accounts-usd",
+                "customerId": "cus_123",
                 "value": 2500
             }
     
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
     
             {
-                "valueStoreId": "vs-1",
-                "programId": "gift-cards-usd",
+                "valueId": "vs-1",
+                "programId": "customer-accounts-usd",
                 "currency": "USD",
                 "value": 2500, 
-                "discount": false, 
+                "discount": false,
                 "preTax": false,
                 "active": true,
                 "frozen": false,

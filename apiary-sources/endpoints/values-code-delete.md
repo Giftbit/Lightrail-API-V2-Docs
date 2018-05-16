@@ -1,6 +1,6 @@
-### Delete Value Store Code [DELETE /valueStores/{valueStoreId}/code]
+### Delete Value Code [DELETE /values/{valueId}/code]
 
-Delete a Value Store's code.
+Delete a Value's code.
 
 ---
 
@@ -10,7 +10,7 @@ Delete a Value Store's code.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
+    + valueId (string) - the valueId of the Value to delete the code of.
 
 + Response 200 (application/json)
 

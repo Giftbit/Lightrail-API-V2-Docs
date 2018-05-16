@@ -7,7 +7,7 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/programs.md' %}
 
-{% include 'api-sections/valueStores.md' %}
+{% include 'api-sections/values.md' %}
 
 {% include 'api-sections/transactions.md' %}
 

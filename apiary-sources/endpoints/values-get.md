@@ -1,6 +1,6 @@
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
+Get multiple Values.
 
 ---
 + Request (application/json)
@@ -36,13 +36,13 @@ Get multiple Value Stores.
             Offset: 0
             Count: 1
         
-    + Attributes (array[ValueStore])
+    + Attributes (array[Value])
 
     + Body
 
             [
                 {
-                    "valueStoreId": "vs-1",
+                    "valueId": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
                     "value": 2500, 
@@ -60,9 +60,9 @@ Get multiple Value Stores.
                 }
             ]
 
-### Get Value Store [GET /valueStores/{valueStoreId}]
+### Get Value [GET /values/{valueId}]
 
-Get Value Store by valueStoreId.
+Get Value by valueId.
 
 ---
 
@@ -72,15 +72,15 @@ Get Value Store by valueStoreId.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get.
+    + valueId (string) - the valueId of the Value to get.
 
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
 
             {
-                "valueStoreId": "vs-1",
+                "valueId": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
                 "value": 2500, 

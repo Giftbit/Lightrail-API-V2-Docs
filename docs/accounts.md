@@ -4,13 +4,13 @@ Typically this is used for integrations where a customer can earn value, such as
 
 Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in app rewards or promotions. 
 
-Like all other Lightrail value, accounts are backed by `ValueStores`. 
+Like all other Lightrail value, accounts are backed by `Values`. 
 
 ### Getting Started with Accounts
 To get started with accounts, you first need to create a `Program` which defines the default parameters for you accounts.
 
 #### Creating a Program
-The `Program` will define the basic properties like currency for the accounts (`ValueStores`) that will be created from it. 
+The `Program` will define the basic properties like currency for the accounts (`Values`) that will be created from it. 
 Below are the required and optional attributes needed for creating a `Program` for an account or a loyalty points use-case.   
 
 Creating an account `Program`. Note, typically Programs are created through the app (coming soon!). 
@@ -30,7 +30,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
 Below is the list of attributes used when creating an Account Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
- - **access** (_required_): Always use value `customerId` for creating account programs. This means the ValueStores must be attached to a Customer.  
+ - **access** (_required_): Always use value `customerId` for creating account programs. This means the Values must be attached to a Customer.  
  - **name** (_optional_): A human-readable name for the Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
@@ -38,10 +38,10 @@ Below is the list of attributes used when creating an Account Program.
 ### Creating an Account
 Request to create an account.  
 
-`POST https://api.lightrail.com/v2/valueStores`
+`POST https://api.lightrail.com/v2/values`
 ```json
 {
-    "valueStoreId": "account-h54sya3",
+    "valueId": "account-h54sya3",
     "programId": "customer-accounts-usd",
     "customerId": "cus_123",
     "value": 2500
@@ -50,8 +50,8 @@ Request to create an account.
 
 #### Attributes
 Below is the list of attributes used when creating an account from a Program.
-- **valueStoreId** (_required_): Unique idempotent id for the ValueStore.
-- **programId** (_required_): The programId of the Program this ValueStore is in.
+- **valueId** (_required_): Unique idempotent id for the Value.
+- **programId** (_required_): The programId of the Program this Value is in.
 - **customerId** (_required_): Unique ID for the Customer.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
@@ -67,7 +67,7 @@ Crediting is used when adding value to an account.
     "transactionId": "unique-id-123",
     "destination": {
         "rail": "lightrail",
-        "valueStoreId": "account-h54sya3"
+        "valueId": "account-h54sya3"
     },
     "amount": 2500,
     "currency": "USD",
@@ -89,7 +89,7 @@ Debiting is used when removing value from an account.
     "transactionId": "unique-id-123",
     "source": {
         "rail": "lightrail",
-        "valueStoreId": "account-h54sya3"
+        "valueId": "account-h54sya3"
     },
     "amount": 2500,
     "currency": "XXX",
@@ -107,11 +107,11 @@ Checkout is done using the `/transactions/orders` endpoint. To use an account di
 ```json
 {
     "rail": "lightrail",
-    "valueStoreId": "account-h54sya3"
+    "valueId": "account-h54sya3"
 }
 ```
 
-Alternatively, since the account is associated with the customer, you can directly use the `customerId` as a payment source. This will consider all `ValueStores` associated with the customer.
+Alternatively, since the account is associated with the customer, you can directly use the `customerId` as a payment source. This will consider all `Values` associated with the customer.
 ```json
 {
     "rail": "lightrail",

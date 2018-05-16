@@ -4,13 +4,13 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
-+ currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
-+ code (string, optional) - {{valueStore.code}}.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ valueId (string, required) - the valueId of the Value transacted with.
++ currency (string, required) - the currency of the Value transacted with.
++ customerId (string, optional) - the customerId of the Customer associated with the Value.
++ code (string, optional) - {{value.code}}.
++ valueBefore (number, required) - the value of the Value before the transaction.
++ valueAfter (number, required) - the value of the Value after the transaction.
++ valueChange (number, required) - the net change of the Value for the transaction.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -20,7 +20,7 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal value store transacted with.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ id (string, required) - the ID of the internal Value transacted with.
++ valueBefore (number, required) - the value of the Value before the transaction.
++ valueAfter (number, required) - the value of the Value after the transaction.
++ valueChange (number, required) - the net change of the Value for the transaction.
