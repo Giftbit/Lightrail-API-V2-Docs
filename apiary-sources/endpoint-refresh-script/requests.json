@@ -3,7 +3,7 @@
     {
       "callId": "ping1",
       "method": "GET",
-      "endpoint": "/ping",
+      "endpoint": "/ping"
     },
     {
       "callId": "giftCardProgram1",
@@ -57,7 +57,7 @@
     {
       "callId": "patchContact2",
       "method": "PATCH",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact2.response.body.contact.id}",
       "body": {
         "firstName": "bill",
         "lastName": "lumbergh"
@@ -75,8 +75,8 @@
       "body": {
         "userSuppliedId": "giftcard-3asfd34a",
         "programId": "{REQUEST_REPLACEMENT:giftCardProgram1.response.body.program.programId}",
-        "initialValue" : 5000,
-        "cardType" : "GIFT_CARD"
+        "initialValue": 5000,
+        "cardType": "GIFT_CARD"
       }
     },
     {
@@ -124,29 +124,29 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/transactions/dryRun",
       "body": {
-        "userSuppliedId":"transaction-234342",
-        "value":-250,
-        "currency":"USD",
+        "userSuppliedId": "transaction-234342",
+        "value": -250,
+        "currency": "USD",
         "nsf": false,
-        "metadata":{
-          "cart":{
-            "total":250,
-            "items":[
+        "metadata": {
+          "cart": {
+            "total": 250,
+            "items": [
               {
-                "id":"B000F34ZKS",
-                "quantity":1,
-                "unit_price":150,
-                "tags":[
+                "id": "B000F34ZKS",
+                "quantity": 1,
+                "unit_price": 150,
+                "tags": [
                   "gear",
                   "outdoor",
                   "clearance"
                 ]
               },
               {
-                "id":"B009L1MF7A",
-                "quantity":2,
-                "unit_price":100,
-                "tags":[
+                "id": "B009L1MF7A",
+                "quantity": 2,
+                "unit_price": 100,
+                "tags": [
                   "apparel",
                   "outdoor"
                 ]
@@ -161,28 +161,28 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/transactions",
       "body": {
-        "userSuppliedId":"transaction-234342",
-        "value":-250,
-        "currency":"USD",
-        "metadata":{
-          "cart":{
-            "total":250,
-            "items":[
+        "userSuppliedId": "transaction-234342",
+        "value": -250,
+        "currency": "USD",
+        "metadata": {
+          "cart": {
+            "total": 250,
+            "items": [
               {
-                "id":"B000F34ZKS",
-                "quantity":1,
-                "unit_price":150,
-                "tags":[
+                "id": "B000F34ZKS",
+                "quantity": 1,
+                "unit_price": 150,
+                "tags": [
                   "gear",
                   "outdoor",
                   "clearance"
                 ]
               },
               {
-                "id":"B009L1MF7A",
-                "quantity":2,
-                "unit_price":100,
-                "tags":[
+                "id": "B009L1MF7A",
+                "quantity": 2,
+                "unit_price": 100,
+                "tags": [
                   "apparel",
                   "outdoor"
                 ]
@@ -197,9 +197,9 @@
       "method": "POST",
       "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/transactions/dryRun",
       "body": {
-        "userSuppliedId":"transaction-234aweras4",
-        "value":-100,
-        "currency":"USD"
+        "userSuppliedId": "transaction-234aweras4",
+        "value": -100,
+        "currency": "USD"
       }
     },
     {
@@ -207,9 +207,9 @@
       "method": "POST",
       "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/transactions",
       "body": {
-        "userSuppliedId":"transaction-234aweras4",
-        "value":-100,
-        "currency":"USD"
+        "userSuppliedId": "transaction-234aweras4",
+        "value": -100,
+        "currency": "USD"
       }
     },
     {
@@ -227,13 +227,13 @@
       "method": "PATCH",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}",
       "body": {
-        "contactId": "{REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}"
+        "contact": "{REQUEST_REPLACEMENT:createContact2.response.body.contact.id}"
       }
     },
     {
       "callId": "getCardsForContact2",
       "method": "GET",
-      "endpoint": "/cards?contactId={REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}"
+      "endpoint": "/cards?contact={REQUEST_REPLACEMENT:createContact2.response.body.contact.id}"
     },
     {
       "callId": "createCardStateChange1",
@@ -284,11 +284,11 @@
       "method": "POST",
       "endpoint": "/cards",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}-account",
-        "cardType":"ACCOUNT_CARD",
-        "contactId":"{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}",
-        "currency":"USD",
-        "initialValue":500
+        "userSuppliedId": "{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}-account",
+        "cardType": "ACCOUNT_CARD",
+        "contactId": "{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}",
+        "currency": "USD",
+        "initialValue": 500
       }
     },
     {
@@ -296,9 +296,9 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions",
       "body": {
-        "userSuppliedId":"transaction-dr67fgig13",
-        "value":-100,
-        "currency":"USD",
+        "userSuppliedId": "transaction-dr67fgig13",
+        "value": -100,
+        "currency": "USD",
         "pending": true
       }
     },
@@ -307,7 +307,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:createPendingTransactionAccountCard.response.body.transaction.transactionId}/capture",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createPendingTransactionAccountCard.response.body.transaction.transactionId}-capture"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:createPendingTransactionAccountCard.response.body.transaction.transactionId}-capture"
       }
     },
     {
@@ -315,7 +315,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:capturePendingTransactionAccountCard.response.body.transaction.transactionId}/refund",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:capturePendingTransactionAccountCard.response.body.transaction.transactionId}-refund"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:capturePendingTransactionAccountCard.response.body.transaction.transactionId}-refund"
       }
     },
     {
@@ -323,9 +323,9 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions",
       "body": {
-        "userSuppliedId":"transaction-a4rwsaw3fds",
-        "value":-100,
-        "currency":"USD",
+        "userSuppliedId": "transaction-a4rwsaw3fds",
+        "value": -100,
+        "currency": "USD",
         "pending": true
       }
     },
@@ -334,7 +334,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:createPendingTransactionToVoidAccountCard.response.body.transaction.transactionId}/void",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createPendingTransactionToVoidAccountCard.response.body.transaction.transactionId}-void"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:createPendingTransactionToVoidAccountCard.response.body.transaction.transactionId}-void"
       }
     },
     {
@@ -342,10 +342,10 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}-promotion1",
+        "userSuppliedId": "{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}-promotion1",
         "currency": "USD",
-        "programId":"{REQUEST_REPLACEMENT:promotion1.response.body.program.programId}",
-        "initialValue":150
+        "programId": "{REQUEST_REPLACEMENT:promotion1.response.body.program.programId}",
+        "initialValue": 150
       }
     },
     {
@@ -353,7 +353,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/freeze",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}-freeze"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}-freeze"
       }
     },
     {
@@ -361,7 +361,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/unfreeze",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:freezePromotionOnAccount.response.body.transaction.transactionId}-Unfreeze"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:freezePromotionOnAccount.response.body.transaction.transactionId}-Unfreeze"
       }
     },
     {
@@ -369,7 +369,7 @@
       "method": "POST",
       "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/valueStores/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.valueStore.valueStoreId}/cancel",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:unfreezePromotionOnAccount.response.body.transaction.transactionId}-cancel"
+        "userSuppliedId": "{REQUEST_REPLACEMENT:unfreezePromotionOnAccount.response.body.transaction.transactionId}-cancel"
       }
     },
     {
@@ -377,7 +377,7 @@
       "method": "POST",
       "endpoint": "/turnkey/giftcard/deliver",
       "body": {
-        "cardId":"{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}",
+        "cardId": "{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}",
         "message": "Hi there, please enjoy this gift.",
         "senderName": "The Rocketship team",
         "recipientEmail": "tim@giftbit.com"

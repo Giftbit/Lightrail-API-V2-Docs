@@ -10,8 +10,8 @@ Create a new Value Store.
     + Attributes
         + valueStoreId (string, required) - {{valueStore.valueStoreId}}
         + programId (string, optional) - Associate with and copy default values from the given Program.
-        + contactId (string, optional) - Associate the Value Store with the given Contact.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `contactId`.
+        + contact (string, optional) - Associate the Value Store with the given Contact ID.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `contact`.
         + currency (string, optional) - {{currency}} Required if `programId` is not set.
         + value (number, optional) - {{valueStore.value}}
         + preTax (boolean, optional) - {{valueStore.preTax}}

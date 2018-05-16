@@ -13,7 +13,7 @@ Create a new Account/Points Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - {{valueStore.access.description}}
-            + `contactId` - {{valueStore.access.types.contactId}}
+            + `contact` - {{valueStore.access.types.contact}}
         + active (boolean, optional) - {{valueStore.active}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
@@ -24,7 +24,7 @@ Create a new Account/Points Program.
                 "programId": "contact-accounts-usd",
                 "name": "Accounts USD",
                 "currency": "USD",
-                "access": "contactId",
+                "access": "contact",
                 "tags": ["account"]
             }
     
@@ -37,7 +37,7 @@ Create a new Account/Points Program.
                 "programId": "contact-accounts-usd",
                 "name": "Accounts USD",
                 "currency": "USD",
-                "access": "contactId",
+                "access": "contact",
                 "discount": "false",
                 "preTax": "false",
                 "active": "true",

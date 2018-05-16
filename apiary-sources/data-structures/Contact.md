@@ -1,5 +1,5 @@
 ## Contact (object)
-+ contactId (string, required) - {{contact.contactId}}
++ id (string, required) - {{contact.id}}
 + firstName (string, optional) - {{contact.firstName}}
 + lastName (string, optional) - {{contact.lastName}}
 + email (string, optional) - {{contact.email}}

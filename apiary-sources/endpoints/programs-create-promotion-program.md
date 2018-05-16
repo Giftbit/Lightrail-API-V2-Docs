@@ -13,7 +13,7 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency}}
         + access (enum[string], required) - {{valueStore.access.description}}
-            + `contactId` - {{valueStore.access.types.contactId}}
+            + `contact` - {{valueStore.access.types.contact}}
             + `secureCode` - {{valueStore.access.types.secureCode}}
             + `publicCode` - {{valueStore.access.types.publicCode}}          
         + active (boolean, optional) - {{valueStore.active}}

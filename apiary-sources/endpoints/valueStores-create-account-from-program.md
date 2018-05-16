@@ -18,7 +18,7 @@
             {
                 "valueStoreId": "vs-1",
                 "programId": "contact-accounts-usd",
-                "contactId": "cus_123",
+                "contact": "cus_123",
                 "value": 2500
             }
     

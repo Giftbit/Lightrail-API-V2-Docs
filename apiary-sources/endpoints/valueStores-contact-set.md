@@ -10,12 +10,12 @@ Set a Value Store's Contact.
             {{header.authorization}}
 
     + Attributes
-        + contactId (string, required) - The contactId to set as the Contact owning the Value Store.
+        + contact (string, required) - The ID of the Contact who should be associated with the Value Store.
         
     + Body
     
             {
-                "contactId": "unique-id-123"
+                "contact": "unique-id-123"
             }
 
 + Parameter
@@ -27,7 +27,7 @@ Set a Value Store's Contact.
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "contact": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

@@ -34,7 +34,7 @@ Get multiple Contacts.
 
             [
                 {
-                    "contactId": "unique-id-123",
+                    "id": "unique-id-123",
                     "firstName": "Jeffrey",
                     "lastName": "Lebowski",
                     "email": "thedude@example.com",
@@ -47,9 +47,9 @@ Get multiple Contacts.
                 }
             ]
 
-### Get Contact [GET /contacts/{contactId}]
+### Get Contact [GET /contacts/{id}]
 
-Get Contact by contactId.
+Get Contact by ID.
 
 ---
 
@@ -59,7 +59,7 @@ Get Contact by contactId.
             {{header.authorization}}
 
 + Parameter
-    + contactId (string) - the contactId of the Contact to get.
+    + id (string) - the ID of the Contact to get.
 
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -67,7 +67,7 @@ Get Contact by contactId.
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

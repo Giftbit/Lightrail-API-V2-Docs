@@ -3,7 +3,7 @@
 + name (string, optional) - {{program.name}}
 + currency (string, required) - {{currency}}
 + access (enum[string], required) - How the valueStores can be accessed.
-    + `contactId` - must be associated with a contactId.
+    + `contact` - must be associated with a Contact.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
 + discount (boolean, required) - {{valueStore.discount}}
