@@ -1,9 +1,6 @@
 ### Get Currencies [GET /currencies]
 
-Get all the Currencies.
-
----
-+ Request (application/json)
++ Request
     + Headers
     
             {{header.authorization}}
@@ -22,13 +19,9 @@ Get all the Currencies.
                 }
             ]
 
-### Get Currency [GET /currencies/{code}]
+### Get a Currency [GET /currencies/{code}]
 
-Get Currency by code.
-
----
-
-+ Request (application/json)
++ Request
     + Headers
     
             {{header.authorization}}

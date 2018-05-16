@@ -1,7 +1,7 @@
 ## Value (object)
 + id (string, required) - {{value.id}}
 + programId (string, optional) - {{value.programId}}
-+ currency (string, required) - {{currency}}
++ currency (string, required) - {{currency.code}}
 + balance (number, optional) - {{value.balance}}
 + discount (boolean, optional) - {{value.discount}}
 + preTax (boolean, optional) - {{value.preTax}}

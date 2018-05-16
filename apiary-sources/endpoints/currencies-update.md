@@ -1,11 +1,12 @@
 ### Update a Currency [PATCH /currencies/{code}]
 
-Update fields that are sent and leave unspecified values at their default.
-
 + Parameter
     + code (string) - the code of the Currency to modify.
 
 + Request (application/merge-patch+json)
+
+    {{patch.merge}}
+
     + Headers
     
             {{header.authorization}}

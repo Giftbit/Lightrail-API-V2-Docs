@@ -245,7 +245,7 @@ Create a new Program.
     + Attributes
         + programId (string, required) - Unique idempotent ID for the Program.
         + name (string, optional) - A human-readable name for the Program.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + access (enum[string], required) - How the values can be accessed
             + `customerId` - must be associated with a customerId.
             + `secureCode` - a code is generated or supplied and is stored securely.
@@ -513,7 +513,7 @@ Create a new Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
-        + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`. Required if `programId` is not set.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
@@ -914,7 +914,7 @@ Data used in example:
 
     + Attributes
         + id (string, required) - Unique idempotent ID for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
@@ -1118,7 +1118,7 @@ Currently only the `lightrail` payment rail is supported.
         + id (string, required) - Unique idempotent ID for the Transaction.
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1183,7 +1183,7 @@ Currently only the `lightrail` payment rail is supported.
         + id (string, required) - Unique idempotent ID for the Transaction.
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
@@ -1248,7 +1248,7 @@ Currently only the `lightrail` payment rail is supported.
         + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1277,7 +1277,7 @@ Currently only the `lightrail` payment rail is supported.
     + Attributes
         + id (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of balance that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
@@ -1501,24 +1501,20 @@ Void a pending Transaction by id.
 
 ## Currencies [/currencies/]
 
-Currencies that can be used in Values and Programs.  Currency codes can be up to 16 characters in length.
+A Currency is a unit of money in the system.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
 
----
 ### Create a Currency [POST /currencies]
 
-Create a new Currency.
-
----
 + Request (application/json)
     + Headers
     
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + code (string, required) - 
-        + name (string, required) - 
-        + symbol (number, required) - 
-        + decimalPlaces (number, required) - 
+        + code (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + name (string, required) - Long name for the currency, eg: `Dollars`.
+        + symbol (number, required) - Currency symbol used for formatting, eg: `$`.
+        + decimalPlaces (number, required) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
     + Body
 
@@ -1542,21 +1538,22 @@ Create a new Currency.
             }
 ### Update a Currency [PATCH /currencies/{code}]
 
-Update fields that are sent and leave unspecified values at their default.
-
 + Parameter
     + code (string) - the code of the Currency to modify.
 
 + Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, optional) -  If present must match the code in the path.
-        + name (string, optional) - 
-        + symbol (string, optional) - 
-        + decimalPlaces (number, optional) - 
+        + code (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. If present must match the code in the path.
+        + name (string, optional) - Long name for the currency, eg: `Dollars`.
+        + symbol (string, optional) - Currency symbol used for formatting, eg: `$`.
+        + decimalPlaces (number, optional) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
         
     + Body
     
@@ -1576,15 +1573,9 @@ Update fields that are sent and leave unspecified values at their default.
                 "symbol": "Z$",
                 "decimalPlaces": 2
             }
-### Delete Currency [DELETE /currencies/{code}]
+### Delete a Currency [DELETE /currencies/{code}]
 
-Delete a Currency by code.
-
-The Currency can only be deleted if it is not used by any Values or Programs.
-
----
-
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1593,18 +1584,27 @@ The Currency can only be deleted if it is not used by any Values or Programs.
     + code (string) - the code of the Currency to delete.
 
 + Response 200 (application/json)
-
+    
     + Body
 
             {
                 "success": true
             }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Currency that is in use.  If the Currency is referenced a Value or Program those objects would need to be deleted first.  If the Currency is referenced by a Transaction it cannot be deleted because Transactions cannot be deleted.  Currencies in use can still be updated.
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Currency 'USD' is in use.",
+                "messageCode": "CurrencyInUse"
+            }
 ### Get Currencies [GET /currencies]
 
-Get all the Currencies.
-
----
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1623,13 +1623,9 @@ Get all the Currencies.
                 }
             ]
 
-### Get Currency [GET /currencies/{code}]
+### Get a Currency [GET /currencies/{code}]
 
-Get Currency by code.
-
----
-
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1652,10 +1648,10 @@ Get Currency by code.
 # Data Structures
 
 ## Currency (object)
-+ code (string, required) - 
-+ name (number, required) - 
-+ symbol (number, required) - 
-+ decimalPlaces (number, required) - 
++ code (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
++ name (number, required) - Long name for the currency, eg: `Dollars`.
++ symbol (number, required) - Currency symbol used for formatting, eg: `$`.
++ decimalPlaces (number, required) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
 ## Customer (object)
 + customerId (string, required) - Unique idempotent ID for the Customer.
@@ -1698,7 +1694,7 @@ Get Currency by code.
 ## Program (object)
 + programId (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + access (enum[string], required) - How the values can be accessed.
     + `customerId` - must be associated with a customerId.
     + `secureCode` - a code is generated or supplied and is stored securely.
@@ -1724,7 +1720,7 @@ Get Currency by code.
 ## Transaction (object)
 + id (string, required) - Unique idempotent ID for the Transaction.
 + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep], required) - An array of transaction steps.
 + remainder (number, required) - The remainder of balance that could not be debited.
 + simulated (boolean, optional) - True if the transaction was simulated.
@@ -1776,7 +1772,7 @@ A step taken as part of the transaction.
 ## Value (object)
 + id (string, required) - Unique idempotent id for the Value.
 + programId (string, optional) - The programId of the Program this Value is in.
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
 + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.

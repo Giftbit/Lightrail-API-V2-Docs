@@ -15,7 +15,7 @@ Currently only the `lightrail` payment rail is supported.
         + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + pending (boolean, optional) - {{transaction.pending}}
@@ -44,7 +44,7 @@ Currently only the `lightrail` payment rail is supported.
     + Attributes
         + id (string, required) - {{transaction.id}}
         + transactionType (string, required) - `transfer`
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - {{transaction.remainder}}
         + simulated (boolean, optional) - {{transaction.simulated}}

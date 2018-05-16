@@ -11,7 +11,7 @@ Create a new Program.
     + Attributes
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
             + `customerId` - {{value.access.types.customerId}}
             + `secureCode` - {{value.access.types.secureCode}}

@@ -14,7 +14,7 @@ Currently only the `lightrail` payment rail is supported.
         + id (string, required) - {{transaction.id}}
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}

@@ -24,7 +24,7 @@ Data used in example:
 
     + Attributes
         + id (string, required) - {{transaction.id}}
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
         + simulate (boolean, optional) - {{transaction.simulate}}

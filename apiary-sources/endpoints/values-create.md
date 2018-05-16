@@ -12,7 +12,7 @@ Create a new Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
-        + currency (string, optional) - {{currency}} Required if `programId` is not set.
+        + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
