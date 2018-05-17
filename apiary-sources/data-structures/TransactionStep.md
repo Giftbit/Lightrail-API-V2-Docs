@@ -6,7 +6,7 @@ A step taken as part of the transaction.
 + rail (string, required) - `lightrail`
 + id (string, required) - the id of the Value transacted with.
 + currency (string, required) - the currency of the Value transacted with.
-+ contactId (string, optional) - the contactId of the Contact associated with the Value.
++ contact (string, optional) - the ID of the Contact associated with the Value.
 + code (string, optional) - {{value.code}}.
 + balanceBefore (number, required) - the balance of the Value before the transaction.
 + balanceAfter (number, required) - the balance of the Value after the transaction.

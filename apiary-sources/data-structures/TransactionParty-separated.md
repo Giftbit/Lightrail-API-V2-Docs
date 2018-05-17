@@ -10,10 +10,10 @@ A partner in the transaction; either a source or a destination for value.  Some 
 + rail (string, required) - `lightrail`
 + code (string, required) - the Value's code to transact with.
 
-## LightrailContactIdTransactionParty (TransactionParty)
+## LightrailContactTransactionParty (TransactionParty)
 This refers to *all* Values associated with the contact.
 + rail (string, required) - `lightrail`
-+ contactId (string, required) - the Contact's contactId.
++ contact (string, required) - the Contact's ID.
 
 ## StripeTransactionParty (TransactionParty)
 + rail (string, required) - `stripe`

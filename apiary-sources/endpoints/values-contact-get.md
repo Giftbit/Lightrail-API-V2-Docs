@@ -14,7 +14,7 @@
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

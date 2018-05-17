@@ -13,7 +13,7 @@ Create a new Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
-            + `contactId` - {{value.access.types.contactId}}
+            + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
             + `publicCode` - {{value.access.types.publicCode}}
         + discount (boolean, optional) - {{value.discount}}

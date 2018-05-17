@@ -1,6 +1,6 @@
 ## Contacts [/contacts/]
 
-Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `contactId`.
+Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
 
 ---
 {% include 'endpoints/contacts-create.md' %}

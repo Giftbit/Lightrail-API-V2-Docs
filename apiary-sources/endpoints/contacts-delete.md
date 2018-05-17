@@ -1,6 +1,6 @@
-### Delete Contact [DELETE /contacts/{contactId}]
+### Delete Contact [DELETE /contacts/{id}]
 
-Delete a Contact by contactId.
+Delete a Contact by ID.
 
 The Contact can only be deleted if it is not associated with any Values.
 
@@ -12,7 +12,7 @@ The Contact can only be deleted if it is not associated with any Values.
             {{header.authorization}}
 
 + Parameter
-    + contactId (string) - the contactId of the Contact to delete.
+    + id (string) - the ID of the Contact to delete.
 
 + Response 200 (application/json)
 

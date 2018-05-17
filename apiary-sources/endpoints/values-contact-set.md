@@ -6,12 +6,12 @@
             {{header.authorization}}
 
     + Attributes
-        + contactId (string, required) - The contactId to set as the Contact owning the Value.
+        + contact (string, required) - The ID of the Contact to set as owner of the Value.
         
     + Body
     
             {
-                "contactId": "unique-id-123"
+                "contact": "unique-id-123"
             }
 
 + Parameter
@@ -23,7 +23,7 @@
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "contact": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

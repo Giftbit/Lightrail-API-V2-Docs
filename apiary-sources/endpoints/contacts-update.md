@@ -1,4 +1,4 @@
-### Update Contact [PUT /contacts/{contactId}]
+### Update Contact [PUT /contacts/{id}]
 
 Update fields that are sent and leave unspecified values unchanged.
 
@@ -9,7 +9,7 @@ Update fields that are sent and leave unspecified values unchanged.
             {{header.authorization}}
         
     + Attributes
-        + contactId (string, required) - {{contact.contactId}}
+        + id (string, required) - {{contact.id}}
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
@@ -25,7 +25,7 @@ Update fields that are sent and leave unspecified values unchanged.
             }
             
 + Parameter
-    + contactId (string) - the contactId of the Contact to update.
+    + id (string) - the ID of the Contact to update.
     
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -33,7 +33,7 @@ Update fields that are sent and leave unspecified values unchanged.
     + Body
             
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

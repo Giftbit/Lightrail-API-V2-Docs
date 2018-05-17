@@ -9,7 +9,7 @@ Create a new Contact.
             {{header.authorization}}
         
     + Attributes
-        + contactId (string, required) - {{contact.contactId}}
+        + id (string, required) - {{contact.id}}
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
@@ -19,7 +19,7 @@ Create a new Contact.
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -34,7 +34,7 @@ Create a new Contact.
     + Body
             
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",'

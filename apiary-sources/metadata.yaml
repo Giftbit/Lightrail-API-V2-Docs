@@ -6,7 +6,7 @@ currency:
   symbol: "Currency symbol used for formatting, eg: `$`."
 contact:
   createdDate: "ISO date for when the Contact was created."
-  contactId: "Unique idempotent ID for the Contact."
+  id: "Unique idempotent ID for the Contact."
   email: "The Contact's email."
   firstName: "The Contact's first name."
   lastName: "The Contact's last name."
@@ -75,6 +75,6 @@ value:
   access:
     description: "How the values can be accessed"
     types:
-      contactId: "must be associated with a contactId."
+      contact: "must be associated with a Contact by ID."
       secureCode: "a code is generated or supplied and is stored securely."
       publicCode: "a code is generated or supplied and can be displayed."
