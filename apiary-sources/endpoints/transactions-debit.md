@@ -1,11 +1,9 @@
 ### Debit [POST /transactions/debit]
 
-Debit (remove value from) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             {{header.authorization}}

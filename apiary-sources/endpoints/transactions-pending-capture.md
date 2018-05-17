@@ -1,9 +1,5 @@
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
 
-Capture a pending Transaction by id.
-
----
-
 + Request (application/json)
     + Headers
     

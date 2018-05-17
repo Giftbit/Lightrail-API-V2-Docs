@@ -3,7 +3,7 @@ HOST: https://api.lightrail.com/v2/
 
 # Lightrail Documentation
 
-Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage contact account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
+Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution. 
 
 You are viewing the reference api documentation. For an overview and detailed use case examples please view our [docs home](https://localhost:8181/docs/).
 
@@ -23,12 +23,9 @@ Authorization: Bearer <API_KEY>
 
 Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
 
----
+
 ### Create Contact [POST /contacts]
 
-Create a new Contact.
-
----
 + Request (application/json)
     + Headers
     
@@ -73,10 +70,10 @@ Create a new Contact.
             }
 ### Update Contact [PUT /contacts/{id}]
 
-Update fields that are sent and leave unspecified values unchanged.
-
----
 + Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -119,12 +116,6 @@ Update fields that are sent and leave unspecified values unchanged.
             }
 ### Delete Contact [DELETE /contacts/{id}]
 
-Delete a Contact by ID.
-
-The Contact can only be deleted if it is not associated with any Values.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -140,11 +131,20 @@ The Contact can only be deleted if it is not associated with any Values.
             {
                 "success": true
             }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Contact that is associated with one or more Values. Values that are associated with the Contact would need to be deleted first. 
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Contact 'unique-id-123' is in use",
+                "messageCode": "ContactInUse"
+            }
 ### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Contacts.
-
----
 + Request (application/json)
     + Headers
     
@@ -191,10 +191,6 @@ Get multiple Contacts.
 
 ### Get Contact [GET /contacts/{id}]
 
-Get Contact by ID.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -220,12 +216,9 @@ Get Contact by ID.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
----
+
 ### Create Account for Contact [POST /contacts/{id}/values/accounts]
 
-Create a new Account for a Contact
-
----
 + Request (application/json)
     + Headers
     
@@ -243,13 +236,13 @@ Create a new Account for a Contact
     + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
     + metadata (number, optional) - Arbitrary data associated with the Value.
     
-+ Body
-
-        {
-            "id": "cust-123-acc-1",
-            "currency": "USD",
-            "balance": 2500
-        }
+    + Body
+    
+            {
+                "id": "cust-123-acc-1",
+                "currency": "USD",
+                "balance": 2500
+            }
 
 
 + Response 200 (application/json)
@@ -278,9 +271,6 @@ Create a new Account for a Contact
             ]
 ### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
 
-Get all Values of type Account associated with a Contact.
-
----
 + Request (application/json)
     + Headers
 
@@ -315,13 +305,10 @@ Get all Values of type Account associated with a Contact.
             ]
 ### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
 
-Get all Values of type GiftCard associated with a Contact.
-
----
 + Request (application/json)
   + Headers
 
-          Authorization: Bearer <API_KEY>
+            Authorization: Bearer <API_KEY>
 
 + Parameter
   + id (string) - the ID of the Contact whose gift cards should be retrieved.
@@ -331,7 +318,7 @@ Get all Values of type GiftCard associated with a Contact.
 
   + Body
 
-          [
+            [
               {
                   "id": "gift-1",
                   "programId": "giftcards",
@@ -349,12 +336,9 @@ Get all Values of type GiftCard associated with a Contact.
                   "createdDate": "2018-04-17T23:20:08.404Z",
                   "updatedDate": "2018-04-17T23:20:08.404Z"
               }
-          ]
+            ]
 ### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
 
-Get all Values of type Promotion associated with a Contact.
-
----
 + Request (application/json)
     + Headers
 
@@ -389,9 +373,6 @@ Get all Values of type Promotion associated with a Contact.
             ]
 ### Get Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
 
-Get all Values associated with a Contact.
-
----
 + Request (application/json)
     + Headers
 
@@ -456,9 +437,6 @@ See [here](https://localhost:8181/docs/) to see examples of how you'd create a P
 ---
 ### Create Program [POST /programs]
 
-Create a new Program.
-
----
 + Request (application/json)
     + Headers
     
@@ -610,9 +588,6 @@ The Program can only be deleted if it is not associated with any Values.
 
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Programs.
-
----
 + Request (application/json)
     + Headers
     
@@ -674,10 +649,6 @@ Get multiple Programs.
             ]
 
 ### Get Program [GET /programs/{programId}]
-
-Get Program by programId
-
----
 
 + Request (application/json)
     + Headers
@@ -1293,12 +1264,10 @@ Data used in example:
 
 ### Debit [POST /transactions/debit]
 
-Debit (remove value from) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1358,12 +1327,10 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Credit [POST /transactions/credit]
 
-Credit (add value to) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1422,12 +1389,10 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Transfer [POST /transactions/transfer]
 
-Transfer balance from one Value to another.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1508,9 +1473,6 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
-Get multiple Transactions.
-
----
 + Request (application/json)
     + Headers
     
@@ -1562,10 +1524,6 @@ Get multiple Transactions.
 
 ### Get Transaction [GET /transactions/{id}]
 
-Get Transaction by id.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -1603,10 +1561,6 @@ Get Transaction by id.
             }
 
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
-
-Capture a pending Transaction by id.
-
----
 
 + Request (application/json)
     + Headers
@@ -1646,10 +1600,6 @@ Capture a pending Transaction by id.
             }
 
 ### Void Pending Transaction [POST /transactions/{id}/void]
-
-Void a pending Transaction by id.
-
----
 
 + Request (application/json)
     + Headers

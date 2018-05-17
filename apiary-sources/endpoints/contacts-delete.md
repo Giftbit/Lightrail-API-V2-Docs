@@ -1,11 +1,5 @@
 ### Delete Contact [DELETE /contacts/{id}]
 
-Delete a Contact by ID.
-
-The Contact can only be deleted if it is not associated with any Values.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -20,4 +14,16 @@ The Contact can only be deleted if it is not associated with any Values.
 
             {
                 "success": true
+            }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Contact that is associated with one or more Values. Values that are associated with the Contact would need to be deleted first. 
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Contact 'unique-id-123' is in use",
+                "messageCode": "ContactInUse"
             }

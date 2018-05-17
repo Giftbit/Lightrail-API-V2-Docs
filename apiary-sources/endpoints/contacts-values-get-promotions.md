@@ -1,8 +1,5 @@
 ### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
 
-Get all Values of type Promotion associated with a Contact.
-
----
 + Request (application/json)
     + Headers
 

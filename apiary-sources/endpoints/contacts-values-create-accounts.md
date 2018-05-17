@@ -1,8 +1,5 @@
 ### Create Account for Contact [POST /contacts/{id}/values/accounts]
 
-Create a new Account for a Contact
-
----
 + Request (application/json)
     + Headers
     
@@ -20,13 +17,13 @@ Create a new Account for a Contact
     + frozen (boolean, optional) - {{value.frozen}}
     + metadata (number, optional) - {{value.metadata}}
     
-+ Body
-
-        {
-            "id": "cust-123-acc-1",
-            "currency": "USD",
-            "balance": 2500
-        }
+    + Body
+    
+            {
+                "id": "cust-123-acc-1",
+                "currency": "USD",
+                "balance": 2500
+            }
 
 
 + Response 200 (application/json)

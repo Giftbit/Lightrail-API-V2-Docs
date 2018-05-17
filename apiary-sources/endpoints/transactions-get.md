@@ -1,8 +1,5 @@
 ### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
-Get multiple Transactions.
-
----
 + Request (application/json)
     + Headers
     
@@ -53,10 +50,6 @@ Get multiple Transactions.
             ]
 
 ### Get Transaction [GET /transactions/{id}]
-
-Get Transaction by id.
-
----
 
 + Request (application/json)
     + Headers

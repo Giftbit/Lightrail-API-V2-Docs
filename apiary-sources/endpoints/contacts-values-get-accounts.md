@@ -1,8 +1,5 @@
 ### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
 
-Get all Values of type Account associated with a Contact.
-
----
 + Request (application/json)
     + Headers
 

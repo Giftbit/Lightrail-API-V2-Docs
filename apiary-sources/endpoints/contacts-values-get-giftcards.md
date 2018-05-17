@@ -1,12 +1,9 @@
 ### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
 
-Get all Values of type GiftCard associated with a Contact.
-
----
 + Request (application/json)
   + Headers
 
-          {{header.authorization}}
+            {{header.authorization}}
 
 + Parameter
   + id (string) - the ID of the Contact whose gift cards should be retrieved.
@@ -16,7 +13,7 @@ Get all Values of type GiftCard associated with a Contact.
 
   + Body
 
-          [
+            [
               {
                   "id": "gift-1",
                   "programId": "giftcards",
@@ -34,4 +31,4 @@ Get all Values of type GiftCard associated with a Contact.
                   "createdDate": "2018-04-17T23:20:08.404Z",
                   "updatedDate": "2018-04-17T23:20:08.404Z"
               }
-          ]
+            ]

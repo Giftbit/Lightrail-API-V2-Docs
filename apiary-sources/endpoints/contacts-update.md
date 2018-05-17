@@ -1,9 +1,9 @@
 ### Update Contact [PUT /contacts/{id}]
 
-Update fields that are sent and leave unspecified values unchanged.
-
----
 + Request (application/json)
+
+    {{patch.merge}}
+
     + Headers
     
             {{header.authorization}}

@@ -1,8 +1,5 @@
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Programs.
-
----
 + Request (application/json)
     + Headers
     
@@ -64,10 +61,6 @@ Get multiple Programs.
             ]
 
 ### Get Program [GET /programs/{programId}]
-
-Get Program by programId
-
----
 
 + Request (application/json)
     + Headers

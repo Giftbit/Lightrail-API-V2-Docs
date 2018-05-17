@@ -1,8 +1,5 @@
 ### Create Account/Points Program [POST /programs]
 
-Create a new Account/Points Program.
-
----
 + Request (application/json)
     + Headers
     

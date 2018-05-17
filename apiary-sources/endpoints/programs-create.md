@@ -1,8 +1,5 @@
 ### Create Program [POST /programs]
 
-Create a new Program.
-
----
 + Request (application/json)
     + Headers
     

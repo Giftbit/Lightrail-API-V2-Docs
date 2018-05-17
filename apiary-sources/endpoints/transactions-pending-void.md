@@ -1,9 +1,5 @@
 ### Void Pending Transaction [POST /transactions/{id}/void]
 
-Void a pending Transaction by id.
-
----
-
 + Request (application/json)
     + Headers
     

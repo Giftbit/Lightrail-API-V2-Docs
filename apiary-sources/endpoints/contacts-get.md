@@ -1,8 +1,5 @@
 ### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Contacts.
-
----
 + Request (application/json)
     + Headers
     
@@ -48,10 +45,6 @@ Get multiple Contacts.
             ]
 
 ### Get Contact [GET /contacts/{id}]
-
-Get Contact by ID.
-
----
 
 + Request (application/json)
     + Headers
