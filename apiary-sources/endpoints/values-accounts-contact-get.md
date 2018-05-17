@@ -1,21 +1,12 @@
-### Set a Promotion Value's Contact [PUT /values/promotion/{id}/contact]
+### Get an Account's Contact [GET /values/promotions/{id}/contact]
 
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
 
-    + Attributes
-        + id (string, required) - The id of the Contact to set as owner of the Value.
-        
-    + Body
-    
-            {
-                "contact": "unique-id-123"
-            }
-
 + Parameter
-    + id (string) - the id of the Value to set the Contact of.
+    + id (string) - the id of the Account to get the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Contact)

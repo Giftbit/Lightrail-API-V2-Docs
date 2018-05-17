@@ -10,5 +10,4 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 {% include 'endpoints/values-promotions-code-set.md' %}
 {% include 'endpoints/values-promotions-code-delete.md' %}
 {% include 'endpoints/values-promotions-contact-get.md' %}
-{% include 'endpoints/values-promotions-contact-set.md' %}
 {% include 'endpoints/values-promotions-contact-delete.md' %}
