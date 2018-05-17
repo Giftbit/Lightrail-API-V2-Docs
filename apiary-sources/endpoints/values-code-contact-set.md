@@ -1,4 +1,4 @@
-### Set a Value's customer by code [PUT /values/code/{code}/customer]
+### Set a Value's Contact by code [PUT /values/code/{code}/contact]
 
 + Request (application/json)
     + Headers
@@ -6,19 +6,19 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - The id of the Customer to set as owner of the Value.
+        + id (string, required) - The id of the Contact to set as owner of the Value.
         
     + Body
     
             {
-                "id": "unique-id-123"
+                "contact": "unique-id-123"
             }
 
 + Parameter
-    + code (string) - the code of the Value to set the Customer of.
+    + code (string) - the code of the Value to set the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 

@@ -1,4 +1,4 @@
-## Values [/values/accounts]
+## Accounts [/values/accounts]
 
 An Account is Value specifically tied to a Contact.
 

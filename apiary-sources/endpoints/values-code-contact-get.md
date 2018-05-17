@@ -1,4 +1,4 @@
-### Get a Value's customer by code [GET /values/code/{code}/customer]
+### Get a Value's Contact by code [GET /values/code/{code}/contact]
 
 + Request (application/json)
     + Headers
@@ -6,10 +6,10 @@
             {{header.authorization}}
 
 + Parameter
-    + code (string) - the code of the Value to get the Customer of.
+    + code (string) - the code of the Value to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 

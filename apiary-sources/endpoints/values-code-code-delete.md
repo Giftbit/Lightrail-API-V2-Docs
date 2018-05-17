@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the code of the Value to delete the code of.
+    + code (string) - the code of the Value to delete the code of.
 
 + Response 200 (application/json)
 

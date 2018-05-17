@@ -689,9 +689,293 @@ The Program can only be deleted if it is not associated with any Values.
 
 ## Values [/values]
 
-Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Contact.
+A Value (naturally) represents value in the Lightrail system.  It can be a giftcard, a promotion or an account.
 
-### Create a Value [POST /values]
+### Get Values [GET /values{?limit}{?offset}{?type}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + type (string, optional) - Filter by Value type.
+    + programId (string, optional) - Filter by programId.
+    + currency (string, optional) - Filter by currency.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
+    + active (boolean, optional) - Filter active/inactive.
+    + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + minUses (number, optional) - Filter by minimum uses, inclusive.
+    + maxUses (number, optional) - Filter by maximum uses, inclusive.
+    + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by he maximum endDate, inclusive.
+    + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
+    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "giftcard",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+
+## Accounts [/values/accounts]
+
+An Account is Value specifically tied to a Contact.
+
+### Create an Account [POST /values/accounts]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, required) - Unique idempotent id for the Value.
+        + contact (string, required) - Associate the Value with the given Contact.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "id": "account-1",
+                "contact": "contact-jeff-2",
+                "currency": "USD"
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+    
+            {
+                "id": "account-1",
+                "type": "account",
+                "programId": null,
+                "currency": "USD",
+                "balance": 0, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Update an Account [PATCH /values/account/{id}]
+
++ Parameter
+    + id (string) - the id of the Account to modify.
+
++ Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, optional) - Unique idempotent id for the Value.  If present must match the id in the path.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "frozen": true
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+    
+            {
+                "id": "account-1",
+                "type": "account",
+                "programId": null,
+                "currency": "USD",
+                "balance": 0, 
+                "preTax": false,
+                "active": true,
+                "frozen": true,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Delete an Account [DELETE /values/accounts/{id}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Account to delete.
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+                "success": true
+            }
+
++ Response 409 (application/json)
+
+    Attempting to delete an Account that has been used in a Transaction.
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Value 'abc123' is in use.",
+                "messageCode": "ValueInUse"
+            }
+### Get Accounts [GET /values/accounts/{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + programId (string, optional) - Filter by programId.
+    + currency (string, optional) - Filter by currency.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
+    + active (boolean, optional) - Filter active/inactive.
+    + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by he maximum endDate, inclusive.
+    + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
+    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "account-1",
+                    "type": "account",
+                    "programId": null,
+                    "currency": "USD",
+                    "balance": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+
+### Get an Account [GET /values/accounts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Account to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "account-1",
+                "type": "account",
+                "programId": null,
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+## Giftcards [/values/giftcards]
+
+A Giftcard is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Giftcard can be used anonymously or claimed and attached to a Contact for later use.
+
+### Create a Giftcard [POST /values/giftcards]
 
 + Request (application/json)
     + Headers
@@ -731,6 +1015,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
     
             {
                 "id": "vs-1",
+                "type": "giftcards",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -746,11 +1031,10 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-
-### Update a Value [PATCH /values/{id}]
+### Update a Giftcard [PATCH /values/giftcards/{id}]
 
 + Parameter
-    + id (string) - the id of the Value to modify.
+    + id (string) - the id of the Giftcard to modify.
 
 + Request (application/merge-patch+json)
 
@@ -785,6 +1069,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
     
             {
                 "id": "vs-1",
+                "type": "giftcard",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -800,8 +1085,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -843,6 +1127,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             [
                 {
                     "id": "vs-1",
+                    "type": "giftcard",
                     "programId": "giftcards",
                     "currency": "USD",
                     "balance": 2500, 
@@ -860,7 +1145,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 }
             ]
 
-### Get Value [GET /values/{id}]
+### Get a Gfitcard [GET /values/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -868,7 +1153,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to get.
+    + id (string) - the id of the Gfitcard to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -877,6 +1162,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
 
             {
                 "id": "vs-1",
+                "type": "giftcard",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
@@ -892,8 +1178,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-
-### Get Value Code [GET /values/{id}/code]
+### Get a Giftcard's code [GET /values/giftcards/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -901,7 +1186,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to get the code of.
+    + id (string) - the id of the Giftcard to get the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -910,10 +1195,9 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
     + Body
 
             {
-                "code": "BLACKFRIDAY20%"
+                "code": "…JM4G"
             }
-
-### Set Value Code [PUT /values/{id}/code]
+### Set a Giftcard's code [PUT /values/giftcard/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -932,7 +1216,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             }
 
 + Parameter
-    + id (string) - the id of the Value to update the code of.
+    + id (string) - the id of the Giftcard to update the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -943,8 +1227,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             {
                 "code": "…e1b1"
             }
-
-### Delete Value Code [DELETE /values/{id}/code]
+### Delete a Giftcard's code [DELETE /values/giftcards/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -952,7 +1235,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to delete the code of.
+    + id (string) - the id of the Giftcard to delete the code of.
 
 + Response 200 (application/json)
 
@@ -961,8 +1244,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             {
                 "success": true
             }
-
-### Get Value's Contact [GET /values/{id}/contact]
+### Get a Giftcard's Contact [GET /values/giftcards/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -970,7 +1252,42 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to get the Contact of.
+    + id (string) - the id of the Giftcard to get the Contact of.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Set a Giftcard's Contact [PUT /values/giftcard/{id}/contact]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + contact (string, required) - The id of the Contact to set as owner of the Giftcard.
+        
+    + Body
+    
+            {
+                "contact": "unique-id-123"
+            }
+
++ Parameter
+    + id (string) - the id of the Giftcard to set the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -988,8 +1305,32 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+### Delete a Giftcard's Contact [DELETE /values/giftcards/{id}/contact]
 
-### Set Value Contact [PUT /values/{id}/contact]
++ Request (application/json)
+
+    Remove the Contact as the owner of a Giftcard.  The Contact's info is not deleted.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Giftcard to remove the Contact from.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+
+## Promotions [/values/promotions]
+
+A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied to orders automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
+
+### Create a Promotion Value [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -997,7 +1338,331 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + contact (string, required) - The ID of the Contact to set as owner of the Value.
+        + id (string, required) - Unique idempotent id for the Value.
+        + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
+        + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
+        + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "id": "vs-1",
+                "programId": "springpromo",
+                "currency": "USD",
+                "balance": 2500
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+    
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "programId": "springpromo",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Update a Promotion Value [PATCH /values/promotions/{id}]
+
++ Parameter
+    + id (string) - the id of the Promotion to modify.
+
++ Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, optional) - Unique idempotent id for the Value.  If present must match the id in the path.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "frozen": true
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+    
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "programId": "springpromo",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": true,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Delete a Promotion Value [DELETE /values/promotions/{id}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to delete.
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+                "success": true
+            }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Promotion that has been used in a Transaction.
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Value 'abc123' is in use.",
+                "messageCode": "ValueInUse"
+            }
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + programId (string, optional) - Filter by programId.
+    + currency (string, optional) - Filter by currency.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
+    + active (boolean, optional) - Filter active/inactive.
+    + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + minUses (number, optional) - Filter by minimum uses, inclusive.
+    + maxUses (number, optional) - Filter by maximum uses, inclusive.
+    + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by he maximum endDate, inclusive.
+    + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
+    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
+    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "promotion"
+                    "programId": "springpromo",
+                    "currency": "USD",
+                    "balance": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+
+### Get a Promotion Value [GET /values/promotions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "programId": "springpromo",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Get a Promotion Value's code [GET /values/promotions/{id}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to get the code of.
+
++ Response 200 (application/json)
+    + Attributes
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
+
+    + Body
+
+            {
+                "code": "BLACKFRIDAY2077"
+            }
+### Set a Promotion Value's code [PUT /values/promotions/{id}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure" true
+            }
+
++ Parameter
+    + id (string) - the id of the Promotion to update the code of.
+
++ Response 200 (application/json)
+    + Attributes
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
+
+    + Body
+
+            {
+                "code": "…e1b1"
+            }
+### Delete a Promotion Value's code [DELETE /values/promotions/{id}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to delete the code of.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+### Get a Promotion Value's Contact [GET /values/promotions/{id}/contact]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to get the Contact of.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Set a Promotion Value's Contact [PUT /values/promotion/{id}/contact]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, required) - The id of the Contact to set as owner of the Value.
         
     + Body
     
@@ -1014,7 +1679,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
     + Body
 
             {
-                "contact": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -1024,8 +1689,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-
-### Delete Value Contact [DELETE /values/{id}/contact]
+### Delete a Promotion Value's Contact [DELETE /values/promotions/{id}/contact]
 
 + Request (application/json)
 
@@ -1036,7 +1700,245 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to remove the Contact from.
+    + id (string) - the id of the Promotion to remove the Contact from.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+
+## Codes [/values/code]
+
+A Code is not a type of Value but a means of accessing a Value.  Giftcards and promotions can both be referenced by a code.  Using these endpoints you can check the balance of a Value by its code or claim it.
+
+### Update a Value by code [PATCH /values/code/{code}]
+
++ Parameter
+    + code (string) - the code of the Value to modify.
+
++ Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "frozen": true
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+    
+            {
+                "id": "vs-1",
+                "type": "giftcard",
+                "programId": "giftcards",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": true,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Get a Value by code [GET /values/code/{code}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "giftcard",
+                "programId": "giftcards",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Get a Value's code by code [GET /values/code/{code}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to get the code of.
+
++ Response 200 (application/json)
+    + Attributes
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
+
+    + Body
+
+            {
+                "code": "BLACKFRIDAY2077"
+            }
+### Set a Value's code by code [PUT /values/code/{code}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure" true
+            }
+
++ Parameter
+    + code (string) - the code of the Value to update the code of.
+
++ Response 200 (application/json)
+    + Attributes
+        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
+
+    + Body
+
+            {
+                "code": "…e1b1"
+            }
+### Delete a Value's code by code [DELETE /values/code/{code}/code]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to delete the code of.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "success": true
+            }
+### Get a Value's Contact by code [GET /values/code/{code}/contact]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to get the Contact of.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Set a Value's Contact by code [PUT /values/code/{code}/contact]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, required) - The id of the Contact to set as owner of the Value.
+        
+    + Body
+    
+            {
+                "contact": "unique-id-123"
+            }
+
++ Parameter
+    + code (string) - the code of the Value to set the Contact of.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "customerId": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Delete a Value's Contact by code [DELETE /values/code/{code}/contact]
+
++ Request (application/json)
+
+    Remove the Contact as the owner of a Value.  The Contact's info is not deleted.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to remove the Contact from.
 
 + Response 200 (application/json)
 
@@ -1640,9 +2542,9 @@ Data used in example:
 
 ## Currencies [/currencies]
 
-A Currency is a unit of money in the system.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
 
-### Create a Currency [POST /currencies]
+### Create Currency [POST /currencies]
 
 + Request (application/json)
     + Headers
@@ -1910,6 +2812,7 @@ A step taken as part of the transaction.
 
 ## Value (object)
 + id (string, required) - Unique idempotent id for the Value.
++ type (string, required) - `account`, `giftcard` or `promotion`
 + programId (string, optional) - The programId of the Program this Value is in.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.

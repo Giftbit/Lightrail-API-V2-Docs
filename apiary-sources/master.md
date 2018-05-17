@@ -15,6 +15,8 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/values-promotions.md' %}
 
+{% include 'api-sections/values-code.md' %}
+
 {% include 'api-sections/transactions.md' %}
 
 {% include 'api-sections/currencies.md' %}

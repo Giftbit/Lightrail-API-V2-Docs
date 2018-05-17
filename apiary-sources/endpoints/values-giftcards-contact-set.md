@@ -18,7 +18,7 @@
     + id (string) - the id of the Giftcard to set the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
