@@ -1,8 +1,4 @@
-### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
-
-Set a Value Store's Customer.
-
----
+### Set Value Customer [PUT /values/{id}/customer]
 
 + Request (application/json)
     + Headers
@@ -10,7 +6,7 @@ Set a Value Store's Customer.
             {{header.authorization}}
 
     + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
+        + customerId (string, required) - The customerId to set as the Customer owning the Value.
         
     + Body
     
@@ -19,7 +15,7 @@ Set a Value Store's Customer.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+    + id (string) - the id of the Value to set the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

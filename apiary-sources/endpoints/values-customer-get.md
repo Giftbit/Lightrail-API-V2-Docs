@@ -1,8 +1,4 @@
-### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
-
-Get a Value Store's customer.
-
----
+### Get Value's Customer [GET /values/{id}/customer]
 
 + Request (application/json)
     + Headers
@@ -10,7 +6,7 @@ Get a Value Store's customer.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+    + id (string) - the id of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

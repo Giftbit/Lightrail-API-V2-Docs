@@ -1,8 +1,5 @@
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
-
----
 + Request (application/json)
     + Headers
     
@@ -13,8 +10,8 @@ Get multiple Value Stores.
     + offset (number, optional) - {{pagination.offset}}
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
-    + minValue (number, optional) - Filter by minimumm value, inclusive.
-    + maxValue (number, optional) - Filter by maximum value, inclusive.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -36,16 +33,16 @@ Get multiple Value Stores.
             Offset: 0
             Count: 1
         
-    + Attributes (array[ValueStore])
+    + Attributes (array[Value])
 
     + Body
 
             [
                 {
-                    "valueStoreId": "vs-1",
+                    "id": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
-                    "value": 2500, 
+                    "balance": 2500, 
                     "preTax": false,
                     "active": true,
                     "frozen": false,
@@ -60,11 +57,7 @@ Get multiple Value Stores.
                 }
             ]
 
-### Get Value Store [GET /valueStores/{valueStoreId}]
-
-Get Value Store by valueStoreId.
-
----
+### Get Value [GET /values/{id}]
 
 + Request (application/json)
     + Headers
@@ -72,18 +65,18 @@ Get Value Store by valueStoreId.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get.
+    + id (string) - the id of the Value to get.
 
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
 
             {
-                "valueStoreId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,

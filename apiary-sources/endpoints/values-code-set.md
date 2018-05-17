@@ -1,8 +1,4 @@
-### Set Value Store Code [PUT /valueStores/{valueStoreId}/code]
-
-Set a Value Store's code.
-
----
+### Set Value Code [PUT /values/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -21,11 +17,11 @@ Set a Value Store's code.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
+    + id (string) - the id of the Value to update the code of.
 
 + Response 200 (application/json)
     + Attributes
-        + code (string, optional) - {{valueStore.code}}
+        + code (string, optional) - {{value.code}}
 
     + Body
 

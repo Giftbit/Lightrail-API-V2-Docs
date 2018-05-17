@@ -1,7 +1,7 @@
 ## Transaction (object)
-+ transactionId (string, required) - {{transaction.transactionId}}
++ id (string, required) - {{transaction.id}}
 + transactionType (string, required) - {{transaction.transactionType}}
-+ currency (string, required) - {{currency}}
++ currency (string, required) - {{currency.code}}
 + steps (array[TransactionStep], required) - {{transaction.steps}}
 + remainder (number, required) - {{transaction.remainder}}
 + simulated (boolean, optional) - {{transaction.simulated}}

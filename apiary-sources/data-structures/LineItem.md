@@ -9,15 +9,15 @@
 + metadata (object, optional) - {{transaction.lineItem.metadata}}
 
 ## LineItemResponse (LineItem)
-+ valueStoresApplied (array[LineItemPromotions])
++ valuesApplied (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueStoreId (string) - {{valueStore.valueStoreId}}
-+ redemptionRule (string) - {{valueStore.redemptionRule}}
-+ ruleExplanation (string) - {{valueStore.ruleExplanation}}
++ id (string) - {{value.id}}
++ redemptionRule (string) - {{value.redemptionRule}}
++ ruleExplanation (string) - {{value.ruleExplanation}}
 + amount (number) - The value of the discount.
-+ preTax (boolean) - {{valueStore.preTax}}
++ preTax (boolean) - {{value.preTax}}
 
 ## LineTotal (object)
 + price (number) - {{transaction.lineItem.lineTotal.price}}

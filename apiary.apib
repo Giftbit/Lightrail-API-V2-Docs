@@ -121,7 +121,7 @@ Update fields that are sent and leave unspecified values unchanged.
 
 Delete a Customer by customerId.
 
-The Customer can only be deleted if it is not associated with any Value Stores.
+The Customer can only be deleted if it is not associated with any Values.
 
 ---
 
@@ -221,10 +221,10 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Programs [/programs/]
+## Programs [/programs]
 
-Programs act as a template to set properties of ValueStores for the type of value you wish to issue. 
-A few common examples of the types of value you may want to issue and define as Programs are:
+Programs act as a template to set properties for the type of Value you wish to issue. 
+A few common examples of the types of Value you may want to issue and define as Programs are:
 - Gift cards
 - Accounts, points 
 - Promotions  
@@ -245,19 +245,19 @@ Create a new Program.
     + Attributes
         + programId (string, required) - Unique idempotent ID for the Program.
         + name (string, optional) - A human-readable name for the Program.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + access (enum[string], required) - How the valueStores can be accessed
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + access (enum[string], required) - How the values can be accessed
             + `customerId` - must be associated with a customerId.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -290,8 +290,8 @@ Create a new Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -308,7 +308,7 @@ Create a new Program.
 
 Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
-Value Stores that have already been created will not be changed.
+Values that have already been created will not be changed.
 
 + Parameter
     + programId (string) - the programId of the Program to modify.
@@ -320,10 +320,10 @@ Value Stores that have already been created will not be changed.
 
     + Attributes
         + programId (string, optional) - Unique idempotent ID for the Program.  If present must match the programId in the path.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + minInitialValue (number, optional) - The minimum value the Value Store can be created with.
-        + maxInitialValue (number, optional) - The maximum value the Value Store can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
         
@@ -348,8 +348,8 @@ Value Stores that have already been created will not be changed.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -366,7 +366,7 @@ Value Stores that have already been created will not be changed.
 
 Delete a Program by programId.
 
-The Program can only be deleted if it is not associated with any Value Stores.
+The Program can only be deleted if it is not associated with any Values.
 
 ---
 
@@ -436,8 +436,8 @@ Get multiple Programs.
                     "active": "true",
                     "redemptionRule": null,
                     "valueRule": null,
-                    "minInitialValue": null,
-                    "maxInitialValue": null,
+                    "minInitialBalance": null,
+                    "maxInitialBalance": null,
                     "fixedInitialValues": [
                         500,
                         1500,
@@ -480,8 +480,8 @@ Get Program by programId
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,
@@ -494,14 +494,11 @@ Get Program by programId
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## ValueStores [/valueStores/]
+## Values [/values]
 
-Value Stores are (naturally) where value is stored in the Lightrail system.  They are identified by a unique valueStoreId but may also be referenced by a code or associated with a Customer.
+Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Customer.
 
----
-### Create a Value Store [POST /valueStores]
-
-Create a new Value Store.
+### Create a Value [POST /values]
 
 + Request (application/json)
     + Headers
@@ -509,41 +506,41 @@ Create a new Value Store.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueStoreId (string, required) - Unique idempotent id for the ValueStore.
+        + id (string, required) - Unique idempotent id for the Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value Store with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value Store with the given code.  Cannot be set with `customerId`.
-        + currency (string, optional) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`. Required if `programId` is not set.
-        + value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + uses (number, optional) - The number of times the value store can be transacted with.
-        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value Store.
+        + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
+        + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500
+                "balance": 2500
             }
     
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,
@@ -557,31 +554,30 @@ Create a new Value Store.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Update a Value Store [PATCH /valueStores/{valueStoreId}]
-
-Update fields that are sent and leave unspecified values unchanged.
-
-In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
+### Update a Value [PATCH /values/{id}]
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to modify.
+    + id (string) - the id of the Value to modify.
 
 + Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + valueStoreId (string, optional) - Unique idempotent id for the ValueStore.  If present must match the valueStoreId in the path.
-        + preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-        + active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-        + uses (number, optional) - The number of times the value store can be transacted with.
-        + startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value Store.
+        + id (string, optional) - Unique idempotent id for the Value.  If present must match the id in the path.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + uses (number, optional) - The number of times the Value can be transacted with.
+        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + metadata (number, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -590,15 +586,15 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
             }
     
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
     
             {
-                "valueStoreId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": true,
@@ -612,11 +608,8 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value Store.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Stores [GET /valueStores{?limit}{?offset}{?programId}{?currency}{?minValue}{?maxValue}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Value Stores.
-
----
 + Request (application/json)
     + Headers
     
@@ -627,8 +620,8 @@ Get multiple Value Stores.
     + offset (number, optional) - The number of items to skip.
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
-    + minValue (number, optional) - Filter by minimumm value, inclusive.
-    + maxValue (number, optional) - Filter by maximum value, inclusive.
+    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
+    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
@@ -650,16 +643,16 @@ Get multiple Value Stores.
             Offset: 0
             Count: 1
         
-    + Attributes (array[ValueStore])
+    + Attributes (array[Value])
 
     + Body
 
             [
                 {
-                    "valueStoreId": "vs-1",
+                    "id": "vs-1",
                     "programId": "giftcards",
                     "currency": "USD",
-                    "value": 2500, 
+                    "balance": 2500, 
                     "preTax": false,
                     "active": true,
                     "frozen": false,
@@ -674,11 +667,7 @@ Get multiple Value Stores.
                 }
             ]
 
-### Get Value Store [GET /valueStores/{valueStoreId}]
-
-Get Value Store by valueStoreId.
-
----
+### Get Value [GET /values/{id}]
 
 + Request (application/json)
     + Headers
@@ -686,18 +675,18 @@ Get Value Store by valueStoreId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get.
+    + id (string) - the id of the Value to get.
 
 + Response 200 (application/json)
-    + Attributes (ValueStore)
+    + Attributes (Value)
 
     + Body
 
             {
-                "valueStoreId": "vs-1",
+                "id": "vs-1",
                 "programId": "giftcards",
                 "currency": "USD",
-                "value": 2500, 
+                "balance": 2500, 
                 "preTax": false,
                 "active": true,
                 "frozen": false,
@@ -711,11 +700,7 @@ Get Value Store by valueStoreId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Value Store Code [GET /valueStores/{valueStoreId}/code]
-
-Get a Value Store's code.
-
----
+### Get Value Code [GET /values/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -723,7 +708,7 @@ Get a Value Store's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the code of.
+    + id (string) - the id of the Value to get the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -735,11 +720,7 @@ Get a Value Store's code.
                 "code": "BLACKFRIDAY20%"
             }
 
-### Set Value Store Code [PUT /valueStores/{valueStoreId}/code]
-
-Set a Value Store's code.
-
----
+### Set Value Code [PUT /values/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -758,7 +739,7 @@ Set a Value Store's code.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to update the code of.
+    + id (string) - the id of the Value to update the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -770,11 +751,7 @@ Set a Value Store's code.
                 "code": "…e1b1"
             }
 
-### Delete Value Store Code [DELETE /valueStores/{valueStoreId}/code]
-
-Delete a Value Store's code.
-
----
+### Delete Value Code [DELETE /values/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -782,7 +759,7 @@ Delete a Value Store's code.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to delete the code of.
+    + id (string) - the id of the Value to delete the code of.
 
 + Response 200 (application/json)
 
@@ -792,11 +769,7 @@ Delete a Value Store's code.
                 "success": true
             }
 
-### Get Value Store's Customer [GET /valueStores/{valueStoreId}/customer]
-
-Get a Value Store's customer.
-
----
+### Get Value's Customer [GET /values/{id}/customer]
 
 + Request (application/json)
     + Headers
@@ -804,7 +777,7 @@ Get a Value Store's customer.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Customer of.
+    + id (string) - the id of the Value to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -823,11 +796,7 @@ Get a Value Store's customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Set Value Store Customer [PUT /valueStores/{valueStoreId}/customer]
-
-Set a Value Store's Customer.
-
----
+### Set Value Customer [PUT /values/{id}/customer]
 
 + Request (application/json)
     + Headers
@@ -835,7 +804,7 @@ Set a Value Store's Customer.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value Store.
+        + customerId (string, required) - The customerId to set as the Customer owning the Value.
         
     + Body
     
@@ -844,7 +813,7 @@ Set a Value Store's Customer.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Customer of.
+    + id (string) - the id of the Value to set the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -863,19 +832,18 @@ Set a Value Store's Customer.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Delete Value Store Customer [DELETE /valueStores/{valueStoreId}/customer]
-
-Remove the Customer as the owner of a Value Store.  The Customer's info is not deleted.
-
----
+### Delete Value Customer [DELETE /values/{id}/customer]
 
 + Request (application/json)
+
+    Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to remove the Customer from.
+    + id (string) - the id of the Value to remove the Customer from.
 
 + Response 200 (application/json)
 
@@ -885,9 +853,8 @@ Remove the Customer as the owner of a Value Store.  The Customer's info is not d
                 "success": true
             }
 
-## Transactions [/transactions/]
+## Transactions [/transactions]
 
----
 ### Process an order [POST /transactions/orders]
 
 Process an order by debiting (removing value from) one or more payment rails.
@@ -913,19 +880,19 @@ Data used in example:
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + id (string, required) - Unique idempotent ID for the Transaction.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
         
     + Body 
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "currency": "USD",
                 "lineItems": [
                     {
@@ -968,7 +935,7 @@ Data used in example:
     + Body
     
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "order",
                 "currency": "USD",
                 "totals": {
@@ -985,9 +952,9 @@ Data used in example:
                         "taxRate": 0.08, 
                         "description": "Socks.", 
                         "quantity": 2,
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "2018-alice-socks-promo",
+                                "id": "2018-alice-socks-promo",
                                 "rule": "item.productId == "pid_12345'",
                                 "ruleExplanation": "Socks 20% discount",
                                 "amount": -200,
@@ -995,7 +962,7 @@ Data used in example:
                                 "discount": true
                             }, 
                             {
-                                "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -80,
@@ -1017,9 +984,9 @@ Data used in example:
                         "unitCost": 199,
                         "taxRate": 0.05, 
                         "description": "Chocolate bar.",
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "2018-10percent-off-over-5-orders",
+                                "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
                                 "amount": -20,
@@ -1027,7 +994,7 @@ Data used in example:
                                 "discount": true
                             },
                             {
-                                "valueStoreId": "2018-50cent-chocobar-credit",
+                                "id": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
                                 "amount": -50,
@@ -1048,9 +1015,9 @@ Data used in example:
                         "id": "standard-shipping", 
                         "unitCost": 349,
                         "taxRate": 0, 
-                        "valueStoresApplied": [
+                        "valuesApplied": [
                             {
-                                "valueStoreId": "alice-account-USD",
+                                "id": "alice-account-USD",
                                 "amount": -349,
                                 "preTax": false,
                                 "discount": false
@@ -1067,28 +1034,28 @@ Data used in example:
                 ],
                 "steps": [
                     {
-                        "valueStoreId": "2018-alice-socks-promo",
+                        "id": "2018-alice-socks-promo",
                         "amount": -200,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
-                        "valueStoreId": "2018-10percent-off-over-5-orders",
+                        "id": "2018-10percent-off-over-5-orders",
                         "amount": -100,
                         "code": "SAVE10PERCENT",
                         "tags": ["generic-code"],
                         "discount": true
                     },
                     {
-                        "valueStoreId": "2018-50cent-chocobar-credit",
+                        "id": "2018-50cent-chocobar-credit",
                         "amount": -50,
                         "customerEmail": "alice@example.com"
                         "tags": ["customer-promotions", "food-promos"],
                         "discount": true
                     },
                     {
-                        "valueStoreId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "amount": -1265,
                         "customerEmail": "alice@example.com",
                         "tags": ["customer-accounts"],
@@ -1115,22 +1082,22 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + id (string, required) - Unique idempotent ID for the Transaction.
+        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "id": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1145,17 +1112,17 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1180,21 +1147,21 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific ValueStore are supported.
-        + amount (number, required) - The amount to debit, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
+        + id (string, required) - Unique idempotent ID for the Transaction.
+        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
+        + amount (number, required) - The amount to credit, > 0.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "destination": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "id": "vs_1"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -1209,17 +1176,17 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "credit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 1500,
-                        "valueAfter": 4000,
-                        "valueChange": 2500
+                        "balanceBefore": 1500,
+                        "balanceAfter": 4000,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1233,7 +1200,7 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Transfer [POST /transactions/transfer]
 
-Transfer value from one value store to another.
+Transfer balance from one Value to another.
 
 Currently only the `lightrail` payment rail is supported.
 
@@ -1244,27 +1211,27 @@ Currently only the `lightrail` payment rail is supported.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
-        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific ValueStore are supported.
-        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + id (string, required) - Unique idempotent ID for the Transaction.
+        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
+        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying values can change.
-        + allowRemainder (boolean, optional) - If true the transaction will go through without all value being debited, and the remainder indicated.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
+        + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "id": "vs_1"
                 },
                 "destination": {
                     "rail": "lightrail",
-                    "valueStoreId": "alice-account-USD"
+                    "id": "alice-account-USD"
                 },
                 "amount": 2500,
                 "currency": "USD",
@@ -1275,11 +1242,11 @@ Currently only the `lightrail` payment rail is supported.
 
 + Response 200 (application/json)
     + Attributes
-        + transactionId (string, required) - Unique idempotent ID for the Transaction.
+        + id (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
-        + currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of value that could not be debited.
+        + remainder (number, required) - The remainder of balance that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
         + createdDate (string, required) - ISO date for when the Transaction was created.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1288,25 +1255,25 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "transfer",
                 "currency": "USD",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "USD",
-                        "valueBefore": 2500,
-                        "valueAfter": 0,
-                        "valueChange": -2500
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "currency": "USD",
-                        "valueBefore": 5000,
-                        "valueAfter": 7500,
-                        "valueChange": 2500
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1348,17 +1315,17 @@ Get multiple Transactions.
 
             [
                 {
-                    "transactionId": "unique-id-123",
+                    "id": "unique-id-123",
                     "transactionType": "debit",
                     "currency": "XXX",
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "valueStoreId": "vs_1",
+                            "id": "vs_1",
                             "currency": "XXX",
-                            "valueBefore": 5500,
-                            "valueAfter": 3000,
-                            "valueChange": -2500
+                            "balanceBefore": 5500,
+                            "balanceAfter": 3000,
+                            "balanceChange": -2500
                         }
                     ],
                     "remainder": 0,
@@ -1371,9 +1338,9 @@ Get multiple Transactions.
                 }
             ]
 
-### Get Transaction [GET /transactions/{transactionId}]
+### Get Transaction [GET /transactions/{id}]
 
-Get Transaction by transactionId.
+Get Transaction by id.
 
 ---
 
@@ -1383,7 +1350,7 @@ Get Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the Transaction to get.
+    + id (string) - the id of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1391,17 +1358,17 @@ Get Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1413,9 +1380,9 @@ Get Transaction by transactionId.
                 }
             }
 
-### Capture Pending Transaction [POST /transactions/{transactionId}/capture]
+### Capture Pending Transaction [POST /transactions/{id}/capture]
 
-Capture a pending Transaction by transactionId.
+Capture a pending Transaction by id.
 
 ---
 
@@ -1425,7 +1392,7 @@ Capture a pending Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to capture.
+    + id (string) - the id of the pending Transaction to capture.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1433,17 +1400,17 @@ Capture a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1456,9 +1423,9 @@ Capture a pending Transaction by transactionId.
                 }
             }
 
-### Void Pending Transaction [POST /transactions/{transactionId}/void]
+### Void Pending Transaction [POST /transactions/{id}/void]
 
-Void a pending Transaction by transactionId.
+Void a pending Transaction by id.
 
 ---
 
@@ -1468,7 +1435,7 @@ Void a pending Transaction by transactionId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to void.
+    + id (string) - the id of the pending Transaction to void.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -1476,17 +1443,17 @@ Void a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1499,26 +1466,22 @@ Void a pending Transaction by transactionId.
                 }
             }
 
-## Currencies [/currencies/]
+## Currencies [/currencies]
 
-Currencies that can be used in Value Stores and Programs.  Currency codes can be up to 16 characters in length.
+A Currency is a unit of money in the system.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
 
----
 ### Create a Currency [POST /currencies]
 
-Create a new Currency.
-
----
 + Request (application/json)
     + Headers
     
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + code (string, required) - 
-        + name (string, required) - 
-        + symbol (number, required) - 
-        + decimalPlaces (number, required) - 
+        + code (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + name (string, required) - Long name for the currency, eg: `Dollars`.
+        + symbol (number, required) - Currency symbol used for formatting, eg: `$`.
+        + decimalPlaces (number, required) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
     + Body
 
@@ -1542,21 +1505,22 @@ Create a new Currency.
             }
 ### Update a Currency [PATCH /currencies/{code}]
 
-Update fields that are sent and leave unspecified values at their default.
-
 + Parameter
     + code (string) - the code of the Currency to modify.
 
 + Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, optional) -  If present must match the code in the path.
-        + name (string, optional) - 
-        + symbol (string, optional) - 
-        + decimalPlaces (number, optional) - 
+        + code (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. If present must match the code in the path.
+        + name (string, optional) - Long name for the currency, eg: `Dollars`.
+        + symbol (string, optional) - Currency symbol used for formatting, eg: `$`.
+        + decimalPlaces (number, optional) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
         
     + Body
     
@@ -1576,15 +1540,9 @@ Update fields that are sent and leave unspecified values at their default.
                 "symbol": "Z$",
                 "decimalPlaces": 2
             }
-### Delete Currency [DELETE /currencies/{code}]
+### Delete a Currency [DELETE /currencies/{code}]
 
-Delete a Currency by code.
-
-The Currency can only be deleted if it is not used by any Value Stores or Programs.
-
----
-
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1593,18 +1551,27 @@ The Currency can only be deleted if it is not used by any Value Stores or Progra
     + code (string) - the code of the Currency to delete.
 
 + Response 200 (application/json)
-
+    
     + Body
 
             {
                 "success": true
             }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Currency that is in use.  If the Currency is referenced a Value or Program those objects would need to be deleted first.  If the Currency is referenced by a Transaction it cannot be deleted because Transactions cannot be deleted.  Currencies in use can still be updated.
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Currency 'USD' is in use.",
+                "messageCode": "CurrencyInUse"
+            }
 ### Get Currencies [GET /currencies]
 
-Get all the Currencies.
-
----
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1623,13 +1590,9 @@ Get all the Currencies.
                 }
             ]
 
-### Get Currency [GET /currencies/{code}]
+### Get a Currency [GET /currencies/{code}]
 
-Get Currency by code.
-
----
-
-+ Request (application/json)
++ Request
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1652,10 +1615,10 @@ Get Currency by code.
 # Data Structures
 
 ## Currency (object)
-+ code (string, required) - 
-+ name (number, required) - 
-+ symbol (number, required) - 
-+ decimalPlaces (number, required) - 
++ code (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
++ name (number, required) - Long name for the currency, eg: `Dollars`.
++ symbol (number, required) - Currency symbol used for formatting, eg: `$`.
++ decimalPlaces (number, required) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
 ## Customer (object)
 + customerId (string, required) - Unique idempotent ID for the Customer.
@@ -1678,15 +1641,15 @@ Get Currency by code.
 + metadata (object, optional) - Any additional data you want to store for the item.
 
 ## LineItemResponse (LineItem)
-+ valueStoresApplied (array[LineItemPromotions])
++ valuesApplied (array[LineItemPromotions])
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ valueStoreId (string) - Unique idempotent id for the ValueStore.
-+ redemptionRule (string) - A Redemption Rule controlling when the Value Store can be used in an order.
++ id (string) - Unique idempotent id for the Value.
++ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
 + amount (number) - The value of the discount.
-+ preTax (boolean) - If true the Value Store's value is applied before tax is calculated.
++ preTax (boolean) - If true the Value's balance is applied before tax is calculated.
 
 ## LineTotal (object)
 + price (number) - The total cost of the items. ie `unitPrice * quantity`.
@@ -1698,20 +1661,20 @@ Get Currency by code.
 ## Program (object)
 + programId (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-+ access (enum[string], required) - How the valueStores can be accessed.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
++ access (enum[string], required) - How the values can be accessed.
     + `customerId` - must be associated with a customerId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - If true the Value Store will be noted as a discount for the customer in orders.
-+ preTax (boolean, required) - If true the Value Store's value is applied before tax is calculated.
-+ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-+ minInitialValue (number, optional) - 
-+ maxInitialValue (number, optional) - 
-+ fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
-+ uses (number, optional) - If set the number of uses the Value Store will be created with.  Set `null` or omit for infinite uses.
++ discount (boolean, required) - If true the Value will be noted as a discount for the customer in orders.
++ preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
++ active (boolean, optional) - Whether the Value is active and can be used upon creation.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ minInitialBalance (number, optional) - 
++ maxInitialBalance (number, optional) - 
++ fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
++ uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
 + createdDate (string, required) - ISO date for when the Program was created.
 + updatedDate (string, required) - ISO date for when the Program was last updated.
@@ -1722,11 +1685,11 @@ Get Currency by code.
 + explanation (string, required) - a plain explanation of the rule seen by customers.
 
 ## Transaction (object)
-+ transactionId (string, required) - Unique idempotent ID for the Transaction.
++ id (string, required) - Unique idempotent ID for the Transaction.
 + transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep], required) - An array of transaction steps.
-+ remainder (number, required) - The remainder of value that could not be debited.
++ remainder (number, required) - The remainder of balance that could not be debited.
 + simulated (boolean, optional) - True if the transaction was simulated.
 + pending (enum[string], optional) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
     + `pending` - created pending and unresolved.
@@ -1740,11 +1703,11 @@ Get Currency by code.
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + customerId (string, optional) - `lightrail`: the Customer's customerId.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
-+ valueStoreId (string, optional) - `lightrail`: The ID of a ValueStore.
++ id (string, optional) - `lightrail`: The ID of a Value.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
-+ id (string, optional) - `internal`: the ID of the value.
-+ value (number, optional) - `internal`: the amount of value.
-+ beforeLightrail (boolean, optional) - `internal`: if true this value store is applied before Lightrail ValueStores, otherwise it will be applied after.
++ id (string, optional) - `internal`: the ID of the internal value.
++ balance (number, optional) - `internal`: the amount of internal value.
++ beforeLightrail (boolean, optional) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
 
 ## TransactionStep (object)
 A step taken as part of the transaction.
@@ -1752,13 +1715,13 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ valueStoreId (string, required) - the valueStoreId of the ValueStore transacted with.
-+ currency (string, required) - the currency of the ValueStore transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the ValueStore.
++ id (string, required) - the id of the Value transacted with.
++ currency (string, required) - the currency of the Value transacted with.
++ customerId (string, optional) - the customerId of the Customer associated with the Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ balanceBefore (number, required) - the balance of the Value before the transaction.
++ balanceAfter (number, required) - the balance of the Value after the transaction.
++ balanceChange (number, required) - the net balance change of the Value for the transaction.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -1768,25 +1731,25 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
-+ id (string, required) - the ID of the internal value store transacted with.
-+ valueBefore (number, required) - the value of the ValueStore before the transaction.
-+ valueAfter (number, required) - the value of the ValueStore after the transaction.
-+ valueChange (number, required) - the net change of the ValueStore for the transaction.
++ id (string, required) - the ID of the internal value transacted with.
++ balanceBefore (number, required) - the balance of the internal value before the transaction.
++ balanceAfter (number, required) - the balance of the internal value after the transaction.
++ balanceChange (number, required) - the net balance change of the internal value for the transaction.
 
-## ValueStore (object)
-+ valueStoreId (string, required) - Unique idempotent id for the ValueStore.
-+ programId (string, optional) - The programId of the Program this ValueStore is in.
-+ currency (string, required) - Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
-+ value (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ discount (boolean, optional) - If true the Value Store will be noted as a discount for the customer in orders.
-+ preTax (boolean, optional) - If true the Value Store's value is applied before tax is calculated.
-+ active (boolean, optional) - Whether the ValueStore is active and can be used upon creation.
-+ frozen (boolean, optional) - If true the Value Store is frozen and cannot be transacted with.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value Store can be used in an order.
-+ valueRule (number, optional) - A Value Rule controlling the value of the ValueStore in an Order.  To use this `value` must be set to `null`.
-+ uses (number, optional) - The number of times the value store can be transacted with.
-+ startDate (number, optional) - ISO date for when the valueStore can start to be transacted with.
-+ endDate (number, optional) - ISO date for when the valueStore can last be transacted with.
-+ metadata (number, optional) - Arbitrary data associated with the Value Store.
+## Value (object)
++ id (string, required) - Unique idempotent id for the Value.
++ programId (string, optional) - The programId of the Program this Value is in.
++ currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
++ balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
++ discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
++ preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
++ active (boolean, optional) - Whether the Value is active and can be used upon creation.
++ frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ uses (number, optional) - The number of times the Value can be transacted with.
++ startDate (number, optional) - ISO date for when the Value can start to be transacted with.
++ endDate (number, optional) - ISO date for when the Value can last be transacted with.
++ metadata (number, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Customer was created.
 + updatedDate (string, required) - ISO date for when the Customer was last updated.
