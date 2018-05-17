@@ -1,11 +1,9 @@
 ### Credit [POST /transactions/credit]
 
-Credit (add value to) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             {{header.authorization}}

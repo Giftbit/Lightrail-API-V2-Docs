@@ -1,11 +1,9 @@
 ### Debit [POST /transactions/debit]
 
-Debit (remove value from) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             {{header.authorization}}
@@ -31,7 +29,7 @@ Currently only the `lightrail` payment rail is supported.
                 "amount": 2500,
                 "currency": "XXX",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
     
@@ -59,6 +57,6 @@ Currently only the `lightrail` payment rail is supported.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }

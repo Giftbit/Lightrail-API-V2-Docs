@@ -19,33 +19,30 @@ Authorization: Bearer <API_KEY>
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help.
 
 
-## Customers [/customers/]
+## Contacts [/contacts/]
 
-Customers are the people or businesses who buy products or services from you.  They're identified by a unique `customerId`.
+Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
 
----
-### Create Customer [POST /customers]
 
-Create a new Customer.
+### Create Contact [POST /contacts]
 
----
 + Request (application/json)
     + Headers
     
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
+        + id (string, required) - Unique idempotent ID for the Contact.
+        + firstName (string, optional) - The Contact's first name.
+        + lastName (string, optional) - The Contact's last name.
+        + email (string, optional) - The Contact's email.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (object, optional) - Arbitrary data associated with the Customer.
+        + metadata (object, optional) - Arbitrary data associated with the Contact.
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -55,12 +52,12 @@ Create a new Customer.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",'
@@ -71,23 +68,23 @@ Create a new Customer.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update Customer [PUT /customers/{customerId}]
+### Update Contact [PUT /contacts/{id}]
 
-Update fields that are sent and leave unspecified values unchanged.
-
----
 + Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + customerId (string, required) - Unique idempotent ID for the Customer.
-        + firstName (string, optional) - The Customer's first name.
-        + lastName (string, optional) - The Customer's last name.
-        + email (string, optional) - The Customer's email.
+        + id (string, required) - Unique idempotent ID for the Contact.
+        + firstName (string, optional) - The Contact's first name.
+        + lastName (string, optional) - The Contact's last name.
+        + email (string, optional) - The Contact's email.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (string, optional) - Arbitrary data associated with the Customer.
+        + metadata (string, optional) - Arbitrary data associated with the Contact.
 
     + Body
 
@@ -98,15 +95,15 @@ Update fields that are sent and leave unspecified values unchanged.
             }
             
 + Parameter
-    + customerId (string) - the customerId of the Customer to update.
+    + id (string) - the ID of the Contact to update.
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -117,13 +114,7 @@ Update fields that are sent and leave unspecified values unchanged.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Delete Customer [DELETE /customers/{customerId}]
-
-Delete a Customer by customerId.
-
-The Customer can only be deleted if it is not associated with any Values.
-
----
+### Delete Contact [DELETE /contacts/{id}]
 
 + Request (application/json)
     + Headers
@@ -131,7 +122,7 @@ The Customer can only be deleted if it is not associated with any Values.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to delete.
+    + id (string) - the ID of the Contact to delete.
 
 + Response 200 (application/json)
 
@@ -140,11 +131,20 @@ The Customer can only be deleted if it is not associated with any Values.
             {
                 "success": true
             }
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Customers.
++ Response 409 (application/json)
 
----
+    Attempting to delete a Contact that is associated with one or more Values. Values that are associated with the Contact would need to be deleted first. 
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Contact 'unique-id-123' is in use",
+                "messageCode": "ContactInUse"
+            }
+### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+
 + Request (application/json)
     + Headers
     
@@ -170,13 +170,13 @@ Get multiple Customers.
             Offset: 0
             Count: 1
 
-    + Attributes (array[Customer])
+    + Attributes (array[Contact])
 
     + Body
 
             [
                 {
-                    "customerId": "unique-id-123",
+                    "id": "unique-id-123",
                     "firstName": "Jeffrey",
                     "lastName": "Lebowski",
                     "email": "thedude@example.com",
@@ -189,11 +189,7 @@ Get multiple Customers.
                 }
             ]
 
-### Get Customer [GET /customers/{customerId}]
-
-Get Customer by customerId.
-
----
+### Get Contact [GET /contacts/{id}]
 
 + Request (application/json)
     + Headers
@@ -201,15 +197,15 @@ Get Customer by customerId.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to get.
+    + id (string) - the ID of the Contact to get.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -220,6 +216,213 @@ Get Customer by customerId.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+
+### Create Account for Contact [POST /contacts/{id}/values/accounts]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + id (string) - the ID of the Contact that the account is for.
+
++ Attributes
+    + id (string, required) - Unique idempotent id for the Value.
+    + program (string, optional) - Associate with and copy default values from the given Program. If not provided, the default Accounts Program will be used.
+    + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
+    + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+    + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+    + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+    + metadata (number, optional) - Arbitrary data associated with the Value.
+    
+    + Body
+    
+            {
+                "id": "cust-123-acc-1",
+                "currency": "USD",
+                "balance": 2500
+            }
+
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "cust-123-acc-1",
+                    "programId": "accounts",
+                    "currency": "USD",
+                    "balance": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Contact whose accounts should be retrieved.
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "acc-1",
+                    "programId": "accounts",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
+
++ Request (application/json)
+  + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+  + id (string) - the ID of the Contact whose gift cards should be retrieved.
+
++ Response 200 (application/json)
+  + Attributes (array[Value])
+
+  + Body
+
+            [
+              {
+                  "id": "gift-1",
+                  "programId": "giftcards",
+                  "currency": "USD",
+                  "balance": 2500,
+                  "preTax": false,
+                  "active": true,
+                  "frozen": false,
+                  "redemptionRule": null,
+                  "valueRule": null,
+                  "uses": null,
+                  "startDate": null,
+                  "endDate": null,
+                  "metadata": null,
+                  "createdDate": "2018-04-17T23:20:08.404Z",
+                  "updatedDate": "2018-04-17T23:20:08.404Z"
+              }
+            ]
+### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Contact whose promotions should be retrieved.
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "promo-1",
+                    "programId": "signup-bonus",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": true,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Get Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + program (string, optional) - Filter by the Value's Program ID.
+    + currency (string, optional) - Filter by the Value's currency.
+    + preTax (boolean, optional) - Filter by whether or not the Value is applied preTax.
+    + active (boolean, optional) - Filter by whether or not the Value is active.
+    + frozen (boolean, optional) - Filter by whether or not the Value is frozen.
+    + uses (number, optional) - Filter by whether or not the Value is uses.
+    + startDate (string, optional) - Filter by the Value's startDate.
+    + endDate (string, optional) - Filter by the Value's endDate.
+    + createdDate (string, optional) - Filter by the Value's createdDate.
+    + updatedDate (string, optional) - Filter by the Value's updatedDate.
+
++ Response 200 (application/json)
+    + Headers
+
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ## Programs [/programs]
 
@@ -234,9 +437,6 @@ See [here](https://localhost:8181/docs/) to see examples of how you'd create a P
 ---
 ### Create Program [POST /programs]
 
-Create a new Program.
-
----
 + Request (application/json)
     + Headers
     
@@ -247,10 +447,10 @@ Create a new Program.
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + access (enum[string], required) - How the values can be accessed
-            + `customerId` - must be associated with a customerId.
+            + `contact` - must be associated with a Contact by ID.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
@@ -276,7 +476,7 @@ Create a new Program.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
@@ -388,9 +588,6 @@ The Program can only be deleted if it is not associated with any Values.
 
 ### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Programs.
-
----
 + Request (application/json)
     + Headers
     
@@ -453,10 +650,6 @@ Get multiple Programs.
 
 ### Get Program [GET /programs/{programId}]
 
-Get Program by programId
-
----
-
 + Request (application/json)
     + Headers
     
@@ -496,7 +689,7 @@ Get Program by programId
 
 ## Values [/values]
 
-Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Customer.
+Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Contact.
 
 ### Create a Value [POST /values]
 
@@ -508,8 +701,8 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
     + Attributes
         + id (string, required) - Unique idempotent id for the Value.
         + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
+        + contact (string, optional) - Associate the Value with the given Contact by ID.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
         + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
@@ -769,7 +962,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "success": true
             }
 
-### Get Value's Customer [GET /values/{id}/customer]
+### Get Value's Contact [GET /values/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -777,15 +970,15 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to get the Customer of.
+    + id (string) - the id of the Value to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -796,7 +989,7 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Set Value Customer [PUT /values/{id}/customer]
+### Set Value Contact [PUT /values/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -804,24 +997,24 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + customerId (string, required) - The customerId to set as the Customer owning the Value.
+        + contact (string, required) - The ID of the Contact to set as owner of the Value.
         
     + Body
     
             {
-                "customerId": "unique-id-123"
+                "contact": "unique-id-123"
             }
 
 + Parameter
-    + id (string) - the id of the Value to set the Customer of.
+    + id (string) - the id of the Value to set the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contact": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -832,18 +1025,18 @@ Values (naturally) represent value in the Lightrail system, such as a gift card 
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Delete Value Customer [DELETE /values/{id}/customer]
+### Delete Value Contact [DELETE /values/{id}/contact]
 
 + Request (application/json)
 
-    Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
+    Remove the Contact as the owner of a Value.  The Contact's info is not deleted.
 
     + Headers
     
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Value to remove the Customer from.
+    + id (string) - the id of the Value to remove the Contact from.
 
 + Response 200 (application/json)
 
@@ -867,7 +1060,7 @@ Data used in example:
     - 1x $1.99 chocolate bar  (5% tax rate)
     - 1x $3.49 shipping (0% tax rate)
 - Payment Sources:
-    - Customer with prepaid account, and a sock and chocolate bar promotion.
+    - Contact with prepaid account, and a sock and chocolate bar promotion.
         - Account has $20.
         - Sock promo is for 20% off retail price of socks.
         - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
@@ -920,7 +1113,7 @@ Data used in example:
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "customerEmail": "alice@example.com"
+                        "contactEmail": "alice@example.com"
                     },
                     {
                         "rail": "lightrail",
@@ -1036,8 +1229,8 @@ Data used in example:
                     {
                         "id": "2018-alice-socks-promo",
                         "amount": -200,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-promotions", "clothing-promos"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-promotions", "clothing-promos"],
                         "discount": true 
                     },
                     {
@@ -1050,15 +1243,15 @@ Data used in example:
                     {
                         "id": "2018-50cent-chocobar-credit",
                         "amount": -50,
-                        "customerEmail": "alice@example.com"
-                        "tags": ["customer-promotions", "food-promos"],
+                        "contactEmail": "alice@example.com"
+                        "tags": ["contact-promotions", "food-promos"],
                         "discount": true
                     },
                     {
                         "id": "alice-account-USD",
                         "amount": -1265,
-                        "customerEmail": "alice@example.com",
-                        "tags": ["customer-accounts"],
+                        "contactEmail": "alice@example.com",
+                        "tags": ["contact-accounts"],
                         "discount": false
                     }
                 ],
@@ -1071,12 +1264,10 @@ Data used in example:
 
 ### Debit [POST /transactions/debit]
 
-Debit (remove value from) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1102,7 +1293,7 @@ Currently only the `lightrail` payment rail is supported.
                 "amount": 2500,
                 "currency": "XXX",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
     
@@ -1130,18 +1321,16 @@ Currently only the `lightrail` payment rail is supported.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
 ### Credit [POST /transactions/credit]
 
-Credit (add value to) a payment rail.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1200,12 +1389,10 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Transfer [POST /transactions/transfer]
 
-Transfer balance from one Value to another.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -1286,9 +1473,6 @@ Currently only the `lightrail` payment rail is supported.
 
 ### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
-Get multiple Transactions.
-
----
 + Request (application/json)
     + Headers
     
@@ -1333,16 +1517,12 @@ Get multiple Transactions.
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z",
                     "metadata": {
-                        "note": "Reduce loyalty points after 3mo customer inactivity"
+                        "note": "Reduce loyalty points after 3mo contact inactivity"
                     }
                 }
             ]
 
 ### Get Transaction [GET /transactions/{id}]
-
-Get Transaction by id.
-
----
 
 + Request (application/json)
     + Headers
@@ -1376,15 +1556,11 @@ Get Transaction by id.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
-
-Capture a pending Transaction by id.
-
----
 
 + Request (application/json)
     + Headers
@@ -1419,15 +1595,11 @@ Capture a pending Transaction by id.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
 ### Void Pending Transaction [POST /transactions/{id}/void]
-
-Void a pending Transaction by id.
-
----
 
 + Request (application/json)
     + Headers
@@ -1462,7 +1634,7 @@ Void a pending Transaction by id.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
@@ -1620,15 +1792,15 @@ A Currency is a unit of money in the system.  It can be a standard currency such
 + symbol (number, required) - Currency symbol used for formatting, eg: `$`.
 + decimalPlaces (number, required) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
-## Customer (object)
-+ customerId (string, required) - Unique idempotent ID for the Customer.
-+ firstName (string, optional) - The Customer's first name.
-+ lastName (string, optional) - The Customer's last name.
-+ email (string, optional) - The Customer's email.
+## Contact (object)
++ id (string, required) - Unique idempotent ID for the Contact.
++ firstName (string, optional) - The Contact's first name.
++ lastName (string, optional) - The Contact's last name.
++ email (string, optional) - The Contact's email.
 + tags (array[string], optional) - Segmentation tags.
-+ metadata (object, optional) - Arbitrary data associated with the Customer.
-+ createdDate (string, required) - ISO date for when the Customer was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ metadata (object, optional) - Arbitrary data associated with the Contact.
++ createdDate (string, required) - ISO date for when the Contact was created.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.
 
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
@@ -1647,7 +1819,7 @@ A Currency is a unit of money in the system.  It can be a standard currency such
 ## LineItemPromotions (object)
 + id (string) - Unique idempotent id for the Value.
 + redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
-+ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the customer.
++ ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
 + preTax (boolean) - If true the Value's balance is applied before tax is calculated.
 
@@ -1663,10 +1835,10 @@ A Currency is a unit of money in the system.  It can be a standard currency such
 + name (string, optional) - A human-readable name for the Program.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + access (enum[string], required) - How the values can be accessed.
-    + `customerId` - must be associated with a customerId.
+    + `contact` - must be associated with a contact.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - If true the Value will be noted as a discount for the customer in orders.
++ discount (boolean, required) - If true the Value will be noted as a discount for the contact in orders.
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
@@ -1682,7 +1854,7 @@ A Currency is a unit of money in the system.  It can be a standard currency such
 
 ## Rule (object)
 + rule (string, required) - the Lightrail Rule text of the rule.
-+ explanation (string, required) - a plain explanation of the rule seen by customers.
++ explanation (string, required) - a plain explanation of the rule seen by contacts.
 
 ## Transaction (object)
 + id (string, required) - Unique idempotent ID for the Transaction.
@@ -1696,12 +1868,12 @@ A Currency is a unit of money in the system.  It can be a standard currency such
     + `captured` - created pending and captured.  The Transaction is final.
     + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string, required) - ISO date for when the Transaction was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
 ## TransactionParty (object)
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ customerId (string, optional) - `lightrail`: the Customer's customerId.
++ contact (string, optional) - `lightrail`: the Contact's ID.
 + code (string, optional) - `lightrail`: the code of a gift card or promotion.
 + id (string, optional) - `lightrail`: The ID of a Value.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
@@ -1717,7 +1889,7 @@ A step taken as part of the transaction.
 + rail (string, required) - `lightrail`
 + id (string, required) - the id of the Value transacted with.
 + currency (string, required) - the currency of the Value transacted with.
-+ customerId (string, optional) - the customerId of the Customer associated with the Value.
++ contact (string, optional) - the ID of the Contact associated with the Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
 + balanceBefore (number, required) - the balance of the Value before the transaction.
 + balanceAfter (number, required) - the balance of the Value after the transaction.
@@ -1741,7 +1913,7 @@ A step taken as part of the transaction.
 + programId (string, optional) - The programId of the Program this Value is in.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ discount (boolean, optional) - If true the Value will be noted as a discount for the customer in orders.
++ discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
 + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
@@ -1751,5 +1923,5 @@ A step taken as part of the transaction.
 + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
 + endDate (number, optional) - ISO date for when the Value can last be transacted with.
 + metadata (number, optional) - Arbitrary data associated with the Value.
-+ createdDate (string, required) - ISO date for when the Customer was created.
-+ updatedDate (string, required) - ISO date for when the Customer was last updated.
++ createdDate (string, required) - ISO date for when the Contact was created.
++ updatedDate (string, required) - ISO date for when the Contact was last updated.

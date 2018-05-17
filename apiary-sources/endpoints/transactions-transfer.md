@@ -1,11 +1,9 @@
 ### Transfer [POST /transactions/transfer]
 
-Transfer balance from one Value to another.
-
-Currently only the `lightrail` payment rail is supported.
-
----
 + Request (application/json)
+
+    Currently only the `lightrail` payment rail is supported.
+
     + Headers
     
             {{header.authorization}}

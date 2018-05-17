@@ -3,7 +3,7 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'sections/introduction-master.md' %}
 
-{% include 'api-sections/customers.md' %}
+{% include 'api-sections/contacts.md' %}
 
 {% include 'api-sections/programs.md' %}
 

@@ -1,4 +1,4 @@
-### Get Value's Customer [GET /values/{id}/customer]
+### Get Value's Contact [GET /values/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -6,15 +6,15 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get the Customer of.
+    + id (string) - the id of the Value to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
