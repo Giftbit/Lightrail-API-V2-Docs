@@ -220,6 +220,173 @@ Get Contact by ID.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+---
+### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
+
+Get all Values of type Account associated with a Contact.
+
+---
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Contact whose accounts should be retrieved.
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "acc-1",
+                    "programId": "accounts",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
+
+Get all Values of type GiftCard associated with a Contact.
+
+---
++ Request (application/json)
+  + Headers
+
+          Authorization: Bearer <API_KEY>
+
++ Parameter
+  + id (string) - the ID of the Contact whose gift cards should be retrieved.
+
++ Response 200 (application/json)
+  + Attributes (array[Value])
+
+  + Body
+
+          [
+              {
+                  "id": "gift-1",
+                  "programId": "giftcards",
+                  "currency": "USD",
+                  "balance": 2500,
+                  "preTax": false,
+                  "active": true,
+                  "frozen": false,
+                  "redemptionRule": null,
+                  "valueRule": null,
+                  "uses": null,
+                  "startDate": null,
+                  "endDate": null,
+                  "metadata": null,
+                  "createdDate": "2018-04-17T23:20:08.404Z",
+                  "updatedDate": "2018-04-17T23:20:08.404Z"
+              }
+          ]
+### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
+
+Get all Values of type Promotion associated with a Contact.
+
+---
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Contact whose promotions should be retrieved.
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "promo-1",
+                    "programId": "signup-bonus",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": true,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Get Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+
+Get all Values associated with a Contact.
+
+---
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + program (string, optional) - Filter by the Value's Program ID.
+    + currency (string, optional) - Filter by the Value's currency.
+    + preTax (boolean, optional) - Filter by whether or not the Value is applied preTax.
+    + active (boolean, optional) - Filter by whether or not the Value is active.
+    + frozen (boolean, optional) - Filter by whether or not the Value is frozen.
+    + uses (number, optional) - Filter by whether or not the Value is uses.
+    + startDate (string, optional) - Filter by the Value's startDate.
+    + endDate (string, optional) - Filter by the Value's endDate.
+    + createdDate (string, optional) - Filter by the Value's createdDate.
+    + updatedDate (string, optional) - Filter by the Value's updatedDate.
+
++ Response 200 (application/json)
+    + Headers
+
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ## Programs [/programs]
 
