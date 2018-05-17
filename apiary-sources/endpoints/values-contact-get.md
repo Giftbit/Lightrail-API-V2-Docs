@@ -1,8 +1,4 @@
-### Get Value Store's Contact [GET /valueStores/{valueStoreId}/contact]
-
-Get a Value Store's contact.
-
----
+### Get Value's Contact [GET /values/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -10,7 +6,7 @@ Get a Value Store's contact.
             {{header.authorization}}
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to get the Contact of.
+    + id (string) - the id of the Value to get the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -18,7 +14,7 @@ Get a Value Store's contact.
     + Body
 
             {
-                "id": "unique-id-123",
+                "contact": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

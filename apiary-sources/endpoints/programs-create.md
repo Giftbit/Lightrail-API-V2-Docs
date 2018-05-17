@@ -11,19 +11,19 @@ Create a new Program.
     + Attributes
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
-        + currency (string, required) - {{currency}}
-        + access (enum[string], required) - {{valueStore.access.description}}
-            + `contact` - {{valueStore.access.types.contact}}
-            + `secureCode` - {{valueStore.access.types.secureCode}}
-            + `publicCode` - {{valueStore.access.types.publicCode}}
-        + discount (boolean, optional) - {{valueStore.discount}}
-        + preTax (boolean, optional) - {{valueStore.preTax}}
-        + active (boolean, optional) - {{valueStore.active}}
-        + redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
-        + valueRule (number, optional) - {{valueStore.valueRule}}
-        + minInitialValue (number, optional) - {{program.minInitialValue}}
-        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + currency (string, required) - {{currency.code}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `contact` - {{value.access.types.contact}}
+            + `secureCode` - {{value.access.types.secureCode}}
+            + `publicCode` - {{value.access.types.publicCode}}
+        + discount (boolean, optional) - {{value.discount}}
+        + preTax (boolean, optional) - {{value.preTax}}
+        + active (boolean, optional) - {{value.active}}
+        + redemptionRule (Rule, optional) - {{value.redemptionRule}}
+        + valueRule (number, optional) - {{value.valueRule}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -56,8 +56,8 @@ Create a new Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,

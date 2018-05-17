@@ -12,7 +12,7 @@ Perhaps a customer who has $20 account credits visits your store, enters the pro
 **Request**: `POST /transactions/orders`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "currency": "USD",
     "lineItems": [
         {
@@ -49,7 +49,7 @@ Also, note the `sources` property in the request. It includes three sources, two
 **Response**: `200 OK`
 ```json
 {
-    "transactionId": "unique-id-123",
+    "id": "unique-id-123",
     "currency": "USD",
     "totals": {
         "subtotal": 3000,
@@ -74,13 +74,13 @@ Also, note the `sources` property in the request. It includes three sources, two
     "steps": [
         {
             "rail": "lightrail",
-            "valueStoreId": "easymoney-promo",
+            "id": "easymoney-promo",
             "amount": -600, 
             "discount": true
         },
         {
             "rail": "lightrail",
-            "valueStoreId": "cus_123-account",
+            "id": "cus_123-account",
             "amount": -2000, 
             "discount": false
         },
@@ -104,11 +104,11 @@ A source consists of an object with a `rail` identifier along with some addition
 #### Rail: Lightrail
 A source with `"rail": "lightrail"` means the value is stored in Lightrail. 
 
-##### How Lightrail Stores Value: `ValueStores`
-Value stored in Lightrail, whether it represents a gift card, account credits or points, or a promotional offer for a discount, are stored as `ValueStores`.   
-Different types of value are represented by modifying the properties of `ValueStores`.
+##### How Lightrail Stores Value: `Values`
+Value stored in Lightrail, whether it represents a gift card, account credits or points, or a promotional offer for a discount, are stored as `Values`.   
+Different types of value are represented by modifying the properties of `Values`.
 
-The way `ValueStores` are passed into the `sources` property of the `orders` resource depends on what type of value it is.
+The way `Values` are passed into the `sources` property of the `orders` resource depends on what type of value it is.
 
 ##### `customerId`
 Some value may be attached directly to a `Customer` (see the [create customer documentation](https://lightrailapi.docs.apiary.io/#reference/0/customers/create-customer) for details on creating `Customers`).
@@ -122,7 +122,7 @@ Usage:
 }
 ```     
 
-This will cause the `orders` endpoint to consider all `ValueStores` associated with that customer and will resolve the complexity of applying them to the order in the correct order. 
+This will cause the `orders` endpoint to consider all `Values` associated with that customer and will resolve the complexity of applying them to the order in the correct order. 
 
 ##### `secureCode`       
 A `secureCode` is a unique-unguessable code and is most commonly used by gift cards and unique promotion codes. 

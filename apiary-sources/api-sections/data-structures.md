@@ -16,4 +16,4 @@
 
 {% include 'data-structures/TransactionStep.md' %}
 
-{% include 'data-structures/ValueStore.md' %}
+{% include 'data-structures/Value.md' %}

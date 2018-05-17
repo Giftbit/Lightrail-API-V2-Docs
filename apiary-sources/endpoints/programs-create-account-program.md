@@ -11,10 +11,10 @@ Create a new Account/Points Program.
     + Attributes
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
-        + currency (string, required) - {{currency}}
-        + access (enum[string], required) - {{valueStore.access.description}}
-            + `contact` - {{valueStore.access.types.contact}}
-        + active (boolean, optional) - {{valueStore.active}}
+        + currency (string, required) - {{currency.code}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `contact` - {{value.access.types.contact}}
+        + active (boolean, optional) - {{value.active}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -43,8 +43,8 @@ Create a new Account/Points Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": null
                 "uses": null,
                 "tags": ["account"],

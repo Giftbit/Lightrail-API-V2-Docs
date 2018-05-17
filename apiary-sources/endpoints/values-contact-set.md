@@ -1,8 +1,4 @@
-### Set Value Store Contact [PUT /valueStores/{valueStoreId}/contact]
-
-Set a Value Store's Contact.
-
----
+### Set Value Contact [PUT /values/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -10,7 +6,7 @@ Set a Value Store's Contact.
             {{header.authorization}}
 
     + Attributes
-        + contact (string, required) - The ID of the Contact who should be associated with the Value Store.
+        + contact (string, required) - The ID of the Contact owning the Value.
         
     + Body
     
@@ -19,7 +15,7 @@ Set a Value Store's Contact.
             }
 
 + Parameter
-    + valueStoreId (string) - the valueStoreId of the Value Store to set the Contact of.
+    + id (string) - the id of the Value to set the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Contact)

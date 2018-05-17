@@ -2,7 +2,7 @@
 
 Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
 
-Value Stores that have already been created will not be changed.
+Values that have already been created will not be changed.
 
 + Parameter
     + programId (string) - the programId of the Program to modify.
@@ -14,10 +14,10 @@ Value Stores that have already been created will not be changed.
 
     + Attributes
         + programId (string, optional) - {{program.programId}}  If present must match the programId in the path.
-        + active (boolean, optional) - {{valueStore.active}}
-        + minInitialValue (number, optional) - {{program.minInitialValue}}
-        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + active (boolean, optional) - {{value.active}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
         
@@ -42,8 +42,8 @@ Value Stores that have already been created will not be changed.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": null,
-                "maxInitialValue": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
                 "fixedInitialValues": [
                     500,
                     1500,

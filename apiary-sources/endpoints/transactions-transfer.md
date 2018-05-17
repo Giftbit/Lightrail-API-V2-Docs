@@ -1,6 +1,6 @@
 ### Transfer [POST /transactions/transfer]
 
-Transfer value from one value store to another.
+Transfer balance from one Value to another.
 
 Currently only the `lightrail` payment rail is supported.
 
@@ -11,11 +11,11 @@ Currently only the `lightrail` payment rail is supported.
             {{header.authorization}}
 
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
-        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific ValueStore are supported.
-        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific ValueStore are supported.
+        + id (string, required) - {{transaction.id}}
+        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
+        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + pending (boolean, optional) - {{transaction.pending}}
@@ -24,14 +24,14 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "valueStoreId": "vs_1"
+                    "id": "vs_1"
                 },
                 "destination": {
                     "rail": "lightrail",
-                    "valueStoreId": "alice-account-USD"
+                    "id": "alice-account-USD"
                 },
                 "amount": 2500,
                 "currency": "USD",
@@ -42,9 +42,9 @@ Currently only the `lightrail` payment rail is supported.
 
 + Response 200 (application/json)
     + Attributes
-        + transactionId (string, required) - {{transaction.transactionId}}
+        + id (string, required) - {{transaction.id}}
         + transactionType (string, required) - `transfer`
-        + currency (string, required) - {{currency}}
+        + currency (string, required) - {{currency.code}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
         + remainder (number, required) - {{transaction.remainder}}
         + simulated (boolean, optional) - {{transaction.simulated}}
@@ -55,25 +55,25 @@ Currently only the `lightrail` payment rail is supported.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "transfer",
                 "currency": "USD",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "USD",
-                        "valueBefore": 2500,
-                        "valueAfter": 0,
-                        "valueChange": -2500
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "alice-account-USD",
+                        "id": "alice-account-USD",
                         "currency": "USD",
-                        "valueBefore": 5000,
-                        "valueAfter": 7500,
-                        "valueChange": 2500
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,

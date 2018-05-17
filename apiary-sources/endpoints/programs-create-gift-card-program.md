@@ -11,13 +11,13 @@ Create a new Gift Card Program.
     + Attributes
         + programId (string, required) - {{program.programId}}
         + name (string, optional) - {{program.name}}
-        + currency (string, required) - {{currency}}
-        + access (enum[string], required) - {{valueStore.access.description}}
-            + `secureCode` - {{valueStore.access.types.secureCode}}
-        + active (boolean, optional) - {{valueStore.active}}
-        + minInitialValue (number, optional) - {{program.minInitialValue}}
-        + maxInitialValue (number, optional) - {{program.maxInitialValue}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
+        + currency (string, required) - {{currency.code}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `secureCode` - {{value.access.types.secureCode}}
+        + active (boolean, optional) - {{value.active}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -28,8 +28,8 @@ Create a new Gift Card Program.
                 "name": "Gift Cards USD",
                 "currency": "USD",
                 "access": "secureCode",
-                "minInitialValue": 500,
-                "maxInitialValue": 100000,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
                 "tags": ["giftcard"]
             }
     
@@ -48,8 +48,8 @@ Create a new Gift Card Program.
                 "active": "true",
                 "redemptionRule": null,
                 "valueRule": null,
-                "minInitialValue": 500,
-                "maxInitialValue": 100000,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
                 "fixedInitialValues": null,
                 "uses": null,
                 "tags": ["giftcard"],

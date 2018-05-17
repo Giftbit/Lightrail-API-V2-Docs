@@ -1,20 +1,19 @@
 ## Program (object)
 + programId (string, required) - {{program.programId}}
 + name (string, optional) - {{program.name}}
-+ currency (string, required) - {{currency}}
-+ access (enum[string], required) - How the valueStores can be accessed.
++ access (enum[string], required) - How the Values can be accessed.
     + `contact` - must be associated with a Contact.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - {{valueStore.discount}}
-+ preTax (boolean, required) - {{valueStore.preTax}}
-+ active (boolean, optional) - {{valueStore.active}}
-+ redemptionRule (Rule, optional) - {{valueStore.redemptionRule}}
-+ valueRule (number, optional) - {{valueStore.valueRule}}
-+ minInitialValue (number, optional) - {{program.minValue}}
-+ maxInitialValue (number, optional) - {{program.maxValue}}
-+ fixedInitialValues (array[number], optional) - A list of values the Value Store can be created with.
-+ uses (number, optional) - If set the number of uses the Value Store will be created with.  Set `null` or omit for infinite uses.
++ discount (boolean, required) - {{value.discount}}
++ preTax (boolean, required) - {{value.preTax}}
++ active (boolean, optional) - {{value.active}}
++ redemptionRule (Rule, optional) - {{value.redemptionRule}}
++ valueRule (number, optional) - {{value.valueRule}}
++ minInitialBalance (number, optional) - {{program.minBalance}}
++ maxInitialBalance (number, optional) - {{program.maxBalance}}
++ fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
++ uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - {{tags}}
 + createdDate (string, required) - {{program.createdDate}}
 + updatedDate (string, required) - {{program.updatedDate}}

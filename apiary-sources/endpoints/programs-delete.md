@@ -2,7 +2,7 @@
 
 Delete a Program by programId.
 
-The Program can only be deleted if it is not associated with any Value Stores.
+The Program can only be deleted if it is not associated with any Values.
 
 ---
 

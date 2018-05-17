@@ -1,7 +1,7 @@
-## Programs [/programs/]
+## Programs [/programs]
 
-Programs act as a template to set properties of ValueStores for the type of value you wish to issue. 
-A few common examples of the types of value you may want to issue and define as Programs are:
+Programs act as a template to set properties for the type of Value you wish to issue. 
+A few common examples of the types of Value you may want to issue and define as Programs are:
 - Gift cards
 - Accounts, points 
 - Promotions  

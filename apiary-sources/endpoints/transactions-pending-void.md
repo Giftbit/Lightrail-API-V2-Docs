@@ -1,6 +1,6 @@
-### Void Pending Transaction [POST /transactions/{transactionId}/void]
+### Void Pending Transaction [POST /transactions/{id}/void]
 
-Void a pending Transaction by transactionId.
+Void a pending Transaction by id.
 
 ---
 
@@ -10,7 +10,7 @@ Void a pending Transaction by transactionId.
             {{header.authorization}}
 
 + Parameter
-    + transactionId (string) - the transactionId of the pending Transaction to void.
+    + id (string) - the id of the pending Transaction to void.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -18,17 +18,17 @@ Void a pending Transaction by transactionId.
     + Body
 
             {
-                "transactionId": "unique-id-123",
+                "id": "unique-id-123",
                 "transactionType": "debit",
                 "currency": "XXX",
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "valueStoreId": "vs_1",
+                        "id": "vs_1",
                         "currency": "XXX",
-                        "valueBefore": 5500,
-                        "valueAfter": 3000,
-                        "valueChange": -2500
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,

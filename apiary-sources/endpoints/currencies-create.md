@@ -1,8 +1,5 @@
 ### Create a Currency [POST /currencies]
 
-Create a new Currency.
-
----
 + Request (application/json)
     + Headers
     
