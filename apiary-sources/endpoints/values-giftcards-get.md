@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?type}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,6 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + type (string, optional) - Filter by Value type.
     + programId (string, optional) - Filter by programId.
     + currency (string, optional) - Filter by currency.
     + minBalance (number, optional) - Filter by minimumm balance, inclusive.
@@ -41,7 +40,6 @@
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
                     "programId": "giftcards",
                     "currency": "USD",
                     "balance": 2500, 
@@ -58,3 +56,36 @@
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
+
+### Get Value [GET /values/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the id of the Value to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "programId": "giftcards",
+                "currency": "USD",
+                "balance": 2500, 
+                "preTax": false,
+                "active": true,
+                "frozen": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }

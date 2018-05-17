@@ -1,0 +1,9 @@
+## Values [/values/accounts]
+
+An Account is Value specifically tied to a Contact.
+
+{% include 'endpoints/values-accounts-create.md' %}
+
+{% include 'endpoints/values-accounts-update.md' %}
+
+{% include 'endpoints/values-accounts-get.md' %}
