@@ -1,25 +1,22 @@
-### Create Customer [POST /customers]
+### Create Contact [POST /contacts]
 
-Create a new Customer.
-
----
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
         
     + Attributes
-        + customerId (string, required) - {{customer.customerId}}
-        + firstName (string, optional) - {{customer.firstName}}
-        + lastName (string, optional) - {{customer.lastName}}
-        + email (string, optional) - {{customer.email}}
+        + id (string, required) - {{contact.id}}
+        + firstName (string, optional) - {{contact.firstName}}
+        + lastName (string, optional) - {{contact.lastName}}
+        + email (string, optional) - {{contact.email}}
         + tags (array[string], optional) - {{tags}}
-        + metadata (object, optional) - {{customer.metadata}}
+        + metadata (object, optional) - {{contact.metadata}}
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -29,12 +26,12 @@ Create a new Customer.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",'

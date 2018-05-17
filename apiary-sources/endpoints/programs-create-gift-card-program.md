@@ -34,7 +34,7 @@ Create a new Gift Card Program.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             

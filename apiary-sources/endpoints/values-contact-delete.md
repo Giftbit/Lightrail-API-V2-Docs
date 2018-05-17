@@ -1,4 +1,4 @@
-### Delete a Promotion Value's contact [DELETE /values/promotions/{id}/contact]
+### Delete Value Contact [DELETE /values/{id}/contact]
 
 + Request (application/json)
 
@@ -9,7 +9,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Promotion to remove the Contact from.
+    + id (string) - the id of the Value to remove the Contact from.
 
 + Response 200 (application/json)
 

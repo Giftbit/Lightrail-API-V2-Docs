@@ -1,8 +1,5 @@
 ### Create Program [POST /programs]
 
-Create a new Program.
-
----
 + Request (application/json)
     + Headers
     
@@ -13,7 +10,7 @@ Create a new Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
-            + `customerId` - {{value.access.types.customerId}}
+            + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
             + `publicCode` - {{value.access.types.publicCode}}
         + discount (boolean, optional) - {{value.discount}}
@@ -42,7 +39,7 @@ Create a new Program.
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             

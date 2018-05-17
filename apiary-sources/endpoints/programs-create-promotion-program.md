@@ -1,6 +1,6 @@
 ### Create Promotion Program [POST /programs]
 
-Create a new Promotion Program. A Promotion can be in the form of a generic code like "SAVE10" which your customer's would enter during checkout. A Promotion may also be a unique code which is distributed to a customer or it may even be directly attached to a customer's account.  
+Create a new Promotion Program. A Promotion can be in the form of a generic code like "SAVE10" which your contact's would enter during checkout. A Promotion may also be a unique code which is distributed to a contact or it may even be directly attached to a contact's account.  
 
 ---
 + Request (application/json)
@@ -13,7 +13,7 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
-            + `customerId` - {{value.access.types.customerId}}
+            + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
             + `publicCode` - {{value.access.types.publicCode}}          
         + active (boolean, optional) - {{value.active}}
@@ -39,7 +39,7 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             

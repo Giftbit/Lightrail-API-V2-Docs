@@ -1,4 +1,4 @@
-### Set a Giftcard's Contact [PUT /values/giftcard/{id}/customer]
+### Set a Giftcard's Contact [PUT /values/giftcard/{id}/contact]
 
 + Request (application/json)
     + Headers

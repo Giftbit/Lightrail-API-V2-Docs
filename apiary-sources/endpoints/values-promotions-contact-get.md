@@ -1,24 +1,15 @@
-### Set a Promotion Value's Customer [PUT /values/promotion/{id}/customer]
+### Get a Promotion Value's Contact [GET /values/promotions/{id}/contact]
 
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
 
-    + Attributes
-        + id (string, required) - The id of the Customer to set as owner of the Value.
-        
-    + Body
-    
-            {
-                "customer": "unique-id-123"
-            }
-
 + Parameter
-    + id (string) - the id of the Value to set the Customer of.
+    + id (string) - the id of the Promotion to get the Contact of.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
