@@ -1,4 +1,4 @@
-### Get Value's Customer [GET /values/{id}/customer]
+### Get a Giftcard's Contact [GET /values/giftcards/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get the Customer of.
+    + id (string) - the id of the Giftcard to get the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Customer)

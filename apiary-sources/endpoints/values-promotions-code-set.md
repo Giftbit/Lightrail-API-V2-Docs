@@ -1,4 +1,4 @@
-### Set a Giftcard's code [PUT /values/giftcard/{id}/code]
+### Set a Promotion Value's code [PUT /values/promotions/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -17,7 +17,7 @@
             }
 
 + Parameter
-    + id (string) - the id of the Giftcard to update the code of.
+    + id (string) - the id of the Promotion to update the code of.
 
 + Response 200 (application/json)
     + Attributes

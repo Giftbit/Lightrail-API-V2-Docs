@@ -1,4 +1,4 @@
-### Get Value by code [GET /values/code/{code}]
+### Get a Value by code [GET /values/code/{code}]
 
 + Request (application/json)
     + Headers

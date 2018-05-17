@@ -1,4 +1,4 @@
-### Delete Value customer by code [DELETE /values/code/{code}/customer]
+### Delete a Value's customer by code [DELETE /values/code/{code}/customer]
 
 + Request (application/json)
 

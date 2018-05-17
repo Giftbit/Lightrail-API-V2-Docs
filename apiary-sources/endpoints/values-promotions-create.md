@@ -1,4 +1,4 @@
-### Create a Giftcard [POST /values/giftcards]
+### Create a Promotion Value [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -7,7 +7,7 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + programId (string, optional) - Associate with and copy default values from the given Program.
+        + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
         + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
@@ -26,7 +26,7 @@
     
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -38,8 +38,8 @@
     
             {
                 "id": "vs-1",
-                "type": "giftcards",
-                "programId": "giftcards",
+                "type": "promotion"
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500, 
                 "preTax": false,

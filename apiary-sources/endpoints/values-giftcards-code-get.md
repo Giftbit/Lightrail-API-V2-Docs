@@ -1,4 +1,4 @@
-### Get Value Code [GET /values/{id}/code]
+### Get a Giftcard's code [GET /values/giftcards/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get the code of.
+    + id (string) - the id of the Giftcard to get the code of.
 
 + Response 200 (application/json)
     + Attributes
@@ -15,5 +15,5 @@
     + Body
 
             {
-                "code": "BLACKFRIDAY20%"
+                "code": "…JM4G"
             }

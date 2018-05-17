@@ -1,4 +1,4 @@
-### Update Value by code [PATCH /values/code/{code}]
+### Update a Value by code [PATCH /values/code/{code}]
 
 + Parameter
     + code (string) - the code of the Value to modify.

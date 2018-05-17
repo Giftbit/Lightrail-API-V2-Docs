@@ -1,15 +1,15 @@
-### Delete Value Customer [DELETE /values/{id}/customer]
+### Delete a Giftcard's Contact [DELETE /values/giftcards/{id}/contact]
 
 + Request (application/json)
 
-    Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
+    Remove the Contact as the owner of a Giftcard.  The Contact's info is not deleted.
 
     + Headers
     
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to remove the Customer from.
+    + id (string) - the id of the Giftcard to remove the Contact from.
 
 + Response 200 (application/json)
 

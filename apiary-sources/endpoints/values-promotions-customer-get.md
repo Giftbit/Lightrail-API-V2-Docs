@@ -1,4 +1,4 @@
-### Get a Value's customer by code [GET /values/code/{code}/customer]
+### Get a Promotion Value's customer [GET /values/promotions/{id}/customer]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + code (string) - the code of the Value to get the Customer of.
+    + id (string) - the id of the Promotion to get the Customer of.
 
 + Response 200 (application/json)
     + Attributes (Customer)
@@ -14,7 +14,7 @@
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

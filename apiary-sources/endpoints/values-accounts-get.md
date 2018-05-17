@@ -56,7 +56,7 @@
                 }
             ]
 
-### Get Account [GET /values/accounts/{id}]
+### Get an Account [GET /values/accounts/{id}]
 
 + Request (application/json)
     + Headers

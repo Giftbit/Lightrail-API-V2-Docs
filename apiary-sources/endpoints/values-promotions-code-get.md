@@ -1,4 +1,4 @@
-### Get a Value's code by code [GET /values/code/{code}/code]
+### Get a Promotion Value's code [GET /values/promotions/{id}/code]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + code (string) - the code of the Value to get the code of.
+    + id (string) - the id of the Promotion to get the code of.
 
 + Response 200 (application/json)
     + Attributes

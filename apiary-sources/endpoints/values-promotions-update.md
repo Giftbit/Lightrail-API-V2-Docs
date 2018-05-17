@@ -1,17 +1,18 @@
-### Create a Giftcard [POST /values/giftcards]
+### Update a Promotion Value [PATCH /values/promotions/{id}]
 
-+ Request (application/json)
++ Parameter
+    + id (string) - the id of the Promotion to modify.
+
++ Request (application/merge-patch+json)
+
+    {{patch.merge}}
+
     + Headers
     
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{value.id}}
-        + programId (string, optional) - Associate with and copy default values from the given Program.
-        + customerId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `customerId`.
-        + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
-        + balance (number, optional) - {{value.balance}}
+        + id (string, optional) - {{value.id}}  If present must match the id in the path.
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
@@ -25,10 +26,7 @@
     + Body
     
             {
-                "id": "vs-1",
-                "programId": "giftcards",
-                "currency": "USD",
-                "balance": 2500
+                "frozen": true
             }
     
 + Response 200 (application/json)
@@ -38,13 +36,13 @@
     
             {
                 "id": "vs-1",
-                "type": "giftcards",
-                "programId": "giftcards",
+                "type": "promotion"
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500, 
                 "preTax": false,
                 "active": true,
-                "frozen": false,
+                "frozen": true,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

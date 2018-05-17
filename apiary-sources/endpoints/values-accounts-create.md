@@ -1,4 +1,4 @@
-### Create Account [POST /values/accounts]
+### Create an Account [POST /values/accounts]
 
 + Request (application/json)
     + Headers
@@ -7,7 +7,7 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + customerId (string, required) - Associate the Value with the given Customer.  Cannot be set with `code`.
+        + contact (string, required) - Associate the Value with the given Contact.
         + currency (string, required) - {{currency.code}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
@@ -17,6 +17,7 @@
     
             {
                 "id": "account-1",
+                "contact": "contact-jeff-2",
                 "currency": "USD"
             }
     

@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -40,7 +40,8 @@
             [
                 {
                     "id": "vs-1",
-                    "programId": "giftcards",
+                    "type": "promotion"
+                    "programId": "springpromo",
                     "currency": "USD",
                     "balance": 2500, 
                     "preTax": false,
@@ -57,7 +58,7 @@
                 }
             ]
 
-### Get Value [GET /values/{id}]
+### Get a Promotion Value [GET /values/promotions/{id}]
 
 + Request (application/json)
     + Headers
@@ -65,7 +66,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get.
+    + id (string) - the id of the Promotion to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -74,7 +75,8 @@
 
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "type": "promotion"
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500, 
                 "preTax": false,

@@ -1,4 +1,4 @@
-### Set Value code by code [PUT /values/code/{code}/code]
+### Set a Value's code by code [PUT /values/code/{code}/code]
 
 + Request (application/json)
     + Headers
@@ -26,5 +26,5 @@
     + Body
 
             {
-                "codeLastFour": "e1b1"
+                "code": "…e1b1"
             }

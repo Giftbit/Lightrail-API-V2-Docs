@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -40,6 +40,7 @@
             [
                 {
                     "id": "vs-1",
+                    "type": "giftcard",
                     "programId": "giftcards",
                     "currency": "USD",
                     "balance": 2500, 
@@ -57,7 +58,7 @@
                 }
             ]
 
-### Get Value [GET /values/{id}]
+### Get a Gfitcard [GET /values/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -65,7 +66,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get.
+    + id (string) - the id of the Gfitcard to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -74,6 +75,7 @@
 
             {
                 "id": "vs-1",
+                "type": "giftcard",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 

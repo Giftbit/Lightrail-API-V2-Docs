@@ -1,7 +1,7 @@
-### Update a Value [PATCH /values/{id}]
+### Update a Giftcard [PATCH /values/giftcards/{id}]
 
 + Parameter
-    + id (string) - the id of the Value to modify.
+    + id (string) - the id of the Giftcard to modify.
 
 + Request (application/merge-patch+json)
 
@@ -36,6 +36,7 @@
     
             {
                 "id": "vs-1",
+                "type": "giftcard",
                 "programId": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 

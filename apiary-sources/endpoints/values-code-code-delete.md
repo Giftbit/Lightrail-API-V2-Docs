@@ -1,4 +1,4 @@
-### Delete Value code by code [DELETE /values/code/{code}/code]
+### Delete a Value's code by code [DELETE /values/code/{code}/code]
 
 + Request (application/json)
     + Headers
