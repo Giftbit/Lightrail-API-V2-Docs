@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Accounts [GET /values/accounts/{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -14,8 +14,6 @@
     + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
     + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
     + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
     + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
@@ -39,8 +37,9 @@
 
             [
                 {
-                    "id": "vs-1",
-                    "programId": "giftcards",
+                    "id": "account-1",
+                    "type": "account",
+                    "programId": null,
                     "currency": "USD",
                     "balance": 2500, 
                     "preTax": false,
@@ -57,7 +56,7 @@
                 }
             ]
 
-### Get Value [GET /values/{id}]
+### Get Account [GET /values/accounts/{id}]
 
 + Request (application/json)
     + Headers
@@ -65,7 +64,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get.
+    + id (string) - the id of the Account to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -73,8 +72,9 @@
     + Body
 
             {
-                "id": "vs-1",
-                "programId": "giftcards",
+                "id": "account-1",
+                "type": "account",
+                "programId": null,
                 "currency": "USD",
                 "balance": 2500, 
                 "preTax": false,
