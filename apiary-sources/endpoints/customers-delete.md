@@ -1,8 +1,8 @@
-### Delete Customer [DELETE /customers/{customerId}]
+### Delete Contact [DELETE /contacts/{contactId}]
 
-Delete a Customer by customerId.
+Delete a Contact by contactId.
 
-The Customer can only be deleted if it is not associated with any Values.
+The Contact can only be deleted if it is not associated with any Values.
 
 ---
 
@@ -12,7 +12,7 @@ The Customer can only be deleted if it is not associated with any Values.
             {{header.authorization}}
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to delete.
+    + contactId (string) - the contactId of the Contact to delete.
 
 + Response 200 (application/json)
 

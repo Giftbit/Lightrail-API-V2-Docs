@@ -47,7 +47,7 @@ Get multiple Transactions.
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z",
                     "metadata": {
-                        "note": "Reduce loyalty points after 3mo customer inactivity"
+                        "note": "Reduce loyalty points after 3mo contact inactivity"
                     }
                 }
             ]
@@ -90,6 +90,6 @@ Get Transaction by id.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z",
                 "metadata": {
-                    "note": "Reduce loyalty points after 3mo customer inactivity"
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }

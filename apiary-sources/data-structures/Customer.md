@@ -1,9 +1,9 @@
-## Customer (object)
-+ customerId (string, required) - {{customer.customerId}}
-+ firstName (string, optional) - {{customer.firstName}}
-+ lastName (string, optional) - {{customer.lastName}}
-+ email (string, optional) - {{customer.email}}
+## Contact (object)
++ contactId (string, required) - {{contact.contactId}}
++ firstName (string, optional) - {{contact.firstName}}
++ lastName (string, optional) - {{contact.lastName}}
++ email (string, optional) - {{contact.email}}
 + tags (array[string], optional) - {{tags}}
-+ metadata (object, optional) - {{customer.metadata}}
-+ createdDate (string, required) - {{customer.createdDate}}
-+ updatedDate (string, required) - {{customer.updatedDate}}
++ metadata (object, optional) - {{contact.metadata}}
++ createdDate (string, required) - {{contact.createdDate}}
++ updatedDate (string, required) - {{contact.updatedDate}}

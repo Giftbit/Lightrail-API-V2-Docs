@@ -1,6 +1,6 @@
-### Get Customers [GET /customers{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Customers.
+Get multiple Contacts.
 
 ---
 + Request (application/json)
@@ -28,13 +28,13 @@ Get multiple Customers.
             Offset: 0
             Count: 1
 
-    + Attributes (array[Customer])
+    + Attributes (array[Contact])
 
     + Body
 
             [
                 {
-                    "customerId": "unique-id-123",
+                    "contactId": "unique-id-123",
                     "firstName": "Jeffrey",
                     "lastName": "Lebowski",
                     "email": "thedude@example.com",
@@ -47,9 +47,9 @@ Get multiple Customers.
                 }
             ]
 
-### Get Customer [GET /customers/{customerId}]
+### Get Contact [GET /contacts/{contactId}]
 
-Get Customer by customerId.
+Get Contact by contactId.
 
 ---
 
@@ -59,15 +59,15 @@ Get Customer by customerId.
             {{header.authorization}}
 
 + Parameter
-    + customerId (string) - the customerId of the Customer to get.
+    + contactId (string) - the contactId of the Contact to get.
 
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
 
             {
-                "customerId": "unique-id-123",
+                "contactId": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",

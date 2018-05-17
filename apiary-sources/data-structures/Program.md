@@ -3,7 +3,7 @@
 + name (string, optional) - {{program.name}}
 + currency (string, required) - {{currency.code}}
 + access (enum[string], required) - How the values can be accessed.
-    + `customerId` - must be associated with a customerId.
+    + `contactId` - must be associated with a contactId.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
 + discount (boolean, required) - {{value.discount}}

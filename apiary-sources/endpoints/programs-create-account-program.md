@@ -13,7 +13,7 @@ Create a new Account/Points Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
-            + `customerId` - {{value.access.types.customerId}}
+            + `contactId` - {{value.access.types.contactId}}
         + active (boolean, optional) - {{value.active}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
@@ -21,23 +21,23 @@ Create a new Account/Points Program.
     + Body
 
             {
-                "programId": "customer-accounts-usd",
+                "programId": "contact-accounts-usd",
                 "name": "Accounts USD",
                 "currency": "USD",
-                "access": "customerId",
+                "access": "contactId",
                 "tags": ["account"]
             }
     
 + Response 200 (application/json)
-    + Attributes (Customer)
+    + Attributes (Contact)
 
     + Body
             
             {
-                "programId": "customer-accounts-usd",
+                "programId": "contact-accounts-usd",
                 "name": "Accounts USD",
                 "currency": "USD",
-                "access": "customerId",
+                "access": "contactId",
                 "discount": "false",
                 "preTax": "false",
                 "active": "true",
