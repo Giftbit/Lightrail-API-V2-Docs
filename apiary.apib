@@ -221,6 +221,61 @@ Get Contact by ID.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 ---
+### Create Account for Contact [POST /contacts/{id}/values/accounts]
+
+Create a new Account for a Contact
+
+---
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + id (string) - the ID of the Contact that the account is for.
+
++ Attributes
+    + id (string, required) - Unique idempotent id for the Value.
+    + program (string, optional) - Associate with and copy default values from the given Program. If not provided, the default Accounts Program will be used.
+    + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
+    + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
+    + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+    + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+    + metadata (number, optional) - Arbitrary data associated with the Value.
+    
++ Body
+
+        {
+            "id": "cust-123-acc-1",
+            "currency": "USD",
+            "balance": 2500
+        }
+
+
++ Response 200 (application/json)
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "cust-123-acc-1",
+                    "programId": "accounts",
+                    "currency": "USD",
+                    "balance": 2500, 
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 ### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
 
 Get all Values of type Account associated with a Contact.
