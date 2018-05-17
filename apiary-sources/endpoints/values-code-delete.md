@@ -1,9 +1,5 @@
 ### Delete Value Code [DELETE /values/{id}/code]
 
-Delete a Value's code.
-
----
-
 + Request (application/json)
     + Headers
     

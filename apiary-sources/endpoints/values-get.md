@@ -1,8 +1,5 @@
 ### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Values.
-
----
 + Request (application/json)
     + Headers
     
@@ -61,10 +58,6 @@ Get multiple Values.
             ]
 
 ### Get Value [GET /values/{id}]
-
-Get Value by id.
-
----
 
 + Request (application/json)
     + Headers

@@ -1,9 +1,5 @@
 ### Get Value Code [GET /values/{id}/code]
 
-Get a Value's code.
-
----
-
 + Request (application/json)
     + Headers
     

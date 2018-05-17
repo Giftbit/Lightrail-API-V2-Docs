@@ -1,9 +1,5 @@
 ### Get Value's Customer [GET /values/{id}/customer]
 
-Get a Value's customer.
-
----
-
 + Request (application/json)
     + Headers
     

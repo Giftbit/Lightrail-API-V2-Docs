@@ -1,4 +1,4 @@
-## Programs [/programs/]
+## Programs [/programs]
 
 Programs act as a template to set properties for the type of Value you wish to issue. 
 A few common examples of the types of Value you may want to issue and define as Programs are:

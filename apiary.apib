@@ -221,7 +221,7 @@ Get Customer by customerId.
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Programs [/programs/]
+## Programs [/programs]
 
 Programs act as a template to set properties for the type of Value you wish to issue. 
 A few common examples of the types of Value you may want to issue and define as Programs are:
@@ -494,14 +494,11 @@ Get Program by programId
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Values [/values/]
+## Values [/values]
 
 Values (naturally) represent value in the Lightrail system, such as a gift card or promotion.  They are identified by a unique id but may also be referenced by a code or associated with a Customer.
 
----
 ### Create a Value [POST /values]
-
-Create a new Value.
 
 + Request (application/json)
     + Headers
@@ -559,14 +556,13 @@ Create a new Value.
 
 ### Update a Value [PATCH /values/{id}]
 
-Update fields that are sent and leave unspecified values unchanged.
-
-In particular this is how you activate/deactivate freeze/unfreeze a Value.
-
 + Parameter
     + id (string) - the id of the Value to modify.
 
 + Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -614,9 +610,6 @@ In particular this is how you activate/deactivate freeze/unfreeze a Value.
 
 ### Get Values [GET /values{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
-Get multiple Values.
-
----
 + Request (application/json)
     + Headers
     
@@ -676,10 +669,6 @@ Get multiple Values.
 
 ### Get Value [GET /values/{id}]
 
-Get Value by id.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -713,10 +702,6 @@ Get Value by id.
 
 ### Get Value Code [GET /values/{id}/code]
 
-Get a Value's code.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -736,10 +721,6 @@ Get a Value's code.
             }
 
 ### Set Value Code [PUT /values/{id}/code]
-
-Set a Value's code.
-
----
 
 + Request (application/json)
     + Headers
@@ -772,10 +753,6 @@ Set a Value's code.
 
 ### Delete Value Code [DELETE /values/{id}/code]
 
-Delete a Value's code.
-
----
-
 + Request (application/json)
     + Headers
     
@@ -793,10 +770,6 @@ Delete a Value's code.
             }
 
 ### Get Value's Customer [GET /values/{id}/customer]
-
-Get a Value's customer.
-
----
 
 + Request (application/json)
     + Headers
@@ -824,10 +797,6 @@ Get a Value's customer.
             }
 
 ### Set Value Customer [PUT /values/{id}/customer]
-
-Set a Value's Customer.
-
----
 
 + Request (application/json)
     + Headers
@@ -865,11 +834,10 @@ Set a Value's Customer.
 
 ### Delete Value Customer [DELETE /values/{id}/customer]
 
-Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
-
----
-
 + Request (application/json)
+
+    Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
+
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -885,9 +853,8 @@ Remove the Customer as the owner of a Value.  The Customer's info is not deleted
                 "success": true
             }
 
-## Transactions [/transactions/]
+## Transactions [/transactions]
 
----
 ### Process an order [POST /transactions/orders]
 
 Process an order by debiting (removing value from) one or more payment rails.
@@ -1499,7 +1466,7 @@ Void a pending Transaction by id.
                 }
             }
 
-## Currencies [/currencies/]
+## Currencies [/currencies]
 
 A Currency is a unit of money in the system.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
 

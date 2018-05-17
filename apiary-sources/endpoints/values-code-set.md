@@ -1,9 +1,5 @@
 ### Set Value Code [PUT /values/{id}/code]
 
-Set a Value's code.
-
----
-
 + Request (application/json)
     + Headers
     

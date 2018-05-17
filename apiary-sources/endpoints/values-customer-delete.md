@@ -1,10 +1,9 @@
 ### Delete Value Customer [DELETE /values/{id}/customer]
 
-Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
-
----
-
 + Request (application/json)
+
+    Remove the Customer as the owner of a Value.  The Customer's info is not deleted.
+
     + Headers
     
             {{header.authorization}}

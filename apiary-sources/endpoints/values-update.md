@@ -1,13 +1,12 @@
 ### Update a Value [PATCH /values/{id}]
 
-Update fields that are sent and leave unspecified values unchanged.
-
-In particular this is how you activate/deactivate freeze/unfreeze a Value.
-
 + Parameter
     + id (string) - the id of the Value to modify.
 
 + Request (application/merge-patch+json)
+
+    {{patch.merge}}
+
     + Headers
     
             {{header.authorization}}

@@ -1,9 +1,5 @@
 ### Set Value Customer [PUT /values/{id}/customer]
 
-Set a Value's Customer.
-
----
-
 + Request (application/json)
     + Headers
     

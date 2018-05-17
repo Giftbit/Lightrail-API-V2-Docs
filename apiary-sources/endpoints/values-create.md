@@ -1,7 +1,5 @@
 ### Create a Value [POST /values]
 
-Create a new Value.
-
 + Request (application/json)
     + Headers
     
