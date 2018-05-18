@@ -16,11 +16,11 @@
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + minStartDate (string, optional) - Filter by he minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by he maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by he minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by he maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by he minimum createdDate, inclusive.
+    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
+    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
     + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
