@@ -1,6 +1,6 @@
 ## Codes [/values/code]
 
-A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions can both be referenced by a code.  
+A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
 
 {% include 'endpoints/values-code-update.md' %}
 {% include 'endpoints/values-code-get.md' %}

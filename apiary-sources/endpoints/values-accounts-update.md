@@ -15,7 +15,7 @@
         + id (string, optional) - {{value.id}}  If present must match the id in the path.
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
-        + metadata (number, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     

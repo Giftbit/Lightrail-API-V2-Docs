@@ -84,7 +84,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
         + tags (array[string], optional) - Segmentation tags.
-        + metadata (string, optional) - Arbitrary data associated with the Contact.
+        + metadata (object, optional) - Arbitrary data associated with the Contact.
 
     + Body
 
@@ -234,7 +234,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
     + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
     + active (boolean, optional) - Whether the Value is active and can be used upon creation.
     + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-    + metadata (number, optional) - Arbitrary data associated with the Value.
+    + metadata (object, optional) - Arbitrary data associated with the Value.
     
     + Body
     
@@ -443,7 +443,7 @@ See [here](https://localhost:8181/docs/) to see examples of how you'd create a P
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + programId (string, required) - Unique idempotent ID for the Program.
+        + programId (string, required) - 
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + access (enum[string], required) - How the values can be accessed
@@ -519,7 +519,7 @@ Values that have already been created will not be changed.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + programId (string, optional) - Unique idempotent ID for the Program.  If present must match the programId in the path.
+        + programId (string, optional) -   If present must match the programId in the path.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
@@ -689,7 +689,7 @@ The Program can only be deleted if it is not associated with any Values.
 
 ## Values [/values]
 
-A Value (naturally) represents value in the Lightrail system.  It can be a giftcard, a promotion or an account.
+A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
 
 ### Get Values [GET /values{?limit}{?offset}{?type}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
@@ -767,9 +767,10 @@ An Account is Value specifically tied to a Contact.
         + id (string, required) - Unique idempotent id for the Value.
         + contact (string, required) - Associate the Value with the given Contact.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -819,7 +820,7 @@ An Account is Value specifically tied to a Contact.
         + id (string, optional) - Unique idempotent id for the Value.  If present must match the id in the path.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1023,7 +1024,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1080,7 +1081,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1171,7 +1172,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 }
             ]
 
-### Get a Gfitcard [GET /values/giftcards/{id}]
+### Get a Giftcard [GET /values/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -1179,7 +1180,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Gfitcard to get.
+    + id (string) - the id of the Giftcard to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -1231,14 +1232,14 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, required) - The code to set.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
         
     + Body
     
             {
                 "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure" true
+                "secure": true
             }
 
 + Parameter
@@ -1286,7 +1287,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -1324,7 +1325,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
             {
                 "contact": {
-                   "contactId": "unique-id-123",
+                   "id": "unique-id-123",
                    "firstName": "Jeffrey",
                    "lastName": "Lebowski",
                    "email": "thedude@example.com",
@@ -1388,8 +1389,8 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
     + Attributes
         + id (string, required) - Unique idempotent id for the Value.
         + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
-        + contactId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contactId`.
+        + contact (string, optional) - Associate the Value with the given Contact.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
         + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
@@ -1400,7 +1401,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1457,7 +1458,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1637,14 +1638,14 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, required) - The code to set.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
         
     + Body
     
             {
                 "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure" true
+                "secure": true
             }
 
 + Parameter
@@ -1730,7 +1731,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
             {
                 "contact": {
-                   "contactId": "unique-id-123",
+                   "id": "unique-id-123",
                    "firstName": "Jeffrey",
                    "lastName": "Lebowski",
                    "email": "thedude@example.com",
@@ -1782,7 +1783,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
 ## Codes [/values/code]
 
-A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions can both be referenced by a code.  
+A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
 
 ### Update a Value by code [PATCH /values/code/{code}]
 
@@ -1806,7 +1807,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-        + metadata (number, optional) - Arbitrary data associated with the Value.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
     
@@ -1897,14 +1898,14 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, required) - The code to set.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
         
     + Body
     
             {
                 "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure" true
+                "secure": true
             }
 
 + Parameter
@@ -1952,7 +1953,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
     + Body
 
             {
-                "contactId": "unique-id-123",
+                "id": "unique-id-123",
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
@@ -1990,7 +1991,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "contact": {
-                   "contactId": "unique-id-123",
+                   "id": "unique-id-123",
                    "firstName": "Jeffrey",
                    "lastName": "Lebowski",
                    "email": "thedude@example.com",
@@ -2044,24 +2045,22 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
 ### Process an order [POST /transactions/orders]
 
-Process an order by debiting (removing value from) one or more payment rails.
+Process an order by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
-The payment rails `lightrail`, `stripe` and `internal` are supported.
-
-Data used in example:
-- Purchasing: 
-    - 2x $5 socks (8% tax rate)
-    - 1x $1.99 chocolate bar  (5% tax rate)
-    - 1x $3.49 shipping (0% tax rate)
-- Payment Sources:
-    - Contact with prepaid account, and a sock and chocolate bar promotion.
-        - Account has $20.
-        - Sock promo is for 20% off retail price of socks.
-        - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
-    - Generic code for 10% off orders over $5 (does not apply to shipping). 
-
----
 + Request (application/json)
+    
+    Data used in example:
+    - Purchasing: 
+        - 2x $5 socks (8% tax rate)
+        - 1x $1.99 chocolate bar  (5% tax rate)
+        - 1x $3.49 shipping (0% tax rate)
+    - Payment Sources:
+        - Contact with prepaid account, and a sock and chocolate bar promotion.
+            - Account has $20.
+            - Sock promo is for 20% off retail price of socks.
+            - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
+        - Generic code for 10% off orders over $5 (does not apply to shipping). 
+    
     + Headers
     
             Authorization: Bearer <API_KEY>
@@ -2258,9 +2257,9 @@ Data used in example:
 
 ### Debit [POST /transactions/debit]
 
-+ Request (application/json)
+Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
 
-    Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     
@@ -2321,9 +2320,9 @@ Data used in example:
 
 ### Credit [POST /transactions/credit]
 
-+ Request (application/json)
+Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
 
-    Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     
@@ -2383,9 +2382,9 @@ Data used in example:
 
 ### Transfer [POST /transactions/transfer]
 
-+ Request (application/json)
+Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
 
-    Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     
@@ -2556,6 +2555,8 @@ Data used in example:
 
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
 
+A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
+
 + Request (application/json)
     + Headers
     
@@ -2594,6 +2595,8 @@ Data used in example:
             }
 
 ### Void Pending Transaction [POST /transactions/{id}/void]
+
+A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
 
 + Request (application/json)
     + Headers
@@ -2825,7 +2828,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + payable (number) - The cost of the line item after tax and discounts have been applied.
 
 ## Program (object)
-+ programId (string, required) - Unique idempotent ID for the Program.
++ id (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + access (enum[string], required) - How the values can be accessed.
@@ -2908,7 +2911,7 @@ A step taken as part of the transaction.
 ## Value (object)
 + id (string, required) - Unique idempotent id for the Value.
 + type (string, required) - `account`, `giftcard` or `promotion`
-+ programId (string, optional) - The programId of the Program this Value is in.
++ program (string, optional) - The ID of the Program this Value is in.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
@@ -2920,6 +2923,6 @@ A step taken as part of the transaction.
 + uses (number, optional) - The number of times the Value can be transacted with.
 + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
 + endDate (number, optional) - ISO date for when the Value can last be transacted with.
-+ metadata (number, optional) - Arbitrary data associated with the Value.
++ metadata (object, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Contact was created.
 + updatedDate (string, required) - ISO date for when the Contact was last updated.

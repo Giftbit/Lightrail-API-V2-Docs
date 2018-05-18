@@ -1,5 +1,7 @@
 ### Void Pending Transaction [POST /transactions/{id}/void]
 
+A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
+
 + Request (application/json)
     + Headers
     

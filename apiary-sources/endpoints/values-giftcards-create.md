@@ -20,7 +20,7 @@
         + uses (number, optional) - {{value.uses}}
         + startDate (number, optional) - {{value.startDate}}
         + endDate (number, optional) - {{value.endDate}}
-        + metadata (number, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     

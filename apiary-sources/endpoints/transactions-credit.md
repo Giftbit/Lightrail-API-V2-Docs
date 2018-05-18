@@ -1,8 +1,8 @@
 ### Credit [POST /transactions/credit]
 
-+ Request (application/json)
+Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
 
-    Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     

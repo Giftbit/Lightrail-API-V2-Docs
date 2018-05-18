@@ -1,23 +1,21 @@
 ### Process an order [POST /transactions/orders]
 
-Process an order by debiting (removing value from) one or more payment rails.
+Process an order by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
-The payment rails `lightrail`, `stripe` and `internal` are supported.
-
-Data used in example:
-- Purchasing: 
-    - 2x $5 socks (8% tax rate)
-    - 1x $1.99 chocolate bar  (5% tax rate)
-    - 1x $3.49 shipping (0% tax rate)
-- Payment Sources:
-    - Contact with prepaid account, and a sock and chocolate bar promotion.
-        - Account has $20.
-        - Sock promo is for 20% off retail price of socks.
-        - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
-    - Generic code for 10% off orders over $5 (does not apply to shipping). 
-
----
 + Request (application/json)
+    
+    Data used in example:
+    - Purchasing: 
+        - 2x $5 socks (8% tax rate)
+        - 1x $1.99 chocolate bar  (5% tax rate)
+        - 1x $3.49 shipping (0% tax rate)
+    - Payment Sources:
+        - Contact with prepaid account, and a sock and chocolate bar promotion.
+            - Account has $20.
+            - Sock promo is for 20% off retail price of socks.
+            - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
+        - Generic code for 10% off orders over $5 (does not apply to shipping). 
+    
     + Headers
     
             {{header.authorization}}

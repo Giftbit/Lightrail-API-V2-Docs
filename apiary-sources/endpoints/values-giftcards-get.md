@@ -58,7 +58,7 @@
                 }
             ]
 
-### Get a Gfitcard [GET /values/giftcards/{id}]
+### Get a Giftcard [GET /values/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -66,7 +66,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Gfitcard to get.
+    + id (string) - the id of the Giftcard to get.
 
 + Response 200 (application/json)
     + Attributes (Value)

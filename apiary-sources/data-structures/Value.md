@@ -1,7 +1,7 @@
 ## Value (object)
 + id (string, required) - {{value.id}}
 + type (string, required) - {{value.type}}
-+ programId (string, optional) - {{value.programId}}
++ program (string, optional) - {{value.program}}
 + currency (string, required) - {{currency.code}}
 + balance (number, optional) - {{value.balance}}
 + discount (boolean, optional) - {{value.discount}}
@@ -13,6 +13,6 @@
 + uses (number, optional) - {{value.uses}}
 + startDate (number, optional) - {{value.startDate}}
 + endDate (number, optional) - {{value.endDate}}
-+ metadata (number, optional) - {{value.metadata}}
++ metadata (object, optional) - {{value.metadata}}
 + createdDate (string, required) - {{contact.createdDate}}
 + updatedDate (string, required) - {{contact.updatedDate}}

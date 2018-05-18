@@ -1,5 +1,5 @@
 ## Program (object)
-+ programId (string, required) - {{program.programId}}
++ id (string, required) - {{program.id}}
 + name (string, optional) - {{program.name}}
 + currency (string, required) - {{currency.code}}
 + access (enum[string], required) - How the values can be accessed.

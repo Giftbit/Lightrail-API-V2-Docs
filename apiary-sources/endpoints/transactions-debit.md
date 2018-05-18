@@ -1,8 +1,8 @@
 ### Debit [POST /transactions/debit]
 
-+ Request (application/json)
+Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
 
-    Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     

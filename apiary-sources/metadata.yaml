@@ -1,9 +1,7 @@
 tags: "Segmentation tags."
-currency:
-  code: "Short code for a currency, eg: `USD`, `FUNBUX`."
-  decimalPlaces: "The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`."
-  name: "Long name for the currency, eg: `Dollars`."
-  symbol: "Currency symbol used for formatting, eg: `$`."
+code:
+  secure: "If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text."
+  set: "The code to set.  If there is an existing code it will no longer refer to this Value."
 contact:
   createdDate: "ISO date for when the Contact was created."
   id: "Unique idempotent ID for the Contact."
@@ -12,6 +10,11 @@ contact:
   lastName: "The Contact's last name."
   metadata: "Arbitrary data associated with the Contact."
   updatedDate: "ISO date for when the Contact was last updated."
+currency:
+  code: "Short code for a currency, eg: `USD`, `FUNBUX`."
+  decimalPlaces: "The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`."
+  name: "Long name for the currency, eg: `Dollars`."
+  symbol: "Currency symbol used for formatting, eg: `$`."
 header:
   authorization: "Authorization: Bearer <API_KEY>"
 pagination:
@@ -23,12 +26,11 @@ patch:
   merge: Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
 program:
   createdDate: "ISO date for when the Program was created."
-  programId: "Unique idempotent ID for the Program."
+  id: "Unique idempotent ID for the Program."
   maxInitialBalance: "The maximum balance the Value can be created with."
   metadata: "Arbitrary data associated with the Program."
   minInitialBalance: "The minimum balance the Value can be created with."
   name: "A human-readable name for the Program."
-  programId: "Unique idempotent ID for the Program."
   updatedDate: "ISO date for when the Program was last updated."
 transaction:
   allowRemainder: "If true the transaction will go through without all balance being debited, and the remainder indicated."
@@ -60,13 +62,14 @@ value:
   active: "Whether the Value is active and can be used upon creation."
   balance: "An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
   code: "The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`."
+  codeSet: ""
   endDate: "ISO date for when the Value can last be transacted with."
   frozen: "If true the Value is frozen and cannot be transacted with."
   discount: "If true the Value will be noted as a discount for the contact in orders."
   id: "Unique idempotent id for the Value."
   metadata: "Arbitrary data associated with the Value."
   preTax: "If true the Value's balance is applied before tax is calculated."
-  programId: "The programId of the Program this Value is in."
+  program: "The ID of the Program this Value is in."
   redemptionRule: "A Redemption Rule controlling when the Value can be used in an order."
   ruleExplanation: "An explanation for the `redemptionRule` does that can be used to display to the contact."
   startDate: "ISO date for when the Value can start to be transacted with."

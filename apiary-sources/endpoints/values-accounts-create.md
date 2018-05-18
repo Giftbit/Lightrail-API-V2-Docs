@@ -9,9 +9,10 @@
         + id (string, required) - {{value.id}}
         + contact (string, required) - Associate the Value with the given Contact.
         + currency (string, required) - {{currency.code}}
+        + balance (number, optional) - {{value.balance}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
-        + metadata (number, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     

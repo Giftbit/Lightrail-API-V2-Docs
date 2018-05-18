@@ -1,8 +1,8 @@
 ### Transfer [POST /transactions/transfer]
 
-+ Request (application/json)
+Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
 
-    Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
++ Request (application/json)
 
     + Headers
     

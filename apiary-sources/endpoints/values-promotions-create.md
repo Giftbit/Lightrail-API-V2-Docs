@@ -8,8 +8,8 @@
     + Attributes
         + id (string, required) - {{value.id}}
         + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
-        + contactId (string, optional) - Associate the Value with the given Customer.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contactId`.
+        + contact (string, optional) - Associate the Value with the given Contact.  Cannot be set with `code`.
+        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
@@ -20,7 +20,7 @@
         + uses (number, optional) - {{value.uses}}
         + startDate (number, optional) - {{value.startDate}}
         + endDate (number, optional) - {{value.endDate}}
-        + metadata (number, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     

@@ -1,5 +1,7 @@
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
 
+A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
+
 + Request (application/json)
     + Headers
     
