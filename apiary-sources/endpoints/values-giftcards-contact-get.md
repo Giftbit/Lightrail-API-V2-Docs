@@ -18,6 +18,7 @@
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },

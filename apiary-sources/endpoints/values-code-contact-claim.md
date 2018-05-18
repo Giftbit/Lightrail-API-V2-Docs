@@ -26,17 +26,18 @@
 
             {
                 "contact": {
-                   "id": "unique-id-123",
-                   "firstName": "Jeffrey",
-                   "lastName": "Lebowski",
-                   "email": "thedude@example.com",
-                   "metadata": {
-                       "alias": "El Duderino"
-                   },
-                   "createdDate": "2018-04-17T23:20:08.404Z",
-                   "updatedDate": "2018-04-17T23:20:08.404Z"
-               },
-               "value": {
+                    "id": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                },
+                "value": {
                     "id": "vs-1-claim-1",
                     "type": "giftcard",
                     "programId": "giftcards",
@@ -51,6 +52,7 @@
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"

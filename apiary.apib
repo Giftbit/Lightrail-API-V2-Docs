@@ -143,7 +143,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "message": "Contact 'unique-id-123' is in use",
                 "messageCode": "ContactInUse"
             }
-### Get Contacts [GET /contacts{?limit}{?offset}{?firstName}{?lastName}{?email}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Contacts [GET /contacts{?limit}{?offset}{?tag}{?firstName}{?lastName}{?email}]
 
 + Request (application/json)
     + Headers
@@ -153,14 +153,10 @@ Contacts are the people or businesses who buy products or services from you.  Th
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
+    + tag (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + firstName (string, optional) - Filter by the firstName.
     + lastName (string, optional) - Filter by the lastName.
-    + email (string, optional) - Filter by the email.
-    + tags (number, optional) - Filter by tags.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    + email (string, optional) - Filter by email.
     
 + Response 200 (application/json)
     + Headers
@@ -691,7 +687,7 @@ The Program can only be deleted if it is not associated with any Values.
 
 A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
 
-### Get Values [GET /values{?limit}{?offset}{?type}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Values [GET /values{?limit}{?offset}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -702,23 +698,12 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
     + type (string, optional) - Filter by Value type.
-    + programId (string, optional) - Filter by programId.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
-    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
-    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + canceled (boolean, optional) - Filter canceled.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
     + Headers
@@ -748,6 +733,7 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -772,6 +758,7 @@ An Account is Value specifically tied to a Contact.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -802,6 +789,7 @@ An Account is Value specifically tied to a Contact.
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -822,6 +810,7 @@ An Account is Value specifically tied to a Contact.
     + Attributes
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -850,9 +839,10 @@ An Account is Value specifically tied to a Contact.
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "updatedDate": "2018-04-17T23:58:19.036Z"
             }
 ### Delete an Account [DELETE /values/accounts/{id}]
 
@@ -883,7 +873,7 @@ An Account is Value specifically tied to a Contact.
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?tag}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -893,21 +883,12 @@ An Account is Value specifically tied to a Contact.
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + programId (string, optional) - Filter by programId.
+    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
-    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
-    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + canceled (boolean, optional) - Filter canceled.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
     + Headers
@@ -937,6 +918,7 @@ An Account is Value specifically tied to a Contact.
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -973,6 +955,7 @@ An Account is Value specifically tied to a Contact.
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1030,6 +1013,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -1061,6 +1045,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1087,6 +1072,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -1116,10 +1102,11 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "startDate": null,
                 "endDate": null,
                 "metadata": null,
+                "tags": [],
                 "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -1129,23 +1116,13 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + programId (string, optional) - Filter by programId.
+    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
-    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
-    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + canceled (boolean, optional) - Filter canceled.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
     + Headers
@@ -1175,6 +1152,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1211,6 +1189,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1301,6 +1280,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -1335,17 +1315,18 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
             {
                 "contact": {
-                   "id": "unique-id-123",
-                   "firstName": "Jeffrey",
-                   "lastName": "Lebowski",
-                   "email": "thedude@example.com",
-                   "metadata": {
-                       "alias": "El Duderino"
-                   },
-                   "createdDate": "2018-04-17T23:20:08.404Z",
-                   "updatedDate": "2018-04-17T23:20:08.404Z"
-               },
-               "value": {
+                    "id": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                     "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                },
+                "value": {
                     "id": "vs-1-claim-1",
                     "type": "giftcard",
                     "programId": "giftcards",
@@ -1412,6 +1393,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -1443,6 +1425,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1469,6 +1452,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -1497,9 +1481,10 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "updatedDate": "2018-04-17T23:58:19.036Z"
             }
 ### Delete a Promotion Value [DELETE /values/promotions/{id}]
 
@@ -1530,7 +1515,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get Promotions [GET /values/promotions{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -1540,23 +1525,13 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + programId (string, optional) - Filter by programId.
+    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
-    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
-    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
     + canceled (boolean, optional) - Filter canceled.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
     + Headers
@@ -1586,6 +1561,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1622,6 +1598,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1712,6 +1689,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -1746,17 +1724,18 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
             {
                 "contact": {
-                   "id": "unique-id-123",
-                   "firstName": "Jeffrey",
-                   "lastName": "Lebowski",
-                   "email": "thedude@example.com",
-                   "metadata": {
-                       "alias": "El Duderino"
-                   },
-                   "createdDate": "2018-04-17T23:20:08.404Z",
-                   "updatedDate": "2018-04-17T23:20:08.404Z"
-               },
-               "value": {
+                    "id": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                     "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                },
+                "value": {
                     "id": "vs-1-claim-1",
                     "type": "promotion"
                     "programId": "springpromo",
@@ -1771,6 +1750,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1823,6 +1803,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -1851,9 +1832,10 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "updatedDate": "2018-04-17T23:58:19.036Z"
             }
 ### Get a Value by code [GET /values/code/{code}]
 
@@ -1885,6 +1867,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1978,6 +1961,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },
@@ -2012,17 +1996,18 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "contact": {
-                   "id": "unique-id-123",
-                   "firstName": "Jeffrey",
-                   "lastName": "Lebowski",
-                   "email": "thedude@example.com",
-                   "metadata": {
-                       "alias": "El Duderino"
-                   },
-                   "createdDate": "2018-04-17T23:20:08.404Z",
-                   "updatedDate": "2018-04-17T23:20:08.404Z"
-               },
-               "value": {
+                    "id": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                },
+                "value": {
                     "id": "vs-1-claim-1",
                     "type": "giftcard",
                     "programId": "giftcards",
@@ -2037,6 +2022,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -3001,6 +2987,7 @@ A step taken as part of the transaction.
 + uses (number, optional) - The number of times the Value can be transacted with.
 + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
 + endDate (number, optional) - ISO date for when the Value can last be transacted with.
++ tags (array[string], required) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Contact was created.
 + updatedDate (string, required) - ISO date for when the Contact was last updated.

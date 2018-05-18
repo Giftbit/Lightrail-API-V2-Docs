@@ -14,6 +14,7 @@
 + uses (number, optional) - {{value.uses}}
 + startDate (number, optional) - {{value.startDate}}
 + endDate (number, optional) - {{value.endDate}}
++ tags (array[string], required) - {{tags}}
 + metadata (object, optional) - {{value.metadata}}
 + createdDate (string, required) - {{contact.createdDate}}
 + updatedDate (string, required) - {{contact.updatedDate}}

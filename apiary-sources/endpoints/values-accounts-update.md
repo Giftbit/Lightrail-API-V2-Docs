@@ -14,6 +14,7 @@
     + Attributes
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
+        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{value.metadata}}
         
     + Body
@@ -42,7 +43,8 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "updatedDate": "2018-04-17T23:58:19.036Z"
             }

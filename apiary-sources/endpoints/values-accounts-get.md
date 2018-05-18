@@ -1,4 +1,4 @@
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?tag}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,21 +8,12 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + programId (string, optional) - Filter by programId.
-    + currency (string, optional) - Filter by currency.
-    + minBalance (number, optional) - Filter by minimumm balance, inclusive.
-    + maxBalance (number, optional) - Filter by maximum balance, inclusive.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
+    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
+    + program (string, optional) - {{filter.program}}
+    + currency (string, optional) - {{filter.currency}}
+    + active (boolean, optional) - {{filter.active}}
+    + frozen (boolean, optional) - {{filter.frozen}}
+    + canceled (boolean, optional) - {{filter.canceled}}
     
 + Response 200 (application/json)
     + Headers
@@ -52,6 +43,7 @@
                     "uses": null,
                     "startDate": null,
                     "endDate": null,
+                    "tags": [],
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -88,6 +80,7 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

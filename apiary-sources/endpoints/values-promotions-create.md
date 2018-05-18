@@ -20,6 +20,7 @@
         + uses (number, optional) - {{value.uses}}
         + startDate (number, optional) - {{value.startDate}}
         + endDate (number, optional) - {{value.endDate}}
+        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{value.metadata}}
         
     + Body
@@ -51,6 +52,7 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
