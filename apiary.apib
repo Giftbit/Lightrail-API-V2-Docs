@@ -802,7 +802,7 @@ An Account is Value specifically tied to a Contact.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update an Account [PATCH /values/account/{id}]
+### Update an Account [PATCH /values/accounts/{id}]
 
 + Parameter
     + id (string) - the id of the Account to modify.
@@ -879,7 +879,7 @@ An Account is Value specifically tied to a Contact.
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get Accounts [GET /values/accounts/{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -970,7 +970,7 @@ An Account is Value specifically tied to a Contact.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Get an Account's Contact [GET /values/promotions/{id}/contact]
+### Get an Account's Contact [GET /values/accounts/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -1223,7 +1223,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "code": "…JM4G"
             }
-### Set a Giftcard's code [PUT /values/giftcard/{id}/code]
+### Set a Giftcard's code [PUT /values/giftcards/{id}/code]
 
 + Request (application/json)
     + Headers
