@@ -1,4 +1,4 @@
-### Set a Giftcard's code [PUT /values/giftcard/{id}/code]
+### Set a Giftcard's code [PUT /values/giftcards/{id}/code]
 
 + Request (application/json)
     + Headers

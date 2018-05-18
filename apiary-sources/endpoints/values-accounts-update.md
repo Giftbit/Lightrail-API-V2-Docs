@@ -1,4 +1,4 @@
-### Update an Account [PATCH /values/account/{id}]
+### Update an Account [PATCH /values/accounts/{id}]
 
 + Parameter
     + id (string) - the id of the Account to modify.

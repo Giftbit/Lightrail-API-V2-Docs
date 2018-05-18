@@ -1,4 +1,4 @@
-### Get an Account's Contact [GET /values/promotions/{id}/contact]
+### Get an Account's Contact [GET /values/accounts/{id}/contact]
 
 + Request (application/json)
     + Headers
