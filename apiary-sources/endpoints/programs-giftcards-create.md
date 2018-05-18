@@ -1,8 +1,5 @@
-### Create Gift Card Program [POST /programs]
+### Create Gift Card Program [POST /programs/giftcards]
 
-Create a new Gift Card Program.
-
----
 + Request (application/json)
     + Headers
     
@@ -13,6 +10,7 @@ Create a new Gift Card Program.
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
+            + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
         + active (boolean, optional) - {{value.active}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
@@ -41,6 +39,7 @@ Create a new Gift Card Program.
             {
                 "programId": "gift-cards-usd",
                 "name": "Gift Cards USD",
+                "type": "giftcard",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "false",
@@ -54,6 +53,8 @@ Create a new Gift Card Program.
                 "uses": null,
                 "tags": ["giftcard"],
                 "metadata": null,
+                "startDate": null,
+                "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }

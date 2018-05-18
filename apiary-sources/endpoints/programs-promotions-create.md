@@ -1,8 +1,5 @@
-### Create Promotion Program [POST /programs]
+### Create Promotion Program [POST /programs/promotions]
 
-Create a new Promotion Program. A Promotion can be in the form of a generic code like "SAVE10" which your contact's would enter during checkout. A Promotion may also be a unique code which is distributed to a contact or it may even be directly attached to a contact's account.  
-
----
 + Request (application/json)
     + Headers
     
@@ -15,14 +12,20 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
         + access (enum[string], required) - {{value.access.description}}
             + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
-            + `publicCode` - {{value.access.types.publicCode}}          
+            + `publicCode` - {{value.access.types.publicCode}}
+        + discount (boolean, optional) - {{value.discount}} Default is `true`. 
+        + preTax (boolean, optional) - {{value.preTax}} Default is `true`.
         + active (boolean, optional) - {{value.active}}
+        + redemptionRule (Rule, optional) - {{value.redemptionRule}}
+        + valueRule (number, optional) - {{value.valueRule}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
+        + startDate (string, optional) - {{program.startDate}}
+        + endDate (string, optional) - {{program.endDate}}
         + metadata (number, optional) - {{program.metadata}}
-
+        
     + Body
 
             {
@@ -46,6 +49,7 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
             {
                 "programId": "spring-promotion-usd",
                 "name": "Spring Promotion USD",
+                "type": "promotion",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "true",
@@ -61,6 +65,8 @@ Create a new Promotion Program. A Promotion can be in the form of a generic code
                 "uses": null,
                 "tags": ["gift-card"],
                 "metadata": null,
+                "startDate": null,
+                "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
