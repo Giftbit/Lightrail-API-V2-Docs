@@ -1,6 +1,7 @@
 ## Program (object)
 + id (string, required) - {{program.id}}
 + name (string, optional) - {{program.name}}
++ type (enum[string], required) - {{program.type}}
 + currency (string, required) - {{currency.code}}
 + access (enum[string], required) - How the values can be accessed.
     + `contact` - must be associated with a contact.
@@ -14,8 +15,10 @@
 + minInitialBalance (number, optional) - {{program.minBalance}}
 + maxInitialBalance (number, optional) - {{program.maxBalance}}
 + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
-+ uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
++ uses (number, optional) - {{program.uses}}
 + tags (array[string], optional) - {{tags}}
++ startDate (string, optional) - {{program.startDate}}
++ endDate (string, optional) - {{program.endDate}}
 + createdDate (string, required) - {{program.createdDate}}
 + updatedDate (string, required) - {{program.updatedDate}}
 + metadata (object, optional) - {{program.metadata}}

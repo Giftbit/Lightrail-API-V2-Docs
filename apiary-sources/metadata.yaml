@@ -42,13 +42,17 @@ pagination:
 patch:
   merge: Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
 program:
-  createdDate: "ISO date for when the Program was created."
   id: "Unique idempotent ID for the Program."
-  maxInitialBalance: "The maximum balance the Value can be created with."
-  metadata: "Arbitrary data associated with the Program."
-  minInitialBalance: "The minimum balance the Value can be created with."
   name: "A human-readable name for the Program."
+  type: "Must be either `promotion`, `giftcard`, or `account`."
+  maxInitialBalance: "The maximum balance the Value can be created with."
+  minInitialBalance: "The minimum balance the Value can be created with."
+  uses: "If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses."
+  startDate: "Earliest ISO date that Values belonging to this Program can be active."
+  endDate: "Latest ISO date that Values belonging to this Program can be active."
+  createdDate: "ISO date for when the Program was created."
   updatedDate: "ISO date for when the Program was last updated."
+  metadata: "Arbitrary data associated with the Program."
 transaction:
   allowRemainder: "If true the transaction will go through without all balance being debited, and the remainder indicated."
   createdDate: "ISO date for when the Transaction was created."
