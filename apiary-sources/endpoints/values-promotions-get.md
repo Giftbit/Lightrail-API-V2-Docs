@@ -1,4 +1,4 @@
-### Get Promotions [GET /values/promotions{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -14,6 +14,7 @@
     + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + canceled (boolean, optional) - Filter canceled.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
     + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
@@ -43,10 +44,11 @@
                     "type": "promotion"
                     "programId": "springpromo",
                     "currency": "USD",
-                    "balance": 2500, 
-                    "preTax": false,
+                    "balance": 2500,
                     "active": true,
-                    "frozen": false,
+                    "frozen": false, 
+                    "canceled": false,
+                    "preTax": false,
                     "redemptionRule": null,
                     "valueRule": null,
                     "uses": null,
@@ -78,10 +80,11 @@
                 "type": "promotion"
                 "programId": "springpromo",
                 "currency": "USD",
-                "balance": 2500, 
-                "preTax": false,
+                "balance": 2500,
                 "active": true,
                 "frozen": false,
+                "canceled": false,
+                "preTax": false,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

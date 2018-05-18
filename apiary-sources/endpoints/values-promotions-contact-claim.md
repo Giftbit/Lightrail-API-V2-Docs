@@ -41,10 +41,11 @@
                     "type": "promotion"
                     "programId": "springpromo",
                     "currency": "USD",
-                    "balance": 2500, 
-                    "preTax": false,
+                    "balance": 2500,
                     "active": true,
                     "frozen": false,
+                    "canceled": false,
+                    "preTax": false,
                     "redemptionRule": null,
                     "valueRule": null,
                     "uses": null,

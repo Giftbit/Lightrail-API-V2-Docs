@@ -61,7 +61,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "contactEmail": "alice@example.com"
+                        "contact": "alice-1234"
                     },
                     {
                         "rail": "lightrail",
@@ -127,6 +127,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                         "description": "Chocolate bar.",
                         "valuesApplied": [
                             {
+                                "rail": "lightrail",
                                 "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
@@ -135,6 +136,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                                 "discount": true
                             },
                             {
+                                "rail": "lightrail",
                                 "id": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
@@ -175,32 +177,52 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                 ],
                 "steps": [
                     {
+                        "rail": "lightrail",
                         "id": "2018-alice-socks-promo",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -200,
-                        "contactEmail": "alice@example.com",
-                        "tags": ["contact-promotions", "clothing-promos"],
-                        "discount": true 
+                        "balance": null,
+                        "uses": {
+                            "before": 1,
+                            "after": 0,
+                            "change": -1
+                        }
                     },
                     {
+                        "rail": "lightrail",
                         "id": "2018-10percent-off-over-5-orders",
-                        "amount": -100,
+                        "currency": "USD",
                         "code": "SAVE10PERCENT",
-                        "tags": ["generic-code"],
-                        "discount": true
+                        "amount": -100,
+                        "balance": null,
+                        "uses": null
                     },
                     {
+                        "rail": "lightrail",
                         "id": "2018-50cent-chocobar-credit",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -50,
-                        "contactEmail": "alice@example.com"
-                        "tags": ["contact-promotions", "food-promos"],
-                        "discount": true
+                        "balance": {
+                            "before": 50,
+                            "after": 0,
+                            "change": -50
+                        },
+                        "uses": null
                     },
                     {
+                        "rail": "lightrail",
                         "id": "alice-account-USD",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -1265,
-                        "contactEmail": "alice@example.com",
-                        "tags": ["contact-accounts"],
-                        "discount": false
+                        "balance": {
+                            "before": 2000,
+                            "after": 735,
+                            "change": -1265
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

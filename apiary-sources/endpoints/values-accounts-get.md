@@ -1,4 +1,4 @@
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?programId}{?currency}{?minBalance}{?maxBalance}{?active}{?frozen}{?canceled}{?minUses}{?maxUses}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -14,6 +14,7 @@
     + maxBalance (number, optional) - Filter by maximum balance, inclusive.
     + active (boolean, optional) - Filter active/inactive.
     + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + canceled (boolean, optional) - Filter canceled.
     + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
     + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
     + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
@@ -41,10 +42,11 @@
                     "type": "account",
                     "programId": null,
                     "currency": "USD",
-                    "balance": 2500, 
-                    "preTax": false,
+                    "balance": 2500,
                     "active": true,
                     "frozen": false,
+                    "canceled": false,
+                    "preTax": false,
                     "redemptionRule": null,
                     "valueRule": null,
                     "uses": null,
@@ -76,10 +78,11 @@
                 "type": "account",
                 "programId": null,
                 "currency": "USD",
-                "balance": 2500, 
-                "preTax": false,
+                "balance": 2500,
                 "active": true,
                 "frozen": false,
+                "canceled": false,
+                "preTax": false,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

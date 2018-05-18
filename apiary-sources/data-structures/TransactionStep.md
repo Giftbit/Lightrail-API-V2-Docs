@@ -4,13 +4,13 @@ A step taken as part of the transaction.
 
 ## LightrailTransactionStep (TransactionStep)
 + rail (string, required) - `lightrail`
-+ id (string, required) - the id of the Value transacted with.
-+ currency (string, required) - the currency of the Value transacted with.
-+ contact (string, optional) - the ID of the Contact associated with the Value.
++ id (string, required) - The id of the Value transacted with.
++ currency (string, required) - The currency of the Value transacted with.
++ contact (string, optional) - The ID of the Contact associated with the Value.
 + code (string, optional) - {{value.code}}.
-+ balanceBefore (number, required) - the balance of the Value before the transaction.
-+ balanceAfter (number, required) - the balance of the Value after the transaction.
-+ balanceChange (number, required) - the net balance change of the Value for the transaction.
++ amount (number, required) - The amount contributed to the Transaction.  This number will be the same as `balance.change` in Values with a balance.
++ balance (Delta, optional) - The balance before, after and net change of Value that carries a balance.  `null` when the Value does not have a balance (and thus has a valueRule).
++ uses (Delta, optional) - The number of uses remaining before, after and net change of a Value that limits the nummber of uses.  `null` when the Value does not limit number of uses. 
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string, required) - `stripe`
@@ -21,6 +21,9 @@ A step taken as part of the transaction.
 ## InternalTransactionStep (TransactionStep)
 + rail (string, required) - `internal`
 + id (string, required) - the ID of the internal value transacted with.
-+ balanceBefore (number, required) - the balance of the internal value before the transaction.
-+ balanceAfter (number, required) - the balance of the internal value after the transaction.
-+ balanceChange (number, required) - the net balance change of the internal value for the transaction.
++ balance (Delta, optional) - The balance before, after and net change of the internal value.
+
+## Delta (object)
++ before (number, required) - the balance/uses before the transaction.
++ after (number, required) - the balance/uses after the transaction.
++ change (number, required) - the balance/uses change in the transaction.

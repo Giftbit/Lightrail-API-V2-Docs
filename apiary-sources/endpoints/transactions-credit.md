@@ -12,6 +12,7 @@ Credit (add to) an account on a rail.  Currently only the `lightrail` rail is su
         + id (string, required) - {{transaction.id}}
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
+        + uses (number, optional) - The number of uses to add.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + pending (boolean, optional) - {{transaction.pending}}
@@ -46,9 +47,13 @@ Credit (add to) an account on a rail.  Currently only the `lightrail` rail is su
                         "rail": "lightrail",
                         "id": "points-account-14314",
                         "currency": "XXX",
-                        "balanceBefore": 1500,
-                        "balanceAfter": 4000,
-                        "balanceChange": 2500
+                        "amount": 2500,
+                        "balance": {
+                            "before": 1500,
+                            "after": 4000,
+                            "change": 2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

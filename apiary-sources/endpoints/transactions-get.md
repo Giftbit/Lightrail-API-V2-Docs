@@ -73,9 +73,13 @@
                         "rail": "lightrail",
                         "id": "vs_1",
                         "currency": "XXX",
-                        "balanceBefore": 5500,
-                        "balanceAfter": 3000,
-                        "balanceChange": -2500
+                        "amount": -2500,
+                        "balance": {
+                            "before": 5500,
+                            "after": 3000,
+                            "change": -2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

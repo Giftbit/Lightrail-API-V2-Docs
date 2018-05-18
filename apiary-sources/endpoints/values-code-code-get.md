@@ -9,11 +9,14 @@
     + code (string) - the code of the Value to get the code of.
 
 + Response 200 (application/json)
+
+    A secured code will come back abbreviated.
+
     + Attributes
         + code (string, optional) - {{value.code}}
 
     + Body
 
             {
-                "code": "BLACKFRIDAY2077"
+                "code": "…e1b1"
             }

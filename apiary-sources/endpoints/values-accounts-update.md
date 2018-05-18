@@ -12,7 +12,6 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, optional) - {{value.id}}  If present must match the id in the path.
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + metadata (object, optional) - {{value.metadata}}
@@ -33,10 +32,11 @@
                 "type": "account",
                 "programId": null,
                 "currency": "USD",
-                "balance": 0, 
-                "preTax": false,
+                "balance": 0,
                 "active": true,
                 "frozen": true,
+                "canceled": false,
+                "preTax": false,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

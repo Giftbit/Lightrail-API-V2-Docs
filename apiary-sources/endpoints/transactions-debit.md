@@ -12,6 +12,7 @@ Debit (remove from) an account on a rail.  Currently only the `lightrail` rail i
         + id (string, required) - {{transaction.id}}
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
+        + uses (number, optional) - The number of uses to remove.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
@@ -47,9 +48,13 @@ Debit (remove from) an account on a rail.  Currently only the `lightrail` rail i
                         "rail": "lightrail",
                         "id": "points-account-14314",
                         "currency": "XXX",
-                        "balanceBefore": 5500,
-                        "balanceAfter": 3000,
-                        "balanceChange": -2500
+                        "amount": -2500,
+                        "balance": {
+                            "before": 5500,
+                            "after": 3000,
+                            "change": -2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,
