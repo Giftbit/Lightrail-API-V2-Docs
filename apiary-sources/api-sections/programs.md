@@ -9,6 +9,8 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
 Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
 
 ---
+{% include 'endpoints/programs-get.md' %}
+
 {% include 'endpoints/programs-promotions-create.md' %}
 
 {% include 'endpoints/programs-promotions-get.md' %}

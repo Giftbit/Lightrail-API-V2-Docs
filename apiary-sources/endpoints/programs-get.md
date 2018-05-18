@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?programId}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -9,6 +9,7 @@
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
     + programId (string, optional) - Filter by programId.
+    + type (string, optional) - Filter by type.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
     + discount (string, optional) - Filter by discount.
@@ -17,6 +18,10 @@
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
     + tags (number, optional) - Filter by tags.
+    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
@@ -55,6 +60,8 @@
                     "uses": null,
                     "tags": [],
                     "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
