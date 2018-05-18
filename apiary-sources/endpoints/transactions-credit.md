@@ -2,7 +2,7 @@
 
 + Request (application/json)
 
-    Currently only the `lightrail` payment rail is supported.
+    Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
 
     + Headers
     
@@ -23,7 +23,7 @@
                 "id": "unique-id-123",
                 "destination": {
                     "rail": "lightrail",
-                    "id": "vs_1"
+                    "account": "points-account-14314"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -44,7 +44,7 @@
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "vs_1",
+                        "id": "points-account-14314",
                         "currency": "XXX",
                         "balanceBefore": 1500,
                         "balanceAfter": 4000,

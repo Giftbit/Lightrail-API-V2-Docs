@@ -2,7 +2,7 @@
 
 + Request (application/json)
 
-    Currently only the `lightrail` payment rail is supported.
+    Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
 
     + Headers
     
@@ -11,7 +11,7 @@
     + Attributes
         + id (string, required) - {{transaction.id}}
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
-        + amount (number, required) - The amount to credit, > 0.
+        + amount (number, required) - The amount to debit, > 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
@@ -24,7 +24,7 @@
                 "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "id": "vs_1"
+                    "account": "points-account-14314"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -45,7 +45,7 @@
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "vs_1",
+                        "id": "points-account-14314",
                         "currency": "XXX",
                         "balanceBefore": 5500,
                         "balanceAfter": 3000,

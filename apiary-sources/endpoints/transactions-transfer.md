@@ -2,7 +2,7 @@
 
 + Request (application/json)
 
-    Currently only the `lightrail` payment rail is supported.
+    Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
 
     + Headers
     
@@ -25,7 +25,7 @@
                 "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "id": "vs_1"
+                    "code": "62026c68ec5048dbb881"
                 },
                 "destination": {
                     "rail": "lightrail",
@@ -59,7 +59,7 @@
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "vs_1",
+                        "id": "giftcard-96f27ad62a1c",
                         "currency": "USD",
                         "balanceBefore": 2500,
                         "balanceAfter": 0,
