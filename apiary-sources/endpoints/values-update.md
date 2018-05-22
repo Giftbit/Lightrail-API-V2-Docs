@@ -5,7 +5,7 @@ Update all Values that match the given query parameters.
 + Parameter
     + limit (number, optional) - {{pagination.limit}}  This limits the number of items returned but not the number of items modified.
     + type (string, optional) - {{filter.type}}
-    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
+    + tag (string, optional) - {{filter.tags}}  {{filter.list}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
     + currency (string, optional) - {{filter.currency}}

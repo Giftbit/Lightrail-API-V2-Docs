@@ -1,4 +1,4 @@
-### Get Contacts [GET /contacts{?limit}{?offset}{?tag}{?firstName}{?lastName}{?email}]
+### Get Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,8 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + tag (number, optional) - {{filter.tag}}  {{filter.list}}
+    + id (number, optional) - {{filter.id}}  {{filter.list}}
+    + tags (number, optional) - {{filter.tags}}  {{filter.list}}
     + firstName (string, optional) - {{filter.firstName}}
     + lastName (string, optional) - {{filter.lastName}}
     + email (string, optional) - {{filter.email}}

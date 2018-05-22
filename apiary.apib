@@ -143,7 +143,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "message": "Contact 'unique-id-123' is in use",
                 "messageCode": "ContactInUse"
             }
-### Get Contacts [GET /contacts{?limit}{?offset}{?tag}{?firstName}{?lastName}{?email}]
+### Get Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
 
 + Request (application/json)
     + Headers
@@ -153,7 +153,8 @@ Contacts are the people or businesses who buy products or services from you.  Th
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + tag (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + firstName (string, optional) - Filter by the firstName.
     + lastName (string, optional) - Filter by the lastName.
     + email (string, optional) - Filter by email.
@@ -687,7 +688,7 @@ The Program can only be deleted if it is not associated with any Values.
 
 A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
 
-### Get Values [GET /values{?limit}{?offset}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -697,6 +698,8 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + type (string, optional) - Filter by Value type.
     + contact (string, optional) - Filter by Values attached to the given Contact ID.
     + program (string, optional) - Filter by Program ID.
@@ -873,7 +876,7 @@ An Account is Value specifically tied to a Contact.
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?tag}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -883,7 +886,8 @@ An Account is Value specifically tied to a Contact.
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
     + active (boolean, optional) - Filter active/inactive.
@@ -1106,7 +1110,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?id}{?tags}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -1116,7 +1120,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + contact (string, optional) - Filter by Values attached to the given Contact ID.
     + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.
@@ -1515,7 +1520,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get Promotions [GET /values/promotions{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?id}{?tags}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -1525,7 +1530,8 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + contact (string, optional) - Filter by Values attached to the given Contact ID.
     + program (string, optional) - Filter by Program ID.
     + currency (string, optional) - Filter by currency.

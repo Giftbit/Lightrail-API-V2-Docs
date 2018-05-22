@@ -8,9 +8,9 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + transactionType (string, optional) - Filter by the transactionType.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
+    + transactionType (string, optional) - {{filter.transactionType}}
+    + minCreatedDate (string, optional) - {{filter.minCreatedDate}}
+    + maxCreatedDate (string, optional) - {{filter.maxCreatedDate}}
 
 + Response 200 (application/json)
     + Headers

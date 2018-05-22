@@ -1,4 +1,4 @@
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?tag}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,8 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
+    + id (number, optional) - {{filter.id}}  {{filter.list}}
+    + tags (string, optional) - {{filter.tags}}  {{filter.list}}
     + program (string, optional) - {{filter.program}}
     + currency (string, optional) - {{filter.currency}}
     + active (boolean, optional) - {{filter.active}}

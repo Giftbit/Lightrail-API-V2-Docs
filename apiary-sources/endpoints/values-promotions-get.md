@@ -1,4 +1,4 @@
-### Get Promotions [GET /values/promotions{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?id}{?tags}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,8 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
+    + id (number, optional) - {{filter.id}}  {{filter.list}}
+    + tags (string, optional) - {{filter.tags}}  {{filter.list}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
     + currency (string, optional) - {{filter.currency}}

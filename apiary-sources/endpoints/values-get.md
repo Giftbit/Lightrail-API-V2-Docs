@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,6 +8,8 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
+    + id (number, optional) - {{filter.id}}  {{filter.list}}
+    + tags (number, optional) - {{filter.tags}}  {{filter.list}}
     + type (string, optional) - {{filter.type}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
