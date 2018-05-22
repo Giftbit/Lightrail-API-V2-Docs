@@ -380,7 +380,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
 Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
 
 ---
-### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?name}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
+### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -390,17 +390,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + type (string, optional) - Filter by type.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
-    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
-    + active (boolean, optional) - Filter active/inactive.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -441,45 +433,6 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-
-### Get Program [GET /programs/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Program to get.
-
-+ Response 200 (application/json)
-    + Attributes (Program)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "name": "Giftcard program",
-                "currency": "CAD",
-                "access": "secureCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ],
-                "uses": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
 
 ### Create Promotion Program [POST /programs/promotions]
 
@@ -554,7 +507,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
+### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -564,17 +517,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + type (string, optional) - Filter by type.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
-    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
-    + active (boolean, optional) - Filter active/inactive.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -609,7 +554,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 }
             ]
 
-### Get a Promotion Program [GET /programs/{id}]
+### Get a Promotion Program [GET /programs/promotions/{id}]
 
 + Request (application/json)
     + Headers
@@ -643,14 +588,15 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
 
-### Update a Promotion Program [PATCH /programs/promotions/{id]
+### Update a Promotion Program [PATCH /programs/promotions/{id}]
 
 + Parameter
     + id (string) - the ID of the Promotion Program to modify.
 
 + Request (application/json)
 
-    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched. 
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
 
     + Headers
     
@@ -659,14 +605,14 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Attributes
         + name (string, optional) - A human-readable name for the Program.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
-        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + tags (array[string], optional) - Segmentation tags.
-        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
-        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
+        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
     + Body
@@ -703,30 +649,6 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to set fixedInitialValues on a Promotion Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Wrong type of balance restriction for Program 'abc123'.",
-                "messageCode": "WrongBalanceTypeForProgram"
-            }
-            
-+ Response 409 (application/json)
-
-    Attempting to change the 'discount' or 'preTax' flag on a Promotion Program that is referenced by existing Values. These are fundamental attributes of Value behaviour. To update these flags on an existing Program, any attached Values would need to be deleted.  
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Cannot update 'discount' for Program 'abc123'.",
-                "messageCode": "ProgramDiscountFlagInUse"
             }
 
 
@@ -822,7 +744,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?active}]
+### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -832,12 +754,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + active (boolean, optional) - Filter active/inactive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -879,7 +798,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 }
             ]
 
-### Get a Giftcard Program [GET /programs/{id}]
+### Get a Giftcard Program [GET /programs/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -918,7 +837,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Update a Giftcard Program [PATCH /programs/giftcards/{id]
+### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
 
 + Parameter
     + id (string) - the ID of the Giftcard Program to modify.
@@ -926,6 +845,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Request (application/json)
 
     Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
 
     + Headers
     
@@ -934,9 +854,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Attributes
         + name (string, optional) - A human-readable name for the Program.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -972,18 +892,6 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to set fixedInitialValues on a Giftcard Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Wrong type of balance restriction for Program 'abc123'.",
-                "messageCode": "WrongBalanceTypeForProgram"
             }
 
 

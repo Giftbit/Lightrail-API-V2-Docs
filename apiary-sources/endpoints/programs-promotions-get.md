@@ -1,4 +1,4 @@
-### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
+### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -8,17 +8,9 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + type (string, optional) - Filter by type.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
-    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
-    + active (boolean, optional) - Filter active/inactive.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - {{filter.id}} {{filter.list}}
+    + tags (number, optional) - {{filter.tags}} {{filter.list}}
+    + currency (string, optional) - {{filter.currency}} {{filter.list}}
     
 + Response 200 (application/json)
     + Headers
@@ -53,7 +45,7 @@
                 }
             ]
 
-### Get a Promotion Program [GET /programs/{id}]
+### Get a Promotion Program [GET /programs/promotions/{id}]
 
 + Request (application/json)
     + Headers
