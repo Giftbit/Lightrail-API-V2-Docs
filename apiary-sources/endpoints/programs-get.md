@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?id}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?name}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
 
 + Request (application/json)
     + Headers
@@ -9,23 +9,16 @@
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
     + id (string, optional) - Filter by ID.
+    + name (string, optional) - Filter by human-readable name.
     + type (string, optional) - Filter by type.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
-    + discount (string, optional) - Filter by discount.
-    + preTax (string, optional) - Filter by preTax.
+    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
+    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
     + active (boolean, optional) - Filter active/inactive.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
     + tags (number, optional) - Filter by tags.
-    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
-    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
-    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
-    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
-    + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
-    + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
-    + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
-    + maxUpdatedDate (string, optional) - Filter by the maximum updatedDate, inclusive.
     
 + Response 200 (application/json)
     + Headers
@@ -42,9 +35,9 @@
             [
                 {
                     "id": "unique-id-123",
-                    "name": "Giftcard programm",
+                    "name": "Giftcard program",
                     "currency": "CAD",
-                    "access": "generatedCode",
+                    "access": "secureCode",
                     "discount": "false",
                     "preTax": "false",
                     "active": "true",
@@ -84,9 +77,9 @@
 
             {
                 "id": "unique-id-123",
-                "name": "Giftcard programm",
+                "name": "Giftcard program",
                 "currency": "CAD",
-                "access": "generatedCode",
+                "access": "secureCode",
                 "discount": "false",
                 "preTax": "false",
                 "active": "true",
