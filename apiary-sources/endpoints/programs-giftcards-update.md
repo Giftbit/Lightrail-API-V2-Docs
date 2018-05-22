@@ -6,6 +6,7 @@
 + Request (application/json)
 
     {{patch.merge}}
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
 
     + Headers
     
@@ -14,9 +15,9 @@
     + Attributes
         + name (string, optional) - {{program.name}}
         + active (boolean, optional) - {{value.active}}
-        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
-        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
+        + fixedInitialValues (array[number], optional) - {{program.fixedInitialValues}} {{patch.alsoChangeValues}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -52,16 +53,4 @@
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to set fixedInitialValues on a Giftcard Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Wrong type of balance restriction for Program 'abc123'.",
-                "messageCode": "WrongBalanceTypeForProgram"
             }

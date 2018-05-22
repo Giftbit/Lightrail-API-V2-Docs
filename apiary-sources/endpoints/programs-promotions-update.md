@@ -5,7 +5,8 @@
 
 + Request (application/json)
 
-    {{patch.merge}}
+    {{patch.merge}} 
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
 
     + Headers
     
@@ -14,14 +15,14 @@
     + Attributes
         + name (string, optional) - {{program.name}}
         + active (boolean, optional) - {{value.active}}
-        + discount (boolean, optional) - {{value.discount}} Default is `true`. 
-        + preTax (boolean, optional) - {{value.preTax}} Default is `true`.
-        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
-        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + discount (boolean, optional) - {{value.discount}} Default is `true`. {{patch.alsoChangeValues}}
+        + preTax (boolean, optional) - {{value.preTax}} Default is `true`. {{patch.alsoChangeValues}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
+        + fixedInitialValues (array[number], optional) - {{program.fixedInitialValues}} {{patch.alsoChangeValues}}
         + tags (array[string], optional) - {{tags}}
-        + startDate (string, optional) - {{program.startDate}}
-        + endDate (string, optional) - {{program.endDate}}
+        + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
+        + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}
         + metadata (number, optional) - {{program.metadata}}
 
     + Body
@@ -58,28 +59,4 @@
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to set fixedInitialValues on a Promotion Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Wrong type of balance restriction for Program 'abc123'.",
-                "messageCode": "WrongBalanceTypeForProgram"
-            }
-            
-+ Response 409 (application/json)
-
-    Attempting to change the 'discount' or 'preTax' flag on a Promotion Program that is referenced by existing Values. These are fundamental attributes of Value behaviour. To update these flags on an existing Program, any attached Values would need to be deleted.  
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Cannot update 'discount' for Program 'abc123'.",
-                "messageCode": "ProgramDiscountFlagInUse"
             }

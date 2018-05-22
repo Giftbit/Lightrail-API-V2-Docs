@@ -41,12 +41,14 @@ pagination:
   offset: "The number of items to skip."
 patch:
   merge: "Applies a JSON merge.  Only members that are present are changed and all others are left untouched."
+  alsoChangeValues: "If updating this member, you likely also want to update any existing Values already created through this Program."
 program:
   id: "Unique idempotent ID for the Program."
   name: "A human-readable name for the Program."
   type: "Must be either `promotion`, `giftcard`, or `account`."
   maxInitialBalance: "The maximum balance the Value can be created with."
   minInitialBalance: "The minimum balance the Value can be created with."
+  fixedInitialValues: "A list of exact values the Value can be created with."
   uses: "If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses."
   startDate: "Earliest ISO date that Values belonging to this Program can be active."
   endDate: "Latest ISO date that Values belonging to this Program can be active."
