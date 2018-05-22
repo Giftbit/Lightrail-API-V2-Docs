@@ -1,4 +1,4 @@
-### Create a Promotion Value [POST /values/promotions]
+### Create a Promotion [POST /values/promotions]
 
 + Request (application/json)
     + Headers

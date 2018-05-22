@@ -1,4 +1,4 @@
-### Delete a Promotion Value [DELETE /values/promotions/{id}]
+### Delete a Promotion [DELETE /values/promotions/{id}]
 
 + Request
     + Headers

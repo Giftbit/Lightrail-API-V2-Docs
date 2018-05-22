@@ -24,7 +24,7 @@ Authorization: Bearer <API_KEY>
 Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
 
 
-### Create Contact [POST /contacts]
+### Create a Contact [POST /contacts]
 
 + Request (application/json)
     + Headers
@@ -68,7 +68,77 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update Contact [PUT /contacts/{id}]
+### Get a Contact [GET /contacts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Contact to get.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "tags": [],
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + firstName (string, optional) - Filter by the firstName.
+    + lastName (string, optional) - Filter by the lastName.
+    + email (string, optional) - Filter by email.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+
+    + Attributes (array[Contact])
+
+    + Body
+
+            [
+                {
+                    "id": "unique-id-123",
+                    "firstName": "Jeffrey",
+                    "lastName": "Lebowski",
+                    "email": "thedude@example.com",
+                    "tags": [],
+                    "metadata": {
+                        "alias": "El Duderino"
+                    },
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Update a Contact [PUT /contacts/{id}]
 
 + Request (application/json)
 
@@ -114,7 +184,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Delete Contact [DELETE /contacts/{id}]
+### Delete a Contact [DELETE /contacts/{id}]
 
 + Request (application/json)
     + Headers
@@ -143,129 +213,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "message": "Contact 'unique-id-123' is in use",
                 "messageCode": "ContactInUse"
             }
-### Get Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
 
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + firstName (string, optional) - Filter by the firstName.
-    + lastName (string, optional) - Filter by the lastName.
-    + email (string, optional) - Filter by email.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-
-    + Attributes (array[Contact])
-
-    + Body
-
-            [
-                {
-                    "id": "unique-id-123",
-                    "firstName": "Jeffrey",
-                    "lastName": "Lebowski",
-                    "email": "thedude@example.com",
-                    "tags": [],
-                    "metadata": {
-                        "alias": "El Duderino"
-                    },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get Contact [GET /contacts/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Contact to get.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "tags": [],
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Create Account for Contact [POST /contacts/{id}/values/accounts]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + id (string) - the ID of the Contact that the account is for.
-
-+ Attributes
-    + id (string, required) - Unique idempotent id for the Value.
-    + program (string, optional) - Associate with and copy default values from the given Program. If not provided, the default Accounts Program will be used.
-    + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
-    + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-    + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-    + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-    + metadata (object, optional) - Arbitrary data associated with the Value.
-    
-    + Body
-    
-            {
-                "id": "cust-123-acc-1",
-                "currency": "USD",
-                "balance": 2500
-            }
-
-
-+ Response 200 (application/json)
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "cust-123-acc-1",
-                    "program": "accounts",
-                    "currency": "USD",
-                    "balance": 2500, 
-                    "preTax": false,
-                    "active": true,
-                    "frozen": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
 ### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
 
 + Request (application/json)
@@ -368,7 +316,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-### Get Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
 
 + Request (application/json)
     + Headers
@@ -1074,7 +1022,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 
 A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
 
-### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### List Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}]
 
 + Request (application/json)
     + Headers
@@ -1089,10 +1037,6 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
     + type (string, optional) - Filter by Value type.
     + contact (string, optional) - Filter by Values attached to the given Contact ID.
     + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
     
 + Response 200 (application/json)
     + Headers
@@ -1183,6 +1127,90 @@ An Account is Value specifically tied to a Contact.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+### Get an Account [GET /values/accounts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Account to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "account-1",
+                "type": "account",
+                "program": null,
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + program (string, optional) - Filter by Program ID.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "account-1",
+                    "type": "account",
+                    "program": null,
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": false,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 ### Update an Account [PATCH /values/accounts/{id}]
 
 + Parameter
@@ -1261,94 +1289,6 @@ An Account is Value specifically tied to a Contact.
                 "statusCode": 409,
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
-            }
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}{?currency}{?active}{?frozen}{?canceled}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "account-1",
-                    "type": "account",
-                    "program": null,
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get an Account [GET /values/accounts/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Account to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "account-1",
-                "type": "account",
-                "program": null,
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 ### Get an Account's Contact [GET /values/accounts/{id}/contact]
 
@@ -1440,6 +1380,91 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+### Get a Giftcard [GET /values/giftcards/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Giftcard to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Giftcards [GET /values/giftcards{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "giftcard",
+                    "program": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": false,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 ### Update a Giftcard [PATCH /values/giftcards/{id}]
 
 + Parameter
@@ -1495,95 +1520,6 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "tags": [],
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
-            }
-### Get Giftcards [GET /values/giftcards{?limit}{?offset}{?id}{?tags}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + contact (string, optional) - Filter by Values attached to the given Contact ID.
-    + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "vs-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get a Giftcard [GET /values/giftcards/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Giftcard to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 ### Get a Giftcard's code [GET /values/giftcards/{id}/code]
 
@@ -1762,7 +1698,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
 A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied to orders automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
 
-### Create a Promotion Value [POST /values/promotions]
+### Create a Promotion [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -1821,7 +1757,92 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update a Promotion Value [PATCH /values/promotions/{id}]
+### Get a Promotion [GET /values/promotions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Promotion to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "program": "springpromo",
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Promotions [GET /values/promotions{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "promotion"
+                    "program": "springpromo",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": false, 
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Update a Promotion [PATCH /values/promotions/{id}]
 
 + Parameter
     + id (string) - the id of the Promotion to modify.
@@ -1877,7 +1898,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Delete a Promotion Value [DELETE /values/promotions/{id}]
+### Delete a Promotion [DELETE /values/promotions/{id}]
 
 + Request
     + Headers
@@ -1905,95 +1926,6 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "statusCode": 409,
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
-            }
-### Get Promotions [GET /values/promotions{?limit}{?offset}{?id}{?tags}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + contact (string, optional) - Filter by Values attached to the given Contact ID.
-    + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "vs-1",
-                    "type": "promotion"
-                    "program": "springpromo",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false, 
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get a Promotion Value [GET /values/promotions/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Promotion to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "vs-1",
-                "type": "promotion"
-                "program": "springpromo",
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 ### Get a Promotion Value's code [GET /values/promotions/{id}/code]
 
@@ -2173,6 +2105,41 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
 A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
 
+### Get a Value by code [GET /values/code/{code}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Value to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
 ### Update a Value by code [PATCH /values/code/{code}]
 
 + Parameter
@@ -2228,41 +2195,6 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
-            }
-### Get a Value by code [GET /values/code/{code}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Value to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 ### Get a Value's code by code [GET /values/code/{code}/code]
 
@@ -2904,7 +2836,49 @@ Transfer value between accounts on rails.  Currently only the `lightrail` rail i
                 }
             }
 
-### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+### Get a Transaction [GET /transactions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the id of the Transaction to get.
+
++ Response 200 (application/json)
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "transactionType": "debit",
+                "currency": "XXX",
+                "steps": [
+                    {
+                        "rail": "lightrail",
+                        "id": "vs_1",
+                        "currency": "XXX",
+                        "amount": -2500,
+                        "balance": {
+                            "before": 5500,
+                            "after": 3000,
+                            "change": -2500
+                        },
+                        "uses": null
+                    }
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
+                }
+            }
+
+### List Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
 + Request (application/json)
     + Headers
@@ -2954,48 +2928,6 @@ Transfer value between accounts on rails.  Currently only the `lightrail` rail i
                     }
                 }
             ]
-
-### Get Transaction [GET /transactions/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Transaction to get.
-
-+ Response 200 (application/json)
-    + Attributes (Transaction)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "transactionType": "debit",
-                "currency": "XXX",
-                "steps": [
-                    {
-                        "rail": "lightrail",
-                        "id": "vs_1",
-                        "currency": "XXX",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 5500,
-                            "after": 3000,
-                            "change": -2500
-                        },
-                        "uses": null
-                    }
-                ],
-                "remainder": 0,
-                "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
-                "metadata": {
-                    "note": "Reduce loyalty points after 3mo contact inactivity"
-                }
-            }
 
 ### Capture Pending Transaction [POST /transactions/{id}/capture]
 
@@ -3091,7 +3023,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
 
 A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
 
-### Create Currency [POST /currencies]
+### Create a Currency [POST /currencies]
 
 + Request (application/json)
     + Headers
@@ -3124,6 +3056,48 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
                 "symbol": "$",
                 "decimalPlaces": 2
             }
+### Get a Currency [GET /currencies/{code}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + code (string) - the code of the Currency to get.
+
++ Response 200 (application/json)
+    + Attributes (Currency)
+
+    + Body
+
+            {
+                "code": "USD",
+                "name": "Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
+
+### List Currencies [GET /currencies]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Response 200 (application/json)
+    + Attributes (array[Currency])
+
+    + Body
+
+            [
+                {
+                    "code": "USD",
+                    "name": "Dollars",
+                    "symbol": "$",
+                    "decimalPlaces": 2
+                }
+            ]
 ### Update a Currency [PATCH /currencies/{code}]
 
 + Parameter
@@ -3189,48 +3163,6 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
                 "statusCode": 409,
                 "message": "Currency 'USD' is in use.",
                 "messageCode": "CurrencyInUse"
-            }
-### Get Currencies [GET /currencies]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Response 200 (application/json)
-    + Attributes (array[Currency])
-
-    + Body
-
-            [
-                {
-                    "code": "USD",
-                    "name": "Dollars",
-                    "symbol": "$",
-                    "decimalPlaces": 2
-                }
-            ]
-
-### Get a Currency [GET /currencies/{code}]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Currency to get.
-
-+ Response 200 (application/json)
-    + Attributes (Currency)
-
-    + Body
-
-            {
-                "code": "USD",
-                "name": "Dollars",
-                "symbol": "$",
-                "decimalPlaces": 2
             }
 
 # Data Structures

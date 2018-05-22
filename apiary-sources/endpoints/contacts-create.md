@@ -1,4 +1,4 @@
-### Create Contact [POST /contacts]
+### Create a Contact [POST /contacts]
 
 + Request (application/json)
     + Headers

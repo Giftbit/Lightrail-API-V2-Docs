@@ -1,4 +1,4 @@
-### Update Contact [PUT /contacts/{id}]
+### Update a Contact [PUT /contacts/{id}]
 
 + Request (application/json)
 

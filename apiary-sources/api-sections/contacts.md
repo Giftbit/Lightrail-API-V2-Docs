@@ -4,11 +4,10 @@ Contacts are the people or businesses who buy products or services from you.  Th
 
 
 {% include 'endpoints/contacts-create.md' %}
+{% include 'endpoints/contacts-get.md' %}
 {% include 'endpoints/contacts-update.md' %}
 {% include 'endpoints/contacts-delete.md' %}
-{% include 'endpoints/contacts-get.md' %}
 
-{% include 'endpoints/contacts-values-create-accounts.md' %}
 {% include 'endpoints/contacts-values-get-accounts.md' %}
 {% include 'endpoints/contacts-values-get-giftcards.md' %}
 {% include 'endpoints/contacts-values-get-promotions.md' %}

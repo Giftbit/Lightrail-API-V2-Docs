@@ -1,4 +1,4 @@
-### Update a Promotion Value [PATCH /values/promotions/{id}]
+### Update a Promotion [PATCH /values/promotions/{id}]
 
 + Parameter
     + id (string) - the id of the Promotion to modify.
