@@ -1,4 +1,4 @@
-### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?active}]
+### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -8,12 +8,9 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + active (boolean, optional) - Filter active/inactive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - {{filter.id}} {{filter.list}}
+    + tags (number, optional) - {{filter.tags}} {{filter.list}}
+    + currency (string, optional) - {{filter.currency}} {{filter.list}}
     
 + Response 200 (application/json)
     + Headers
@@ -55,7 +52,7 @@
                 }
             ]
 
-### Get a Giftcard Program [GET /programs/{id}]
+### Get a Giftcard Program [GET /programs/giftcards/{id}]
 
 + Request (application/json)
     + Headers

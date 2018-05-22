@@ -1,4 +1,4 @@
-### Update a Giftcard Program [PATCH /programs/giftcards/{id]
+### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
 
 + Parameter
     + id (string) - the ID of the Giftcard Program to modify.

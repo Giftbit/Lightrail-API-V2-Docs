@@ -1,4 +1,4 @@
-### Update a Promotion Program [PATCH /programs/promotions/{id]
+### Update a Promotion Program [PATCH /programs/promotions/{id}]
 
 + Parameter
     + id (string) - the ID of the Promotion Program to modify.

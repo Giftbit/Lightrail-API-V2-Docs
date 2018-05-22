@@ -432,7 +432,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
 Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
 
 ---
-### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?name}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
+### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -442,17 +442,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + type (string, optional) - Filter by type.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
-    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
-    + active (boolean, optional) - Filter active/inactive.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -493,45 +485,6 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-
-### Get Program [GET /programs/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Program to get.
-
-+ Response 200 (application/json)
-    + Attributes (Program)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "name": "Giftcard program",
-                "currency": "CAD",
-                "access": "secureCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ],
-                "uses": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
 
 ### Create Promotion Program [POST /programs/promotions]
 
@@ -606,7 +559,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}]
+### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -616,17 +569,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + type (string, optional) - Filter by type.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + discount (boolean, optional) - Filter by whether the Program's values represent a discount.
-    + preTax (boolean, optional) - Filter by whether the Program's values are applied before tax.
-    + active (boolean, optional) - Filter active/inactive.
-    + minUses (number, optional) - Filter by minimum uses, inclusive.
-    + maxUses (number, optional) - Filter by maximum uses, inclusive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -661,7 +606,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 }
             ]
 
-### Get a Promotion Program [GET /programs/{id}]
+### Get a Promotion Program [GET /programs/promotions/{id}]
 
 + Request (application/json)
     + Headers
@@ -695,7 +640,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
 
-### Update a Promotion Program [PATCH /programs/promotions/{id]
+### Update a Promotion Program [PATCH /programs/promotions/{id}]
 
 + Parameter
     + id (string) - the ID of the Promotion Program to modify.
@@ -874,7 +819,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?name}{?tags}{?currency}{?access}{?active}]
+### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -884,12 +829,9 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID.
-    + name (string, optional) - Filter by human-readable name.
-    + currency (string, optional) - Filter by currency.
-    + access (string, optional) - Filter by access.
-    + active (boolean, optional) - Filter active/inactive.
-    + tags (number, optional) - Filter by tags.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
     
 + Response 200 (application/json)
     + Headers
@@ -931,7 +873,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 }
             ]
 
-### Get a Giftcard Program [GET /programs/{id}]
+### Get a Giftcard Program [GET /programs/giftcards/{id}]
 
 + Request (application/json)
     + Headers
@@ -970,7 +912,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Update a Giftcard Program [PATCH /programs/giftcards/{id]
+### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
 
 + Parameter
     + id (string) - the ID of the Giftcard Program to modify.
