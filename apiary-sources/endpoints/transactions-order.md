@@ -70,7 +70,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                 ]
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body

@@ -38,7 +38,7 @@ Transfer value between accounts on rails.  Currently only the `lightrail` rail i
                 }
             }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes
         + id (string, required) - {{transaction.id}}
         + transactionType (string, required) - `transfer`

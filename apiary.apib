@@ -51,7 +51,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 }
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
@@ -1158,7 +1158,7 @@ An Account is Value specifically tied to a Contact.
                 "currency": "USD"
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body
@@ -1415,7 +1415,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "balance": 2500
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body
@@ -1796,7 +1796,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "balance": 2500
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body
@@ -2515,7 +2515,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                 ]
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -2713,7 +2713,7 @@ Debit (remove from) an account on a rail.  Currently only the `lightrail` rail i
                 }
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -2780,7 +2780,7 @@ Credit (add to) an account on a rail.  Currently only the `lightrail` rail is su
                 }
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body
@@ -2852,7 +2852,7 @@ Transfer value between accounts on rails.  Currently only the `lightrail` rail i
                 }
             }
 
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes
         + id (string, required) - Unique idempotent ID for the Transaction.
         + transactionType (string, required) - `transfer`
@@ -3113,7 +3113,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
                 "decimalPlaces": 2
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Currency)
 
     + Body
