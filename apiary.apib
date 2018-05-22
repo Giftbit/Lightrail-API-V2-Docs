@@ -695,7 +695,91 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
 
+### Update a Promotion Program [PATCH /programs/promotions/{id]
 
++ Parameter
+    + id (string) - the ID of the Promotion Program to modify.
+
++ Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + name (string, optional) - A human-readable name for the Program.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
+        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "tags": ["spring-marketing-push"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "type": "promotion",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "true",
+                "preTax": "true",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500
+                ],
+                "uses": null,
+                "tags": ["spring-marketing-push"]
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
++ Response 409 (application/json)
+
+    Attempting to set fixedInitialValues on a Promotion Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Wrong type of balance restriction for Program 'abc123'.",
+                "messageCode": "WrongBalanceTypeForProgram"
+            }
+            
++ Response 409 (application/json)
+
+    Attempting to change the 'discount' or 'preTax' flag on a Promotion Program that is referenced by existing Values. These are fundamental attributes of Value behaviour. To update these flags on an existing Program, any attached Values would need to be deleted.  
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Cannot update 'discount' for Program 'abc123'.",
+                "messageCode": "ProgramDiscountFlagInUse"
+            }
 
 
 
@@ -886,7 +970,73 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
+### Update a Giftcard Program [PATCH /programs/giftcards/{id]
 
++ Parameter
+    + id (string) - the ID of the Giftcard Program to modify.
+
++ Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + name (string, optional) - A human-readable name for the Program.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "tags": ["top-customers"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "type": "giftcard",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "fixedInitialValues": null,
+                "uses": null,
+                "tags": ["giftcard", "top-customers"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
++ Response 409 (application/json)
+
+    Attempting to set fixedInitialValues on a Giftcard Program that uses a balance range, i.e. minInitialBalance and maxInitialBalance, or attempting to set minInitialBalance and maxInitialBalance on a Giftcard Program that uses fixedInitialValues. 
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Wrong type of balance restriction for Program 'abc123'.",
+                "messageCode": "WrongBalanceTypeForProgram"
+            }
 
 
 
