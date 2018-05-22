@@ -32,7 +32,7 @@
                 {
                     "id": "account-1",
                     "type": "account",
-                    "programId": null,
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -69,7 +69,7 @@
             {
                 "id": "account-1",
                 "type": "account",
-                "programId": null,
+                "program": null,
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,

@@ -250,7 +250,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
                 {
                     "id": "cust-123-acc-1",
-                    "programId": "accounts",
+                    "program": "accounts",
                     "currency": "USD",
                     "balance": 2500, 
                     "preTax": false,
@@ -284,7 +284,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
                 {
                     "id": "acc-1",
-                    "programId": "accounts",
+                    "program": "accounts",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,
@@ -318,7 +318,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
               {
                   "id": "gift-1",
-                  "programId": "giftcards",
+                  "program": "giftcards",
                   "currency": "USD",
                   "balance": 2500,
                   "preTax": false,
@@ -352,7 +352,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
                 {
                     "id": "promo-1",
-                    "programId": "signup-bonus",
+                    "program": "signup-bonus",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": true,
@@ -404,7 +404,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
                 {
                     "id": "vs-1",
-                    "programId": "giftcards",
+                    "program": "giftcards",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,
@@ -432,7 +432,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
 Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
 
 ---
-### Get Programs [GET /programs{?limit}{?offset}{?programId}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?id}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -442,7 +442,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
-    + programId (string, optional) - Filter by programId.
+    + id (string, optional) - Filter by ID.
     + type (string, optional) - Filter by type.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
@@ -475,7 +475,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
 
             [
                 {
-                    "programId": "unique-id-123",
+                    "id": "unique-id-123",
                     "name": "Giftcard programm",
                     "currency": "CAD",
                     "access": "generatedCode",
@@ -501,7 +501,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
                 }
             ]
 
-### Get Program [GET /programs/{programId}]
+### Get Program [GET /programs/{id}]
 
 + Request (application/json)
     + Headers
@@ -509,7 +509,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + programId (string) - the programId of the Program to get.
+    + id (string) - the ID of the Program to get.
 
 + Response 200 (application/json)
     + Attributes (Program)
@@ -517,7 +517,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Body
 
             {
-                "programId": "unique-id-123",
+                "id": "unique-id-123",
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",
@@ -548,7 +548,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + programId (string, required) - 
+        + id (string, required) - Unique idempotent ID for the Program.
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + access (enum[string], required) - How the values can be accessed
@@ -571,7 +571,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Body
 
             {
-                "programId": "spring-promotion-usd",
+                "id": "spring-promotion-usd",
                 "name": "Spring Promotion USD",
                 "currency": "USD",
                 "access": "secureCode",
@@ -589,7 +589,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Body
             
             {
-                "programId": "spring-promotion-usd",
+                "id": "spring-promotion-usd",
                 "name": "Spring Promotion USD",
                 "type": "promotion",
                 "currency": "USD",
@@ -629,7 +629,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + programId (string, required) - 
+        + id (string, required) - Unique idempotent ID for the Program.
         + name (string, optional) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + access (enum[string], required) - How the values can be accessed
@@ -645,7 +645,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Body
 
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
                 "currency": "USD",
                 "access": "secureCode",
@@ -660,7 +660,7 @@ Behind the scenes, all Accounts are also backed by a default Accounts Program. L
     + Body
             
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
                 "type": "giftcard",
                 "currency": "USD",
@@ -730,7 +730,7 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
                 {
                     "id": "vs-1",
                     "type": "giftcard",
-                    "programId": "giftcards",
+                    "program": "giftcards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -786,7 +786,7 @@ An Account is Value specifically tied to a Contact.
             {
                 "id": "account-1",
                 "type": "account",
-                "programId": null,
+                "program": null,
                 "currency": "USD",
                 "balance": 0, 
                 "active": true,
@@ -836,7 +836,7 @@ An Account is Value specifically tied to a Contact.
             {
                 "id": "account-1",
                 "type": "account",
-                "programId": null,
+                "program": null,
                 "currency": "USD",
                 "balance": 0,
                 "active": true,
@@ -916,7 +916,7 @@ An Account is Value specifically tied to a Contact.
                 {
                     "id": "account-1",
                     "type": "account",
-                    "programId": null,
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -953,7 +953,7 @@ An Account is Value specifically tied to a Contact.
             {
                 "id": "account-1",
                 "type": "account",
-                "programId": null,
+                "program": null,
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1010,10 +1010,10 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
     + Attributes
         + id (string, required) - Unique idempotent id for the Value.
-        + programId (string, optional) - Associate with and copy default values from the given Program.
+        + program (string, optional) - Associate with and copy default values from the given Program.
         + contact (string, optional) - Associate the Value with the given Contact by ID.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
-        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
@@ -1030,7 +1030,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -1043,7 +1043,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "id": "vs-1",
                 "type": "giftcards",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1099,7 +1099,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "id": "vs-1",
                 "type": "giftcard",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,
@@ -1151,7 +1151,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 {
                     "id": "vs-1",
                     "type": "giftcard",
-                    "programId": "giftcards",
+                    "program": "giftcards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -1188,7 +1188,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "id": "vs-1",
                 "type": "giftcard",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1340,7 +1340,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "value": {
                     "id": "vs-1-claim-1",
                     "type": "giftcard",
-                    "programId": "giftcards",
+                    "program": "giftcards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -1391,10 +1391,10 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
     + Attributes
         + id (string, required) - Unique idempotent id for the Value.
-        + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
+        + program (string, optional) - Associate with and copy default values from the given Promotion Program.
         + contact (string, optional) - Associate the Value with the given Contact.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
-        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
         + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
@@ -1411,7 +1411,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
     
             {
                 "id": "vs-1",
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -1424,7 +1424,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1480,7 +1480,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,
@@ -1561,7 +1561,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 {
                     "id": "vs-1",
                     "type": "promotion"
-                    "programId": "springpromo",
+                    "program": "springpromo",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -1598,7 +1598,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1750,7 +1750,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "value": {
                     "id": "vs-1-claim-1",
                     "type": "promotion"
-                    "programId": "springpromo",
+                    "program": "springpromo",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -1832,7 +1832,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "id": "vs-1",
                 "type": "giftcard",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,
@@ -1867,7 +1867,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "id": "vs-1",
                 "type": "giftcard",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -2022,7 +2022,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "value": {
                     "id": "vs-1-claim-1",
                     "type": "giftcard",
-                    "programId": "giftcards",
+                    "program": "giftcards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,

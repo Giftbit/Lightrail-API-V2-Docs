@@ -16,7 +16,7 @@
             [
                 {
                     "id": "promo-1",
-                    "programId": "signup-bonus",
+                    "program": "signup-bonus",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": true,

@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?programId}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?id}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,7 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + programId (string, optional) - Filter by programId.
+    + id (string, optional) - Filter by ID.
     + type (string, optional) - Filter by type.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
@@ -41,7 +41,7 @@
 
             [
                 {
-                    "programId": "unique-id-123",
+                    "id": "unique-id-123",
                     "name": "Giftcard programm",
                     "currency": "CAD",
                     "access": "generatedCode",
@@ -67,7 +67,7 @@
                 }
             ]
 
-### Get Program [GET /programs/{programId}]
+### Get Program [GET /programs/{id}]
 
 + Request (application/json)
     + Headers
@@ -75,7 +75,7 @@
             {{header.authorization}}
 
 + Parameter
-    + programId (string) - the programId of the Program to get.
+    + id (string) - the ID of the Program to get.
 
 + Response 200 (application/json)
     + Attributes (Program)
@@ -83,7 +83,7 @@
     + Body
 
             {
-                "programId": "unique-id-123",
+                "id": "unique-id-123",
                 "name": "Giftcard programm",
                 "currency": "CAD",
                 "access": "generatedCode",

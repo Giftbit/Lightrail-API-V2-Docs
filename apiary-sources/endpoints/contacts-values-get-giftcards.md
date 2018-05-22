@@ -16,7 +16,7 @@
             [
               {
                   "id": "gift-1",
-                  "programId": "giftcards",
+                  "program": "giftcards",
                   "currency": "USD",
                   "balance": 2500,
                   "preTax": false,

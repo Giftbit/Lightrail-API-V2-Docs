@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + programId (string, required) - {{program.programId}}
+        + id (string, required) - {{program.id}}
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
@@ -29,7 +29,7 @@
     + Body
 
             {
-                "programId": "spring-promotion-usd",
+                "id": "spring-promotion-usd",
                 "name": "Spring Promotion USD",
                 "currency": "USD",
                 "access": "secureCode",
@@ -47,7 +47,7 @@
     + Body
             
             {
-                "programId": "spring-promotion-usd",
+                "id": "spring-promotion-usd",
                 "name": "Spring Promotion USD",
                 "type": "promotion",
                 "currency": "USD",

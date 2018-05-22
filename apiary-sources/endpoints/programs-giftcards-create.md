@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + programId (string, required) - {{program.programId}}
+        + id (string, required) - {{program.id}}
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
@@ -22,7 +22,7 @@
     + Body
 
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
                 "currency": "USD",
                 "access": "secureCode",
@@ -37,7 +37,7 @@
     + Body
             
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
                 "type": "giftcard",
                 "currency": "USD",

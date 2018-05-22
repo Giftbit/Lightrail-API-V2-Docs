@@ -7,10 +7,10 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + programId (string, optional) - Associate with and copy default values from the given Program.
+        + program (string, optional) - Associate with and copy default values from the given Program.
         + contact (string, optional) - Associate the Value with the given Contact by ID.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
-        + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
+        + currency (string, optional) - {{currency.code}} Required if `program` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
@@ -27,7 +27,7 @@
     
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -40,7 +40,7 @@
             {
                 "id": "vs-1",
                 "type": "giftcards",
-                "programId": "giftcards",
+                "program": "giftcards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,

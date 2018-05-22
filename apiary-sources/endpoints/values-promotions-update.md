@@ -37,7 +37,7 @@
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,

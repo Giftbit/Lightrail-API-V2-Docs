@@ -40,7 +40,7 @@
                 "value": {
                     "id": "vs-1-claim-1",
                     "type": "promotion"
-                    "programId": "springpromo",
+                    "program": "springpromo",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,

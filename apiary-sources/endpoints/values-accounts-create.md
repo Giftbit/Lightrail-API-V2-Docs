@@ -31,7 +31,7 @@
             {
                 "id": "account-1",
                 "type": "account",
-                "programId": null,
+                "program": null,
                 "currency": "USD",
                 "balance": 0, 
                 "active": true,
