@@ -432,158 +432,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
 Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
 
 ---
-### Create Program [POST /programs]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + programId (string, required) - 
-        + name (string, optional) - A human-readable name for the Program.
-        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
-        + access (enum[string], required) - How the values can be accessed
-            + `contact` - must be associated with a Contact by ID.
-            + `secureCode` - a code is generated or supplied and is stored securely.
-            + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
-        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-
-    + Body
-
-            {
-                "programId": "unique-id-123",
-                "name": "Giftcard programm",
-                "currency": "CAD",
-                "access": "generatedCode",
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ]
-            }
-    
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-            
-            {
-                "programId": "unique-id-123",
-                "name": "Giftcard programm",
-                "currency": "CAD",
-                "access": "generatedCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ],
-                "uses": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Update a Program [PATCH /programs/{programId}]
-
-Update a Program by programId.  Update fields that are sent and leave unspecified values unchanged.
-
-Values that have already been created will not be changed.
-
-+ Parameter
-    + programId (string) - the programId of the Program to modify.
-
-+ Request (application/merge-patch+json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + programId (string, optional) -   If present must match the programId in the path.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-        
-    + Body
-    
-            {
-                "tags": ["internal"]
-            }
-    
-+ Response 200 (application/json)
-    + Attributes (Program)
-
-    + Body
-    
-            {
-                "programId": "unique-id-123",
-                "name": "Giftcard programm",
-                "currency": "CAD",
-                "access": "generatedCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ],
-                "uses": null,
-                "tags": ["internal"],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Delete Program [DELETE /program/{programId}]
-
-Delete a Program by programId.
-
-The Program can only be deleted if it is not associated with any Values.
-
----
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + programId (string) - the programId of the Program to delete.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "success": true
-            }
-
-### Get Programs [GET /programs{?limit}{?offset}{?programId}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
+### Get Programs [GET /programs{?limit}{?offset}{?programId}{?type}{?currency}{?access}{?discount}{?preTax}{?active}{?minUses}{?maxUses}{?tags}{?minStartDate}{?maxStartDate}{?minEndDate}{?maxEndDate}{?minCreatedDate}{?maxCreatedDate}{?minUpdatedDate}{?maxUpdatedDate}]
 
 + Request (application/json)
     + Headers
@@ -594,6 +443,7 @@ The Program can only be deleted if it is not associated with any Values.
     + limit (number, optional) - The max number of items to get.
     + offset (number, optional) - The number of items to skip.
     + programId (string, optional) - Filter by programId.
+    + type (string, optional) - Filter by type.
     + currency (string, optional) - Filter by currency.
     + access (string, optional) - Filter by access.
     + discount (string, optional) - Filter by discount.
@@ -602,6 +452,10 @@ The Program can only be deleted if it is not associated with any Values.
     + minUses (number, optional) - Filter by minimum uses, inclusive.
     + maxUses (number, optional) - Filter by maximum uses, inclusive.
     + tags (number, optional) - Filter by tags.
+    + minStartDate (string, optional) - Filter by the minimum startDate, inclusive.
+    + maxStartDate (string, optional) - Filter by the maximum startDate, inclusive.
+    + minEndDate (string, optional) - Filter by the minimum endDate, inclusive.
+    + maxEndDate (string, optional) - Filter by the maximum endDate, inclusive.
     + minCreatedDate (string, optional) - Filter by the minimum createdDate, inclusive.
     + maxCreatedDate (string, optional) - Filter by the maximum createdDate, inclusive.
     + minUpdatedDate (string, optional) - Filter by the minimum updatedDate, inclusive.
@@ -640,6 +494,8 @@ The Program can only be deleted if it is not associated with any Values.
                     "uses": null,
                     "tags": [],
                     "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
@@ -683,6 +539,156 @@ The Program can only be deleted if it is not associated with any Values.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+
+### Create Promotion Program [POST /programs/promotions]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + programId (string, required) - 
+        + name (string, optional) - A human-readable name for the Program.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + access (enum[string], required) - How the values can be accessed
+            + `contact` - must be associated with a Contact by ID.
+            + `secureCode` - a code is generated or supplied and is stored securely.
+            + `publicCode` - a code is generated or supplied and can be displayed.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
+        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+        
+    + Body
+
+            {
+                "programId": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "currency": "USD",
+                "access": "secureCode",
+                "preTax": true,
+                "discount": true,
+                "fixedInitialValues": [
+                    500
+                ],
+                "tags": ["promotion", "spring-promotion-usd"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "programId": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "type": "promotion",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "true",
+                "preTax": "true",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500
+                ],
+                "uses": null,
+                "tags": ["gift-card"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+
+
+
+
+
+
+
+
+### Create Gift Card Program [POST /programs/giftcards]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + programId (string, required) - 
+        + name (string, optional) - A human-readable name for the Program.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + access (enum[string], required) - How the values can be accessed
+            + `contact` - must be associated with a Contact by ID.
+            + `secureCode` - a code is generated or supplied and is stored securely.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "programId": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "currency": "USD",
+                "access": "secureCode",
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "tags": ["giftcard"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "programId": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "type": "giftcard",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "fixedInitialValues": null,
+                "uses": null,
+                "tags": ["giftcard"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+
+
+
+
+
+
+
 
 ## Values [/values]
 
@@ -2896,6 +2902,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 ## Program (object)
 + id (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
++ type (enum[string], required) - Must be either `promotion`, `giftcard`, or `account`.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + access (enum[string], required) - How the values can be accessed.
     + `contact` - must be associated with a contact.
@@ -2911,6 +2918,8 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
 + uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
++ startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
++ endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
 + createdDate (string, required) - ISO date for when the Program was created.
 + updatedDate (string, required) - ISO date for when the Program was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Program.
