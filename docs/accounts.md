@@ -20,7 +20,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
 {
     "programId": "customer-accounts-usd",
     "currency": "USD",
-    "access": "customerId",
+    "access": "contactId",
     "name": "Accounts USD",
     "tags": ["accounts-usd"]
 }
@@ -30,7 +30,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
 Below is the list of attributes used when creating an Account Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
- - **access** (_required_): Always use value `customerId` for creating account programs. This means the Values must be attached to a Customer.  
+ - **access** (_required_): Always use value `contactId` for creating account programs. This means the Values must be attached to a Customer.  
  - **name** (_optional_): A human-readable name for the Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
@@ -43,7 +43,7 @@ Request to create an account.
 {
     "id": "account-h54sya3",
     "programId": "customer-accounts-usd",
-    "customerId": "cus_123",
+    "contactId": "cus_123",
     "value": 2500
 }
 ``` 
@@ -52,7 +52,7 @@ Request to create an account.
 Below is the list of attributes used when creating an account from a Program.
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
-- **customerId** (_required_): Unique ID for the Customer.
+- **contactId** (_required_): Unique ID for the Customer.
 - **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
 
 ### Common Requests  
@@ -111,11 +111,11 @@ Checkout is done using the `/transactions/orders` endpoint. To use an account di
 }
 ```
 
-Alternatively, since the account is associated with the customer, you can directly use the `customerId` as a payment source. This will consider all `Values` associated with the customer.
+Alternatively, since the account is associated with the customer, you can directly use the `contactId` as a payment source. This will consider all `Values` associated with the customer.
 ```json
 {
     "rail": "lightrail",
-    "customerId": "cus_123"
+    "contactId": "cus_123"
 }
 ```
 

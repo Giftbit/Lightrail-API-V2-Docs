@@ -1,8 +1,8 @@
 ### Transfer [POST /transactions/transfer]
 
-+ Request (application/json)
+Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
 
-    Currently only the `lightrail` payment rail is supported.
++ Request (application/json)
 
     + Headers
     
@@ -25,7 +25,7 @@
                 "id": "unique-id-123",
                 "source": {
                     "rail": "lightrail",
-                    "id": "vs_1"
+                    "code": "62026c68ec5048dbb881"
                 },
                 "destination": {
                     "rail": "lightrail",
@@ -59,19 +59,27 @@
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "vs_1",
+                        "id": "giftcard-96f27ad62a1c",
                         "currency": "USD",
-                        "balanceBefore": 2500,
-                        "balanceAfter": 0,
-                        "balanceChange": -2500
+                        "amount": -2500,
+                        "balance": {
+                            "before": 2500,
+                            "after": 0,
+                            "change": -2500
+                        },
+                        "uses": null
                     },
                     {
                         "rail": "lightrail",
                         "id": "alice-account-USD",
                         "currency": "USD",
-                        "balanceBefore": 5000,
-                        "balanceAfter": 7500,
-                        "balanceChange": 2500
+                        "amount": 2500,
+                        "balance": {
+                            "before": 5000,
+                            "after": 7500,
+                            "change": 2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

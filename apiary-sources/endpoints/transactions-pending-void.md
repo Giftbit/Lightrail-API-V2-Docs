@@ -1,5 +1,7 @@
 ### Void Pending Transaction [POST /transactions/{id}/void]
 
+A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
+
 + Request (application/json)
     + Headers
     
@@ -22,9 +24,13 @@
                         "rail": "lightrail",
                         "id": "vs_1",
                         "currency": "XXX",
-                        "balanceBefore": 5500,
-                        "balanceAfter": 3000,
-                        "balanceChange": -2500
+                        "amount": -2500,
+                        "balance": {
+                            "before": 5500,
+                            "after": 3000,
+                            "change": -2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

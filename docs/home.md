@@ -24,7 +24,7 @@ Perhaps a customer who has $20 account credits visits your store, enters the pro
     "sources": [
         {
             "rail": "lightrail",
-            "customerId": "cus_123"
+            "contactId": "cus_123"
         },
         {
             "rail": "lightrail",
@@ -42,7 +42,7 @@ You can see `lineItems` contains the basic shopping cart information.
 
 Also, note the `sources` property in the request. It includes three sources, two of which are value stored in Lightrail, the other is a tokenized card from Stripe.
 
-- `"customerId": "cus_123"`: uses any value associated with that customer in Lightrail. 
+- `"contactId": "cus_123"`: uses any value associated with that customer in Lightrail. 
 - `"code: "EASYMONEY"`: represents the promotion code entered during checkout.
 - `"cardToken": "tok_12345"`: tokenized card using Stripe elements.  
  
@@ -110,7 +110,7 @@ Different types of value are represented by modifying the properties of `Values`
 
 The way `Values` are passed into the `sources` property of the `orders` resource depends on what type of value it is.
 
-##### `customerId`
+##### `contactId`
 Some value may be attached directly to a `Customer` (see the [create customer documentation](https://lightrailapi.docs.apiary.io/#reference/0/customers/create-customer) for details on creating `Customers`).
 For example account credits or promotions are commonly attached directly to a `Customer`. 
 
@@ -118,7 +118,7 @@ Usage:
 ```json
 {
     "rail": "lightrail",
-    "customerId": "cus_123"
+    "contactId": "cus_123"
 }
 ```     
 

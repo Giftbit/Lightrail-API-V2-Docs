@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Promotions [GET /values/promotions{?limit}{?offset}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,7 +8,7 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + type (string, optional) - {{filter.type}}
+    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
     + currency (string, optional) - {{filter.currency}}
@@ -31,12 +31,12 @@
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "programId": "giftcards",
+                    "type": "promotion"
+                    "programId": "springpromo",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
-                    "frozen": false,
+                    "frozen": false, 
                     "canceled": false,
                     "preTax": false,
                     "redemptionRule": null,
@@ -50,3 +50,39 @@
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
+
+### Get a Promotion Value [GET /values/promotions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the id of the Promotion to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "programId": "springpromo",
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }

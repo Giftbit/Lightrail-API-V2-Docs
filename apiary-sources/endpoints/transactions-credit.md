@@ -1,8 +1,8 @@
 ### Credit [POST /transactions/credit]
 
-+ Request (application/json)
+Credit (add to) an account on a rail.  Currently only the `lightrail` rail is supported.
 
-    Currently only the `lightrail` payment rail is supported.
++ Request (application/json)
 
     + Headers
     
@@ -12,6 +12,7 @@
         + id (string, required) - {{transaction.id}}
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
+        + uses (number, optional) - The number of uses to add.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + pending (boolean, optional) - {{transaction.pending}}
@@ -23,7 +24,7 @@
                 "id": "unique-id-123",
                 "destination": {
                     "rail": "lightrail",
-                    "id": "vs_1"
+                    "account": "points-account-14314"
                 },
                 "amount": 2500,
                 "currency": "XXX",
@@ -44,11 +45,15 @@
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "vs_1",
+                        "id": "points-account-14314",
                         "currency": "XXX",
-                        "balanceBefore": 1500,
-                        "balanceAfter": 4000,
-                        "balanceChange": 2500
+                        "amount": 2500,
+                        "balance": {
+                            "before": 1500,
+                            "after": 4000,
+                            "change": 2500
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

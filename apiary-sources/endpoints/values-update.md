@@ -1,7 +1,17 @@
-### Update a Value [PATCH /values/{id}]
+### Update Values [PATCH /values{?limit}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
+Update all Values that match the given query parameters.
+        
 + Parameter
-    + id (string) - the id of the Value to modify.
+    + limit (number, optional) - {{pagination.limit}}  This limits the number of items returned but not the number of items modified.
+    + type (string, optional) - {{filter.type}}
+    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
+    + contact (string, optional) - {{filter.contact}}
+    + program (string, optional) - {{filter.program}}
+    + currency (string, optional) - {{filter.currency}}
+    + active (boolean, optional) - {{filter.active}}
+    + frozen (boolean, optional) - {{filter.frozen}}
+    + canceled (boolean, optional) - {{filter.canceled}}
 
 + Request (application/merge-patch+json)
 
@@ -12,16 +22,15 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, optional) - {{value.id}}  If present must match the id in the path.
-        + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
+        + canceled (boolean, optional) - {{value.canceled}}
+        + preTax (boolean, optional) - {{value.preTax}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + valueRule (number, optional) - {{value.valueRule}}
-        + uses (number, optional) - {{value.uses}}
         + startDate (number, optional) - {{value.startDate}}
         + endDate (number, optional) - {{value.endDate}}
-        + metadata (number, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     
@@ -30,24 +39,56 @@
             }
     
 + Response 200 (application/json)
-    + Attributes (Value)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 2
+        
+    + Attributes (array[Value])
 
     + Body
-    
-            {
-                "id": "vs-1",
-                "programId": "giftcards",
-                "currency": "USD",
-                "balance": 2500, 
-                "preTax": false,
-                "active": true,
-                "frozen": true,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "giftcard",
+                    "programId": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": true,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:58:19.036Z"
+                },
+                {
+                    "id": "account-1",
+                    "type": "account",
+                    "programId": null,
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": true,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:58:19.036Z"
+                }
+            ]

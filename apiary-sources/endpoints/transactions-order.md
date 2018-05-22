@@ -1,23 +1,21 @@
 ### Process an order [POST /transactions/orders]
 
-Process an order by debiting (removing value from) one or more payment rails.
+Process an order by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
-The payment rails `lightrail`, `stripe` and `internal` are supported.
-
-Data used in example:
-- Purchasing: 
-    - 2x $5 socks (8% tax rate)
-    - 1x $1.99 chocolate bar  (5% tax rate)
-    - 1x $3.49 shipping (0% tax rate)
-- Payment Sources:
-    - Contact with prepaid account, and a sock and chocolate bar promotion.
-        - Account has $20.
-        - Sock promo is for 20% off retail price of socks.
-        - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
-    - Generic code for 10% off orders over $5 (does not apply to shipping). 
-
----
 + Request (application/json)
+    
+    Data used in example:
+    - Purchasing: 
+        - 2x $5 socks (8% tax rate)
+        - 1x $1.99 chocolate bar  (5% tax rate)
+        - 1x $3.49 shipping (0% tax rate)
+    - Payment Sources:
+        - Contact with prepaid account, and a sock and chocolate bar promotion.
+            - Account has $20.
+            - Sock promo is for 20% off retail price of socks.
+            - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
+        - Generic code for 10% off orders over $5 (does not apply to shipping). 
+    
     + Headers
     
             {{header.authorization}}
@@ -63,7 +61,7 @@ Data used in example:
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "contactEmail": "alice@example.com"
+                        "contact": "alice-1234"
                     },
                     {
                         "rail": "lightrail",
@@ -129,6 +127,7 @@ Data used in example:
                         "description": "Chocolate bar.",
                         "valuesApplied": [
                             {
+                                "rail": "lightrail",
                                 "id": "2018-10percent-off-over-5-orders",
                                 "rule": "order.total > 500 && item.type != 'shipping", 
                                 "ruleExplanation": "Take 10% off order if over $5.",
@@ -137,6 +136,7 @@ Data used in example:
                                 "discount": true
                             },
                             {
+                                "rail": "lightrail",
                                 "id": "2018-50cent-chocobar-credit",
                                 "rule": "item.productId == "pid_41234",
                                 "ruleExplanation": "50 cents towards chocolate bars.",
@@ -177,32 +177,52 @@ Data used in example:
                 ],
                 "steps": [
                     {
+                        "rail": "lightrail",
                         "id": "2018-alice-socks-promo",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -200,
-                        "contactEmail": "alice@example.com",
-                        "tags": ["contact-promotions", "clothing-promos"],
-                        "discount": true 
+                        "balance": null,
+                        "uses": {
+                            "before": 1,
+                            "after": 0,
+                            "change": -1
+                        }
                     },
                     {
+                        "rail": "lightrail",
                         "id": "2018-10percent-off-over-5-orders",
-                        "amount": -100,
+                        "currency": "USD",
                         "code": "SAVE10PERCENT",
-                        "tags": ["generic-code"],
-                        "discount": true
+                        "amount": -100,
+                        "balance": null,
+                        "uses": null
                     },
                     {
+                        "rail": "lightrail",
                         "id": "2018-50cent-chocobar-credit",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -50,
-                        "contactEmail": "alice@example.com"
-                        "tags": ["contact-promotions", "food-promos"],
-                        "discount": true
+                        "balance": {
+                            "before": 50,
+                            "after": 0,
+                            "change": -50
+                        },
+                        "uses": null
                     },
                     {
+                        "rail": "lightrail",
                         "id": "alice-account-USD",
+                        "currency": "USD",
+                        "contact": "alice-1234",
                         "amount": -1265,
-                        "contactEmail": "alice@example.com",
-                        "tags": ["contact-accounts"],
-                        "discount": false
+                        "balance": {
+                            "before": 2000,
+                            "after": 735,
+                            "change": -1265
+                        },
+                        "uses": null
                     }
                 ],
                 "remainder": 0,

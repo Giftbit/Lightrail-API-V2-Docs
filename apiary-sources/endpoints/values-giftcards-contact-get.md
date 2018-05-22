@@ -1,4 +1,4 @@
-### Get Value's Contact [GET /values/{id}/contact]
+### Get a Giftcard's Contact [GET /values/giftcards/{id}/contact]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to get the Contact of.
+    + id (string) - the id of the Giftcard to get the Contact of.
 
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -18,6 +18,7 @@
                 "firstName": "Jeffrey",
                 "lastName": "Lebowski",
                 "email": "thedude@example.com",
+                "tags": [],
                 "metadata": {
                     "alias": "El Duderino"
                 },

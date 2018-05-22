@@ -26,7 +26,7 @@ Example of creating a `Program` for a promotion that will be directly attached t
     "programId": "sign-up-promotion",
     "name": "Spring Promotion USD",
     "currency": "USD",
-    "access": "customerId",
+    "access": "contactId",
     "preTax": false,
     "discount": true,
     "fixedInitialValues": [
@@ -40,7 +40,7 @@ Example of creating a `Program` for a promotion that will be directly attached t
 Below is the list of attributes used when creating a Promotion Program.
  - **programId** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
- - **access** (_required_): In this case use `customerId` for attaching to a customer.
+ - **access** (_required_): In this case use `contactId` for attaching to a customer.
  - **discount** (_required_): Set to `true`. 
  - **minInitialBalance** (_optional_): The minimum value the Value can be created with.
  - **maxInitialBalance** (_optional_): The maximum value the Value can be created with.  
@@ -57,7 +57,7 @@ Request to add a promotion to a customer.
 {
     "id": "cus_123-sign-up-promotion",
     "programId": "sign-up-promotion",
-    "customerId": "cus_123",
+    "contactId": "cus_123",
     "value": 500
 }
 ``` 
@@ -66,17 +66,17 @@ Request to add a promotion to a customer.
 Below is the list of attributes used when creating an account from a Program.
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
-- **customerId** (_required_): Unique ID for the Customer.
+- **contactId** (_required_): Unique ID for the Customer.
 - **value** (_required_): In this case, must match the value defined in `fixedInitialValues`. 
 
 #### Using the Promotion as a Payment Source in Checkout
-Checkout is done using the `/transactions/orders` endpoint. Since the account is associated with the customer, you can directly use the `customerId` as a payment source. 
+Checkout is done using the `/transactions/orders` endpoint. Since the account is associated with the customer, you can directly use the `contactId` as a payment source. 
 This will automatically use the promotion along with any other Values associated with the customer.  
 
 ```json
 {
     "rail": "lightrail",
-    "customerId": "cus_123"
+    "contactId": "cus_123"
 }
 ```
 

@@ -14,7 +14,7 @@
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
         + tags (array[string], optional) - {{tags}}
-        + metadata (string, optional) - {{contact.metadata}}
+        + metadata (object, optional) - {{contact.metadata}}
 
     + Body
 

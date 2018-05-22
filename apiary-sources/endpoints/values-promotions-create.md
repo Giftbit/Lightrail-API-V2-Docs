@@ -1,4 +1,4 @@
-### Create a Value [POST /values]
+### Create a Promotion Value [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -7,8 +7,8 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + programId (string, optional) - Associate with and copy default values from the given Program.
-        + contact (string, optional) - Associate the Value with the given Contact by ID.  Cannot be set with `code`.
+        + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
+        + contact (string, optional) - Associate the Value with the given Contact.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
@@ -20,13 +20,14 @@
         + uses (number, optional) - {{value.uses}}
         + startDate (number, optional) - {{value.startDate}}
         + endDate (number, optional) - {{value.endDate}}
-        + metadata (number, optional) - {{value.metadata}}
+        + tags (array[string], optional) - {{tags}}
+        + metadata (object, optional) - {{value.metadata}}
         
     + Body
     
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -38,17 +39,20 @@
     
             {
                 "id": "vs-1",
-                "programId": "giftcards",
+                "type": "promotion"
+                "programId": "springpromo",
                 "currency": "USD",
-                "balance": 2500, 
-                "preTax": false,
+                "balance": 2500,
                 "active": true,
                 "frozen": false,
+                "canceled": false,
+                "preTax": false,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

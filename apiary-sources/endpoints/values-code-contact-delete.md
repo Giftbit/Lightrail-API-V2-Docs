@@ -1,4 +1,4 @@
-### Delete Value Contact [DELETE /values/{id}/contact]
+### Delete a Value's Contact by code [DELETE /values/code/{code}/contact]
 
 + Request (application/json)
 
@@ -9,7 +9,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Value to remove the Contact from.
+    + code (string) - the code of the Value to remove the Contact from.
 
 + Response 200 (application/json)
 

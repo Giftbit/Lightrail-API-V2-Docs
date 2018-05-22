@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get Accounts [GET /values/accounts{?limit}{?offset}{?tag}{?program}{?currency}{?active}{?frozen}{?canceled}]
 
 + Request (application/json)
     + Headers
@@ -8,8 +8,7 @@
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + offset (number, optional) - {{pagination.offset}}
-    + type (string, optional) - {{filter.type}}
-    + contact (string, optional) - {{filter.contact}}
+    + tag (string, optional) - {{filter.tag}}  {{filter.list}}
     + program (string, optional) - {{filter.program}}
     + currency (string, optional) - {{filter.currency}}
     + active (boolean, optional) - {{filter.active}}
@@ -30,9 +29,9 @@
 
             [
                 {
-                    "id": "vs-1",
-                    "type": "giftcard",
-                    "programId": "giftcards",
+                    "id": "account-1",
+                    "type": "account",
+                    "programId": null,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -50,3 +49,39 @@
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
+
+### Get an Account [GET /values/accounts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the id of the Account to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "account-1",
+                "type": "account",
+                "programId": null,
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
