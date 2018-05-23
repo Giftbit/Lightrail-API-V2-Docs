@@ -45,7 +45,7 @@ patch:
 program:
   id: "Unique idempotent ID for the Program."
   name: "A human-readable name for the Program."
-  type: "Must be either `promotion`, `giftcard`, or `account`."
+  type: "Must be either `promotion`, `giftCard`, or `account`."
   maxInitialBalance: "The maximum balance the Value can be created with."
   minInitialBalance: "The minimum balance the Value can be created with."
   fixedInitialValues: "A list of exact values the Value can be created with."
@@ -98,7 +98,7 @@ value:
   redemptionRule: "A Redemption Rule controlling when the Value can be used in an order."
   ruleExplanation: "An explanation for the `redemptionRule` does that can be used to display to the contact."
   startDate: "ISO date for when the Value can start to be transacted with."
-  type: "`account`, `giftcard` or `promotion`"
+  type: "`account`, `giftCard` or `promotion`"
   uses: "The number of times the Value can be transacted with."
   valueRule: "A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`."
   access:

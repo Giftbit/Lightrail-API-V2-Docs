@@ -27,8 +27,8 @@
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "contact": "unique-id-123",
                 "balance": 2500,
@@ -57,8 +57,8 @@
 
             {
                 "id": "vs-1-claim-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "contact": "unique-id-123",
                 "balance": 2500,

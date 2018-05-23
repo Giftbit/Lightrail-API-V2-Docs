@@ -26,7 +26,7 @@
 
             {
                 "id": "unique-id-123",
-                "name": "Giftcard program",
+                "name": "Gift Card program",
                 "currency": "CAD",
                 "code": "…e1b1"
                 "access": "secureCode",

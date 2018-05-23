@@ -1,4 +1,4 @@
-### Get a Giftcard [GET /values/giftcards/{id}]
+### Get a Gift Card [GET /values/giftCards/{id}]
 
 + Request (application/json)
     + Headers
@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the ID of the Giftcard to get.
+    + id (string) - the ID of the Gift Card to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -15,8 +15,8 @@
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -34,7 +34,7 @@
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### List Giftcards [GET /values/giftcards{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
+### List Gift Cards [GET /values/giftCards{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
 
 + Request (application/json)
     + Headers
@@ -64,8 +64,8 @@
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
+                    "type": "giftCard",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,

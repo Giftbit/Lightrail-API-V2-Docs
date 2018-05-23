@@ -280,7 +280,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
+### Get Contact's Gift Cards [GET /contacts/{id}/values/giftCards]
 
 + Request (application/json)
   + Headers
@@ -298,7 +298,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
               {
                   "id": "gift-1",
-                  "program": "giftcards",
+                  "program": "giftCards",
                   "currency": "USD",
                   "balance": 2500,
                   "preTax": false,
@@ -384,7 +384,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             [
                 {
                     "id": "vs-1",
-                    "program": "giftcards",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,
@@ -622,13 +622,13 @@ An Account is Value specifically tied to a Contact.
                 "messageCode": "ValueInUse"
             }
 
-# Group Giftcards
+# Group Gift Cards
 
-## Giftcards [/values/giftcards]
+## Gift Cards [/values/giftCards]
 
-A Giftcard is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Giftcard can be used anonymously or claimed and attached to a Contact for later use.
+A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or claimed and attached to a Contact for later use.
 
-### Create a Giftcard [POST /values/giftcards]
+### Create a Gift Card [POST /values/giftCards]
 
 + Request (application/json)
     + Headers
@@ -657,7 +657,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     
             {
                 "id": "vs-1",
-                "program": "giftcards",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -669,8 +669,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     
             {
                 "id": "vs-1",
-                "type": "giftcards",
-                "program": "giftcards",
+                "type": "giftCards",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -687,7 +687,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Get a Giftcard [GET /values/giftcards/{id}]
+### Get a Gift Card [GET /values/giftCards/{id}]
 
 + Request (application/json)
     + Headers
@@ -695,7 +695,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the ID of the Giftcard to get.
+    + id (string) - the ID of the Gift Card to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -704,8 +704,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -723,7 +723,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### List Giftcards [GET /values/giftcards{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
+### List Gift Cards [GET /values/giftCards{?limit}{?offset}{?id}{?tags}{?contact}{?program}]
 
 + Request (application/json)
     + Headers
@@ -753,8 +753,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
+                    "type": "giftCard",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -772,10 +772,10 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-### Update a Giftcard [PATCH /values/giftcards/{id}]
+### Update a Gift Card [PATCH /values/giftCards/{id}]
 
 + Parameter
-    + id (string) - the ID of the Giftcard to modify.
+    + id (string) - the ID of the Gift Card to modify.
 
 + Request (application/merge-patch+json)
 
@@ -810,8 +810,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,
@@ -828,7 +828,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
+### Claim a Gift Card for a Contact [POST /values/giftCards/{id}/claim]
 
 + Request (application/json)
      + Headers
@@ -836,7 +836,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
              Authorization: Bearer <API_KEY>
  
      + Attributes
-         + contact (string, required) - The ID of the Contact to claim the Giftcard.
+         + contact (string, required) - The ID of the Contact to claim the Gift Card.
          
      + Body
      
@@ -845,11 +845,11 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
              }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to claim.
+    + id (string) - the ID of the Gift Card to claim.
 
 + Response 200 (application/json)
 
-    The Giftcard was claimed for the Contact.
+    The Gift Card was claimed for the Contact.
 
     + Attributes (Value)
 
@@ -857,8 +857,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
             {
                 "id": "vs-1-claim-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "contact": "unique-id-123",
                 "currency": "USD",
                 "balance": 2500,
@@ -875,7 +875,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Change a Giftcard's code [PUT /values/giftcards/{id}/changeCode]
+### Change a Gift Card's code [PUT /values/giftCards/{id}/changeCode]
 
 + Request (application/json)
 
@@ -895,7 +895,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to change the code of.
+    + id (string) - the ID of the Gift Card to change the code of.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -904,8 +904,8 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "code": "…e1b1",
                 "balance": 2500,
@@ -924,11 +924,11 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### Giftcard Programs [/programs/giftcards]
+### Gift Card Programs [/programs/giftCards]
 
 Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an overview of the Programs endpoints related to gift cards is included here, and a more detailed explanation of Programs can be found below to provide context and insight into how `Values` function.
 
-### Create Gift Card Program [POST /programs/giftcards]
+### Create Gift Card Program [POST /programs/giftCards]
 
 + Request (application/json)
     + Headers
@@ -958,7 +958,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "access": "secureCode",
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "tags": ["giftcard"]
+                "tags": ["giftCard"]
             }
     
 + Response 201 (application/json)
@@ -969,7 +969,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
             {
                 "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
-                "type": "giftcard",
+                "type": "giftCard",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "false",
@@ -981,14 +981,14 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "maxInitialBalance": 100000,
                 "fixedInitialValues": null,
                 "uses": null,
-                "tags": ["giftcard"],
+                "tags": ["giftCard"],
                 "metadata": null,
                 "startDate": null,
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Get a Giftcard Program [GET /programs/giftcards/{id}]
+### Get a Gift Card Program [GET /programs/giftCards/{id}]
 
 + Request (application/json)
     + Headers
@@ -996,7 +996,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the ID of the Giftcard Program to get.
+    + id (string) - the ID of the Gift Card Program to get.
 
 + Response 200 (application/json)
     + Attributes (Program)
@@ -1005,7 +1005,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
 
             {
                 "id": "unique-id-123",
-                "name": "Giftcard program",
+                "name": "Gift Card program",
                 "currency": "CAD",
                 "access": "secureCode",
                 "discount": "false",
@@ -1027,7 +1027,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-### List Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
+### List Gift Card Programs [GET /programs/giftCards{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
@@ -1056,7 +1056,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
             [
                 {
                     "id": "unique-id-123",
-                    "name": "Giftcard program",
+                    "name": "Gift Card program",
                     "currency": "CAD",
                     "access": "secureCode",
                     "discount": "false",
@@ -1080,10 +1080,10 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
+### Update a Gift Card Program [PATCH /programs/giftCards/{id}]
 
 + Parameter
-    + id (string) - the ID of the Giftcard Program to modify.
+    + id (string) - the ID of the Gift Card Program to modify.
 
 + Request (application/json)
 
@@ -1117,7 +1117,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
             {
                 "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
-                "type": "giftcard",
+                "type": "giftCard",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "false",
@@ -1129,14 +1129,14 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "maxInitialBalance": 100000,
                 "fixedInitialValues": null,
                 "uses": null,
-                "tags": ["giftcard", "top-customers"],
+                "tags": ["giftCard", "top-customers"],
                 "metadata": null,
                 "startDate": null,
                 "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Delete a Giftcard Program [DELETE /programs/giftcards/{id}]
+### Delete a Gift Card Program [DELETE /programs/giftCards/{id}]
 
 + Request
     + Headers
@@ -1156,7 +1156,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
 
 + Response 409 (application/json)
 
-    Attempting to delete a Giftcard Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
+    Attempting to delete a Gift Card Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
 
     + Body
     
@@ -1780,7 +1780,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
 
 ## Codes [/values/byCode]
 
-A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
+A Code is not a type of Value but a means of accessing a Value.  Gift Cards and Promotions (which are types of Value) can both be referenced by a code.  
 
 ### Get a Value by code [GET /values/byCode/{code}]
 
@@ -1799,8 +1799,8 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -1855,8 +1855,8 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
     
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500, 
                 "active": true,
@@ -1902,8 +1902,8 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "contact": "unique-id-123",
                 "balance": 2500,
@@ -1932,8 +1932,8 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "id": "vs-1-claim-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "contact": "unique-id-123",
                 "balance": 2500,
@@ -1979,7 +1979,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
 
             {
                 "id": "unique-id-123",
-                "name": "Giftcard program",
+                "name": "Gift Card program",
                 "currency": "CAD",
                 "code": "…e1b1"
                 "access": "secureCode",
@@ -2436,7 +2436,7 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "giftcard-96f27ad62a1c",
+                        "id": "giftCard-96f27ad62a1c",
                         "currency": "USD",
                         "amount": -2500,
                         "balance": {
@@ -2654,7 +2654,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
 
 ## Values [/values]
 
-A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
+A Value (naturally) represents value in the Lightrail system.  It can be a Gift Card, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
 
 ### List Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}]
 
@@ -2687,8 +2687,8 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Giftc
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
+                    "type": "giftCard",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -2715,7 +2715,6 @@ Programs are most commonly used to define and organize Promotion campaigns. For 
 
 Programs can also be used to control and organize gift card campaigns. Lightrail supplies you with a default gift card Program, but you can also choose to create more gift card Programs for custom use cases -- for example, so that B2B gift cards can be handled differently from gift cards that your customers purchase directly from your site.
 
----
 ### List Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
@@ -2745,7 +2744,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
             [
                 {
                     "id": "unique-id-123",
-                    "name": "Giftcard program",
+                    "name": "Gift Card program",
                     "currency": "CAD",
                     "access": "secureCode",
                     "discount": "false",
@@ -2965,7 +2964,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 ## Program (object)
 + id (string, required) - Unique idempotent ID for the Program.
 + name (string, optional) - A human-readable name for the Program.
-+ type (enum[string], required) - Must be either `promotion`, `giftcard`, or `account`.
++ type (enum[string], required) - Must be either `promotion`, `giftCard`, or `account`.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + access (enum[string], required) - How the values can be accessed.
     + `contact` - must be associated with a contact.
@@ -3008,11 +3007,11 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 ## TransactionParty (object)
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ code (string, optional) - `lightrail`: the code of a Giftcard or Promotion.
++ code (string, optional) - `lightrail`: the code of a Gift Card or Promotion.
 + contact (string, optional) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
 + account (string, optional) - `lightrail`: an Account's ID.
 + promotion (string, optional) - `lightrail`: a Promotion's ID.
-+ giftcard (string, optional) - `lightrail`: a Giftcard's ID.
++ giftCard (string, optional) - `lightrail`: a Gift Card's ID.
 + value (string, optional) - `lightrail`: a Value's ID.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
 + id (string, optional) - `internal`: the ID of the internal value.
@@ -3051,7 +3050,7 @@ A step taken as part of the transaction.
 
 ## Value (object)
 + id (string, required) - Unique idempotent id for the Value.
-+ type (string, required) - `account`, `giftcard` or `promotion`
++ type (string, required) - `account`, `giftCard` or `promotion`
 + program (string, optional) - The ID of the Program this Value is in.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + contact (string, optional) - The ID of the Contact that has claimed this Value.

@@ -59,7 +59,7 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "giftcard-96f27ad62a1c",
+                        "id": "giftCard-96f27ad62a1c",
                         "currency": "USD",
                         "amount": -2500,
                         "balance": {

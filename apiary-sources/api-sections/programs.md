@@ -6,5 +6,4 @@ Programs are most commonly used to define and organize Promotion campaigns. For 
 
 Programs can also be used to control and organize gift card campaigns. Lightrail supplies you with a default gift card Program, but you can also choose to create more gift card Programs for custom use cases -- for example, so that B2B gift cards can be handled differently from gift cards that your customers purchase directly from your site.
 
----
 {% include 'endpoints/programs-get.md' %}

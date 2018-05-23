@@ -1,4 +1,4 @@
-### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
+### Claim a Gift Card for a Contact [POST /values/giftCards/{id}/claim]
 
 + Request (application/json)
      + Headers
@@ -6,7 +6,7 @@
              {{header.authorization}}
  
      + Attributes
-         + contact (string, required) - The ID of the Contact to claim the Giftcard.
+         + contact (string, required) - The ID of the Contact to claim the Gift Card.
          
      + Body
      
@@ -15,11 +15,11 @@
              }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to claim.
+    + id (string) - the ID of the Gift Card to claim.
 
 + Response 200 (application/json)
 
-    The Giftcard was claimed for the Contact.
+    The Gift Card was claimed for the Contact.
 
     + Attributes (Value)
 
@@ -27,8 +27,8 @@
 
             {
                 "id": "vs-1-claim-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "contact": "unique-id-123",
                 "currency": "USD",
                 "balance": 2500,

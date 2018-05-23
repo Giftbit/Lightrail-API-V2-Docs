@@ -15,8 +15,8 @@
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,

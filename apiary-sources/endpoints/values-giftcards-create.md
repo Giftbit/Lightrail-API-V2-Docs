@@ -1,4 +1,4 @@
-### Create a Giftcard [POST /values/giftcards]
+### Create a Gift Card [POST /values/giftCards]
 
 + Request (application/json)
     + Headers
@@ -27,7 +27,7 @@
     
             {
                 "id": "vs-1",
-                "program": "giftcards",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -39,8 +39,8 @@
     
             {
                 "id": "vs-1",
-                "type": "giftcards",
-                "program": "giftcards",
+                "type": "giftCards",
+                "program": "giftCards",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,

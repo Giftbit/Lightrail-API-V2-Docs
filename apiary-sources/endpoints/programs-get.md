@@ -27,7 +27,7 @@
             [
                 {
                     "id": "unique-id-123",
-                    "name": "Giftcard program",
+                    "name": "Gift Card program",
                     "currency": "CAD",
                     "access": "secureCode",
                     "discount": "false",

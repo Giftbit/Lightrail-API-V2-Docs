@@ -21,7 +21,7 @@ How to create a Gift Card Program through the API. Note, typically Programs are 
     "access": "secureCode",
     "minInitialBalance": 500,
     "maxInitialBalance": 100000,
-    "tags": ["giftcard"]
+    "tags": ["giftCard"]
 }
 ``` 
 

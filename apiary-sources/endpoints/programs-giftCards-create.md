@@ -1,33 +1,37 @@
-### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
-
-+ Parameter
-    + id (string) - the ID of the Giftcard Program to modify.
+### Create Gift Card Program [POST /programs/giftCards]
 
 + Request (application/json)
-
-    {{patch.merge}}
-    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
-
     + Headers
     
             {{header.authorization}}
         
     + Attributes
+        + id (string, required) - {{program.id}}
         + name (string, optional) - {{program.name}}
+        + currency (string, required) - {{currency.code}}
+        + access (enum[string], required) - {{value.access.description}}
+            + `contact` - {{value.access.types.contact}}
+            + `secureCode` - {{value.access.types.secureCode}}
         + active (boolean, optional) - {{value.active}}
-        + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
-        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
-        + fixedInitialValues (array[number], optional) - {{program.fixedInitialValues}} {{patch.alsoChangeValues}}
+        + minInitialBalance (number, optional) - {{program.minInitialBalance}}
+        + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
     + Body
 
             {
-                "tags": ["top-customers"]
+                "id": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "currency": "USD",
+                "access": "secureCode",
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "tags": ["giftCard"]
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
@@ -35,7 +39,7 @@
             {
                 "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
-                "type": "giftcard",
+                "type": "giftCard",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "false",
@@ -47,7 +51,7 @@
                 "maxInitialBalance": 100000,
                 "fixedInitialValues": null,
                 "uses": null,
-                "tags": ["giftcard", "top-customers"],
+                "tags": ["giftCard"],
                 "metadata": null,
                 "startDate": null,
                 "endDate": null,

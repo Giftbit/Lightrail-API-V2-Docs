@@ -34,7 +34,7 @@
             [
                 {
                     "id": "vs-1",
-                    "program": "giftcards",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,

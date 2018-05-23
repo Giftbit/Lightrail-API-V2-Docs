@@ -1,10 +1,10 @@
 ## TransactionParty (object)
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ code (string, optional) - `lightrail`: the code of a Giftcard or Promotion.
++ code (string, optional) - `lightrail`: the code of a Gift Card or Promotion.
 + contact (string, optional) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
 + account (string, optional) - `lightrail`: an Account's ID.
 + promotion (string, optional) - `lightrail`: a Promotion's ID.
-+ giftcard (string, optional) - `lightrail`: a Giftcard's ID.
++ giftCard (string, optional) - `lightrail`: a Gift Card's ID.
 + value (string, optional) - `lightrail`: a Value's ID.
 + token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
 + id (string, optional) - `internal`: the ID of the internal value.

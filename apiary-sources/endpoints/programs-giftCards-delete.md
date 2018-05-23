@@ -1,4 +1,4 @@
-### Delete a Giftcard Program [DELETE /programs/giftcards/{id}]
+### Delete a Gift Card Program [DELETE /programs/giftCards/{id}]
 
 + Request
     + Headers
@@ -18,7 +18,7 @@
 
 + Response 409 (application/json)
 
-    Attempting to delete a Giftcard Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
+    Attempting to delete a Gift Card Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
 
     + Body
     

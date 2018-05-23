@@ -1,4 +1,4 @@
-### Change a Giftcard's code [PUT /values/giftcards/{id}/changeCode]
+### Change a Gift Card's code [PUT /values/giftCards/{id}/changeCode]
 
 + Request (application/json)
 
@@ -18,7 +18,7 @@
             }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to change the code of.
+    + id (string) - the ID of the Gift Card to change the code of.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -27,8 +27,8 @@
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "giftCard",
+                "program": "giftCards",
                 "currency": "USD",
                 "code": "…e1b1",
                 "balance": 2500,
