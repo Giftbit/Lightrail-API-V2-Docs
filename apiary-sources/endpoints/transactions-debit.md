@@ -1,6 +1,6 @@
 ### Debit [POST /transactions/debit]
 
-Debit (remove from) an account on a rail.  Currently only the `lightrail` rail is supported.
+Debit (remove from) a payment source.  Currently only the `lightrail` rail is supported.
 
 + Request (application/json)
 
@@ -34,7 +34,7 @@ Debit (remove from) an account on a rail.  Currently only the `lightrail` rail i
                 }
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body

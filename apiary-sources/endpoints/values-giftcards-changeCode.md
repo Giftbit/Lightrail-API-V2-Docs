@@ -1,12 +1,24 @@
-### Get a Value by code [GET /values/byCode/{code}]
+### Change a Giftcard's code [PUT /values/giftcards/{id}/changeCode]
 
 + Request (application/json)
+
     + Headers
     
             {{header.authorization}}
 
+    + Attributes
+        + code (string, required) - {{code.set}}
+        + secure (boolean, optional) - {{code.secure}}
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure": true
+            }
+
 + Parameter
-    + code (string) - the code of the Value to get.
+    + id (string) - the ID of the Giftcard to change the code of.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -18,6 +30,7 @@
                 "type": "giftcard",
                 "program": "giftcards",
                 "currency": "USD",
+                "code": "…e1b1",
                 "balance": 2500,
                 "active": true,
                 "frozen": false,

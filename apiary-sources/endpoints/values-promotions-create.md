@@ -1,4 +1,4 @@
-### Create a Promotion Value [POST /values/promotions]
+### Create a Promotion [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -32,7 +32,7 @@
                 "balance": 2500
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body

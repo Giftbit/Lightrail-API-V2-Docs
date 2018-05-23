@@ -1,7 +1,7 @@
 ### Update an Account [PATCH /values/accounts/{id}]
 
 + Parameter
-    + id (string) - the id of the Account to modify.
+    + id (string) - the ID of the Account to modify.
 
 + Request (application/merge-patch+json)
 

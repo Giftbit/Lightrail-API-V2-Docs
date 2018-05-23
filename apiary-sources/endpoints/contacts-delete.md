@@ -1,4 +1,4 @@
-### Delete Contact [DELETE /contacts/{id}]
+### Delete a Contact [DELETE /contacts/{id}]
 
 + Request (application/json)
     + Headers

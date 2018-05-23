@@ -87,6 +87,7 @@ value:
   canceled: "If true the Value is canceled.  Once canceled the Value can never be uncanceled."
   code: "The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`."
   codeSet: ""
+  contact: "The ID of the Contact that has claimed this Value."
   endDate: "ISO date for when the Value can last be transacted with."
   frozen: "If true the Value is frozen and cannot be transacted with."
   discount: "If true the Value will be noted as a discount for the contact in orders."

@@ -23,7 +23,7 @@
                 "currency": "USD"
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body
@@ -33,6 +33,7 @@
                 "type": "account",
                 "program": null,
                 "currency": "USD",
+                "contact": "contact-jeff-2",
                 "balance": 0, 
                 "active": true,
                 "frozen": false,

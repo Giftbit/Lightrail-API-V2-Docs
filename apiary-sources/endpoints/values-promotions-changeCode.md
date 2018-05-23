@@ -1,12 +1,22 @@
-### Get a Value by code [GET /values/byCode/{code}]
+### Change a Promotion's code [PUT /values/promotions/{id}/changeCode]
 
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
 
+    + Attributes
+        + code (string, required) - {{code.set}}
+        + secure (boolean, optional) - {{code.secure}}
+        
+    + Body
+    
+            {
+                "code": "SPRINGPROMO2077"
+            }
+
 + Parameter
-    + code (string) - the code of the Value to get.
+    + id (string) - the ID of the Promotion to change the code of.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -15,9 +25,10 @@
 
             {
                 "id": "vs-1",
-                "type": "giftcard",
-                "program": "giftcards",
+                "type": "promotion"
+                "program": "springpromo",
                 "currency": "USD",
+                "code": "SPRINGPROMO2077",
                 "balance": 2500,
                 "active": true,
                 "frozen": false,
