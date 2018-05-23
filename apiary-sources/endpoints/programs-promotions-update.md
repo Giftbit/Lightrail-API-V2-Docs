@@ -19,7 +19,7 @@
         + preTax (boolean, optional) - {{value.preTax}} Default is `true`. {{patch.alsoChangeValues}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
-        + fixedInitialValues (array[number], optional) - {{program.fixedInitialValues}} {{patch.alsoChangeValues}}
+        + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}} {{patch.alsoChangeValues}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
         + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}
@@ -49,7 +49,7 @@
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "uses": null,

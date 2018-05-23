@@ -2,7 +2,7 @@
 
 ## Promotions [/values/promotions]
 
-A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied to orders automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
+A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied on checkout automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
 
 {% include 'endpoints/values-promotions-create.md' %}
 {% include 'endpoints/values-promotions-get.md' %}

@@ -17,7 +17,7 @@
         + active (boolean, optional) - {{value.active}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
-        + fixedInitialValues (array[number], optional) - {{program.fixedInitialValues}} {{patch.alsoChangeValues}}
+        + fixedInitialBalances (array[number], optional) - {{program.fixedInitialBalances}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -45,7 +45,7 @@
                 "valueRule": null,
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
+                "fixedInitialBalances": null,
                 "uses": null,
                 "tags": ["giftCard", "top-customers"],
                 "metadata": null,

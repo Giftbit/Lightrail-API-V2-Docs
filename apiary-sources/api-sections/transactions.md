@@ -2,7 +2,7 @@
 
 ## Transactions [/transactions]
 
-{% include 'endpoints/transactions-order.md' %}
+{% include 'endpoints/transactions-checkout.md' %}
 
 {% include 'endpoints/transactions-debit.md' %}
 

@@ -14,7 +14,7 @@
 + valueRule (number, optional) - {{value.valueRule}}
 + minInitialBalance (number, optional) - {{program.minBalance}}
 + maxInitialBalance (number, optional) - {{program.maxBalance}}
-+ fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
++ fixedInitialBalances (array[number], optional) - {{program.fixedInitialBalances}}
 + uses (number, optional) - {{program.uses}}
 + tags (array[string], optional) - {{tags}}
 + startDate (string, optional) - {{program.startDate}}

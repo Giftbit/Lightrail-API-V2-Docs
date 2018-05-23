@@ -37,7 +37,7 @@
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500,
                     1500,
                     2500

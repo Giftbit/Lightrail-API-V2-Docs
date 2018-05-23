@@ -15,7 +15,7 @@
         + active (boolean, optional) - {{value.active}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + tags (array[string], optional) - {{tags}}
         + metadata (number, optional) - {{program.metadata}}
 
@@ -49,7 +49,7 @@
                 "valueRule": null,
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
+                "fixedInitialBalances": null,
                 "uses": null,
                 "tags": ["giftCard"],
                 "metadata": null,

@@ -20,7 +20,7 @@
         + valueRule (number, optional) - {{value.valueRule}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}}
         + endDate (string, optional) - {{program.endDate}}
@@ -35,7 +35,7 @@
                 "access": "secureCode",
                 "preTax": true,
                 "discount": true,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "tags": ["promotion", "spring-promotion-usd"]
@@ -59,7 +59,7 @@
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "uses": null,

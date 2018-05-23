@@ -645,7 +645,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
@@ -790,7 +790,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
@@ -945,7 +945,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -979,7 +979,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "valueRule": null,
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
+                "fixedInitialBalances": null,
                 "uses": null,
                 "tags": ["giftCard"],
                 "metadata": null,
@@ -1015,7 +1015,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500,
                     1500,
                     2500
@@ -1066,7 +1066,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                     "valueRule": null,
                     "minInitialBalance": null,
                     "maxInitialBalance": null,
-                    "fixedInitialValues": [
+                    "fixedInitialBalances": [
                         500,
                         1500,
                         2500
@@ -1099,7 +1099,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (number, optional) - Arbitrary data associated with the Program.
 
@@ -1127,7 +1127,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "valueRule": null,
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
+                "fixedInitialBalances": null,
                 "uses": null,
                 "tags": ["giftCard", "top-customers"],
                 "metadata": null,
@@ -1171,7 +1171,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
 
 ## Promotions [/values/promotions]
 
-A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied to orders automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
+A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied on checkout automatically.  It can be balance-based such as $5 or valueRule-based such a 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
 
 ### Create a Promotion [POST /values/promotions]
 
@@ -1190,7 +1190,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
@@ -1335,7 +1335,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
@@ -1546,14 +1546,14 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
             + `contact` - must be associated with a Contact by ID.
             + `secureCode` - a code is generated or supplied and is stored securely.
             + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact on checkout. Default is `true`. 
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
         + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
         + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
@@ -1568,7 +1568,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
                 "access": "secureCode",
                 "preTax": true,
                 "discount": true,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "tags": ["promotion", "spring-promotion-usd"]
@@ -1592,7 +1592,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "uses": null,
@@ -1700,11 +1700,11 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
     + Attributes
         + name (string, optional) - A human-readable name for the Program.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact on checkout. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + tags (array[string], optional) - Segmentation tags.
         + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
         + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
@@ -1734,7 +1734,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500
                 ],
                 "uses": null,
@@ -1835,7 +1835,7 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (number, optional) - ISO date for when the Value can last be transacted with.
@@ -1990,7 +1990,7 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
                 "valueRule": null,
                 "minInitialBalance": null,
                 "maxInitialBalance": null,
-                "fixedInitialValues": [
+                "fixedInitialBalances": [
                     500,
                     1500,
                     2500
@@ -2006,9 +2006,9 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
 
 ## Transactions [/transactions]
 
-### Process an order [POST /transactions/orders]
+### Checkout [POST /transactions/checkout]
 
-Process an order by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
+Process a checkout by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
 + Request (application/json)
     
@@ -2754,7 +2754,7 @@ Programs can also be used to control and organize gift card campaigns. Lightrail
                     "valueRule": null,
                     "minInitialBalance": null,
                     "maxInitialBalance": null,
-                    "fixedInitialValues": [
+                    "fixedInitialBalances": [
                         500,
                         1500,
                         2500
@@ -2949,7 +2949,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 ## LineItemPromotions (object)
 + id (string) - Unique idempotent id for the Value.
-+ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in an order.
++ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout.
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
 + preTax (boolean) - If true the Value's balance is applied before tax is calculated.
@@ -2970,14 +2970,14 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
     + `contact` - must be associated with a contact.
     + `secureCode` - a code is generated or supplied and is stored securely.
     + `publicCode` - a code is generated or supplied and can be displayed.
-+ discount (boolean, required) - If true the Value will be noted as a discount for the contact in orders.
++ discount (boolean, required) - If true the Value will be noted as a discount for the contact on checkout.
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
 + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + minInitialBalance (number, optional) - 
 + maxInitialBalance (number, optional) - 
-+ fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
++ fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
 + uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
 + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
@@ -2992,7 +2992,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 ## Transaction (object)
 + id (string, required) - Unique idempotent ID for the Transaction.
-+ transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `order`...
++ transactionType (string, required) - The type of the transaction, eg: `debit`, `credit`, `checkout`...
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep], required) - An array of transaction steps.
 + remainder (number, required) - The remainder of balance that could not be debited.
@@ -3056,12 +3056,12 @@ A step taken as part of the transaction.
 + contact (string, optional) - The ID of the Contact that has claimed this Value.
 + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-+ discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
++ discount (boolean, optional) - If true the Value will be noted as a discount for the contact on checkout.
 + active (boolean, required) - Whether the Value is active and can be used upon creation.
 + frozen (boolean, required) - If true the Value is frozen and cannot be transacted with.
 + canceled (boolean, required) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
 + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + uses (number, optional) - The number of times the Value can be transacted with.
 + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
