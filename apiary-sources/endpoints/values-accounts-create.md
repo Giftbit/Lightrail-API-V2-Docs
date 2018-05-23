@@ -33,6 +33,7 @@
                 "type": "account",
                 "program": null,
                 "currency": "USD",
+                "contact": "contact-jeff-2",
                 "balance": 0, 
                 "active": true,
                 "frozen": false,

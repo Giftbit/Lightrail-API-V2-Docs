@@ -138,7 +138,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-### Update a Contact [PUT /contacts/{id}]
+### Update a Contact [PATCH /contacts/{id}]
 
 + Request (application/json)
 
@@ -149,7 +149,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - Unique idempotent ID for the Contact.
+        + id (string, optional) - Unique idempotent ID for the Contact.  If present must match the ID in the path.
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
@@ -1020,6 +1020,7 @@ An Account is Value specifically tied to a Contact.
                 "type": "account",
                 "program": null,
                 "currency": "USD",
+                "contact": "contact-jeff-2",
                 "balance": 0, 
                 "active": true,
                 "frozen": false,
@@ -1197,32 +1198,6 @@ An Account is Value specifically tied to a Contact.
                 "statusCode": 409,
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
-            }
-### Get an Account's Contact [GET /values/accounts/{id}/contact]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Account to get the Contact of.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
 ## Giftcards [/values/giftcards]
@@ -1495,33 +1470,6 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "success": true
             }
-### Get a Giftcard's Contact [GET /values/giftcards/{id}/contact]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Giftcard to get the Contact of.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "tags": [],
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
 ### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
 
 + Request (application/json)
@@ -1542,64 +1490,32 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
     + id (string) - the id of the Giftcard to claim.
 
 + Response 200 (application/json)
-    + Attributes
-        + contact (Contact, required) The Contact that claimed the Giftcard.
-        + value (Value, required) The Giftcard that was claimed.
+
+    The Giftcard was claimed for the Contact.
+
+    + Attributes (Value)
 
     + Body
 
             {
-                "contact": {
-                    "id": "unique-id-123",
-                    "firstName": "Jeffrey",
-                    "lastName": "Lebowski",
-                    "email": "thedude@example.com",
-                     "tags": [],
-                    "metadata": {
-                        "alias": "El Duderino"
-                    },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                },
-                "value": {
-                    "id": "vs-1-claim-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            }
-### Delete a Giftcard's Contact [DELETE /values/giftcards/{id}/contact]
-
-+ Request (application/json)
-
-    Remove the Contact as the owner of a Giftcard.  The Contact's info is not deleted.
-
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Giftcard to remove the Contact from.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "success": true
+                "id": "vs-1-claim-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "contact": "unique-id-123",
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
 ## Promotions [/values/promotions]
@@ -1901,33 +1817,6 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             {
                 "success": true
             }
-### Get a Promotion Value's Contact [GET /values/promotions/{id}/contact]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Promotion to get the Contact of.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "tags": [],
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
 ### Claim a Promotion for a Contact [POST /values/promotions/{id}/claim]
 
 + Request (application/json)
@@ -1948,72 +1837,70 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
     + id (string) - the id of the Promotion to claim.
 
 + Response 200 (application/json)
-    + Attributes
-        + contact (Contact, required) The Contact that claimed the Giftcard.
-        + value (Value, required) The Promotion that was claimed.  If the original Promotion could be claimed by multiple Contacts this could be a new Value object unique to the Contact. 
-
-    + Body
-
-            {
-                "contact": {
-                    "id": "unique-id-123",
-                    "firstName": "Jeffrey",
-                    "lastName": "Lebowski",
-                    "email": "thedude@example.com",
-                     "tags": [],
-                    "metadata": {
-                        "alias": "El Duderino"
-                    },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                },
-                "value": {
-                    "id": "vs-1-claim-1",
-                    "type": "promotion"
-                    "program": "springpromo",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            }
-### Delete a Promotion Value's Contact [DELETE /values/promotions/{id}/contact]
-
-+ Request (application/json)
-
-    Remove the Contact as the owner of a Value.  The Contact's info is not deleted.
-
-    + Headers
     
-            Authorization: Bearer <API_KEY>
+    The Promotion was claimed for the Contact.
 
-+ Parameter
-    + id (string) - the id of the Promotion to remove the Contact from.
-
-+ Response 200 (application/json)
+    + Attributes (Value)
 
     + Body
 
             {
-                "success": true
+                "id": "vs-1",
+                "type": "promotion",
+                "program": "springpromo",
+                "currency": "USD",
+                "contact": "unique-id-123",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
-## Codes [/values/code]
++ Response 201 (application/json)
+    
+    A portion of the original Promotion was claimed and a new Promotion was created private to the Contact.
+
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1-claim-1",
+                "type": "promotion",
+                "program": "springpromo",
+                "currency": "USD",
+                "contact": "unique-id-123",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": 1,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+## Codes [/values/byCode]
 
 A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
 
-### Get a Value by code [GET /values/code/{code}]
+### Get a Value by code [GET /values/byCode/{code}]
 
 + Request (application/json)
     + Headers
@@ -2048,7 +1935,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
-### Update a Value by code [PATCH /values/code/{code}]
+### Update a Value by code [PATCH /values/byCode/{code}]
 
 + Parameter
     + code (string) - the code of the Value to modify.
@@ -2104,7 +1991,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Get a Value's code by code [GET /values/code/{code}/code]
+### Get a Value's code by code [GET /values/byCode/{code}/code]
 
 + Request (application/json)
     + Headers
@@ -2126,7 +2013,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "code": "…e1b1"
             }
-### Set a Value's code by code [PUT /values/code/{code}/code]
+### Set a Value's code by code [PUT /values/byCode/{code}/code]
 
 + Request (application/json)
     + Headers
@@ -2156,7 +2043,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "code": "…e1b1"
             }
-### Delete a Value's code by code [DELETE /values/code/{code}/code]
+### Delete a Value's code by code [DELETE /values/byCode/{code}/code]
 
 + Request (application/json)
     + Headers
@@ -2173,34 +2060,7 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "success": true
             }
-### Get a Value's Contact by code [GET /values/code/{code}/contact]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Value to get the Contact of.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "tags": [],
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-### Claim a Value for a Contact by code [POST /values/code/{code}/claim]
+### Claim a Value for a Contact by code [POST /values/byCode/{code}/claim]
 
 + Request (application/json)
      + Headers
@@ -2220,65 +2080,63 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
     + code (string) - the code of the Value to claim.
 
 + Response 200 (application/json)
-    + Attributes
-        + contact (Contact, required) The Contact that claimed the Giftcard.
-        + value (Value, required) The Value that was claimed.  If the original Value could be claimed by multiple Contacts this could be a new Value object unique to the Contact. 
-
-    + Body
-
-            {
-                "contact": {
-                    "id": "unique-id-123",
-                    "firstName": "Jeffrey",
-                    "lastName": "Lebowski",
-                    "email": "thedude@example.com",
-                    "tags": [],
-                    "metadata": {
-                        "alias": "El Duderino"
-                    },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                },
-                "value": {
-                    "id": "vs-1-claim-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            }
-### Delete a Value's Contact by code [DELETE /values/code/{code}/contact]
-
-+ Request (application/json)
-
-    Remove the Contact as the owner of a Value.  The Contact's info is not deleted.
-
-    + Headers
     
-            Authorization: Bearer <API_KEY>
+    The Value was claimed for the Contact.
 
-+ Parameter
-    + code (string) - the code of the Value to remove the Contact from.
-
-+ Response 200 (application/json)
+    + Attributes (Value)
 
     + Body
 
             {
-                "success": true
+                "id": "vs-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "currency": "USD",
+                "contact": "unique-id-123",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
++ Response 201 (application/json)
+    
+    A portion of the original Value was claimed and a new Value was created private to the Contact.
+
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1-claim-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "currency": "USD",
+                "contact": "unique-id-123",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": 1,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
             }
 
 ## Transactions [/transactions]
@@ -3211,6 +3069,8 @@ A step taken as part of the transaction.
 + type (string, required) - `account`, `giftcard` or `promotion`
 + program (string, optional) - The ID of the Program this Value is in.
 + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
++ contact (string, optional) - The ID of the Contact that has claimed this Value.
++ code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 + balance (number, optional) - An integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders.
 + active (boolean, required) - Whether the Value is active and can be used upon creation.

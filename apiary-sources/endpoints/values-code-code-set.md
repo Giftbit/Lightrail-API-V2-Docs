@@ -1,4 +1,4 @@
-### Set a Value's code by code [PUT /values/code/{code}/code]
+### Set a Value's code by code [PUT /values/byCode/{code}/code]
 
 + Request (application/json)
     + Headers
