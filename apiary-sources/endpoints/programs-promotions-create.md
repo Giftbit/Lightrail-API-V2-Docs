@@ -24,7 +24,7 @@
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}}
         + endDate (string, optional) - {{program.endDate}}
-        + metadata (number, optional) - {{program.metadata}}
+        + metadata (object, optional) - {{program.metadata}}
         
     + Body
 

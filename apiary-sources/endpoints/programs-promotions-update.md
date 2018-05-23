@@ -23,7 +23,7 @@
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
         + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}
-        + metadata (number, optional) - {{program.metadata}}
+        + metadata (object, optional) - {{program.metadata}}
 
     + Body
 

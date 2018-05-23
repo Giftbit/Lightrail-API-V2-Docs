@@ -17,7 +17,7 @@
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + tags (array[string], optional) - {{tags}}
-        + metadata (number, optional) - {{program.metadata}}
+        + metadata (object, optional) - {{program.metadata}}
 
     + Body
 
