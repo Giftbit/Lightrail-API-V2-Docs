@@ -15,7 +15,7 @@
              }
 
 + Parameter
-    + id (string) - the id of the Promotion to claim.
+    + id (string) - the ID of the Promotion to claim.
 
 + Response 200 (application/json)
     

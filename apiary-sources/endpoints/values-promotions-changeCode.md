@@ -1,36 +1,34 @@
-### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
+### Change a Promotion's code [PUT /values/promotions/{id}/changeCode]
 
 + Request (application/json)
-     + Headers
-     
-             {{header.authorization}}
- 
-     + Attributes
-         + contact (string, required) - The ID of the Contact to claim the Giftcard.
-         
-     + Body
-     
-             {
-                 "contact": "unique-id-123"
-             }
+    + Headers
+    
+            {{header.authorization}}
+
+    + Attributes
+        + code (string, required) - {{code.set}}
+        + secure (boolean, optional) - {{code.secure}}
+        
+    + Body
+    
+            {
+                "code": "SPRINGPROMO2077"
+            }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to claim.
+    + id (string) - the ID of the Promotion to change the code of.
 
 + Response 200 (application/json)
-
-    The Giftcard was claimed for the Contact.
-
     + Attributes (Value)
 
     + Body
 
             {
-                "id": "vs-1-claim-1",
-                "type": "giftcard",
-                "program": "giftcards",
-                "contact": "unique-id-123",
+                "id": "vs-1",
+                "type": "promotion"
+                "program": "springpromo",
                 "currency": "USD",
+                "code": "SPRINGPROMO2077",
                 "balance": 2500,
                 "active": true,
                 "frozen": false,
@@ -41,6 +39,7 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

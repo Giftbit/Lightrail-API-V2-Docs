@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Account to delete.
+    + id (string) - the ID of the Account to delete.
 
 + Response 200 (application/json)
     

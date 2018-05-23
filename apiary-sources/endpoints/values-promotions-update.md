@@ -1,7 +1,7 @@
 ### Update a Promotion [PATCH /values/promotions/{id}]
 
 + Parameter
-    + id (string) - the id of the Promotion to modify.
+    + id (string) - the ID of the Promotion to modify.
 
 + Request (application/merge-patch+json)
 

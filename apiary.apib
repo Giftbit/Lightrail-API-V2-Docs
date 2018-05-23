@@ -1044,7 +1044,7 @@ An Account is Value specifically tied to a Contact.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Account to get.
+    + id (string) - the ID of the Account to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -1123,7 +1123,7 @@ An Account is Value specifically tied to a Contact.
 ### Update an Account [PATCH /values/accounts/{id}]
 
 + Parameter
-    + id (string) - the id of the Account to modify.
+    + id (string) - the ID of the Account to modify.
 
 + Request (application/merge-patch+json)
 
@@ -1178,7 +1178,7 @@ An Account is Value specifically tied to a Contact.
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Account to delete.
+    + id (string) - the ID of the Account to delete.
 
 + Response 200 (application/json)
     
@@ -1271,7 +1271,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Giftcard to get.
+    + id (string) - the ID of the Giftcard to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -1351,7 +1351,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 ### Update a Giftcard [PATCH /values/giftcards/{id}]
 
 + Parameter
-    + id (string) - the id of the Giftcard to modify.
+    + id (string) - the ID of the Giftcard to modify.
 
 + Request (application/merge-patch+json)
 
@@ -1404,72 +1404,6 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Get a Giftcard's code [GET /values/giftcards/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Giftcard to get the code of.
-
-+ Response 200 (application/json)
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "…JM4G"
-            }
-### Set a Giftcard's code [PUT /values/giftcards/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
-        
-    + Body
-    
-            {
-                "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure": true
-            }
-
-+ Parameter
-    + id (string) - the id of the Giftcard to update the code of.
-
-+ Response 200 (application/json)
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "…e1b1"
-            }
-### Delete a Giftcard's code [DELETE /values/giftcards/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Giftcard to delete the code of.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "success": true
-            }
 ### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
 
 + Request (application/json)
@@ -1487,7 +1421,7 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
              }
 
 + Parameter
-    + id (string) - the id of the Giftcard to claim.
+    + id (string) - the ID of the Giftcard to claim.
 
 + Response 200 (application/json)
 
@@ -1513,6 +1447,54 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Change a Giftcard's code [PUT /values/giftcards/{id}/changeCode]
+
++ Request (application/json)
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure": true
+            }
+
++ Parameter
+    + id (string) - the ID of the Giftcard to change the code of.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "giftcard",
+                "program": "giftcards",
+                "currency": "USD",
+                "code": "…e1b1",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
@@ -1589,7 +1571,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Promotion to get.
+    + id (string) - the ID of the Promotion to get.
 
 + Response 200 (application/json)
     + Attributes (Value)
@@ -1669,7 +1651,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 ### Update a Promotion [PATCH /values/promotions/{id}]
 
 + Parameter
-    + id (string) - the id of the Promotion to modify.
+    + id (string) - the ID of the Promotion to modify.
 
 + Request (application/merge-patch+json)
 
@@ -1730,7 +1712,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Promotion to delete.
+    + id (string) - the ID of the Promotion to delete.
 
 + Response 200 (application/json)
     
@@ -1751,72 +1733,6 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Get a Promotion Value's code [GET /values/promotions/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Promotion to get the code of.
-
-+ Response 200 (application/json)
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "BLACKFRIDAY2077"
-            }
-### Set a Promotion Value's code [PUT /values/promotions/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
-        
-    + Body
-    
-            {
-                "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure": true
-            }
-
-+ Parameter
-    + id (string) - the id of the Promotion to update the code of.
-
-+ Response 200 (application/json)
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "…e1b1"
-            }
-### Delete a Promotion Value's code [DELETE /values/promotions/{id}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the id of the Promotion to delete the code of.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "success": true
-            }
 ### Claim a Promotion for a Contact [POST /values/promotions/{id}/claim]
 
 + Request (application/json)
@@ -1834,7 +1750,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
              }
 
 + Parameter
-    + id (string) - the id of the Promotion to claim.
+    + id (string) - the ID of the Promotion to claim.
 
 + Response 200 (application/json)
     
@@ -1888,6 +1804,52 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": 1,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Change a Promotion's code [PUT /values/promotions/{id}/changeCode]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
+        
+    + Body
+    
+            {
+                "code": "SPRINGPROMO2077"
+            }
+
++ Parameter
+    + id (string) - the ID of the Promotion to change the code of.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "vs-1",
+                "type": "promotion"
+                "program": "springpromo",
+                "currency": "USD",
+                "code": "SPRINGPROMO2077",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
                 "startDate": null,
                 "endDate": null,
                 "tags": [],
@@ -1991,75 +1953,6 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Get a Value's code by code [GET /values/byCode/{code}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Value to get the code of.
-
-+ Response 200 (application/json)
-
-    A secured code will come back abbreviated.
-
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "…e1b1"
-            }
-### Set a Value's code by code [PUT /values/byCode/{code}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
-        
-    + Body
-    
-            {
-                "code": "c3d177ff950b4e2796e341f65976e1b1",
-                "secure": true
-            }
-
-+ Parameter
-    + code (string) - the code of the Value to update the code of.
-
-+ Response 200 (application/json)
-    + Attributes
-        + code (string, optional) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-
-    + Body
-
-            {
-                "code": "…e1b1"
-            }
-### Delete a Value's code by code [DELETE /values/byCode/{code}/code]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + code (string) - the code of the Value to delete the code of.
-
-+ Response 200 (application/json)
-
-    + Body
-
-            {
-                "success": true
-            }
 ### Claim a Value for a Contact by code [POST /values/byCode/{code}/claim]
 
 + Request (application/json)
@@ -2133,6 +2026,56 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
                 "uses": 1,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Change a Value's code by code [PUT /values/byCode/{code}/changeCode]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
+        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure": true
+            }
+
++ Parameter
+    + code (string) - the code of the Value to change the code of.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "name": "Giftcard program",
+                "currency": "CAD",
+                "code": "…e1b1"
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "uses": null,
                 "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
@@ -2610,7 +2553,7 @@ Transfer value between accounts on rails.  Currently only the `lightrail` rail i
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the Transaction to get.
+    + id (string) - the ID of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -2705,7 +2648,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the pending Transaction to capture.
+    + id (string) - the ID of the pending Transaction to capture.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -2750,7 +2693,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
             Authorization: Bearer <API_KEY>
 
 + Parameter
-    + id (string) - the id of the pending Transaction to void.
+    + id (string) - the ID of the pending Transaction to void.
 
 + Response 200 (application/json)
     + Attributes (Transaction)

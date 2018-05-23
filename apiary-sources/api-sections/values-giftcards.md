@@ -5,7 +5,5 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
 {% include 'endpoints/values-giftcards-create.md' %}
 {% include 'endpoints/values-giftcards-get.md' %}
 {% include 'endpoints/values-giftcards-update.md' %}
-{% include 'endpoints/values-giftcards-code-get.md' %}
-{% include 'endpoints/values-giftcards-code-set.md' %}
-{% include 'endpoints/values-giftcards-code-delete.md' %}
 {% include 'endpoints/values-giftcards-claim.md' %}
+{% include 'endpoints/values-giftcards-changeCode.md' %}

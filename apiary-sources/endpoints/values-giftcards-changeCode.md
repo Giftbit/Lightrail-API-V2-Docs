@@ -1,36 +1,36 @@
-### Claim a Giftcard for a Contact [POST /values/giftcards/{id}/claim]
+### Change a Giftcard's code [PUT /values/giftcards/{id}/changeCode]
 
 + Request (application/json)
-     + Headers
-     
-             {{header.authorization}}
- 
-     + Attributes
-         + contact (string, required) - The ID of the Contact to claim the Giftcard.
-         
-     + Body
-     
-             {
-                 "contact": "unique-id-123"
-             }
+
+    + Headers
+    
+            {{header.authorization}}
+
+    + Attributes
+        + code (string, required) - {{code.set}}
+        + secure (boolean, optional) - {{code.secure}}
+        
+    + Body
+    
+            {
+                "code": "c3d177ff950b4e2796e341f65976e1b1",
+                "secure": true
+            }
 
 + Parameter
-    + id (string) - the ID of the Giftcard to claim.
+    + id (string) - the ID of the Giftcard to change the code of.
 
 + Response 200 (application/json)
-
-    The Giftcard was claimed for the Contact.
-
     + Attributes (Value)
 
     + Body
 
             {
-                "id": "vs-1-claim-1",
+                "id": "vs-1",
                 "type": "giftcard",
                 "program": "giftcards",
-                "contact": "unique-id-123",
                 "currency": "USD",
+                "code": "…e1b1",
                 "balance": 2500,
                 "active": true,
                 "frozen": false,
@@ -41,6 +41,7 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
+                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

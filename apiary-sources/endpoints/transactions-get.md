@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Transaction to get.
+    + id (string) - the ID of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)

@@ -6,7 +6,7 @@
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the Promotion to delete.
+    + id (string) - the ID of the Promotion to delete.
 
 + Response 200 (application/json)
     
