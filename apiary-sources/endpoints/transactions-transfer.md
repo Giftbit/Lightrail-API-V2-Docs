@@ -1,6 +1,6 @@
 ### Transfer [POST /transactions/transfer]
 
-Transfer value between accounts on rails.  Currently only the `lightrail` rail is supported.
+Transfer value between a payment source and a payment destination.  Currently only the `lightrail` rail is supported.
 
 + Request (application/json)
 
