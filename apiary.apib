@@ -421,621 +421,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 }
             ]
 
-## Programs [/programs]
-
-Programs define the behaviour of Value that you wish to issue. Programs are typically created through the web app, but an explanation is included here for context and insight into how `Values` function.
-
-Programs are most commonly used to define and organize Promotion campaigns. For example, the `Value` issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the `Value` for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
-
-Programs can also be used to control and organize gift card campaigns. Lightrail supplies you with a default gift card Program, but you can also choose to create more gift card Programs for custom use cases -- for example, so that B2B gift cards can be handled differently from gift cards that your customers purchase directly from your site.
-
-Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
-
----
-### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Program])
-
-    + Body
-
-            [
-                {
-                    "id": "unique-id-123",
-                    "name": "Giftcard program",
-                    "currency": "CAD",
-                    "access": "secureCode",
-                    "discount": "false",
-                    "preTax": "false",
-                    "active": "true",
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "minInitialBalance": null,
-                    "maxInitialBalance": null,
-                    "fixedInitialValues": [
-                        500,
-                        1500,
-                        2500
-                    ],
-                    "uses": null,
-                    "tags": [],
-                    "metadata": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Create Promotion Program [POST /programs/promotions]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + id (string, required) - Unique idempotent ID for the Program.
-        + name (string, optional) - A human-readable name for the Program.
-        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
-        + access (enum[string], required) - How the values can be accessed
-            + `contact` - must be associated with a Contact by ID.
-            + `secureCode` - a code is generated or supplied and is stored securely.
-            + `publicCode` - a code is generated or supplied and can be displayed.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
-        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
-        + tags (array[string], optional) - Segmentation tags.
-        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
-        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-        
-    + Body
-
-            {
-                "id": "spring-promotion-usd",
-                "name": "Spring Promotion USD",
-                "currency": "USD",
-                "access": "secureCode",
-                "preTax": true,
-                "discount": true,
-                "fixedInitialValues": [
-                    500
-                ],
-                "tags": ["promotion", "spring-promotion-usd"]
-            }
-    
-+ Response 201 (application/json)
-    + Attributes (Contact)
-
-    + Body
-            
-            {
-                "id": "spring-promotion-usd",
-                "name": "Spring Promotion USD",
-                "type": "promotion",
-                "currency": "USD",
-                "access": "secureCode",
-                "discount": "true",
-                "preTax": "true",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500
-                ],
-                "uses": null,
-                "tags": ["gift-card"],
-                "metadata": null,
-                "startDate": null,
-                "endDate": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Get Promotion Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Program])
-
-    + Body
-
-            [
-                {
-                    "id": "unique-id-123",
-                    "name": "5% off promo program",
-                    "currency": "CAD",
-                    "access": "secureCode",
-                    "discount": "true",
-                    "preTax": "true",
-                    "active": "true",
-                    "redemptionRule": null,
-                    "valueRule": "order*0.05",
-                    "uses": null,
-                    "tags": [],
-                    "metadata": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get a Promotion Program [GET /programs/promotions/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Promotion Program to get.
-
-+ Response 200 (application/json)
-    + Attributes (Program)
-
-    + Body
-
-                {
-                    "id": "unique-id-123",
-                    "name": "5% off promo program",
-                    "currency": "CAD",
-                    "access": "secureCode",
-                    "discount": "true",
-                    "preTax": "true",
-                    "active": "true",
-                    "redemptionRule": null,
-                    "valueRule": "order*0.05",
-                    "uses": null,
-                    "tags": [],
-                    "metadata": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-
-### Update a Promotion Program [PATCH /programs/promotions/{id}]
-
-+ Parameter
-    + id (string) - the ID of the Promotion Program to modify.
-
-+ Request (application/json)
-
-    Applies a JSON merge.  Only members that are present are changed and all others are left untouched. 
-    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
-
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + name (string, optional) - A human-readable name for the Program.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + tags (array[string], optional) - Segmentation tags.
-        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-
-    + Body
-
-            {
-                "tags": ["spring-marketing-push"]
-            }
-    
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-            
-            {
-                "id": "spring-promotion-usd",
-                "name": "Spring Promotion USD",
-                "type": "promotion",
-                "currency": "USD",
-                "access": "secureCode",
-                "discount": "true",
-                "preTax": "true",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500
-                ],
-                "uses": null,
-                "tags": ["spring-marketing-push"]
-                "metadata": null,
-                "startDate": null,
-                "endDate": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-
-
-### Delete a Promotion Program [DELETE /programs/promotions/{id}]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Promotion Program to delete.
-
-+ Response 200 (application/json)
-    
-    + Body
-
-            {
-                "success": true
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to delete a Promotion Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Program 'abc123' is in use.",
-                "messageCode": "ProgramInUse"
-            }
-
-### Create Gift Card Program [POST /programs/giftcards]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + id (string, required) - Unique idempotent ID for the Program.
-        + name (string, optional) - A human-readable name for the Program.
-        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
-        + access (enum[string], required) - How the values can be accessed
-            + `contact` - must be associated with a Contact by ID.
-            + `secureCode` - a code is generated or supplied and is stored securely.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-
-    + Body
-
-            {
-                "id": "gift-cards-usd",
-                "name": "Gift Cards USD",
-                "currency": "USD",
-                "access": "secureCode",
-                "minInitialBalance": 500,
-                "maxInitialBalance": 100000,
-                "tags": ["giftcard"]
-            }
-    
-+ Response 201 (application/json)
-    + Attributes (Contact)
-
-    + Body
-            
-            {
-                "id": "gift-cards-usd",
-                "name": "Gift Cards USD",
-                "type": "giftcard",
-                "currency": "USD",
-                "access": "secureCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": 500,
-                "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
-                "uses": null,
-                "tags": ["giftcard"],
-                "metadata": null,
-                "startDate": null,
-                "endDate": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Get Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Program])
-
-    + Body
-
-            [
-                {
-                    "id": "unique-id-123",
-                    "name": "Giftcard program",
-                    "currency": "CAD",
-                    "access": "secureCode",
-                    "discount": "false",
-                    "preTax": "false",
-                    "active": "true",
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "minInitialBalance": null,
-                    "maxInitialBalance": null,
-                    "fixedInitialValues": [
-                        500,
-                        1500,
-                        2500
-                    ],
-                    "uses": null,
-                    "tags": [],
-                    "metadata": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-
-### Get a Giftcard Program [GET /programs/giftcards/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Giftcard Program to get.
-
-+ Response 200 (application/json)
-    + Attributes (Program)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "name": "Giftcard program",
-                "currency": "CAD",
-                "access": "secureCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": null,
-                "maxInitialBalance": null,
-                "fixedInitialValues": [
-                    500,
-                    1500,
-                    2500
-                ],
-                "uses": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
-
-+ Parameter
-    + id (string) - the ID of the Giftcard Program to modify.
-
-+ Request (application/json)
-
-    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
-    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
-
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-    + Attributes
-        + name (string, optional) - A human-readable name for the Program.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (number, optional) - Arbitrary data associated with the Program.
-
-    + Body
-
-            {
-                "tags": ["top-customers"]
-            }
-    
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-            
-            {
-                "id": "gift-cards-usd",
-                "name": "Gift Cards USD",
-                "type": "giftcard",
-                "currency": "USD",
-                "access": "secureCode",
-                "discount": "false",
-                "preTax": "false",
-                "active": "true",
-                "redemptionRule": null,
-                "valueRule": null,
-                "minInitialBalance": 500,
-                "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
-                "uses": null,
-                "tags": ["giftcard", "top-customers"],
-                "metadata": null,
-                "startDate": null,
-                "endDate": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-
-
-### Delete a Giftcard Program [DELETE /programs/giftcards/{id}]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Promotion Program to delete.
-
-+ Response 200 (application/json)
-    
-    + Body
-
-            {
-                "success": true
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to delete a Giftcard Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Program 'abc123' is in use.",
-                "messageCode": "ProgramInUse"
-            }
-
-## Values [/values]
-
-A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
-
-### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + type (string, optional) - Filter by Value type.
-    + contact (string, optional) - Filter by Values attached to the given Contact ID.
-    + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "vs-1",
-                    "type": "giftcard",
-                    "program": "giftcards",
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
+# Group Accounts
 
 ## Accounts [/values/accounts]
 
@@ -1284,6 +670,8 @@ An Account is Value specifically tied to a Contact.
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }
+
+# Group Giftcards
 
 ## Giftcards [/values/giftcards]
 
@@ -1665,6 +1053,251 @@ A Giftcard is Value that starts as identified by a code.  The code is kept secre
             {
                 "success": true
             }
+
+### Giftcard Programs [/programs/giftcards]
+
+Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an overview of the Programs endpoints related to gift cards is included here, and a more detailed explanation of Programs can be found below to provide context and insight into how `Values` function.
+
+### Create Gift Card Program [POST /programs/giftcards]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + id (string, required) - Unique idempotent ID for the Program.
+        + name (string, optional) - A human-readable name for the Program.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + access (enum[string], required) - How the values can be accessed
+            + `contact` - must be associated with a Contact by ID.
+            + `secureCode` - a code is generated or supplied and is stored securely.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "id": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "currency": "USD",
+                "access": "secureCode",
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "tags": ["giftcard"]
+            }
+    
++ Response 201 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "type": "giftcard",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "fixedInitialValues": null,
+                "uses": null,
+                "tags": ["giftcard"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Get a Giftcard Program [GET /programs/giftcards/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Giftcard Program to get.
+
++ Response 200 (application/json)
+    + Attributes (Program)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "name": "Giftcard program",
+                "currency": "CAD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "uses": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Giftcard Programs [GET /programs/giftcards{?limit}{?offset}{?id}{?tags}{?currency}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Program])
+
+    + Body
+
+            [
+                {
+                    "id": "unique-id-123",
+                    "name": "Giftcard program",
+                    "currency": "CAD",
+                    "access": "secureCode",
+                    "discount": "false",
+                    "preTax": "false",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "minInitialBalance": null,
+                    "maxInitialBalance": null,
+                    "fixedInitialValues": [
+                        500,
+                        1500,
+                        2500
+                    ],
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Update a Giftcard Program [PATCH /programs/giftcards/{id}]
+
++ Parameter
+    + id (string) - the ID of the Giftcard Program to modify.
+
++ Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + name (string, optional) - A human-readable name for the Program.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + tags (array[string], optional) - Segmentation tags.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "tags": ["top-customers"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "gift-cards-usd",
+                "name": "Gift Cards USD",
+                "type": "giftcard",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": 500,
+                "maxInitialBalance": 100000,
+                "fixedInitialValues": null,
+                "uses": null,
+                "tags": ["giftcard", "top-customers"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Delete a Giftcard Program [DELETE /programs/giftcards/{id}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Promotion Program to delete.
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+                "success": true
+            }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Giftcard Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Program 'abc123' is in use.",
+                "messageCode": "ProgramInUse"
+            }
+
+
+# Group Promotions
 
 ## Promotions [/values/promotions]
 
@@ -2077,6 +1710,257 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
                 "success": true
             }
 
+## Promotion Programs [/programs/promotions]
+
+Programs define the behaviour of Value that you wish to issue: in this case, promotions. Programs are typically created through the web app, but an overview of the Programs endpoints related to promotions is included here, and a more detailed explanation of Programs can be found below to provide context and insight into how `Values` function.
+
+### Create Promotion Program [POST /programs/promotions]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + id (string, required) - Unique idempotent ID for the Program.
+        + name (string, optional) - A human-readable name for the Program.
+        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
+        + access (enum[string], required) - How the values can be accessed
+            + `contact` - must be associated with a Contact by ID.
+            + `secureCode` - a code is generated or supplied and is stored securely.
+            + `publicCode` - a code is generated or supplied and can be displayed.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. 
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in an order.
+        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
+        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + tags (array[string], optional) - Segmentation tags.
+        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
+        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+        
+    + Body
+
+            {
+                "id": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "currency": "USD",
+                "access": "secureCode",
+                "preTax": true,
+                "discount": true,
+                "fixedInitialValues": [
+                    500
+                ],
+                "tags": ["promotion", "spring-promotion-usd"]
+            }
+    
++ Response 201 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "type": "promotion",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "true",
+                "preTax": "true",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500
+                ],
+                "uses": null,
+                "tags": ["gift-card"],
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Get a Promotion Program [GET /programs/promotions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Promotion Program to get.
+
++ Response 200 (application/json)
+    + Attributes (Program)
+
+    + Body
+
+                {
+                    "id": "unique-id-123",
+                    "name": "5% off promo program",
+                    "currency": "CAD",
+                    "access": "secureCode",
+                    "discount": "true",
+                    "preTax": "true",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": "order*0.05",
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+
+### List Promotion Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Program])
+
+    + Body
+
+            [
+                {
+                    "id": "unique-id-123",
+                    "name": "5% off promo program",
+                    "currency": "CAD",
+                    "access": "secureCode",
+                    "discount": "true",
+                    "preTax": "true",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": "order*0.05",
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+### Update a Promotion Program [PATCH /programs/promotions/{id}]
+
++ Parameter
+    + id (string) - the ID of the Promotion Program to modify.
+
++ Request (application/json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched. 
+    Note that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step. 
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
+    + Attributes
+        + name (string, optional) - A human-readable name for the Program.
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the contact in orders. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + minInitialBalance (number, optional) - The minimum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + fixedInitialValues (array[number], optional) - A list of exact values the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + tags (array[string], optional) - Segmentation tags.
+        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + metadata (number, optional) - Arbitrary data associated with the Program.
+
+    + Body
+
+            {
+                "tags": ["spring-marketing-push"]
+            }
+    
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+            
+            {
+                "id": "spring-promotion-usd",
+                "name": "Spring Promotion USD",
+                "type": "promotion",
+                "currency": "USD",
+                "access": "secureCode",
+                "discount": "true",
+                "preTax": "true",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialValues": [
+                    500
+                ],
+                "uses": null,
+                "tags": ["spring-marketing-push"]
+                "metadata": null,
+                "startDate": null,
+                "endDate": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+### Delete a Promotion Program [DELETE /programs/promotions/{id}]
+
++ Request
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
++ Parameter
+    + id (string) - the ID of the Promotion Program to delete.
+
++ Response 200 (application/json)
+    
+    + Body
+
+            {
+                "success": true
+            }
+
++ Response 409 (application/json)
+
+    Attempting to delete a Promotion Program that is in use. If the Program is referenced by one or more Values, those objects would need to be deleted first. If a Value created through this Program is referenced by a Transaction, it cannot be deleted because Transactions cannot be deleted. Programs in use can still be updated. 
+
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "Program 'abc123' is in use.",
+                "messageCode": "ProgramInUse"
+            }
+
+
+# Group Codes
+
 ## Codes [/values/code]
 
 A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
@@ -2348,6 +2232,8 @@ A Code is not a type of Value but a means of accessing a Value.  Giftcards and P
             {
                 "success": true
             }
+
+# Group Transactions
 
 ## Transactions [/transactions]
 
@@ -2994,6 +2880,132 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
+
+# Group Advanced
+
+## Values [/values]
+
+A Value (naturally) represents value in the Lightrail system.  It can be a Giftcard, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
+
+### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + type (string, optional) - Filter by Value type.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
+    + currency (string, optional) - Filter by currency.
+    + active (boolean, optional) - Filter active/inactive.
+    + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + canceled (boolean, optional) - Filter canceled.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "giftcard",
+                    "program": "giftcards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": false,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+
+## Programs [/programs]
+
+Programs define the behaviour of Value that you wish to issue. Programs are typically created through the web app, but an explanation is included here for context and insight into how `Values` function.
+
+Programs are most commonly used to define and organize Promotion campaigns. For example, the `Value` issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the `Value` for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+
+Programs can also be used to control and organize gift card campaigns. Lightrail supplies you with a default gift card Program, but you can also choose to create more gift card Programs for custom use cases -- for example, so that B2B gift cards can be handled differently from gift cards that your customers purchase directly from your site.
+
+Behind the scenes, all Accounts are also backed by a default Accounts Program. Lightrail recommends using this default for all Accounts.
+
+---
+### List Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.
+    + offset (number, optional) - The number of items to skip.
+    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 1
+        
+    + Attributes (array[Program])
+
+    + Body
+
+            [
+                {
+                    "id": "unique-id-123",
+                    "name": "Giftcard program",
+                    "currency": "CAD",
+                    "access": "secureCode",
+                    "discount": "false",
+                    "preTax": "false",
+                    "active": "true",
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "minInitialBalance": null,
+                    "maxInitialBalance": null,
+                    "fixedInitialValues": [
+                        500,
+                        1500,
+                        2500
+                    ],
+                    "uses": null,
+                    "tags": [],
+                    "metadata": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
 
 ## Currencies [/currencies]
 

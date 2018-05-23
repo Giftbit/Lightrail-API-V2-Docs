@@ -1,3 +1,5 @@
+# Group Codes
+
 ## Codes [/values/code]
 
 A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
