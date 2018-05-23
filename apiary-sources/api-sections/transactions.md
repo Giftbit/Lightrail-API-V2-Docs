@@ -1,3 +1,5 @@
+# Group Transactions
+
 ## Transactions [/transactions]
 
 {% include 'endpoints/transactions-order.md' %}

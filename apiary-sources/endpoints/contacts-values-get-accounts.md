@@ -16,7 +16,7 @@
             [
                 {
                     "id": "acc-1",
-                    "program": "accounts",
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,

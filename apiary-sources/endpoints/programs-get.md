@@ -1,4 +1,4 @@
-### Get Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
+### List Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers
