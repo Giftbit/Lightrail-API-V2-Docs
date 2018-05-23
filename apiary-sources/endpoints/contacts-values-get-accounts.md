@@ -1,4 +1,4 @@
-### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
+### List Contact's Accounts [GET /contacts/{id}/values/accounts]
 
 + Request (application/json)
     + Headers

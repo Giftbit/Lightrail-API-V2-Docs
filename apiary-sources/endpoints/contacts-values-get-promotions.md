@@ -1,4 +1,4 @@
-### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
+### List Contact's Promotions [GET /contacts/{id}/values/promotions]
 
 + Request (application/json)
     + Headers

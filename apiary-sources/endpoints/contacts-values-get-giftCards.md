@@ -1,4 +1,4 @@
-### Get Contact's Gift Cards [GET /contacts/{id}/values/giftCards]
+### List Contact's Gift Cards [GET /contacts/{id}/values/giftCards]
 
 + Request (application/json)
   + Headers
