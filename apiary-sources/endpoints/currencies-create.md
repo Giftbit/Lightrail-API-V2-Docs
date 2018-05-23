@@ -1,4 +1,4 @@
-### Create Currency [POST /currencies]
+### Create a Currency [POST /currencies]
 
 + Request (application/json)
     + Headers
@@ -20,7 +20,7 @@
                 "decimalPlaces": 2
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Currency)
 
     + Body

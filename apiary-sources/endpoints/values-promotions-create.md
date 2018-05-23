@@ -1,4 +1,4 @@
-### Create a Promotion Value [POST /values/promotions]
+### Create a Promotion [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -7,10 +7,10 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + programId (string, optional) - Associate with and copy default values from the given Promotion Program.
+        + program (string, optional) - Associate with and copy default values from the given Promotion Program.
         + contact (string, optional) - Associate the Value with the given Contact.  Cannot be set with `code`.
         + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
-        + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
+        + currency (string, optional) - {{currency.code}} Required if `program` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
@@ -27,12 +27,12 @@
     
             {
                 "id": "vs-1",
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Value)
 
     + Body
@@ -40,7 +40,7 @@
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "programId": "springpromo",
+                "program": "springpromo",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,

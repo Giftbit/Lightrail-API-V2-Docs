@@ -29,7 +29,7 @@ Example of creating a `Program` for a promotion that will be directly attached t
     "access": "contactId",
     "preTax": false,
     "discount": true,
-    "fixedInitialValues": [
+    "fixedInitialBalances": [
         500
     ],
     "tags": ["promotion", "new-sign-up"]

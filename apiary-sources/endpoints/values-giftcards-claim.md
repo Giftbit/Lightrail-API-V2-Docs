@@ -1,22 +1,35 @@
-### Get a Value by code [GET /values/byCode/{code}]
+### Claim a Gift Card for a Contact [POST /values/giftCards/{id}/claim]
 
 + Request (application/json)
-    + Headers
-    
-            {{header.authorization}}
+     + Headers
+     
+             {{header.authorization}}
+ 
+     + Attributes
+         + contact (string, required) - The ID of the Contact to claim the Gift Card.
+         
+     + Body
+     
+             {
+                 "contact": "unique-id-123"
+             }
 
 + Parameter
-    + code (string) - the code of the Value to get.
+    + id (string) - the ID of the Gift Card to claim.
 
 + Response 200 (application/json)
+
+    The Gift Card was claimed for the Contact.
+
     + Attributes (Value)
 
     + Body
 
             {
-                "id": "vs-1",
+                "id": "vs-1-claim-1",
                 "type": "giftCard",
                 "program": "giftCards",
+                "contact": "unique-id-123",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -28,7 +41,6 @@
                 "uses": null,
                 "startDate": null,
                 "endDate": null,
-                "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"

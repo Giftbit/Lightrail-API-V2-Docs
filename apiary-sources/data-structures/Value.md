@@ -3,6 +3,8 @@
 + type (string, required) - {{value.type}}
 + program (string, optional) - {{value.program}}
 + currency (string, required) - {{currency.code}}
++ contact (string, optional) - {{value.contact}}
++ code (string, optional) - {{value.code}}
 + balance (number, optional) - {{value.balance}}
 + discount (boolean, optional) - {{value.discount}}
 + active (boolean, required) - {{value.active}}

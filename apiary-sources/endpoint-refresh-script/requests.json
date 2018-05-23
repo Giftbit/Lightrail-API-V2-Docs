@@ -73,7 +73,7 @@
       "method": "POST",
       "endpoint": "/cards",
       "body": {
-        "userSuppliedId": "giftcard-3asfd34a",
+        "userSuppliedId": "giftCard-3asfd34a",
         "programId": "{REQUEST_REPLACEMENT:giftCardProgram1.response.body.program.programId}",
         "initialValue" : 5000,
         "cardType" : "GIFT_CARD"

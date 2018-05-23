@@ -1,4 +1,4 @@
-### Get Contact's Promotions [GET /contacts/{id}/values/promotions]
+### List Contact's Promotions [GET /contacts/{id}/values/promotions]
 
 + Request (application/json)
     + Headers
@@ -16,7 +16,7 @@
             [
                 {
                     "id": "promo-1",
-                    "programId": "signup-bonus",
+                    "program": "signup-bonus",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": true,

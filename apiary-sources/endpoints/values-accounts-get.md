@@ -1,4 +1,40 @@
-### Get Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Get an Account [GET /values/accounts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the ID of the Account to get.
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {
+                "id": "account-1",
+                "type": "account",
+                "program": null,
+                "currency": "USD",
+                "balance": 2500,
+                "active": true,
+                "frozen": false,
+                "canceled": false,
+                "preTax": false,
+                "redemptionRule": null,
+                "valueRule": null,
+                "uses": null,
+                "startDate": null,
+                "endDate": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}]
 
 + Request (application/json)
     + Headers
@@ -11,10 +47,6 @@
     + id (number, optional) - {{filter.id}}  {{filter.list}}
     + tags (string, optional) - {{filter.tags}}  {{filter.list}}
     + program (string, optional) - {{filter.program}}
-    + currency (string, optional) - {{filter.currency}}
-    + active (boolean, optional) - {{filter.active}}
-    + frozen (boolean, optional) - {{filter.frozen}}
-    + canceled (boolean, optional) - {{filter.canceled}}
     
 + Response 200 (application/json)
     + Headers
@@ -32,7 +64,7 @@
                 {
                     "id": "account-1",
                     "type": "account",
-                    "programId": null,
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -50,39 +82,3 @@
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-
-### Get an Account [GET /values/accounts/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            {{header.authorization}}
-
-+ Parameter
-    + id (string) - the id of the Account to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "account-1",
-                "type": "account",
-                "programId": null,
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }

@@ -53,8 +53,8 @@ Update all Values that match the given query parameters.
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "programId": "giftcards",
+                    "type": "giftCard",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -74,7 +74,7 @@ Update all Values that match the given query parameters.
                 {
                     "id": "account-1",
                     "type": "account",
-                    "programId": null,
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,

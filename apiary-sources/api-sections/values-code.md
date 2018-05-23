@@ -1,12 +1,10 @@
-## Codes [/values/code]
+# Group Codes
 
-A Code is not a type of Value but a means of accessing a Value.  Giftcards and Promotions (which are types of Value) can both be referenced by a code.  
+## Codes [/values/byCode]
 
-{% include 'endpoints/values-code-update.md' %}
+A Code is not a type of Value but a means of accessing a Value.  Gift Cards and Promotions (which are types of Value) can both be referenced by a code.  
+
 {% include 'endpoints/values-code-get.md' %}
-{% include 'endpoints/values-code-code-get.md' %}
-{% include 'endpoints/values-code-code-set.md' %}
-{% include 'endpoints/values-code-code-delete.md' %}
-{% include 'endpoints/values-code-contact-get.md' %}
-{% include 'endpoints/values-code-contact-claim.md' %}
-{% include 'endpoints/values-code-contact-delete.md' %}
+{% include 'endpoints/values-code-update.md' %}
+{% include 'endpoints/values-code-claim.md' %}
+{% include 'endpoints/values-code-changeCode.md' %}

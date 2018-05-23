@@ -1,4 +1,46 @@
-### Get Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+### Get a Transaction [GET /transactions/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the ID of the Transaction to get.
+
++ Response 200 (application/json)
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "transactionType": "debit",
+                "currency": "XXX",
+                "steps": [
+                    {
+                        "rail": "lightrail",
+                        "id": "vs_1",
+                        "currency": "XXX",
+                        "amount": -2500,
+                        "balance": {
+                            "before": 5500,
+                            "after": 3000,
+                            "change": -2500
+                        },
+                        "uses": null
+                    }
+                ],
+                "remainder": 0,
+                "simulated": false,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "metadata": {
+                    "note": "Reduce loyalty points after 3mo contact inactivity"
+                }
+            }
+
+### List Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
 
 + Request (application/json)
     + Headers
@@ -48,45 +90,3 @@
                     }
                 }
             ]
-
-### Get Transaction [GET /transactions/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            {{header.authorization}}
-
-+ Parameter
-    + id (string) - the id of the Transaction to get.
-
-+ Response 200 (application/json)
-    + Attributes (Transaction)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "transactionType": "debit",
-                "currency": "XXX",
-                "steps": [
-                    {
-                        "rail": "lightrail",
-                        "id": "vs_1",
-                        "currency": "XXX",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 5500,
-                            "after": 3000,
-                            "change": -2500
-                        },
-                        "uses": null
-                    }
-                ],
-                "remainder": 0,
-                "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
-                "metadata": {
-                    "note": "Reduce loyalty points after 3mo contact inactivity"
-                }
-            }

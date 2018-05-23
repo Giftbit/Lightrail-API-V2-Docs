@@ -1,4 +1,4 @@
-### Get Contact's Accounts [GET /contacts/{id}/values/accounts]
+### List Contact's Accounts [GET /contacts/{id}/values/accounts]
 
 + Request (application/json)
     + Headers
@@ -16,7 +16,7 @@
             [
                 {
                     "id": "acc-1",
-                    "programId": "accounts",
+                    "program": null,
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,

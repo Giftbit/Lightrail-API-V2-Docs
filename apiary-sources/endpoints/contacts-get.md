@@ -1,4 +1,32 @@
-### Get Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
+### Get a Contact [GET /contacts/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the ID of the Contact to get.
+
++ Response 200 (application/json)
+    + Attributes (Contact)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "firstName": "Jeffrey",
+                "lastName": "Lebowski",
+                "email": "thedude@example.com",
+                "tags": [],
+                "metadata": {
+                    "alias": "El Duderino"
+                },
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
 
 + Request (application/json)
     + Headers
@@ -40,31 +68,3 @@
                     "updatedDate": "2018-04-17T23:20:08.404Z"
                 }
             ]
-
-### Get Contact [GET /contacts/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Contact to get.
-
-+ Response 200 (application/json)
-    + Attributes (Contact)
-
-    + Body
-
-            {
-                "id": "unique-id-123",
-                "firstName": "Jeffrey",
-                "lastName": "Lebowski",
-                "email": "thedude@example.com",
-                "tags": [],
-                "metadata": {
-                    "alias": "El Duderino"
-                },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }

@@ -1,4 +1,4 @@
-### Get Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Contact's Values [GET /contacts/{id}/values{?limit}{?offset}{?program}{?currency}{?preTax}{?active}{?frozen}{?uses}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
 
 + Request (application/json)
     + Headers
@@ -34,7 +34,7 @@
             [
                 {
                     "id": "vs-1",
-                    "programId": "giftcards",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "preTax": false,

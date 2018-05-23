@@ -8,7 +8,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
             {{header.authorization}}
 
 + Parameter
-    + id (string) - the id of the pending Transaction to capture.
+    + id (string) - the ID of the pending Transaction to capture.
 
 + Response 200 (application/json)
     + Attributes (Transaction)

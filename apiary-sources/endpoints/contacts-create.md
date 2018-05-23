@@ -1,4 +1,4 @@
-### Create Contact [POST /contacts]
+### Create a Contact [POST /contacts]
 
 + Request (application/json)
     + Headers
@@ -25,7 +25,7 @@
                 }
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
