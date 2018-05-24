@@ -6,7 +6,7 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - "Program issuance request ID.  This ID is used to generate Gift Card IDs and prevent duplicate requests from being processed."
+        + id (string, required) - Program issuance request ID.  This ID is used to generate Gift Card IDs and prevent duplicate requests from being processed.
         + count (number, required) - The number of Gift Cards to issue.
         + contacts (array[string], optional) - List of Contact IDs to apply the Gift Card to directly.  {{program.issuance.lengthMatchCount}}  {{program.issuance.oneOfAccess}}
         + codes (array[string], optional) - List of codes to use for each Gift Card created.  {{program.issuance.lengthMatchCount}}  {{program.issuance.oneOfAccess}}
@@ -31,7 +31,7 @@
     + Attributes
         + count (number, required) - The number of Gift Cards generated.
         + values (Value, optional) - A list of Gift Cards generated.  This list is only available if `count` < 1000.
-        + csv (string, required) - A link to a CSV with details of the generated Gift Cards.  This CSV will always contain the full code.
+        + csv (string, required) - A link to a CSV with details of the generated Gift Cards.  This CSV will always contain the full codes (if the Gift Cards were not attached directly to Contacts).
 
     + Body
     

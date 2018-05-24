@@ -646,7 +646,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (string, optional) - ISO date for when the Value can last be transacted with.
@@ -791,7 +791,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
@@ -1173,7 +1173,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - "Program issuance request ID.  This ID is used to generate Gift Card IDs and prevent duplicate requests from being processed."
+        + id (string, required) - Program issuance request ID.  This ID is used to generate Gift Card IDs and prevent duplicate requests from being processed.
         + count (number, required) - The number of Gift Cards to issue.
         + contacts (array[string], optional) - List of Contact IDs to apply the Gift Card to directly.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
         + codes (array[string], optional) - List of codes to use for each Gift Card created.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
@@ -1198,7 +1198,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
     + Attributes
         + count (number, required) - The number of Gift Cards generated.
         + values (Value, optional) - A list of Gift Cards generated.  This list is only available if `count` < 1000.
-        + csv (string, required) - A link to a CSV with details of the generated Gift Cards.  This CSV will always contain the full code.
+        + csv (string, required) - A link to a CSV with details of the generated Gift Cards.  This CSV will always contain the full codes (if the Gift Cards were not attached directly to Contacts).
 
     + Body
     
@@ -1255,7 +1255,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
         + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (string, optional) - ISO date for when the Value can last be transacted with.
@@ -1400,7 +1400,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
@@ -1614,7 +1614,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
@@ -1846,7 +1846,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - "Program issuance request ID.  This ID is used to generate Promotion IDs and prevent duplicate requests from being processed."
+        + id (string, required) - Program issuance request ID.  This ID is used to generate Promotion IDs and prevent duplicate requests from being processed.
         + count (number, required) - The number of Promotions to issue.
         + contacts (array[string], optional) - List of Contact IDs to apply the Promotion to directly.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
         + codes (array[string], optional) - List of codes to use for each Promotion created.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
@@ -1873,7 +1873,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
     + Attributes
         + count (number, required) - The number of Promotions generated.
         + values (Value, optional) - A list of Promotions generated.  This list is only available if `count` < 1000.
-        + csv (string, required) - A link to a CSV with details of the generated Promotions.  This CSV will always contain the full code.
+        + csv (string, required) - A link to a CSV with details of the generated Promotions.  This CSV will always contain the full codes (if the Promotions were not attached directly to Contacts).
 
     + Body
     
@@ -1966,7 +1966,7 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
         + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
@@ -3111,7 +3111,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + minInitialBalance (number, optional) - 
 + maxInitialBalance (number, optional) - 
 + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
@@ -3199,7 +3199,7 @@ A step taken as part of the transaction.
 + canceled (boolean, required) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + uses (number, optional) - The number of times the Value can be transacted with.
 + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
 + endDate (string, optional) - ISO date for when the Value can last be transacted with.

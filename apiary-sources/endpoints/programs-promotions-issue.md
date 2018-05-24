@@ -6,7 +6,7 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - "Program issuance request ID.  This ID is used to generate Promotion IDs and prevent duplicate requests from being processed."
+        + id (string, required) - Program issuance request ID.  This ID is used to generate Promotion IDs and prevent duplicate requests from being processed.
         + count (number, required) - The number of Promotions to issue.
         + contacts (array[string], optional) - List of Contact IDs to apply the Promotion to directly.  {{program.issuance.lengthMatchCount}}  {{program.issuance.oneOfAccess}}
         + codes (array[string], optional) - List of codes to use for each Promotion created.  {{program.issuance.lengthMatchCount}}  {{program.issuance.oneOfAccess}}
@@ -33,7 +33,7 @@
     + Attributes
         + count (number, required) - The number of Promotions generated.
         + values (Value, optional) - A list of Promotions generated.  This list is only available if `count` < 1000.
-        + csv (string, required) - A link to a CSV with details of the generated Promotions.  This CSV will always contain the full code.
+        + csv (string, required) - A link to a CSV with details of the generated Promotions.  This CSV will always contain the full codes (if the Promotions were not attached directly to Contacts).
 
     + Body
     
