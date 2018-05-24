@@ -32,13 +32,13 @@ Lightrail uses the following HTTP status codes to indicate an error:
 
 Lightrail errors contain a JSON body with the following properties:
 
-| property    | optional | purpose |
+| property    | required | purpose |
 |-------------|----------|---------|
-| message     | no       | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
-| statusCode  | no       | The HTTP status code. |
-| messageCode | yes      | A constant corresponding to the message.  This can be used to take action in response to the error. |
+| message     | yes      | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
+| statusCode  | yes      | The HTTP status code. |
+| messageCode | no       | A constant corresponding to the message.  This can be used to take action in response to the error. |
 
-For example:
+An example:
 
 ```json
 {
@@ -49,7 +49,7 @@ For example:
 ```
 
 ## Support
-[Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help.
+[Contact us](mailto:hello@lightrail.com) any time if you have any questions.  We're here to help.
 
 ## Contacts [/contacts/]
 
