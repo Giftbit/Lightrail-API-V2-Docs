@@ -14,21 +14,22 @@
   + Body
 
             [
-              {
-                  "id": "gift-1",
-                  "program": "giftCards",
-                  "currency": "USD",
-                  "balance": 2500,
-                  "preTax": false,
-                  "active": true,
-                  "frozen": false,
-                  "redemptionRule": null,
-                  "valueRule": null,
-                  "uses": null,
-                  "startDate": null,
-                  "endDate": null,
-                  "metadata": null,
-                  "createdDate": "2018-04-17T23:20:08.404Z",
-                  "updatedDate": "2018-04-17T23:20:08.404Z"
-              }
+                {
+                    "id": "gift-1",
+                    "program": "giftCards",
+                    "currency": "USD",
+                    "contact": "unique-id-123",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
             ]

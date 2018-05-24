@@ -18,6 +18,7 @@
                     "id": "promo-1",
                     "program": "signup-bonus",
                     "currency": "USD",
+                    "contact": "unique-id-123",
                     "balance": 2500,
                     "preTax": true,
                     "active": true,

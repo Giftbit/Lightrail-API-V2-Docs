@@ -36,6 +36,7 @@
                     "id": "vs-1",
                     "program": "giftCards",
                     "currency": "USD",
+                    "contact": "unique-id-123",
                     "balance": 2500,
                     "preTax": false,
                     "active": true,
