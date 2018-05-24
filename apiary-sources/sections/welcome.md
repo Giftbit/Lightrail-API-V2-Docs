@@ -1,8 +1,6 @@
 # Lightrail Documentation
 
-Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution.
-
-You are viewing the reference api documentation. For an overview and detailed use case examples please view our [docs home](https://localhost:8181/docs/).
+Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotions, and collect payment all in one unified checkout solution.
 
 ## Authentication
 Authentication is done via an authorization header. You can retrieve your Lightrail API key [here](https://www.lightrail.com).
