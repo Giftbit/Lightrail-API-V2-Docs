@@ -12,7 +12,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
 
 ### Gift Card Programs [/programs/giftCards]
 
-Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an explanation of Programs can be found [below](#advanced-programs) to provide context and insight into how `Values` function. The following endpoints can be used to manage Gift Card Programs. 
+Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an explanation of Programs can be found [below](#reference/advanced/programs) to provide context and insight into how `Values` function. The following endpoints can be used to manage Gift Card Programs. 
 
 {% include 'endpoints/programs-giftCards-create.md' %}
 {% include 'endpoints/programs-giftCards-get.md' %}

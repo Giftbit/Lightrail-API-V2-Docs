@@ -5,8 +5,6 @@ HOST: https://api.lightrail.com/v2/
 
 Welcome to Lightrail V2. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution.
 
-You are viewing the reference api documentation. For an overview and detailed use case examples please view our [docs home](https://localhost:8181/docs/).
-
 ## Authentication
 Authentication is done via an authorization header. You can retrieve your Lightrail API key [here](https://www.lightrail.com).
 
@@ -54,7 +52,6 @@ An example:
 ## Contacts [/contacts/]
 
 Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
-
 
 ### Create a Contact [POST /contacts]
 
@@ -926,7 +923,7 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
 
 ### Gift Card Programs [/programs/giftCards]
 
-Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an explanation of Programs can be found [below](#advanced-programs) to provide context and insight into how `Values` function. The following endpoints can be used to manage Gift Card Programs. 
+Programs define the behaviour of Value that you wish to issue: in this case, gift cards. Programs are typically created through the web app, but an explanation of Programs can be found [below](#reference/advanced/programs) to provide context and insight into how `Values` function. The following endpoints can be used to manage Gift Card Programs. 
 
 ### Create Gift Card Program [POST /programs/giftCards]
 
@@ -1235,7 +1232,9 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
 
 ## Promotions [/values/promotions]
 
-A Promotion is Value that is given away to incentivise a purchase.  It may be accessed via a code, attached to a Contact or even applied on checkout automatically.  It can be balance-based such as $5 or valueRule-based such as 50% off.  A Promotion will typically have a redemption rule that defines when the Promotion applies. 
+A Promotion is [Value](#reference/advanced/values) that is given away to incentivise a purchase. It may be accessed via a code, attached to a [Contact](#reference/0/contacts) or even applied on checkout automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
+- **Managing Promotions:** Promotions are typically created and managed based on [Promotion Programs](#reference/promotions/promotion-programs) that define the default parameters for the promotion and how it behaves. 
+- **Redeeming Promotions:** Promotions are redeemed by your customers in [checkout](#reference/transactions/transactions/checkout). 
 
 ### Create a Promotion [POST /values/promotions]
 
@@ -1593,7 +1592,7 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
 
 ## Promotion Programs [/programs/promotions]
 
-Programs define the behaviour of Value that you wish to issue: in this case, promotions. Programs are typically created through the web app, but an explanation of Programs can be found [below](#advanced-programs) to provide context and insight into how `Values` function. The following endpoints can be used to manage Promotion Programs. 
+Programs define the behaviour of promotional value that you issue. Programs are typically created through the [web app](https://www.lightrail.com/app/#), but an explanation of Programs can be found [below](#reference/advanced/programs) to provide context and insight into how [Values](#reference/advanced/values) function. The following endpoints can be used to manage Promotion Programs. 
 
 ### Create Promotion Program [POST /programs/promotions]
 
@@ -2838,7 +2837,6 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Gift 
             ]
 
 ## Programs [/programs]
-<a name="advanced-programs" />
 
 Programs define the behaviour of Value that you wish to issue. Programs are typically created through the web app, but an explanation is included here for context and insight into how `Values` function.
 
