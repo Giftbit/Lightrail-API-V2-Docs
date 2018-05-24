@@ -1,6 +1,8 @@
-### Claim a Value for a Contact by code [POST /values/byCode/{code}/claim]
+### Assign a Value to a Contact by code [POST /values/byCode/{code}/claim]
 
 + Request (application/json)
+    Associates a Value with a contact so that it is automatically available to them in checkout.
+    
      + Headers
      
              {{header.authorization}}

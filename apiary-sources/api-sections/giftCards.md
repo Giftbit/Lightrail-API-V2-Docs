@@ -2,7 +2,7 @@
 
 ## Gift Cards [/values/giftCards]
 
-A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or claimed and attached to a Contact for later use.
+A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or assigned and attached to a Contact for later use.
 
 {% include 'endpoints/values-giftCards-create.md' %}
 {% include 'endpoints/values-giftCards-get.md' %}

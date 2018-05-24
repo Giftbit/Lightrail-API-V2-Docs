@@ -1,6 +1,9 @@
-### Claim a Promotion for a Contact [POST /values/promotions/{id}/claim]
+### Assign a Promotion to a Contact [POST /values/promotions/{id}/claim]
 
 + Request (application/json)
+
+    Associates a Promotion with a contact so that the value is automatically available to them in checkout. 
+
      + Headers
      
              {{header.authorization}}

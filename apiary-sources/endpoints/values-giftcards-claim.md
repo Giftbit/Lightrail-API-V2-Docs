@@ -1,6 +1,8 @@
-### Claim a Gift Card for a Contact [POST /values/giftCards/{id}/claim]
+### Assign a Gift Card to a Contact [POST /values/giftCards/{id}/claim]
 
 + Request (application/json)
+    Associates a Gift Card with a contact so that the value is automatically available to them in checkout.
+
      + Headers
      
              {{header.authorization}}

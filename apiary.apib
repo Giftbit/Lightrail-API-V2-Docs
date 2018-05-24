@@ -623,7 +623,7 @@ An Account is Value specifically tied to a Contact.
 
 ## Gift Cards [/values/giftCards]
 
-A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or claimed and attached to a Contact for later use.
+A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or assigned and attached to a Contact for later use.
 
 ### Create a Gift Card [POST /values/giftCards]
 
@@ -825,9 +825,11 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Claim a Gift Card for a Contact [POST /values/giftCards/{id}/claim]
+### Assign a Gift Card to a Contact [POST /values/giftCards/{id}/claim]
 
 + Request (application/json)
+    Associates a Gift Card with a contact so that the value is automatically available to them in checkout.
+
      + Headers
      
              Authorization: Bearer <API_KEY>
@@ -1465,9 +1467,12 @@ A Promotion is [Value](#reference/advanced/values) that is given away to incenti
                 "message": "Value 'abc123' is in use.",
                 "messageCode": "ValueInUse"
             }
-### Claim a Promotion for a Contact [POST /values/promotions/{id}/claim]
+### Assign a Promotion to a Contact [POST /values/promotions/{id}/claim]
 
 + Request (application/json)
+
+    Associates a Promotion with a contact so that the value is automatically available to them in checkout. 
+
      + Headers
      
              Authorization: Bearer <API_KEY>
@@ -2002,9 +2007,11 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-### Claim a Value for a Contact by code [POST /values/byCode/{code}/claim]
+### Assign a Value to a Contact by code [POST /values/byCode/{code}/claim]
 
 + Request (application/json)
+    Associates a Value with a contact so that it is automatically available to them in checkout.
+    
      + Headers
      
              Authorization: Bearer <API_KEY>
@@ -2137,7 +2144,9 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
 
 ### Checkout [POST /transactions/checkout]
 
-Process a checkout by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
+The checkout endpoint is used to collect all payment for a purchase. It will debit funds from Lightrail and also charge credit cards through Stripe. Your Stripe account must be connected to Lightrail in order for Lightrail to make charges on your behalf. 
+
+Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended a stop-gap solution to support transitioning from legacy systems.    
 
 + Request (application/json)
     
