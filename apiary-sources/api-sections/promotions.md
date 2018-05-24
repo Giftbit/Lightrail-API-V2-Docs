@@ -3,8 +3,8 @@
 ## Promotions [/values/promotions]
 <a name="promotions-intro" />
 
-- **Use cases:** A Promotion is [Value](#advanced-values) that is given away to incentivise a purchase. It may be accessed via a code, attached to a [Contact](#contacts) or even applied on checkout automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
-- **Managing Promotions:** Promotions are typically created and managed based on [Promotion Programs](#promotions-programs) that define how the value that you are offering to your customers behaves. Promotions can be generated without a Program, but this should only be done for unusual or one-off use cases, such as testing. 
+A Promotion is [Value](#advanced-values) that is given away to incentivise a purchase. It may be accessed via a code, attached to a [Contact](#contacts) or even applied on checkout automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
+- **Managing Promotions:** Promotions are typically created and managed based on [Promotion Programs](#promotions-programs) that define how the value that you are offering to your customers behaves. 
 - **Redeeming Promotions:** Promotions are redeemed by your customers in [checkout](#transactions-checkout). 
 
 {% include 'endpoints/values-promotions-create.md' %}
