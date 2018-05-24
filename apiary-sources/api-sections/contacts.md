@@ -1,5 +1,4 @@
 ## Contacts [/contacts/]
-<a name="contacts" />
 
 Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`.
 

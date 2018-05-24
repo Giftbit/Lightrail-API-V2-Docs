@@ -1,5 +1,4 @@
 ### Checkout [POST /transactions/checkout]
-<a name="transactions-checkout" />
 
 Process a checkout by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
