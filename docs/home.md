@@ -97,7 +97,7 @@ As a result of this transaction, the promotion was applied, the customer's accou
 As you can see, Lightrail handles the complexity of applying the promotion, calculating tax and charging the various payment sources, all within a single transaction. 
 Lightrail returns a summary and detailed information of the transaction so that it's easy to display a breakdown to the customer. 
 
-### Orders Payment Sources
+### Checkout Payment Sources
 The `sources` property in the `orders` endpoint contains a list of payment sources. 
 A source consists of an object with a `rail` identifier along with some additional data. There are currently two payment rails: `lightrail` and `stripe`. Support for more credit card processors such as BrainTree and Square is coming soon!
 
