@@ -10,6 +10,14 @@ In requests to Lightrail you must incldue the following header:
 Authorization: Bearer <API_KEY>
 ```
 
+## Dates
+
+All dates are sent and received in 8601 format.
+
+```text
+YYYY-MM-DDTHH:MM:SSZ
+```
+
 ## Errors
 
 Lightrail uses the following HTTP status codes to indicate an error:

@@ -7,7 +7,7 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + contact (string, required) - Associate the Value with the given Contact.
+        + contact (string, required) - The ID of that Contact that will own the Account.
         + currency (string, required) - {{currency.code}}
         + balance (number, optional) - {{value.balance}}
         + active (boolean, optional) - {{value.active}}

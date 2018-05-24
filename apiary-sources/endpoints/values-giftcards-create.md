@@ -7,9 +7,9 @@
 
     + Attributes
         + id (string, required) - {{value.id}}
-        + program (string, optional) - Associate with and copy default values from the given Program.
-        + contact (string, optional) - Associate the Value with the given Contact by ID.  Cannot be set with `code`.
-        + code (string, optional) - Associate the Value with the given code.  Cannot be set with `contact`.
+        + program (string, optional) - {{value.create.program}}
+        + contact (string, optional) - {{value.create.contact}}
+        + code (string, optional) - {{value.create.code}}
         + currency (string, optional) - {{currency.code}} Required if `program` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
