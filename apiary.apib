@@ -13,6 +13,14 @@ In requests to Lightrail you must incldue the following header:
 Authorization: Bearer <API_KEY>
 ```
 
+## Dates
+
+All dates are sent and received in 8601 format.
+
+```text
+YYYY-MM-DDTHH:MM:SSZ
+```
+
 ## Errors
 
 Lightrail uses the following HTTP status codes to indicate an error:
@@ -645,8 +653,8 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
-        + startDate (string, optional) - ISO date for when the Value becomes available.
-        + endDate (string, optional) - ISO date for when the Value expires.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -789,8 +797,8 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
-        + startDate (string, optional) - ISO date for when the Value becomes available.
-        + endDate (string, optional) - ISO date for when the Value expires.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1256,8 +1264,8 @@ A Promotion is [Value](#reference/advanced/values) that is given away to incenti
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
-        + startDate (string, optional) - ISO date for when the Value becomes available.
-        + endDate (string, optional) - ISO date for when the Value expires.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1400,8 +1408,8 @@ A Promotion is [Value](#reference/advanced/values) that is given away to incenti
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
-        + startDate (string, optional) - ISO date for when the Value becomes available.
-        + endDate (string, optional) - ISO date for when the Value expires.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1618,8 +1626,8 @@ Programs define the behaviour of promotional value that you issue. Programs are 
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
         + tags (array[string], optional) - Segmentation tags.
-        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
-        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
+        + startDate (string, optional) - Earliest date that Values belonging to this Program can be active.
+        + endDate (string, optional) - Latest date that Values belonging to this Program can be active.
         + metadata (object, optional) - Arbitrary data associated with the Program.
         
     + Body
@@ -1769,8 +1777,8 @@ Programs define the behaviour of promotional value that you issue. Programs are 
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + tags (array[string], optional) - Segmentation tags.
-        + startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + startDate (string, optional) - Earliest date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        + endDate (string, optional) - Latest date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
         + metadata (object, optional) - Arbitrary data associated with the Program.
 
     + Body
@@ -1966,8 +1974,8 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
-        + startDate (string, optional) - ISO date for when the Value becomes available.
-        + endDate (string, optional) - ISO date for when the Value expires.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -2552,7 +2560,7 @@ Transfer value between a payment source and a payment destination.  Currently on
         + steps (array[TransactionStep], required) - An array of transaction steps.
         + remainder (number, required) - The remainder of balance that could not be debited.
         + simulated (boolean, optional) - True if the transaction was simulated.
-        + createdDate (string, required) - ISO date for when the Transaction was created.
+        + createdDate (string, required) - Date when the Transaction was created.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
@@ -3065,8 +3073,8 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + email (string, optional) - The Contact's email.
 + tags (array[string], optional) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Contact.
-+ createdDate (string, required) - ISO date for when the Contact was created.
-+ updatedDate (string, required) - ISO date for when the Contact was last updated.
++ createdDate (string, required) - Date when the Contact was created.
++ updatedDate (string, required) - Date when the Contact was last updated.
 
 ## LineItem (object)
 + type (string, required) - Must be either `product`, `shipping` or `fee`.
@@ -3115,10 +3123,10 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
 + uses (number, optional) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
 + tags (array[string], optional) - Segmentation tags.
-+ startDate (string, optional) - Earliest ISO date that Values belonging to this Program can be active.
-+ endDate (string, optional) - Latest ISO date that Values belonging to this Program can be active.
-+ createdDate (string, required) - ISO date for when the Program was created.
-+ updatedDate (string, required) - ISO date for when the Program was last updated.
++ startDate (string, optional) - Earliest date that Values belonging to this Program can be active.
++ endDate (string, optional) - Latest date that Values belonging to this Program can be active.
++ createdDate (string, required) - Date when the Program was created.
++ updatedDate (string, required) - Date when the Program was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Program.
 
 ## Rule (object)
@@ -3136,8 +3144,8 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
     + `pending` - created pending and unresolved.
     + `captured` - created pending and captured.  The Transaction is final.
     + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
-+ createdDate (string, required) - ISO date for when the Transaction was created.
-+ updatedDate (string, required) - ISO date for when the Contact was last updated.
++ createdDate (string, required) - Date when the Transaction was created.
++ updatedDate (string, required) - Date when the Contact was last updated.
 + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
 ## TransactionParty (object)
@@ -3199,9 +3207,9 @@ A step taken as part of the transaction.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
 + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
 + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
-+ startDate (string, optional) - ISO date for when the Value becomes available.
-+ endDate (string, optional) - ISO date for when the Value expires.
++ startDate (string, optional) - Date when the Value becomes available.
++ endDate (string, optional) - Date when the Value expires.
 + tags (array[string], required) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Value.
-+ createdDate (string, required) - ISO date for when the Contact was created.
-+ updatedDate (string, required) - ISO date for when the Contact was last updated.
++ createdDate (string, required) - Date when the Contact was created.
++ updatedDate (string, required) - Date when the Contact was last updated.
