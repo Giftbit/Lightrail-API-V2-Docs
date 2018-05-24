@@ -1,4 +1,43 @@
-### List Programs [GET /programs{?limit}{?offset}{?id}{?tags}{?currency}]
+### Get a Gift Card Program [GET /programs/giftCards/{id}]
+
++ Request (application/json)
+    + Headers
+    
+            {{header.authorization}}
+
++ Parameter
+    + id (string) - the ID of the Gift Card Program to get.
+
++ Response 200 (application/json)
+    + Attributes (Program)
+
+    + Body
+
+            {
+                "id": "unique-id-123",
+                "name": "Gift Card program",
+                "currency": "CAD",
+                "access": "secureCode",
+                "discount": "false",
+                "preTax": "false",
+                "active": "true",
+                "redemptionRule": null,
+                "valueRule": null,
+                "minInitialBalance": null,
+                "maxInitialBalance": null,
+                "fixedInitialBalances": [
+                    500,
+                    1500,
+                    2500
+                ],
+                "uses": null,
+                "tags": [],
+                "metadata": null,
+                "createdDate": "2018-04-17T23:20:08.404Z",
+                "updatedDate": "2018-04-17T23:20:08.404Z"
+            }
+
+### List Gift Card Programs [GET /programs/giftCards{?limit}{?offset}{?id}{?tags}{?currency}]
 
 + Request (application/json)
     + Headers

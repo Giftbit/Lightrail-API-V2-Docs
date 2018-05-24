@@ -1,46 +1,45 @@
-### Create Gift Card Program [POST /programs]
+### Create Gift Card Program [POST /programs/giftCards]
 
-Create a new Gift Card Program.
-
----
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
         
     + Attributes
-        + programId (string, required) - {{program.programId}}
+        + id (string, required) - {{program.id}}
         + name (string, optional) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + access (enum[string], required) - {{value.access.description}}
+            + `contact` - {{value.access.types.contact}}
             + `secureCode` - {{value.access.types.secureCode}}
         + active (boolean, optional) - {{value.active}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
-        + fixedInitialValues (array[number], optional) - A list of values the Value can be created with.
+        + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + tags (array[string], optional) - {{tags}}
-        + metadata (number, optional) - {{program.metadata}}
+        + metadata (object, optional) - {{program.metadata}}
 
     + Body
 
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
                 "currency": "USD",
                 "access": "secureCode",
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "tags": ["giftcard"]
+                "tags": ["giftCard"]
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
             {
-                "programId": "gift-cards-usd",
+                "id": "gift-cards-usd",
                 "name": "Gift Cards USD",
+                "type": "giftCard",
                 "currency": "USD",
                 "access": "secureCode",
                 "discount": "false",
@@ -50,10 +49,12 @@ Create a new Gift Card Program.
                 "valueRule": null,
                 "minInitialBalance": 500,
                 "maxInitialBalance": 100000,
-                "fixedInitialValues": null,
+                "fixedInitialBalances": null,
                 "uses": null,
-                "tags": ["giftcard"],
+                "tags": ["giftCard"],
                 "metadata": null,
+                "startDate": null,
+                "endDate": null,
                 "createdDate": "2018-04-17T23:20:08.404Z",
                 "updatedDate": "2018-04-17T23:20:08.404Z"
             }

@@ -1,4 +1,4 @@
-### Get Contact's Gift Cards [GET /contacts/{id}/values/giftcards]
+### List Contact's Gift Cards [GET /contacts/{id}/values/giftCards]
 
 + Request (application/json)
   + Headers
@@ -16,7 +16,7 @@
             [
               {
                   "id": "gift-1",
-                  "programId": "giftcards",
+                  "program": "giftCards",
                   "currency": "USD",
                   "balance": 2500,
                   "preTax": false,

@@ -1,4 +1,4 @@
-### Get Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### List Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}]
 
 + Request (application/json)
     + Headers
@@ -13,10 +13,6 @@
     + type (string, optional) - {{filter.type}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
-    + currency (string, optional) - {{filter.currency}}
-    + active (boolean, optional) - {{filter.active}}
-    + frozen (boolean, optional) - {{filter.frozen}}
-    + canceled (boolean, optional) - {{filter.canceled}}
     
 + Response 200 (application/json)
     + Headers
@@ -33,8 +29,8 @@
             [
                 {
                     "id": "vs-1",
-                    "type": "giftcard",
-                    "programId": "giftcards",
+                    "type": "giftCard",
+                    "program": "giftCards",
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,

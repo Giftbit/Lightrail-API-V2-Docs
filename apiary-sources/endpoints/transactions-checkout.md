@@ -1,6 +1,6 @@
-### Process an order [POST /transactions/orders]
+### Checkout [POST /transactions/checkout]
 
-Process an order by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
+Process a checkout by debiting (removing value from) one or more payment rails.  The payment rails `lightrail`, `stripe` and `internal` are supported.
 
 + Request (application/json)
     
@@ -70,7 +70,7 @@ Process an order by debiting (removing value from) one or more payment rails.  T
                 ]
             }
     
-+ Response 200 (application/json)
++ Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body

@@ -1,4 +1,4 @@
-### Update Contact [PUT /contacts/{id}]
+### Update a Contact [PATCH /contacts/{id}]
 
 + Request (application/json)
 
@@ -9,7 +9,7 @@
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{contact.id}}
+        + id (string, optional) - {{contact.id}}  If present must match the ID in the path.
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
