@@ -55,6 +55,13 @@ program:
   createdDate: "ISO date for when the Program was created."
   updatedDate: "ISO date for when the Program was last updated."
   metadata: "Arbitrary data associated with the Program."
+  issuance:
+    codeGeneration: "Settings for randomly generated codes."
+    lengthMatchCount: "The length of the list must match `count`."
+    oneOfAccess: "One of `contacts`, `codes`, or `codeGeneration` must be specified."
+    secureCodes: "Codes are stored securely.  They will only be visible in the CSV file."
+    startDate: "Override the Program's configured startDate."
+    endDate: "Override the Program's configured endDate."
 transaction:
   allowRemainder: "If true the transaction will go through without all balance being debited, and the remainder indicated."
   createdDate: "ISO date for when the Transaction was created."

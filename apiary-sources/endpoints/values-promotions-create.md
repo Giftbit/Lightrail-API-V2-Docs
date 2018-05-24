@@ -16,10 +16,10 @@
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
-        + valueRule (number, optional) - {{value.valueRule}}
+        + valueRule (Rule, optional) - {{value.valueRule}}
         + uses (number, optional) - {{value.uses}}
-        + startDate (number, optional) - {{value.startDate}}
-        + endDate (number, optional) - {{value.endDate}}
+        + startDate (string, optional) - {{value.startDate}}
+        + endDate (string, optional) - {{value.endDate}}
         + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{value.metadata}}
         

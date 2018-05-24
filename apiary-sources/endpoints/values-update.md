@@ -27,9 +27,9 @@ Update all Values that match the given query parameters.
         + canceled (boolean, optional) - {{value.canceled}}
         + preTax (boolean, optional) - {{value.preTax}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
-        + valueRule (number, optional) - {{value.valueRule}}
-        + startDate (number, optional) - {{value.startDate}}
-        + endDate (number, optional) - {{value.endDate}}
+        + valueRule (Rule, optional) - {{value.valueRule}}
+        + startDate (string, optional) - {{value.startDate}}
+        + endDate (string, optional) - {{value.endDate}}
         + metadata (object, optional) - {{value.metadata}}
         
     + Body

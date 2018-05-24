@@ -11,7 +11,7 @@
 + preTax (boolean, required) - {{value.preTax}}
 + active (boolean, optional) - {{value.active}}
 + redemptionRule (Rule, optional) - {{value.redemptionRule}}
-+ valueRule (number, optional) - {{value.valueRule}}
++ valueRule (Rule, optional) - {{value.valueRule}}
 + minInitialBalance (number, optional) - {{program.minBalance}}
 + maxInitialBalance (number, optional) - {{program.maxBalance}}
 + fixedInitialBalances (array[number], optional) - {{program.fixedInitialBalances}}

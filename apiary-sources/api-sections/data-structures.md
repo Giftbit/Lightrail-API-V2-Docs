@@ -1,5 +1,7 @@
 # Data Structures
 
+{% include 'data-structures/CodeGeneration.md' %}
+
 {% include 'data-structures/Currency.md' %}
 
 {% include 'data-structures/Contact.md' %}

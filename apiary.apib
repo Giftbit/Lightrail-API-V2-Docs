@@ -646,10 +646,10 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
-        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -791,9 +791,9 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
-        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1165,7 +1165,71 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
                 "message": "Program 'abc123' is in use.",
                 "messageCode": "ProgramInUse"
             }
+### Issue Gift Cards from a Program [POST /programs/giftCards/{id}/issue]
 
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, required) - "Program issuance request ID.  This ID is used to generate Gift Card IDs and prevent duplicate requests from being processed."
+        + count (number, required) - The number of Gift Cards to issue.
+        + contacts (array[string], optional) - List of Contact IDs to apply the Gift Card to directly.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + codes (array[string], optional) - List of codes to use for each Gift Card created.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + codeGeneration (CodeGeneration, optional) - Settings for randomly generated codes. One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + secureCodes (boolean, optional) - Codes are stored securely.  They will only be visible in the CSV file.
+        + startDate (string, optional) - Override the Program's configured startDate.
+        + endDate (string, optional) - Override the Program's configured endDate.
+        
+    + Body
+    
+            {
+                "id": "partner-release-11",
+                "count": 10,
+                "codeGeneration": {
+                    "length": 12,
+                    "characters": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                },
+                "secureCodes": true
+            }
+    
++ Response 201 (application/json)
+    + Attributes
+        + count (number, required) - The number of Gift Cards generated.
+        + values (Value, optional) - A list of Gift Cards generated.  This list is only available if `count` < 1000.
+        + csv (string, required) - A link to a CSV with details of the generated Gift Cards.  This CSV will always contain the full code.
+
+    + Body
+    
+            {
+                "count" 10,
+                "values": [
+                    {
+                        "id": "partner-release-11-1",
+                        "type": "giftCard",
+                        "program": "partner-release",
+                        "currency": "USD",
+                        "code": "…LQWT",
+                        "balance": 2400,
+                        "active": true,
+                        "frozen": false,
+                        "canceled": false,
+                        "preTax": false,
+                        "redemptionRule": null,
+                        "valueRule": null,
+                        "uses": null,
+                        "startDate": null,
+                        "endDate": null,
+                        "tags": [],
+                        "metadata": null,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    },
+                    // ...
+                ],
+                "csv": "https://www.lightrail.com/csv/partner-release-11-7116484d77ca.csv"
+            }
 
 # Group Promotions
 
@@ -1191,10 +1255,10 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + uses (number, optional) - The number of times the Value can be transacted with.
-        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1336,9 +1400,9 @@ A Promotion is Value that is given away to incentivise a purchase.  It may be ac
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
-        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -1550,7 +1614,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated. Default is `true`.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
@@ -1774,7 +1838,73 @@ Programs define the behaviour of Value that you wish to issue: in this case, pro
                 "message": "Program 'abc123' is in use.",
                 "messageCode": "ProgramInUse"
             }
+### Issue Promotions from a Program [POST /programs/promotions/{id}/issue]
 
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + id (string, required) - "Program issuance request ID.  This ID is used to generate Promotion IDs and prevent duplicate requests from being processed."
+        + count (number, required) - The number of Promotions to issue.
+        + contacts (array[string], optional) - List of Contact IDs to apply the Promotion to directly.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + codes (array[string], optional) - List of codes to use for each Promotion created.  The length of the list must match `count`.  One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + codeGeneration (CodeGeneration, optional) - Settings for randomly generated codes. One of `contacts`, `codes`, or `codeGeneration` must be specified.
+        + secureCodes (boolean, optional) - Codes are stored securely.  They will only be visible in the CSV file.
+        + startDate (string, optional) - Override the Program's configured startDate.
+        + endDate (string, optional) - Override the Program's configured endDate.
+        
+    + Body
+    
+            {
+                "id": "summer-promo-2077",
+                "count": 100,
+                "codeGeneration": {
+                    "length": 8,
+                    "characters": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                    "prefix": "SUMMMER-"
+                    "suffix": "-2077"
+                },
+                "secureCodes": true
+            }
+    
++ Response 201 (application/json)
+    + Attributes
+        + count (number, required) - The number of Promotions generated.
+        + values (Value, optional) - A list of Promotions generated.  This list is only available if `count` < 1000.
+        + csv (string, required) - A link to a CSV with details of the generated Promotions.  This CSV will always contain the full code.
+
+    + Body
+    
+            {
+                "count" 100,
+                "values": [
+                    {
+                        "id": "summer-promo-2077-1",
+                        "type": "promotion"
+                        "program": "summerpromo",
+                        "currency": "USD",
+                        "code": "…2077",
+                        "balance": 500,
+                        "active": true,
+                        "frozen": false,
+                        "canceled": false,
+                        "preTax": false,
+                        "redemptionRule": null,
+                        "valueRule": null,
+                        "uses": 1,
+                        "startDate": "2077-07-01T00:00:00.000Z",
+                        "endDate": "2077-10-01T00:00:00.000Z",
+                        "tags": [],
+                        "metadata": null,
+                        "createdDate": "2018-04-17T23:20:08.404Z",
+                        "updatedDate": "2018-04-17T23:20:08.404Z"
+                    },
+                    // ...
+                ],
+                "csv": "https://www.lightrail.com/csv/summer-promo-2077-b03b610c61aa4146.csv"
+            }
 
 # Group Codes
 
@@ -1836,9 +1966,9 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied before tax is calculated.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
-        + startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-        + endDate (number, optional) - ISO date for when the Value can last be transacted with.
+        + valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
+        + startDate (string, optional) - ISO date for when the Value can start to be transacted with.
+        + endDate (string, optional) - ISO date for when the Value can last be transacted with.
         + tags (array[string], optional) - Segmentation tags.
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
@@ -2918,6 +3048,12 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 # Data Structures
 
+## CodeGeneration (object)
++ length (number, required) - The number of random characters in the code.  This number must be at least 5 to accommodate a reasonable amount of randomness.
++ characters (string, optional) - The set of characters to use for the random part of the code.  Defaults to all numbers and upper case letters.
++ prefix (string, optional) - Text prepended in front the random characters in the code.
++ suffix (string, optional) - Text appended after the random characters in the code.
+
 ## Currency (object)
 + code (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + name (number, required) - Long name for the currency, eg: `Dollars`.
@@ -2975,7 +3111,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + minInitialBalance (number, optional) - 
 + maxInitialBalance (number, optional) - 
 + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
@@ -3063,10 +3199,10 @@ A step taken as part of the transaction.
 + canceled (boolean, required) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean, required) - If true the Value's balance is applied before tax is calculated.
 + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (number, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
++ valueRule (string, optional) - A Value Rule controlling the effective balance of the Value in an Order.  To use this `balance` must be set to `null`.
 + uses (number, optional) - The number of times the Value can be transacted with.
-+ startDate (number, optional) - ISO date for when the Value can start to be transacted with.
-+ endDate (number, optional) - ISO date for when the Value can last be transacted with.
++ startDate (string, optional) - ISO date for when the Value can start to be transacted with.
++ endDate (string, optional) - ISO date for when the Value can last be transacted with.
 + tags (array[string], required) - Segmentation tags.
 + metadata (object, optional) - Arbitrary data associated with the Value.
 + createdDate (string, required) - ISO date for when the Contact was created.
