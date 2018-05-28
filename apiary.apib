@@ -271,6 +271,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "id": "acc-1",
                     "program": null,
                     "currency": "USD",
+                    "contact": "unique-id-123",
                     "balance": 2500,
                     "preTax": false,
                     "active": true,
@@ -301,23 +302,24 @@ Contacts are the people or businesses who buy products or services from you.  Th
   + Body
 
             [
-              {
-                  "id": "gift-1",
-                  "program": "giftCards",
-                  "currency": "USD",
-                  "balance": 2500,
-                  "preTax": false,
-                  "active": true,
-                  "frozen": false,
-                  "redemptionRule": null,
-                  "valueRule": null,
-                  "uses": null,
-                  "startDate": null,
-                  "endDate": null,
-                  "metadata": null,
-                  "createdDate": "2018-04-17T23:20:08.404Z",
-                  "updatedDate": "2018-04-17T23:20:08.404Z"
-              }
+                {
+                    "id": "gift-1",
+                    "program": "giftCards",
+                    "currency": "USD",
+                    "contact": "unique-id-123",
+                    "balance": 2500,
+                    "preTax": false,
+                    "active": true,
+                    "frozen": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
             ]
 ### List Contact's Promotions [GET /contacts/{id}/values/promotions]
 
@@ -339,6 +341,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "id": "promo-1",
                     "program": "signup-bonus",
                     "currency": "USD",
+                    "contact": "unique-id-123",
                     "balance": 2500,
                     "preTax": true,
                     "active": true,
@@ -391,6 +394,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
                     "id": "vs-1",
                     "program": "giftCards",
                     "currency": "USD",
+                    "contact": "unique-id-123",
                     "balance": 2500,
                     "preTax": false,
                     "active": true,
@@ -2850,6 +2854,101 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Gift 
                     "metadata": null,
                     "createdDate": "2018-04-17T23:20:08.404Z",
                     "updatedDate": "2018-04-17T23:20:08.404Z"
+                }
+            ]
+
+### Update Values [PATCH /values{?limit}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+
+Update all Values that match the given query parameters.
+        
++ Parameter
+    + limit (number, optional) - The max number of items to get.  This limits the number of items returned but not the number of items modified.
+    + type (string, optional) - Filter by Value type.
+    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + contact (string, optional) - Filter by Values attached to the given Contact ID.
+    + program (string, optional) - Filter by Program ID.
+    + currency (string, optional) - Filter by currency.
+    + active (boolean, optional) - Filter active/inactive.
+    + frozen (boolean, optional) - Filter frozen/unfrozen.
+    + canceled (boolean, optional) - Filter canceled.
+
++ Request (application/merge-patch+json)
+
+    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
+
+    + Headers
+    
+            Authorization: Bearer <API_KEY>
+
+    + Attributes
+        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
+        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
+        + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + startDate (string, optional) - Date when the Value becomes available.
+        + endDate (string, optional) - Date when the Value expires.
+        + metadata (object, optional) - Arbitrary data associated with the Value.
+        
+    + Body
+    
+            {
+                "frozen": true
+            }
+    
++ Response 200 (application/json)
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Offset: 0
+            Count: 2
+        
+    + Attributes (array[Value])
+
+    + Body
+
+            [
+                {
+                    "id": "vs-1",
+                    "type": "giftCard",
+                    "program": "giftCards",
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": true,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:58:19.036Z"
+                },
+                {
+                    "id": "account-1",
+                    "type": "account",
+                    "program": null,
+                    "currency": "USD",
+                    "balance": 2500,
+                    "active": true,
+                    "frozen": true,
+                    "canceled": false,
+                    "preTax": false,
+                    "redemptionRule": null,
+                    "valueRule": null,
+                    "uses": null,
+                    "startDate": null,
+                    "endDate": null,
+                    "tags": [],
+                    "metadata": null,
+                    "createdDate": "2018-04-17T23:20:08.404Z",
+                    "updatedDate": "2018-04-17T23:58:19.036Z"
                 }
             ]
 
