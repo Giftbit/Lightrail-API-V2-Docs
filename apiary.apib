@@ -2857,20 +2857,17 @@ A Value (naturally) represents value in the Lightrail system.  It can be a Gift 
                 }
             ]
 
-### Update Values [PATCH /values{?limit}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Update Values [PATCH /values{?limit}{?id}{?tags}{?type}{?contact}{?program}]
 
 Update all Values that match the given query parameters.
         
 + Parameter
     + limit (number, optional) - The max number of items to get.  This limits the number of items returned but not the number of items modified.
+    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (number, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + type (string, optional) - Filter by Value type.
-    + tag (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
     + contact (string, optional) - Filter by Values attached to the given Contact ID.
     + program (string, optional) - Filter by Program ID.
-    + currency (string, optional) - Filter by currency.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
 
 + Request (application/merge-patch+json)
 

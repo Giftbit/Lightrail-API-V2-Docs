@@ -1,17 +1,14 @@
-### Update Values [PATCH /values{?limit}{?type}{?tag}{?contact}{?program}{?currency}{?active}{?frozen}{?canceled}]
+### Update Values [PATCH /values{?limit}{?id}{?tags}{?type}{?contact}{?program}]
 
 Update all Values that match the given query parameters.
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}  This limits the number of items returned but not the number of items modified.
+    + id (number, optional) - {{filter.id}}  {{filter.list}}
+    + tags (number, optional) - {{filter.tags}}  {{filter.list}}
     + type (string, optional) - {{filter.type}}
-    + tag (string, optional) - {{filter.tags}}  {{filter.list}}
     + contact (string, optional) - {{filter.contact}}
     + program (string, optional) - {{filter.program}}
-    + currency (string, optional) - {{filter.currency}}
-    + active (boolean, optional) - {{filter.active}}
-    + frozen (boolean, optional) - {{filter.frozen}}
-    + canceled (boolean, optional) - {{filter.canceled}}
 
 + Request (application/merge-patch+json)
 
