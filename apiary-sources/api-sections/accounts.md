@@ -2,7 +2,7 @@
 
 ## Accounts [/values/accounts]
 
-An Account is Value specifically tied to a Contact.
+An Account is a Value specifically tied to a Contact.
 
 {% include 'endpoints/values-accounts-create.md' %}
 {% include 'endpoints/values-accounts-get.md' %}

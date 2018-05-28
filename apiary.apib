@@ -414,7 +414,7 @@ Contacts are the people or businesses who buy products or services from you.  Th
 
 ## Accounts [/values/accounts]
 
-An Account is Value specifically tied to a Contact.
+An Account is a Value specifically tied to a Contact.
 
 ### Create an Account [POST /values/accounts]
 
@@ -635,7 +635,9 @@ An Account is Value specifically tied to a Contact.
 
 ## Gift Cards [/values/giftCards]
 
-A Gift Card is Value that starts as identified by a code.  The code is kept secret and used to access the Value.  A Gift Card can be used anonymously or assigned and attached to a Contact for later use.
+A Gift Card is a [Value](#reference/advanced/values) that is initially identified by a [code](#reference/codes). The code is kept secret and used to access the Value. A Gift Card can be used anonymously or assigned and attached to a [Contact](#reference/0/contacts) for later use.
+- **Managing Gift Cards:** Gift Cards are typically created based on Lightrail's default Gift Card Program, which sets sensible defaults for gift card behaviour. You can also use custom [Gift Card Programs](#reference/promotions/gift-card-programs) to set parameters for particular use cases. 
+- **Redeeming Gift Cards:** Gift Cards are redeemed by your customers in [checkout](#reference/transactions/transactions/checkout). 
 
 ### Create a Gift Card [POST /values/giftCards]
 
@@ -1246,7 +1248,7 @@ Programs define the behaviour of Value that you wish to issue: in this case, gif
 
 ## Promotions [/values/promotions]
 
-A Promotion is [Value](#reference/advanced/values) that is given away to incentivise a purchase. It may be accessed via a code, attached to a [Contact](#reference/0/contacts) or even applied on checkout automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
+A Promotion is a [Value](#reference/advanced/values) that is given away to incentivise a purchase. It may be accessed via a [code](#reference/codes), attached to a [Contact](#reference/0/contacts) or even applied on [checkout](#reference/transactions/transactions/checkout) automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
 - **Managing Promotions:** Promotions are typically created and managed based on [Promotion Programs](#reference/promotions/promotion-programs) that define the default parameters for the promotion and how it behaves. 
 - **Redeeming Promotions:** Promotions are redeemed by your customers in [checkout](#reference/transactions/transactions/checkout). 
 
