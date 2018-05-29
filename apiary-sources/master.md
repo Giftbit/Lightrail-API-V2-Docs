@@ -5,8 +5,6 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/contacts.md' %}
 
-{% include 'api-sections/accounts.md' %}
-
 {% include 'api-sections/giftCards.md' %}
 
 {% include 'api-sections/promotions.md' %}

@@ -34,15 +34,15 @@ Lightrail uses the following HTTP status codes to indicate an error:
 | 409  | The operation could not be performed because of the state of the system.  eg: There is not enough balance for a Transaction to complete. |
 | 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. |
 | 429  | Too many requests in a given amount of time. |
-| 500  | Internal server error.  Please contact support with details of your request and we'll look into it. |
+| 500  | Internal server error.  Please [contact us](mailto:hello@lightrail.com) with details of your request and we'll look into it. |
 
 Lightrail errors contain a JSON body with the following properties:
 
-| property    | required | purpose |
-|-------------|----------|---------|
-| message     | yes      | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
-| statusCode  | yes      | The HTTP status code. |
-| messageCode | no       | A constant corresponding to the message.  This can be used to take action in response to the error. |
+| property    | always present | purpose |
+|-------------|----------------|---------|
+| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
+| statusCode  | yes            | The HTTP status code. |
+| messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
 
 An example:
 
@@ -251,41 +251,6 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 "messageCode": "ContactInUse"
             }
 
-### List Contact's Accounts [GET /contacts/{id}/values/accounts]
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Contact whose accounts should be retrieved.
-
-+ Response 200 (application/json)
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "acc-1",
-                    "program": null,
-                    "currency": "USD",
-                    "contact": "unique-id-123",
-                    "balance": 2500,
-                    "preTax": false,
-                    "active": true,
-                    "frozen": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
 ### List Contact's Gift Cards [GET /contacts/{id}/values/giftCards]
 
 + Request (application/json)
@@ -410,227 +375,6 @@ Contacts are the people or businesses who buy products or services from you.  Th
                 }
             ]
 
-# Group Accounts
-
-## Accounts [/values/accounts]
-
-An Account is a Value specifically tied to a Contact.
-
-### Create an Account [POST /values/accounts]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + id (string, required) - Unique idempotent ID of the Value.
-        + contact (string, required) - The ID of that Contact that will own the Account.
-        + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
-        + balance (number, optional) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (object, optional) - Arbitrary data associated with the Value.
-        
-    + Body
-    
-            {
-                "id": "account-1",
-                "contact": "contact-jeff-2",
-                "currency": "USD"
-            }
-    
-+ Response 201 (application/json)
-    + Attributes (Value)
-
-    + Body
-    
-            {
-                "id": "account-1",
-                "type": "account",
-                "program": null,
-                "currency": "USD",
-                "contact": "contact-jeff-2",
-                "balance": 0, 
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-### Get an Account [GET /values/accounts/{id}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Account to get.
-
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-
-            {
-                "id": "account-1",
-                "type": "account",
-                "program": null,
-                "currency": "USD",
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
-            }
-
-### List Accounts [GET /values/accounts{?limit}{?offset}{?id}{?tags}{?program}]
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-        
-+ Parameter
-    + limit (number, optional) - The max number of items to get.
-    + offset (number, optional) - The number of items to skip.
-    + id (number, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + program (string, optional) - Filter by Program ID.
-    
-+ Response 200 (application/json)
-    + Headers
-        
-            Limit: 100
-            MaxLimit: 1000
-            Offset: 0
-            Count: 1
-        
-    + Attributes (array[Value])
-
-    + Body
-
-            [
-                {
-                    "id": "account-1",
-                    "type": "account",
-                    "program": null,
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
-                }
-            ]
-### Update an Account [PATCH /values/accounts/{id}]
-
-+ Parameter
-    + id (string) - the ID of the Account to modify.
-
-+ Request (application/merge-patch+json)
-
-    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
-
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + tags (array[string], optional) - Segmentation tags.
-        + metadata (object, optional) - Arbitrary data associated with the Value.
-        
-    + Body
-    
-            {
-                "frozen": true
-            }
-    
-+ Response 200 (application/json)
-    + Attributes (Value)
-
-    + Body
-    
-            {
-                "id": "account-1",
-                "type": "account",
-                "program": null,
-                "currency": "USD",
-                "balance": 0,
-                "active": true,
-                "frozen": true,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:58:19.036Z"
-            }
-### Delete an Account [DELETE /values/accounts/{id}]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-+ Parameter
-    + id (string) - the ID of the Account to delete.
-
-+ Response 200 (application/json)
-    
-    + Body
-
-            {
-                "success": true
-            }
-
-+ Response 409 (application/json)
-
-    Attempting to delete an Account that has been used in a Transaction.
-
-    + Body
-    
-            {
-                "statusCode": 409,
-                "message": "Value 'abc123' is in use.",
-                "messageCode": "ValueInUse"
-            }
-
 # Group Gift Cards
 
 ## Gift Cards [/values/giftCards]
@@ -656,8 +400,8 @@ A Gift Card is a [Value](#reference/advanced/values) that is initially identifie
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
@@ -801,8 +545,8 @@ A Gift Card is a [Value](#reference/advanced/values) that is initially identifie
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -1269,8 +1013,8 @@ A Promotion is a [Value](#reference/advanced/values) that is given away to incen
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
@@ -1414,8 +1158,8 @@ A Promotion is a [Value](#reference/advanced/values) that is given away to incen
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -1631,8 +1375,8 @@ Programs define the behaviour of promotional value that you issue. Programs are 
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout. Default is `true`. 
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated. Default is `true`.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
@@ -1983,8 +1727,8 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -2806,7 +2550,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
 
 ## Values [/values]
 
-A Value (naturally) represents value in the Lightrail system.  It can be a Gift Card, a Promotion or an Account.  The type of Value is distinguished by the `type` member.
+A Value (naturally) represents value in the Lightrail system.  It can be a Gift Card or a Promotion.  The type of Value is distinguished by the `type` member.
 
 ### List Values [GET /values{?limit}{?offset}{?id}{?tags}{?type}{?contact}{?program}]
 
@@ -2884,8 +2628,8 @@ Update all Values that match the given query parameters.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + metadata (object, optional) - Arbitrary data associated with the Value.
@@ -3199,7 +2943,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 ## LineItemPromotions (object)
 + id (string) - Unique idempotent ID of the Value.
-+ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout.
++ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
@@ -3223,8 +2967,8 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + discount (boolean, required) - If true the Value will be noted as a discount for the Contact on checkout.
 + preTax (boolean, required) - If true the Value's balance is applied on checkout before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + minInitialBalance (number, optional) - 
 + maxInitialBalance (number, optional) - 
 + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
@@ -3259,7 +3003,6 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + code (string, optional) - `lightrail`: the code of a Gift Card or Promotion.
 + contact (string, optional) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
-+ account (string, optional) - `lightrail`: an Account's ID.
 + promotion (string, optional) - `lightrail`: a Promotion's ID.
 + giftCard (string, optional) - `lightrail`: a Gift Card's ID.
 + value (string, optional) - `lightrail`: a Value's ID.
@@ -3311,8 +3054,8 @@ A step taken as part of the transaction.
 + frozen (boolean, required) - If true the Value is frozen and cannot be transacted with.
 + canceled (boolean, required) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean, required) - If true the Value's balance is applied on checkout before tax is calculated.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
 + startDate (string, optional) - Date when the Value becomes available.
 + endDate (string, optional) - Date when the Value expires.
