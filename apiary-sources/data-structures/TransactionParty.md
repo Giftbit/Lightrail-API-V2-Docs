@@ -2,7 +2,6 @@
 + rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + code (string, optional) - `lightrail`: the code of a Gift Card or Promotion.
 + contact (string, optional) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
-+ account (string, optional) - `lightrail`: an Account's ID.
 + promotion (string, optional) - `lightrail`: a Promotion's ID.
 + giftCard (string, optional) - `lightrail`: a Gift Card's ID.
 + value (string, optional) - `lightrail`: a Value's ID.
