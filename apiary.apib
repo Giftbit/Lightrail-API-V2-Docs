@@ -34,15 +34,15 @@ Lightrail uses the following HTTP status codes to indicate an error:
 | 409  | The operation could not be performed because of the state of the system.  eg: There is not enough balance for a Transaction to complete. |
 | 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. |
 | 429  | Too many requests in a given amount of time. |
-| 500  | Internal server error.  Please contact support with details of your request and we'll look into it. |
+| 500  | Internal server error.  Please [contact us](mailto:hello@lightrail.com) with details of your request and we'll look into it. |
 
 Lightrail errors contain a JSON body with the following properties:
 
-| property    | required | purpose |
-|-------------|----------|---------|
-| message     | yes      | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
-| statusCode  | yes      | The HTTP status code. |
-| messageCode | no       | A constant corresponding to the message.  This can be used to take action in response to the error. |
+| property    | always present | purpose |
+|-------------|----------------|---------|
+| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
+| statusCode  | yes            | The HTTP status code. |
+| messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
 
 An example:
 
@@ -654,8 +654,8 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
@@ -799,8 +799,8 @@ A Gift Card is Value that starts as identified by a code.  The code is kept secr
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -1267,8 +1267,8 @@ A Promotion is [Value](#reference/advanced/values) that is given away to incenti
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
@@ -1412,8 +1412,8 @@ A Promotion is [Value](#reference/advanced/values) that is given away to incenti
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -1629,8 +1629,8 @@ Programs define the behaviour of promotional value that you issue. Programs are 
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout. Default is `true`. 
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated. Default is `true`.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + minInitialBalance (number, optional) - The minimum balance the Value can be created with.
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
@@ -1981,8 +1981,8 @@ A Code is not a type of Value but a means of accessing a Value.  Gift Cards and 
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + tags (array[string], optional) - Segmentation tags.
@@ -2882,8 +2882,8 @@ Update all Values that match the given query parameters.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
+        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
+        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
         + metadata (object, optional) - Arbitrary data associated with the Value.
@@ -3197,7 +3197,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 ## LineItemPromotions (object)
 + id (string) - Unique idempotent ID of the Value.
-+ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout.
++ redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
@@ -3221,8 +3221,8 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + discount (boolean, required) - If true the Value will be noted as a discount for the Contact on checkout.
 + preTax (boolean, required) - If true the Value's balance is applied on checkout before tax is calculated.
 + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + minInitialBalance (number, optional) - 
 + maxInitialBalance (number, optional) - 
 + fixedInitialBalances (array[number], optional) - A list of exact balances the Value can be created with.
@@ -3309,8 +3309,8 @@ A step taken as part of the transaction.
 + frozen (boolean, required) - If true the Value is frozen and cannot be transacted with.
 + canceled (boolean, required) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean, required) - If true the Value's balance is applied on checkout before tax is calculated.
-+ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.
-+ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.
++ redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
++ valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
 + startDate (string, optional) - Date when the Value becomes available.
 + endDate (string, optional) - Date when the Value expires.
