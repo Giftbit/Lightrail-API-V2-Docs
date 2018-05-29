@@ -2,7 +2,7 @@
 
 ## Promotions [/values/promotions]
 
-A Promotion is [Value](#reference/advanced/values) that is given away to incentivise a purchase. It may be accessed via a code, attached to a [Contact](#reference/0/contacts) or even applied on checkout automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
+A Promotion is a [Value](#reference/advanced/values) that is given away to incentivise a purchase. It may be accessed via a [code](#reference/codes), attached to a [Contact](#reference/0/contacts) or even applied on [checkout](#reference/transactions/transactions/checkout) automatically. It can be `balance`-based such as $5 or `valueRule`-based such as 50% off. A Promotion will typically have a `redemptionRule` that defines when the Promotion applies. 
 - **Managing Promotions:** Promotions are typically created and managed based on [Promotion Programs](#reference/promotions/promotion-programs) that define the default parameters for the promotion and how it behaves. 
 - **Redeeming Promotions:** Promotions are redeemed by your customers in [checkout](#reference/transactions/transactions/checkout). 
 
