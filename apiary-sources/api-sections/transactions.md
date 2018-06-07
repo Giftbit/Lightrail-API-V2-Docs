@@ -1,5 +1,3 @@
-# Group Transactions
-
 ## Transactions [/transactions]
 
 {% include 'endpoints/transactions-checkout.md' %}
