@@ -1,12 +1,12 @@
 ### Get a Contact [GET /contacts/{id}]
 
++ Parameter
+    + id (string) - the ID of the Contact to get.
+
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Contact to get.
 
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -22,33 +22,31 @@
                 "metadata": {
                     "alias": "El Duderino"
                 },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z"
             }
 
-### List Contacts [GET /contacts{?limit}{?offset}{?id}{?tags}{?firstName}{?lastName}{?email}]
+### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
+        
++ Parameter
+    + limit (number, optional) - {{pagination.limit}}
+    + id (string, optional) - {{filter.id}}  {{filter.list}}
+    + tags (string, optional) - {{filter.tags}}  {{filter.list}}
+    + firstName (string, optional) - {{filter.firstName}}  {{filter.ops.string}}
+    + lastName (string, optional) - {{filter.lastName}}  {{filter.ops.string}}
+    + email (string, optional) - {{filter.email}}  {{filter.ops.string}}
 
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
-        
-+ Parameter
-    + limit (number, optional) - {{pagination.limit}}
-    + offset (number, optional) - {{pagination.offset}}
-    + id (number, optional) - {{filter.id}}  {{filter.list}}
-    + tags (number, optional) - {{filter.tags}}  {{filter.list}}
-    + firstName (string, optional) - {{filter.firstName}}
-    + lastName (string, optional) - {{filter.lastName}}
-    + email (string, optional) - {{filter.email}}
     
 + Response 200 (application/json)
     + Headers
         
             Limit: 100
             MaxLimit: 1000
-            Offset: 0
-            Count: 1
+            Link: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
 
     + Attributes (array[Contact])
 
@@ -64,7 +62,7 @@
                     "metadata": {
                         "alias": "El Duderino"
                     },
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z"
+                    "createdDate": "2018-04-17T23:20:08.000Z",
+                    "updatedDate": "2018-04-17T23:20:08.000Z"
                 }
             ]

@@ -1,4 +1,7 @@
-### Change a Promotion's code [PUT /values/promotions/{id}/changeCode]
+### Change a Value's code [PUT /values/{id}/changeCode]
+
++ Parameter
+    + id (string) - the ID of the Value to change the code of.
 
 + Request (application/json)
     + Headers
@@ -15,9 +18,6 @@
                 "code": "SPRINGPROMO2077"
             }
 
-+ Parameter
-    + id (string) - the ID of the Promotion to change the code of.
-
 + Response 200 (application/json)
     + Attributes (Value)
 
@@ -26,7 +26,7 @@
             {
                 "id": "vs-1",
                 "type": "promotion"
-                "program": "springpromo",
+                "programId": "springpromo",
                 "currency": "USD",
                 "code": "SPRINGPROMO2077",
                 "balance": 2500,
@@ -41,6 +41,6 @@
                 "endDate": null,
                 "tags": [],
                 "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z"
             }

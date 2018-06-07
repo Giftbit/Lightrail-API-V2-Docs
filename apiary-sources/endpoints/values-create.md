@@ -1,4 +1,4 @@
-### Create a Gift Card [POST /values/giftCards]
+### Create a Promotion [POST /values/promotions]
 
 + Request (application/json)
     + Headers
@@ -6,9 +6,9 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{value.id}}
-        + program (string, optional) - {{value.create.program}}
-        + contact (string, optional) - {{value.create.contact}}
+        + id (string, required) - {{value.id}}  {{idPurpose}}
+        + programId (string, optional) - {{value.create.programId}}
+        + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}
         + currency (string, optional) - {{currency.code}} Required if `program` is not set.
         + balance (number, optional) - {{value.balance}}
@@ -27,7 +27,7 @@
     
             {
                 "id": "vs-1",
-                "program": "giftCards",
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500
             }
@@ -39,8 +39,8 @@
     
             {
                 "id": "vs-1",
-                "type": "giftCards",
-                "program": "giftCards",
+                "type": "promotion"
+                "programId": "springpromo",
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -54,6 +54,6 @@
                 "endDate": null,
                 "tags": [],
                 "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z"
             }

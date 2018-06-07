@@ -1,12 +1,12 @@
 ### Delete a Currency [DELETE /currencies/{code}]
 
++ Parameter
+    + code (string) - the code of the Currency to delete.
+
 + Request
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + code (string) - the code of the Currency to delete.
 
 + Response 200 (application/json)
     

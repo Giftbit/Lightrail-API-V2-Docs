@@ -1,4 +1,7 @@
 ### Update a Contact [PATCH /contacts/{id}]
+            
++ Parameter
+    + id (string) - the ID of the Contact to update.
 
 + Request (application/json)
 
@@ -23,9 +26,6 @@
                     "alias": "El Duderino"
                 }
             }
-            
-+ Parameter
-    + id (string) - the ID of the Contact to update.
     
 + Response 200 (application/json)
     + Attributes (Contact)
@@ -41,6 +41,6 @@
                 "metadata": {
                     "alias": "El Duderino"
                 },
-                "createdDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }

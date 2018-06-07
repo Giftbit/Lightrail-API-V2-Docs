@@ -1,12 +1,12 @@
 ### Get a Currency [GET /currencies/{code}]
 
++ Parameter
+    + code (string) - the code of the Currency to get.
+
 + Request
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + code (string) - the code of the Currency to get.
 
 + Response 200 (application/json)
     + Attributes (Currency)

@@ -1,22 +1,21 @@
 ## Value (object)
-+ id (string, required) - {{value.id}}
-+ type (string, required) - {{value.type}}
-+ program (string, optional) - {{value.program}}
-+ currency (string, required) - {{currency.code}}
-+ contact (string, optional) - {{value.contact}}
-+ code (string, optional) - {{value.code}}
-+ balance (number, optional) - {{value.balance}}
-+ discount (boolean, optional) - {{value.discount}}
-+ active (boolean, required) - {{value.active}}
-+ frozen (boolean, required) - {{value.frozen}}
-+ canceled (boolean, required) - {{value.canceled}}
-+ preTax (boolean, required) - {{value.preTax}}
-+ redemptionRule (Rule, optional) - {{value.redemptionRule}}
-+ valueRule (Rule, optional) - {{value.valueRule}}
-+ uses (number, optional) - {{value.uses}}
-+ startDate (string, optional) - {{value.startDate}}
-+ endDate (string, optional) - {{value.endDate}}
-+ tags (array[string], required) - {{tags}}
-+ metadata (object, optional) - {{value.metadata}}
-+ createdDate (string, required) - {{contact.createdDate}}
-+ updatedDate (string, required) - {{contact.updatedDate}}
++ id (string) - {{value.id}}
++ programId (string) - {{value.program}}
++ currency (string) - {{currency.code}}
++ contactId (string) - {{value.contact}}
++ code (string) - {{value.code}}
++ balance (number) - {{value.balance}}
++ uses (number) - {{value.uses}}
++ discount (boolean) - {{value.discount}}
++ active (boolean) - {{value.active}}
++ frozen (boolean) - {{value.frozen}}
++ canceled (boolean) - {{value.canceled}}
++ preTax (boolean) - {{value.preTax}}
++ redemptionRule (Rule) - {{value.redemptionRule}}
++ valueRule (Rule) - {{value.valueRule}}
++ startDate (string) - {{value.startDate}}
++ endDate (string) - {{value.endDate}}
++ tags (array[string]) - {{tags}}
++ metadata (object) - {{value.metadata}}
++ createdDate (string) - {{contact.createdDate}}
++ updatedDate (string) - {{contact.updatedDate}}

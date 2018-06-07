@@ -1,5 +1,5 @@
 ## Currency (object)
-+ code (string, required) - {{currency.code}}
-+ name (number, required) - {{currency.name}}
-+ symbol (number, required) - {{currency.symbol}}
-+ decimalPlaces (number, required) - {{currency.decimalPlaces}}
++ code (string) - {{currency.code}}
++ name (number) - {{currency.name}}
++ symbol (number) - {{currency.symbol}}
++ decimalPlaces (number) - {{currency.decimalPlaces}}

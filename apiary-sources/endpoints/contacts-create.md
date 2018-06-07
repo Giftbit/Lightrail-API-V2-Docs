@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{contact.id}}
+        + id (string, required) - {{contact.id}}  {{idPurpose}}
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
@@ -39,6 +39,6 @@
                 "metadata": {
                     "alias": "El Duderino"
                 },
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z"
             }
