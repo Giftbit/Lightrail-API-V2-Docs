@@ -1,4 +1,4 @@
-### Change a Value's code [PUT /values/{id}/changeCode]
+### Change a Value's code [POST /values/{id}/changeCode]
 
 + Parameter
     + id (string) - the ID of the Value to change the code of.
