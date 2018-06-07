@@ -1,12 +1,12 @@
 ### Delete a Contact [DELETE /contacts/{id}]
 
++ Parameter
+    + id (string) - the ID of the Contact to delete.
+
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Contact to delete.
 
 + Response 200 (application/json)
 

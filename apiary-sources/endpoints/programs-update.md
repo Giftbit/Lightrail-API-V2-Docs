@@ -1,7 +1,7 @@
-### Update a Promotion Program [PATCH /programs/promotions/{id}]
+### Update a Program [PATCH /programs/{id}]
 
 + Parameter
-    + id (string) - the ID of the Promotion Program to modify.
+    + id (string) - the ID of the Program to modify.
 
 + Request (application/json)
 
@@ -20,6 +20,7 @@
         + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}} {{patch.alsoChangeValues}}
+        + fixedInitialUses (array[number], optional) -  {{program.fixedInitialUses}} {{patch.alsoChangeValues}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
         + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}
@@ -52,11 +53,11 @@
                 "fixedInitialBalances": [
                     500
                 ],
-                "uses": null,
+                "fixedInitialUses": null,
                 "tags": ["spring-marketing-push"]
                 "metadata": null,
                 "startDate": null,
                 "endDate": null,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z"
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z"
             }

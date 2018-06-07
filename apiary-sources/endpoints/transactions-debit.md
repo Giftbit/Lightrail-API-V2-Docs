@@ -9,7 +9,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{transaction.id}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + uses (number, optional) - The number of uses to remove.  Defaults to 0.
@@ -59,8 +59,8 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }

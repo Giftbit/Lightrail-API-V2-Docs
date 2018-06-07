@@ -1,12 +1,12 @@
-### Delete an Account [DELETE /values/accounts/{id}]
+### Delete a Value [DELETE /values/{id}]
+
++ Parameter
+    + id (string) - the ID of the Value to delete.
 
 + Request
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Account to delete.
 
 + Response 200 (application/json)
     
@@ -18,7 +18,7 @@
 
 + Response 409 (application/json)
 
-    Attempting to delete an Account that has been used in a Transaction.
+    Attempting to delete a Value that has been used in a Transaction.
 
     + Body
     

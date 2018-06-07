@@ -1,12 +1,12 @@
 ### Get a Transaction [GET /transactions/{id}]
 
++ Parameter
+    + id (string) - the ID of the Transaction to get.
+
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Transaction to get.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -33,34 +33,31 @@
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
 
-### List Transactions [GET /transactions{?limit}{?offset}{?transactionType}{?minCreatedDate}{?maxCreatedDate}]
+### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
+
++ Parameter
+    + limit (number, optional) - {{pagination.limit}}
+    + transactionType (string, optional) - {{filter.transactionType}}
+    + createdDate (string, optional) - {{filter.createdDate}}
 
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
 
-+ Parameter
-    + limit (number, optional) - {{pagination.limit}}
-    + offset (number, optional) - {{pagination.offset}}
-    + transactionType (string, optional) - {{filter.transactionType}}
-    + minCreatedDate (string, optional) - {{filter.minCreatedDate}}
-    + maxCreatedDate (string, optional) - {{filter.maxCreatedDate}}
-
 + Response 200 (application/json)
     + Headers
         
             Limit: 100
             MaxLimit: 1000
-            Offset: 0
-            Count: 1
+            Link: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
         
     + Attributes (array[Transaction])
 
@@ -83,8 +80,8 @@
                     ],
                     "remainder": 0,
                     "simulated": false,
-                    "createdDate": "2018-04-17T23:20:08.404Z",
-                    "updatedDate": "2018-04-17T23:20:08.404Z",
+                    "createdDate": "2018-04-17T23:20:08.000Z",
+                    "updatedDate": "2018-04-17T23:20:08.000Z",
                     "metadata": {
                         "note": "Reduce loyalty points after 3mo contact inactivity"
                     }

@@ -1,11 +1,9 @@
 ## TransactionParty (object)
-+ rail (string, required) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ code (string, optional) - `lightrail`: the code of a Gift Card or Promotion.
-+ contact (string, optional) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
-+ promotion (string, optional) - `lightrail`: a Promotion's ID.
-+ giftCard (string, optional) - `lightrail`: a Gift Card's ID.
-+ value (string, optional) - `lightrail`: a Value's ID.
-+ token (string, optional) - `stripe`: a tokenized credit card for Stripe.  
-+ id (string, optional) - `internal`: the ID of the internal value.
-+ balance (number, optional) - `internal`: the amount of internal value stored.
-+ beforeLightrail (boolean, optional) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
++ rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
++ code (string) - `lightrail`: the code of a Gift Card or Promotion.
++ contactId (string) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
++ valueId (string) - `lightrail`: a Value's ID.
++ token (string) - `stripe`: a tokenized credit card for Stripe.  
++ id (string) - `internal`: the ID of the internal value.
++ balance (number) - `internal`: the amount of internal value stored.
++ beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.

@@ -1,12 +1,12 @@
 ## LineItem (object)
-+ type (string, required) - {{transaction.lineItem.type}}
-+ productId (string, optional) -  {{transaction.lineItem.productId}}
-+ variantId (string, optional) - {{transaction.lineItem.variantId}}
-+ unitPrice (number, required) -  {{transaction.lineItem.unitPrice}}
-+ quantity (number, optional) -  {{transaction.lineItem.quantity}}
-+ taxRate (number, optional) - {{transaction.lineItem.taxRate}}
-+ tags (array[string], optional) - {{transaction.lineItem.tags}}
-+ metadata (object, optional) - {{transaction.lineItem.metadata}}
++ type (string) - {{transaction.lineItem.type}}
++ productId (string) -  {{transaction.lineItem.productId}}
++ variantId (string) - {{transaction.lineItem.variantId}}
++ unitPrice (number) -  {{transaction.lineItem.unitPrice}}
++ quantity (number) -  {{transaction.lineItem.quantity}}
++ taxRate (number) - {{transaction.lineItem.taxRate}}
++ tags (array[string]) - {{transaction.lineItem.tags}}
++ metadata (object) - {{transaction.lineItem.metadata}}
 
 ## LineItemResponse (LineItem)
 + valuesApplied (array[LineItemPromotions])

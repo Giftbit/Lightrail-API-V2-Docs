@@ -1,9 +1,9 @@
 ## Contact (object)
-+ id (string, required) - {{contact.id}}
-+ firstName (string, optional) - {{contact.firstName}}
-+ lastName (string, optional) - {{contact.lastName}}
-+ email (string, optional) - {{contact.email}}
-+ tags (array[string], optional) - {{tags}}
-+ metadata (object, optional) - {{contact.metadata}}
-+ createdDate (string, required) - {{contact.createdDate}}
-+ updatedDate (string, required) - {{contact.updatedDate}}
++ id (string) - {{contact.id}}
++ firstName (string) - {{contact.firstName}}
++ lastName (string) - {{contact.lastName}}
++ email (string) - {{contact.email}}
++ tags (array[string]) - {{tags}}
++ metadata (object) - {{contact.metadata}}
++ createdDate (string) - {{contact.createdDate}}
++ updatedDate (string) - {{contact.updatedDate}}

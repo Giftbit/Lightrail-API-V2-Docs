@@ -23,7 +23,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{transaction.id}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + currency (string, required) - {{currency.code}}
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
@@ -63,7 +63,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "sources": [
                     {
                         "rail": "lightrail",
-                        "contact": "alice-1234"
+                        "contactId": "alice-1234"
                     },
                     {
                         "rail": "lightrail",
@@ -182,7 +182,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                         "rail": "lightrail",
                         "id": "2018-alice-socks-promo",
                         "currency": "USD",
-                        "contact": "alice-1234",
+                        "contactId": "alice-1234",
                         "amount": -200,
                         "balance": null,
                         "uses": {
@@ -204,7 +204,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                         "rail": "lightrail",
                         "id": "2018-50cent-chocobar-credit",
                         "currency": "USD",
-                        "contact": "alice-1234",
+                        "contactId": "alice-1234",
                         "amount": -50,
                         "balance": {
                             "before": 50,
@@ -217,7 +217,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                         "rail": "lightrail",
                         "id": "alice-account-USD",
                         "currency": "USD",
-                        "contact": "alice-1234",
+                        "contactId": "alice-1234",
                         "amount": -1265,
                         "balance": {
                             "before": 2000,
@@ -229,7 +229,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {}
             }

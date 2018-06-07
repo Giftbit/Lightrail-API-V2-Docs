@@ -1,12 +1,12 @@
-### Delete a Promotion Program [DELETE /programs/promotions/{id}]
+### Delete a Program [DELETE /programs/{id}]
+
++ Parameter
+    + id (string) - the ID of the Promotion Program to delete.
 
 + Request
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the Promotion Program to delete.
 
 + Response 200 (application/json)
     

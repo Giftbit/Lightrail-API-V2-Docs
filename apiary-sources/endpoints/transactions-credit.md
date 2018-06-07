@@ -9,7 +9,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{transaction.id}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + uses (number, optional) - The number of uses to add.  Defaults to 0.
@@ -58,8 +58,8 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
-                "updatedDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
+                "updatedDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {
                     "note": "Frequent buyer bonus"
                 }

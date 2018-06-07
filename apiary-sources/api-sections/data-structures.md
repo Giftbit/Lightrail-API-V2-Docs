@@ -6,6 +6,8 @@
 
 {% include 'data-structures/Contact.md' %}
 
+{% include 'data-structures/Issuance.md' %}
+
 {% include 'data-structures/LineItem.md' %}
 
 {% include 'data-structures/Program.md' %}

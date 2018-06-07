@@ -2,13 +2,13 @@
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
 
++ Parameter
+    + id (string) - the ID of the pending Transaction to void.
+
 + Request (application/json)
     + Headers
     
             {{header.authorization}}
-
-+ Parameter
-    + id (string) - the ID of the pending Transaction to void.
 
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -36,7 +36,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
                 "remainder": 0,
                 "simulated": false,
                 "pending": "void",
-                "createdDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo contact inactivity"

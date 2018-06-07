@@ -9,7 +9,7 @@ Transfer value between a payment source and a payment destination.  Currently on
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{transaction.id}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
         + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to transfer, > 0.
@@ -84,7 +84,7 @@ Transfer value between a payment source and a payment destination.  Currently on
                 ],
                 "remainder": 0,
                 "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.404Z",
+                "createdDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {
                     "reference": "loyalty-bonus-072301"
                 }
