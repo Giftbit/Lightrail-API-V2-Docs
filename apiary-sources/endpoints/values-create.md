@@ -1,4 +1,4 @@
-### Create a Promotion [POST /values/promotions]
+### Create a Value [POST /values]
 
 + Request (application/json)
     + Headers
@@ -10,7 +10,7 @@
         + programId (string, optional) - {{value.create.programId}}
         + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}
-        + currency (string, optional) - {{currency.code}} Required if `program` is not set.
+        + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}

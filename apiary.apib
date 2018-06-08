@@ -401,7 +401,7 @@ A Value (naturally) represents value in the Lightrail system.  This includes a g
  
 Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).
 
-### Create a Promotion [POST /values/promotions]
+### Create a Value [POST /values]
 
 + Request (application/json)
     + Headers
@@ -413,7 +413,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - 
         + code (string, optional) - Assign a code.  Cannot be set with `contact`.
-        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `program` is not set.
+        + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
@@ -567,6 +567,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
             Authorization: Bearer <API_KEY>
 
     + Attributes
+        + contactId (string, optional) - 
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
@@ -640,6 +641,7 @@ Bulk update all Values that match the given query parameters.
             Authorization: Bearer <API_KEY>
 
     + Attributes
+        + contactId (string, optional) - 
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.

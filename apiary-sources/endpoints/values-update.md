@@ -12,6 +12,7 @@
             {{header.authorization}}
 
     + Attributes
+        + contactId (string, optional) - {{value.create.contactId}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + canceled (boolean, optional) - {{value.canceled}}
@@ -85,6 +86,7 @@ Bulk update all Values that match the given query parameters.
             {{header.authorization}}
 
     + Attributes
+        + contactId (string, optional) - {{value.create.contactId}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + canceled (boolean, optional) - {{value.canceled}}
