@@ -38,9 +38,9 @@
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
-    + id (string, optional) - {{filter.id}} {{filter.list}}
-    + currency (string, optional) - {{filter.currency}} {{filter.list}}
-    + tags (string, optional) - {{filter.tags}} {{filter.list}}
+    + id (string, optional) - {{filter.id}} {{filter.ops.in}}
+    + currency (string, optional) - {{filter.currency}} {{filter.ops.in}}
+    + tags (string, optional) - {{filter.tags}} {{filter.ops.in}}
     + startDate (string, optional) - {{filter.startDate}} {{filter.ops.date}}
     + endDate (string, optional) - {{filter.endDate}} {{filter.ops.date}}
     + createdDate (string, optional) - {{filter.createdDate}} {{filter.ops.date}}

@@ -1,8 +1,5 @@
 idPurpose: "This ID is a value you choose to represent the resource.  Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources."
 tags: "Segmentation tags."
-code:
-  secure: "If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text."
-  set: "The code to set.  If there is an existing code it will no longer refer to this Value."
 contact:
   createdDate: "Date when the Contact was created."
   id: "ID for the Contact."
@@ -40,6 +37,7 @@ filter:
   uses: "Filter by number of uses remaining."
   ops:
     date: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
+    in: "This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information."
     number: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
     string: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information."
 header:

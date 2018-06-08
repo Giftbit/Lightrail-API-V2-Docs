@@ -37,9 +37,9 @@
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
-    + programId (string, optional) - {{filter.programId}}  {{filter.list}}
-    + currency (string, optional) - {{filter.currency}}  {{filter.list}}
-    + contactId (string, optional) - {{filter.contactId}}  {{filter.list}}
+    + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
+    + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
+    + contactId (string, optional) - {{filter.contactId}}  {{filter.ops.in}}
     + balance (number, optional) - {{filter.balance}}  {{filter.ops.number}}
     + uses (number, optional) - {{filter.uses}}  {{filter.ops.number}}
     + discount (boolean, optional) - {{filter.discount}}
@@ -51,7 +51,7 @@
     + endDate (string, optional) - {{filter.endDate}}  {{filter.ops.date}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + updatedDate (string, optional) - {{filter.updatedDate}}  {{filter.ops.date}}
-    + tags (string, optional) - {{filter.tags}}  {{filter.list}}
+    + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
 
 + Request (application/json)
     + Headers

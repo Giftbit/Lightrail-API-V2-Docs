@@ -23,11 +23,9 @@ YYYY-MM-DDTHH:MM:SSZ
 
 ## Filtering
 
-Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs)) have powerful filters for retrieving a subset of the entries.
+Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs)) have filters for retrieving a subset of the entries.
 
-Some properties such as `id` and `tag` can be filtered with a comma separated list in which case one of the values in the list must match.  For example `https://api.lightrail.com/v2/contacts?tags=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` **or** `silver`. 
-
-Some properties support operators for more powerful filtering than matching an exact value.  The operator is specified after the property and a dot.  For example `https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000` searches for [Values](#reference/0/values/list-values) in the `USD` `currency` with a `balance` greater than or equal to $10.  In another example `https://api.lightrail.com/v2/contacts?email.like=%@gmail.com` searches for [Contacts](#reference/0/contacts/list-contacts) whose email address is "like" `%@gmail.com` where `%` acts as a wild card (ie: ends with @gmail.com).
+Some properties support operators for more powerful filtering than matching an exact value.  The operator is specified after the property and a dot.
 
 | operator | description |
 |----------|-------------|
@@ -35,9 +33,18 @@ Some properties support operators for more powerful filtering than matching an e
 | lte      | Less than or equal to (&lt;=). |
 | gt       | Greater than (&gt;). |
 | gte      | Greater than or equal to (&gt;=). |
-| eq       | Equal to (=).  This is the default where no operator is specified. |
+| eq       | Equal to (==).  This is the default where no operator is specified. |
 | ne       | Not equal to (!=). |
+| in       | Equals one of the members of a comma-separated list.  Literal commas must be escaped (\\,). |
 | like     | Equal to with wildcard support.  Percent signs (%) in the value are wild.  This operator is only supported on string properties. |
+
+**Examples**
+
+`https://api.lightrail.com/v2/contacts?tags.in=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` **or** `silver`.
+
+`https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000` searches for [Values](#reference/0/values/list-values) in the `USD` `currency` with a `balance` greater than or equal to $10.
+
+`https://api.lightrail.com/v2/contacts?email.like=%@gmail.com` searches for [Contacts](#reference/0/contacts/list-contacts) whose email address is "like" `%@gmail.com` where `%` acts as a wild card (ie: ends with @gmail.com).
 
 ## Paging
 
@@ -181,8 +188,8 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
         
 + Parameter
     + limit (number, optional) - The max number of items to get.
-    + id (string, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (string, optional) - Filter by ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + firstName (string, optional) - Filter by the firstName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
     + lastName (string, optional) - Filter by the lastName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
     + email (string, optional) - Filter by email.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
@@ -297,8 +304,8 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
 + Parameter
     + limit (number, optional) - The max number of items to get.
-    + programId (string, optional) - Filter by Program ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + programId (string, optional) - Filter by Program ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + currency (string, optional) - Filter by currency.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + balance (number, optional) - Filter by balance.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + uses (number, optional) - Filter by number of uses remaining.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + discount (boolean, optional) - Filter by discount.
@@ -310,7 +317,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
     + endDate (string, optional) - Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + updatedDate (string, optional) - Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
 
 + Request (application/json)
     + Headers
@@ -397,9 +404,9 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
 ## Values [/values]
 
-A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time but are most often [issued](#reference/0/issuing-value/issue-values) from a Program.  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time but are most often [issued](#reference/0/issuing-value/issue-values) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
  
-Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).
+Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
 
 ### Create a Value [POST /values]
 
@@ -499,9 +506,9 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         
 + Parameter
     + limit (number, optional) - The max number of items to get.
-    + programId (string, optional) - Filter by Program ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + contactId (string, optional) - Filter by Values attached to the given Contact ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + programId (string, optional) - Filter by Program ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + currency (string, optional) - Filter by currency.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + contactId (string, optional) - Filter by Values attached to the given Contact ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + balance (number, optional) - Filter by balance.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + uses (number, optional) - Filter by number of uses remaining.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + discount (boolean, optional) - Filter by discount.
@@ -513,7 +520,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
     + endDate (string, optional) - Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + updatedDate (string, optional) - Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
+    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
 
 + Request (application/json)
     + Headers
@@ -609,66 +616,6 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:58:19.036Z"
             }
-
-### Update Values [PATCH /values{?id}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]]
-
-Bulk update all Values that match the given query parameters.
-        
-+ Parameter
-    + id (string, optional) - Filter by ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + programId (string, optional) - Filter by Program ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + contactId (string, optional) - Filter by Values attached to the given Contact ID.  Multiple values can be sent as a comma separated list in which case only one value must match.
-    + balance (number, optional) - Filter by balance.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + uses (number, optional) - Filter by number of uses remaining.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + discount (boolean, optional) - Filter by discount.
-    + active (boolean, optional) - Filter active/inactive.
-    + frozen (boolean, optional) - Filter frozen/unfrozen.
-    + canceled (boolean, optional) - Filter canceled.
-    + preTax (boolean, optional) - 
-    + startDate (string, optional) - Filter by startDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + endDate (string, optional) - Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + createdDate (string, optional) - Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + updatedDate (string, optional) - Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  Multiple values can be sent as a comma separated list in which case only one value must match.
-
-+ Request (application/merge-patch+json)
-
-    Applies a JSON merge.  Only members that are present are changed and all others are left untouched.
-
-    + Headers
-    
-            Authorization: Bearer <API_KEY>
-
-    + Attributes
-        + contactId (string, optional) - 
-        + active (boolean, optional) - Whether the Value is active and can be used upon creation.
-        + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
-        + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
-        + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
-        + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
-        + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
-        + startDate (string, optional) - Date when the Value becomes available.
-        + endDate (string, optional) - Date when the Value expires.
-        + metadata (object, optional) - Arbitrary data associated with the Value.
-        
-    + Body
-    
-            {
-                "frozen": true
-            }
-    
-+ Response 200 (application/json)
-    + Headers
-        
-    + Attributes
-        + count (number) - The number of Values updated.
-
-    + Body
-
-            {
-                "count": 23
-            }
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -709,8 +656,8 @@ Bulk update all Values that match the given query parameters.
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, required) - The code to set.  If there is an existing code it will no longer refer to this Value.
-        + secure (boolean, optional) - If true the code is stored securely and only shown in abbreviated form.  If false or omitted the code will be shown in the web app and reports in plain text.
+        + code (string, optional) - A generic code to set.  Required if `codeGeneration` is not set.
+        + codeGeneration (CodeGeneration, optional) - Parameters to generate a code.  The code generated will be stored securely.  Required if `code` is not set.
         
     + Body
     
@@ -747,7 +694,7 @@ Bulk update all Values that match the given query parameters.
 
 ## Programs [/programs]
 
-Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/issuing-value) from Programs. They are typically created through the web app.
+Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/issuing-value) from Programs.  Programs are typically created through the web app.
 
 Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
 
@@ -859,9 +806,9 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
 + Parameter
     + limit (number, optional) - The max number of items to get.
-    + id (string, optional) - Filter by ID. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + currency (string, optional) - Filter by currency. Multiple values can be sent as a comma separated list in which case only one value must match.
-    + tags (string, optional) - Filter by tag. Multiple values can be sent as a comma separated list in which case only one value must match.
+    + id (string, optional) - Filter by ID. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + currency (string, optional) - Filter by currency. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + startDate (string, optional) - Filter by startDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + endDate (string, optional) - Filter by endDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
@@ -1004,7 +951,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
 ## Issuing Value [/programs/{id}/issuances]
 
-[Value](#reference/0/values) is usually created by issuing it from a Program in the web app.  Each block of Values issued at once is tracked as an Issuance.  Issuances are tracked for downloading secured codes after creation.
+[Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app.  Each block of Values issued at once is tracked as an Issuance.  Issuances are tracked for downloading secured codes after creation.
 
 ### Issue Values [POST /programs/{id}/issuances]
 

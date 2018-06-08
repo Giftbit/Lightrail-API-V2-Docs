@@ -30,8 +30,8 @@
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
-    + id (string, optional) - {{filter.id}}  {{filter.list}}
-    + tags (string, optional) - {{filter.tags}}  {{filter.list}}
+    + id (string, optional) - {{filter.id}}  {{filter.ops.in}}
+    + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
     + firstName (string, optional) - {{filter.firstName}}  {{filter.ops.string}}
     + lastName (string, optional) - {{filter.lastName}}  {{filter.ops.string}}
     + email (string, optional) - {{filter.email}}  {{filter.ops.string}}

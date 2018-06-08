@@ -9,8 +9,8 @@
             {{header.authorization}}
 
     + Attributes
-        + code (string, required) - {{code.set}}
-        + secure (boolean, optional) - {{code.secure}}
+        + code (string, optional) - A generic code to set.  Required if `codeGeneration` is not set.
+        + codeGeneration (CodeGeneration, optional) - Parameters to generate a code.  The code generated will be stored securely.  Required if `code` is not set.
         
     + Body
     
