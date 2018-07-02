@@ -5,6 +5,7 @@
 + unitPrice (number) -  {{transaction.lineItem.unitPrice}}
 + quantity (number) -  {{transaction.lineItem.quantity}}
 + taxRate (number) - {{transaction.lineItem.taxRate}}
++ marketplaceRate (number) - {{transaction.lineItem.marketplaceRate}}
 + tags (array[string]) - {{transaction.lineItem.tags}}
 + metadata (object) - {{transaction.lineItem.metadata}}
 

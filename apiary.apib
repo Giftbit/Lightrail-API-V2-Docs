@@ -1463,7 +1463,7 @@ Transfer value between a payment source and a payment destination.  Currently on
         + transactionType (string, required) - `transfer`
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of balance that could not be debited.
+        + remainder (number, required) - 
         + simulated (boolean, optional) - True if the transaction was simulated.
         + createdDate (string, required) - Date when the Transaction was created.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1874,6 +1874,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + unitPrice (number) -  The unit price of the item.
 + quantity (number) -  The number of items. Defaults to 1 if not provided.
 + taxRate (number) - Tax rate for the item. This is needed when a transaction contains items that have different tax rates.
++ marketplaceRate (number) - A number between 0 and 1 for the marketplace's commission rate.  If this number is set on any lineItems then the `marketplace` section of totals will be calculated.
 + tags (array[string]) - A list of tags associated with the item. For example, 'seasonal' or 'clothing'.
 + metadata (object) - Any additional data you want to store for the item.
 
@@ -1924,15 +1925,26 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + transactionType (string) - The type of the transaction, eg: `debit`, `credit`, `checkout`...
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep]) - An array of transaction steps.
-+ remainder (number) - The remainder of balance that could not be debited.
++ totals (TransactionTotals) - Totals calculated for checkout transactions.
++ lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction.
++ paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction.
 + simulated (boolean) - True if the transaction was simulated.
-+ pending (enum[string]) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
-    + `pending` - created pending and unresolved.
-    + `captured` - created pending and captured.  The Transaction is final.
-    + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string) - Date when the Transaction was created.
-+ updatedDate (string) - Date when the Contact was last updated.
 + metadata (object) - Arbitrary data associated with the Transaction.
+
+## TransactionTotals (object)
++ discount (number) - The amount of discounts applies.
++ marketplace (TransactionTotalsMarketplace) - Marketplace totals calculated if any marketplace behaviour has been configured (by setting the LineItem `marketplaceRate`).
++ payable (number) - The amount payable.
++ remainder (number) - The remainder of balance that could not be debited or charged.
++ subTotal (number) - The sum of all products, services and fees before tax or discounts.
++ tax (number) - The amount of tax to be collected.
+
+## TransactionTotalsMarketplace (object)
+
+sellerDiscount (number) - The amount of discount the seller is responsible for providing (comes from Values with `discountSellerLiability` > 0).
+sellerGross (number) - The amount payable to the seller before discounts.
+sellerNet (number) - The amount payable to the seller after discounts.
 
 ## TransactionParty (object)
 + rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
@@ -1982,11 +1994,12 @@ A step taken as part of the transaction.
 + code (string) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 + balance (number) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + uses (number) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
-+ discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
 + active (boolean) - Whether the Value is active and can be used upon creation.
 + frozen (boolean) - If true the Value is frozen and cannot be transacted with.
 + canceled (boolean) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
++ discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
++ discountSellerLiability (number) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
 + redemptionRule (Rule) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + valueRule (Rule) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + startDate (string) - Date when the Value becomes available.
