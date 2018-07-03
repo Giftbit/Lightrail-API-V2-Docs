@@ -17,6 +17,8 @@
         + frozen (boolean, optional) - {{value.frozen}}
         + canceled (boolean, optional) - {{value.canceled}}
         + preTax (boolean, optional) - {{value.preTax}}
+        + discount (boolean, optional) - {{value.discount}}
+        + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + valueRule (Rule, optional) - {{value.valueRule}}
         + startDate (string, optional) - {{value.startDate}}
@@ -44,6 +46,8 @@
                 "frozen": true,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

@@ -425,6 +425,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
@@ -457,6 +459,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": false,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
@@ -491,6 +495,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": false,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
@@ -549,6 +555,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                     "frozen": false,
                     "canceled": false,
                     "preTax": false,
+                    "discount": false,
+                    "discountSellerLiability": null,
                     "redemptionRule": null,
                     "valueRule": null,
                     "uses": null,
@@ -579,6 +587,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
@@ -606,6 +616,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": true,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
