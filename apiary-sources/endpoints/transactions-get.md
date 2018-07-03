@@ -71,8 +71,9 @@
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "id": "vs_1",
-                            "currency": "XXX",
+                            "valueId": "vs_1",
+                            "code": null,
+                            "contactId": null,
                             "balanceBefore": 5500,
                             "balanceAfter": 3000,
                             "balanceChange": -2500

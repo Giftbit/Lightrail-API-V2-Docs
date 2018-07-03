@@ -180,51 +180,39 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "2018-alice-socks-promo",
-                        "currency": "USD",
+                        "valueId": "2018-alice-socks-promo",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -200,
-                        "balance": null,
-                        "uses": {
-                            "before": 1,
-                            "after": 0,
-                            "change": -1
-                        }
+                        "balanceBefore": null,
+                        "balanceAfter": null,
+                        "balanceChange": -200
                     },
                     {
                         "rail": "lightrail",
-                        "id": "2018-10percent-off-over-5-orders",
-                        "currency": "USD",
+                        "valueId": "2018-10percent-off-over-5-orders",
                         "code": "SAVE10PERCENT",
-                        "amount": -100,
-                        "balance": null,
-                        "uses": null
+                        "contactId": null,
+                        "balanceBefore": null,
+                        "balanceAfter": null,
+                        "balanceChange": -100
                     },
                     {
                         "rail": "lightrail",
-                        "id": "2018-50cent-chocobar-credit",
-                        "currency": "USD",
+                        "valueId": "2018-50cent-chocobar-credit",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -50,
-                        "balance": {
-                            "before": 50,
-                            "after": 0,
-                            "change": -50
-                        },
-                        "uses": null
+                        "balanceBefore": 50,
+                        "balanceAfter": 0,
+                        "balanceChange": -50
                     },
                     {
                         "rail": "lightrail",
-                        "id": "alice-account-USD",
-                        "currency": "USD",
+                        "valueId": "alice-account-USD",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -1265,
-                        "balance": {
-                            "before": 2000,
-                            "after": 735,
-                            "change": -1265
-                        },
-                        "uses": null
+                        "balanceBefore": 2000,
+                        "balanceAfter": 735,
+                        "balanceChange": -1265
                     }
                 ],
                 "remainder": 0,

@@ -59,27 +59,21 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "giftCard-96f27ad62a1c",
-                        "currency": "USD",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 2500,
-                            "after": 0,
-                            "change": -2500
-                        },
-                        "uses": null
+                        "valueId": "giftCard-96f27ad62a1c",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
-                        "id": "alice-account-USD",
-                        "currency": "USD",
-                        "amount": 2500,
-                        "balance": {
-                            "before": 5000,
-                            "after": 7500,
-                            "change": 2500
-                        },
-                        "uses": null
+                        "valueId": "alice-account-USD",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
