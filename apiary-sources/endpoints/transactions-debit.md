@@ -46,15 +46,12 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "points-account-14314",
-                        "currency": "XXX",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 5500,
-                            "after": 3000,
-                            "change": -2500
-                        },
-                        "uses": null
+                        "valueId": "points-account-14314",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,

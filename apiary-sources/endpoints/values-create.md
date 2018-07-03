@@ -15,6 +15,8 @@
         + preTax (boolean, optional) - {{value.preTax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
+        + discount (boolean, optional) - {{value.discount}}
+        + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + valueRule (Rule, optional) - {{value.valueRule}}
         + uses (number, optional) - {{value.uses}}
@@ -47,6 +49,8 @@
                 "frozen": false,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,

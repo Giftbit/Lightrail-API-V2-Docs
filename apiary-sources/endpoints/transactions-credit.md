@@ -45,15 +45,12 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "points-account-14314",
-                        "currency": "XXX",
-                        "amount": 2500,
-                        "balance": {
-                            "before": 1500,
-                            "after": 4000,
-                            "change": 2500
-                        },
-                        "uses": null
+                        "valueId": "points-account-14314",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 1500,
+                        "balanceAfter": 4000,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,

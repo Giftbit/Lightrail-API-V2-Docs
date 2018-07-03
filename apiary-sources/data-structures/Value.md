@@ -6,11 +6,12 @@
 + code (string) - {{value.code}}
 + balance (number) - {{value.balance}}
 + uses (number) - {{value.uses}}
-+ discount (boolean) - {{value.discount}}
 + active (boolean) - {{value.active}}
 + frozen (boolean) - {{value.frozen}}
 + canceled (boolean) - {{value.canceled}}
 + preTax (boolean) - {{value.preTax}}
++ discount (boolean) - {{value.discount}}
++ discountSellerLiability (number) - {{value.discountSellerLiability}}
 + redemptionRule (Rule) - {{value.redemptionRule}}
 + valueRule (Rule) - {{value.valueRule}}
 + startDate (string) - {{value.startDate}}

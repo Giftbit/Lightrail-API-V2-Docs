@@ -425,6 +425,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
@@ -457,6 +459,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": false,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
@@ -491,6 +495,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": false,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
@@ -549,6 +555,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                     "frozen": false,
                     "canceled": false,
                     "preTax": false,
+                    "discount": false,
+                    "discountSellerLiability": null,
                     "redemptionRule": null,
                     "valueRule": null,
                     "uses": null,
@@ -579,6 +587,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
+        + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
@@ -606,6 +616,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "frozen": true,
                 "canceled": false,
                 "preTax": false,
+                "discount": false,
+                "discountSellerLiability": null,
                 "redemptionRule": null,
                 "valueRule": null,
                 "uses": null,
@@ -1228,51 +1240,39 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "2018-alice-socks-promo",
-                        "currency": "USD",
+                        "valueId": "2018-alice-socks-promo",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -200,
-                        "balance": null,
-                        "uses": {
-                            "before": 1,
-                            "after": 0,
-                            "change": -1
-                        }
+                        "balanceBefore": null,
+                        "balanceAfter": null,
+                        "balanceChange": -200
                     },
                     {
                         "rail": "lightrail",
-                        "id": "2018-10percent-off-over-5-orders",
-                        "currency": "USD",
+                        "valueId": "2018-10percent-off-over-5-orders",
                         "code": "SAVE10PERCENT",
-                        "amount": -100,
-                        "balance": null,
-                        "uses": null
+                        "contactId": null,
+                        "balanceBefore": null,
+                        "balanceAfter": null,
+                        "balanceChange": -100
                     },
                     {
                         "rail": "lightrail",
-                        "id": "2018-50cent-chocobar-credit",
-                        "currency": "USD",
+                        "valueId": "2018-50cent-chocobar-credit",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -50,
-                        "balance": {
-                            "before": 50,
-                            "after": 0,
-                            "change": -50
-                        },
-                        "uses": null
+                        "balanceBefore": 50,
+                        "balanceAfter": 0,
+                        "balanceChange": -50
                     },
                     {
                         "rail": "lightrail",
-                        "id": "alice-account-USD",
-                        "currency": "USD",
+                        "valueId": "alice-account-USD",
+                        "code": null,
                         "contactId": "alice-1234",
-                        "amount": -1265,
-                        "balance": {
-                            "before": 2000,
-                            "after": 735,
-                            "change": -1265
-                        },
-                        "uses": null
+                        "balanceBefore": 2000,
+                        "balanceAfter": 735,
+                        "balanceChange": -1265
                     }
                 ],
                 "remainder": 0,
@@ -1330,15 +1330,12 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "points-account-14314",
-                        "currency": "XXX",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 5500,
-                            "after": 3000,
-                            "change": -2500
-                        },
-                        "uses": null
+                        "valueId": "points-account-14314",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 5500,
+                        "balanceAfter": 3000,
+                        "balanceChange": -2500
                     }
                 ],
                 "remainder": 0,
@@ -1397,15 +1394,12 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "points-account-14314",
-                        "currency": "XXX",
-                        "amount": 2500,
-                        "balance": {
-                            "before": 1500,
-                            "after": 4000,
-                            "change": 2500
-                        },
-                        "uses": null
+                        "valueId": "points-account-14314",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 1500,
+                        "balanceAfter": 4000,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1463,7 +1457,7 @@ Transfer value between a payment source and a payment destination.  Currently on
         + transactionType (string, required) - `transfer`
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
-        + remainder (number, required) - The remainder of balance that could not be debited.
+        + remainder (number, required) - 
         + simulated (boolean, optional) - True if the transaction was simulated.
         + createdDate (string, required) - Date when the Transaction was created.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
@@ -1478,27 +1472,21 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "steps": [
                     {
                         "rail": "lightrail",
-                        "id": "giftCard-96f27ad62a1c",
-                        "currency": "USD",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 2500,
-                            "after": 0,
-                            "change": -2500
-                        },
-                        "uses": null
+                        "valueId": "giftCard-96f27ad62a1c",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 2500,
+                        "balanceAfter": 0,
+                        "balanceChange": -2500
                     },
                     {
                         "rail": "lightrail",
-                        "id": "alice-account-USD",
-                        "currency": "USD",
-                        "amount": 2500,
-                        "balance": {
-                            "before": 5000,
-                            "after": 7500,
-                            "change": 2500
-                        },
-                        "uses": null
+                        "valueId": "alice-account-USD",
+                        "code": null,
+                        "contactId": null,
+                        "balanceBefore": 5000,
+                        "balanceAfter": 7500,
+                        "balanceChange": 2500
                     }
                 ],
                 "remainder": 0,
@@ -1582,8 +1570,9 @@ Transfer value between a payment source and a payment destination.  Currently on
                     "steps": [
                         {
                             "rail": "lightrail",
-                            "id": "vs_1",
-                            "currency": "XXX",
+                            "valueId": "vs_1",
+                            "code": null,
+                            "contactId": null,
                             "balanceBefore": 5500,
                             "balanceAfter": 3000,
                             "balanceChange": -2500
@@ -1599,7 +1588,7 @@ Transfer value between a payment source and a payment destination.  Currently on
                 }
             ]
 
-### Capture Pending Transaction [POST /transactions/{id}/capture]
+### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
 
@@ -1644,7 +1633,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
                 }
             }
 
-### Void Pending Transaction [POST /transactions/{id}/void]
+### Void Pending Transaction (Coming soon) [POST /transactions/{id}/void]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
 
@@ -1874,6 +1863,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + unitPrice (number) -  The unit price of the item.
 + quantity (number) -  The number of items. Defaults to 1 if not provided.
 + taxRate (number) - Tax rate for the item. This is needed when a transaction contains items that have different tax rates.
++ marketplaceRate (number) - A number between 0 and 1 for the marketplace's commission rate.  If this number is set on any lineItems then the `marketplace` section of totals will be calculated.
 + tags (array[string]) - A list of tags associated with the item. For example, 'seasonal' or 'clothing'.
 + metadata (object) - Any additional data you want to store for the item.
 
@@ -1924,15 +1914,26 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + transactionType (string) - The type of the transaction, eg: `debit`, `credit`, `checkout`...
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep]) - An array of transaction steps.
-+ remainder (number) - The remainder of balance that could not be debited.
++ totals (TransactionTotals) - Totals calculated for checkout transactions.
++ lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction.
++ paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction.
 + simulated (boolean) - True if the transaction was simulated.
-+ pending (enum[string]) - The pending status.  Only set if the Transaction was created with `pending` set to `true`.
-    + `pending` - created pending and unresolved.
-    + `captured` - created pending and captured.  The Transaction is final.
-    + `void` - created pending and voided.  The Transaction was unrolled and all funds released back to their sources.
 + createdDate (string) - Date when the Transaction was created.
-+ updatedDate (string) - Date when the Contact was last updated.
 + metadata (object) - Arbitrary data associated with the Transaction.
+
+## TransactionTotals (object)
++ discount (number) - The amount of discounts applies.
++ marketplace (TransactionTotalsMarketplace) - Marketplace totals calculated if any marketplace behaviour has been configured (by setting the LineItem `marketplaceRate`).
++ payable (number) - The amount payable.
++ remainder (number) - The remainder of balance that could not be debited or charged.
++ subTotal (number) - The sum of all products, services and fees before tax or discounts.
++ tax (number) - The amount of tax to be collected.
+
+## TransactionTotalsMarketplace (object)
+
+sellerDiscount (number) - The amount of discount the seller is responsible for providing (comes from Values with `discountSellerLiability` > 0).
+sellerGross (number) - The amount payable to the seller before discounts.
+sellerNet (number) - The amount payable to the seller after discounts.
 
 ## TransactionParty (object)
 + rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
@@ -1982,11 +1983,12 @@ A step taken as part of the transaction.
 + code (string) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
 + balance (number) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + uses (number) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
-+ discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
 + active (boolean) - Whether the Value is active and can be used upon creation.
 + frozen (boolean) - If true the Value is frozen and cannot be transacted with.
 + canceled (boolean) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
++ discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
++ discountSellerLiability (number) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
 + redemptionRule (Rule) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + valueRule (Rule) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + startDate (string) - Date when the Value becomes available.
