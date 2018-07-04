@@ -30,7 +30,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + pending (boolean, optional) - {{transaction.pending}}
-        + metadata (object, optional) - {{transaction.metadata}}
+        + metadata (object, optional) - {{transaction.checkout.metadata}}
         
     + Body 
     
