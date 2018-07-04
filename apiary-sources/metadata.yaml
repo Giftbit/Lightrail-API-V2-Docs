@@ -1,5 +1,5 @@
 idPurpose: "This ID is a value you choose to represent the resource.  Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources."
-tags: "Segmentation tags."
+tags: "Segmentation tags. (support coming soon)"
 contact:
   createdDate: "Date when the Contact was created."
   id: "ID for the Contact."
@@ -31,7 +31,7 @@ filter:
   preTax: "Filter by whether or not the Value is applied preTax."
   programId: "Filter by Program ID."
   startDate: "Filter by startDate."
-  tags: "Filter by tag."
+  tags: "Filter by tag. (support coming soon)"
   transactionType: "Filter by the transactionType."
   updatedDate: "Filter by updatedDate."
   uses: "Filter by number of uses remaining."

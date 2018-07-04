@@ -124,7 +124,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + metadata (object, optional) - Arbitrary data associated with the Contact.
 
     + Body
@@ -189,7 +189,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 + Parameter
     + limit (number, optional) - The max number of items to get.
     + id (string, optional) - Filter by ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag. (support coming soon)  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + firstName (string, optional) - Filter by the firstName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
     + lastName (string, optional) - Filter by the lastName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
     + email (string, optional) - Filter by email.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.
@@ -242,7 +242,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + metadata (object, optional) - Arbitrary data associated with the Contact.
 
     + Body
@@ -317,7 +317,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
     + endDate (string, optional) - Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + updatedDate (string, optional) - Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag. (support coming soon)  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
 
 + Request (application/json)
     + Headers
@@ -432,7 +432,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -526,7 +526,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
     + endDate (string, optional) - Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + updatedDate (string, optional) - Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag. (support coming soon)  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
 
 + Request (application/json)
     + Headers
@@ -593,7 +593,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
         + endDate (string, optional) - Date when the Value expires.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + metadata (object, optional) - Arbitrary data associated with the Value.
         
     + Body
@@ -730,7 +730,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with.
         + fixedInitialUses (array[number], optional) -  A list of exact uses the Value can be created with.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + startDate (string, optional) - Earliest date that Values belonging to this Program can be active.
         + endDate (string, optional) - Latest date that Values belonging to this Program can be active.
         + metadata (object, optional) - Arbitrary data associated with the Program.
@@ -820,7 +820,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
     + limit (number, optional) - The max number of items to get.
     + id (string, optional) - Filter by ID. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + currency (string, optional) - Filter by currency. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
-    + tags (string, optional) - Filter by tag. This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + tags (string, optional) - Filter by tag. (support coming soon) This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + startDate (string, optional) - Filter by startDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + endDate (string, optional) - Filter by endDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + createdDate (string, optional) - Filter by createdDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
@@ -891,7 +891,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         + maxInitialBalance (number, optional) - The maximum balance the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
         + fixedInitialUses (array[number], optional) -  A list of exact uses the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
-        + tags (array[string], optional) - Segmentation tags.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)
         + startDate (string, optional) - Earliest date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
         + endDate (string, optional) - Latest date that Values belonging to this Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
         + metadata (object, optional) - Arbitrary data associated with the Program.
@@ -984,7 +984,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         + uses (number, optional) - The uses to set on each Value.  
         + startDate (string, optional) - Override the Program's startDate for the Value.
         + endDate (string, optional) - Override the Program's endDate for the Value.
-        + tags (array[string], optional) - Segmentation tags.  These are applied to each Value.
+        + tags (array[string], optional) - Segmentation tags. (support coming soon)  These are applied to each Value.
         
     + Body
     
@@ -1859,7 +1859,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + firstName (string) - The Contact's first name.
 + lastName (string) - The Contact's last name.
 + email (string) - The Contact's email.
-+ tags (array[string]) - Segmentation tags.
++ tags (array[string]) - Segmentation tags. (support coming soon)
 + metadata (object) - Arbitrary data associated with the Contact.
 + createdDate (string) - Date when the Contact was created.
 + updatedDate (string) - Date when the Contact was last updated.
@@ -1912,7 +1912,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + maxInitialBalance (number) - 
 + fixedInitialBalances (array[number]) - A list of exact balances the Value can be created with.
 + fixedInitialUses (number) - If set the number of uses the Value will be created with.  Set `null` or omit for infinite uses.
-+ tags (array[string]) - Segmentation tags.
++ tags (array[string]) - Segmentation tags. (support coming soon)
 + startDate (string) - Earliest date that Values belonging to this Program can be active.
 + endDate (string) - Latest date that Values belonging to this Program can be active.
 + createdDate (string) - Date when the Program was created.
@@ -2005,7 +2005,7 @@ A step taken as part of the transaction.
 + valueRule (Rule) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + startDate (string) - Date when the Value becomes available.
 + endDate (string) - Date when the Value expires.
-+ tags (array[string]) - Segmentation tags.
++ tags (array[string]) - Segmentation tags. (support coming soon)
 + metadata (object) - Arbitrary data associated with the Value.
 + createdDate (string) - Date when the Contact was created.
 + updatedDate (string) - Date when the Contact was last updated.
