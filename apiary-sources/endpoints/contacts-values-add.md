@@ -1,7 +1,7 @@
-### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
+### Add a Value to a Contact [POST /contacts/{id}/values/add]
 
 + Parameter
-    + id (string) - the ID of the Contact to attach Value to.
+    + id (string) - the ID of the Contact to add an existing Value to.
 
 + Request (application/json)
     + Headers
@@ -9,8 +9,8 @@
             {{header.authorization}}
         
     + Attributes
-        + valueId (string, optional) - The `id` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
-        + code (string, optional) - The `code` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
+        + valueId (string, optional) - The `id` of the Value to add to the Contact.  One of `valueId` or `code` must be specified.
+        + code (string, optional) - The `code` of the Value to add to the Contact.  One of `valueId` or `code` must be specified.
 
     + Body
 

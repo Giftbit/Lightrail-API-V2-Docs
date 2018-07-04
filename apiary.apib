@@ -23,9 +23,9 @@ YYYY-MM-DDTHH:MM:SSZ
 
 ## Filtering
 
-Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs)) have filters for retrieving a subset of the entries.
+Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs), [Transactions](#reference/0/transactions)) have filters for retrieving a subset of the entries.
 
-Some properties support operators for more powerful filtering than matching an exact value.  The operator is specified after the property and a dot.
+Some query filter properties support operators for more powerful filtering.  The operator is specified after the property and a dot (eg: `balance.ne` for balance not equal to).
 
 | operator | description |
 |----------|-------------|
@@ -40,7 +40,7 @@ Some properties support operators for more powerful filtering than matching an e
 
 **Examples**
 
-`https://api.lightrail.com/v2/contacts?tags.in=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` **or** `silver`.
+`https://api.lightrail.com/v2/contacts?tags.in=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` *or* `silver`.
 
 `https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000` searches for [Values](#reference/0/values/list-values) in the `USD` `currency` with a `balance` greater than or equal to $10.
 
@@ -110,7 +110,7 @@ An example:
 
 Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
 
-Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
+Values can be [added](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Values added to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
 
 ### Create a Contact [POST /contacts]
 
@@ -355,10 +355,10 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
                     "updatedDate": "2018-04-17T23:20:08.000Z"
                 }
             ]
-### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
+### Add a Value to a Contact [POST /contacts/{id}/values/add]
 
 + Parameter
-    + id (string) - the ID of the Contact to attach Value to.
+    + id (string) - the ID of the Contact to add an existing Value to.
 
 + Request (application/json)
     + Headers
@@ -366,8 +366,8 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + valueId (string, optional) - The `id` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
-        + code (string, optional) - The `code` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
+        + valueId (string, optional) - The `id` of the Value to add to the Contact.  One of `valueId` or `code` must be specified.
+        + code (string, optional) - The `code` of the Value to add to the Contact.  One of `valueId` or `code` must be specified.
 
     + Body
 
@@ -406,7 +406,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
 A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time but are most often [issued](#reference/0/issuing-value/issue-values) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
  
-Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+Most Values will be accessed by a code, or added to a [Contact](#reference/0/contacts).  All Values added to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
 
 ### Create a Value [POST /values]
 
@@ -514,7 +514,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
     + limit (number, optional) - The max number of items to get.
     + programId (string, optional) - Filter by Program ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + currency (string, optional) - Filter by currency.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
-    + contactId (string, optional) - Filter by Values attached to the given Contact ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
+    + contactId (string, optional) - Filter by Values added to the given Contact.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + balance (number, optional) - Filter by balance.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + uses (number, optional) - Filter by number of uses remaining.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.
     + discount (boolean, optional) - Filter by discount.

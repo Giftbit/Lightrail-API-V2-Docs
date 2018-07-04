@@ -17,7 +17,7 @@ filter:
   active: "Filter active/inactive."
   balance: "Filter by balance."
   canceled: "Filter canceled."
-  contactId: "Filter by Values attached to the given Contact ID."
+  contactId: "Filter by Values added to the given Contact."
   createdDate: "Filter by createdDate."
   currency: "Filter by currency."
   discount: "Filter by discount."
