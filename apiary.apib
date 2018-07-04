@@ -23,9 +23,9 @@ YYYY-MM-DDTHH:MM:SSZ
 
 ## Filtering
 
-Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs)) have filters for retrieving a subset of the entries.
+Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs), [Transactions](#reference/0/transactions)) have filters for retrieving a subset of the entries.
 
-Some properties support operators for more powerful filtering than matching an exact value.  The operator is specified after the property and a dot.
+Some query filter properties support operators for more powerful filtering.  The operator is specified after the property and a dot (eg: `balance.ne` for balance not equal to).
 
 | operator | description |
 |----------|-------------|
@@ -40,7 +40,7 @@ Some properties support operators for more powerful filtering than matching an e
 
 **Examples**
 
-`https://api.lightrail.com/v2/contacts?tags.in=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` **or** `silver`.
+`https://api.lightrail.com/v2/contacts?tags.in=gold,silver` searches for [Contacts](#reference/0/contacts/list-contacts) tagged `gold` *or* `silver`.
 
 `https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000` searches for [Values](#reference/0/values/list-values) in the `USD` `currency` with a `balance` greater than or equal to $10.
 
@@ -66,7 +66,7 @@ Link:
     rel="last"
 ```
 
-This example has links to the first page, the previous page, the next page, and the last page.  When already at the first page there will only be links to the next and last.  When already at the first page there will only be links to the first and prev.  If there are no results to page though or only 1 page there will not be any links.
+This example has links to the first page, the previous page, the next page, and the last page.  When already at the first page there will only be links to the next and last.  When already at the last page there will only be links to the first and prev.  If there are no results to page though or only 1 page there will not be any links.
 
 It's important to follow the links in the Link header and not construct the URLs on your own.
 
@@ -89,7 +89,7 @@ Lightrail errors contain a JSON body with the following properties:
 
 | property    | always present | purpose |
 |-------------|----------------|---------|
-| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
+| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates. |
 | statusCode  | yes            | The HTTP status code. |
 | messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
 
@@ -1174,7 +1174,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 1000,
+                            "subtotal": 1000,
                             "taxable": 720,
                             "tax": 58,
                             "discount": 280,
@@ -1208,7 +1208,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 199,
+                            "subtotal": 199,
                             "taxable": 179,
                             "tax": 9,
                             "discount": 70,
@@ -1229,7 +1229,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 349,
+                            "subtotal": 349,
                             "taxable": 349,
                             "tax": 0,
                             "discount": 0,
@@ -1275,7 +1275,13 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                         "balanceChange": -1265
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "discount": 350,
+                    "payable": 1265,
+                    "remainder": 0,
+                    "subtotal": 1548,
+                    "tax": 67
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",
@@ -1338,7 +1344,9 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                         "balanceChange": -2500
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "remainder": 0
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",
@@ -1402,7 +1410,9 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
                         "balanceChange": 2500
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "remainder": 0                
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",
@@ -1489,7 +1499,9 @@ Transfer value between a payment source and a payment destination.  Currently on
                         "balanceChange": 2500
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "remainder": 0
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {
@@ -1578,7 +1590,9 @@ Transfer value between a payment source and a payment destination.  Currently on
                             "balanceChange": -2500
                         }
                     ],
-                    "remainder": 0,
+                    "totals": {
+                        "remainder": 0
+                    },
                     "simulated": false,
                     "createdDate": "2018-04-17T23:20:08.000Z",
                     "updatedDate": "2018-04-17T23:20:08.000Z",
@@ -1879,7 +1893,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
 
 ## LineTotal (object)
-+ price (number) - The total cost of the items. ie `unitPrice * quantity`.
++ subtotal (number) - The total cost of the items. ie `unitPrice * quantity`.
 + taxable (number) - The taxable amount. ie `price - preTaxDiscount`.
 + tax (number) - The taxable amount multiplied by the taxRate for the item. Uses 'bankers rounding'.
 + discount (number) - The discount
@@ -1926,7 +1940,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + marketplace (TransactionTotalsMarketplace) - Marketplace totals calculated if any marketplace behaviour has been configured (by setting the LineItem `marketplaceRate`).
 + payable (number) - The amount payable.
 + remainder (number) - The remainder of balance that could not be debited or charged.
-+ subTotal (number) - The sum of all products, services and fees before tax or discounts.
++ subtotal (number) - The sum of all products, services and fees before tax or discounts.
 + tax (number) - The amount of tax to be collected.
 
 ## TransactionTotalsMarketplace (object)
@@ -1956,8 +1970,9 @@ A step taken as part of the transaction.
 + contactId (string) - The ID of the Contact associated with the Value.
 + code (string) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
 + amount (number) - The amount contributed to the Transaction.  This number will be the same as `balance.change` in Values with a balance.
-+ balance (Delta) - The balance before, after and net change of Value that carries a balance.  `null` when the Value does not have a balance (and thus has a valueRule).
-+ uses (Delta) - The number of uses remaining before, after and net change of a Value that limits the nummber of uses.  `null` when the Value does not limit number of uses. 
++ balanceBefore (number) - The balance of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
++ balanceAfter (number) - The balance of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
++ balanceChange (number) - The net change of the balance of the Value for the Transaction.  When the Value has a `valueRule` rather than a `balance` this number will still be set to indicate the value of the rule.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string) - `stripe`
@@ -1968,12 +1983,9 @@ A step taken as part of the transaction.
 ## InternalTransactionStep (TransactionStep)
 + rail (string) - `internal`
 + id (string) - the ID of the internal value transacted with.
-+ balance (Delta) - The balance before, after and net change of the internal value.
-
-## Delta (object)
-+ before (number) - the balance/uses before the transaction.
-+ after (number) - the balance/uses after the transaction.
-+ change (number) - the balance/uses change in the transaction.
++ balanceBefore (number) - The balance of the internal value before the Transaction.
++ balanceAfter (number) - The balance of the internal value after the Transaction.
++ balanceChange (number) - The net change of the balance of the internal value for the Transaction.
 
 ## Value (object)
 + id (string) - ID of the Value.

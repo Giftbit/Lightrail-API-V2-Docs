@@ -21,7 +21,7 @@
 + preTax (boolean) - {{value.preTax}}
 
 ## LineTotal (object)
-+ price (number) - {{transaction.lineItem.lineTotal.price}}
++ subtotal (number) - {{transaction.lineItem.lineTotal.subtotal}}
 + taxable (number) - {{transaction.lineItem.lineTotal.taxable}}
 + tax (number) - {{transaction.lineItem.lineTotal.tax}}
 + discount (number) - {{transaction.lineItem.lineTotal.discount}}

@@ -18,6 +18,6 @@ Link:
     rel="last"
 ```
 
-This example has links to the first page, the previous page, the next page, and the last page.  When already at the first page there will only be links to the next and last.  When already at the first page there will only be links to the first and prev.  If there are no results to page though or only 1 page there will not be any links.
+This example has links to the first page, the previous page, the next page, and the last page.  When already at the first page there will only be links to the next and last.  When already at the last page there will only be links to the first and prev.  If there are no results to page though or only 1 page there will not be any links.
 
 It's important to follow the links in the Link header and not construct the URLs on your own.

@@ -15,7 +15,7 @@
 + marketplace (TransactionTotalsMarketplace) - Marketplace totals calculated if any marketplace behaviour has been configured (by setting the LineItem `marketplaceRate`).
 + payable (number) - The amount payable.
 + remainder (number) - The remainder of balance that could not be debited or charged.
-+ subTotal (number) - The sum of all products, services and fees before tax or discounts.
++ subtotal (number) - The sum of all products, services and fees before tax or discounts.
 + tax (number) - The amount of tax to be collected.
 
 ## TransactionTotalsMarketplace (object)

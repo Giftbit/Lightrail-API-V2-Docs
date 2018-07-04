@@ -76,7 +76,9 @@ Transfer value between a payment source and a payment destination.  Currently on
                         "balanceChange": 2500
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "remainder": 0
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {

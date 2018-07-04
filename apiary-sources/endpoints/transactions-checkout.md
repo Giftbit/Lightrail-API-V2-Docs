@@ -114,7 +114,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 1000,
+                            "subtotal": 1000,
                             "taxable": 720,
                             "tax": 58,
                             "discount": 280,
@@ -148,7 +148,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 199,
+                            "subtotal": 199,
                             "taxable": 179,
                             "tax": 9,
                             "discount": 70,
@@ -169,7 +169,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                             }
                         ],
                         "lineTotal": {
-                            "price": 349,
+                            "subtotal": 349,
                             "taxable": 349,
                             "tax": 0,
                             "discount": 0,
@@ -215,7 +215,13 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                         "balanceChange": -1265
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "discount": 350,
+                    "payable": 1265,
+                    "remainder": 0,
+                    "subtotal": 1548,
+                    "tax": 67
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",

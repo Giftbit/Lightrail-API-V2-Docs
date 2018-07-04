@@ -9,8 +9,9 @@ A step taken as part of the transaction.
 + contactId (string) - The ID of the Contact associated with the Value.
 + code (string) - {{value.code}}.
 + amount (number) - The amount contributed to the Transaction.  This number will be the same as `balance.change` in Values with a balance.
-+ balance (Delta) - The balance before, after and net change of Value that carries a balance.  `null` when the Value does not have a balance (and thus has a valueRule).
-+ uses (Delta) - The number of uses remaining before, after and net change of a Value that limits the nummber of uses.  `null` when the Value does not limit number of uses. 
++ balanceBefore (number) - The balance of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
++ balanceAfter (number) - The balance of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
++ balanceChange (number) - The net change of the balance of the Value for the Transaction.  When the Value has a `valueRule` rather than a `balance` this number will still be set to indicate the value of the rule.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string) - `stripe`
@@ -21,9 +22,6 @@ A step taken as part of the transaction.
 ## InternalTransactionStep (TransactionStep)
 + rail (string) - `internal`
 + id (string) - the ID of the internal value transacted with.
-+ balance (Delta) - The balance before, after and net change of the internal value.
-
-## Delta (object)
-+ before (number) - the balance/uses before the transaction.
-+ after (number) - the balance/uses after the transaction.
-+ change (number) - the balance/uses change in the transaction.
++ balanceBefore (number) - The balance of the internal value before the Transaction.
++ balanceAfter (number) - The balance of the internal value after the Transaction.
++ balanceChange (number) - The net change of the balance of the internal value for the Transaction.

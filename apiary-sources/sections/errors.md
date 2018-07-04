@@ -17,7 +17,7 @@ Lightrail errors contain a JSON body with the following properties:
 
 | property    | always present | purpose |
 |-------------|----------------|---------|
-| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may change between system updates for clarity. |
+| message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates. |
 | statusCode  | yes            | The HTTP status code. |
 | messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
 

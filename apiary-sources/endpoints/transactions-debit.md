@@ -54,7 +54,9 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                         "balanceChange": -2500
                     }
                 ],
-                "remainder": 0,
+                "totals": {
+                    "remainder": 0
+                },
                 "simulated": false,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",

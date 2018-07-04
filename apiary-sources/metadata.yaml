@@ -94,7 +94,7 @@ transaction:
     marketplaceRate: "A number between 0 and 1 for the marketplace's commission rate.  If this number is set on any lineItems then the `marketplace` section of totals will be calculated."
     metadata: "Any additional data you want to store for the item."
     lineTotal:
-      price: "The total cost of the items. ie `unitPrice * quantity`."
+      subtotal: "The total cost of the items. ie `unitPrice * quantity`."
       taxable: "The taxable amount. ie `price - preTaxDiscount`."
       tax: "The taxable amount multiplied by the taxRate for the item. Uses 'bankers rounding'."
       discount: "The discount"
