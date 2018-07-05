@@ -376,6 +376,11 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
             }
     
 + Response 200 (application/json)
+    
+    If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
+    
+    If the Value has a generic code it will be copied.  The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
+    
     + Attributes (Value)
 
     + Body
@@ -394,12 +399,27 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
                 "preTax": false,
                 "redemptionRule": null,
                 "valueRule": null,
+                "isGenericCode": false,
                 "startDate": null,
                 "endDate": null,
                 "tags": [],
                 "metadata": null,
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-05-06T13:02:12.000Z"
+            }
+
++ Response 409 (application/json)
+    
+    A Value with `isGenericCode=true` true and `uses=0` cannot be attached to any more Contacts.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 uses remaining."
+                "messageCode": "InsufficientUses"
             }
 
 ## Values [/values]
@@ -965,7 +985,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
 [Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app.  Each block of Values issued at once is tracked as an Issuance.  Issuances are tracked for downloading secured codes after creation.
 
-### Issue Values [POST /programs/{id}/issuances]
+### Issue Values (Coming soon) [POST /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to issue Value from.
@@ -1008,7 +1028,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
                 "csv": "<URL to download CSV from>",
                 "createdDate": "2018-04-17T23:20:08.000Z"
             }
-### Get an Issuance [GET /programs/{programId}/issuances/{id}]
+### Get an Issuance (Coming soon) [GET /programs/{programId}/issuances/{id}]
 
 + Parameter
     + id (string) - the ID of the Issuance to get.
@@ -1031,7 +1051,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
                 "createdDate": "2018-04-17T23:20:08.000Z"
             }
 
-### List Issuances [GET /programs/{id}/issuances]
+### List Issuances (Coming soon) [GET /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to get Issuances from.
@@ -1918,6 +1938,11 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + createdDate (string) - Date when the Program was created.
 + updatedDate (string) - Date when the Program was last updated.
 + metadata (object) - Arbitrary data associated with the Program.
+
+## RestError (object)
++ statusCode (number) - the HTTP status code.
++ message (string) - an English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates.
++ messageCode (string) - A constant corresponding to the message.  This can be used to take action in response to the error.
 
 ## Rule (object)
 + rule (string) - the Lightrail Rule text of the rule.
