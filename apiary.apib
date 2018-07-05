@@ -1145,7 +1145,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
         + allowRemainder (boolean, optional) - If true the transaction will go through without all balance being debited, and the remainder indicated.
         + pending (boolean, optional) - If true the transaction is created as pending and does not complete until captured.  The transaction will be automatically voided if not captured.
-        + metadata (object, optional) - Arbitrary data associated with the Transaction.
+        + metadata (object, optional) - Any additional data you want to store for the item. All metadata will also be saved on any Stripe charge(s).
         
     + Body 
     
@@ -2061,7 +2061,9 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + code (string) - `lightrail`: the code of a Gift Card or Promotion.
 + contactId (string) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
 + valueId (string) - `lightrail`: a Value's ID.
-+ token (string) - `stripe`: a tokenized credit card for Stripe.  
++ source (string) - `stripe`: a tokenized credit card for Stripe.  
++ customer (string) - `stripe`: a Stripe customer ID (uses customer's default source).  
++ maxAmount (number) - `stripe`: the maximum amount that can be charged to the given Stripe source.  
 + id (string) - `internal`: the ID of the internal value.
 + balance (number) - `internal`: the amount of internal value stored.
 + beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
