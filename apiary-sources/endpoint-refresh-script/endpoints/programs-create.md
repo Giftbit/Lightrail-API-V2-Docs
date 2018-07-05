@@ -25,11 +25,11 @@
         
     + Body
 
-            {"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
+            {REQUEST_REPLACEMENT:createProgram1.body}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {REQUEST_REPLACEMENT:createProgram1.response.body}

@@ -37,4 +37,4 @@
 
     + Body
             
-            {"id":"spring-promotion-usd_run1","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {REQUEST_REPLACEMENT:updateProgram1.response.body}

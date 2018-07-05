@@ -21,7 +21,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_run1","source":{"rail":"lightrail","valueId":"value2-_run1"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {REQUEST_REPLACEMENT:debitTransaction1.body}
     
 + Response 201 (application/json)
 
@@ -29,7 +29,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}
+            {REQUEST_REPLACEMENT:debitTransaction1.response.body}
 
 + Response 409 (application/json)
 

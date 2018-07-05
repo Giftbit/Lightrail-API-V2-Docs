@@ -13,7 +13,7 @@
 
     + Body
 
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {REQUEST_REPLACEMENT:createContact1.response.body}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -41,4 +41,4 @@
 
     + Body
 
-            [{"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}]
+            {REQUEST_REPLACEMENT:listContacts1.response.body}

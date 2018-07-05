@@ -20,7 +20,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run1","destination":{"rail":"lightrail","valueId":"value2-_run1"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
+            {REQUEST_REPLACEMENT:creditTransaction1.body}
     
 + Response 201 (application/json)
 
@@ -28,5 +28,5 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-05T23:35:07.000Z"}
+            {REQUEST_REPLACEMENT:creditTransaction1.response.body}
 

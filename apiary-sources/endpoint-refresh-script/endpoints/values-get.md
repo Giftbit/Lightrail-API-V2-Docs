@@ -14,7 +14,7 @@
 
     + Body
 
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {REQUEST_REPLACEMENT:createValue1.response.body}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         

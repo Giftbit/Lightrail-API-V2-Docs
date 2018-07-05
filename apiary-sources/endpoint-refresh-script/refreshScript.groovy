@@ -58,7 +58,7 @@ while (callsToDo) {
         }
         calls.put(key, call)
     }
-    callsToDo = callsToDo.findAll { it.value.response.status != 200 }
+    callsToDo = callsToDo.findAll { it.value.response.status != 200 && it.value.response.status != 201 }
 }
 
 for (file in filesToProcess) {
@@ -77,6 +77,11 @@ static def checkForReplacements(def input, Map responses, boolean replaceAsJson 
             entry.value = checkForReplacements(entry.value, responses)
         }
         return input
+    } else if (input instanceof List) {
+        for (entry in input) {
+            entry = checkForReplacements(entry, responses)
+        }
+        return input
     } else if (input instanceof String) {
         List<String> responseReplacements = input.findAll(/\{REQUEST_REPLACEMENT\:(.*?)\}/)
         for (replacement in responseReplacements) {
@@ -92,6 +97,7 @@ static def checkForReplacements(def input, Map responses, boolean replaceAsJson 
                 }
             }
             if (replaceAsJson) {
+//                value = JsonOutput.prettyPrint(JsonOutput.toJson(value))
                 value = JsonOutput.toJson(value)
             }
             println "replacement value: " + value
@@ -110,7 +116,7 @@ static def fetchTestDataFromFile(File file) {
 
 def makeRequestAgainstLightrail(Map request, String userJwt) {
     println "Making request: ${request}"
-    URLConnection connection = new URL("https://www.lightraildev.net/v1" + request.endpoint).openConnection();
+    URLConnection connection = new URL("https://api.lightraildev.net/v2" + request.endpoint).openConnection();
     connection.setDoOutput(true)
     connection.setRequestProperty("Content-Type", "application/json")
     connection.setRequestProperty("Authorization", "Bearer ${userJwt}")
@@ -131,11 +137,14 @@ def makeRequestAgainstLightrail(Map request, String userJwt) {
 
 Map getResponse(HttpsURLConnectionImpl result) {
     def response = [status: result.getResponseCode()]
+    println result
     println response.status
-    if (response.status == 200) {
+    if (response.status == 200 || response.status == 201) {
+        println "in here"
         response.body = new JsonSlurper().parse(result.getInputStream().getText().toCharArray())
         println response.body
     } else if (response.status == 400 || response.status == 409) {
+        println "nope, in here"
         throw new Exception("Requested failed against api.")
     }
     return response

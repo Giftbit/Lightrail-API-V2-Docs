@@ -13,32 +13,7 @@
 
     + Body
 
-            {
-                "id": "unique-id-123",
-                "transactionType": "debit",
-                "currency": "XXX",
-                "steps": [
-                    {
-                        "rail": "lightrail",
-                        "id": "vs_1",
-                        "currency": "XXX",
-                        "amount": -2500,
-                        "balance": {
-                            "before": 5500,
-                            "after": 3000,
-                            "change": -2500
-                        },
-                        "uses": null
-                    }
-                ],
-                "remainder": 0,
-                "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-04-17T23:20:08.000Z",
-                "metadata": {
-                    "note": "Reduce loyalty points after 3mo contact inactivity"
-                }
-            }
+            {"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
 
@@ -63,30 +38,4 @@
 
     + Body
 
-            [
-                {
-                    "id": "unique-id-123",
-                    "transactionType": "debit",
-                    "currency": "XXX",
-                    "steps": [
-                        {
-                            "rail": "lightrail",
-                            "valueId": "vs_1",
-                            "code": null,
-                            "contactId": null,
-                            "balanceBefore": 5500,
-                            "balanceAfter": 3000,
-                            "balanceChange": -2500
-                        }
-                    ],
-                    "totals": {
-                        "remainder": 0
-                    },
-                    "simulated": false,
-                    "createdDate": "2018-04-17T23:20:08.000Z",
-                    "updatedDate": "2018-04-17T23:20:08.000Z",
-                    "metadata": {
-                        "note": "Reduce loyalty points after 3mo contact inactivity"
-                    }
-                }
-            ]
+            [{"id":"credit1-_run1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"value1-_run1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value1-_run1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"value2-_run1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}]

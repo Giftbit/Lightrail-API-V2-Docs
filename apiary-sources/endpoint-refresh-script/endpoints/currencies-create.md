@@ -13,11 +13,11 @@
 
     + Body
 
-            {"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}
+            {REQUEST_REPLACEMENT:createCurrency1.body}
     
 + Response 201 (application/json)
     + Attributes (Currency)
 
     + Body
             
-            {"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}
+            {REQUEST_REPLACEMENT:createCurrency1.response.body}
