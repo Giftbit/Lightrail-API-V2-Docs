@@ -25,8 +25,8 @@ An example:
 
 ```json
 {
-    "message": "Insufficient value for the transaction.",
+    "message": "Insufficient balance for the transaction.",
     "statusCode": 409,
-    "messageCode": "InsufficientValue"
+    "messageCode": "InsufficientBalance"
 }
 ```
