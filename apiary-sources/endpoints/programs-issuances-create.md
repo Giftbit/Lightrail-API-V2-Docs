@@ -1,4 +1,4 @@
-### Issue Values [POST /programs/{id}/issuances]
+### Issue Values (Coming soon) [POST /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to issue Value from.

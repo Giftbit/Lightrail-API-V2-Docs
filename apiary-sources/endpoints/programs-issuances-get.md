@@ -1,4 +1,4 @@
-### Get an Issuance [GET /programs/{programId}/issuances/{id}]
+### Get an Issuance (Coming soon) [GET /programs/{programId}/issuances/{id}]
 
 + Parameter
     + id (string) - the ID of the Issuance to get.
@@ -21,7 +21,7 @@
                 "createdDate": "2018-04-17T23:20:08.000Z"
             }
 
-### List Issuances [GET /programs/{id}/issuances]
+### List Issuances (Coming soon) [GET /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to get Issuances from.

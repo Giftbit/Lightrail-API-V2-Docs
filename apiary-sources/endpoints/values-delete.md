@@ -19,6 +19,8 @@
 + Response 409 (application/json)
 
     Attempting to delete a Value that has been used in a Transaction.
+    
+    + Attributes (RestError)
 
     + Body
     

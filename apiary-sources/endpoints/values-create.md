@@ -10,6 +10,7 @@
         + programId (string, optional) - {{value.create.programId}}
         + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}
+        + isGenericCode (boolean) - {{value.isGenericCode}}
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
@@ -44,6 +45,8 @@
                 "type": "promotion"
                 "programId": "springpromo",
                 "currency": "USD",
+                "code": "SPRINGFLING",
+                "isGenericCode": true,
                 "balance": 2500,
                 "active": true,
                 "frozen": false,

@@ -19,7 +19,6 @@
 + tax (number) - The amount of tax to be collected.
 
 ## TransactionTotalsMarketplace (object)
-
-sellerDiscount (number) - The amount of discount the seller is responsible for providing (comes from Values with `discountSellerLiability` > 0).
-sellerGross (number) - The amount payable to the seller before discounts.
-sellerNet (number) - The amount payable to the seller after discounts.
++ sellerDiscount (number) - The amount of discount the seller is responsible for providing (comes from Values with `discountSellerLiability` > 0).
++ sellerGross (number) - The amount payable to the seller before discounts.
++ sellerNet (number) - The amount payable to the seller after discounts.

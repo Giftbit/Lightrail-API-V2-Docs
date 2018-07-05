@@ -73,6 +73,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
@@ -226,4 +227,18 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z",
                 "metadata": {}
+            }
+
++ Response 409 (application/json)
+
+    You cannot checkout if the balance of all Values does not cover the `lineItems` and there is no credit card to charge (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
             }

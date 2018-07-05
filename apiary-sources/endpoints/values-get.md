@@ -1,7 +1,8 @@
-### Get a Value [GET /values/{id}]
+### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
     + id (string) - the ID of the Value to get.
+    + showCode (boolean, optional) - {{value.showCode}}
 
 + Request (application/json)
     + Headers
@@ -16,6 +17,8 @@
             {
                 "id": "vs-1",
                 "programId": "springpromo",
+                "code": "SPRINGFLING",
+                "isGenericCode": true,
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -35,10 +38,11 @@
                 "updatedDate": "2018-04-17T23:20:08.000Z"
             }
 
-### List Values [GET /values{?limit}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
+    + showCode (boolean, optional) - {{value.showCode}}
     + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
     + contactId (string, optional) - {{filter.contactId}}  {{filter.ops.in}}
@@ -76,6 +80,9 @@
                     "id": "vs-1",
                     "type": "giftCard",
                     "programId": "giftCards",
+                    "contactId": null,
+                    "code": "…GYOA",
+                    "isGenericCode": false,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -95,3 +102,18 @@
                     "updatedDate": "2018-04-17T23:20:08.000Z"
                 }
             ]
+
++ Response 200 (text/csv)
+
+    You can request a CSV file of the output by setting `Accept: text/csv` in the request header.
+
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Link: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+        
+    + Body
+
+            id,currency,balance,uses,programId,contactId,code,isGenericCode,pretax,active,canceled,frozen,discount,discountSellerLiability,redemptionRule,valueRule,startDate,endDate,metadata,createdDate,updatedDate
+            vs-1,USD,2500,,giftCards,,…GYOA,false,false,true,false,false,false,,,,,,,2018-04-17T23:20:08.000Z,2018-04-17T23:20:08.000Z

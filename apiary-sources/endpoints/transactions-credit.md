@@ -34,6 +34,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
