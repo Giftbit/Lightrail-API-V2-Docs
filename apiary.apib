@@ -291,6 +291,8 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 + Response 409 (application/json)
 
     Attempting to delete a Contact that is associated with one or more Values. Values that are associated with the Contact would need to be deleted first. 
+    
+    + Attributes (RestError)
 
     + Body
 
@@ -341,6 +343,8 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
                     "programId": "giftCards",
                     "currency": "USD",
                     "contactId": "unique-id-123",
+                    "code": "…GYOA",
+                    "isGenericCode": false,
                     "balance": 2500,
                     "preTax": false,
                     "active": true,
@@ -440,6 +444,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - 
         + code (string, optional) - Assign a code.  Cannot be set with `contact`.
+        + isGenericCode (boolean) - If true the code is to be shared publicly and not secret.  If false the code is treated as a secret.
         + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
@@ -474,6 +479,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "type": "promotion"
                 "programId": "springpromo",
                 "currency": "USD",
+                "code": "SPRINGFLING",
+                "isGenericCode": true,
                 "balance": 2500,
                 "active": true,
                 "frozen": false,
@@ -491,10 +498,11 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "createdDate": "2018-04-17T23:20:08.000Z",
                 "updatedDate": "2018-04-17T23:20:08.000Z"
             }
-### Get a Value [GET /values/{id}]
+### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
     + id (string) - the ID of the Value to get.
+    + showCode (boolean, optional) - Show the full code for the Value.
 
 + Request (application/json)
     + Headers
@@ -509,6 +517,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
             {
                 "id": "vs-1",
                 "programId": "springpromo",
+                "code": "SPRINGFLING",
+                "isGenericCode": true,
                 "currency": "USD",
                 "balance": 2500,
                 "active": true,
@@ -528,10 +538,11 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "updatedDate": "2018-04-17T23:20:08.000Z"
             }
 
-### List Values [GET /values{?limit}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
 + Parameter
     + limit (number, optional) - The max number of items to get.
+    + showCode (boolean, optional) - Show the full code for the Value.
     + programId (string, optional) - Filter by Program ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + currency (string, optional) - Filter by currency.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
     + contactId (string, optional) - Filter by Values attached to the given Contact ID.  This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information.
@@ -569,6 +580,9 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                     "id": "vs-1",
                     "type": "giftCard",
                     "programId": "giftCards",
+                    "contactId": null,
+                    "code": "…GYOA",
+                    "isGenericCode": false,
                     "currency": "USD",
                     "balance": 2500,
                     "active": true,
@@ -588,6 +602,21 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                     "updatedDate": "2018-04-17T23:20:08.000Z"
                 }
             ]
+
++ Response 200 (text/csv)
+
+    You can request a CSV file of the output by setting `Accept: text/csv` in the request header.
+
+    + Headers
+        
+            Limit: 100
+            MaxLimit: 1000
+            Link: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+        
+    + Body
+
+            id,currency,balance,uses,programId,contactId,code,isGenericCode,pretax,active,canceled,frozen,discount,discountSellerLiability,redemptionRule,valueRule,startDate,endDate,metadata,createdDate,updatedDate
+            vs-1,USD,2500,,giftCards,,…GYOA,false,false,true,false,false,false,,,,,,,2018-04-17T23:20:08.000Z,2018-04-17T23:20:08.000Z
 ### Update a Value [PATCH /values/{id}]
 
 + Parameter
@@ -631,6 +660,9 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "id": "vs-1",
                 "programId": "springpromo",
                 "currency": "USD",
+                "contactId": null,
+                "code": "SPRINGFLING",
+                "isGenericCode": true,
                 "balance": 2500, 
                 "active": true,
                 "frozen": true,
@@ -669,6 +701,8 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 + Response 409 (application/json)
 
     Attempting to delete a Value that has been used in a Transaction.
+    
+    + Attributes (RestError)
 
     + Body
     
@@ -708,6 +742,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
                 "programId": "springpromo",
                 "currency": "USD",
                 "code": "SPRINGPROMO2077",
+                "isGenericCode": true,
                 "balance": 2500,
                 "active": true,
                 "frozen": false,
@@ -1153,6 +1188,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
@@ -1308,6 +1344,20 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "metadata": {}
             }
 
++ Response 409 (application/json)
+
+    You cannot checkout if the balance of all Values does not cover the `lineItems` and there is no credit card to charge (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
+            }
+
 ### Debit [POST /transactions/debit]
 
 Debit (remove from) a payment source.  Currently only the `lightrail` rail is supported.
@@ -1345,6 +1395,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
@@ -1373,6 +1424,20 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
+            }
+
++ Response 409 (application/json)
+
+    You cannot debit a Value by more balance than is available (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
             }
 
 ### Credit [POST /transactions/credit]
@@ -1411,6 +1476,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
@@ -1482,6 +1548,7 @@ Transfer value between a payment source and a payment destination.  Currently on
             }
 
 + Response 201 (application/json)
+
     + Attributes
         + id (string, required) - ID for the Transaction.
         + transactionType (string, required) - `transfer`
@@ -1527,6 +1594,20 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "metadata": {
                     "reference": "loyalty-bonus-072301"
                 }
+            }
+
++ Response 409 (application/json)
+
+    You cannot transfer from a Value more balance than is available (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
             }
 
 ### Get a Transaction [GET /transactions/{id}]
@@ -1850,7 +1931,9 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 
 + Response 409 (application/json)
 
-    Attempting to delete a Currency that is in use.  If the Currency is referenced a Value or Program those objects would need to be deleted first.  If the Currency is referenced by a Transaction it cannot be deleted because Transactions cannot be deleted.  Currencies in use can still be updated.
+    Attempting to delete a Currency that is in use.  If the Currency is referenced by a Value or Program those objects would need to be deleted first.  If the Currency is referenced by a Transaction it cannot be deleted because Transactions cannot be deleted.  Currencies in use can still be updated.
+    
+    + Attributes (RestError)
 
     + Body
     
@@ -2018,6 +2101,7 @@ A step taken as part of the transaction.
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + contactId (string) - The ID of the Contact that has claimed this Value.
 + code (string) - The code.  If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
++ isGenericCode (boolean) - If true the code is to be shared publicly and not secret.  If false the code is treated as a secret.
 + balance (number) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + uses (number) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
 + active (boolean) - Whether the Value is active and can be used upon creation.

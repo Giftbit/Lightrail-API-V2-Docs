@@ -29,6 +29,7 @@
                 "programId": "springpromo",
                 "currency": "USD",
                 "code": "SPRINGPROMO2077",
+                "isGenericCode": true,
                 "balance": 2500,
                 "active": true,
                 "frozen": false,

@@ -39,6 +39,7 @@ Transfer value between a payment source and a payment destination.  Currently on
             }
 
 + Response 201 (application/json)
+
     + Attributes
         + id (string, required) - {{transaction.id}}
         + transactionType (string, required) - `transfer`
@@ -84,4 +85,18 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "metadata": {
                     "reference": "loyalty-bonus-072301"
                 }
+            }
+
++ Response 409 (application/json)
+
+    You cannot transfer from a Value more balance than is available (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
             }

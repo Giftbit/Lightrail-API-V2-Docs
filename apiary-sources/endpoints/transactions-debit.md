@@ -35,6 +35,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
             }
     
 + Response 201 (application/json)
+
     + Attributes (Transaction)
 
     + Body
@@ -63,4 +64,18 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 "metadata": {
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
+            }
+
++ Response 409 (application/json)
+
+    You cannot debit a Value by more balance than is available (if `allowRemainder` is not `true`).
+
+    + Attributes (Transaction)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Insufficient balance for the transaction.",
+                "messageCode": "InsufficientBalance"
             }

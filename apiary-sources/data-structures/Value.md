@@ -4,6 +4,7 @@
 + currency (string) - {{currency.code}}
 + contactId (string) - {{value.contact}}
 + code (string) - {{value.code}}
++ isGenericCode (boolean) - {{value.isGenericCode}}
 + balance (number) - {{value.balance}}
 + uses (number) - {{value.uses}}
 + active (boolean) - {{value.active}}

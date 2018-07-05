@@ -19,6 +19,8 @@
 + Response 409 (application/json)
 
     Attempting to delete a Contact that is associated with one or more Values. Values that are associated with the Contact would need to be deleted first. 
+    
+    + Attributes (RestError)
 
     + Body
 

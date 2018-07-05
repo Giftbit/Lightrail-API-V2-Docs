@@ -39,6 +39,8 @@
                     "programId": "giftCards",
                     "currency": "USD",
                     "contactId": "unique-id-123",
+                    "code": "…GYOA",
+                    "isGenericCode": false,
                     "balance": 2500,
                     "preTax": false,
                     "active": true,
