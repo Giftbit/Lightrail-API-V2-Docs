@@ -1,66 +1,33 @@
 {
   "calls": [
     {
-      "callId": "ping1",
-      "method": "GET",
-      "endpoint": "/ping",
-    },
-    {
-      "callId": "giftCardProgram1",
+      "callId": "createCurrency1",
       "method": "POST",
-      "endpoint": "/programs",
+      "endpoint": "/currencies",
       "body": {
-        "name": "USD Gift Cards",
-        "currency": "USD",
-        "codeValueMin": 0,
-        "codeValueMax": 20000,
-        "userSuppliedId": "giftCardProgram1",
-        "valueStoreType": "PRINCIPAL"
+        "code": "USD",
+        "name": "US Dollars",
+        "symbol": "$",
+        "decimalPlaces": 2
       }
     },
     {
-      "callId": "promotion1",
-      "method": "POST",
-      "endpoint": "/programs",
-      "body": {
-        "name": "Simple Promotion",
-        "currency": "USD",
-        "codeValueMin": 0,
-        "codeValueMax": 20000,
-        "userSuppliedId": "promotion1",
-        "valueStoreType": "ATTACHED"
-      }
-    },
-    {
-      "callId": "listPrograms1",
+      "callId": "listCurrencies1",
       "method": "GET",
-      "endpoint": "/programs"
+      "endpoint": "/currencies"
     },
     {
       "callId": "createContact1",
       "method": "POST",
       "endpoint": "/contacts",
       "body": {
-        "userSuppliedId": "createContact1",
-        "email": "alice@example.com"
-      }
-    },
-    {
-      "callId": "createContact2",
-      "method": "POST",
-      "endpoint": "/contacts",
-      "body": {
-        "userSuppliedId": "createContact2",
-        "email": "bill@example.com"
-      }
-    },
-    {
-      "callId": "patchContact2",
-      "method": "PATCH",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}",
-      "body": {
-        "firstName": "bill",
-        "lastName": "lumbergh"
+        "id": "id_JeffreyLebowski_run1",
+        "firstName": "Jeffrey",
+        "lastName": "Lebowski",
+        "email": "thedude@example.com",
+        "metadata": {
+          "alias": "El Duderino"
+        }
       }
     },
     {
@@ -69,319 +36,200 @@
       "endpoint": "/contacts"
     },
     {
-      "callId": "createCard1",
-      "method": "POST",
-      "endpoint": "/cards",
-      "body": {
-        "userSuppliedId": "giftCard-3asfd34a",
-        "programId": "{REQUEST_REPLACEMENT:giftCardProgram1.response.body.program.programId}",
-        "initialValue" : 5000,
-        "cardType" : "GIFT_CARD"
-      }
-    },
-    {
-      "callId": "getCard1Card",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}"
-    },
-    {
-      "callId": "getCard1Fullcode",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/fullcode"
-    },
-    {
-      "callId": "getCard1FullcodeDetails",
-      "method": "GET",
-      "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/details"
-    },
-    {
-      "callId": "getCard1Details",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/details"
-    },
-    {
-      "callId": "getCard1Categories",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/categories"
-    },
-    {
-      "callId": "getCard1ValueStores",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/values"
-    },
-    {
-      "callId": "listCards1",
-      "method": "GET",
-      "endpoint": "/cards"
-    },
-    {
-      "callId": "listCategories1",
-      "method": "GET",
-      "endpoint": "/categories"
-    },
-    {
-      "callId": "createTransaction1Card1Dryrun",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/transactions/dryRun",
-      "body": {
-        "userSuppliedId":"transaction-234342",
-        "value":-250,
-        "currency":"USD",
-        "nsf": false,
-        "metadata":{
-          "cart":{
-            "total":250,
-            "items":[
-              {
-                "id":"B000F34ZKS",
-                "quantity":1,
-                "unit_price":150,
-                "tags":[
-                  "gear",
-                  "outdoor",
-                  "clearance"
-                ]
-              },
-              {
-                "id":"B009L1MF7A",
-                "quantity":2,
-                "unit_price":100,
-                "tags":[
-                  "apparel",
-                  "outdoor"
-                ]
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "callId": "createTransaction1Card1",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/transactions",
-      "body": {
-        "userSuppliedId":"transaction-234342",
-        "value":-250,
-        "currency":"USD",
-        "metadata":{
-          "cart":{
-            "total":250,
-            "items":[
-              {
-                "id":"B000F34ZKS",
-                "quantity":1,
-                "unit_price":150,
-                "tags":[
-                  "gear",
-                  "outdoor",
-                  "clearance"
-                ]
-              },
-              {
-                "id":"B009L1MF7A",
-                "quantity":2,
-                "unit_price":100,
-                "tags":[
-                  "apparel",
-                  "outdoor"
-                ]
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "callId": "createTransaction2Card1FullcodeDryrun",
-      "method": "POST",
-      "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/transactions/dryRun",
-      "body": {
-        "userSuppliedId":"transaction-234aweras4",
-        "value":-100,
-        "currency":"USD"
-      }
-    },
-    {
-      "callId": "createTransaction2Card1Fullcode",
-      "method": "POST",
-      "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/transactions",
-      "body": {
-        "userSuppliedId":"transaction-234aweras4",
-        "value":-100,
-        "currency":"USD"
-      }
-    },
-    {
-      "callId": "getCard1Transactions",
-      "method": "GET",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}/transactions"
-    },
-    {
-      "callId": "getCard1TransactionsByFullcode",
-      "method": "GET",
-      "endpoint": "/codes/{REQUEST_REPLACEMENT:getCard1Fullcode.response.body.fullcode.code}/transactions"
-    },
-    {
-      "callId": "patchCard1",
+      "callId": "updateContact1",
       "method": "PATCH",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}",
       "body": {
-        "contactId": "{REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}"
+        "firstName": "The Dude",
+        "metadata": {
+          "alias": "El Duderino",
+          "note": "Into the whole 'brevity thing'"
+        }
       }
     },
     {
-      "callId": "getCardsForContact2",
-      "method": "GET",
-      "endpoint": "/cards?contactId={REQUEST_REPLACEMENT:createContact2.response.body.contact.contactId}"
-    },
-    {
-      "callId": "createCardStateChange1",
+      "callId": "createProgram1",
       "method": "POST",
-      "endpoint": "/cards",
+      "endpoint": "/programs",
       "body": {
-        "userSuppliedId": "giftcard-a45etsraw",
-        "programId": "{REQUEST_REPLACEMENT:giftCardProgram1.response.body.program.programId}",
-        "initialValue": 5000,
-        "cardType": "GIFT_CARD",
-        "inactive": true
-      }
-    },
-    {
-      "callId": "createCardStateChange1Activate",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCardStateChange1.response.body.card.cardId}/activate",
-      "body": {
-        "userSuppliedId": "activate-giftcard-a45etsraw"
-      }
-    },
-    {
-      "callId": "createCardStateChange1Freeze",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCardStateChange1.response.body.card.cardId}/freeze",
-      "body": {
-        "userSuppliedId": "freeze-{REQUEST_REPLACEMENT:createCardStateChange1Activate.response.body.transaction.transactionId}"
-      }
-    },
-    {
-      "callId": "createCardStateChange1Unfreeze",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCardStateChange1.response.body.card.cardId}/unfreeze",
-      "body": {
-        "userSuppliedId": "unfreeze-{REQUEST_REPLACEMENT:createCardStateChange1Freeze.response.body.transaction.transactionId}"
-      }
-    },
-    {
-      "callId": "createCardStateChange1Cancel",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createCardStateChange1.response.body.card.cardId}/cancel",
-      "body": {
-        "userSuppliedId": "cancel-{REQUEST_REPLACEMENT:createCardStateChange1Unfreeze.response.body.transaction.transactionId}"
-      }
-    },
-    {
-      "callId": "createAccountCard",
-      "method": "POST",
-      "endpoint": "/cards",
-      "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}-account",
-        "cardType":"ACCOUNT_CARD",
-        "contactId":"{REQUEST_REPLACEMENT:createContact1.response.body.contact.contactId}",
-        "currency":"USD",
-        "initialValue":500
-      }
-    },
-    {
-      "callId": "createPendingTransactionAccountCard",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions",
-      "body": {
-        "userSuppliedId":"transaction-dr67fgig13",
-        "value":-100,
-        "currency":"USD",
-        "pending": true
-      }
-    },
-    {
-      "callId": "capturePendingTransactionAccountCard",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:createPendingTransactionAccountCard.response.body.transaction.transactionId}/capture",
-      "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createPendingTransactionAccountCard.response.body.transaction.transactionId}-capture"
-      }
-    },
-    {
-      "callId": "refundTransactionAccountCard",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:capturePendingTransactionAccountCard.response.body.transaction.transactionId}/refund",
-      "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:capturePendingTransactionAccountCard.response.body.transaction.transactionId}-refund"
-      }
-    },
-    {
-      "callId": "createPendingTransactionToVoidAccountCard",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions",
-      "body": {
-        "userSuppliedId":"transaction-a4rwsaw3fds",
-        "value":-100,
-        "currency":"USD",
-        "pending": true
-      }
-    },
-    {
-      "callId": "voidPendingTransactionAccountCard",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/transactions/{REQUEST_REPLACEMENT:createPendingTransactionToVoidAccountCard.response.body.transaction.transactionId}/void",
-      "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createPendingTransactionToVoidAccountCard.response.body.transaction.transactionId}-void"
-      }
-    },
-    {
-      "callId": "addPromotionToAccount",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values",
-      "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}-promotion1",
+        "id": "spring-promotion-usd_run1",
+        "name": "Spring Promotion USD",
         "currency": "USD",
-        "programId":"{REQUEST_REPLACEMENT:promotion1.response.body.program.programId}",
-        "initialValue":150
+        "pretax": true,
+        "discount": true,
+        "fixedInitialBalances": [
+          500
+        ]
       }
     },
     {
-      "callId": "freezePromotionOnAccount",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/freeze",
+      "callId": "listPrograms1",
+      "method": "GET",
+      "endpoint": "/programs"
+    },
+    {
+      "callId": "updateProgram1",
+      "method": "PATCH",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}-freeze"
+        "id": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "name": "Spring Promo US Dollars",
+        "currency": "USD"
       }
     },
     {
-      "callId": "unfreezePromotionOnAccount",
+      "callId": "createValue1",
       "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/unfreeze",
+      "endpoint": "/values",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:freezePromotionOnAccount.response.body.transaction.transactionId}-Unfreeze"
+        "id": "value1-_run1",
+        "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "balance": 500
       }
     },
     {
-      "callId": "cancelPromotionOnAccount",
-      "method": "POST",
-      "endpoint": "/cards/{REQUEST_REPLACEMENT:createAccountCard.response.body.card.cardId}/values/{REQUEST_REPLACEMENT:addPromotionToAccount.response.body.value.valueId}/cancel",
+      "callId": "updateValue1",
+      "method": "PATCH",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}",
       "body": {
-        "userSuppliedId":"{REQUEST_REPLACEMENT:unfreezePromotionOnAccount.response.body.transaction.transactionId}-cancel"
+        "frozen": true
       }
     },
     {
-      "callId": "deliverGiftCard",
+      "callId": "createValue2ForTransactions",
       "method": "POST",
-      "endpoint": "/turnkey/giftcard/deliver",
+      "endpoint": "/values",
       "body": {
-        "cardId":"{REQUEST_REPLACEMENT:createCard1.response.body.card.cardId}",
-        "message": "Hi there, please enjoy this gift.",
-        "senderName": "The Rocketship team",
-        "recipientEmail": "tim@giftbit.com"
+        "id": "value2-_run1",
+        "currency": "USD",
+        "balance": 500
+      }
+    },
+    {
+      "callId": "creditTransaction1",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "credit1-_run1",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD",
+        "metadata": {
+          "note": "Frequent buyer bonus"
+        }
+      }
+    },
+    {
+      "callId": "debitTransaction1",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "debit1-_run1",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+        },
+        "amount": 1000,
+        "currency": "USD",
+        "metadata": {
+          "note": "Reduce loyalty points after 3mo contact inactivity"
+        }
+      }
+    },
+    {
+      "callId": "listTransactions1",
+      "method": "GET",
+      "endpoint": "/transactions"
+    },
+    {
+      "callId": "createValue1ForCheckoutExample",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "valueForCheckout1-_run1",
+        "currency": "USD",
+        "balance": 2000
+      }
+    },
+    {
+      "callId": "createValue2ForCheckoutExample",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "valueForCheckout2-_run1",
+        "currency": "USD",
+        "balance": 50,
+        "discount": true,
+        "pretax": true,
+        "redemptionRule": {
+          "rule": "currentLineItem.productId == 'chocolate_bar'",
+          "explanation": "$0.50 off a chocolate bar"
+        }
+      }
+    },
+    {
+      "callId": "createValue3ForCheckoutExample",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "valueForCheckout3-_run1",
+        "currency": "USD",
+        "discount": true,
+        "pretax": true,
+        "redemptionRule": {
+          "rule": "currentLineItem.productId == 'socks'",
+          "explanation": "20% off socks"
+        },
+        "valueRule": {
+          "rule": "currentLineItem.lineTotal.subtotal * 0.20",
+          "explanation": "20% off socks"
+        }
+      }
+    },
+    {
+      "callId": "checkoutExample1",
+      "method": "POST",
+      "endpoint": "/transactions/checkout",
+      "body": {
+        "id": "checkoutExample1-_run1",
+        "sources": [
+          {
+            "rail": "lightrail",
+            "valueId": "{REQUEST_REPLACEMENT:createValue1ForCheckoutExample.body.id}"
+          },
+          {
+            "rail": "lightrail",
+            "valueId": "{REQUEST_REPLACEMENT:createValue2ForCheckoutExample.body.id}"
+          },
+          {
+            "rail": "lightrail",
+            "valueId": "{REQUEST_REPLACEMENT:createValue3ForCheckoutExample.body.id}"
+          }
+        ],
+        "lineItems": [
+          {
+            "productId": "socks",
+            "unitPrice": 500,
+            "quantity": 2,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "chocolate_bar",
+            "unitPrice": 199,
+            "taxRate": 0.05
+          },
+          {
+            "productId": "shipping",
+            "unitPrice": 349,
+            "taxRate": 0.0
+          }
+        ],
+        "currency": "USD"
       }
     }
+
   ]
 }

@@ -28,11 +28,11 @@
         
     + Body
     
-            {"id":"value1-_run1","programId":"spring-promotion-usd_run1","balance":500}
+            {REQUEST_REPLACEMENT:createValue1.body}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {REQUEST_REPLACEMENT:createValue1.response.body}

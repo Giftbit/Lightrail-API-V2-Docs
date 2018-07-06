@@ -15,11 +15,11 @@
 
     + Body
 
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
+            {REQUEST_REPLACEMENT:createContact1.body}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {REQUEST_REPLACEMENT:createContact1.response.body}
