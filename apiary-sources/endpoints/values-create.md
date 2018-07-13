@@ -11,6 +11,7 @@
         + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}
         + isGenericCode (boolean) - {{value.isGenericCode}}
+        + generateCode (CodeGeneration, optional) - {{value.generateCode}}
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}
@@ -28,11 +29,11 @@
         
     + Body
     
-            {"id":"value1-_run1","programId":"spring-promotion-usd_run1","balance":500}
+            {"id":"value1-_run14","programId":"spring-promotion-usd_run14","balance":500}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {"id":"value1-_run14","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run14","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-10T22:00:46.000Z","updatedDate":"2018-07-10T22:00:46.000Z"}

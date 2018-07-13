@@ -9,39 +9,18 @@
             {{header.authorization}}
 
     + Attributes
-        + code (string, optional) - A generic code to set.  Required if `codeGeneration` is not set.
-        + codeGeneration (CodeGeneration, optional) - Parameters to generate a code.  The code generated will be stored securely.  Required if `code` is not set.
+        + code (string, optional) - {{value.code}}
+        + generateCode (CodeGeneration, optional) - {{value.generateCode}}
+        + isGenericCode: (boolean, optional) - {{value.isGenericCode}}
+        
         
     + Body
     
-            {
-                "code": "SPRINGPROMO2077"
-            }
+            {"generateCode":{}}
 
 + Response 200 (application/json)
     + Attributes (Value)
 
     + Body
 
-            {
-                "id": "vs-1",
-                "type": "promotion"
-                "programId": "springpromo",
-                "currency": "USD",
-                "code": "SPRINGPROMO2077",
-                "isGenericCode": true,
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-04-17T23:20:08.000Z"
-            }
+            {"id":"value3-_run14","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run14","contactId":null,"code":"\u2026D29J","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-10T22:00:48.000Z","updatedDate":"2018-07-10T22:00:48.000Z"}

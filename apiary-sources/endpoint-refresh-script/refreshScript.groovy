@@ -116,7 +116,7 @@ static def fetchTestDataFromFile(File file) {
 
 def makeRequestAgainstLightrail(Map request, String userJwt) {
     println "Making request: ${request}"
-    URLConnection connection = new URL("https://api.lightraildev.net/v2" + request.endpoint).openConnection();
+    URLConnection connection = new URL("https://api.lightrailstaging.net/v2" + request.endpoint).openConnection();
     connection.setDoOutput(true)
     connection.setRequestProperty("Content-Type", "application/json")
     connection.setRequestProperty("Authorization", "Bearer ${userJwt}")
