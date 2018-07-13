@@ -21,7 +21,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"transfer-_run14","source":{"rail":"lightrail","valueId":"value4-_run14"},"destination":{"rail":"lightrail","valueId":"value5-_run14"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
+            {"id":"transfer-_rn1","source":{"rail":"lightrail","valueId":"value4-_rn1"},"destination":{"rail":"lightrail","valueId":"value5-_rn1"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
 
 + Response 201 (application/json)
 
@@ -38,7 +38,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"transfer-_run14","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_run14","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_run14","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-10T22:00:49.000Z"}
+            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-13T18:49:30.000Z"}
 
 + Response 409 (application/json)
 

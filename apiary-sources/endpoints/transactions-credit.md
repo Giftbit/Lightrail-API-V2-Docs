@@ -20,7 +20,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run14","destination":{"rail":"lightrail","valueId":"value2-_run14"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
+            {"id":"credit1-_rn1","destination":{"rail":"lightrail","valueId":"value2-_rn1"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
     
 + Response 201 (application/json)
 
@@ -28,5 +28,5 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run14","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run14","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-10T22:00:46.000Z"}
+            {"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-13T18:49:27.000Z"}
 

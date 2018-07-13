@@ -5,7 +5,7 @@
       "method": "POST",
       "endpoint": "/currencies",
       "body": {
-        "code": "USD_rn1",
+        "code": "USD",
         "name": "US Dollars",
         "symbol": "$",
         "decimalPlaces": 2

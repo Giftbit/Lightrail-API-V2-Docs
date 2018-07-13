@@ -35,4 +35,4 @@
 
     + Body
     
-            {"id":"value1-_run14","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run14","contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-10T22:00:46.000Z","updatedDate":"2018-07-10T22:00:46.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:49:26.000Z","updatedDate":"2018-07-13T18:49:27.000Z"}
