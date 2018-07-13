@@ -11,7 +11,7 @@
     + Attributes
         + code (string, optional) - {{value.code}}
         + generateCode (CodeGeneration, optional) - {{value.generateCode}}
-        + isGenericCode: (boolean, optional) - {{value.isGenericCode}}
+        + isGenericCode (boolean, optional) - {{value.isGenericCode}}
         
         
     + Body
