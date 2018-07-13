@@ -592,7 +592,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
     + Attributes
         + code (string, optional) - The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
         + generateCode (CodeGeneration, optional) - Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
-        + isGenericCode: (boolean, optional) - If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
+        + isGenericCode (boolean, optional) - If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
         
         
     + Body
