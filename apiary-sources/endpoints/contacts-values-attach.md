@@ -14,9 +14,7 @@
 
     + Body
 
-            {
-                "code": "920cb077a0f1a7db"
-            }
+            {"valueId":"value1-_rn1"}
     
 + Response 200 (application/json)
     
@@ -28,28 +26,7 @@
 
     + Body
             
-            {
-                "id": "giftcard-456",
-                "programId": "giftcards",
-                "currency": "USD",
-                "contactId": "unique-id-123",
-                "balance": 2500,
-                "uses": null,
-                "discount": false,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "isGenericCode": false,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-05-06T13:02:12.000Z"
-            }
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
 
 + Response 409 (application/json)
     

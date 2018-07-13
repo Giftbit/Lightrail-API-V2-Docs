@@ -38,7 +38,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-13T18:49:30.000Z"}
+            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-13T18:59:50.000Z"}
 
 + Response 409 (application/json)
 

@@ -14,9 +14,7 @@
 
     + Body
 
-            {
-                "code": "920cb077a0f1a7db"
-            }
+            {REQUEST_REPLACEMENT:attachValue1.body}
     
 + Response 200 (application/json)
     
@@ -28,28 +26,7 @@
 
     + Body
             
-            {
-                "id": "giftcard-456",
-                "programId": "giftcards",
-                "currency": "USD",
-                "contactId": "unique-id-123",
-                "balance": 2500,
-                "uses": null,
-                "discount": false,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "isGenericCode": false,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-05-06T13:02:12.000Z"
-            }
+            {REQUEST_REPLACEMENT:attachValue1.response.body}
 
 + Response 409 (application/json)
     

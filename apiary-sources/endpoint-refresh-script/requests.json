@@ -86,6 +86,19 @@
       }
     },
     {
+      "callId": "attachValue1",
+      "method": "POST",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/attach",
+      "body": {
+        "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
+      }
+    },
+    {
+      "callId": "listContactsValue1",
+      "method": "GET",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values"
+    },
+    {
       "callId": "updateValue1",
       "method": "PATCH",
       "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}",
