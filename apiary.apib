@@ -136,7 +136,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-13T18:59:47.000Z","updatedDate":"2018-07-13T18:59:47.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-16T23:16:11.000Z","updatedDate":"2018-07-16T23:16:11.000Z"}
 ### Get a Contact [GET /contacts/{id}]
 
 + Parameter
@@ -152,7 +152,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-13T18:59:47.000Z","updatedDate":"2018-07-13T18:59:47.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-16T23:16:11.000Z","updatedDate":"2018-07-16T23:16:11.000Z"}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -180,7 +180,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-13T18:59:47.000Z","updatedDate":"2018-07-13T18:59:47.000Z"}]
+            [{"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-16T23:16:11.000Z","updatedDate":"2018-07-16T23:16:11.000Z"}]
 ### Update a Contact [PATCH /contacts/{id}]
             
 + Parameter
@@ -211,7 +211,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"id_JeffreyLebowski_rn1","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-13T18:59:47.000Z","updatedDate":"2018-07-13T18:59:47.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-16T23:16:11.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 ### Delete a Contact [DELETE /contacts/{id}]
 
 + Parameter
@@ -279,7 +279,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}]
+            [{"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}]
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
 + Parameter
@@ -302,13 +302,13 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
     
     If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
     
-    If the Value has a generic code it will be copied.  The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
+    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
     
     + Attributes (Value)
 
     + Body
             
-            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 
 + Response 409 (application/json)
     
@@ -368,7 +368,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 ### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
@@ -385,7 +385,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
@@ -503,7 +503,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:13.000Z"}
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -560,7 +560,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"value3-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":null,"code":"\u2026RMP5","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:49.000Z","updatedDate":"2018-07-13T18:59:50.000Z"}
+            {"id":"value3-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":null,"code":"\u20262TKA","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:14.000Z","updatedDate":"2018-07-16T23:16:14.000Z"}
 
 ## Programs [/programs]
 
@@ -602,7 +602,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
             
-            {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 ### Get a Program [GET /programs/promotions/{id}]
 
 + Parameter
@@ -618,7 +618,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-                {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+                {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 
 ### List Programs [GET /programs{?limit}{?id}{?name}{?preTax}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
@@ -648,7 +648,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            [{"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}]
+            [{"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}]
 ### Update a Program [PATCH /programs/{id}]
 
 + Parameter
@@ -686,7 +686,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
             
-            {"id":"spring-promotion-usd_rn1","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z","updatedDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"spring-promotion-usd_rn1","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z","updatedDate":"2018-07-16T23:16:12.000Z"}
 ### Delete a Program [DELETE /programs/{id}]
 
 + Parameter
@@ -858,7 +858,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
 
     + Body
     
-            {"id":"checkoutExample1-_rn1","transactionType":"checkout","currency":"USD","totals":{"subtotal":1548,"tax":71,"discount":250,"payable":1369,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":149,"tax":7,"discount":50,"remainder":0,"payable":156}}],"steps":[{"rail":"lightrail","valueId":"valueForCheckout2-_rn1","contactId":null,"code":null,"balanceBefore":50,"balanceAfter":0,"balanceChange":-50},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":-200,"balanceChange":-200},{"rail":"lightrail","valueId":"valueForCheckout1-_rn1","contactId":null,"code":null,"balanceBefore":2000,"balanceAfter":631,"balanceChange":-1369}],"paymentSources":[{"rail":"lightrail","valueId":"valueForCheckout1-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout2-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1"}],"metadata":null,"createdDate":"2018-07-13T18:59:49.000Z"}
+            {"id":"checkoutExample1-_rn1","transactionType":"checkout","currency":"USD","totals":{"subtotal":1548,"tax":71,"discount":250,"payable":1369,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":149,"tax":7,"discount":50,"remainder":0,"payable":156}}],"steps":[{"rail":"lightrail","valueId":"valueForCheckout2-_rn1","contactId":null,"code":null,"balanceBefore":50,"balanceAfter":0,"balanceChange":-50},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":-200,"balanceChange":-200},{"rail":"lightrail","valueId":"valueForCheckout1-_rn1","contactId":null,"code":null,"balanceBefore":2000,"balanceAfter":631,"balanceChange":-1369}],"paymentSources":[{"rail":"lightrail","valueId":"valueForCheckout1-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout2-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1"}],"metadata":null,"createdDate":"2018-07-16T23:16:14.000Z"}
 
 + Response 409 (application/json)
 
@@ -905,7 +905,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-13T18:59:49.000Z"}
+            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-16T23:16:13.000Z"}
 
 + Response 409 (application/json)
 
@@ -951,7 +951,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-13T18:59:48.000Z"}
+            {"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-16T23:16:13.000Z"}
 
 
 ### Transfer [POST /transactions/transfer]
@@ -994,7 +994,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-13T18:59:50.000Z"}
+            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-16T23:16:15.000Z"}
 
 + Response 409 (application/json)
 
@@ -1025,7 +1025,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-13T18:59:49.000Z"}
+            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-16T23:16:13.000Z"}
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
 
@@ -1050,7 +1050,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            [{"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-13T18:59:48.000Z"},{"id":"value1-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value1-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z"},{"id":"value2-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-13T18:59:48.000Z"},{"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-13T18:59:49.000Z"}]
+            [{"id":"value1-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value1-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-16T23:16:12.000Z"},{"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-16T23:16:13.000Z"},{"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-16T23:16:13.000Z"},{"id":"value2-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-16T23:16:13.000Z"}]
 
 ### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
 
