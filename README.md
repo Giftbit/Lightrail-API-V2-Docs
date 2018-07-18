@@ -7,7 +7,7 @@ The documentation that is hosted by Apiary is defined by the `apiary.apib` file 
 There are two level of compilation that go into creating the apiary.apib. There is refreshScript.groovy which is responsible for making sure the endpoint requests and response are up to date with the API. There is also release.py in /apiary-sources script which is responsible for amalgamating the apiary.apib file.     
 
 ### Endpoint refresh script
-The refreshScript.groovy script makes the requests defined in the requests.json script. It then loads all of the files defined in /endpoints and makes the replacements defined by `{{REQUEST_REPLACEMENT:...}}`. This allows it to replace the request body and response in the endpoint files. It outputs the endpoint files to /apiary-sources/compiled/endpoints. 
+The refreshScript.groovy script makes the requests defined in the requests.json. It then loads all of the files defined in /endpoints and makes the replacements defined by `{{REQUEST_REPLACEMENT:...}}`. This allows it to replace the request body and response in the endpoint files. It outputs the endpoint files to /apiary-sources/generated/endpoints. 
 
 To use refreshScript.groovy:
 1. [Sign-up](https://www.lightrailstaging.net/app/#/register) for a new staging account.
