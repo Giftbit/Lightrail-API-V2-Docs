@@ -28,9 +28,7 @@
 
     + Body
 
-            {
-                "name": "Spring Promo US Dollars"
-            }
+            {REQUEST_REPLACEMENT:updateProgram1.body}
     
 + Response 200 (application/json)
     + Attributes (Contact)

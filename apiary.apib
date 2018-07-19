@@ -129,14 +129,14 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 ### Get a Contact [GET /contacts/{id}]
 
 + Parameter
@@ -152,7 +152,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -180,7 +180,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"id_JeffreyLebowski_run1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}]
+            [{"id":"id_JeffreyLebowski_rn1","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}]
 ### Update a Contact [PATCH /contacts/{id}]
             
 + Parameter
@@ -211,7 +211,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"id_JeffreyLebowski_run1","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {"id":"id_JeffreyLebowski_rn1","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 ### Delete a Contact [DELETE /contacts/{id}]
 
 + Parameter
@@ -279,28 +279,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [
-                {
-                    "id": "vs-1",
-                    "programId": "giftCards",
-                    "currency": "USD",
-                    "contactId": "unique-id-123",
-                    "code": "…GYOA",
-                    "isGenericCode": false,
-                    "balance": 2500,
-                    "preTax": false,
-                    "active": true,
-                    "frozen": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.000Z",
-                    "updatedDate": "2018-04-17T23:20:08.000Z"
-                }
-            ]
+            [{"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}]
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
 + Parameter
@@ -317,42 +296,19 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {
-                "code": "920cb077a0f1a7db"
-            }
+            {"valueId":"value1-_rn1"}
     
 + Response 200 (application/json)
     
     If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
     
-    If the Value has a generic code it will be copied.  The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
+    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
     
     + Attributes (Value)
 
     + Body
             
-            {
-                "id": "giftcard-456",
-                "programId": "giftcards",
-                "currency": "USD",
-                "contactId": "unique-id-123",
-                "balance": 2500,
-                "uses": null,
-                "discount": false,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "isGenericCode": false,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-05-06T13:02:12.000Z"
-            }
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 
 + Response 409 (application/json)
     
@@ -386,14 +342,15 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - 
         + code (string, optional) - Assign a code.  Cannot be set with `contact`.
-        + isGenericCode (boolean) - If true the code is to be shared publicly and not secret.  If false the code is treated as a secret.
+        + isGenericCode (boolean) - If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
+        + generateCode (CodeGeneration, optional) - Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
         + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether the Value is active and can be used upon creation.
         + frozen (boolean, optional) - If true the Value is frozen and cannot be transacted with.
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
-        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for. (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount).
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + uses (number, optional) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
@@ -404,14 +361,14 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         
     + Body
     
-            {"id":"value1-_run1","programId":"spring-promotion-usd_run1","balance":500}
+            {"id":"value1-_rn1","programId":"spring-promotion-usd_rn1","balance":500}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 ### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
@@ -428,7 +385,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
@@ -529,7 +486,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + canceled (boolean, optional) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
         + preTax (boolean, optional) - If true the Value's balance is applied on checkout before tax is calculated.
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout.
-        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
+        + discountSellerLiability (number, optional) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for. (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount).
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
         + valueRule (Rule, optional) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
         + startDate (string, optional) - Date when the Value becomes available.
@@ -546,7 +503,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"id":"value1-_run1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_run1","contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:07.000Z","updatedDate":"2018-07-05T23:35:07.000Z"}
+            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:38.000Z"}
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -589,42 +546,21 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + code (string, optional) - A generic code to set.  Required if `codeGeneration` is not set.
-        + codeGeneration (CodeGeneration, optional) - Parameters to generate a code.  The code generated will be stored securely.  Required if `code` is not set.
+        + code (string, optional) - The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
+        + generateCode (CodeGeneration, optional) - Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
+        + isGenericCode (boolean, optional) - If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
+        
         
     + Body
     
-            {
-                "code": "SPRINGPROMO2077"
-            }
+            {"generateCode":{}}
 
 + Response 200 (application/json)
     + Attributes (Value)
 
     + Body
 
-            {
-                "id": "vs-1",
-                "type": "promotion"
-                "programId": "springpromo",
-                "currency": "USD",
-                "code": "SPRINGPROMO2077",
-                "isGenericCode": true,
-                "balance": 2500,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "uses": null,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-04-17T23:20:08.000Z"
-            }
+            {"id":"value3-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":null,"code":"\u2026T2VD","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:40.000Z","updatedDate":"2018-07-18T21:45:40.000Z"}
 
 ## Programs [/programs]
 
@@ -659,14 +595,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
 
-            {"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
+            {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 ### Get a Program [GET /programs/promotions/{id}]
 
 + Parameter
@@ -682,7 +618,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-                {"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+                {"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 
 ### List Programs [GET /programs{?limit}{?id}{?name}{?preTax}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
@@ -712,7 +648,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            [{"id":"spring-promotion-usd_run1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}]
+            [{"id":"spring-promotion-usd_rn1","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}]
 ### Update a Program [PATCH /programs/{id}]
 
 + Parameter
@@ -743,16 +679,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            {
-                "name": "Spring Promo US Dollars"
-            }
+            {"name":"Spring Promo US Dollars"}
     
 + Response 200 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"spring-promotion-usd_run1","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-05T23:35:06.000Z","updatedDate":"2018-07-05T23:35:06.000Z"}
+            {"id":"spring-promotion-usd_rn1","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:37.000Z"}
 ### Delete a Program [DELETE /programs/{id}]
 
 + Parameter
@@ -916,7 +850,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         
     + Body 
     
-            {"id":"checkoutExample1-_run1","sources":[{"rail":"lightrail","valueId":"valueForCheckout1-_run1"},{"rail":"lightrail","valueId":"valueForCheckout2-_run1"},{"rail":"lightrail","valueId":"valueForCheckout3-_run1"}],"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05},{"productId":"shipping","unitPrice":349,"taxRate":0.0}],"currency":"USD"}
+            {"id":"checkoutExample1-_rn1","sources":[{"rail":"lightrail","valueId":"valueForCheckout1-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout2-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1"}],"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05},{"productId":"shipping","unitPrice":349,"taxRate":0.0}],"currency":"USD"}
     
 + Response 201 (application/json)
 
@@ -924,7 +858,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
 
     + Body
     
-            {"id":"checkoutExample1-_run1","transactionType":"checkout","currency":"USD","totals":{"subtotal":1548,"tax":71,"discount":250,"payable":1369,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":149,"tax":7,"discount":50,"remainder":0,"payable":156}}],"steps":[{"rail":"lightrail","valueId":"valueForCheckout2-_run1","contactId":null,"code":null,"balanceBefore":50,"balanceAfter":0,"balanceChange":-50},{"rail":"lightrail","valueId":"valueForCheckout3-_run1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":-200,"balanceChange":-200},{"rail":"lightrail","valueId":"valueForCheckout1-_run1","contactId":null,"code":null,"balanceBefore":2000,"balanceAfter":631,"balanceChange":-1369}],"paymentSources":[{"rail":"lightrail","valueId":"valueForCheckout1-_run1"},{"rail":"lightrail","valueId":"valueForCheckout2-_run1"},{"rail":"lightrail","valueId":"valueForCheckout3-_run1"}],"metadata":null,"createdDate":"2018-07-05T23:35:08.000Z"}
+            {"id":"checkoutExample1-_rn1","transactionType":"checkout","currency":"USD","totals":{"subtotal":1548,"tax":71,"discount":250,"payable":1369,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":149,"tax":7,"discount":50,"remainder":0,"payable":156}}],"steps":[{"rail":"lightrail","valueId":"valueForCheckout2-_rn1","contactId":null,"code":null,"balanceBefore":50,"balanceAfter":0,"balanceChange":-50},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":-200,"balanceChange":-200},{"rail":"lightrail","valueId":"valueForCheckout1-_rn1","contactId":null,"code":null,"balanceBefore":2000,"balanceAfter":631,"balanceChange":-1369}],"paymentSources":[{"rail":"lightrail","valueId":"valueForCheckout1-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout2-_rn1"},{"rail":"lightrail","valueId":"valueForCheckout3-_rn1"}],"metadata":null,"createdDate":"2018-07-18T21:45:39.000Z"}
 
 + Response 409 (application/json)
 
@@ -939,7 +873,6 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "message": "Insufficient balance for the transaction.",
                 "messageCode": "InsufficientBalance"
             }
-
 ### Debit [POST /transactions/debit]
 
 Debit (remove from) a payment source.  Currently only the `lightrail` rail is supported.
@@ -963,7 +896,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_run1","source":{"rail":"lightrail","valueId":"value2-_run1"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"id":"debit1-_rn1","source":{"rail":"lightrail","valueId":"value2-_rn1"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
     
 + Response 201 (application/json)
 
@@ -971,7 +904,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}
+            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-18T21:45:38.000Z"}
 
 + Response 409 (application/json)
 
@@ -986,7 +919,6 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
                 "message": "Insufficient balance for the transaction.",
                 "messageCode": "InsufficientBalance"
             }
-
 ### Credit [POST /transactions/credit]
 
 Credit (add to) a payment destination.  Currently only the `lightrail` rail is supported.
@@ -1009,7 +941,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run1","destination":{"rail":"lightrail","valueId":"value2-_run1"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
+            {"id":"credit1-_rn1","destination":{"rail":"lightrail","valueId":"value2-_rn1"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
     
 + Response 201 (application/json)
 
@@ -1017,8 +949,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"credit1-_run1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-05T23:35:07.000Z"}
-
+            {"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-18T21:45:38.000Z"}
 
 ### Transfer [POST /transactions/transfer]
 
@@ -1032,8 +963,8 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Attributes
         + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
-        + source (TransactionParty, required) - The rail to take value from.  Only `lightrail` rails that refer to a specific Value are supported.
-        + destination (TransactionParty, required) - The rail to send value to.  Only `lightrail` rails that refer to a specific Value are supported.
+        + source (TransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
+        + destination (TransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
@@ -1043,22 +974,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {
-                "id": "unique-id-123",
-                "source": {
-                    "rail": "lightrail",
-                    "code": "62026c68ec5048dbb881"
-                },
-                "destination": {
-                    "rail": "lightrail",
-                    "id": "alice-account-USD"
-                },
-                "amount": 2500,
-                "currency": "USD",
-                "metadata": {
-                    "reference": "frequent-shopper-bonus-072301"
-                }
-            }
+            {"id":"transfer-_rn1","source":{"rail":"lightrail","valueId":"value4-_rn1"},"destination":{"rail":"lightrail","valueId":"value5-_rn1"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
 
 + Response 201 (application/json)
 
@@ -1075,39 +991,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {
-                "id": "unique-id-123",
-                "transactionType": "transfer",
-                "currency": "USD",
-                "steps": [
-                    {
-                        "rail": "lightrail",
-                        "valueId": "giftCard-96f27ad62a1c",
-                        "code": null,
-                        "contactId": null,
-                        "balanceBefore": 2500,
-                        "balanceAfter": 0,
-                        "balanceChange": -2500
-                    },
-                    {
-                        "rail": "lightrail",
-                        "valueId": "alice-account-USD",
-                        "code": null,
-                        "contactId": null,
-                        "balanceBefore": 5000,
-                        "balanceAfter": 7500,
-                        "balanceChange": 2500
-                    }
-                ],
-                "totals": {
-                    "remainder": 0
-                },
-                "simulated": false,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "metadata": {
-                    "reference": "loyalty-bonus-072301"
-                }
-            }
+            {"id":"transfer-_rn1","transactionType":"transfer","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value4-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"value5-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"createdDate":"2018-07-18T21:45:41.000Z"}
 
 + Response 409 (application/json)
 
@@ -1122,7 +1006,6 @@ Transfer value between a payment source and a payment destination.  Currently on
                 "message": "Insufficient balance for the transaction.",
                 "messageCode": "InsufficientBalance"
             }
-
 ### Get a Transaction [GET /transactions/{id}]
 
 + Parameter
@@ -1138,7 +1021,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}
+            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-18T21:45:38.000Z"}
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
 
@@ -1163,8 +1046,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            [{"id":"credit1-_run1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"value1-_run1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value1-_run1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"value2-_run1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-05T23:35:07.000Z"},{"id":"debit1-_run1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_run1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-05T23:35:08.000Z"}]
-
+            [{"id":"value1-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value1-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z"},{"id":"credit1-_rn1","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"createdDate":"2018-07-18T21:45:38.000Z"},{"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-18T21:45:38.000Z"},{"id":"value2-_rn1","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-18T21:45:38.000Z"}]
 ### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
@@ -1209,7 +1091,6 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
                     "note": "Reduce loyalty points after 3mo contact inactivity"
                 }
             }
-
 ### Void Pending Transaction (Coming soon) [POST /transactions/{id}/void]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
@@ -1517,7 +1398,7 @@ A step taken as part of the transaction.
 + id (string) - The id of the Value transacted with.
 + currency (string) - The currency of the Value transacted with.
 + contactId (string) - The ID of the Contact associated with the Value.
-+ code (string) - The code. If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
++ code (string) - The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`..
 + amount (number) - The amount contributed to the Transaction.  This number will be the same as `balance.change` in Values with a balance.
 + balanceBefore (number) - The balance of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
 + balanceAfter (number) - The balance of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
@@ -1541,8 +1422,8 @@ A step taken as part of the transaction.
 + programId (string) - 
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + contactId (string) - The ID of the Contact that has claimed this Value.
-+ code (string) - The code. If the code is secure only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
-+ isGenericCode (boolean) - If true the code is to be shared publicly and not secret.  If false the code is treated as a secret.
++ code (string) - The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.
++ isGenericCode (boolean) - If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
 + balance (number) - The amount of money available in a Value.  This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500.
 + uses (number) - The number of times the Value can be used.  When this number reaches 0 the Value is expired.
 + active (boolean) - Whether the Value is active and can be used upon creation.
@@ -1550,7 +1431,7 @@ A step taken as part of the transaction.
 + canceled (boolean) - If true the Value is canceled.  Once canceled the Value can never be uncanceled.
 + preTax (boolean) - If true the Value's balance is applied on checkout before tax is calculated.
 + discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
-+ discountSellerLiability (number) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for.  (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount)
++ discountSellerLiability (number) - In a marketplace: a number between 0 and 1 for the ratio of the discount the seller is liable for. (eg: at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount).
 + redemptionRule (Rule) - A Redemption Rule controlling when the Value can be used in checkout.  The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + valueRule (Rule) - A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document.
 + startDate (string) - Date when the Value becomes available.

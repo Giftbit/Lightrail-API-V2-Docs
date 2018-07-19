@@ -2,5 +2,5 @@
 
 [Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app.  Each block of Values issued at once is tracked as an Issuance.  Issuances are tracked for downloading secured codes after creation.
 
-{% include 'endpoints/programs-issuances-create.md' %}
-{% include 'endpoints/programs-issuances-get.md' %}
+{% include 'generated/endpoints/programs-issuances-create.md' %}
+{% include 'generated/endpoints/programs-issuances-get.md' %}

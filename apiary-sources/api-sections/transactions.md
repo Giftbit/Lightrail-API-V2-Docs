@@ -1,15 +1,9 @@
 ## Transactions [/transactions]
 
-{% include 'endpoints/transactions-checkout.md' %}
-
-{% include 'endpoints/transactions-debit.md' %}
-
-{% include 'endpoints/transactions-credit.md' %}
-
-{% include 'endpoints/transactions-transfer.md' %}
-
-{% include 'endpoints/transactions-get.md' %}
-
-{% include 'endpoints/transactions-pending-capture.md' %}
-
-{% include 'endpoints/transactions-pending-void.md' %}
+{% include 'generated/endpoints/transactions-checkout.md' %}
+{% include 'generated/endpoints/transactions-debit.md' %}
+{% include 'generated/endpoints/transactions-credit.md' %}
+{% include 'generated/endpoints/transactions-transfer.md' %}
+{% include 'generated/endpoints/transactions-get.md' %}
+{% include 'generated/endpoints/transactions-pending-capture.md' %}
+{% include 'generated/endpoints/transactions-pending-void.md' %}

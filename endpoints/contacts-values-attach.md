@@ -14,42 +14,19 @@
 
     + Body
 
-            {
-                "code": "920cb077a0f1a7db"
-            }
+            {REQUEST_REPLACEMENT:attachValue1.body}
     
 + Response 200 (application/json)
     
     If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
     
-    If the Value has a generic code it will be copied.  The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
+    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
     
     + Attributes (Value)
 
     + Body
             
-            {
-                "id": "giftcard-456",
-                "programId": "giftcards",
-                "currency": "USD",
-                "contactId": "unique-id-123",
-                "balance": 2500,
-                "uses": null,
-                "discount": false,
-                "active": true,
-                "frozen": false,
-                "canceled": false,
-                "preTax": false,
-                "redemptionRule": null,
-                "valueRule": null,
-                "isGenericCode": false,
-                "startDate": null,
-                "endDate": null,
-                "tags": [],
-                "metadata": null,
-                "createdDate": "2018-04-17T23:20:08.000Z",
-                "updatedDate": "2018-05-06T13:02:12.000Z"
-            }
+            {REQUEST_REPLACEMENT:attachValue1.response.body}
 
 + Response 409 (application/json)
     

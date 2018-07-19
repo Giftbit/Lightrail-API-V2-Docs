@@ -11,6 +11,7 @@
         + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}
         + isGenericCode (boolean) - {{value.isGenericCode}}
+        + generateCode (CodeGeneration, optional) - {{value.generateCode}}
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
         + preTax (boolean, optional) - {{value.preTax}}

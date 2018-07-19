@@ -4,8 +4,8 @@ A Value (naturally) represents value in the Lightrail system.  This includes a g
  
 Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
 
-{% include 'endpoints/values-create.md' %}
-{% include 'endpoints/values-get.md' %}
-{% include 'endpoints/values-update.md' %}
-{% include 'endpoints/values-delete.md' %}
-{% include 'endpoints/values-changeCode.md' %}
+{% include 'generated/endpoints/values-create.md' %}
+{% include 'generated/endpoints/values-get.md' %}
+{% include 'generated/endpoints/values-update.md' %}
+{% include 'generated/endpoints/values-delete.md' %}
+{% include 'generated/endpoints/values-changeCode.md' %}

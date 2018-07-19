@@ -33,25 +33,4 @@
 
     + Body
 
-            [
-                {
-                    "id": "vs-1",
-                    "programId": "giftCards",
-                    "currency": "USD",
-                    "contactId": "unique-id-123",
-                    "code": "…GYOA",
-                    "isGenericCode": false,
-                    "balance": 2500,
-                    "preTax": false,
-                    "active": true,
-                    "frozen": false,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.000Z",
-                    "updatedDate": "2018-04-17T23:20:08.000Z"
-                }
-            ]
+            {REQUEST_REPLACEMENT:listContactsValue1.response.body}
