@@ -964,7 +964,7 @@ Transfer value between a payment source and a payment destination.  Currently on
     + Attributes
         + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + source (TransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
-        + destination (TransactionParty, required) - Only `rail = "lightrail"` which refers to a specific Value is supported.
+        + destination (TransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place.  If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.

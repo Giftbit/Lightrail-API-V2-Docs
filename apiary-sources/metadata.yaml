@@ -75,7 +75,7 @@ program:
 transaction:
   allowRemainder: "If true the transaction will go through without all balance being debited, and the remainder indicated."
   createdDate: "Date when the Transaction was created."
-  destination: "Only `rail = \"lightrail\"` which refers to a specific Value is supported."
+  destination: "Only supported rail is `\"lightrail\"` and must it refer to a single Value."
   id: "ID for the Transaction."
   idPurpose: "Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice."
   metadata: "Arbitrary data associated with the Transaction."
