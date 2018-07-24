@@ -9,7 +9,7 @@ Lightrail uses the following HTTP status codes to indicate an error:
 | 403  | The operation is not allowed for the given authentication. |
 | 404  | The resource was not found.  eg: There is no Contact for the given ID. |
 | 409  | The operation could not be performed because of the state of the system.  eg: There is not enough balance for a Transaction to complete. |
-| 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. |
+| 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. If using the `stripe` payment rail, most Stripe errors will result in a `422`. |
 | 429  | Too many requests in a given amount of time. |
 | 500  | Internal server error.  Please [contact us](mailto:hello@lightrail.com) with details of your request and we'll look into it. |
 
@@ -20,6 +20,7 @@ Lightrail errors contain a JSON body with the following properties:
 | message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates. |
 | statusCode  | yes            | The HTTP status code. |
 | messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
+| stripeError | no             | When using the `stripe` rail: the full error response from Stripe in case of an error charging a credit card. |
 
 An example:
 
