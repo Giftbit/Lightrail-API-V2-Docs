@@ -35,4 +35,4 @@
 
     + Body
     
-            {"id":"value1-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":"id_JeffreyLebowski_rn1","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:37.000Z","updatedDate":"2018-07-18T21:45:38.000Z"}
+            {"id":"c4a10df5-4e31-4fa0-b","currency":"USD","balance":500,"uses":null,"programId":"e46823bb-6fd5-40bf-9","contactId":"e7db2103-806e-4887-b","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-24T18:49:49.000Z","updatedDate":"2018-07-24T18:49:50.000Z"}

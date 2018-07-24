@@ -21,7 +21,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_rn1","source":{"rail":"lightrail","valueId":"value2-_rn1"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"id":"2c44612d-e90d-4e0e-8","source":{"rail":"lightrail","valueId":"4b6cb6f1-21d4-41f3-a"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
     
 + Response 201 (application/json)
 
@@ -29,7 +29,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"debit1-_rn1","transactionType":"debit","currency":"USD","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"value2-_rn1","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdDate":"2018-07-18T21:45:38.000Z"}
+            {"id":"2c44612d-e90d-4e0e-8","transactionType":"debit","currency":"USD","createdDate":"2018-07-24T18:49:50.000Z","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"4b6cb6f1-21d4-41f3-a","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
 
 + Response 409 (application/json)
 

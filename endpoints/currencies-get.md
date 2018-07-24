@@ -13,7 +13,12 @@
 
     + Body
 
-            {REQUEST_REPLACEMENT:createCurrency1.response.body}
+            {
+                "code": "USD",
+                "name": "US Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
 
 ### List Currencies [GET /currencies]
 
@@ -27,4 +32,11 @@
 
     + Body
 
-            {REQUEST_REPLACEMENT:listCurrencies1.response.body}
+            [
+                {
+                    "code": "USD",
+                    "name": "US Dollars",
+                    "symbol": "$",
+                    "decimalPlaces": 2
+                }
+            ]

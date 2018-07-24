@@ -23,4 +23,4 @@
 
     + Body
 
-            {"id":"value3-_rn1","currency":"USD","balance":500,"uses":null,"programId":"spring-promotion-usd_rn1","contactId":null,"code":"\u2026T2VD","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-18T21:45:40.000Z","updatedDate":"2018-07-18T21:45:40.000Z"}
+            {"id":"93d78efc-ba0f-443b-8","currency":"USD","balance":500,"uses":null,"programId":"e46823bb-6fd5-40bf-9","contactId":null,"code":"\u2026EV3B","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-24T18:49:51.000Z","updatedDate":"2018-07-24T18:49:51.000Z"}

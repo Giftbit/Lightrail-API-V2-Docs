@@ -7,13 +7,7 @@ List<File> filesToProcess = new File("endpoints").listFiles()
 
 def json = fetchTestDataFromFile(requests)
 
-if (args.size() == 0) {
-    println "You must provide an api key as an argument. Use a new LIVE mode API key from lightraildev."
-    System.exit(0)
-}
-
-String userJwt = args[0]
-println "Recieved API key: ${args[0]}"
+String userJwt = "eyJ2ZXIiOjMsInZhdiI6MSwiYWxnIjoiSFMyNTYiLCJ0eXAiOiJKV1QifQ.eyJnIjp7Imd1aSI6InVzZXItYzBlNGJjODllYzcxNGU2MTk5MTk5ZTgzMjI0NTllMmUtVEVTVCIsImdtaSI6InVzZXItYzBlNGJjODllYzcxNGU2MTk5MTk5ZTgzMjI0NTllMmUtVEVTVCIsInRtaSI6InVzZXItYzBlNGJjODllYzcxNGU2MTk5MTk5ZTgzMjI0NTllMmUtVEVTVCJ9LCJhdWQiOiJBUElfS0VZIiwiaXNzIjoiU0VSVklDRVNfVjEiLCJpYXQiOjE1MzI0NTc3NDQuMjg5LCJqdGkiOiJiYWRnZS0zOThiNmM5ZmE1Yjg0ODM1OWQ2MWRmMmYzYmQ1YmZmYSIsInBhcmVudEp0aSI6ImJhZGdlLTVkYzU4NzI0MDVjNjQ4NjA4OWQ1ZDcyMmYxZDU2MzQwIiwic2NvcGVzIjpbXSwicm9sZXMiOlsiYWNjb3VudE1hbmFnZXIiLCJjb250YWN0TWFuYWdlciIsImN1c3RvbWVyU2VydmljZU1hbmFnZXIiLCJjdXN0b21lclNlcnZpY2VSZXByZXNlbnRhdGl2ZSIsInBvaW50T2ZTYWxlIiwicHJvZ3JhbU1hbmFnZXIiLCJwcm9tb3RlciIsInJlcG9ydGVyIiwic2VjdXJpdHlNYW5hZ2VyIiwidGVhbUFkbWluIiwid2ViUG9ydGFsIl19.tmP6yn05U1f5Wv5626MCNbz5aLyhw9Br5gLg00_6wzk"
 
 Map calls = [:]
 for (Map call in json.calls) {
@@ -26,6 +20,7 @@ for (Map call in json.calls) {
     if (!call.endpoint) {
         throw new Exception("Invalid input. Call ${call}.")
     }
+    call = checkForFunctionReplacements(call)
     calls.put(call.callId, call)
 }
 
@@ -71,6 +66,29 @@ for (file in filesToProcess) {
     outputFile.write(fileText)
 }
 
+static def checkForFunctionReplacements(def input) throws TestDataCallDependencyException {
+    if (input instanceof Map) {
+        for (entry in input.entrySet()) {
+            entry.value = checkForFunctionReplacements(entry.value)
+        }
+        return input
+    } else if (input instanceof List) {
+        for (entry in input) {
+            entry = checkForFunctionReplacements(entry)
+        }
+        return input
+    } else if (input instanceof String) {
+        String uuidReplacement = input.find(/\{UUID\(\)\}/)
+        if (uuidReplacement) {
+            println "found uuid replacement"
+            input = input.replace(uuidReplacement, UUID.randomUUID().toString().substring(0,20))
+        }
+        return input
+    } else {
+        return input
+    }
+}
+
 static def checkForReplacements(def input, Map responses, boolean replaceAsJson = false) throws TestDataCallDependencyException {
     if (input instanceof Map) {
         for (entry in input.entrySet()) {
@@ -83,6 +101,11 @@ static def checkForReplacements(def input, Map responses, boolean replaceAsJson 
         }
         return input
     } else if (input instanceof String) {
+        String uuidReplacement = input.find(/\{UUID()\}/)
+        if (uuidReplacement) {
+            println "found uuid replacement"
+            input = input.replace(uuidReplacement, UUID.randomUUID().toString())
+        }
         List<String> responseReplacements = input.findAll(/\{REQUEST_REPLACEMENT\:(.*?)\}/)
         for (replacement in responseReplacements) {
             println "found something to replace: " + replacement

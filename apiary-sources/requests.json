@@ -1,17 +1,6 @@
 {
   "calls": [
     {
-      "callId": "createCurrency1",
-      "method": "POST",
-      "endpoint": "/currencies",
-      "body": {
-        "code": "USD",
-        "name": "US Dollars",
-        "symbol": "$",
-        "decimalPlaces": 2
-      }
-    },
-    {
       "callId": "listCurrencies1",
       "method": "GET",
       "endpoint": "/currencies"
@@ -21,7 +10,7 @@
       "method": "POST",
       "endpoint": "/contacts",
       "body": {
-        "id": "id_JeffreyLebowski_rn1",
+        "id": "{UUID()}",
         "firstName": "Jeffrey",
         "lastName": "Lebowski",
         "email": "thedude@example.com",
@@ -33,7 +22,7 @@
     {
       "callId": "listContacts1",
       "method": "GET",
-      "endpoint": "/contacts"
+      "endpoint": "/contacts?limit=1"
     },
     {
       "callId": "updateContact1",
@@ -52,7 +41,7 @@
       "method": "POST",
       "endpoint": "/programs",
       "body": {
-        "id": "spring-promotion-usd_rn1",
+        "id": "{UUID()}",
         "name": "Spring Promotion USD",
         "currency": "USD",
         "pretax": true,
@@ -65,7 +54,7 @@
     {
       "callId": "listPrograms1",
       "method": "GET",
-      "endpoint": "/programs"
+      "endpoint": "/programs?limit=1"
     },
     {
       "callId": "updateProgram1",
@@ -80,7 +69,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "value1-_rn1",
+        "id": "{UUID()}",
         "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
         "balance": 500
       }
@@ -96,7 +85,7 @@
     {
       "callId": "listContactsValue1",
       "method": "GET",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values"
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values?limit=1"
     },
     {
       "callId": "updateValue1",
@@ -111,7 +100,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "value2-_rn1",
+        "id": "{UUID()}",
         "currency": "USD",
         "balance": 500
       }
@@ -121,7 +110,7 @@
       "method": "POST",
       "endpoint": "/transactions/credit",
       "body": {
-        "id": "credit1-_rn1",
+        "id": "{UUID()}",
         "destination": {
           "rail": "lightrail",
           "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
@@ -138,7 +127,7 @@
       "method": "POST",
       "endpoint": "/transactions/debit",
       "body": {
-        "id": "debit1-_rn1",
+        "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
           "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
@@ -153,14 +142,14 @@
     {
       "callId": "listTransactions1",
       "method": "GET",
-      "endpoint": "/transactions"
+      "endpoint": "/transactions?limit=1"
     },
     {
       "callId": "createValue1ForCheckoutExample",
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "valueForCheckout1-_rn1",
+        "id": "{UUID()}",
         "currency": "USD",
         "balance": 2000
       }
@@ -170,7 +159,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "valueForCheckout2-_rn1",
+        "id": "{UUID()}",
         "currency": "USD",
         "balance": 50,
         "discount": true,
@@ -186,7 +175,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "valueForCheckout3-_rn1",
+        "id": "{UUID()}",
         "currency": "USD",
         "discount": true,
         "pretax": true,
@@ -205,7 +194,7 @@
       "method": "POST",
       "endpoint": "/transactions/checkout",
       "body": {
-        "id": "checkoutExample1-_rn1",
+        "id": "{UUID()}",
         "sources": [
           {
             "rail": "lightrail",
@@ -246,7 +235,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "value3-_rn1",
+        "id": "{UUID()}",
         "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
         "balance": 500,
         "generateCode": {}
@@ -265,7 +254,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "value4-_rn1",
+        "id": "{UUID()}",
         "balance": 500,
         "currency": "USD"
       }
@@ -275,7 +264,7 @@
       "method": "POST",
       "endpoint": "/values",
       "body": {
-        "id": "value5-_rn1",
+        "id": "{UUID()}",
         "balance": 500,
         "currency": "USD"
       }
@@ -285,7 +274,7 @@
       "method": "POST",
       "endpoint": "/transactions/transfer",
       "body": {
-        "id": "transfer-_rn1",
+        "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
           "valueId": "{REQUEST_REPLACEMENT:valueForTransferSource.body.id}"

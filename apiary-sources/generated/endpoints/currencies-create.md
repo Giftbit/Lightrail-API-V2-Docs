@@ -13,11 +13,21 @@
 
     + Body
 
-            {"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}
+            {
+                "code": "USD",
+                "name":"US Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
     
 + Response 201 (application/json)
     + Attributes (Currency)
 
     + Body
             
-            {"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}
+            {
+                "code": "USD",
+                "name": "US Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
