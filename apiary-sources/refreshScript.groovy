@@ -62,7 +62,7 @@ for (file in filesToProcess) {
     if (fileText.contains("REQUEST_REPLACEMENT")) {
         throw new Exception("File withname ${file.name} contains unreplaced text!!!")
     }
-    def outputFile = new File("apiary-sources/generated/endpoints/${file.name}")
+    def outputFile = new File("generated/endpoints/${file.name}")
     outputFile.write(fileText)
 }
 

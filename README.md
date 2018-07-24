@@ -4,8 +4,11 @@ If you are looking for the official Lightrail documentation please go to https:/
 ## Updating Documentation
 The documentation that is hosted by Apiary is defined by the `apiary.apib` file on master. 
 
+### Updating Apiary
+- Making changes to endpoints definitions in apiary. 
+
 ### Compiling
-Simply run `./apiary-sources/compile.sh`.
+Simply run: `cd apiary-sources && ./compile.sh && cd ..`
 
 #### Requirements
 1. Use `brew doctor` to ensure your homebrew is up to date. You might also need to update xcode. 
