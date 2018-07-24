@@ -1,6 +1,6 @@
 ### Transfer [POST /transactions/transfer]
 
-Transfer value between a payment source and a payment destination.  Currently only the `lightrail` rail is supported.
+Transfer value between a payment source and a payment destination.  Currently the `lightrail` and `stripe` rails are supported as `source`s and the `lightrail` rail is supported as a destination.
 
 + Request (application/json)
 
@@ -10,8 +10,8 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
-        + source (TransactionParty, required) - {{transaction.source}}
-        + destination (TransactionParty, required) - {{transaction.destination}}
+        + source (StripeOrLightrailTransactionParty, required) - {{transaction.source}}
+        + destination (LightrailTransactionParty, required) - {{transaction.destination}}
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
@@ -44,7 +44,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     You cannot transfer from a Value more balance than is available (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (StripeRestError)
 
     + Body
 
