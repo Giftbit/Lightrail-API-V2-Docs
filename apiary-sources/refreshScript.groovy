@@ -56,6 +56,17 @@ while (callsToDo) {
     callsToDo = callsToDo.findAll { it.value.response.status != 200 && it.value.response.status != 201 }
 }
 
+File outputDirectory = new File("generated/endpoints");
+if (!outputDirectory.exists()) {
+    println "creating output directory"
+    outputDirectory.mkdirs();
+}
+
+println "finished creating directory"
+
+def outputRequestJSON = new File("generated/requestsOutput.json")
+outputRequestJSON.write(JsonOutput.prettyPrint(JsonOutput.toJson(calls)));
+
 for (file in filesToProcess) {
     String fileText = file.text
     fileText = checkForReplacements(fileText, calls, true) as String
@@ -183,3 +194,5 @@ class TestDataCallDependencyException extends Exception {
         super(message)
     }
 }
+
+println "FINISHED REFRESH SCRIPT"

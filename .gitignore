@@ -2,4 +2,4 @@
 **/.idea
 *.iml
 target/
-apiary-sources/generated/endpoints/*
+apiary-sources/generated/*
