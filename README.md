@@ -5,7 +5,9 @@ If you are looking for the official Lightrail documentation please go to https:/
 The documentation that is hosted by Apiary is defined by the `apiary.apib` file on master. 
 
 ### Updating Apiary
-- Making changes to endpoints definitions in apiary.  
+- The file `master.md` is responsible for the overall structure of the document. This is a good place to start to familiarize with the repo.
+- The `api-sections` directory contains the reference section of the API. Files within include the output files from `refreshScript.groovy` that are output to the `generated` directory.
+- IMPORTANT: Don't update anything in `generated`. This is compiled and will be overwritten.  
 
 ### Compiling
 ```
