@@ -151,7 +151,8 @@
       "body": {
         "id": "{UUID()}",
         "currency": "USD",
-        "balance": 2000
+        "balance": 1000,
+        "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
       }
     },
     {
@@ -186,7 +187,8 @@
         "valueRule": {
           "rule": "currentLineItem.lineTotal.subtotal * 0.20",
           "explanation": "20% off socks"
-        }
+        },
+        "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
       }
     },
     {
@@ -198,15 +200,11 @@
         "sources": [
           {
             "rail": "lightrail",
-            "valueId": "{REQUEST_REPLACEMENT:createValue1ForCheckoutExample.body.id}"
+            "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
           },
           {
-            "rail": "lightrail",
-            "valueId": "{REQUEST_REPLACEMENT:createValue2ForCheckoutExample.body.id}"
-          },
-          {
-            "rail": "lightrail",
-            "valueId": "{REQUEST_REPLACEMENT:createValue3ForCheckoutExample.body.id}"
+            "rail": "stripe",
+            "source": "tok_visa"
           }
         ],
         "lineItems": [
