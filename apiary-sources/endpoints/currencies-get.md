@@ -13,7 +13,12 @@
 
     + Body
 
-            {"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}
+            {
+                "code": "USD",
+                "name": "US Dollars",
+                "symbol": "$",
+                "decimalPlaces": 2
+            }
 
 ### List Currencies [GET /currencies]
 
@@ -27,4 +32,11 @@
 
     + Body
 
-            [{"code":"USD","name":"US Dollars","symbol":"$","decimalPlaces":2}]
+            [
+                {
+                    "code": "USD",
+                    "name": "US Dollars",
+                    "symbol": "$",
+                    "decimalPlaces": 2
+                }
+            ]
