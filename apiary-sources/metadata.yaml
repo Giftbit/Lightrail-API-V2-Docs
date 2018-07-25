@@ -132,6 +132,6 @@ value:
   access:
     description: "How the values can be accessed"
     types:
-      contact: "must be associated with a Contact by ID."
+      contactId: "must be associated with a Contact by ID."
       secureCode: "a code is generated or supplied and is stored securely."
       publicCode: "a code is generated or supplied and can be displayed."
