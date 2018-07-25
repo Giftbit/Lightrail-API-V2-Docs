@@ -10,34 +10,26 @@
 
     + Attributes
         + id (string, required) - {{issuance.id}}  {{idPurpose}}
-        + count (number, required) - The numbers of Values to issue.
-        + code (string, optional) - The code to set on the Value.  The code will not be secured.  This is only available when `count` is 1.
-        + codeGeneration (CodeGeneration, optional) - Defines how codes are generated.  Each code generated will be stored securely.  Required if `code` is not set.
-        + balance (number, optional) - The balance to set on each Value.  This can be constrained by the Program's `minInitialBalance` and `maxInitialBalance` or must be in the `fixedInitialBalances` array.
-        + uses (number, optional) - The uses to set on each Value.  
-        + startDate (string, optional) - Override the Program's startDate for the Value.
-        + endDate (string, optional) - Override the Program's endDate for the Value.
-        + tags (array[string], optional) - {{tags}}  These are applied to each Value.
+        + count (number, required) - {{issuance.count}}
+        + codeGeneration (CodeGeneration, optional) - {{issuance.generateCode}}
+        + code (string, optional) - {{issuance.code}}
+        + isGenericCode (boolean, optional) - {{issuance.isGenericCode}}
+        + balance (number, optional) - {{issuance.balance}}
+        + uses (number, optional) - {{issuance.uses}}  
+        + startDate (string, optional) - {{issuance.startDate}}
+        + endDate (string, optional) - {{issuance.endDate}}
+        + redemptionRule (Rule, optional) - {{issuance.redemptionRule}}
+        + valueRule (Rule, optional) - {{issuance.valueRule}}
+        + tags (array[string], optional) - {{tags}} These are applied to each Value.
+        + metadata (object, optional) - {{issuance.metadata}}
         
     + Body
     
-            {
-                "id": "printer-block-21",
-                "count": 200,
-                "codeGeneration": {
-                    "length": 12
-                },
-                "balance": 5000
-            }
+            {REQUEST_REPLACEMENT:createIssuance.body}
     
 + Response 201 (application/json)
     + Attributes (Issuance)
 
     + Body
     
-            {
-                "id": "printer-block-21",
-                "count": 200,
-                "csv": "<URL to download CSV from>",
-                "createdDate": "2018-04-17T23:20:08.000Z"
-            }
+            {REQUEST_REPLACEMENT:createIssuance.response.body}

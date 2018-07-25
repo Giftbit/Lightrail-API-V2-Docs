@@ -289,6 +289,22 @@
           "reference": "customer request to move funds. ref: #4948173593"
         }
       }
+    },
+    {
+      "callId": "createIssuance",
+      "method": "POST",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances",
+      "body": {
+        "id": "{UUID()}",
+        "count": 200,
+        "codeGeneration": {},
+        "balance": 5000
+      }
+    },
+    {
+      "callId": "listIssuances",
+      "method": "GET",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances?limit=1"
     }
   ]
 }
