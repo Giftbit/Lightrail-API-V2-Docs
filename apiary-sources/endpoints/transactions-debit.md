@@ -10,7 +10,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
         
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
-        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
+        + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + uses (number, optional) - The number of uses to remove.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
@@ -35,7 +35,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     You cannot debit a Value by more balance than is available (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (RestError)
 
     + Body
 
