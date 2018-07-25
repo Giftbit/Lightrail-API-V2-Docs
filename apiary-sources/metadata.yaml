@@ -127,7 +127,7 @@ value:
   valueRule: "A Value Rule controlling the effective balance of the Value in a Checkout.  To use this `balance` must be set to `null`.  The syntax will be defined in a separate document."
   create:
     code: "Assign a code.  Cannot be set with `contact`."
-    contact: "Directly apply to a Contact.  Cannot be set with `code`."
+    contactId: "Directly apply to a Contact.  Cannot be set with `code`."
     programId: "Create as part of a Program and copy default properties from it."
   access:
     description: "How the values can be accessed"
