@@ -73,7 +73,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
 
 + Response 422 (application/json)
 
-    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD (or equivalent). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You may wish to handle this error by asking your customer to top up their account balance, or if the customer is using a gift card, you may wish to forgive the $0.50. 
+    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD (or equivalent). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You may wish to handle this error by asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
 
     + Body
 

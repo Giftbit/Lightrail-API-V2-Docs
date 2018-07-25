@@ -1,6 +1,6 @@
 ### Transfer [POST /transactions/transfer]
 
-Transfer value between a payment source and a payment destination.  Currently the `lightrail` and `stripe` rails are supported as `source`s and the `lightrail` rail is supported as a destination.
+Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
 
 + Request (application/json)
 

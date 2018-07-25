@@ -1,6 +1,6 @@
 ### Credit [POST /transactions/credit]
 
-Credit (add to) a payment destination.  Currently only the `lightrail` rail is supported.
+Credit (add an amount to) a Lightrail payment destination.
 
 + Request (application/json)
 

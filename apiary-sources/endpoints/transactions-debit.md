@@ -1,6 +1,6 @@
 ### Debit [POST /transactions/debit]
 
-Debit (remove from) a payment source.  Currently only the `lightrail` rail is supported.
+Debit (remove an amount from) a Lightrail payment source.
 
 + Request (application/json)
 
