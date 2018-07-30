@@ -2,7 +2,9 @@
 
 The checkout endpoint is used to collect all payment for a purchase. It will debit funds from Lightrail and also charge credit cards through Stripe. Your Stripe account must be connected to Lightrail in order for Lightrail to make charges on your behalf. 
 
-Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended a stop-gap solution to support transitioning from legacy systems.    
+Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended as a stop-gap solution to support transitioning from legacy systems.
+
+Error responses: If using the `stripe` rail, it is possible for checkout transactions to fail for reasons outside of Lightrail's control, such as an invalid card token or a card being declined. Stripe errors will be passed on in full under the `stripeError` key in the response. 
 
 + Request (application/json)
     
@@ -12,11 +14,10 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         - 1x $1.99 chocolate bar  (5% tax rate)
         - 1x $3.49 shipping (0% tax rate)
     - Payment Sources:
-        - Contact with prepaid account, and a sock and chocolate bar promotion.
-            - Account has $20.
+        - Contact with prepaid account and a chocolate bar promotion.
+            - Account has $10.
             - Sock promo is for 20% off retail price of socks.
-            - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
-        - Generic code for 10% off orders over $5 (does not apply to shipping). 
+        - Credit card
     
     + Headers
     
@@ -48,7 +49,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
 
     You cannot checkout if the balance of all Values does not cover the `lineItems` and there is no credit card to charge (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (StripeRestError)
 
     + Body
 
@@ -57,3 +58,29 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "message": "Insufficient balance for the transaction.",
                 "messageCode": "InsufficientBalance"
             }
+
++ Response 409 (application/json)
+
+    Idempotency error: you cannot create use a Transaction `id` more than once, for the same or a different Transaction request.
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "A Lightrail transaction with transactionId 'transac-12345' already exists.",
+                "messageCode": "TransactionExists"
+            }
+
++ Response 422 (application/json)
+
+    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD (or equivalent). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You may wish to handle this error by asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Failed to charge credit card: amount '25' for Stripe was too small.",
+                "messageCode": "StripeAmountTooSmall",
+                "stripeError": {...}
+            }
+

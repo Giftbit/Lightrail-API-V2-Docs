@@ -1,6 +1,6 @@
 ### Credit [POST /transactions/credit]
 
-Credit (add to) a payment destination.  Currently only the `lightrail` rail is supported.
+Credit (add an amount to) a Lightrail payment destination.
 
 + Request (application/json)
 
@@ -10,7 +10,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
         
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
-        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
+        + destination (LightrailTransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + uses (number, optional) - The number of uses to add.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
@@ -24,7 +24,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
     
 + Response 201 (application/json)
 
-    + Attributes (Transaction)
+    + Attributes (RestError)
 
     + Body
 
