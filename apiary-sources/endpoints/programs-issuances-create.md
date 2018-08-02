@@ -11,7 +11,7 @@
     + Attributes
         + id (string, required) - {{issuance.id}}  {{idPurpose}}
         + count (number, required) - {{issuance.count}}
-        + codeGeneration (CodeGeneration, optional) - {{issuance.generateCode}}
+        + generateCode (CodeGeneration, optional) - {{issuance.generateCode}}
         + code (string, optional) - {{issuance.code}}
         + isGenericCode (boolean, optional) - {{issuance.isGenericCode}}
         + balance (number, optional) - {{issuance.balance}}

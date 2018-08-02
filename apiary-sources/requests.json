@@ -294,9 +294,9 @@
       "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances",
       "body": {
         "id": "{UUID()}",
-        "count": 200,
-        "codeGeneration": {},
-        "balance": 5000
+        "count": 10,
+        "generateCode": {},
+        "balance": 500
       }
     },
     {

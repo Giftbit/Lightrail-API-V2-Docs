@@ -37,6 +37,7 @@ filter:
   transactionType: "Filter by the transactionType."
   updatedDate: "Filter by updatedDate."
   uses: "Filter by number of uses remaining."
+  valueId: "Filter by Value ID."
   ops:
     date: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
     in: "This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information."
