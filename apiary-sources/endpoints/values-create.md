@@ -1,7 +1,6 @@
 ### Create a Value [POST /values{?showCode}]
 
 + Parameter
-    + id (string) - the ID of the Value to get.
     + showCode (boolean, optional) - {{value.showCode}}  This is useful when using the `generateCode` param and you want to see the generated code.
 
 + Request (application/json)
