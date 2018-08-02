@@ -8,8 +8,5 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 {% include 'generated/endpoints/programs-get.md' %}
 {% include 'generated/endpoints/programs-update.md' %}
 {% include 'generated/endpoints/programs-delete.md' %}
-
-[Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app. Each block of Values issued at once is tracked as an Issuance. Issuances are tracked for downloading secured codes after creation.
-
 {% include 'generated/endpoints/programs-issuances-create.md' %}
 {% include 'generated/endpoints/programs-issuances-get.md' %}

@@ -1,4 +1,4 @@
-### Get an Issuance (Coming soon) [GET /programs/{programId}/issuances/{id}]
+### Get an Issuance [GET /programs/{programId}/issuances/{id}]
 
 + Parameter
     + id (string) - the ID of the Issuance to get.
@@ -16,7 +16,7 @@
 
             {REQUEST_REPLACEMENT:createIssuance.response.body}
 
-### List Issuances (Coming soon) [GET /programs/{id}/issuances]
+### List Issuances [GET /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to get Issuances from.

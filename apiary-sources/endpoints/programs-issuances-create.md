@@ -1,4 +1,5 @@
-### Issue Values (Coming soon) [POST /programs/{id}/issuances]
+### Create Issuance[POST /programs/{id}/issuances]
+[Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app. Each block of Values issued at once is tracked as an Issuance. Issuances are tracked for downloading secured codes after creation.
 
 + Parameter
     + id (string) - the ID of the Program to issue Value from.
