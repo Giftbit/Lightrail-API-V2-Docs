@@ -19,5 +19,5 @@
 + endDate (string) - {{value.endDate}}
 + tags (array[string]) - {{tags}}
 + metadata (object) - {{value.metadata}}
-+ createdDate (string) - {{contact.createdDate}}
-+ updatedDate (string) - {{contact.updatedDate}}
++ createdDate (string) - {{createdDate}}
++ updatedDate (string) - {{updatedDate}}

@@ -1,4 +1,4 @@
-### Get an Issuance (Coming soon) [GET /programs/{programId}/issuances/{id}]
+### Get an Issuance [GET /programs/{programId}/issuances/{id}]
 
 + Parameter
     + id (string) - the ID of the Issuance to get.
@@ -14,14 +14,9 @@
 
     + Body
 
-            {
-                "id": "printer-block-21",
-                "count": 200,
-                "csv": "<URL to download CSV from>",
-                "createdDate": "2018-04-17T23:20:08.000Z"
-            }
+            {REQUEST_REPLACEMENT:createIssuance.response.body}
 
-### List Issuances (Coming soon) [GET /programs/{id}/issuances]
+### List Issuances [GET /programs/{id}/issuances]
 
 + Parameter
     + id (string) - the ID of the Program to get Issuances from.
@@ -37,11 +32,4 @@
 
     + Body
     
-            [
-                {
-                    "id": "printer-block-21",
-                    "count": 200,
-                    "csv": "<URL to download CSV from>",
-                    "createdDate": "2018-04-17T23:20:08.000Z"
-                }
-            ]
+            {REQUEST_REPLACEMENT:listIssuances.response.body}

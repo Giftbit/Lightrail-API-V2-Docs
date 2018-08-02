@@ -21,8 +21,6 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/programs.md' %}
 
-{% include 'api-sections/issuances.md' %}
-
 {% include 'api-sections/transactions.md' %}
 
 # Group Advanced

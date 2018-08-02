@@ -8,3 +8,5 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 {% include 'generated/endpoints/programs-get.md' %}
 {% include 'generated/endpoints/programs-update.md' %}
 {% include 'generated/endpoints/programs-delete.md' %}
+{% include 'generated/endpoints/programs-issuances-create.md' %}
+{% include 'generated/endpoints/programs-issuances-get.md' %}

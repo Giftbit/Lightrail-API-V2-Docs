@@ -1,5 +1,7 @@
 idPurpose: "This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources."
 tags: "Segmentation tags. (support coming soon)"
+createdDate: "Date of creation."
+updatedDate: "Date of last update."
 contact:
   createdDate: "Date when the Contact was created."
   id: "ID for the Contact."
@@ -35,6 +37,7 @@ filter:
   transactionType: "Filter by the transactionType."
   updatedDate: "Filter by updatedDate."
   uses: "Filter by number of uses remaining."
+  valueId: "Filter by Value ID."
   ops:
     date: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
     in: "This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information."
@@ -43,8 +46,20 @@ filter:
 header:
   authorization: "Authorization: Bearer <API_KEY>"
 issuance:
-  createdDate: "Date when the Value was issued."
+  createdDate: "Date when the Issuance was created."
   id: "ID for the Issuance."
+  programId: "The ID of the program it was created from."
+  count: "The numbers of Values to issue. Must be between 1-1000."
+  generateCode: "This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`."
+  code: "The code to set on the Value. This is only available when `count` is 1."
+  isGenericCode: "If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided. This is only available when `count` is 1."
+  balance: "The balance to set on each Value. This can be constrained by the Program's `minInitialBalance` and `maxInitialBalance` or must be in the `fixedInitialBalances` array."
+  uses: "The uses to set on each Value. This can be restricted to values defined by the Program's `fixedInitialUses`."
+  startDate: "Override the Program's startDate for the Value."
+  endDate: "Override the Program's endDate for the Value."
+  redemptionRule: "A Redemption Rule controlling when the Values can be used in checkout. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md)."
+  valueRule: "A Value Rule controlling the effective balance of the Values in checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document."
+  metadata: "Arbitrary data associated with the Issuance."
 pagination:
   limit: "The max number of items to get."
   maxLimit: "The `limit` available`."
