@@ -81,7 +81,7 @@ Lightrail uses the following HTTP status codes to indicate an error:
 | 403  | The operation is not allowed for the given authentication. |
 | 404  | The resource was not found.  eg: There is no Contact for the given ID. |
 | 409  | The operation could not be performed because of the state of the system.  eg: There is not enough balance for a Transaction to complete. |
-| 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. |
+| 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. If using the `stripe` payment rail, most Stripe errors will result in a `422`. |
 | 429  | Too many requests in a given amount of time. |
 | 500  | Internal server error.  Please [contact us](mailto:hello@lightrail.com) with details of your request and we'll look into it. |
 
@@ -92,6 +92,7 @@ Lightrail errors contain a JSON body with the following properties:
 | message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates. |
 | statusCode  | yes            | The HTTP status code. |
 | messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
+| stripeError | no             | When using the `stripe` rail: the full error response from Stripe in case of an error charging a credit card. |
 
 An example:
 
@@ -129,14 +130,14 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"12d29014-223d-4970-8","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
+            {"email":"thedude@example.com","firstName":"Jeffrey","id":"d0e2e8f0-0931-4a5b-9","lastName":"Lebowski","metadata":{"alias":"El Duderino"}}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"12d29014-223d-4970-8","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:52.000Z"}
+            {"createdDate":"2018-08-01T22:41:01.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"d0e2e8f0-0931-4a5b-9","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-08-01T22:41:01.000Z"}
 ### Get a Contact [GET /contacts/{id}]
 
 + Parameter
@@ -152,7 +153,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"12d29014-223d-4970-8","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:52.000Z"}
+            {"createdDate":"2018-08-01T22:41:01.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"d0e2e8f0-0931-4a5b-9","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-08-01T22:41:01.000Z"}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -180,7 +181,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"0bd795f8-7f91-4df7-9","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-24T22:06:43.000Z","updatedDate":"2018-07-24T22:06:43.000Z"}]
+            [{"createdDate":"2018-07-24T22:06:43.000Z","email":"thedude@example.com","firstName":"The Dude","id":"0bd795f8-7f91-4df7-9","lastName":"Lebowski","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"updatedDate":"2018-07-24T22:06:43.000Z"}]
 ### Update a Contact [PATCH /contacts/{id}]
             
 + Parameter
@@ -211,7 +212,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"12d29014-223d-4970-8","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:52.000Z"}
+            {"createdDate":"2018-08-01T22:41:01.000Z","email":"thedude@example.com","firstName":"The Dude","id":"d0e2e8f0-0931-4a5b-9","lastName":"Lebowski","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"updatedDate":"2018-08-01T22:41:01.000Z"}
 ### Delete a Contact [DELETE /contacts/{id}]
 
 + Parameter
@@ -279,7 +280,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"e7b73ba0-5aa9-401f-b","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","contactId":"12d29014-223d-4970-8","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:53.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}]
+            [{"active":true,"balance":500,"canceled":false,"code":null,"contactId":"d0e2e8f0-0931-4a5b-9","createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"421b42af-17cd-462a-a","isGenericCode":null,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","uses":null,"valueRule":null}]
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
 + Parameter
@@ -296,7 +297,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"valueId":"e7b73ba0-5aa9-401f-b"}
+            {"valueId":"421b42af-17cd-462a-a"}
     
 + Response 200 (application/json)
     
@@ -308,7 +309,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"e7b73ba0-5aa9-401f-b","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","contactId":"12d29014-223d-4970-8","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:53.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}
+            {"active":true,"balance":500,"canceled":false,"code":null,"contactId":"d0e2e8f0-0931-4a5b-9","createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"421b42af-17cd-462a-a","isGenericCode":null,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","uses":null,"valueRule":null}
 
 + Response 409 (application/json)
     
@@ -330,7 +331,11 @@ A Value (naturally) represents value in the Lightrail system.  This includes a g
  
 Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
 
-### Create a Value [POST /values]
+### Create a Value [POST /values{?showCode}]
+
++ Parameter
+    + id (string) - the ID of the Value to get.
+    + showCode (boolean, optional) - Show the full code for the Value.  This is useful when using the `generateCode` param and you want to see the generated code.
 
 + Request (application/json)
     + Headers
@@ -361,14 +366,14 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         
     + Body
     
-            {"id":"e7b73ba0-5aa9-401f-b","programId":"4d086a7e-3e5e-4284-9","balance":500}
+            {"balance":500,"id":"421b42af-17cd-462a-a","programId":"6fb5993e-75aa-4b53-a"}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"id":"e7b73ba0-5aa9-401f-b","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-25T18:21:53.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}
+            {"active":true,"balance":500,"canceled":false,"code":null,"contactId":null,"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"421b42af-17cd-462a-a","isGenericCode":null,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","uses":null,"valueRule":null}
 ### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
@@ -385,7 +390,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"e7b73ba0-5aa9-401f-b","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","code":null,"isGenericCode":null,"contactId":null,"pretax":true,"active":true,"frozen":false,"redemptionRule":null,"valueRule":null,"discount":true,"discountSellerLiability":null,"startDate":null,"endDate":null,"metadata":null,"canceled":false,"createdDate":"2018-07-25T18:21:53.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}
+            {"active":true,"balance":500,"canceled":false,"code":null,"contactId":null,"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"421b42af-17cd-462a-a","isGenericCode":null,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","uses":null,"valueRule":null}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
@@ -503,7 +508,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"id":"e7b73ba0-5aa9-401f-b","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","contactId":"12d29014-223d-4970-8","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:53.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}
+            {"active":true,"balance":500,"canceled":false,"code":null,"contactId":"d0e2e8f0-0931-4a5b-9","createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":true,"id":"421b42af-17cd-462a-a","isGenericCode":null,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","uses":null,"valueRule":null}
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -560,7 +565,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"f5ea81d6-8621-49d1-8","currency":"USD","balance":500,"uses":null,"programId":"4d086a7e-3e5e-4284-9","contactId":null,"code":"\u2026RW5M","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:55.000Z","updatedDate":"2018-07-25T18:21:55.000Z"}
+            {"active":true,"balance":500,"canceled":false,"code":"\u2026C25Y","contactId":null,"createdDate":"2018-08-01T22:41:06.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"18bdd890-e7df-4691-b","isGenericCode":false,"metadata":null,"pretax":true,"programId":"6fb5993e-75aa-4b53-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:06.000Z","uses":null,"valueRule":null}
 
 ## Programs [/programs]
 
@@ -595,14 +600,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
 
-            {"id":"4d086a7e-3e5e-4284-9","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
+            {"currency":"USD","discount":true,"fixedInitialBalances":[500],"id":"6fb5993e-75aa-4b53-a","name":"Spring Promotion USD","pretax":true}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"4d086a7e-3e5e-4284-9","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:52.000Z"}
+            {"active":true,"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"id":"6fb5993e-75aa-4b53-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","valueRule":null}
 ### Get a Program [GET /programs/promotions/{id}]
 
 + Parameter
@@ -618,7 +623,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-                {"id":"4d086a7e-3e5e-4284-9","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:52.000Z"}
+                {"active":true,"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"id":"6fb5993e-75aa-4b53-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","valueRule":null}
 
 ### List Programs [GET /programs{?limit}{?id}{?name}{?preTax}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
@@ -648,7 +653,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            [{"id":"004fb3a2-829c-4139-8","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-24T21:38:11.000Z","updatedDate":"2018-07-24T21:38:11.000Z"}]
+            [{"active":true,"createdDate":"2018-07-24T21:38:11.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"id":"004fb3a2-829c-4139-8","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promo US Dollars","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-07-24T21:38:11.000Z","valueRule":null}]
 ### Update a Program [PATCH /programs/{id}]
 
 + Parameter
@@ -686,7 +691,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
             
-            {"id":"4d086a7e-3e5e-4284-9","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-07-25T18:21:52.000Z","updatedDate":"2018-07-25T18:21:53.000Z"}
+            {"active":true,"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"id":"6fb5993e-75aa-4b53-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promo US Dollars","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-08-01T22:41:02.000Z","valueRule":null}
 ### Delete a Program [DELETE /programs/{id}]
 
 + Parameter
@@ -818,7 +823,9 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
 The checkout endpoint is used to collect all payment for a purchase. It will debit funds from Lightrail and also charge credit cards through Stripe. Your Stripe account must be connected to Lightrail in order for Lightrail to make charges on your behalf. 
 
-Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended a stop-gap solution to support transitioning from legacy systems.    
+Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended as a stop-gap solution to support transitioning from legacy systems.
+
+Error responses: If using the `stripe` rail, it is possible for checkout transactions to fail for reasons outside of Lightrail's control, such as an invalid card token or a card being declined. Stripe errors will be passed on in full under the `stripeError` key in the response. 
 
 + Request (application/json)
     
@@ -828,11 +835,10 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         - 1x $1.99 chocolate bar  (5% tax rate)
         - 1x $3.49 shipping (0% tax rate)
     - Payment Sources:
-        - Contact with prepaid account, and a sock and chocolate bar promotion.
-            - Account has $20.
+        - Contact with prepaid account and a chocolate bar promotion.
+            - Account has $10.
             - Sock promo is for 20% off retail price of socks.
-            - Chocolate bar promo is a $0.50 credit towards the purchase of a chocolate bar.
-        - Generic code for 10% off orders over $5 (does not apply to shipping). 
+        - Credit card
     
     + Headers
     
@@ -850,7 +856,7 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
         
     + Body 
     
-            {"id":"2d565b8a-737d-4d39-9","sources":[{"rail":"lightrail","valueId":"2fa50f41-5eb8-4f04-9"},{"rail":"lightrail","valueId":"edc2a6eb-662d-46d3-8"},{"rail":"lightrail","valueId":"0ef6e893-5bf5-432f-9"}],"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05},{"productId":"shipping","unitPrice":349,"taxRate":0.0}],"currency":"USD"}
+            {"currency":"USD","id":"714416c2-4ba6-4142-b","lineItems":[{"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"productId":"chocolate_bar","taxRate":0.05,"unitPrice":199},{"productId":"shipping","taxRate":0.0,"unitPrice":349}],"sources":[{"contactId":"d0e2e8f0-0931-4a5b-9","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}]}
     
 + Response 201 (application/json)
 
@@ -858,13 +864,13 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
 
     + Body
     
-            {"id":"2d565b8a-737d-4d39-9","transactionType":"checkout","currency":"USD","createdDate":"2018-07-25T18:21:54.000Z","totals":{"subtotal":1548,"tax":71,"discount":250,"payable":1369,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":149,"tax":7,"discount":50,"remainder":0,"payable":156}}],"steps":[{"rail":"lightrail","valueId":"0ef6e893-5bf5-432f-9","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":0,"balanceChange":-200},{"rail":"lightrail","valueId":"edc2a6eb-662d-46d3-8","contactId":null,"code":null,"balanceBefore":50,"balanceAfter":0,"balanceChange":-50},{"rail":"lightrail","valueId":"2fa50f41-5eb8-4f04-9","contactId":null,"code":null,"balanceBefore":2000,"balanceAfter":631,"balanceChange":-1369}],"paymentSources":[{"rail":"lightrail","valueId":"2fa50f41-5eb8-4f04-9"},{"rail":"lightrail","valueId":"edc2a6eb-662d-46d3-8"},{"rail":"lightrail","valueId":"0ef6e893-5bf5-432f-9"}],"metadata":null}
+            {"createdDate":"2018-08-01T22:41:03.000Z","currency":"USD","id":"714416c2-4ba6-4142-b","lineItems":[{"lineTotal":{"discount":200,"payable":864,"remainder":0,"subtotal":1000,"tax":64,"taxable":800},"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"lineTotal":{"discount":0,"payable":349,"remainder":0,"subtotal":349,"tax":0,"taxable":349},"productId":"shipping","quantity":1,"taxRate":0,"unitPrice":349},{"lineTotal":{"discount":0,"payable":209,"remainder":0,"subtotal":199,"tax":10,"taxable":199},"productId":"chocolate_bar","quantity":1,"taxRate":0.05,"unitPrice":199}],"metadata":null,"paymentSources":[{"contactId":"d0e2e8f0-0931-4a5b-9","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}],"steps":[{"balanceAfter":0,"balanceBefore":0,"balanceChange":-200,"code":null,"contactId":"d0e2e8f0-0931-4a5b-9","rail":"lightrail","valueId":"4dd9dc74-e791-4222-b"},{"balanceAfter":0,"balanceBefore":1000,"balanceChange":-1000,"code":null,"contactId":"d0e2e8f0-0931-4a5b-9","rail":"lightrail","valueId":"0794add1-14f1-4839-9"},{"amount":-422,"charge":{"amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1CuT09CM9MOvFvZK7dubeFM7","captured":true,"created":1533163264,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"id":"ch_1CuT08CM9MOvFvZK2muhgg2J","invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"714416c2-4ba6-4142-b","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"4dd9dc74-e791-4222-b\"},{\"rail\":\"lightrail\",\"valueId\":\"0794add1-14f1-4839-9\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"object":"charge","on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"},"paid":true,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"data":[],"has_more":false,"object":"list","total_count":0,"url":"/v1/charges/ch_1CuT08CM9MOvFvZK2muhgg2J/refunds"},"review":null,"shipping":null,"source":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":8,"exp_year":2019,"fingerprint":"of2hPOxbCXt9w9BD","funding":"credit","id":"card_1CuT08CM9MOvFvZKDYMyjmqQ","last4":"4242","metadata":{},"name":null,"object":"card","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"chargeId":"ch_1CuT08CM9MOvFvZK2muhgg2J","rail":"stripe"}],"totals":{"discount":200,"payable":1422,"remainder":0,"subtotal":1548,"tax":74},"transactionType":"checkout"}
 
 + Response 409 (application/json)
 
     You cannot checkout if the balance of all Values does not cover the `lineItems` and there is no credit card to charge (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (StripeRestError)
 
     + Body
 
@@ -873,9 +879,35 @@ Lightrail and Stripe payment sources are referred to as the payment rails `light
                 "message": "Insufficient balance for the transaction.",
                 "messageCode": "InsufficientBalance"
             }
+
++ Response 409 (application/json)
+
+    Idempotency error: you cannot create use a Transaction `id` more than once, for the same or a different Transaction request.
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "A Lightrail transaction with transactionId 'transac-12345' already exists.",
+                "messageCode": "TransactionExists"
+            }
+
++ Response 422 (application/json)
+
+    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD (or equivalent). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You may wish to handle this error by asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Failed to charge credit card: amount '25' for Stripe was too small.",
+                "messageCode": "StripeAmountTooSmall",
+                "stripeError": {...}
+            }
+
 ### Debit [POST /transactions/debit]
 
-Debit (remove from) a payment source.  Currently only the `lightrail` rail is supported.
+Debit (remove an amount from) a Lightrail payment source.
 
 + Request (application/json)
 
@@ -885,7 +917,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
         
     + Attributes
         + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
-        + source (TransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
+        + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + uses (number, optional) - The number of uses to remove.  Defaults to 0.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
@@ -896,7 +928,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"71435af0-442e-4e29-8","source":{"rail":"lightrail","valueId":"93a677f1-3277-414d-a"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"amount":1000,"currency":"USD","id":"37863d80-f09d-4d44-8","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"source":{"rail":"lightrail","valueId":"e79825da-3069-4569-9"}}
     
 + Response 201 (application/json)
 
@@ -904,13 +936,13 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
 
     + Body
 
-            {"id":"71435af0-442e-4e29-8","transactionType":"debit","currency":"USD","createdDate":"2018-07-25T18:21:53.000Z","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"93a677f1-3277-414d-a","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","id":"37863d80-f09d-4d44-8","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","valueId":"e79825da-3069-4569-9"}],"totals":{"remainder":0},"transactionType":"debit"}
 
 + Response 409 (application/json)
 
     You cannot debit a Value by more balance than is available (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (RestError)
 
     + Body
 
@@ -921,7 +953,7 @@ Debit (remove from) a payment source.  Currently only the `lightrail` rail is su
             }
 ### Credit [POST /transactions/credit]
 
-Credit (add to) a payment destination.  Currently only the `lightrail` rail is supported.
+Credit (add an amount to) a Lightrail payment destination.
 
 + Request (application/json)
 
@@ -931,7 +963,7 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
         
     + Attributes
         + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
-        + destination (TransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
+        + destination (LightrailTransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + uses (number, optional) - The number of uses to add.  Defaults to 0.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
@@ -941,19 +973,19 @@ Credit (add to) a payment destination.  Currently only the `lightrail` rail is s
 
     + Body
 
-            {"id":"1da29328-39ef-43d7-a","destination":{"rail":"lightrail","valueId":"93a677f1-3277-414d-a"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
+            {"amount":2500,"currency":"USD","destination":{"rail":"lightrail","valueId":"e79825da-3069-4569-9"},"id":"b118d000-2c24-4449-9","metadata":{"note":"Frequent buyer bonus"}}
     
 + Response 201 (application/json)
 
-    + Attributes (Transaction)
+    + Attributes (RestError)
 
     + Body
 
-            {"id":"1da29328-39ef-43d7-a","transactionType":"credit","currency":"USD","createdDate":"2018-07-25T18:21:53.000Z","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"93a677f1-3277-414d-a","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"}}
+            {"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","id":"b118d000-2c24-4449-9","lineItems":null,"metadata":{"note":"Frequent buyer bonus"},"paymentSources":null,"steps":[{"balanceAfter":3000,"balanceBefore":500,"balanceChange":2500,"code":null,"contactId":null,"rail":"lightrail","valueId":"e79825da-3069-4569-9"}],"totals":{"remainder":0},"transactionType":"credit"}
 
 ### Transfer [POST /transactions/transfer]
 
-Transfer value between a payment source and a payment destination.  Currently only the `lightrail` rail is supported.
+Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
 
 + Request (application/json)
 
@@ -963,8 +995,8 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Attributes
         + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
-        + source (TransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
-        + destination (TransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
+        + source (StripeOrLightrailTransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
+        + destination (LightrailTransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
         + amount (number, required) - The amount to transfer, > 0.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If true the transaction is simulated and no changes take place. If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change.
@@ -974,7 +1006,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"9fc0e976-3e43-48e4-a","source":{"rail":"lightrail","valueId":"98cefefa-9bb7-498f-a"},"destination":{"rail":"lightrail","valueId":"1411340d-63ab-4c7e-8"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
+            {"amount":100,"currency":"USD","destination":{"rail":"lightrail","valueId":"23b0c1f4-daae-4b88-b"},"id":"fb06bc6a-86b7-4369-8","metadata":{"reference":"customer request to move funds. ref: #4948173593"},"source":{"rail":"lightrail","valueId":"bb5b40c1-1fdf-48dd-a"}}
 
 + Response 201 (application/json)
 
@@ -991,13 +1023,13 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"9fc0e976-3e43-48e4-a","transactionType":"transfer","currency":"USD","createdDate":"2018-07-25T18:21:55.000Z","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"98cefefa-9bb7-498f-a","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"1411340d-63ab-4c7e-8","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
+            {"createdDate":"2018-08-01T22:41:06.000Z","currency":"USD","id":"fb06bc6a-86b7-4369-8","lineItems":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"paymentSources":null,"steps":[{"balanceAfter":400,"balanceBefore":500,"balanceChange":-100,"code":null,"contactId":null,"rail":"lightrail","valueId":"bb5b40c1-1fdf-48dd-a"},{"balanceAfter":600,"balanceBefore":500,"balanceChange":100,"code":null,"contactId":null,"rail":"lightrail","valueId":"23b0c1f4-daae-4b88-b"}],"totals":{"remainder":0},"transactionType":"transfer"}
 
 + Response 409 (application/json)
 
     You cannot transfer from a Value more balance than is available (if `allowRemainder` is not `true`).
 
-    + Attributes (Transaction)
+    + Attributes (StripeRestError)
 
     + Body
 
@@ -1021,7 +1053,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            {"id":"71435af0-442e-4e29-8","transactionType":"debit","currency":"USD","createdDate":"2018-07-25T18:21:53.000Z","totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"93a677f1-3277-414d-a","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"createdDate":"2018-08-01T22:41:02.000Z","currency":"USD","id":"37863d80-f09d-4d44-8","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","valueId":"e79825da-3069-4569-9"}],"totals":{"remainder":0},"transactionType":"debit"}
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
 
@@ -1046,7 +1078,7 @@ Transfer value between a payment source and a payment destination.  Currently on
 
     + Body
 
-            [{"id":"5cb3e2d0-b702-4ea6-a","transactionType":"credit","currency":"USD","totals":null,"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"5cb3e2d0-b702-4ea6-a","contactId":null,"code":null,"balanceBefore":0,"balanceAfter":500,"balanceChange":500}],"metadata":null,"createdDate":"2018-07-24T18:45:15.000Z"}]
+            [{"createdDate":"2018-07-24T18:45:15.000Z","currency":"USD","id":"5cb3e2d0-b702-4ea6-a","lineItems":null,"metadata":null,"paymentSources":null,"steps":[{"balanceAfter":500,"balanceBefore":0,"balanceChange":500,"code":null,"contactId":null,"rail":"lightrail","valueId":"5cb3e2d0-b702-4ea6-a"}],"totals":null,"transactionType":"credit"}]
 ### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
@@ -1370,6 +1402,9 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + message (string) - an English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates.
 + messageCode (string) - A constant corresponding to the message.  This can be used to take action in response to the error.
 
+## StripeRestError (RestError)
++ stripeError (object) - When using the `stripe` rail: the full error response from Stripe in case of an error charging a credit card.
+
 ## Rule (object)
 + rule (string) - the Lightrail Rule text of the rule.
 + explanation (string) - a plain explanation of the rule seen by contacts.
@@ -1399,14 +1434,20 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + sellerGross (number) - The amount payable to the seller before discounts.
 + sellerNet (number) - The amount payable to the seller after discounts.
 
-## TransactionParty (object)
-+ rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
+## LightrailTransactionParty (object)
++ rail (string) - The payment rail: `lightrail`. Must be used in combination with one of the following identifiers.
 + code (string) - `lightrail`: the code of a Gift Card or Promotion.
 + contactId (string) - `lightrail`: a Contact's ID.  This is shorthand for all Values that a Contact is associated with.
 + valueId (string) - `lightrail`: a Value's ID.
+
+## StripeOrLightrailTransactionParty (LightrailTransactionParty)
++ rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`]. Must be used in combination with one of the following identifiers.
 + source (string) - `stripe`: a tokenized credit card for Stripe.  
 + customer (string) - `stripe`: a Stripe customer ID (uses customer's default source).  
 + maxAmount (number) - `stripe`: the maximum amount that can be charged to the given Stripe source.  
+
+## TransactionParty (StripeOrLightrailTransactionParty)
++ rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
 + id (string) - `internal`: the ID of the internal value.
 + balance (number) - `internal`: the amount of internal value stored.
 + beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
