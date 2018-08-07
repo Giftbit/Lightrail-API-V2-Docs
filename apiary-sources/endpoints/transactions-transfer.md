@@ -30,7 +30,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
         + transactionType (string, required) - `transfer`
         + currency (string, required) - {{currency.code}}
         + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainder}}
+        + remainder (number, required) - {{transaction.remainderResponse}}
         + simulated (boolean, optional) - {{transaction.simulated}}
         + createdDate (string, required) - {{transaction.createdDate}}
         + pending (boolean, optional) - {{transaction.pending}}
