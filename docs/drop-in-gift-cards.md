@@ -9,13 +9,11 @@ When your customers receive a gift card, they can easily redeem and apply the gi
 Your checkout process requires a simple update to accept payment from your customer accounts.
 
 ### Getting Started
-[Sign up](https://www.lightrail.com/app/#/register) for a Lightrail account. 
+[Sign up](https://www.lightrail.com/app/#/auth/register) for a Lightrail account.
 
 Note this quickstart assumes you are using Stripe to process payments: if you are using another payment processor and want to build a custom solution, please [contact us](mailto:hello@lightrail.com).
 
 You will need configure a few settings to get started. 
-
-If at any point you want to see a working example of the entire Drop-in Gift Card solution, check out our [sample app](https://github.com/Giftbit/stripe-integration-sample-webapp).
 
 ### Step 0: Authentication & Configuration
 Create your Lightrail API key from the [Integrations](https://www.lightrail.com/app/#/account/api) section of your Lightrail account. 
@@ -84,9 +82,9 @@ This step is usually done in the web app (coming soon!) but currently must be do
 #### Shopper Tokens
 Shopper Tokens act like customer-specific API tokens to be used client-side in the drop-in components. They are based on a Contact's `id` stored in Lightrail.
 
-Shopper Tokens must be generated server side, for example using our [Node (Typescript/Javascript) Client Library](https://github.com/Giftbit/lightrail-client-javascript). (Coming soon: client libraries in Java, Ruby, PHP, and C#.)
+Shopper Tokens must be generated server side, for example using our [Node (Typescript/Javascript) Client Library](https://github.com/Giftbit/lightrail-client-javascript/tree/v2-client). (Coming soon: client libraries in Java, Ruby, PHP, and C#.)
 
-The current version of the Lightrail Javascript Client is under the alpha tag: `npm install lightrail-client@alpha`
+The current version of the Lightrail Javascript Client (^2.0.0) is under the alpha tag: `npm install lightrail-client@alpha`
 
 You'll also need the shared secret that you created earlier. You can retrieve it here: `GET https://api.lightrail.com/v1/storage/jwtSecret`
 
