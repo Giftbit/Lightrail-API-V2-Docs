@@ -28,7 +28,7 @@
             {REQUEST_REPLACEMENT:createProgram1.body}
     
 + Response 201 (application/json)
-    + Attributes (Contact)
+    + Attributes (Program)
 
     + Body
             
