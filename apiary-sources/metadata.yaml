@@ -88,7 +88,8 @@ program:
     startDate: "Override the Program's configured startDate."
     endDate: "Override the Program's configured endDate."
 transaction:
-  allowRemainder: "If true the transaction will go through without all balance being debited, and the remainder indicated."
+  allowRemainder: "If true the transaction will go through using whatever amount is available: this might not cover the full amount of the transaction. The remainder (i.e. amount still owing) will be indicated."
+  remainderResponse: "The amount still owing, if a remainder is allowed by setting `allowRemainder: true`."
   createdDate: "Date when the Transaction was created."
   destination: "Only supported rail is `\"lightrail\"` and must it refer to a single Value."
   id: "ID for the Transaction."
