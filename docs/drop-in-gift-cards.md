@@ -13,7 +13,7 @@ Your checkout process requires a simple update to accept payment from your custo
 
 Note this quickstart assumes you are using Stripe to process payments: if you are using another payment processor and want to build a custom solution, please [contact us](mailto:hello@lightrail.com).
 
-You will need configure a few settings to get started. 
+You will need to configure a few settings to get started. 
 
 ### Step 0: Authentication & Configuration
 Create your Lightrail API key from the [Integrations](https://www.lightrail.com/app/#/account/api) section of your Lightrail account. 
@@ -413,7 +413,7 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
 ```
 
 ## Customization and Advanced UI
-The appearance of components is fully customizable. Using Lightrail UI you can also attach event listeners to the components to respond to customer activity. For more information on this usage, see [Lightrail UI](#lightrail-ui).
+The appearance of components is fully customizable. Using Lightrail UI you can also attach event listeners to the components to respond to customer activity. Detailed customization documentation is coming soon, and in the meantime you can always [contact us](mailto:hello@lightrail.com) with any questions. 
 
 ## Support
 Contact us any time at [hello@lightrail.com](mailto:hello@lightrail.com) —- we are here to help.
