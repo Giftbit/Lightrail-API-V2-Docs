@@ -294,6 +294,7 @@
       "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances",
       "body": {
         "id": "{UUID()}",
+        "name": "My First Issuance",
         "count": 10,
         "generateCode": {},
         "balance": 500

@@ -15,7 +15,7 @@
 
                 {REQUEST_REPLACEMENT:createProgram1.response.body}
 
-### List Programs [GET /programs{?limit}{?id}{?name}{?preTax}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
+### List Programs [GET /programs{?limit}{?id}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}

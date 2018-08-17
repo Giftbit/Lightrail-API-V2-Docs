@@ -48,6 +48,7 @@ header:
 issuance:
   createdDate: "Date when the Issuance was created."
   id: "ID for the Issuance."
+  name: "A human-readable name for the Issuance."
   programId: "The ID of the program it was created from."
   count: "The numbers of Values to issue. Must be between 1-1000."
   generateCode: "This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`."

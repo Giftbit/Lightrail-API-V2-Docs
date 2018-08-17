@@ -7,7 +7,7 @@
         
     + Attributes
         + id (string, required) - {{program.id}}  {{idPurpose}}
-        + name (string, optional) - {{program.name}}
+        + name (string, required) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + discount (boolean, optional) - {{value.discount}} Default is `true`. 
         + preTax (boolean, optional) - {{value.preTax}} Default is `true`.
