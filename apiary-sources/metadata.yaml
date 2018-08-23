@@ -121,7 +121,7 @@ transaction:
   checkout:
     metadata: "Any additional data you want to store for the item. All metadata will also be saved on any Stripe charge(s)."
   tax:
-    roundingMode: "The rounding mode used for tax calculations. Modes: `HALF_EVEN`, `HALF_UP`. Defaults to `HALF_EVEN`."
+    roundingMode: "The rounding mode used for tax calculations. Modes: `HALF_EVEN`, `HALF_UP`. Defaults to `HALF_EVEN`, also known as bankers rounding, which is the standard for most financial calculations."
 value:
   active: "Whether the Value is active and can be used upon creation."
   balance: "The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
