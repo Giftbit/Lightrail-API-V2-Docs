@@ -121,7 +121,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Contact.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - ID for the Contact.  The ID you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
@@ -342,7 +342,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID of the Value.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - ID of the Value.  The ID you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - Directly attach to a Contact.
         + code (string, optional) - Assign a code.
@@ -598,7 +598,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Program.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - ID for the Program.  The ID you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + name (string, required) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout. Default is `true`. 
@@ -750,7 +750,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Issuance.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - ID for the Issuance.  The ID you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + name (string, required) - A human-readable name for the Issuance.
         + count (number, required) - The numbers of Values to issue. Must be between 1-1000.
         + generateCode (CodeGeneration, optional) - This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
@@ -839,7 +839,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Transaction.  This ID is a value you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - ID for the Transaction.  The ID you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
@@ -910,7 +910,7 @@ Debit (remove an amount from) a Lightrail payment source.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Transaction.  This ID is a value you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - ID for the Transaction.  The ID you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + uses (number, optional) - The number of uses to remove.  Defaults to 0.
@@ -956,7 +956,7 @@ Credit (add an amount to) a Lightrail payment destination.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Transaction.  This ID is a value you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - ID for the Transaction.  The ID you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + destination (LightrailTransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + uses (number, optional) - The number of uses to add.  Defaults to 0.
@@ -988,7 +988,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Transaction.  This ID is a value you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - ID for the Transaction.  The ID you choose to represent the Transaction. Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + source (StripeOrLightrailTransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
         + destination (LightrailTransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
         + amount (number, required) - The amount to transfer, > 0.
@@ -1337,7 +1337,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + updatedDate (string) - Date when the Contact was last updated.
 
 ## Issuance (object)
-+ id (string, required) - ID for the Issuance.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
++ id (string, required) - ID for the Issuance.  The ID you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
 + programId (string) - The ID of the program it was created from.
 + count (number) - The numbers of Values to issue. Must be between 1-1000.
 + codeGeneration (CodeGeneration) - This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
