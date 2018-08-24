@@ -9,7 +9,7 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{value.id}}  {{idPurpose}}
+        + id (string, required) - {{value.id}}  {{value.idPurpose}}
         + programId (string, optional) - {{value.create.programId}}
         + contactId (string, optional) - {{value.create.contactId}}
         + code (string, optional) - {{value.create.code}}

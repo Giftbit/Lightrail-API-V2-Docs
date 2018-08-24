@@ -121,7 +121,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Contact.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - The ID you choose to represent the Contact.  Two Contacts can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
@@ -130,14 +130,14 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"0d7b668c-8c8d-48c0-9","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
+            {"id":"4ee9173c-7b70-43c3-b","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"}}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"id":"0d7b668c-8c8d-48c0-9","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}
+            {"id":"4ee9173c-7b70-43c3-b","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 ### Get a Contact [GET /contacts/{id}]
 
 + Parameter
@@ -153,7 +153,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"id":"0d7b668c-8c8d-48c0-9","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}
+            {"id":"4ee9173c-7b70-43c3-b","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -181,7 +181,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"0d7b668c-8c8d-48c0-9","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}]
+            [{"id":"4ee9173c-7b70-43c3-b","firstName":"Jeffrey","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino"},"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}]
 ### Update a Contact [PATCH /contacts/{id}]
             
 + Parameter
@@ -196,7 +196,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, optional) - ID for the Contact.  If present must match the ID in the path.
+        + id (string, optional) - The ID you choose to represent the Contact.  If present must match the ID in the path.
         + firstName (string, optional) - The Contact's first name.
         + lastName (string, optional) - The Contact's last name.
         + email (string, optional) - The Contact's email.
@@ -212,7 +212,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"0d7b668c-8c8d-48c0-9","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}
+            {"id":"4ee9173c-7b70-43c3-b","firstName":"The Dude","lastName":"Lebowski","email":"thedude@example.com","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 ### Delete a Contact [DELETE /contacts/{id}]
 
 + Parameter
@@ -280,7 +280,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":"0d7b668c-8c8d-48c0-9","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}]
+            [{"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":"4ee9173c-7b70-43c3-b","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}]
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
 + Parameter
@@ -297,7 +297,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"valueId":"97a237ff-5dad-412d-9"}
+            {"valueId":"19465862-59a4-4c41-9"}
     
 + Response 200 (application/json)
     
@@ -309,7 +309,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":"0d7b668c-8c8d-48c0-9","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":"4ee9173c-7b70-43c3-b","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}
 
 + Response 409 (application/json)
     
@@ -342,7 +342,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID of the Value.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - The ID you choose to represent the Value.  Two Values can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - Directly attach to a Contact.
         + code (string, optional) - Assign a code.
@@ -365,14 +365,14 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         
     + Body
     
-            {"id":"97a237ff-5dad-412d-9","programId":"fc3ae7c1-71c9-4567-a","balance":500}
+            {"id":"19465862-59a4-4c41-9","programId":"850ddba8-7f32-47cd-9","balance":500}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}
 ### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
@@ -389,7 +389,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}
 
 ### Get a Value by Code [GET /values?code={code}{?showCode}]
 
@@ -407,7 +407,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":null,"code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
@@ -525,7 +525,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"id":"97a237ff-5dad-412d-9","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":"0d7b668c-8c8d-48c0-9","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:48.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"19465862-59a4-4c41-9","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":"4ee9173c-7b70-43c3-b","code":null,"isGenericCode":null,"pretax":true,"active":true,"canceled":false,"frozen":true,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:36.000Z","updatedDate":"2018-08-24T00:26:36.000Z"}
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -582,7 +582,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"id":"c600a5c7-53ee-410f-b","currency":"USD","balance":500,"uses":null,"programId":"fc3ae7c1-71c9-4567-a","issuanceId":null,"contactId":null,"code":"\u2026E8T3","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:52.000Z","updatedDate":"2018-08-23T21:12:52.000Z"}
+            {"id":"2583971b-6e77-402d-a","currency":"USD","balance":500,"uses":null,"programId":"850ddba8-7f32-47cd-9","issuanceId":null,"contactId":null,"code":"\u2026EWTA","isGenericCode":false,"pretax":true,"active":true,"canceled":false,"frozen":false,"discount":true,"discountSellerLiability":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:41.000Z","updatedDate":"2018-08-24T00:26:41.000Z"}
 
 ## Programs [/programs]
 
@@ -598,7 +598,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Program.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - The ID you choose to represent the Program.  
         + name (string, required) - A human-readable name for the Program.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + discount (boolean, optional) - If true the Value will be noted as a discount for the Contact on checkout. Default is `true`. 
@@ -617,14 +617,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
 
-            {"id":"fc3ae7c1-71c9-4567-a","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
+            {"id":"850ddba8-7f32-47cd-9","name":"Spring Promotion USD","currency":"USD","pretax":true,"discount":true,"fixedInitialBalances":[500]}
     
 + Response 201 (application/json)
     + Attributes (Program)
 
     + Body
             
-            {"id":"fc3ae7c1-71c9-4567-a","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}
+            {"id":"850ddba8-7f32-47cd-9","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 ### Get a Program [GET /programs/promotions/{id}]
 
 + Parameter
@@ -640,7 +640,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-                {"id":"fc3ae7c1-71c9-4567-a","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}
+                {"id":"850ddba8-7f32-47cd-9","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"redemptionRule":null,"valueRule":null,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 
 ### List Programs [GET /programs{?limit}{?id}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
@@ -670,7 +670,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            [{"id":"fc3ae7c1-71c9-4567-a","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:47.000Z"}]
+            [{"id":"850ddba8-7f32-47cd-9","name":"Spring Promotion USD","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}]
 ### Update a Program [PATCH /programs/{id}]
 
 + Parameter
@@ -708,7 +708,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
             
-            {"id":"fc3ae7c1-71c9-4567-a","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:47.000Z","updatedDate":"2018-08-23T21:12:48.000Z"}
+            {"id":"850ddba8-7f32-47cd-9","name":"Spring Promo US Dollars","currency":"USD","discount":true,"discountSellerLiability":null,"pretax":true,"active":true,"minInitialBalance":null,"maxInitialBalance":null,"fixedInitialBalances":[500],"fixedInitialUses":null,"redemptionRule":null,"valueRule":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:35.000Z","updatedDate":"2018-08-24T00:26:35.000Z"}
 ### Delete a Program [DELETE /programs/{id}]
 
 + Parameter
@@ -750,7 +750,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Issuance.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        + id (string, required) - The ID you choose to represent the Issuance.  Two Issuances can't have the same ID, guaranteeing repeated calls won't create extra resources.
         + name (string, required) - A human-readable name for the Issuance.
         + count (number, required) - The numbers of Values to issue. Must be between 1-1000.
         + generateCode (CodeGeneration, optional) - This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
@@ -767,14 +767,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
     
-            {"id":"ca78c72b-6982-415c-9","name":"My First Issuance","count":10,"generateCode":{},"balance":500}
+            {"id":"5c06f2da-a409-474a-b","name":"My First Issuance","count":10,"generateCode":{},"balance":500}
     
 + Response 201 (application/json)
     + Attributes (Issuance)
 
     + Body
     
-            {"id":"ca78c72b-6982-415c-9","name":"My First Issuance","programId":"fc3ae7c1-71c9-4567-a","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:53.000Z","updatedDate":"2018-08-23T21:12:53.000Z"}
+            {"id":"5c06f2da-a409-474a-b","name":"My First Issuance","programId":"850ddba8-7f32-47cd-9","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:41.000Z","updatedDate":"2018-08-24T00:26:41.000Z"}
 ### Get an Issuance [GET /programs/{programId}/issuances/{id}]
 
 + Parameter
@@ -791,7 +791,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            {"id":"ca78c72b-6982-415c-9","name":"My First Issuance","programId":"fc3ae7c1-71c9-4567-a","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:53.000Z","updatedDate":"2018-08-23T21:12:53.000Z"}
+            {"id":"5c06f2da-a409-474a-b","name":"My First Issuance","programId":"850ddba8-7f32-47cd-9","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:41.000Z","updatedDate":"2018-08-24T00:26:41.000Z"}
 
 ### List Issuances [GET /programs/{id}/issuances]
 
@@ -809,7 +809,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
     
-            [{"id":"ca78c72b-6982-415c-9","name":"My First Issuance","programId":"fc3ae7c1-71c9-4567-a","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-23T21:12:53.000Z","updatedDate":"2018-08-23T21:12:53.000Z"}]
+            [{"id":"5c06f2da-a409-474a-b","name":"My First Issuance","programId":"850ddba8-7f32-47cd-9","count":10,"balance":500,"redemptionRule":null,"valueRule":null,"uses":null,"startDate":null,"endDate":null,"metadata":null,"createdDate":"2018-08-24T00:26:41.000Z","updatedDate":"2018-08-24T00:26:41.000Z"}]
 
 ## Transactions [/transactions]
 
@@ -839,7 +839,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + lineItems (array[LineItem])
         + sources (array[TransactionParty])
@@ -851,7 +851,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
         
     + Body 
     
-            {"id":"caaa3293-a0f2-4cae-9","sources":[{"rail":"lightrail","contactId":"0d7b668c-8c8d-48c0-9"},{"rail":"stripe","source":"tok_visa"}],"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05},{"productId":"shipping","unitPrice":349,"taxRate":0.0}],"currency":"USD"}
+            {"id":"e8a3f594-8afd-4b02-8","sources":[{"rail":"lightrail","contactId":"4ee9173c-7b70-43c3-b"},{"rail":"stripe","source":"tok_visa"}],"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05},{"productId":"shipping","unitPrice":349,"taxRate":0.0}],"currency":"USD"}
     
 + Response 201 (application/json)
 
@@ -859,7 +859,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
 
     + Body
     
-            {"id":"caaa3293-a0f2-4cae-9","transactionType":"checkout","currency":"USD","createdDate":"2018-08-23T21:12:49.000Z","tax":{"roundingMode":"HALF_EVEN"},"totals":{"subtotal":1548,"tax":74,"discount":200,"payable":1422,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":199,"tax":10,"discount":0,"remainder":0,"payable":209}}],"steps":[{"rail":"lightrail","valueId":"8810936b-ce20-4e7e-8","contactId":"0d7b668c-8c8d-48c0-9","code":null,"balanceBefore":0,"balanceAfter":0,"balanceChange":-200},{"rail":"lightrail","valueId":"99a31e67-1a0b-4c13-8","contactId":"0d7b668c-8c8d-48c0-9","code":null,"balanceBefore":1000,"balanceAfter":0,"balanceChange":-1000},{"rail":"stripe","chargeId":"ch_1D2Q6pCM9MOvFvZK0T3vgYnG","charge":{"id":"ch_1D2Q6pCM9MOvFvZK0T3vgYnG","object":"charge","amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1D2Q6pCM9MOvFvZKvJ4mwFIp","captured":true,"created":1535058771,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"caaa3293-a0f2-4cae-9","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"8810936b-ce20-4e7e-8\"},{\"rail\":\"lightrail\",\"valueId\":\"99a31e67-1a0b-4c13-8\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"},"paid":true,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"/v1/charges/ch_1D2Q6pCM9MOvFvZK0T3vgYnG/refunds"},"review":null,"shipping":null,"source":{"id":"card_1D2Q6pCM9MOvFvZKr0NdVXih","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":8,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","last4":"4242","metadata":{},"name":null,"tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"amount":-422}],"paymentSources":[{"rail":"lightrail","contactId":"0d7b668c-8c8d-48c0-9"},{"rail":"stripe","source":"tok_visa"}],"metadata":null}
+            {"id":"e8a3f594-8afd-4b02-8","transactionType":"checkout","currency":"USD","createdDate":"2018-08-24T00:26:37.000Z","tax":{"roundingMode":"HALF_EVEN"},"totals":{"subtotal":1548,"tax":74,"discount":200,"payable":1422,"remainder":0},"lineItems":[{"productId":"socks","unitPrice":500,"quantity":2,"taxRate":0.08,"lineTotal":{"subtotal":1000,"taxable":800,"tax":64,"discount":200,"remainder":0,"payable":864}},{"productId":"shipping","unitPrice":349,"taxRate":0,"quantity":1,"lineTotal":{"subtotal":349,"taxable":349,"tax":0,"discount":0,"remainder":0,"payable":349}},{"productId":"chocolate_bar","unitPrice":199,"taxRate":0.05,"quantity":1,"lineTotal":{"subtotal":199,"taxable":199,"tax":10,"discount":0,"remainder":0,"payable":209}}],"steps":[{"rail":"lightrail","valueId":"0efc6380-dca1-4b5f-b","contactId":"4ee9173c-7b70-43c3-b","code":null,"balanceBefore":0,"balanceAfter":0,"balanceChange":-200},{"rail":"lightrail","valueId":"e4187bbf-adae-47b5-a","contactId":"4ee9173c-7b70-43c3-b","code":null,"balanceBefore":1000,"balanceAfter":0,"balanceChange":-1000},{"rail":"stripe","chargeId":"ch_1D2T8NCM9MOvFvZKOzDar7Sd","charge":{"id":"ch_1D2T8NCM9MOvFvZKOzDar7Sd","object":"charge","amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1D2T8NCM9MOvFvZKX0TExG3j","captured":true,"created":1535070399,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"e8a3f594-8afd-4b02-8","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"0efc6380-dca1-4b5f-b\"},{\"rail\":\"lightrail\",\"valueId\":\"e4187bbf-adae-47b5-a\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","seller_message":"Payment complete.","type":"authorized"},"paid":true,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"object":"list","data":[],"has_more":false,"total_count":0,"url":"/v1/charges/ch_1D2T8NCM9MOvFvZKOzDar7Sd/refunds"},"review":null,"shipping":null,"source":{"id":"card_1D2T8NCM9MOvFvZKxMHNCfSu","object":"card","address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":8,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","last4":"4242","metadata":{},"name":null,"tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"amount":-422}],"paymentSources":[{"rail":"lightrail","contactId":"4ee9173c-7b70-43c3-b"},{"rail":"stripe","source":"tok_visa"}],"metadata":null}
 
 + Response 409 (application/json)
 
@@ -911,7 +911,7 @@ Debit (remove an amount from) a Lightrail payment source.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
         + uses (number, optional) - The number of uses to remove.  Defaults to 0.
@@ -923,7 +923,7 @@ Debit (remove an amount from) a Lightrail payment source.
 
     + Body
 
-            {"id":"3586e815-0bc4-46f0-b","source":{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"id":"836be876-c30e-4380-a","source":{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b"},"amount":1000,"currency":"USD","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
     
 + Response 201 (application/json)
 
@@ -931,7 +931,7 @@ Debit (remove an amount from) a Lightrail payment source.
 
     + Body
 
-            {"id":"3586e815-0bc4-46f0-b","transactionType":"debit","currency":"USD","createdDate":"2018-08-23T21:12:48.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"id":"836be876-c30e-4380-a","transactionType":"debit","currency":"USD","createdDate":"2018-08-24T00:26:36.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
 
 + Response 409 (application/json)
 
@@ -957,7 +957,7 @@ Credit (add an amount to) a Lightrail payment destination.
             Authorization: Bearer <API_KEY>
         
     + Attributes
-        + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + destination (LightrailTransactionParty, required) - The rail to credit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to credit, > 0.
         + uses (number, optional) - The number of uses to add.  Defaults to 0.
@@ -968,7 +968,7 @@ Credit (add an amount to) a Lightrail payment destination.
 
     + Body
 
-            {"id":"ef50f8b7-a8d4-4c1b-b","destination":{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
+            {"id":"8a91eaba-6ccc-49f1-b","destination":{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b"},"amount":2500,"currency":"USD","metadata":{"note":"Frequent buyer bonus"}}
     
 + Response 201 (application/json)
 
@@ -976,7 +976,7 @@ Credit (add an amount to) a Lightrail payment destination.
 
     + Body
 
-            {"id":"ef50f8b7-a8d4-4c1b-b","transactionType":"credit","currency":"USD","createdDate":"2018-08-23T21:12:48.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"}}
+            {"id":"8a91eaba-6ccc-49f1-b","transactionType":"credit","currency":"USD","createdDate":"2018-08-24T00:26:36.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"paymentSources":null,"metadata":{"note":"Frequent buyer bonus"}}
 
 ### Transfer [POST /transactions/transfer]
 
@@ -989,7 +989,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
             Authorization: Bearer <API_KEY>
 
     + Attributes
-        + id (string, required) - ID for the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        + id (string, required) - The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         + source (StripeOrLightrailTransactionParty, required) - Supported rails: `["lightrail", "stripe"]`.
         + destination (LightrailTransactionParty, required) - Only supported rail is `"lightrail"` and must it refer to a single Value.
         + amount (number, required) - The amount to transfer, > 0.
@@ -1001,12 +1001,12 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            {"id":"2a2c4089-9aad-4f53-b","source":{"rail":"lightrail","valueId":"783fdf0d-da02-4a58-8"},"destination":{"rail":"lightrail","valueId":"5a8b7c0b-f06b-48dd-8"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
+            {"id":"a9e34ebd-e42f-412a-a","source":{"rail":"lightrail","valueId":"16425a41-1257-4f33-b"},"destination":{"rail":"lightrail","valueId":"234f3e96-c74a-4959-8"},"amount":100,"currency":"USD","metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
 
 + Response 201 (application/json)
 
     + Attributes
-        + id (string, required) - ID for the Transaction.
+        + id (string, required) - The ID you choose to represent the Transaction.
         + transactionType (string, required) - `transfer`
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + steps (array[TransactionStep], required) - An array of transaction steps.
@@ -1018,7 +1018,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            {"id":"2a2c4089-9aad-4f53-b","transactionType":"transfer","currency":"USD","createdDate":"2018-08-23T21:12:53.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"783fdf0d-da02-4a58-8","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"5a8b7c0b-f06b-48dd-8","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
+            {"id":"a9e34ebd-e42f-412a-a","transactionType":"transfer","currency":"USD","createdDate":"2018-08-24T00:26:41.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"16425a41-1257-4f33-b","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":400,"balanceChange":-100},{"rail":"lightrail","valueId":"234f3e96-c74a-4959-8","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":600,"balanceChange":100}],"paymentSources":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"}}
 
 + Response 409 (application/json)
 
@@ -1048,7 +1048,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            {"id":"3586e815-0bc4-46f0-b","transactionType":"debit","currency":"USD","createdDate":"2018-08-23T21:12:48.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
+            {"id":"836be876-c30e-4380-a","transactionType":"debit","currency":"USD","createdDate":"2018-08-24T00:26:36.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"}}
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?maxCreatedDate}]
 
@@ -1073,7 +1073,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            [{"id":"ef50f8b7-a8d4-4c1b-b","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"1a1c2d9c-4c69-44bb-9","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"tax":null,"createdDate":"2018-08-23T21:12:48.000Z"}]
+            [{"id":"8a91eaba-6ccc-49f1-b","transactionType":"credit","currency":"USD","totals":{"remainder":0},"lineItems":null,"paymentSources":null,"steps":[{"rail":"lightrail","valueId":"38ddd02b-9eed-4bb9-b","contactId":null,"code":null,"balanceBefore":500,"balanceAfter":3000,"balanceChange":2500}],"metadata":{"note":"Frequent buyer bonus"},"tax":null,"createdDate":"2018-08-24T00:26:36.000Z"}]
 ### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
@@ -1328,7 +1328,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + decimalPlaces (number) - The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.
 
 ## Contact (object)
-+ id (string) - ID for the Contact.
++ id (string) - The ID you choose to represent the Contact.
 + firstName (string) - The Contact's first name.
 + lastName (string) - The Contact's last name.
 + email (string) - The Contact's email.
@@ -1338,7 +1338,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + updatedDate (string) - Date when the Contact was last updated.
 
 ## Issuance (object)
-+ id (string, required) - ID for the Issuance.  This ID is a value you choose to represent the resource. Two resources can't have the same ID, guaranteeing repeated calls won't create extra resources.
++ id (string, required) - The ID you choose to represent the Issuance.  Two Issuances can't have the same ID, guaranteeing repeated calls won't create extra resources.
 + programId (string) - The ID of the program it was created from.
 + count (number) - The numbers of Values to issue. Must be between 1-1000.
 + codeGeneration (CodeGeneration) - This will cause each Value created in the Issuance to have its own unique generated code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
@@ -1371,7 +1371,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + lineTotal (LineTotal)
 
 ## LineItemPromotions (object)
-+ id (string) - ID of the Value.
++ id (string) - The ID you choose to represent the Value.
 + redemptionRule (string) - A Redemption Rule controlling when the Value can be used in checkout. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
 + ruleExplanation (string) - An explanation for the `redemptionRule` does that can be used to display to the contact.
 + amount (number) - The value of the discount.
@@ -1385,7 +1385,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + payable (number) - The cost of the line item after tax and discounts have been applied.
 
 ## Program (object)
-+ id (string) - ID for the Program.
++ id (string) - The ID you choose to represent the Program.
 + name (string) - A human-readable name for the Program.
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + discount (boolean) - If true the Value will be noted as a discount for the Contact on checkout.
@@ -1420,7 +1420,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + roundingMode (string) - The rounding mode used for tax calculations. Modes: `"HALF_EVEN"`, `"HALF_UP"`. Defaults to `"HALF_EVEN"`, also known as bankers rounding, which is the standard for most financial calculations.
 
 ## Transaction (object)
-+ id (string) - ID for the Transaction.
++ id (string) - The ID you choose to represent the Transaction.
 + transactionType (string) - The type of the transaction, eg: `debit`, `credit`, `checkout`...
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + steps (array[TransactionStep]) - An array of transaction steps.
@@ -1491,7 +1491,7 @@ A step taken as part of the transaction.
 + balanceChange (number) - The net change of the balance of the internal value for the Transaction.
 
 ## Value (object)
-+ id (string) - ID of the Value.
++ id (string) - The ID you choose to represent the Value.
 + programId (string) - 
 + currency (string) - Short code for a currency, eg: `USD`, `FUNBUX`.
 + contactId (string) - The ID of the Contact that has claimed this Value.
