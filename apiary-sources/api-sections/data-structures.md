@@ -16,6 +16,8 @@
 
 {% include 'data-structures/Rule.md' %}
 
+{% include 'data-structures/Tax.md' %}
+
 {% include 'data-structures/Transaction.md' %}
 
 {% include 'data-structures/TransactionParty.md' %}
