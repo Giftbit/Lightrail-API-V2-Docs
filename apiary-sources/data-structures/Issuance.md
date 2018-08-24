@@ -1,5 +1,5 @@
 ## Issuance (object)
-+ id (string, required) - {{issuance.id}}  {{idPurpose}}
++ id (string, required) - {{issuance.id}}  {{issuance.idPurpose}}
 + programId (string) - {{issuance.programId}}
 + count (number) - {{issuance.count}}
 + codeGeneration (CodeGeneration) - {{issuance.generateCode}}
