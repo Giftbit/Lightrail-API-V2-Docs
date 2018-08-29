@@ -94,7 +94,6 @@ Create Value request:
 {
     "id": "example",
     "currency": "USD",
-    "balance": 500,
     "valueRule": {
          "rule": "currentLineItem.lineTotal.subtotal * 0.5",
          "explanation": "50% off line item's subtotal."
@@ -103,7 +102,7 @@ Create Value request:
 }
 ```
 
-**Limiting to one discount per item**
+**Up to $5 off order, limiting to one discount per line item**
 
 Create Value request:
 ```json
