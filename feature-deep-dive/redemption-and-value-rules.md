@@ -1,5 +1,5 @@
 # Redemption Rules and Value Rules
-Redemption Rules and Value Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to a boolean. Value Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few examples.  
+Redemption Rules and Value Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to true or false. Value Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
 
 **Example 1: $5 off orders over $100** 
 
@@ -99,56 +99,34 @@ Value and Redemption Rules are evaluated for each line item during checkout. Whe
 
 You can think of the Rule Context being created as a simple map which the Rules evaluate on. 
 
-## Examples
-**50% off each item**
-
-Create Value request:
+## Additional Rule Examples
+**50% off each line item item**
 ```json
-{
-    "id": "example",
-    "currency": "USD",
-    "valueRule": {
-        "rule": "currentLineItem.lineTotal.subtotal * 0.5",
-        "explanation": "50% off item's subtotal."
-    },
-    "discount": true
-}
+"valueRule": {
+     "rule": "currentLineItem.lineTotal.subtotal * 0.5",
+     "explanation": "50% off line item's subtotal."
+ }
 ```
 Note, often you'll want to limit promotions to one per item.
 
 **Limiting to one discount per item**
-
-Create Value request:
 ```json
-{
-    "id": "example",
-    "currency": "USD",
-    "redemptionRule": {
-        "rule": "currentLineItem.lineTotal.discount == 0",
-        "explanation": "Limited to 1 discount per item."
-    },
-    // needs balance or valueRule depending on what the Value should be worth
-    "discount": true
+"redemptionRule": {
+    "rule": "currentLineItem.lineTotal.discount == 0",
+    "explanation": "Limited to 1 discount per item."
 }
 ```
 
-**50% off orders over $100 and limited to 1 promotion per item**
-
-Create Value request:
+**25% off orders over $100 and limited to 1 promotion per item**
 ```json
-{
-    "id": "example",
-    "currency": "USD",
-    "redemptionRule": {
-        "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
-        "explanation": "Applies to orders over $100. Limited to 1 discount per item."
-    },
-    "valueRule": {
-        "rule": "currentLineItem.lineTotal.subtotal * 0.5",
-        "explanation": "50% off item's subtotal."
-    },
-    "discount": true
-}
+"redemptionRule": {
+    "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
+    "explanation": "Applies to orders over $100. Limited to 1 discount per item."
+},
+"valueRule": {
+    "rule": "currentLineItem.lineTotal.subtotal * 0.25",
+    "explanation": "25% off item's subtotal."
+},
 ```
 
 ## Support
