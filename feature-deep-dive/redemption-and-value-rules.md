@@ -2,6 +2,7 @@
 Redemption Rules and Value Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to a boolean. Value Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few examples.  
 
 **Example 1: $5 off orders over $100** 
+
 In this case, the Value would simply have a balance of $5 and the Redemption Rule would require that the transaction subtotal is over $100.
 
 Create Value request:
@@ -19,6 +20,7 @@ Create Value request:
 ```
 
 **Example 2: 50% off red hats**
+
 This example requires the use of a Value Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to a single select item. The Value Rule causes the Value to be worth 50% of the select item's subtotal.
 
 Create Value request:
@@ -115,6 +117,7 @@ Create Value request:
 Note, often you'll want to limit promotions to one per item.
 
 **Limiting to one discount per item**
+
 Create Value request:
 ```json
 {
@@ -130,6 +133,7 @@ Create Value request:
 ```
 
 **50% off orders over $100 and limited to 1 promotion per item**
+
 Create Value request:
 ```json
 {
