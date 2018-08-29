@@ -54,23 +54,15 @@ Value and Redemption Rules are evaluated for each line item during checkout. Rul
         "quantity": "number",
         "tags": "string[]",
         "taxRate": "number",
-        "marketplaceRate": "number",
         "metadata": "object",
         "lineTotal": {
             "subtotal": "number",
-            "taxable": "number",
-            "tax": "number",
             "discount": "number",
-            "remainder": "number",
-            "payable": "number"
+            "remainder": "number"
         }
     }, 
     "totals": {
         "subtotal": "number",
-        "tax": "number",
-        "discount": "number",
-        "payable": "number",
-        "remainder": "number"
     }, 
     "lineItems": [
         {
@@ -81,15 +73,11 @@ Value and Redemption Rules are evaluated for each line item during checkout. Rul
             "quantity": "number",
             "tags": "string[]",
             "taxRate": "number",
-            "marketplaceRate": "number",
             "metadata": "object",
             "lineTotal": {
                 "subtotal": "number",
-                "taxable": "number",
-                "tax": "number",
                 "discount": "number",
-                "remainder": "number",
-                "payable": "number"
+                "remainder": "number"
             }
         }
     ]
