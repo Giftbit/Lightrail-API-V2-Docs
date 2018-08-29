@@ -1,7 +1,7 @@
 # Redemption Rules and Value Rules
 Redemption Rules and Value Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to true or false. Value Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
 
-**Example 1: $5 off orders over $100** 
+**Example 1: $5 off transactions over $100** 
 
 In this case, the Value would simply have a balance of $5 and the Redemption Rule would require that the transaction subtotal is over $100.
 
@@ -21,7 +21,7 @@ Create Value request:
 
 **Example 2: 50% off red hats**
 
-This example requires the use of a Value Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to a single select item. The Value Rule causes the Value to be worth 50% of the select item's subtotal.
+This example requires the use of a Value Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to an item with productId `red-hat`. The Value Rule causes the Value to be worth 50% of the item's subtotal.
 
 Create Value request:
 ```json
@@ -41,7 +41,7 @@ Create Value request:
 ```
 
 ## How Rules Work
-Value and Redemption Rules are evaluated for each line item during checkout. When evaluating a line item the Rules operate on a Rule Context which contains the current item and the entire order.
+Value and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), and a list of all of the line items in the transaction (`lineItems`).
 
 ### Rule Context 
 ```json
@@ -71,7 +71,6 @@ Value and Redemption Rules are evaluated for each line item during checkout. Whe
         "discount": "number",
         "payable": "number",
         "remainder": "number"
-
     }, 
     "lineItems": [
         {
@@ -99,37 +98,58 @@ Value and Redemption Rules are evaluated for each line item during checkout. Whe
 
 You can think of the Rule Context being created as a simple map which the Rules evaluate on. 
 
-## Additional Rule Examples
-**50% off each line item item**
-```json
-"valueRule": {
-     "rule": "currentLineItem.lineTotal.subtotal * 0.5",
-     "explanation": "50% off line item's subtotal."
- }
-```
-Note, often you'll want to limit promotions to one per item.
+## Examples Continued
+**50% off everything**
 
-**Limiting to one discount per item**
+Create Value request:
 ```json
-"redemptionRule": {
-    "rule": "currentLineItem.lineTotal.discount == 0",
-    "explanation": "Limited to 1 discount per item."
+{
+    "id": "example",
+    "currency": "USD",
+    "balance": 500,
+    "valueRule": {
+         "rule": "currentLineItem.lineTotal.subtotal * 0.5",
+         "explanation": "50% off line item's subtotal."
+     },
+    "discount": true
 }
 ```
 
-**25% off orders over $100 and limited to 1 promotion per item**
+**Limiting to one discount per item**
+
+Create Value request:
 ```json
-"redemptionRule": {
-    "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
-    "explanation": "Applies to orders over $100. Limited to 1 discount per item."
-},
-"valueRule": {
-    "rule": "currentLineItem.lineTotal.subtotal * 0.25",
-    "explanation": "25% off item's subtotal."
-},
+{
+    "id": "example",
+    "currency": "USD",
+    "balance": 500,
+    "redemptionRule": {
+        "rule": "currentLineItem.lineTotal.discount == 0",
+        "explanation": "Limited to 1 discount per item."
+    },
+    "discount": true
+}
+```
+
+**25% off transactions over $100 and limited to 1 promotion per item**
+```json
+{
+    "id": "example",
+    "currency": "USD",
+    "balance": 500,
+    "redemptionRule": {
+        "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
+        "explanation": "Applies to orders over $100. Limited to 1 discount per item."
+    },
+    "valueRule": {
+        "rule": "currentLineItem.lineTotal.subtotal * 0.25",
+        "explanation": "25% off item's subtotal."
+    },
+    "discount": true
+}
 ```
 
 ## Support
-For more information on rule syntax please see: 
+For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md). 
 
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
