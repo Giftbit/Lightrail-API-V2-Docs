@@ -10,7 +10,7 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{issuance.id}}  {{idPurpose}}
+        + id (string, required) - {{issuance.id}}  {{issuance.idPurpose}}
         + name (string, required) - {{issuance.name}}
         + count (number, required) - {{issuance.count}}
         + generateCode (CodeGeneration, optional) - {{issuance.generateCode}}
