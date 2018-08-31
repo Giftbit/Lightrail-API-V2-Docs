@@ -2,7 +2,7 @@
 + id (string) - {{value.id}}
 + programId (string) - {{value.program}}
 + currency (string) - {{currency.code}}
-+ contactId (string) - {{value.contact}}
++ contactId (string) - {{value.contactId}}
 + code (string) - {{value.code}}
 + isGenericCode (boolean) - {{value.isGenericCode}}
 + balance (number) - {{value.balance}}
@@ -21,3 +21,4 @@
 + metadata (object) - {{value.metadata}}
 + createdDate (string) - {{createdDate}}
 + updatedDate (string) - {{updatedDate}}
++ updatedContactIdDate (string) - {{value.updatedContactIdDate}}
