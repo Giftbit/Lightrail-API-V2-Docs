@@ -97,7 +97,7 @@ transaction:
   id: "The ID you choose to represent the Transaction."
   idPurpose: "Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice."
   metadata: "Arbitrary data associated with the Transaction."
-  pending: "(Coming soon!) If true the transaction is created as pending and does not complete until captured. The transaction will be automatically voided if not captured."
+  pending: "(Coming soon) If true the transaction is created as pending and does not complete until captured. The transaction will be automatically voided if not captured."
   simulate: "If true the transaction is simulated and no changes take place. If the transaction is repeated with simulate=false it is not guaranteed to behave the same way as the underlying Values can change."
   simulated: "True if the transaction was simulated."
   source: "Supported rails: `[\"lightrail\", \"stripe\"]`."
