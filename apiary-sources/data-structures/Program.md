@@ -3,7 +3,7 @@
 + name (string) - {{program.name}}
 + currency (string) - {{currency.code}}
 + discount (boolean) - {{value.discount}}
-+ preTax (boolean) - {{value.preTax}}
++ pretax (boolean) - {{value.pretax}}
 + active (boolean) - {{value.active}}
 + redemptionRule (Rule) - {{value.redemptionRule}}
 + valueRule (Rule) - {{value.valueRule}}

@@ -22,7 +22,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
     "currency": "USD",
     "name": "Accounts USD",
     "discount": false,
-    "preTax": false,
+    "pretax": false,
     "tags": ["accounts-usd"]
 }
 ``` 
@@ -32,7 +32,7 @@ Below is the list of attributes commonly used when creating an Account Program. 
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `true`). Typically should be `false` for Account Programs.
- - **preTax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Set this to `false` for Account Programs.
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Set this to `false` for Account Programs.
  - **name** (_optional_): A human-readable name for the Program.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.

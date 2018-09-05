@@ -18,7 +18,7 @@
 + redemptionRule (string) - {{value.redemptionRule}}
 + ruleExplanation (string) - {{value.ruleExplanation}}
 + amount (number) - The value of the discount.
-+ preTax (boolean) - {{value.preTax}}
++ pretax (boolean) - {{value.pretax}}
 
 ## LineTotal (object)
 + subtotal (number) - {{transaction.lineItem.lineTotal.subtotal}}

@@ -45,7 +45,7 @@ Create the [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/c
     "currency": "USD",
     "fixedInitialBalances": [500, 1000, 2500, 5000, 7500, 10000],
     "discount": false,
-    "preTax": false
+    "pretax": false
 }
 ```
 

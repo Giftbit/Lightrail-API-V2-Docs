@@ -25,7 +25,7 @@ Example of creating a `Program` for a $5 promotion:
     "name": "Spring Promotion USD",
     "currency": "USD",
     "discount": true,
-    "preTax": false,
+    "pretax": false,
     "fixedInitialBalances": [
         500
     ],
@@ -39,7 +39,7 @@ Below is the list of attributes commonly used when creating a Promotion Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **name** (_optional_): A human-readable name for the Program.
  - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer. Set to `true` (default: `true`). 
- - **preTax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). 
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). 
  - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. 

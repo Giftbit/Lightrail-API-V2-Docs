@@ -17,7 +17,7 @@
         + generateCode (CodeGeneration, optional) - {{value.generateCode}}
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
         + balance (number, optional) - {{value.balance}}
-        + preTax (boolean, optional) - {{value.preTax}}
+        + pretax (boolean, optional) - {{value.pretax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + discount (boolean, optional) - {{value.discount}}
