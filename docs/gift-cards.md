@@ -21,7 +21,7 @@ How to create a Gift Card Program through the API. Note, typically Programs are 
     "minInitialBalance": 500,
     "maxInitialBalance": 100000,
     "discount": false,
-    "preTax": false,
+    "pretax": false,
     "tags": ["giftCard"]
 }
 ``` 
@@ -36,7 +36,7 @@ Below is the list of attributes commonly used when creating a Gift Card Program.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. Not set in combination with `minInitialBalance` and `maxInitialBalance`.
  - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `true`). Use `false` for Gift Card Programs.
- - **preTax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Use `false` for Gift Card Programs.
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Use `false` for Gift Card Programs.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 

@@ -10,7 +10,7 @@
         + name (string, required) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + discount (boolean, optional) - {{value.discount}} Default is `true`. 
-        + preTax (boolean, optional) - {{value.preTax}} Default is `true`.
+        + pretax (boolean, optional) - {{value.pretax}} Default is `true`.
         + active (boolean, optional) - {{value.active}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + valueRule (Rule, optional) - {{value.valueRule}}

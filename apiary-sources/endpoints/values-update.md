@@ -16,7 +16,7 @@
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
         + canceled (boolean, optional) - {{value.canceled}}
-        + preTax (boolean, optional) - {{value.preTax}}
+        + pretax (boolean, optional) - {{value.pretax}}
         + discount (boolean, optional) - {{value.discount}}
         + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
