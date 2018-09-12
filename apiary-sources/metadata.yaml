@@ -30,6 +30,7 @@ filter:
   id: "Filter by ID."
   lastName: "Filter by the lastName."
   list: "Multiple values can be sent as a comma separated list in which case only one value must match."
+  maxCreatedDate: "Filter up to the createdDate."
   pretax: "Filter by whether or not the Value is applied pretax."
   programId: "Filter by Program ID."
   startDate: "Filter by startDate."
@@ -40,7 +41,7 @@ filter:
   valueId: "Filter by Value ID."
   ops:
     date: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
-    in: "This filter supports the operator `in`.  See [filtering](#introduction/filtering) for more information."
+    in: "This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information."
     number: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
     string: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information."
 header:

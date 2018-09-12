@@ -1,6 +1,7 @@
 ### List a Contact's Values [GET /contacts/{id}/values{?limit}{?programId}{?currency}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
 
 + Parameter
+    + id (string) - the ID of the Contact to get the Values of.
     + limit (number, optional) - {{pagination.limit}}
     + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
