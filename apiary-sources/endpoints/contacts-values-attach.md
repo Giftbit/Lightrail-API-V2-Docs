@@ -41,3 +41,31 @@
                 "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 uses remaining."
                 "messageCode": "InsufficientUses"
             }
+
++ Response 409 (application/json)
+    
+    A Value that is frozen cannot be attached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value cannot be attached because it is frozen."
+                "messageCode": "ValueFrozen"
+            }
+
++ Response 409 (application/json)
+    
+    A Value that is canceled cannot be attached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value cannot be attached because it is canceled."
+                "messageCode": "ValueCanceled"
+            }

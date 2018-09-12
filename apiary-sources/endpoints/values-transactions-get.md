@@ -1,28 +1,10 @@
-### Get a Transaction [GET /transactions/{id}]
+### List a Value's Transactions [GET /values/{id}/transactions{?limit}{?transactionType}{?createdDate}{?currency}]
 
 + Parameter
-    + id (string) - the ID of the Transaction to get.
-
-+ Request (application/json)
-    + Headers
-    
-            {{header.authorization}}
-
-+ Response 200 (application/json)
-    + Attributes (Transaction)
-
-    + Body
-
-            {REQUEST_REPLACEMENT:debitTransaction1.response.body}
-
-### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?currency}{?valueId}]
-
-+ Parameter
-    + limit (number, optional) - {{pagination.limit}}
+    + id (string) - the ID of the Value to get the Transactions of.
     + transactionType (string, optional) - {{filter.transactionType}}  {{filter.ops.in}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
-    + valueId (string, optional) - Filter by Value ID used in the Transaction.  {{filter.ops.in}}
 
 + Request (application/json)
     + Headers
