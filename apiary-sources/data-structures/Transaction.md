@@ -13,7 +13,7 @@
 ## TransactionTotals (object)
 + subtotal (number) - The sum of all products, services and fees before tax or discounts.
 + tax (number) - The amount of tax to be collected.
-+ discount (number) - (Deprecated. Use discountLightrail instead.) The amount of discounts applies.
++ discount (number) - (Deprecated. Use discountLightrail instead.) The amount of discounts applied.
 + discountLightrail (number) - The amount discounted from Lightrail payment sources. 
 + payable (number) - (Deprecated. Instead use subtotal + tax - discountLightrail.) The amount payable.
 + paidLightrail (number) - The amount paid from Lightrail payment sources.
