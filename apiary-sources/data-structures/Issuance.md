@@ -6,11 +6,13 @@
 + code (string) - {{issuance.code}}
 + isGenericCode (boolean) - {{issuance.isGenericCode}}
 + balance (number) - {{issuance.balance}}
-+ uses (number) - {{issuance.uses}}  
++ uses (number) - (Deprecated. Use `usesRemaining` instead.)  
++ usesRemaining (number) - {{issuance.uses}}  
 + startDate (string) - {{issuance.startDate}}
 + endDate (string) - {{issuance.endDate}}
 + redemptionRule (Rule) - {{issuance.redemptionRule}}
-+ valueRule (Rule) - {{issuance.valueRule}}
++ valueRule (Rule) - (Deprecated. Use `balanceRule` instead.)
++ balanceRule (Rule) - {{issuance.balanceRule}}
 + tags (array[string]) - {{tags}} These are applied to each Value.
 + metadata (object) - {{issuance.metadata}}
 + createdDate (string) - {{createdDate}}

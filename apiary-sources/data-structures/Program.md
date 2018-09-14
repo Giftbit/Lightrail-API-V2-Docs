@@ -11,7 +11,8 @@
 + minInitialBalance (number) - {{program.minBalance}}
 + maxInitialBalance (number) - {{program.maxBalance}}
 + fixedInitialBalances (array[number]) - {{program.fixedInitialBalances}}
-+ fixedInitialUses (number) - {{program.uses}}
++ fixedInitialUses (number) - (Deprecated. Use `fixedInitialUsesRemaining` instead.)
++ fixedInitialUsesRemaining (number) - {{program.fixedInitialUsesRemaining}}
 + tags (array[string]) - {{tags}}
 + startDate (string) - {{program.startDate}}
 + endDate (string) - {{program.endDate}}
