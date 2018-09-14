@@ -2,6 +2,7 @@
 + id (string) - {{transaction.id}}
 + transactionType (string) - {{transaction.transactionType}}
 + currency (string) - {{currency.code}}
++ tax (Tax, optional) 
 + steps (array[TransactionStep]) - {{transaction.steps}}
 + totals (TransactionTotals) - Totals calculated for checkout transactions.
 + lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction.
