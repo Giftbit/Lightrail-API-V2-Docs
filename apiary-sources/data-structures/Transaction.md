@@ -13,9 +13,9 @@
 ## TransactionTotals (object)
 + subtotal (number) - The sum of all products, services and fees before tax or discounts.
 + tax (number) - The amount of tax to be collected.
-+ discount (number) - (Deprecated. Use discountLightrail instead.)
++ discount (number) - The total amount of discounts applied.
 + discountLightrail (number) - The amount discounted from Lightrail payment sources. 
-+ payable (number) - (Deprecated. Instead use subtotal + tax - discountLightrail.)
++ payable (number) - The amount payable by the customer. Calculated as `payable = subtotal + tax - discount`.
 + paidLightrail (number) - The amount paid from Lightrail payment sources.
 + paidStripe (number) - The amount paid from Stripe payment sources.
 + paidInternal (number) - The amount paid from Internal payment sources.

@@ -6,7 +6,8 @@
 + pretax (boolean) - {{value.pretax}}
 + active (boolean) - {{value.active}}
 + redemptionRule (Rule) - {{value.redemptionRule}}
-+ valueRule (Rule) - {{value.valueRule}}
++ valueRule (Rule) - (Deprecated. Use `balanceRule` instead.)
++ balanceRule (Rule) - {{value.balanceRule}}
 + minInitialBalance (number) - {{program.minBalance}}
 + maxInitialBalance (number) - {{program.maxBalance}}
 + fixedInitialBalances (array[number]) - {{program.fixedInitialBalances}}

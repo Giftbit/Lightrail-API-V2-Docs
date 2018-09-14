@@ -146,8 +146,8 @@ value:
   showCode: "Show the full code for the Value."
   startDate: "Date when the Value becomes available."
   updatedContactIdDate: "Date of the last contactId update (Contact attached)."
-  uses: "The number of times the Value can be used.  When this number reaches 0 the Value is expired."
-  valueRule: "A Value Rule controlling the effective balance of the Value in a Checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document."
+  usesRemaining: "The number of times the Value can be used. When this number reaches 0 the Value can no longer be used."
+  balanceRule: "A Rule controlling the effective balance of the Value in a Checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document."
   create:
     code: "Assign a code."
     contactId: "Directly attach to a Contact."
