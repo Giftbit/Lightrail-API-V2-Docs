@@ -4,7 +4,7 @@ updatedDate: "Date of last update."
 contact:
   createdDate: "Date when the Contact was created."
   id: "The ID you choose to represent the Contact."
-  idPurpose: "Two Contacts can't have the same ID, guaranteeing repeated calls won't create extra resources."
+  idPurpose: "Two Contacts can't have the same ID, guaranteeing repeated calls won't create extra resources.  We recommend not using email addresses as IDs because users can change email addresses but the ID can't be changed."
   email: "The Contact's email."
   firstName: "The Contact's first name."
   lastName: "The Contact's last name."
