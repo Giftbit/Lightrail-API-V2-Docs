@@ -1,5 +1,5 @@
 # Redemption Rules and Value Rules
-Redemption Rules and Value Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to true or false. Value Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
+Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to true or false. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
 
 **Example 1: $5 off transactions over $100** 
 
@@ -21,7 +21,7 @@ Create Value request:
 
 **Example 2: 50% off red hats**
 
-This example requires the use of a Value Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to an item with productId `red-hat`. The Value Rule causes the Value to be worth 50% of the item's subtotal.
+This example requires the use of a Balance Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to an item with productId `red-hat`. The Balance Rule causes the Value to be worth 50% of the item's subtotal.
 
 Create Value request:
 ```json
@@ -32,7 +32,7 @@ Create Value request:
         "rule": "currentLineItem.productId == 'red-hat'",
         "explanation": "Promotion can be used towards purchase of red hats."
     },
-    "valueRule": {
+    "balanceRule": {
         "rule": "currentLineItem.lineTotal.subtotal * 0.5",
         "explanation": "50% off item's subtotal."
     },
@@ -41,7 +41,7 @@ Create Value request:
 ```
 
 ## How Rules Work
-Value and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), and a list of all of the line items in the transaction (`lineItems`).
+Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), and a list of all of the line items in the transaction (`lineItems`).
 
 ### Rule Context 
 ```json
@@ -94,7 +94,7 @@ Create Value request:
 {
     "id": "example",
     "currency": "USD",
-    "valueRule": {
+    "balanceRule": {
          "rule": "currentLineItem.lineTotal.subtotal * 0.5",
          "explanation": "50% off line item's subtotal."
      },
@@ -128,7 +128,7 @@ Create Value request:
         "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
         "explanation": "Applies to orders over $100. Limited to 1 discount per item."
     },
-    "valueRule": {
+    "balanceRule": {
         "rule": "currentLineItem.lineTotal.subtotal * 0.25",
         "explanation": "25% off item's subtotal."
     },
