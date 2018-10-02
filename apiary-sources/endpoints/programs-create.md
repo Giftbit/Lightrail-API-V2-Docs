@@ -9,12 +9,12 @@
         + id (string, required) - {{program.id}}  {{program.idPurpose}}
         + name (string, required) - {{program.name}}
         + currency (string, required) - {{currency.code}}
-        + discount (boolean, optional) - {{value.discount}} Default is `true`. 
-        + pretax (boolean, optional) - {{value.pretax}} Default is `true`.
-        + active (boolean, optional) - {{value.active}}
-        + redemptionRule (Rule, optional) - {{value.redemptionRule}}
+        + discount (boolean, optional) - {{program.discount}} Default is `true`. 
+        + pretax (boolean, optional) - {{program.pretax}} Default is `true`.
+        + active (boolean, optional) - {{program.active}}
+        + redemptionRule (Rule, optional) - {{program.redemptionRule}}
         + valueRule (Rule, optional) - (Deprecated. Use `balanceRule` instead.)
-        + balanceRule (Rule, optional) - {{value.balanceRule}}
+        + balanceRule (Rule, optional) - {{program.balanceRule}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
