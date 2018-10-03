@@ -2,12 +2,12 @@
 + id (string) - {{program.id}}
 + name (string) - {{program.name}}
 + currency (string) - {{currency.code}}
-+ discount (boolean) - {{value.discount}}
-+ pretax (boolean) - {{value.pretax}}
-+ active (boolean) - {{value.active}}
-+ redemptionRule (Rule) - {{value.redemptionRule}}
++ discount (boolean) - {{program.discount}}
++ pretax (boolean) - {{program.pretax}}
++ active (boolean) - {{program.active}}
++ redemptionRule (Rule) - {{program.redemptionRule}}
 + valueRule (Rule) - (Deprecated. Use `balanceRule` instead.)
-+ balanceRule (Rule) - {{value.balanceRule}}
++ balanceRule (Rule) - {{program.balanceRule}}
 + minInitialBalance (number) - {{program.minBalance}}
 + maxInitialBalance (number) - {{program.maxBalance}}
 + fixedInitialBalances (array[number]) - {{program.fixedInitialBalances}}
