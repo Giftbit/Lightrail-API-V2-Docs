@@ -9,9 +9,9 @@ A step taken as part of the transaction.
 + contactId (string) - The ID of the Contact associated with the Value.
 + code (string) - {{value.code}}.
 + amount (number) - The amount contributed to the Transaction.  This number will be the same as `balance.change` in Values with a balance.
-+ balanceBefore (number) - The balance of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
-+ balanceAfter (number) - The balance of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `valueRule`).
-+ balanceChange (number) - The net change of the balance of the Value for the Transaction.  When the Value has a `valueRule` rather than a `balance` this number will still be set to indicate the value of the rule.
++ balanceBefore (number) - The balance of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
++ balanceAfter (number) - The balance of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
++ balanceChange (number) - The net change of the balance of the Value for the Transaction.  When the Value has a `balanceRule` rather than a `balance` this number will still be set to indicate the value of the rule.
 
 ## StripeTransactionStep (TransactionStep)
 + rail (string) - `stripe`

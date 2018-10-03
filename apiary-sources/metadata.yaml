@@ -37,7 +37,7 @@ filter:
   tags: "Filter by tag. (support coming soon)"
   transactionType: "Filter by the transactionType."
   updatedDate: "Filter by updatedDate."
-  uses: "Filter by number of uses remaining."
+  usesRemaining: "Filter by number of uses remaining."
   valueId: "Filter by Value ID."
   ops:
     date: "This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information."
@@ -57,7 +57,7 @@ issuance:
   code: "The code to set on the Value. This is only available when `count` is 1."
   isGenericCode: "If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided. This is only available when `count` is 1."
   balance: "The balance to set on each Value. This can be constrained by the Program's `minInitialBalance` and `maxInitialBalance` or must be in the `fixedInitialBalances` array."
-  usesRemaining: "The uses to set on each Value. This can be restricted to values defined by the Program's `fixedInitialUsesRemaining`."
+  usesRemaining: "The usesRemaining to set on each Value. This can be restricted to values defined by the Program's `fixedInitialUsesRemaining`."
   startDate: "Override the Program's startDate for the Value."
   endDate: "Override the Program's endDate for the Value."
   redemptionRule: "A Redemption Rule controlling when the Values can be used in checkout. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md)."

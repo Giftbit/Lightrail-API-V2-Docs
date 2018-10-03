@@ -75,6 +75,11 @@
       }
     },
     {
+      "callId": "listValues1",
+      "method": "GET",
+      "endpoint": "/values?limit=1"
+    },
+    {
       "callId": "attachValue1",
       "method": "POST",
       "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/attach",
@@ -184,7 +189,7 @@
           "rule": "currentLineItem.productId == 'socks'",
           "explanation": "20% off socks"
         },
-        "valueRule": {
+        "balanceRule": {
           "rule": "currentLineItem.lineTotal.subtotal * 0.20",
           "explanation": "20% off socks"
         },

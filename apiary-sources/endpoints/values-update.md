@@ -20,7 +20,6 @@
         + discount (boolean, optional) - {{value.discount}}
         + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
-        + valueRule (Rule, optional) - (Deprecated. Use `balanceRule` instead.)
         + balanceRule (Rule, optional) - {{value.balanceRule}}
         + startDate (string, optional) - {{value.startDate}}
         + endDate (string, optional) - {{value.endDate}}

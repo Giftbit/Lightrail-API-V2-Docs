@@ -43,7 +43,7 @@ Below is the list of attributes commonly used when creating a Promotion Program.
  - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. 
- - **valueRule**: A Value Rule controlling the effective balance of the Value in a Checkout - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
+ - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a Checkout - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
  - **redemptionRule**: A Redemption Rule controlling when the Value can be used in checkout. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.

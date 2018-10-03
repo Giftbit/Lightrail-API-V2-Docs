@@ -20,7 +20,7 @@
     
     If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
     
-    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
+    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `usesRemaining` decremented by 1 if `usesRemaining` is not null.
     
     + Attributes (Value)
 
@@ -30,7 +30,7 @@
 
 + Response 409 (application/json)
     
-    A Value with `isGenericCode=true` true and `uses=0` cannot be attached to any more Contacts.
+    A Value with `isGenericCode=true` true and `usesRemaining=0` cannot be attached to any more Contacts.
     
     + Attributes (RestError)
     
@@ -38,7 +38,7 @@
     
             {
                 "statusCode": 409,
-                "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 uses remaining."
+                "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 usesRemaining."
                 "messageCode": "InsufficientUses"
             }
 

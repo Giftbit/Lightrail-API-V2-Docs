@@ -30,7 +30,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
                             "after": 3000,
                             "change": -2500
                         },
-                        "uses": null
+                        "usesRemaining": null
                     }
                 ],
                 "remainder": 0,
