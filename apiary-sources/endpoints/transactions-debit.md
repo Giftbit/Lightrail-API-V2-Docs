@@ -12,7 +12,7 @@ Debit (remove an amount from) a Lightrail payment source.
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + amount (number, required) - The amount to debit, > 0.
-        + uses (number, optional) - The number of uses to remove.  Defaults to 0.
+        + usesRemaining (number, optional) - The number of usesRemaining to remove.  Defaults to 0.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}

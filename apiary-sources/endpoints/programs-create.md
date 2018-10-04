@@ -13,12 +13,11 @@
         + pretax (boolean, optional) - {{program.pretax}} Default is `true`.
         + active (boolean, optional) - {{program.active}}
         + redemptionRule (Rule, optional) - {{program.redemptionRule}}
-        + valueRule (Rule, optional) - (Deprecated. Use `balanceRule` instead.)
         + balanceRule (Rule, optional) - {{program.balanceRule}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
-        + fixedInitialUses (array[number], optional) -  {{program.fixedInitialUses}}
+        + fixedInitialUsesRemaining (array[number], optional) -  {{program.fixedInitialUsesRemaining}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}}
         + endDate (string, optional) - {{program.endDate}}

@@ -6,7 +6,6 @@
 + code (string) - {{value.code}}
 + isGenericCode (boolean) - {{value.isGenericCode}}
 + balance (number) - {{value.balance}}
-+ uses (number) - (Deprecated. Use `usesRemaining` instead.)
 + usesRemaining (number) - {{value.usesRemaining}}
 + active (boolean) - {{value.active}}
 + frozen (boolean) - {{value.frozen}}
@@ -15,7 +14,6 @@
 + discount (boolean) - {{value.discount}}
 + discountSellerLiability (number) - {{value.discountSellerLiability}}
 + redemptionRule (Rule) - {{value.redemptionRule}}
-+ valueRule (Rule) - (Deprecated. Use `balanceRule` instead.)
 + balanceRule (Rule) - {{value.balanceRule}}
 + startDate (string) - {{value.startDate}}
 + endDate (string) - {{value.endDate}}

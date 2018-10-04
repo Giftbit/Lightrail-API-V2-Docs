@@ -1,4 +1,4 @@
-### List a Contact's Values [GET /contacts/{id}/values{?limit}{?programId}{?currency}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List a Contact's Values [GET /contacts/{id}/values{?limit}{?programId}{?currency}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
 
 + Parameter
     + id (string) - the ID of the Contact to get the Values of.
@@ -6,7 +6,7 @@
     + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
     + balance (number, optional) - {{filter.balance}}  {{filter.ops.number}}
-    + uses (number, optional) - {{filter.uses}}  {{filter.ops.number}}
+    + usesRemaining (number, optional) - {{filter.usesRemaining}}  {{filter.ops.number}}
     + discount (boolean, optional) - {{filter.discount}}
     + active (boolean, optional) - {{filter.active}}
     + frozen (boolean, optional) - {{filter.frozen}}
