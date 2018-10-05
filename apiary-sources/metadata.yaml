@@ -150,7 +150,7 @@ value:
   showCode: "Show the full code for the Value."
   startDate: "Date when the Value becomes available."
   updatedContactIdDate: "Date of the last contactId update (Contact attached)."
-  usesRemaining: "The number of times the Value can be used. When this number reaches 0 the Value can no longer be used."
+  usesRemaining: "The number of times the Value can be used in checkout. When this number reaches 0 the Value can no longer be used in checkout."
   create:
     code: "Assign a code."
     contactId: "Directly attach to a Contact."
