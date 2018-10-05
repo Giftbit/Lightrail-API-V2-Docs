@@ -1,5 +1,9 @@
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
+Attaching a Contact to a Value sets the Value's `contactId` to that Contact's ID.  The Contact "has" that Value.  In a checkout Transaction specifying the same `contactId` will have all applicable Values for the Contact applied to the Transaction. 
+
+If the Value is attached by `code` and the code is generic then a copy of the Value will be created for the Contact (so that other Contacts can also use that code) and a Transaction created to record it.  If the original Value has a limited number of `usesRemaining` 1 will be taken off and applied to the copy.
+
 + Parameter
     + id (string) - the ID of the Contact to attach Value to.
 
@@ -17,10 +21,6 @@
             {REQUEST_REPLACEMENT:attachValue1.body}
     
 + Response 200 (application/json)
-    
-    If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
-    
-    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `usesRemaining` decremented by 1 if `usesRemaining` is not null.
     
     + Attributes (Value)
 
