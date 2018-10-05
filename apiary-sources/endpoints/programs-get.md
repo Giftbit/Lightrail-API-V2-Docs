@@ -1,4 +1,4 @@
-### Get a Program [GET /programs/promotions/{id}]
+### Get a Program [GET /programs/{id}]
 
 + Parameter
     + id (string) - the ID of the Program to get.
