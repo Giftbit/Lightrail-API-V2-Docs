@@ -197,9 +197,9 @@ The `source` is a tokenized credit card, created from Stripe Elements.
 ### Getting Started
 See our examples below to get started with:
 
-- [Gift cards](https://www.lightrail.com/docs/#gift-cards/gift-cards)
+- [Gift cards](https://www.lightrail.com/docs/#drop-in-gift-cards/drop-in-gift-cards)
 - [Accounts and loyalty points](https://www.lightrail.com/docs/#accounts/accounts-and-points)
-- [Promotions](https://www.lightrail.com/docs/#discounts/promotions)
+- [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
 - [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
  
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
