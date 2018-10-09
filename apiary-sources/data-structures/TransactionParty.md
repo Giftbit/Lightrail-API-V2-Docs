@@ -18,6 +18,7 @@
 + beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
 
 ## AdditionalStripeChargeParams (object)
++ description (string)
 + on_behalf_of (string)
 + receipt_email (string)
 + statement_descriptor (string)
