@@ -11,7 +11,7 @@ Here's a basic example of how you can add a Card Purchase Dialog to your page us
         <title>Buy Gift Cards | Rocketship</title>
         
         <!-- Include this script in your page header -->
-        <script src="https://embed.lightrail.com/dropin/v1/lightrail-ui.js"></script>
+        <script src="https://embed.lightrail.com/dropin_v2/v2/lightrail-ui.js"></script>
         
         <!-- Now that you've included Lightrail UI, it's time to use it. -->
         <script>
@@ -174,7 +174,7 @@ Alternatively, a launch button can be added to your page by adding the correct p
 | ------------- | ------------- | ------------- |
 | "open" | Open the Dialog. | {} |
 | "close" | Close the Dialog.  | {} |
-| "purchaseComplete" | A Gift Card was purchased and sent to another customer.  | {senderEmail: "user@aol.com", recipientEmail: "user2@aol.com", cardAmountCents: 10000, currency: "USD"} |
+| "purchaseComplete" | A Gift Card was purchased and sent to another customer.  | {senderEmail: "user@aol.com", recipientEmail: "user2@aol.com", stripeChargeId:"12345", valueId:"12345"} |
 | "purchaseError" | There was an error purchasing | {status: 401, data: {type: "", message: "Unauthorized"}} |
 
 
@@ -294,6 +294,7 @@ Below is a comprehensive list of values accepted by the **Card Purchase Dialog C
 24. `launch_btn_container: "#launch-button-container"`
 25. `launch_btn_label: "Give a Gift"`
 26. `launch_btn_classname: "rocketship-button__small"`
+27. `resend_btn_hidden`: true (defaults to false)
 
 _*All overrides are optional_
 
@@ -352,6 +353,4 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 **Note:** #17 provides a label to pass for the completed redemption step. #18 is the the href for where the button will redirect users on redemption completion.
 
 ## Support
-Looking for an example? Check out our [sample app](https://github.com/Giftbit/stripe-integration-sample-webapp) which is a working example of the entire Drop-in Gift Card solution.
-
 Contact us any time at hello@lightrail.com —- we are here to help.
