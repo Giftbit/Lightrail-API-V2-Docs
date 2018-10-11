@@ -1,5 +1,9 @@
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
+Attaching a Contact to a Value sets the Value's `contactId` to that Contact's ID.  The Contact "has" that Value.  In a checkout Transaction specifying the same `contactId` will have all applicable Values for the Contact applied to the Transaction. 
+
+If the Value is attached by `code` and the code is generic then a copy of the Value will be created for the Contact (so that other Contacts can also use that code) and a Transaction created to record it.  If the original Value has a limited number of `usesRemaining` 1 will be taken off and applied to the copy.
+
 + Parameter
     + id (string) - the ID of the Contact to attach Value to.
 
@@ -18,10 +22,6 @@
     
 + Response 200 (application/json)
     
-    If the Value has a unique code (or no code) it will be attached to the Contact by setting the `contactId` on the Value.
-    
-    If the Value has a generic code it will be copied. The new Value will have an `id` that is a hash of the original Value `id` and the Contact `id`.  The original Value will have `uses` decremented by 1 if `uses` is not null.
-    
     + Attributes (Value)
 
     + Body
@@ -30,7 +30,7 @@
 
 + Response 409 (application/json)
     
-    A Value with `isGenericCode=true` true and `uses=0` cannot be attached to any more Contacts.
+    A Value with `isGenericCode=true` true and `usesRemaining=0` cannot be attached to any more Contacts.
     
     + Attributes (RestError)
     
@@ -38,6 +38,34 @@
     
             {
                 "statusCode": 409,
-                "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 uses remaining."
+                "message": "The Value with id '123abc' cannot be attached because it has a generic code and has 0 usesRemaining."
                 "messageCode": "InsufficientUses"
+            }
+
++ Response 409 (application/json)
+    
+    A Value that is frozen cannot be attached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value cannot be attached because it is frozen."
+                "messageCode": "ValueFrozen"
+            }
+
++ Response 409 (application/json)
+    
+    A Value that is canceled cannot be attached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value cannot be attached because it is canceled."
+                "messageCode": "ValueCanceled"
             }

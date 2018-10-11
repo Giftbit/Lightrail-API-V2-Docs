@@ -14,13 +14,13 @@
         
     + Attributes
         + name (string, optional) - {{program.name}}
-        + active (boolean, optional) - {{value.active}}
-        + discount (boolean, optional) - {{value.discount}} Default is `true`. {{patch.alsoChangeValues}}
-        + preTax (boolean, optional) - {{value.preTax}} Default is `true`. {{patch.alsoChangeValues}}
+        + active (boolean, optional) - {{program.active}}
+        + discount (boolean, optional) - {{program.discount}} Default is `true`. {{patch.alsoChangeValues}}
+        + pretax (boolean, optional) - {{program.pretax}} Default is `true`. {{patch.alsoChangeValues}}
         + minInitialBalance (number, optional) - {{program.minInitialBalance}} {{patch.alsoChangeValues}}
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}} {{patch.alsoChangeValues}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}} {{patch.alsoChangeValues}}
-        + fixedInitialUses (array[number], optional) -  {{program.fixedInitialUses}} {{patch.alsoChangeValues}}
+        + fixedInitialUsesRemaining (array[number], optional) -  {{program.fixedInitialUsesRemaining}} {{patch.alsoChangeValues}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
         + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}

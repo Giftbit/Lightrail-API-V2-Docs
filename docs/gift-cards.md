@@ -15,65 +15,88 @@ How to create a Gift Card Program through the API. Note, typically Programs are 
 `POST https://api.lightrail.com/v2/programs`
 ```json
 {
-    "programId": "gift-cards-usd",
+    "id": "gift-cards-usd",
     "name": "Gift Cards USD",
     "currency": "USD",
-    "access": "secureCode",
     "minInitialBalance": 500,
     "maxInitialBalance": 100000,
+    "discount": false,
+    "pretax": false,
     "tags": ["giftCard"]
 }
 ``` 
 
 #### Attributes
-Below is the list of attributes used when creating an Account Program.
- - **programId** (_required_): Unique idempotent ID for the Program.
+Below is the list of attributes commonly used when creating a Gift Card Program. For full attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+ - **id** (_required_): Unique idempotent ID for the Program.
  - **name** (_optional_): A human-readable name for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
- - **access** (_required_): Always use value `secureCode` for creating account programs. This means the gift card will be created using a unique unguessable code.
- - **active** (_optional_): Whether the Value is active and can be used upon creation.
- - **minInitialValue** (_optional_): The minimum value the Value can be created with.
- - **maxInitialBalance** (_optional_): The maximum value the Value can be created with.  
- - **fixedInitialValues** (_optional_): A list of values the Value can be created with.  
+ - **active** (_optional_): Whether Values in this Program are active and can be used upon creation.
+ - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
+ - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
+ - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. Not set in combination with `minInitialBalance` and `maxInitialBalance`.
+ - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `true`). Use `false` for Gift Card Programs.
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Use `false` for Gift Card Programs.
  - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ### Issuing a Gift Card
-Creating Gift Cards is easy. Below is the call to do this. 
-
 `POST https://api.lightrail.com/v2/values`
 ```json
 {
     "id": "gc-n6se54",
     "programId": "gift-cards-usd",
-    "value": 2500
+    "balance": 2500
 }
 ``` 
 
 #### Attributes
-Below is the list of attributes used when creating an Account from a Program.
-- **id** (_required_): Unique idempotent id for the Value.
+Below is the list of attributes commonly used when creating a Gift Card from a Program. For full attribute details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+- **id** (_required_): Unique idempotent ID for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
-- **value** (_optional_): An integer greater than or equal to 0 representing the initial value of the Account.
+- **balance** (_optional_): An integer greater than or equal to 0 representing the initial balance of the Gift Card.
+- **code** (_optional_): Can by used by the customer to use the Gift Card as a payment source. 
+- **generateCode** (_optional_): Parameters to generate a secure code. To use the default length and character set, simply set to an empty object: `{}`. See the [reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value) for usage details.
 
 ### Common Requests  
 Below are the most common requests made when interacting with Gift Cards.
 
 #### Retrieve Gift Code
-The unique code that's generated for a Gift Card must be retrieved via the following endpoint. It is not returned with the Gift Card (`Value`) for security purposes.
+The unique code that's generated for a Gift Card can be retrieved via the following endpoint. By default it is not returned with the Gift Card (`Value`) for security purposes.
 
-`GET https://api.lightrail.com/v2/values/<id>/code`
+`GET https://api.lightrail.com/v2/values/<id>?showCode=true`
 
-Example response:
+The response will be the same as the response returned for creating a Value, but with the full code displayed instead of only the last four characters:
 
 ```json 
 {
-    "code": "ABCDEFGHIJKLM"
+  "id": "gc-n6se54",
+  "currency": "USD",
+  "balance": 2500,
+  "usesRemaining": null,
+  "programId": "gift-cards-usd",
+  "issuanceId": null,
+  "contactId": null,
+  "code": "ABCDEF123456",
+  "isGenericCode": false,
+  "pretax": false,
+  "active": true,
+  "canceled": false,
+  "frozen": false,
+  "discount": false,
+  "discountSellerLiability": null,
+  "redemptionRule": null,
+  "balanceRule": null,
+  "startDate": null,
+  "endDate": null,
+  "metadata": null,
+  "createdDate": "2018-08-02T21:12:24.000Z",
+  "updatedDate": "2018-08-02T21:12:24.000Z"
 }
-``` 
+```
 
 #### Using a Gift Card as a Payment Source in Checkout
-Checkout is done using the `/transactions/orders` endpoint. To use a Gift Card as a payment source simply provide the following in the sources property of the request. 
+Checkout uses the `/transactions/checkout` endpoint. To use a Gift Card as a payment source simply provide the following in the sources property of the request. 
 
 ```json
 {
@@ -82,7 +105,7 @@ Checkout is done using the `/transactions/orders` endpoint. To use a Gift Card a
 }
 ```
 
-See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order) for full documentation of `/transactions/orders` endpoint.
+See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
 
 ### Support
 Want more information on your gift card use-case? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

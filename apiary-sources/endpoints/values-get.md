@@ -16,7 +16,25 @@
 
             {REQUEST_REPLACEMENT:createValue1.response.body}
 
-### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?uses}{?discount}{?active}{?frozen}{?canceled}{?preTax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### Get a Value by Code [GET /values?code={code}{?showCode}]
+
++ Parameter
+    + code (string) - the code (secret or generic) of the Value to get.
+    + showCode (boolean, optional) - {{value.showCode}}
+
++ Request (application/json)
+    + Headers
+
+            {{header.authorization}}
+
++ Response 200 (application/json)
+    + Attributes (Value)
+
+    + Body
+
+            {REQUEST_REPLACEMENT:createValue1.response.body}
+
+### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
@@ -25,12 +43,12 @@
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
     + contactId (string, optional) - {{filter.contactId}}  {{filter.ops.in}}
     + balance (number, optional) - {{filter.balance}}  {{filter.ops.number}}
-    + uses (number, optional) - {{filter.uses}}  {{filter.ops.number}}
+    + usesRemaining (number, optional) - {{filter.usesRemaining}}  {{filter.ops.number}}
     + discount (boolean, optional) - {{filter.discount}}
     + active (boolean, optional) - {{filter.active}}
     + frozen (boolean, optional) - {{filter.frozen}}
     + canceled (boolean, optional) - {{filter.canceled}}
-    + preTax (boolean, optional) - {{filter.preTax}}
+    + pretax (boolean, optional) - {{filter.pretax}}
     + startDate (string, optional) - {{filter.startDate}}  {{filter.ops.date}}
     + endDate (string, optional) - {{filter.endDate}}  {{filter.ops.date}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
@@ -53,33 +71,7 @@
 
     + Body
 
-            [
-                {
-                    "id": "vs-1",
-                    "type": "giftCard",
-                    "programId": "giftCards",
-                    "contactId": null,
-                    "code": "…GYOA",
-                    "isGenericCode": false,
-                    "currency": "USD",
-                    "balance": 2500,
-                    "active": true,
-                    "frozen": false,
-                    "canceled": false,
-                    "preTax": false,
-                    "discount": false,
-                    "discountSellerLiability": null,
-                    "redemptionRule": null,
-                    "valueRule": null,
-                    "uses": null,
-                    "startDate": null,
-                    "endDate": null,
-                    "tags": [],
-                    "metadata": null,
-                    "createdDate": "2018-04-17T23:20:08.000Z",
-                    "updatedDate": "2018-04-17T23:20:08.000Z"
-                }
-            ]
+            {REQUEST_REPLACEMENT:listValues1.response.body}
 
 + Response 200 (text/csv)
 
@@ -93,5 +85,5 @@
         
     + Body
 
-            id,currency,balance,uses,programId,contactId,code,isGenericCode,pretax,active,canceled,frozen,discount,discountSellerLiability,redemptionRule,valueRule,startDate,endDate,metadata,createdDate,updatedDate
+            id,currency,balance,usesRemaining,programId,contactId,code,isGenericCode,pretax,active,canceled,frozen,discount,discountSellerLiability,redemptionRule,balanceRule,startDate,endDate,metadata,createdDate,updatedDate
             vs-1,USD,2500,,giftCards,,…GYOA,false,false,true,false,false,false,,,,,,,2018-04-17T23:20:08.000Z,2018-04-17T23:20:08.000Z

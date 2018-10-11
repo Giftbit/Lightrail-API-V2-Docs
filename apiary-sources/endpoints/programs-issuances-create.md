@@ -10,17 +10,18 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{issuance.id}}  {{idPurpose}}
+        + id (string, required) - {{issuance.id}}  {{issuance.idPurpose}}
+        + name (string, required) - {{issuance.name}}
         + count (number, required) - {{issuance.count}}
         + generateCode (CodeGeneration, optional) - {{issuance.generateCode}}
         + code (string, optional) - {{issuance.code}}
         + isGenericCode (boolean, optional) - {{issuance.isGenericCode}}
         + balance (number, optional) - {{issuance.balance}}
-        + uses (number, optional) - {{issuance.uses}}  
+        + usesRemaining (number, optional) - {{issuance.usesRemaining}}  
         + startDate (string, optional) - {{issuance.startDate}}
         + endDate (string, optional) - {{issuance.endDate}}
         + redemptionRule (Rule, optional) - {{issuance.redemptionRule}}
-        + valueRule (Rule, optional) - {{issuance.valueRule}}
+        + balanceRule (Rule, optional) - {{issuance.balanceRule}}
         + tags (array[string], optional) - {{tags}} These are applied to each Value.
         + metadata (object, optional) - {{issuance.metadata}}
         

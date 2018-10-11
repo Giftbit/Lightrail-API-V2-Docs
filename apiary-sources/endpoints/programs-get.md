@@ -1,4 +1,4 @@
-### Get a Program [GET /programs/promotions/{id}]
+### Get a Program [GET /programs/{id}]
 
 + Parameter
     + id (string) - the ID of the Program to get.
@@ -15,7 +15,7 @@
 
                 {REQUEST_REPLACEMENT:createProgram1.response.body}
 
-### List Programs [GET /programs{?limit}{?id}{?name}{?preTax}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
+### List Programs [GET /programs{?limit}{?id}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
