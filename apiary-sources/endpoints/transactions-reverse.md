@@ -1,6 +1,5 @@
 ### Reverse [POST /transactions/{id}/reverse]
-
-Reverse a Transaction. Reverse can be used to undo a Transaction and is useful for issuing refunds or recovering from errors.  
+Reversing a Transaction returns value back to where it came from. Reverse is used for refunding or undoing a Transaction.      
 
 + Request (application/json)
 
