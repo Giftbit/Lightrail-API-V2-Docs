@@ -1130,7 +1130,7 @@ Returns value back to where it came from. Reverse adds a Transaction to the [Tra
 
             {"id":"d425425c-fb55-45ec-8","transactionType":"debit","currency":"USD","createdDate":"2018-10-24T17:36:48.000Z","tax":null,"totals":{"remainder":0},"lineItems":null,"steps":[{"rail":"lightrail","valueId":"27685722-d68b-4efd-a","contactId":null,"code":null,"balanceBefore":3000,"balanceAfter":2000,"balanceChange":-1000,"usesRemainingBefore":null,"usesRemainingAfter":null,"usesRemainingChange":null}],"paymentSources":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"}
             
-### GET Transaction Chain [GET /transactions/{id}/chain]
+### Get Transaction Chain [GET /transactions/{id}/chain]
 Returns all Transactions in a Transaction Chain. 
 
 A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are reverse and pending capture/void (coming soon). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to understand the current state of a Transaction.  
