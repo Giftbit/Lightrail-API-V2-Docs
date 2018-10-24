@@ -15,10 +15,10 @@
 
             {REQUEST_REPLACEMENT:debitTransaction1.response.body}
             
-### List Transaction Chain [GET /transactions/{id}/chain]
+### GET Transaction Chain [GET /transactions/{id}/chain]
 Returns all Transactions in a Transaction Chain. 
 
-A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are reverse and pending capture/void (coming soon). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to display the current state of a Transaction.  
+A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are reverse and pending capture/void (coming soon). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to understand the current state of a Transaction.  
 
 + Parameter
     + id (string, required) - The ID of any Transaction in the chain to look up. 
