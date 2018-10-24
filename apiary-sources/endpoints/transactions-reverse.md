@@ -41,6 +41,6 @@ Returns value back to where it came from. Reverse adds a Transaction to the [Tra
 
             {
                 "statusCode": 422,
-                "message": "Cannot reverse transaction that is not last in the transaction chain. Use endpoint .../v2/transactions/${id}/chain to find last transaction in chain",
+                "message": "Cannot reverse Transaction that is not last in the Transaction Chain. See documentation for more information on the Transaction Chain.",
                 "messageCode": "TransactionNotReversible"
             }
