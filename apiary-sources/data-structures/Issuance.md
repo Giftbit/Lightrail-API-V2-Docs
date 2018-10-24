@@ -2,9 +2,6 @@
 + id (string, required) - {{issuance.id}}  {{issuance.idPurpose}}
 + programId (string) - {{issuance.programId}}
 + count (number) - {{issuance.count}}
-+ codeGeneration (CodeGeneration) - {{issuance.generateCode}}
-+ code (string) - {{issuance.code}}
-+ isGenericCode (boolean) - {{issuance.isGenericCode}}
 + balance (number) - {{issuance.balance}}  
 + usesRemaining (number) - {{issuance.usesRemaining}}  
 + startDate (string) - {{issuance.startDate}}
