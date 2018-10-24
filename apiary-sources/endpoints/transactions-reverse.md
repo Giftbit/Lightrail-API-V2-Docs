@@ -1,5 +1,5 @@
 ### Reverse [POST /transactions/{id}/reverse]
-Returns value back to where it came from. Reverse can be used for undoing a Transaction and adds a Transaction to the [Transaction Chain](#reference/0/transactions/list-transaction-chain).      
+Returns value back to where it came from. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/list-transaction-chain).      
 
 + Request (application/json)
 
