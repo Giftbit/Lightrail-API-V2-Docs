@@ -234,6 +234,19 @@
       }
     },
     {
+      "callId": "reverseCheckout",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkoutExample1.body.id}/reverse",
+      "body": {
+        "id": "{UUID()}"
+      }
+    },
+    {
+      "callId": "transactionChain",
+      "method": "GET",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkoutExample1.body.id}/chain"
+    },
+    {
       "callId": "generateCodeValue1",
       "method": "POST",
       "endpoint": "/values",
