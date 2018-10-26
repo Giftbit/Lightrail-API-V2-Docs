@@ -23,7 +23,7 @@
         + redemptionRule (Rule, optional) - {{issuance.redemptionRule}}
         + balanceRule (Rule, optional) - {{issuance.balanceRule}}
         + tags (array[string], optional) - {{tags}} These are applied to each Value.
-        + metadata (object, optional) - {{issuance.metadata}}
+        + metadata (object, optional) - {{issuance.metadata}} `metadata` from the Program is inherited but any keys specified will override those of the Program.
         
     + Body
     

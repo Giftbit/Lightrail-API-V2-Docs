@@ -28,7 +28,7 @@
         + startDate (string, optional) - {{value.startDate}}
         + endDate (string, optional) - {{value.endDate}}
         + tags (array[string], optional) - {{tags}}
-        + metadata (object, optional) - {{value.metadata}}
+        + metadata (object, optional) - {{value.metadata}} If `programId` is set `metadata` from the Program is inherited but any keys specified will override those of the Program.
         
     + Body
     

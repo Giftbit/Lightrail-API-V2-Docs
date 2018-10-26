@@ -79,7 +79,7 @@ program:
   fixedInitialUsesRemaining: "A list of exact usesRemaining the Value can be created with."
   id: "The ID you choose to represent the Program."
   maxInitialBalance: "The maximum balance Values created in the Program can be created with."
-  metadata: "Arbitrary data associated with the Program."
+  metadata: "Arbitrary data associated with the Program. Values will inherit this `metadata` but may override any keys."
   minInitialBalance: "The minimum balance Values created in the Program can be created with."
   name: "A human-readable name for the Program."
   pretax: "If true the balance on Values created in the Program is applied on checkout before tax is calculated."

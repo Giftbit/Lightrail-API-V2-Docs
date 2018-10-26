@@ -1,7 +1,7 @@
-### Get an Issuance [GET /programs/{programId}/issuances/{id}]
+### Get an Issuance [GET /programs/{programId}/issuances/{issuanceId}]
 
 + Parameter
-    + id (string) - the ID of the Issuance to get.
+    + issuanceId (string) - the ID of the Issuance to get.
     + programId (string) - the ID of the Program of the Issuance.
 
 + Request (application/json)
