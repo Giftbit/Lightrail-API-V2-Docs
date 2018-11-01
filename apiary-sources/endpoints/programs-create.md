@@ -9,8 +9,8 @@
         + id (string, required) - {{program.id}}  {{program.idPurpose}}
         + name (string, required) - {{program.name}}
         + currency (string, required) - {{currency.code}}
-        + discount (boolean, optional) - {{program.discount}} Default is `true`. 
-        + pretax (boolean, optional) - {{program.pretax}} Default is `true`.
+        + discount (boolean, optional) - {{program.discount}}
+        + pretax (boolean, optional) - {{program.pretax}}
         + active (boolean, optional) - {{program.active}}
         + redemptionRule (Rule, optional) - {{program.redemptionRule}}
         + balanceRule (Rule, optional) - {{program.balanceRule}}
