@@ -24,11 +24,11 @@ Note: For development, toggle your Lightrail account to test mode, this will all
 Also, before going live or to see test Stripe charges show up in your Stripe account, you'll need to connect your Stripe account on your account's [Integrations](https://www.lightrail.com/app/#/account/api) page. 
 
 #### Shared Secret
-Set the shared secret that Lightrail will use to verify calls made using shopper tokens (see below). This step is usually done in the web app (coming soon!) but currently must be done through the API:
+Set the shared secret that Lightrail will use to verify calls made using shopper tokens (see below). This step is done through the API:
 
 `PUT https://api.lightrail.com/v1/storage/jwtSecret`
 
-The request body will simply be a string, which will be stored as your shared secret: 
+The request body will simply be a JSON string, which will be stored as your shared secret: 
 
 `"unguessable-secret"`
 
@@ -52,7 +52,7 @@ Create the [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/c
 See the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for details on what parameters can be set.
 
 #### Drop-in Configuration
-This step is usually done in the web app (coming soon!) but currently must be done through the API. This example uses the fictional company "Rocketship" to represent your company. 
+Is done through the API. This example uses the fictional company "Rocketship" to represent your company. 
 
 **Important notes:**
 - `stripePublicKey`: Use your test-mode publishable key for development and testing. 
@@ -82,7 +82,7 @@ This step is usually done in the web app (coming soon!) but currently must be do
 #### Shopper Tokens
 Shopper Tokens act like customer-specific API tokens to be used client-side in the drop-in components. They are based on a Contact's `id` stored in Lightrail.
 
-Shopper Tokens must be generated server side, for example using our [Node (Typescript/Javascript) Client Library](https://github.com/Giftbit/lightrail-client-javascript/tree/v2-client). (Coming soon: client libraries in Java, Ruby, PHP, and C#.)
+Shopper Tokens must be generated server side, for example using our [Node (Typescript/Javascript) Client Library](https://github.com/Giftbit/lightrail-client-javascript/tree/v2-client).
 
 The current version of the Lightrail Javascript Client (^2.0.0) is under the alpha tag: `npm install lightrail-client@alpha`
 
