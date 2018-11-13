@@ -141,7 +141,7 @@ value:
   generateCode: "Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`."
   id: "The ID you choose to represent the Value."
   idPurpose: "Two Values can't have the same ID, guaranteeing repeated calls won't create extra resources."
-  isGenericCode: "If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided."
+  isGenericCode: "(Deprecated. Lightrail is currently in the process of updating functionality of generic codes. Please [contact us](mailto:hello@lightrail.com) for more information.) If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided."
   metadata: "Arbitrary data associated with the Value."
   pretax: "If true the Value's balance is applied on checkout before tax is calculated."
   programId: "The ID of the Program this Value is in."
