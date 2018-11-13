@@ -2,7 +2,7 @@
 
 Attaching a Contact to a Value sets the Value's `contactId` to that Contact's ID.  The Contact "has" that Value.  In a checkout Transaction specifying the same `contactId` will have all applicable Values for the Contact applied to the Transaction. 
 
-If the Value is attached by `code` and the code is generic then a copy of the Value will be created for the Contact (so that other Contacts can also use that code) and a Transaction created to record it.  If the original Value has a limited number of `usesRemaining` 1 will be taken off and applied to the copy.
+Note, attaching a generic Value is currently deprecated as Lightrail is in the process of updating this functionality. Please [contact us](mailto:hello@lightrail.com) for more information. 
 
 + Parameter
     + id (string) - the ID of the Contact to attach Value to.
