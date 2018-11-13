@@ -378,7 +378,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         + programId (string, optional) - Create as part of a Program and copy default properties from it.
         + contactId (string, optional) - Directly attach to a Contact.
         + code (string, optional) - Assign a code.
-        + isGenericCode (boolean) - (Deprecated. Lightrail is currently in the process of updating functionality of generic codes. Please [contact us](mailto:hello@lightrail.com) for more information.) If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
+        + isGenericCode (boolean) - (Deprecated. Lightrail is currently in the process of updating the functionality of generic codes. Please [contact us](mailto:hello@lightrail.com) for more information.) If true the code is to be shared publicly and not secret. If false the code is treated as a secret. Defaults to false if not provided.
         + generateCode (CodeGeneration, optional) - Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`.
         + currency (string, optional) - Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.
         + balance (number, optional) - The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500. When this is set an `initialBalance` Transaction is created tracking the amount created.
