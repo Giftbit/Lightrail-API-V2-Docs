@@ -153,7 +153,7 @@ Alternatively, a launch button can be added to your page by adding the correct p
 ```javascript
         var cardPurchaseDialog = lightrailUI.components.cardPurchaseDialog({theme_bg_primary: "#ccc"});
 
-        cardPurchaseDialog.on("ready", function(error){
+        cardPurchaseDialog.on("ready", function(response){
             cardPurchaseDialog.open();
         });
 
@@ -161,7 +161,7 @@ Alternatively, a launch button can be added to your page by adding the correct p
             startConfetti();
         });
         
-        cardPurchaseDialog.on("close", function(error){
+        cardPurchaseDialog.on("close", function(response){
            stopConfetti(); 
         });
         
