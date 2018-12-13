@@ -1,6 +1,6 @@
 ## Dates & Durations
 
-All dates and durations are sent and received in 8601 format.
+All dates and durations are sent and received in ISO 8601 format.
 
 Date format: `YYYY-MM-DDTHH:MM:SS.SSSZ`
 

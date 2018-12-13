@@ -16,7 +16,7 @@ Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler a
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
-        + pending (boolean, optional) - {{transaction.pendingRequest}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body

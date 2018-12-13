@@ -30,7 +30,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
         + sources (array[TransactionParty])
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
-        + pending (boolean, optional) - {{transaction.pendingRequest}}
+        + pending (boolean, optional) - {{transaction.pending}}
         + tax (Tax, optional) 
         + metadata (object, optional) - {{transaction.checkout.metadata}}
         

@@ -322,6 +322,95 @@
       "callId": "listIssuances",
       "method": "GET",
       "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances?limit=1"
+    },
+    {
+      "callId": "valueForPendingVoid",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "txForPendingVoid",
+      "method": "POST",
+      "endpoint": "/transactions/checkout",
+      "body": {
+        "id": "{UUID()}",
+        "sources": [
+          {
+            "rail": "lightrail",
+            "contactId": "{REQUEST_REPLACEMENT:valueForPendingVoid.body.id}"
+          },
+          {
+            "rail": "stripe",
+            "source": "tok_visa"
+          }
+        ],
+        "lineItems": [
+          {
+            "productId": "avacado",
+            "unitPrice": 89,
+            "quantity": 2,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "bread",
+            "unitPrice": 399,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "toaster",
+            "unitPrice": 1999,
+            "taxRate": 0.08
+          }
+        ],
+        "currency": "USD",
+        "pending": true
+      }
+    },
+    {
+      "callId": "pendingVoid",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:txForPendingVoid.body.id}/void",
+      "body": {
+        "id": "{UUID()}"
+      }
+    },
+    {
+      "callId": "valueForPendingCapture",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "txForPendingCapture",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:valueForPendingCapture.body.id}"
+        },
+        "amount": 300,
+        "currency": "USD",
+        "pending": true
+      }
+    },
+    {
+      "callId": "pendingCapture",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:txForPendingCapture.body.id}/capture",
+      "body": {
+        "id": "{UUID()}"
+      }
     }
   ]
 }
