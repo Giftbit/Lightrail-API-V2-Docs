@@ -8,6 +8,8 @@
 + lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction.
 + paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction.
 + simulated (boolean) - {{transaction.simulated}}
++ pending (boolean) - {{transaction.pendingResponse}}
++ pendingVoidDate (string) - {{transaction.pendingVoidDate}}
 + createdDate (string) - {{transaction.createdDate}}
 + metadata (object) - {{transaction.metadata}}
 

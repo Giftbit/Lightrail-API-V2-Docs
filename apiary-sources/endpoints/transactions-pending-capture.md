@@ -1,9 +1,10 @@
-### Capture Pending Transaction (Coming soon) [POST /transactions/{id}/capture]
+### Capture Pending Transaction [POST /transactions/{transactionToCaptureId}/capture]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided unless it is captured.
 
 + Parameter
-    + id (string) - the ID of the pending Transaction to capture.
+    + transactionToCaptureId (string) - the ID of the pending Transaction to capture.
+    + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
 
 + Request (application/json)
     + Headers
@@ -11,6 +12,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
             {{header.authorization}}
 
 + Response 200 (application/json)
+
     + Attributes (Transaction)
 
     + Body

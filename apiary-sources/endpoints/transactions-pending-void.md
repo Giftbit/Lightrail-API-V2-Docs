@@ -1,9 +1,10 @@
-### Void Pending Transaction (Coming soon) [POST /transactions/{id}/void]
+### Void Pending Transaction [POST /transactions/{transactionToVoidId}/void]
 
 A pending Transaction is created when it is created with `pending = true`.  A pending Transaction will be automatically voided but voiding it manually will release the funds sooner.
 
 + Parameter
-    + id (string) - the ID of the pending Transaction to void.
+    + transactionToVoidId (string) - the ID of the pending Transaction to void.
+    + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
 
 + Request (application/json)
     + Headers
@@ -11,6 +12,7 @@ A pending Transaction is created when it is created with `pending = true`.  A pe
             {{header.authorization}}
 
 + Response 200 (application/json)
+
     + Attributes (Transaction)
 
     + Body

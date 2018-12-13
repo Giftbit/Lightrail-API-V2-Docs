@@ -15,7 +15,7 @@ Credit (add an amount to) a Lightrail payment destination.
         + uses (number, optional) - The number of `usesRemaining` to add.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
-        + pending (boolean, optional) - {{transaction.pending}}
+        + pending (boolean, optional) - {{transaction.pendingRequest}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body
@@ -24,7 +24,7 @@ Credit (add an amount to) a Lightrail payment destination.
     
 + Response 201 (application/json)
 
-    + Attributes (RestError)
+    + Attributes (Transaction)
 
     + Body
 
