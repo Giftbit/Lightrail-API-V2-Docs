@@ -1,8 +1,11 @@
 ### Reverse [POST /transactions/{id}/reverse]
-Returns value back to where it came from. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).      
+
+Returns funds back to where they came from. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
+
++ Parameter
+    + id (string, required) - The ID of any Transaction to reverse. 
 
 + Request (application/json)
-
     + Headers
     
             {{header.authorization}}
@@ -15,17 +18,7 @@ Returns value back to where it came from. Reverse adds a Transaction to the [Tra
             {REQUEST_REPLACEMENT:reverseCheckout.body}
 
 + Response 201 (application/json)
-
-    + Attributes
-        + id (string, required) - {{transaction.id}}
-        + transactionType (string, required) - `reverse`
-        + currency (string, required) - {{currency.code}}
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainderResponse}}
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + pending (boolean, optional) - {{transaction.pending}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
 

@@ -24,7 +24,7 @@ Credit (add an amount to) a Lightrail payment destination.
     
 + Response 201 (application/json)
 
-    + Attributes (RestError)
+    + Attributes (Transaction)
 
     + Body
 

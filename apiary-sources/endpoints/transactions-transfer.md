@@ -25,16 +25,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
 + Response 201 (application/json)
 
-    + Attributes
-        + id (string, required) - {{transaction.id}}
-        + transactionType (string, required) - `transfer`
-        + currency (string, required) - {{currency.code}}
-        + steps (array[TransactionStep], required) - {{transaction.steps}}
-        + remainder (number, required) - {{transaction.remainderResponse}}
-        + simulated (boolean, optional) - {{transaction.simulated}}
-        + createdDate (string, required) - {{transaction.createdDate}}
-        + pending (boolean, optional) - {{transaction.pending}}
-        + metadata (object, optional) - {{transaction.metadata}}
+    + Attributes (Transaction)
 
     + Body
 
