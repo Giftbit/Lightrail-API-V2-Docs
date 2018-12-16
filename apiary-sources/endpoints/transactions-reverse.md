@@ -1,6 +1,6 @@
 ### Reverse [POST /transactions/{id}/reverse]
 
-Returns funds back to where they came from. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
+Reverses any balance changes, usesRemaining changes and Stripe charges of a Transaction. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
 
 + Parameter
     + id (string, required) - The ID of any Transaction to reverse. 
