@@ -137,14 +137,14 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"email":"thedude@example.com","firstName":"Jeffrey","id":"54ae5e21-d44a-480b-a","lastName":"Lebowski","metadata":{"alias":"El Duderino"}}
+            {"email":"thedude@example.com","firstName":"Jeffrey","id":"98b8d267-3be8-469b-b","lastName":"Lebowski","metadata":{"alias":"El Duderino"}}
     
 + Response 201 (application/json)
     + Attributes (Contact)
 
     + Body
             
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"54ae5e21-d44a-480b-a","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-13T23:28:01.000Z"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"98b8d267-3be8-469b-b","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-17T22:51:23.000Z"}
 ### Get a Contact [GET /contacts/{id}]
 
 + Parameter
@@ -160,7 +160,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"54ae5e21-d44a-480b-a","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-13T23:28:01.000Z"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"98b8d267-3be8-469b-b","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-17T22:51:23.000Z"}
 
 ### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
         
@@ -188,7 +188,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"54ae5e21-d44a-480b-a","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-13T23:28:01.000Z"}]
+            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","email":"thedude@example.com","firstName":"Jeffrey","id":"98b8d267-3be8-469b-b","lastName":"Lebowski","metadata":{"alias":"El Duderino"},"updatedDate":"2018-12-17T22:51:23.000Z"}]
 ### Update a Contact [PATCH /contacts/{id}]
             
 + Parameter
@@ -219,7 +219,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
             
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","email":"thedude@example.com","firstName":"The Dude","id":"54ae5e21-d44a-480b-a","lastName":"Lebowski","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"updatedDate":"2018-12-13T23:28:01.000Z"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","email":"thedude@example.com","firstName":"The Dude","id":"98b8d267-3be8-469b-b","lastName":"Lebowski","metadata":{"alias":"El Duderino","note":"Into the whole 'brevity thing'"},"updatedDate":"2018-12-17T22:51:23.000Z"}
 ### Delete a Contact [DELETE /contacts/{id}]
 
 + Parameter
@@ -288,7 +288,7 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 
     + Body
 
-            [{"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"54ae5e21-d44a-480b-a","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-13T23:28:01.000Z","updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}]
+            [{"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"98b8d267-3be8-469b-b","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-17T22:51:24.000Z","updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}]
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
 
 Attaching a Contact to a Value sets the Value's `contactId` to that Contact's ID.  The Contact "has" that Value.  In a checkout Transaction specifying the same `contactId` will have all applicable Values for the Contact applied to the Transaction. 
@@ -309,7 +309,7 @@ Note, attaching a generic Value is currently deprecated as we're in the process 
 
     + Body
 
-            {"valueId":"c1e204da-031d-4e9f-a"}
+            {"valueId":"dfc6c79f-62a4-4b6c-b"}
     
 + Response 200 (application/json)
     
@@ -317,7 +317,7 @@ Note, attaching a generic Value is currently deprecated as we're in the process 
 
     + Body
             
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"54ae5e21-d44a-480b-a","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-13T23:28:01.000Z","updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"98b8d267-3be8-469b-b","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-17T22:51:24.000Z","updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}
 
 + Response 409 (application/json)
     
@@ -401,14 +401,14 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
         
     + Body
     
-            {"balance":500,"id":"c1e204da-031d-4e9f-a","programId":"4fc2adca-c699-4a68-a"}
+            {"balance":500,"id":"dfc6c79f-62a4-4b6c-b","programId":"c99170fa-3b6b-4bfb-8"}
     
 + Response 201 (application/json)
     + Attributes (Value)
 
     + Body
     
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}
 ### Get a Value [GET /values/{id}{?showCode}]
 
 + Parameter
@@ -425,7 +425,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}
 
 ### Get a Value by Code [GET /values?code={code}{?showCode}]
 
@@ -443,7 +443,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
@@ -482,7 +482,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            [{"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}]
+            [{"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}]
 
 + Response 200 (text/csv)
 
@@ -533,7 +533,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
     
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"54ae5e21-d44a-480b-a","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":true,"id":"c1e204da-031d-4e9f-a","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-13T23:28:01.000Z","updatedDate":"2018-12-13T23:28:01.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":null,"contactId":"98b8d267-3be8-469b-b","createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":true,"id":"dfc6c79f-62a4-4b6c-b","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":"2018-12-17T22:51:24.000Z","updatedDate":"2018-12-17T22:51:24.000Z","usesRemaining":null}
 ### Delete a Value [DELETE /values/{id}]
 
 + Parameter
@@ -590,7 +590,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":"\u2026QZ93","contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:06.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"82dc8a5c-bc56-43c6-8","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-13T23:28:06.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"canceled":false,"code":"\u2026W6E7","contactId":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:31.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"frozen":false,"id":"93ae96d7-5e26-4655-8","isGenericCode":false,"issuanceId":null,"metadata":{},"pretax":true,"programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedContactIdDate":null,"updatedDate":"2018-12-17T22:51:31.000Z","usesRemaining":null}
 ### List a Value's Transactions [GET /values/{id}/transactions{?limit}{?transactionType}{?createdDate}{?currency}]
 
 + Parameter
@@ -615,7 +615,7 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 
     + Body
 
-            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"f2a5b37c-1328-4448-8","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":500,"balanceBefore":0,"balanceChange":500,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"f2a5b37c-1328-4448-8"}],"tax":null,"totals":null,"transactionType":"initialBalance"}]
+            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"0d1c12f3-fb39-43e7-b","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"a574418d-f81b-4f04-a"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}]
 
 ## Programs [/programs]
 
@@ -638,7 +638,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         + pretax (boolean, optional) - If true the balance on Values created in the Program is applied on checkout before tax is calculated.
         + active (boolean, optional) - Whether Values created in the Program are active and can be used upon creation.
         + redemptionRule (Rule, optional) - A Redemption Rule controlling when Values created in the Program can be used in checkout. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
-        + balanceRule (Rule, optional) - A Rule controlling the effective balance of Values created in the Program in a Checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document.
+        + balanceRule (Rule, optional) - A Rule controlling the effective balance in checkout of Values created in the Program. To use this `minInitialBalance`, `maxInitialBalance` and `fixedInitialBalances` must be set to `null`. The syntax will be defined in a separate document.
         + minInitialBalance (number, optional) - The minimum balance Values created in the Program can be created with.
         + maxInitialBalance (number, optional) - The maximum balance Values created in the Program can be created with.
         + fixedInitialBalances (array[number], optional) -  A list of exact balances Values created in the Program can be created with.
@@ -650,14 +650,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
 
-            {"currency":"USD","discount":true,"fixedInitialBalances":[500],"id":"4fc2adca-c699-4a68-a","name":"Spring Promotion USD","pretax":true}
+            {"currency":"USD","discount":true,"fixedInitialBalances":[500],"id":"c99170fa-3b6b-4bfb-8","name":"Spring Promotion USD","pretax":true}
     
 + Response 201 (application/json)
     + Attributes (Program)
 
     + Body
             
-            {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"4fc2adca-c699-4a68-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:01.000Z"}
+            {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"c99170fa-3b6b-4bfb-8","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:23.000Z"}
 ### Get a Program [GET /programs/{id}]
 
 + Parameter
@@ -673,7 +673,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-                {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"4fc2adca-c699-4a68-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:01.000Z"}
+                {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"c99170fa-3b6b-4bfb-8","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:23.000Z"}
 
 ### List Programs [GET /programs{?limit}{?id}{?currency}{?tags}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
@@ -703,7 +703,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            [{"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"4fc2adca-c699-4a68-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:01.000Z"}]
+            [{"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"c99170fa-3b6b-4bfb-8","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promotion USD","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:23.000Z"}]
 ### Update a Program [PATCH /programs/{id}]
 
 + Parameter
@@ -741,7 +741,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
             
-            {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:01.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"4fc2adca-c699-4a68-a","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promo US Dollars","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:01.000Z"}
+            {"active":true,"balanceRule":null,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:23.000Z","currency":"USD","discount":true,"discountSellerLiability":null,"endDate":null,"fixedInitialBalances":[500],"fixedInitialUsesRemaining":null,"id":"c99170fa-3b6b-4bfb-8","maxInitialBalance":null,"metadata":null,"minInitialBalance":null,"name":"Spring Promo US Dollars","pretax":true,"redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:24.000Z"}
 ### Delete a Program [DELETE /programs/{id}]
 
 + Parameter
@@ -800,14 +800,14 @@ Programs are most commonly used to define and organize promotion campaigns. For 
         
     + Body
     
-            {"balance":500,"count":10,"generateCode":{},"id":"18143ee8-eb33-4cca-8","name":"My First Issuance"}
+            {"balance":500,"count":10,"generateCode":{},"id":"603c72f7-6ff1-43bd-b","name":"My First Issuance"}
     
 + Response 201 (application/json)
     + Attributes (Issuance)
 
     + Body
     
-            {"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:06.000Z","endDate":null,"id":"18143ee8-eb33-4cca-8","metadata":{},"name":"My First Issuance","programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:06.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:31.000Z","endDate":null,"id":"603c72f7-6ff1-43bd-b","metadata":{},"name":"My First Issuance","programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:31.000Z","usesRemaining":null}
 ### Get an Issuance [GET /programs/{programId}/issuances/{issuanceId}]
 
 + Parameter
@@ -824,7 +824,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
 
-            {"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:06.000Z","endDate":null,"id":"18143ee8-eb33-4cca-8","metadata":{},"name":"My First Issuance","programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:06.000Z","usesRemaining":null}
+            {"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:31.000Z","endDate":null,"id":"603c72f7-6ff1-43bd-b","metadata":{},"name":"My First Issuance","programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:31.000Z","usesRemaining":null}
 
 ### List Issuances [GET /programs/{id}/issuances]
 
@@ -842,7 +842,7 @@ Programs are most commonly used to define and organize promotion campaigns. For 
 
     + Body
     
-            [{"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:06.000Z","endDate":null,"id":"18143ee8-eb33-4cca-8","metadata":{},"name":"My First Issuance","programId":"4fc2adca-c699-4a68-a","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-13T23:28:06.000Z","usesRemaining":null}]
+            [{"active":true,"balance":500,"balanceRule":null,"count":10,"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:31.000Z","endDate":null,"id":"603c72f7-6ff1-43bd-b","metadata":{},"name":"My First Issuance","programId":"c99170fa-3b6b-4bfb-8","redemptionRule":null,"startDate":null,"updatedDate":"2018-12-17T22:51:31.000Z","usesRemaining":null}]
 
 ## Transactions [/transactions]
 
@@ -888,7 +888,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
         
     + Body 
     
-            {"currency":"USD","id":"ef1af359-9ab1-48ac-a","lineItems":[{"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"productId":"chocolate_bar","taxRate":0.05,"unitPrice":199},{"productId":"shipping","taxRate":0.0,"unitPrice":349}],"sources":[{"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}]}
+            {"currency":"USD","id":"141205a0-9c46-4d18-9","lineItems":[{"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"productId":"chocolate_bar","taxRate":0.05,"unitPrice":199},{"productId":"shipping","taxRate":0.0,"unitPrice":349}],"sources":[{"contactId":"98b8d267-3be8-469b-b","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}]}
     
 + Response 201 (application/json)
 
@@ -896,7 +896,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
 
     + Body
     
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"ef1af359-9ab1-48ac-a","lineItems":[{"lineTotal":{"discount":200,"payable":864,"remainder":0,"subtotal":1000,"tax":64,"taxable":800},"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"lineTotal":{"discount":0,"payable":349,"remainder":0,"subtotal":349,"tax":0,"taxable":349},"productId":"shipping","quantity":1,"taxRate":0,"unitPrice":349},{"lineTotal":{"discount":0,"payable":209,"remainder":0,"subtotal":199,"tax":10,"taxable":199},"productId":"chocolate_bar","quantity":1,"taxRate":0.05,"unitPrice":199}],"metadata":null,"paymentSources":[{"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}],"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":-200,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"878146f9-2866-4df3-8"},{"balanceAfter":0,"balanceBefore":1000,"balanceChange":-1000,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"40497ff7-58d8-4469-9"},{"amount":-422,"charge":{"amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1Dh3b5CM9MOvFvZKnyf3u6z6","captured":true,"created":1544743683,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"id":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"ef1af359-9ab1-48ac-a","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"878146f9-2866-4df3-8\"},{\"rail\":\"lightrail\",\"valueId\":\"40497ff7-58d8-4469-9\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"object":"charge","on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","risk_score":64,"seller_message":"Payment complete.","type":"authorized"},"paid":true,"payment_intent":null,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"data":[],"has_more":false,"object":"list","total_count":0,"url":"/v1/charges/ch_1Dh3b5CM9MOvFvZKcSWQ2EKl/refunds"},"review":null,"shipping":null,"source":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":12,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","id":"card_1Dh3b5CM9MOvFvZK1AwMYgbp","last4":"4242","metadata":{},"name":null,"object":"card","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"chargeId":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":200,"discountLightrail":200,"paidInternal":0,"paidLightrail":1000,"paidStripe":422,"payable":1422,"remainder":0,"subtotal":1548,"tax":74},"transactionType":"checkout"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"141205a0-9c46-4d18-9","lineItems":[{"lineTotal":{"discount":200,"payable":864,"remainder":0,"subtotal":1000,"tax":64,"taxable":800},"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"lineTotal":{"discount":0,"payable":349,"remainder":0,"subtotal":349,"tax":0,"taxable":349},"productId":"shipping","quantity":1,"taxRate":0,"unitPrice":349},{"lineTotal":{"discount":0,"payable":209,"remainder":0,"subtotal":199,"tax":10,"taxable":199},"productId":"chocolate_bar","quantity":1,"taxRate":0.05,"unitPrice":199}],"metadata":null,"paymentSources":[{"contactId":"98b8d267-3be8-469b-b","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}],"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":-200,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"e0fec6e9-05e8-43ca-a"},{"balanceAfter":0,"balanceBefore":1000,"balanceChange":-1000,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"0f6d8cfa-656a-4543-a"},{"amount":-422,"charge":{"amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1DiUvsCM9MOvFvZKoVNAfdHq","captured":true,"created":1545087088,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"id":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"141205a0-9c46-4d18-9","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"e0fec6e9-05e8-43ca-a\"},{\"rail\":\"lightrail\",\"valueId\":\"0f6d8cfa-656a-4543-a\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"object":"charge","on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","risk_score":60,"seller_message":"Payment complete.","type":"authorized"},"paid":true,"payment_intent":null,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"data":[],"has_more":false,"object":"list","total_count":0,"url":"/v1/charges/ch_1DiUvsCM9MOvFvZKMMBpFUh5/refunds"},"review":null,"shipping":null,"source":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":12,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","id":"card_1DiUvsCM9MOvFvZKgWT8MmlB","last4":"4242","metadata":{},"name":null,"object":"card","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"chargeId":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":200,"discountLightrail":200,"paidInternal":0,"paidLightrail":1000,"paidStripe":422,"payable":1422,"remainder":0,"subtotal":1548,"tax":74},"transactionType":"checkout"}
 
 + Response 409 (application/json)
 
@@ -960,7 +960,7 @@ Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler a
 
     + Body
 
-            {"amount":1000,"currency":"USD","id":"67eac91a-0e2f-42c8-8","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"source":{"rail":"lightrail","valueId":"f2a5b37c-1328-4448-8"}}
+            {"amount":1000,"currency":"USD","id":"0d1c12f3-fb39-43e7-b","metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"source":{"rail":"lightrail","valueId":"a574418d-f81b-4f04-a"}}
     
 + Response 201 (application/json)
 
@@ -968,7 +968,7 @@ Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler a
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"67eac91a-0e2f-42c8-8","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"f2a5b37c-1328-4448-8"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"0d1c12f3-fb39-43e7-b","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"a574418d-f81b-4f04-a"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}
 
 + Response 409 (application/json)
 
@@ -1005,7 +1005,7 @@ Credit (add an amount to) a Lightrail payment destination.
 
     + Body
 
-            {"amount":2500,"currency":"USD","destination":{"rail":"lightrail","valueId":"f2a5b37c-1328-4448-8"},"id":"db3a7b5b-36cb-43fd-a","metadata":{"note":"Frequent buyer bonus"}}
+            {"amount":2500,"currency":"USD","destination":{"rail":"lightrail","valueId":"a574418d-f81b-4f04-a"},"id":"a20e2d05-1db6-40cc-8","metadata":{"note":"Frequent buyer bonus"}}
     
 + Response 201 (application/json)
 
@@ -1013,7 +1013,7 @@ Credit (add an amount to) a Lightrail payment destination.
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"db3a7b5b-36cb-43fd-a","lineItems":null,"metadata":{"note":"Frequent buyer bonus"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":3000,"balanceBefore":500,"balanceChange":2500,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"f2a5b37c-1328-4448-8"}],"tax":null,"totals":null,"transactionType":"credit"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:24.000Z","currency":"USD","id":"a20e2d05-1db6-40cc-8","lineItems":null,"metadata":{"note":"Frequent buyer bonus"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":3000,"balanceBefore":500,"balanceChange":2500,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"a574418d-f81b-4f04-a"}],"tax":null,"totals":null,"transactionType":"credit"}
 ### Transfer [POST /transactions/transfer]
 
 Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
@@ -1037,7 +1037,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            {"amount":100,"currency":"USD","destination":{"rail":"lightrail","valueId":"104c33b0-3c06-4048-b"},"id":"5147346d-9436-4bf3-b","metadata":{"reference":"customer request to move funds. ref: #4948173593"},"source":{"rail":"lightrail","valueId":"0a3a15b2-7894-4d47-9"}}
+            {"amount":100,"currency":"USD","destination":{"rail":"lightrail","valueId":"b95255cf-fe1c-4ba9-a"},"id":"516db65c-071d-4950-9","metadata":{"reference":"customer request to move funds. ref: #4948173593"},"source":{"rail":"lightrail","valueId":"1ce76906-302a-4872-9"}}
 
 + Response 201 (application/json)
 
@@ -1045,7 +1045,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:06.000Z","currency":"USD","id":"5147346d-9436-4bf3-b","lineItems":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":400,"balanceBefore":500,"balanceChange":-100,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"0a3a15b2-7894-4d47-9"},{"balanceAfter":600,"balanceBefore":500,"balanceChange":100,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"104c33b0-3c06-4048-b"}],"tax":null,"totals":{"remainder":0},"transactionType":"transfer"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:31.000Z","currency":"USD","id":"516db65c-071d-4950-9","lineItems":null,"metadata":{"reference":"customer request to move funds. ref: #4948173593"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":400,"balanceBefore":500,"balanceChange":-100,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"1ce76906-302a-4872-9"},{"balanceAfter":600,"balanceBefore":500,"balanceChange":100,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"b95255cf-fe1c-4ba9-a"}],"tax":null,"totals":{"remainder":0},"transactionType":"transfer"}
 
 + Response 409 (application/json)
 
@@ -1077,14 +1077,14 @@ Reverses any balance changes, usesRemaining changes and Stripe charges of a Tran
      
     + Body
 
-            {"id":"3f84a377-503d-4147-b"}
+            {"id":"6d40e60c-6330-4d26-9"}
 
 + Response 201 (application/json)
     + Attributes (Transaction)
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:04.000Z","currency":"USD","id":"3f84a377-503d-4147-b","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":200,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"878146f9-2866-4df3-8"},{"balanceAfter":1000,"balanceBefore":0,"balanceChange":1000,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"40497ff7-58d8-4469-9"},{"amount":422,"charge":{"amount":422,"balance_transaction":"txn_1Dh3b7CM9MOvFvZKzA56yYn9","charge":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","created":1544743685,"currency":"usd","id":"re_1Dh3b7CM9MOvFvZKAgfCcMCg","metadata":{"reason":"Being refunded as part of reverse transaction 3f84a377-503d-4147-b."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":-200,"discountLightrail":-200,"paidInternal":0,"paidLightrail":-1000,"paidStripe":-422,"payable":-1422,"remainder":0,"subtotal":-1548,"tax":-74},"transactionType":"reverse"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:29.000Z","currency":"USD","id":"6d40e60c-6330-4d26-9","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":200,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"e0fec6e9-05e8-43ca-a"},{"balanceAfter":1000,"balanceBefore":0,"balanceChange":1000,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"0f6d8cfa-656a-4543-a"},{"amount":422,"charge":{"amount":422,"balance_transaction":"txn_1DiUvuCM9MOvFvZKRMPALzrA","charge":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","created":1545087090,"currency":"usd","id":"re_1DiUvuCM9MOvFvZKXXLVbMUm","metadata":{"reason":"Being refunded as part of reverse transaction 6d40e60c-6330-4d26-9."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":-200,"discountLightrail":-200,"paidInternal":0,"paidLightrail":-1000,"paidStripe":-422,"payable":-1422,"remainder":0,"subtotal":-1548,"tax":-74},"transactionType":"reverse"}
 
 + Response 422 (application/json)
 
@@ -1116,14 +1116,14 @@ Secures a pending Transaction and adds the capture to the [Transaction Chain](#r
         
     + Body
         
-                    {"id":"d67c1e43-4238-4163-b"}
+                    {"id":"e9e34040-9e9a-4153-b"}
         
 + Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:10.000Z","currency":"USD","id":"d67c1e43-4238-4163-b","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[],"tax":null,"totals":null,"transactionType":"capture"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:35.000Z","currency":"USD","id":"e9e34040-9e9a-4153-b","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[],"tax":null,"totals":null,"transactionType":"capture"}
 ### Void Pending [POST /transactions/{id}/void]
 
 Releases a pending Transaction and adds the void to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided but voiding it manually releases the funds sooner.
@@ -1141,14 +1141,14 @@ Releases a pending Transaction and adds the void to the [Transaction Chain](#ref
         
     + Body
     
-                {"id":"8e1122e8-ca06-4ebf-b"}
+                {"id":"e50b3e78-d4f7-4787-8"}
 
 + Response 200 (application/json)
     + Attributes (Transaction)
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:08.000Z","currency":"USD","id":"8e1122e8-ca06-4ebf-b","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"amount":2782,"charge":{"amount":2782,"balance_transaction":null,"charge":"ch_1Dh3bACM9MOvFvZK89AJEiEP","created":1544743689,"currency":"usd","id":"re_1Dh3bBCM9MOvFvZKkESEEvKk","metadata":{"reason":"Being refunded as part of reverse transaction 8e1122e8-ca06-4ebf-b."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1Dh3bACM9MOvFvZK89AJEiEP","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":0,"discountLightrail":0,"paidInternal":0,"paidLightrail":0,"paidStripe":-2782,"payable":-2782,"remainder":0,"subtotal":-2576,"tax":-206},"transactionType":"void"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:33.000Z","currency":"USD","id":"e50b3e78-d4f7-4787-8","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"amount":2782,"charge":{"amount":2782,"balance_transaction":null,"charge":"ch_1DiUvxCM9MOvFvZK5uUsnhoy","created":1545087094,"currency":"usd","id":"re_1DiUvyCM9MOvFvZKf2xLvmgI","metadata":{"reason":"Being refunded as part of reverse transaction e50b3e78-d4f7-4787-8."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1DiUvxCM9MOvFvZK5uUsnhoy","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":0,"discountLightrail":0,"paidInternal":0,"paidLightrail":0,"paidStripe":-2782,"payable":-2782,"remainder":0,"subtotal":-2576,"tax":-206},"transactionType":"void"}
 ### Get a Transaction [GET /transactions/{id}]
 
 + Parameter
@@ -1164,7 +1164,7 @@ Releases a pending Transaction and adds the void to the [Transaction Chain](#ref
 
     + Body
 
-            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"67eac91a-0e2f-42c8-8","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"f2a5b37c-1328-4448-8"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}
+            {"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"0d1c12f3-fb39-43e7-b","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"a574418d-f81b-4f04-a"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}
             
 ### Get Transaction Chain [GET /transactions/{id}/chain]
 
@@ -1191,7 +1191,7 @@ A Transaction Chain is an ordered list of Transactions and results from creating
 
     + Body
 
-            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"ef1af359-9ab1-48ac-a","lineItems":[{"lineTotal":{"discount":200,"payable":864,"remainder":0,"subtotal":1000,"tax":64,"taxable":800},"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"lineTotal":{"discount":0,"payable":349,"remainder":0,"subtotal":349,"tax":0,"taxable":349},"productId":"shipping","quantity":1,"taxRate":0,"unitPrice":349},{"lineTotal":{"discount":0,"payable":209,"remainder":0,"subtotal":199,"tax":10,"taxable":199},"productId":"chocolate_bar","quantity":1,"taxRate":0.05,"unitPrice":199}],"metadata":null,"paymentSources":[{"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}],"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":-200,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"878146f9-2866-4df3-8"},{"balanceAfter":0,"balanceBefore":1000,"balanceChange":-1000,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"40497ff7-58d8-4469-9"},{"amount":-422,"charge":{"amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1Dh3b5CM9MOvFvZKnyf3u6z6","captured":true,"created":1544743683,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"id":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"ef1af359-9ab1-48ac-a","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"878146f9-2866-4df3-8\"},{\"rail\":\"lightrail\",\"valueId\":\"40497ff7-58d8-4469-9\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"object":"charge","on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","risk_score":64,"seller_message":"Payment complete.","type":"authorized"},"paid":true,"payment_intent":null,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"data":[],"has_more":false,"object":"list","total_count":0,"url":"/v1/charges/ch_1Dh3b5CM9MOvFvZKcSWQ2EKl/refunds"},"review":null,"shipping":null,"source":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":12,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","id":"card_1Dh3b5CM9MOvFvZK1AwMYgbp","last4":"4242","metadata":{},"name":null,"object":"card","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"chargeId":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":200,"discountLightrail":200,"paidInternal":0,"paidLightrail":1000,"paidStripe":422,"payable":1422,"remainder":0,"subtotal":1548,"tax":74},"transactionType":"checkout"},{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:04.000Z","currency":"USD","id":"3f84a377-503d-4147-b","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":200,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"878146f9-2866-4df3-8"},{"balanceAfter":1000,"balanceBefore":0,"balanceChange":1000,"code":null,"contactId":"54ae5e21-d44a-480b-a","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"40497ff7-58d8-4469-9"},{"amount":422,"charge":{"amount":422,"balance_transaction":"txn_1Dh3b7CM9MOvFvZKzA56yYn9","charge":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","created":1544743685,"currency":"usd","id":"re_1Dh3b7CM9MOvFvZKAgfCcMCg","metadata":{"reason":"Being refunded as part of reverse transaction 3f84a377-503d-4147-b."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1Dh3b5CM9MOvFvZKcSWQ2EKl","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":-200,"discountLightrail":-200,"paidInternal":0,"paidLightrail":-1000,"paidStripe":-422,"payable":-1422,"remainder":0,"subtotal":-1548,"tax":-74},"transactionType":"reverse"}]
+            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"141205a0-9c46-4d18-9","lineItems":[{"lineTotal":{"discount":200,"payable":864,"remainder":0,"subtotal":1000,"tax":64,"taxable":800},"productId":"socks","quantity":2,"taxRate":0.08,"unitPrice":500},{"lineTotal":{"discount":0,"payable":349,"remainder":0,"subtotal":349,"tax":0,"taxable":349},"productId":"shipping","quantity":1,"taxRate":0,"unitPrice":349},{"lineTotal":{"discount":0,"payable":209,"remainder":0,"subtotal":199,"tax":10,"taxable":199},"productId":"chocolate_bar","quantity":1,"taxRate":0.05,"unitPrice":199}],"metadata":null,"paymentSources":[{"contactId":"98b8d267-3be8-469b-b","rail":"lightrail"},{"rail":"stripe","source":"tok_visa"}],"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":-200,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"e0fec6e9-05e8-43ca-a"},{"balanceAfter":0,"balanceBefore":1000,"balanceChange":-1000,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"0f6d8cfa-656a-4543-a"},{"amount":-422,"charge":{"amount":422,"amount_refunded":0,"application":"ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz","application_fee":null,"balance_transaction":"txn_1DiUvsCM9MOvFvZKoVNAfdHq","captured":true,"created":1545087088,"currency":"usd","customer":null,"description":null,"destination":null,"dispute":null,"failure_code":null,"failure_message":null,"fraud_details":{},"id":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","invoice":null,"livemode":false,"metadata":{"lightrailTransactionId":"141205a0-9c46-4d18-9","lightrailTransactionSources":"[{\"rail\":\"lightrail\",\"valueId\":\"e0fec6e9-05e8-43ca-a\"},{\"rail\":\"lightrail\",\"valueId\":\"0f6d8cfa-656a-4543-a\"}]","lightrailUserId":"user-c0e4bc89ec714e6199199e8322459e2e-TEST"},"object":"charge","on_behalf_of":null,"order":null,"outcome":{"network_status":"approved_by_network","reason":null,"risk_level":"normal","risk_score":60,"seller_message":"Payment complete.","type":"authorized"},"paid":true,"payment_intent":null,"receipt_email":null,"receipt_number":null,"refunded":false,"refunds":{"data":[],"has_more":false,"object":"list","total_count":0,"url":"/v1/charges/ch_1DiUvsCM9MOvFvZKMMBpFUh5/refunds"},"review":null,"shipping":null,"source":{"address_city":null,"address_country":null,"address_line1":null,"address_line1_check":null,"address_line2":null,"address_state":null,"address_zip":null,"address_zip_check":null,"brand":"Visa","country":"US","customer":null,"cvc_check":null,"dynamic_last4":null,"exp_month":12,"exp_year":2019,"fingerprint":"vnMoEG5eZVxSMPc7","funding":"credit","id":"card_1DiUvsCM9MOvFvZKgWT8MmlB","last4":"4242","metadata":{},"name":null,"object":"card","tokenization_method":null},"source_transfer":null,"statement_descriptor":null,"status":"succeeded","transfer_group":null},"chargeId":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":200,"discountLightrail":200,"paidInternal":0,"paidLightrail":1000,"paidStripe":422,"payable":1422,"remainder":0,"subtotal":1548,"tax":74},"transactionType":"checkout"},{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:29.000Z","currency":"USD","id":"6d40e60c-6330-4d26-9","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":null,"balanceBefore":null,"balanceChange":200,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"e0fec6e9-05e8-43ca-a"},{"balanceAfter":1000,"balanceBefore":0,"balanceChange":1000,"code":null,"contactId":"98b8d267-3be8-469b-b","rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"0f6d8cfa-656a-4543-a"},{"amount":422,"charge":{"amount":422,"balance_transaction":"txn_1DiUvuCM9MOvFvZKRMPALzrA","charge":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","created":1545087090,"currency":"usd","id":"re_1DiUvuCM9MOvFvZKXXLVbMUm","metadata":{"reason":"Being refunded as part of reverse transaction 6d40e60c-6330-4d26-9."},"object":"refund","reason":null,"receipt_number":null,"source_transfer_reversal":null,"status":"succeeded","transfer_reversal":null},"chargeId":"ch_1DiUvsCM9MOvFvZKMMBpFUh5","rail":"stripe"}],"tax":{"roundingMode":"HALF_EVEN"},"totals":{"discount":-200,"discountLightrail":-200,"paidInternal":0,"paidLightrail":-1000,"paidStripe":-422,"payable":-1422,"remainder":0,"subtotal":-1548,"tax":-74},"transactionType":"reverse"}]
 
 ### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?currency}{?valueId}]
 
@@ -1218,7 +1218,7 @@ A Transaction Chain is an ordered list of Transactions and results from creating
 
     + Body
 
-            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-13T23:28:02.000Z","currency":"USD","id":"f2a5b37c-1328-4448-8","lineItems":null,"metadata":null,"paymentSources":null,"pending":false,"steps":[{"balanceAfter":500,"balanceBefore":0,"balanceChange":500,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"f2a5b37c-1328-4448-8"}],"tax":null,"totals":null,"transactionType":"initialBalance"}]
+            [{"createdBy":"user-c0e4bc89ec714e6199199e8322459e2e-TEST","createdDate":"2018-12-17T22:51:25.000Z","currency":"USD","id":"0d1c12f3-fb39-43e7-b","lineItems":null,"metadata":{"note":"Reduce loyalty points after 3mo contact inactivity"},"paymentSources":null,"pending":false,"steps":[{"balanceAfter":2000,"balanceBefore":3000,"balanceChange":-1000,"code":null,"contactId":null,"rail":"lightrail","usesRemainingAfter":null,"usesRemainingBefore":null,"usesRemainingChange":null,"valueId":"a574418d-f81b-4f04-a"}],"tax":null,"totals":{"remainder":0},"transactionType":"debit"}]
 
 
 # Group Advanced
@@ -1447,7 +1447,7 @@ A Currency is a unit of money in Lightrail.  It can be a standard currency such 
 + pretax (boolean) - If true the balance on Values created in the Program is applied on checkout before tax is calculated.
 + active (boolean) - Whether Values created in the Program are active and can be used upon creation.
 + redemptionRule (Rule) - A Redemption Rule controlling when Values created in the Program can be used in checkout. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-Docs/blob/master/feature-deep-dive/redemption-rules.md).
-+ balanceRule (Rule) - A Rule controlling the effective balance of Values created in the Program in a Checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document.
++ balanceRule (Rule) - A Rule controlling the effective balance in checkout of Values created in the Program. To use this `minInitialBalance`, `maxInitialBalance` and `fixedInitialBalances` must be set to `null`. The syntax will be defined in a separate document.
 + minInitialBalance (number) - 
 + maxInitialBalance (number) - 
 + fixedInitialBalances (array[number]) - A list of exact balances Values created in the Program can be created with.

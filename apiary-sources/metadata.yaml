@@ -71,7 +71,7 @@ patch:
   alsoChangeValues: "If updating this member, you likely also want to update any existing Values already created through this Program."
 program:
   active: "Whether Values created in the Program are active and can be used upon creation."
-  balanceRule: "A Rule controlling the effective balance of Values created in the Program in a Checkout. To use this `balance` must be set to `null`. The syntax will be defined in a separate document."
+  balanceRule: "A Rule controlling the effective balance in checkout of Values created in the Program. To use this `minInitialBalance`, `maxInitialBalance` and `fixedInitialBalances` must be set to `null`. The syntax will be defined in a separate document."
   createdDate: "Date when the Program was created."
   discount: "If true Values created in the Program will be marked as a discount on checkout."
   endDate: "Latest date that Values created in the Program can be active."
