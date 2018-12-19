@@ -299,16 +299,16 @@ Below is a comprehensive list of values accepted by the **Card Purchase Dialog C
 _*All overrides are optional_
 
 #### Gift Card Purchase Theming - 1
-![Gift card purchase theming - 1](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/gift-card-purchase-theming-1.png)
+![Gift card purchase theming - 1](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/gift-card-purchase-theming-1.png)
 
 #### Gift Card Purchase Theming - 2
-![Gift card purchase theming - 2](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/gift-card-purchase-theming-2.png)
+![Gift card purchase theming - 2](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/gift-card-purchase-theming-2.png)
 
 #### Gift Card Purchase Theming - 3
-![Gift card purchase theming - 3](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/gift-card-purchase-theming-3.png)
+![Gift card purchase theming - 3](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/gift-card-purchase-theming-3.png)
 
 #### Gift Card Purchase Theming - 4
-![Gift card purchase theming - 4](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/gift-card-purchase-theming-4.png)
+![Gift card purchase theming - 4](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/gift-card-purchase-theming-4.png)
 
 **Note:** #24 and #25 are special in the sense that you are able to pass in a label for the button text (#24), and if one isn’t provided, we default to "Buy a Gift Card". #25 accepts a button class name that you already use locally in your site, or you can define one to control the look of the button.
 
@@ -348,7 +348,7 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 17. `success_btn_cta_label: "Start Shopping Today"`
 18. `success_btn_cta_href: "landingpage"`
  
-![Code redemption theming - 3](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/code-remption-theming-1.png)
+![Code redemption theming - 3](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/code-remption-theming-1.png)
 
 **Note:** #17 provides a label to pass for the completed redemption step. #18 is the the href for where the button will redirect users on redemption completion.
 
