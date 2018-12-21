@@ -18,6 +18,7 @@
         + maxInitialBalance (number, optional) - {{program.maxInitialBalance}}
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + fixedInitialUsesRemaining (array[number], optional) -  {{program.fixedInitialUsesRemaining}}
+        + discountSellerLiability (number, optional) - {{program.discountSellerLiability}}
         + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}}
         + endDate (string, optional) - {{program.endDate}}
