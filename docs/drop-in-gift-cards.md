@@ -116,7 +116,7 @@ Also, you can enable customers to pay using saved credit cards. See [below](#dro
 The Gift Card Purchase Component allows your customers to purchase gift cards from your site. 
 Lightrail powers the entire gift card purchase and delivery flow. 
 
-![Gift Card Purchase Component](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/purchase-widget.png)
+![Gift Card Purchase Component](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/purchase-widget.png)
 
 What you see here is our fictional brand called Rocketship. Once set up with our Drop-in solution, you will see your branding instead.
 
@@ -173,7 +173,7 @@ Allow your customers to pay with credit cards you've saved for them in Stripe. T
 
 <br/>
 
-![Purchase Using Saved Credit Card](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/saved-credit-cards.png)
+![Purchase Using Saved Credit Card](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/saved-credit-cards.png)
 
 To enable this, you need to **provide the customer ID from Stripe** when you generate the Shopper Token. 
 
@@ -192,7 +192,7 @@ The Gift Card Redemption Component enables your customers to redeem gift cards t
 
 <br/>
 
-![Gift Card Redemption Component](https://raw.githubusercontent.com/Giftbit/Lightrail-API-Docs/master/docs/assets/redemption-widget.png)
+![Gift Card Redemption Component](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/redemption-widget.png)
 
 When the recipient clicks the "apply to account" button in the email, they are taken to the redemption page indicated in your [Drop-in Configuration](#drop-in-gift-cards/drop-in-configuration).
 
