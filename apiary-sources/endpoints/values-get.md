@@ -41,7 +41,7 @@
     + showCode (boolean, optional) - {{value.showCode}}
     + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
-    + contactId (string, optional) - {{filter.contactId}}  {{filter.ops.in}}
+    + contactId (string, optional) - {{filter.contactId}}
     + balance (number, optional) - {{filter.balance}}  {{filter.ops.number}}
     + usesRemaining (number, optional) - {{filter.usesRemaining}}  {{filter.ops.number}}
     + discount (boolean, optional) - {{filter.discount}}

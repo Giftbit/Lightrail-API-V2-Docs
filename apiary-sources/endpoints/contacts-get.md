@@ -15,7 +15,7 @@
 
             {REQUEST_REPLACEMENT:createContact1.response.body}
 
-### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}]
+### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}{?valueId}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
@@ -24,6 +24,7 @@
     + firstName (string, optional) - {{filter.firstName}}  {{filter.ops.string}}
     + lastName (string, optional) - {{filter.lastName}}  {{filter.ops.string}}
     + email (string, optional) - {{filter.email}}  {{filter.ops.string}}
+    + valueId (string, optional) - {{filter.valueId}} {{filter.ops.string}}
 
 + Request (application/json)
     + Headers

@@ -93,6 +93,11 @@
       "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values?limit=1"
     },
     {
+      "callId": "listValue1Contacts",
+      "method": "GET",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}/contacts"
+    },
+    {
       "callId": "updateValue1",
       "method": "PATCH",
       "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}",
