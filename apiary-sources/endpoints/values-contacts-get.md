@@ -1,7 +1,7 @@
 ### List a Value's Attached Contacts [GET /values/{id}/contacts{?limit}{?tags}{?firstName}{?lastName}{?email}{?valueId}]
 
 + Parameter
-    + id (string) - the ID of the Value to get the Contacts of.
+    + id (string) - {{filter.contactId}} {{filter.ops.in}}
     + limit (number, optional) - {{pagination.limit}}
     + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
     + firstName (string, optional) - {{filter.firstName}}  {{filter.ops.string}}

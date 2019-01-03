@@ -1,7 +1,7 @@
 ### Attach a Contact to a Value [POST /contacts/{id}/values/attach]
-Attaching a Contact to a Value associates the Value to that Contact. This means in a checkout Transaction, providing the `contactId` will resolve to all Values the Contact has attached to be applied to the Transaction.
+Attaching a Value to a Contact associates the Value to the Contact. The Contact then "has" that Value. In a checkout Transaction, specifying the  `contactId` as a payment source will resolve to all associated Values for the Contact to be considered for the Transaction.
 
-If the Value's `isGenericCode` property is set to `false`, attach sets the Value's `contactId` to that Contact's ID. Otherwise, attaching Values with property `isGenericCode:true` will attach the Contact behind the scenes.      
+If the Value's `isGenericCode` property is set to `false`, attach sets the Value's `contactId` to that Contact's ID. Otherwise, attaching Values with property `isGenericCode:true` will attach the Contact behind the scenes.       
 
 + Parameter
     + id (string) - the ID of the Contact to attach Value to.
