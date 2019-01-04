@@ -14,7 +14,7 @@ If `Value.isGenericCode=false` then the Value cannot be shared and `Value.contac
     + Attributes
         + valueId (string, optional) - The `id` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
         + code (string, optional) - The `code` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
-        + attachGenericAsNewValue (boolean, optional) - If the Value to attach has `isGenericCode:true` then `attachGenericAsNewValue: true` can be used to create a new Value with `usesRemaining:1` with the same balance and rule properties as the original Value. This can be used for scenarios where a contact attaches a generic promotion code to their account for a single use promotion that can be used in checkout.  
+        + attachGenericAsNewValue (boolean, optional) - If the Value to attach has property `isGenericCode:true` then `attachGenericAsNewValue: true` can be used to create a new Value with `usesRemaining:1` with the same balance and rule properties as the original Value. This can be used for scenarios where a contact attaches a generic promotion code to their account for a single use promotion that can be used in checkout.  
 
     + Body
 
