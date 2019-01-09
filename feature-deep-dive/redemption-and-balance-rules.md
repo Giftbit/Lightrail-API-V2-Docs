@@ -81,7 +81,10 @@ Balance and Redemption Rules are evaluated for each line item during checkout. R
             }
         }
     ],
-    "metadata": "object"
+    "metadata": "object",
+    "value": {
+        "balanceChange": "number"
+    }
 }
 ```
 
