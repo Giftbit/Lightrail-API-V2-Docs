@@ -113,7 +113,10 @@ Create Value request:
 {
     "id": "example",
     "currency": "USD",
-    "balance": 500,
+    "balanceRule": {
+        "rule": "500 + value.balanceChange",
+        "explanation": "Up to $5 off order."
+    },
     "redemptionRule": {
         "rule": "currentLineItem.lineTotal.discount == 0",
         "explanation": "Limited to 1 discount per item."
@@ -121,6 +124,7 @@ Create Value request:
     "discount": true
 }
 ```
+Values are applied to checkout item by item. The property `value.balanceChange` keeps track of the total amount paid by the Value as it's applied to each item. Note, it is a negative since it represents `balanceChange`.   
 
 **25% off transactions over $100 and limited to 1 promotion per item**
 ```json
