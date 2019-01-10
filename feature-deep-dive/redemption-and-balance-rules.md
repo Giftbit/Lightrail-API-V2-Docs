@@ -41,7 +41,7 @@ Create Value request:
 ```
 
 ## How Rules Work
-Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), and the transaction metadata (`metadata`).
+Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), the transaction metadata (`metadata`), and the current Value being applied (`value`) - Value's are applied one by one during checkout.
 
 ### Rule Context 
 ```json
