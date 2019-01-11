@@ -41,7 +41,7 @@ Create Value request:
 ```
 
 ## How Rules Work
-Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), and the transaction metadata (`metadata`).
+Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), the transaction metadata (`metadata`), and the current Value being applied (`value`) - Value's are applied one by one during checkout.
 
 ### Rule Context 
 ```json
@@ -81,7 +81,10 @@ Balance and Redemption Rules are evaluated for each line item during checkout. R
             }
         }
     ],
-    "metadata": "object"
+    "metadata": "object",
+    "value": {
+        "balanceChange": "number"
+    }
 }
 ```
 
@@ -110,7 +113,10 @@ Create Value request:
 {
     "id": "example",
     "currency": "USD",
-    "balance": 500,
+    "balanceRule": {
+        "rule": "500 + value.balanceChange",
+        "explanation": "Up to $5 off order."
+    },
     "redemptionRule": {
         "rule": "currentLineItem.lineTotal.discount == 0",
         "explanation": "Limited to 1 discount per item."
@@ -118,6 +124,7 @@ Create Value request:
     "discount": true
 }
 ```
+Values are applied to checkout item by item. The property `value.balanceChange` keeps track of the total amount paid by the Value as it's applied to each item. Note, it is a negative since it represents balance change.   
 
 **25% off transactions over $100 and limited to 1 promotion per item**
 ```json
