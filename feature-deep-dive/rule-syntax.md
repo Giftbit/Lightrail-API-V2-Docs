@@ -27,7 +27,7 @@ true || false
 true ? 'yes' : 'no'
 ```
 
-Numers include integer and decimal values, positive and negative infinity, and NaN.
+Numbers include integer and decimal values, positive and negative infinity, and NaN.
 
 ```javascript
 -1
@@ -59,7 +59,7 @@ Parentheses can be used to group operations.
 (9 < 5) || (3 < 5)
 ```
 
-Lists (arrays) are accessed with brackets and are 0-indexed.
+Lists (aka arrays) are accessed with brackets and are 0-indexed.
 
 ```javascript
 myList[0]
@@ -67,20 +67,30 @@ myList[1]
 myList[variableName]
 ```
 
-Lists can be created with brackets.
+Lists can be created with brackets.  The values can be any expression and don't all have to be of the same type.
 
 ```javascript
 []
 [1, 2, 3]
-['alpha', 'beta', 'charlie']
+['alpha', 'bravo', 'charlie']
+["abc", [1, 2, 3]]
 ```
 
-Maps (dictionaries, objects) can be accessed with dot notation or bracket notation.
+Maps (aka dictionaries, objects) can be accessed with bracket notation, or dot notation if the key is a valid [identifier](#identifiers).
 
 ```javascript
 myMap.child
 myMap['child']
 myMap[variableName]
+```
+
+Maps can be created with braces and pairs of keys and values.  Keys can be strings or [identifiers](#identifiers).  Values can be any expression.
+
+```javascript
+{}
+{'key': 'value'}
+{a: 1, b: 2, c: 3}
+{'some numbers': [1, 2, 3], 'an object': {nested: true}}
 ```
 
 Functions are global.  Their names are case-sensitive.  They can be accessed like the global function they are, or treated like methods with the first argument acting as the object the method is on.  This second form is more convenient for chaining.  Some functions can accept a variable number of arguments or multiple types.  For a complete list of functions see the [functions section](#functions).
@@ -106,7 +116,7 @@ round(sum([1.23, 4.56, 7.89]))
 [1.23, 4.56, 7.89].sum().round()
 ```
 
-Some functions operate on collections and take a lambda parameter.  These are the most powerful functions.  Lambdas are written using fat arrow `=>` notation and are single statements that return a value, just like rules.  The parameter names can be any combination of letters.  If the lambda only has one argument the parentheses can be skipped.
+Some functions operate on collections and take a lambda parameter.  These are the most powerful functions.  Lambdas are written using fat arrow `=>` notation and are single statements that return a value, just like rules.  The parameter names can be any [identifier](#identifiers).  If the lambda only has one argument the parentheses can be skipped.
 
 ```javascript
 [1, 2, 3, 4, 5].filter(x => x % 2 == 0) → [2, 4]
@@ -412,6 +422,12 @@ values(null) → []
 values(metadata.foo) → ['33bbb2bf-c270-41d9-ab42-9eeba99fa69c', 'medium', 6]
 ```
 
+## Identifiers
+
+Identifiers are used in variable names, map dot notation and lambda parameter names.
+
+An identifier must start with a letter (a-z, A_Z), underscore (_), or dollar sign ($).  Following characters can also be digits (0-9).  Identifiers are case sensitive.
+
 ## Operator precedence
 
 Operators are evaluated in the following order, with higher operators being evaluated first.
@@ -436,7 +452,7 @@ Operators are evaluated in the following order, with higher operators being eval
 - number (`0`, `1`, `-3`, `123.345`, ...)
 - string (`'foo'`, `"bar"`, ...)
 - list (`[]`, `[1, 2, 3]`, `['a', 'b', ['c', 'd']]`, ...)
-- map (has no literal constructor)
+- map (`{}`, `{a: 'alpha', 'numbers': [1, 2, 3], c: {nested: true}}`, ...)
 - lambda (`a => a == 1`, ...) (only available as a function argument)
 
 ## Type coercion
