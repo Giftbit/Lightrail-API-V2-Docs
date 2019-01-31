@@ -93,7 +93,7 @@ Debiting is used when removing value from an account.
         "valueId": "account-u824rj0"
     },
     "amount": 2500,
-    "currency": "XXX",
+    "currency": "POINTS",
     "metadata": {
       "note": "Reduce loyalty points after 3mo customer inactivity"
     }
