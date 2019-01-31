@@ -23,7 +23,6 @@ Creating an account `Program`. Note, typically Programs are created through the 
     "name": "Accounts USD",
     "discount": false,
     "pretax": false,
-    "tags": ["accounts-usd"]
 }
 ``` 
 

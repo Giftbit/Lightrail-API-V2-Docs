@@ -4,13 +4,13 @@ Lightrail enables a wide variety of promotion use-cases. A few common examples a
  2. A site wide promotion code that can be entered during checkout.
  3. Unique promotion code delivered to a potential customer.  
  
-Promotions can be valid for a number of dollars or points off, but they can also represent a percent discount.
-These variations are all determined by properties on the `Value` which represents the promotion.
+Promotions can be valid for a percentage or dollar off discount. 
+These variations are all determined by properties on the `Value` which represent the promotion.
 
 ### Getting Started with Promotions
 To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
 
-Let's look at an example of creating a sign-up promotion which will be attached to new sign-ups.  
+Let's look at an example of creating a sign-up promotion which will be attached to new sign-ups for $5 off their first purchase.  
 
 #### Creating a Program for a Customer Promotion
 The `Program` will define the basic properties for the promotional `Values` that will be created from it. 
@@ -25,11 +25,11 @@ Example of creating a `Program` for a $5 promotion:
     "name": "Spring Promotion USD",
     "currency": "USD",
     "discount": true,
-    "pretax": false,
-    "fixedInitialBalances": [
-        500
-    ],
-    "tags": ["promotion", "new-sign-up"]
+    "pretax": true,
+    "balanceRule": {
+        "rule": "500 + value.balanceChange",
+        "explanation": "Up to $5 off purchase."
+    }
 }
 ``` 
 
@@ -56,8 +56,7 @@ This request attaches a new Value to a Contact, so that this promotion will be a
 {
     "id": "cus_123-sign-up-promotion",
     "programId": "sign-up-promotion",
-    "contactId": "cus_123",
-    "balance": 500
+    "contactId": "cus_123"
 }
 ``` 
 
@@ -66,7 +65,6 @@ Below is the list of attributes used when creating a promotional Value from a Pr
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **contactId** (_required_): Unique ID for the Contact.
-- **balance** (_required_): In this case, must match the amount set in `fixedInitialBalances`. 
 
 #### Using the Promotion as a Payment Source in Checkout
 Checkout uses the `/transactions/checkout` endpoint. Since the promotion is associated with the customer, you can directly use the `contactId` as a payment source. 
