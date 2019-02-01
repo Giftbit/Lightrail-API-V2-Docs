@@ -150,7 +150,7 @@ A `source` consists of an object with a `rail` identifier along with some additi
 A source with `"rail": "lightrail"` means the value is stored in Lightrail. 
 
 ##### How Lightrail Stores Value: `Values`
-Whether representing a promotional offer, loyalty points or a gift card, value stored in Lightrail as `Values`.   
+Whether representing a promotional offer, loyalty points or a gift card, value in Lightrail is stored as a `Values`.   
 Different types of value are represented by modifying the properties of `Values`.
 
 The way `Values` are passed into the `sources` property of the `checkout` endpoint depends on what type of value it is.

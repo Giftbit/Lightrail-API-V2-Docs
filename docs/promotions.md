@@ -4,7 +4,7 @@ Lightrail enables a wide variety of promotion use-cases. A few common examples a
  2. A site wide promotion code that can be entered during checkout.
  3. Unique promotion code delivered to a potential customer.  
  
-Promotions can be valid for a percentage or dollar off discount. 
+Promotions can be valid for a percentage or dollar-off discount. 
 These variations are all determined by properties on the `Value` which represent the promotion.
 
 ### Getting Started with Promotions
