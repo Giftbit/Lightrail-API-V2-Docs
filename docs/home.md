@@ -1,41 +1,41 @@
 # Welcome to Lightrail
-Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect payment all in one unified checkout solution.
+Lightrail makes it easy to run promotions, manage customer loyalty points, create gift cards, and collect payment all in one unified checkout solution.
 
 The checkout solution allows you to submit a customer's shopping cart along with a list of sources to pay for the order. The payment sources can be value held by that customer in Lightrail along with external value, such as a credit card, to pay for any remainder of the order. Lightrail takes care of the complexity of this split-tender transaction, ensuring value in Lightrail and external credit cards are charged the correct amount.
 
 ### Checkout with Lightrail
 Checkout transactions use the `/transactions/checkout` endpoint. Let's look at an example. 
 
-Suppose you're running an ad campaign for 20% off all orders that use the promotion code "EASYMONEY". 
-Perhaps a customer who has $20 account credits visits your store, enters the promotion code, and wants to purchase a $30 product. Using the `orders` endpoint it is easy to complete the payment for this entire transaction in a single request.
+For example, suppose you're running a Black Friday ad campaign for 20% off all orders that use the promotion code "BLACKFRIDAY". 
+A customer who has attached a $10 gift card to their account visits your store, enters the promotion code, and wants to purchase a $100 item. Using the `/transactions/checkout` endpoint you can complete the payment for this entire transaction in a single request.
 
 **Request**: `POST /transactions/checkout`
 ```json
 {
-    "id": "unique-id-123",
-    "currency": "USD",
-    "lineItems": [
-        {
-            "productId": "pid_1",
-            "unitPrice": 3000,
-            "taxRate": 0.05,
-            "quantity": 1
-        }
-    ],
-    "sources": [
-        {
-            "rail": "lightrail",
-            "contactId": "cus_123"
-        },
-        {
-            "rail": "lightrail",
-            "code": "EASYMONEY"
-        },
-        {
-            "rail": "stripe",
-            "source": "tok_12345"
-        }
-    ]
+   "id":"example-checkout-id-123",
+   "currency":"USD",
+   "lineItems":[
+      {
+         "productId":"pid_shoes2123",
+         "unitPrice":10000,
+         "taxRate":0.05,
+         "quantity":1
+      }
+   ],
+   "sources":[
+      {
+         "rail":"lightrail",
+         "contactId":"cus_123"
+      },
+      {
+         "rail":"lightrail",
+         "code":"BLACKFRIDAY"
+      },
+      {
+         "rail":"stripe",
+         "source":"tok_visa"
+      }
+   ]
 }
 ```       
 
@@ -44,85 +44,101 @@ The `lineItems` array contains the details of the items in the order.
 Also, note the `sources` property in the request. It includes three sources, two of which are Values stored in Lightrail, the other is a tokenized card from Stripe.
 
 - `"contactId": "cus_123"`: uses any value associated with that customer in Lightrail. 
-- `"code: "EASYMONEY"`: represents the promotion code entered during checkout.
+- `"code: "BLACKFRIDAY"`: represents the promotion code entered during checkout.
 - `"source": "tok_12345"`: tokenized card using Stripe elements.  
  
-**Response**: `200 OK`
+**Response**: `201 OK`
 ```json
 {
-    "id": "unique-id-123",
-    "currency": "USD",
-    "totals": {
-        "subtotal": 3000,
-        "tax": 120,
-        "discount": 600,
-        "payable": 2520,
-        "remainder": 0
-    },
-    "lineItems": [
-        {
-            "productId": "pid_1",
-            "unitPrice": 3000,
-            "taxRate": 0.05,
-            "quantity": 1,
-            "lineTotal": {
-                "subtotal": 3000,
-                "taxable": 2400,
-                "discount": 600,
-                "tax": 120,
-                "payable": 2520
-            }
-        }
-    ],
-    "steps": [
-        {
-            "rail": "lightrail",
-            "valueId": "easymoney-promo",
-            "code": "EASYMONEY",
-            "contactId": null,
-            "balanceBefore": 0,
-            "balanceAfter": 0,
-            "balanceChange": -600, 
-            "discount": true
-        },
-        {
-            "rail": "lightrail",
-            "valueId": "cus_123-account",
-            "contactId": "cus_123",
-            "code": null,
-            "balanceBefore": 4500, 
-            "balanceAfter": 2500, 
-            "balanceChange": -2000, 
-            "discount": false
-        },
-        {
-            "rail": "stripe",
-            "chargeId": "ch_abcde",
-            "amount": -520,
-            "charge": {
-                "id": "ch_abcde",
-                // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
-            }
-        }
-    ],
-    "paymentSources": [
-        {
-            "rail": "lightrail",
-            "contactId": "cus_123"
-        },
-        {
-            "rail": "lightrail",
-            "code": "EASYMONEY"
-        },
-        {
-            "rail": "stripe",
-            "source": "tok_12345"
-        }
-    ]
-} 
+   "id":"example-checkout-id-123",
+   "transactionType":"checkout",
+   "currency":"USD",
+   "createdDate":"2018-01-31T21:15:17.000Z",
+   "tax":{
+      "roundingMode":"HALF_EVEN"
+   },
+   "totals":{
+      "subtotal":10000,
+      "tax":400,
+      "discount":2000,
+      "payable":8400,
+      "remainder":0,
+      "discountLightrail":2000,
+      "paidLightrail":1000,
+      "paidStripe":7400,
+      "paidInternal":0
+   },
+   "lineItems":[
+      {
+         "productId":"pid_shoes2123",
+         "unitPrice":10000,
+         "taxRate":0.05,
+         "quantity":1,
+         "lineTotal":{
+            "subtotal":10000,
+            "taxable":8000,
+            "tax":400,
+            "discount":2000,
+            "remainder":0,
+            "payable":8400
+         }
+      }
+   ],
+   "steps":[
+      {
+         "rail":"lightrail",
+         "valueId":"BlackFriday Promo",
+         "contactId":null,
+         "code":"BLACKFRIDAY",
+         "balanceBefore":null,
+         "balanceAfter":null,
+         "balanceChange":-2000,
+         "usesRemainingBefore":null,
+         "usesRemainingAfter":null,
+         "usesRemainingChange":null
+      },
+      {
+         "rail":"lightrail",
+         "valueId":"$10 GC",
+         "contactId":"cus_123",
+         "code":null,
+         "balanceBefore":1000,
+         "balanceAfter":0,
+         "balanceChange":-1000,
+         "usesRemainingBefore":null,
+         "usesRemainingAfter":null,
+         "usesRemainingChange":null
+      },
+      {
+         "rail":"stripe",
+         "chargeId":"ch_1DymsVCM9MOvFvZK11KdlGZr",
+         "charge":{
+            // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
+         },
+         "amount":-7400
+      }
+   ],
+   "paymentSources":[
+      {
+         "rail":"lightrail",
+         "contactId":"cus_123"
+      },
+      {
+         "rail":"lightrail",
+         "code":"BLACKFRIDAY"
+      },
+      {
+         "rail":"stripe",
+         "source":"tok_visa"
+      }
+   ],
+   "pending":false,
+   "metadata":null,
+   "createdBy":"user-5022fccf827647ee9cfb63b779d62193-TEST"
+}
 ``` 
 
-As a result of this transaction, the promotion was applied, the customer's account has been charged $20, and finally, their credit card was charged the remaining $5.20.
+As a result of this transaction, the promotion was applied saving the customer $20, the customer's gift card attached to their account was charged $10, and finally their credit card was charged the remaining $74.
 As you can see, Lightrail handles the complexity of applying the promotion, calculating tax and charging the various payment sources, all within a single transaction. 
 Lightrail returns a summary and detailed information of the transaction so that it's easy to display a breakdown to the customer. 
 
@@ -134,7 +150,7 @@ A `source` consists of an object with a `rail` identifier along with some additi
 A source with `"rail": "lightrail"` means the value is stored in Lightrail. 
 
 ##### How Lightrail Stores Value: `Values`
-Value stored in Lightrail, whether it represents a gift card, account credits or points, or a promotional offer for a discount, are stored as `Values`.   
+Whether representing a promotional offer, loyalty points or a gift card, value in Lightrail is stored as a `Value`.   
 Different types of value are represented by modifying the properties of `Values`.
 
 The way `Values` are passed into the `sources` property of the `checkout` endpoint depends on what type of value it is.
@@ -197,9 +213,9 @@ The `source` is a tokenized credit card, created from Stripe Elements.
 ### Getting Started
 See our examples below to get started with:
 
+- [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
 - [Gift cards](https://www.lightrail.com/docs/#drop-in-gift-cards/drop-in-gift-cards)
 - [Accounts and loyalty points](https://www.lightrail.com/docs/#accounts/accounts-and-points)
-- [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
 - [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
  
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

@@ -290,26 +290,26 @@ The following is an example of the call that must be made by your simulation end
 `POST https://api.lightrail.com/v2/transactions/checkout`
 ```json
 {
-    "id": "unique-id-123",
-    "currency": "USD",
-    "lineItems": [
-        {
-            "productId": "pid_1",
-            "unitPrice": 3000,
-            "taxRate": 0.05
-        }
-    ],
-    "sources": [
-        {
-            "rail": "lightrail",
-            "contactId": "cust_123abc"
-        },
-        {
-            "rail": "stripe",
-            "source": "tok_12345"
-        }
-    ],
-    "simulate": true
+   "id":"unique-checkout-id-123",
+   "currency":"USD",
+   "lineItems":[
+      {
+         "productId":"pid_1",
+         "unitPrice":3000,
+         "taxRate":0.05
+      }
+   ],
+   "sources":[
+      {
+         "rail":"lightrail",
+         "contactId":"cus_234"
+      },
+      {
+         "rail":"stripe",
+         "source":"tok_visa"
+      }
+   ],
+   "simulate": true
 }
 ```
 
@@ -327,89 +327,103 @@ The following is an example of the call that must be made by your charge endpoin
 `POST https://api.lightrail.com/v2/transactions/checkout`
 ```json
 {
-    "id": "unique-id-123",
-    "currency": "USD",
-    "lineItems": [
-        {
-            "productId": "pid_1",
-            "unitPrice": 3000,
-            "taxRate": 0.05
-        }
-    ],
-    "sources": [
-        {
-            "rail": "lightrail",
-            "contactId": "cust_123abc"
-        },
-        {
-            "rail": "stripe",
-            "source": "tok_12345"
-        }
-    ]
+   "id":"unique-checkout-id-123",
+   "currency":"USD",
+   "lineItems":[
+      {
+         "productId":"pid_1",
+         "unitPrice":3000,
+         "taxRate":0.05
+      }
+   ],
+   "sources":[
+      {
+         "rail":"lightrail",
+         "contactId":"cus_234"
+      },
+      {
+         "rail":"stripe",
+         "source":"tok_visa"
+      }
+   ]
 }
 ```
 
 At this point, the charge has been posted to both Lightrail and Stripe. You can handle post-checkout flow as you otherwise would. The response will include the Lightrail transaction details as well as the full Stripe charge response: 
 
-`200 OK`
+`201 OK`
 ```json
 {
-    "id": "unique-id-123",
-    "currency": "USD",
-    "totals": {
-        "subtotal": 3000,
-        "tax": 150,
-        "discount": 0,
-        "payable": 3150,
-        "remainder": 0
-    },
-    "lineItems": [
-        {
-            "productId": "pid_1",
-            "unitPrice": 3000,
-            "taxRate": 0.05,
-            "quantity": 1,
-            "lineTotal": {
-                "subtotal": 3000,
-                "taxable": 3000,
-                "discount": 0,
-                "tax": 150,
-                "payable": 3150
-            }
-        }
-    ],
-    "steps": [
-        {
-            "rail": "lightrail",
-            "valueId": "cust_123abc-account",
-            "contactId": "cust_123abc",
-            "code": null,
-            "balanceBefore": 4500, 
-            "balanceAfter": 2500, 
-            "balanceChange": -2000, 
-            "discount": false
-        },
-        {
-            "rail": "stripe",
-            "chargeId": "ch_abcde",
-            "amount": -520,
-            "charge": {
-                "id": "ch_abcde",
-                // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
-            }
-        }
-    ],
-    "paymentSources": [
-        {
-            "rail": "lightrail",
-            "contactId": "cus_123"
-        },
-        {
-            "rail": "stripe",
-            "source": "tok_12345"
-        }
-    ]
-} 
+   "id":"unique-checkout-id-123",
+   "transactionType":"checkout",
+   "currency":"USD",
+   "createdDate":"2019-01-31T22:14:09.000Z",
+   "tax":{
+      "roundingMode":"HALF_EVEN"
+   },
+   "totals":{
+      "subtotal":3000,
+      "tax":150,
+      "discount":0,
+      "payable":3150,
+      "remainder":0,
+      "discountLightrail":0,
+      "paidLightrail":1000,
+      "paidStripe":2150,
+      "paidInternal":0
+   },
+   "lineItems":[
+      {
+         "productId":"pid_1",
+         "unitPrice":3000,
+         "taxRate":0.05,
+         "quantity":1,
+         "lineTotal":{
+            "subtotal":3000,
+            "taxable":3000,
+            "tax":150,
+            "discount":0,
+            "remainder":0,
+            "payable":3150
+         }
+      }
+   ],
+   "steps":[
+      {
+         "rail":"lightrail",
+         "valueId":"$10 GCa sfd",
+         "contactId":"cus_234",
+         "code":null,
+         "balanceBefore":1000,
+         "balanceAfter":0,
+         "balanceChange":-1000,
+         "usesRemainingBefore":null,
+         "usesRemainingAfter":null,
+         "usesRemainingChange":null
+      },
+      {
+         "rail":"stripe",
+         "chargeId":"ch_1DynnSCM9MOvFvZK7BGHlNLE",
+         "charge":{
+            // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
+         },
+         "amount":-2150
+      }
+   ],
+   "paymentSources":[
+      {
+         "rail":"lightrail",
+         "contactId":"cus_234"
+      },
+      {
+         "rail":"stripe",
+         "source":"tok_visa"
+      }
+   ],
+   "pending":false,
+   "metadata":null,
+   "createdBy":"user-5022fccf827647ee9cfb63b779d62193-TEST"
+}
 ```
 
 ## Customization and Advanced UI

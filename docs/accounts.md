@@ -23,7 +23,6 @@ Creating an account `Program`. Note, typically Programs are created through the 
     "name": "Accounts USD",
     "discount": false,
     "pretax": false,
-    "tags": ["accounts-usd"]
 }
 ``` 
 
@@ -94,7 +93,7 @@ Debiting is used when removing value from an account.
         "valueId": "account-u824rj0"
     },
     "amount": 2500,
-    "currency": "XXX",
+    "currency": "POINTS",
     "metadata": {
       "note": "Reduce loyalty points after 3mo customer inactivity"
     }
