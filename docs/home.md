@@ -6,8 +6,8 @@ The checkout solution allows you to submit a customer's shopping cart along with
 ### Checkout with Lightrail
 Checkout transactions use the `/transactions/checkout` endpoint. Let's look at an example. 
 
-For example, let's say you're running a Black Friday ad campaign for 20% off all orders that use the promotion code "BLACKFRIDAY". 
-Perhaps a customer who has attached a $10 gift card to their account visits your store, enters the promotion code, and wants to purchase a $100 product. Using the `/transactions/checkout` endpoint it is easy to complete the payment for this entire transaction in a single request.
+For example, suppose you're running a Black Friday ad campaign for 20% off all orders that use the promotion code "BLACKFRIDAY". 
+A customer who has attached a $10 gift card to their account visits your store, enters the promotion code, and wants to purchase a $100 item. Using the `/transactions/checkout` endpoint you can complete the payment for this entire transaction in a single request.
 
 **Request**: `POST /transactions/checkout`
 ```json
