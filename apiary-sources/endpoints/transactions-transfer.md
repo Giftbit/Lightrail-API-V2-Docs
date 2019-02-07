@@ -16,7 +16,6 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
         + currency (string, required) - {{currency.code}}
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
-        + pending (boolean, optional) - {{transaction.pending}}
         + metadata (object, optional) - {{transaction.metadata}}
 
     + Body

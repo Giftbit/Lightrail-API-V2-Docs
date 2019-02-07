@@ -1031,7 +1031,6 @@ Credit (add an amount to) a Lightrail payment destination.
         + uses (number, optional) - The number of `usesRemaining` to add.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
-        + pending (boolean, optional) - If `true` the Transaction is created as pending for the default duration. The pending duration can be customized by passing in an ISO duration string instead of a boolean. A pending Transaction will be automatically [voided](#reference/0/transactions/void-pending) after the pending duration if not [captured](#reference/0/transactions/capture-pending).
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
@@ -1063,7 +1062,6 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
         + currency (string, required) - Short code for a currency, eg: `USD`, `FUNBUX`.
         + simulate (boolean, optional) - If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
         + allowRemainder (boolean, optional) - If `true` the Transaction will go through using whatever amount is available: this might not cover the full amount of the Transaction. The remainder (i.e. amount still owing) will be indicated.
-        + pending (boolean, optional) - If `true` the Transaction is created as pending for the default duration. The pending duration can be customized by passing in an ISO duration string instead of a boolean. A pending Transaction will be automatically [voided](#reference/0/transactions/void-pending) after the pending duration if not [captured](#reference/0/transactions/capture-pending).
         + metadata (object, optional) - Arbitrary data associated with the Transaction.
 
     + Body
