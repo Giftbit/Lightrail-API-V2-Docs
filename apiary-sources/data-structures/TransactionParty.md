@@ -13,7 +13,7 @@
 
 ## TransactionParty (StripeOrLightrailTransactionParty)
 + rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`, `internal`]. Must be used in combination with one of the following identifiers.
-+ id (string) - `internal`: the ID of the internal value.
++ internalId (string) - `internal`: the ID of the internal value.
 + balance (number) - `internal`: the amount of internal value stored.
 + beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
 

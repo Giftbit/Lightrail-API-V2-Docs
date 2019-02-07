@@ -23,7 +23,7 @@ A step taken as part of the transaction.
 
 ## InternalTransactionStep (TransactionStep)
 + rail (string) - `internal`
-+ id (string) - the ID of the internal value transacted with.
++ internalId (string) - the ID of the internal value transacted with.
 + balanceBefore (number) - The balance of the internal value before the Transaction.
 + balanceAfter (number) - The balance of the internal value after the Transaction.
 + balanceChange (number) - The net change of the balance of the internal value for the Transaction.
