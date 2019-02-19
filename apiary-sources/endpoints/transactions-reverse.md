@@ -12,6 +12,7 @@ Reverses any balance changes, usesRemaining changes and Stripe charges of a Tran
 
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + metadata (object, optional) - {{transaction.metadata}}
      
     + Body
 

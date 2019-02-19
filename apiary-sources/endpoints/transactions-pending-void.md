@@ -12,6 +12,7 @@ Releases a pending Transaction and adds the void to the [Transaction Chain](#ref
 
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + metadata (object, optional) - {{transaction.metadata}}
         
     + Body
     
