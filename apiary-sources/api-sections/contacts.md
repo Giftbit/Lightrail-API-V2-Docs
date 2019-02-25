@@ -10,4 +10,5 @@ Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to C
 {% include 'generated/endpoints/contacts-delete.md' %}
 
 {% include 'generated/endpoints/contacts-values-attach.md' %}
+{% include 'generated/endpoints/contacts-values-detach.md' %}
 {% include 'generated/endpoints/contacts-values-get.md' %}

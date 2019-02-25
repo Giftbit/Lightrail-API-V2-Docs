@@ -22,3 +22,31 @@
     + Body
             
             {REQUEST_REPLACEMENT:detachValue1.response.body}
+
++ Response 409 (application/json)
+    
+    A Value that is not attached cannot be detached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value X is not Attached to the Contact Y."
+                "messageCode": "AttachedValueNotFound"
+            }
+
++ Response 409 (application/json)
+    
+    A Value that is frozen cannot be detached.
+    
+    + Attributes (RestError)
+    
+    + Body
+    
+            {
+                "statusCode": 409,
+                "message": "The Value cannot be detached because it is frozen."
+                "messageCode": "ValueFrozen"
+            }
