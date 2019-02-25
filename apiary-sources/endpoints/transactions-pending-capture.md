@@ -12,6 +12,7 @@ Secures a pending Transaction and adds the capture to the [Transaction Chain](#r
             
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + metadata (object, optional) - {{transaction.metadata}}
         
     + Body
         
