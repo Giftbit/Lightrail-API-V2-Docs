@@ -1,4 +1,4 @@
-### Detach a Value from a Contact [POST /contacts/{id}/values/detach]
+### Detach a Contact from a Value [POST /contacts/{id}/values/detach]
       
 + Parameter
     + id (string) - the ID of the Contact to detach the Value from.
