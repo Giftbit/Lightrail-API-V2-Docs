@@ -124,7 +124,7 @@ Create Value request:
     "discount": true
 }
 ```
-Values are applied to checkout item by item. The property `value.balanceChange` keeps track of the total amount paid by the Value as it's applied to each item. Note, it is a negative since it represents balance change.   
+Values are applied to checkout item by item. The property `value.balanceChange` keeps track of the total amount paid by the Value as it's applied to each item. Note, it is a negative since it represents balance change. Also, the redemptionRule `"currentLineItem.lineTotal.discount == 0"` must be set on all promotions if you want only one discount to be able to be applied per line item.   
 
 **25% off transactions over $100 and limited to 1 promotion per item**
 ```json
