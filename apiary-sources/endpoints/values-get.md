@@ -16,7 +16,7 @@
 
             {REQUEST_REPLACEMENT:createValue1.response.body}
 
-### Get a Value by Code [GET /values?code={code}{?showCode}]
+### Get a Value by Code [GET /values{?code}{?showCode}]
 
 + Parameter
     + code (string) - the code (secret or generic) of the Value to get.
@@ -32,7 +32,7 @@
 
     + Body
 
-            {REQUEST_REPLACEMENT:createValue1.response.body}
+            [{REQUEST_REPLACEMENT:createValue1.response.body}]
 
 ### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
