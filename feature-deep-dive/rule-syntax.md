@@ -260,7 +260,7 @@ Get the keys of the map in a list.
 
 ```javascript
 keys(null) → []
-keys(metadata.foo) → ['itemId', 'size', 'quantity']
+keys({itemId: '33bbb2bf-c270-41d9-ab42-9eeba99fa69c', size: 'medium', quantity:6}) → ['itemId', 'size', 'quantity']
 ```
 
 ### map
@@ -340,7 +340,7 @@ roundBankers(13.5) → 14
 
 ### size
 
-`size(value: string | number) → number`
+`size(value: any[] | number) → number`
 
 Get the length of the list or the number of characters in a string.
 
@@ -419,7 +419,7 @@ Get the values of the map in a list.
 
 ```javascript
 values(null) → []
-values(metadata.foo) → ['33bbb2bf-c270-41d9-ab42-9eeba99fa69c', 'medium', 6]
+values({itemId: '33bbb2bf-c270-41d9-ab42-9eeba99fa69c', size: 'medium', quantity:6}) → ['33bbb2bf-c270-41d9-ab42-9eeba99fa69c', 'medium', 6]
 ```
 
 ## Identifiers
