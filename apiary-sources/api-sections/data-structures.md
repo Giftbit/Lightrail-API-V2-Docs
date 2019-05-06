@@ -25,3 +25,5 @@
 {% include 'data-structures/TransactionStep.md' %}
 
 {% include 'data-structures/Value.md' %}
+
+{% include 'data-structures/GenericCodeOptions.md' %}

@@ -1,0 +1,6 @@
+## GenericCodeOptions (object)
++ perContact (PerContact, required) - Per contact properties. If set, the generic code must be attached before being used. Generic codes with per contact properties will be auto-attached during checkout if a `contactId` is provided as a payment source in addition to the generic code.
+
+## PerContact (object)
++ balance (number, optional) - The balance available to a Contact. Leave null if using balanceRule. When the generic code is attached the `perContact.balance` is subtracted from the Value's `balance`. This allows the Value's `balance` to be used as a liability control and represents how much balance can be used.   
++ usesRemaining (number, optional) - The usesRemaining available to a Contact. Leave null if indefinite uses. When the generic code is attached the `perContact.userRemaining` is subtracted from the Value's `usesRemaining`. This allows the Value's `usesRemaining` to be used as a liability control and represents how many times the generic code can be used.
