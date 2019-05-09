@@ -17,7 +17,7 @@
         + genericCodeOptions (GenericCodeOptions, optional)
         + generateCode (CodeGeneration, optional) - {{value.generateCode}}
         + currency (string, optional) - {{currency.code}} Required if `programId` is not set.
-        + balance (number, optional) - {{value.balance}} When this is set an `initialBalance` Transaction is created tracking the amount created.
+        + balance (number, optional) - {{value.balance}} 
         + pretax (boolean, optional) - {{value.pretax}}
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
