@@ -132,7 +132,7 @@ transaction:
     roundingMode: "The rounding mode used for tax calculations. Modes: `\"HALF_EVEN\"`, `\"HALF_UP\"`. Defaults to `\"HALF_EVEN\"`, also known as bankers rounding, which is the standard for most financial calculations."
 value:
   active: "Whether the Value is active and can be used upon creation."
-  balance: "The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500."
+  balance: "The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500. For generic codes that have a `perContact.balance` the `balance` can control maximum liability and will be drawn down by the `perContact.balance` when attached to a Contact."
   balanceRule: "A Rule controlling the effective balance of the Value in a Checkout. To use this `balance` must be set to `null`. The syntax is defined in a [separate document](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/redemption-and-balance-rules.md)."
   canceled: "If `true` the Value is canceled. Once canceled the Value can never be uncanceled."
   code: "The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`."
@@ -153,7 +153,7 @@ value:
   showCode: "Show the full code for the Value."
   startDate: "Date when the Value becomes available."
   updatedContactIdDate: "Date of the last contactId update (Contact attached)."
-  usesRemaining: "The number of times the Value can be used in checkout. When this number reaches 0 the Value can no longer be used in checkout."
+  usesRemaining: "The number of times the Value can be used in checkout. When this number reaches 0 the Value can no longer be used in checkout. For generic codes that have a `perContact.usesRemaining` the `usesRemaining` can control maximum uses and will be drawn down by the `perContact.usesRemaining` when attached to a Contact."
   create:
     code: "Assign a code."
     contactId: "Directly attach to a Contact."

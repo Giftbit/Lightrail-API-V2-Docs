@@ -36,7 +36,7 @@ print ("Processing "+inputfile+" based on " + variablesfile+". Writing to "+outp
 
 # stream = open("variables.yaml", "r")
 stream = open(variablesfile, "r")
-data = yaml.load(stream)
+data = yaml.load(stream, Loader=yaml.FullLoader)
 
 env = Environment(loader=FileSystemLoader('./'))
 template = env.get_template(inputfile)

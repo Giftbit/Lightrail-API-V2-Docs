@@ -5,6 +5,7 @@
 + contactId (string) - {{value.contactId}}
 + code (string) - {{value.code}}
 + isGenericCode (boolean) - {{value.isGenericCode}}
++ genericCodeOptions (GenericCodeOptions)
 + balance (number) - {{value.balance}}
 + usesRemaining (number) - {{value.usesRemaining}}
 + active (boolean) - {{value.active}}
