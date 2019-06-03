@@ -28,6 +28,7 @@ filter:
   frozen: "Filter frozen/unfrozen."
   email: "Filter by email."
   id: "Filter by ID."
+  isGenericCode: "Filter by isGenericCode."
   lastName: "Filter by the lastName."
   list: "Multiple values can be sent as a comma separated list in which case only one Value must match."
   maxCreatedDate: "Filter up to the createdDate."
