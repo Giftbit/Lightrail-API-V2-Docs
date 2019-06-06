@@ -34,7 +34,7 @@
 
             [{REQUEST_REPLACEMENT:createValue1.response.body}]
 
-### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?isGenericCode}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
@@ -42,6 +42,7 @@
     + programId (string, optional) - {{filter.programId}}  {{filter.ops.in}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
     + contactId (string, optional) - {{filter.contactId}}
+    + isGenericCode (boolean, optional) - {{filter.isGenericCode}}
     + balance (number, optional) - {{filter.balance}}  {{filter.ops.number}}
     + usesRemaining (number, optional) - {{filter.usesRemaining}}  {{filter.ops.number}}
     + discount (boolean, optional) - {{filter.discount}}
