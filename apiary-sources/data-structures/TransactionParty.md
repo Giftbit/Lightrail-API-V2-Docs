@@ -18,8 +18,26 @@
 + beforeLightrail (boolean) - `internal`: if true this value is applied before Lightrail Values, otherwise it will be applied after.
 
 ## AdditionalStripeChargeParams (object)
++ application_fee (string)
++ application_fee_amount (number)
 + description (string)
 + on_behalf_of (string)
 + receipt_email (string)
++ shipping (AdditionalStripeChargeParams_Shipping)
 + statement_descriptor (string)
 + transfer_group (string)
+
+## `AdditionalStripeChargeParams_Shipping` (object)
++ address (AdditionalStripeChargeParams_Shipping_Address)
++ carrier (string)
++ name (string)
++ phone (string)
++ tracking_number (string)
+
+## `AdditionalStripeChargeParams_Shipping_Address` (object)
++ city (string)
++ country (string)
++ line1 (string)
++ line2 (string)
++ postal_code (string)
++ state (string)
