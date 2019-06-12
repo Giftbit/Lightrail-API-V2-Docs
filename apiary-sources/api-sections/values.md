@@ -7,7 +7,6 @@ Most Values will be accessed by a code, or attached to a [Contact](#reference/0/
 {% include 'generated/endpoints/values-create.md' %}
 {% include 'generated/endpoints/values-get.md' %}
 {% include 'generated/endpoints/values-update.md' %}
-{% include 'generated/endpoints/values-delete.md' %}
 {% include 'generated/endpoints/values-changeCode.md' %}
 {% include 'generated/endpoints/values-transactions-get.md' %}
 {% include 'generated/endpoints/values-contacts-get.md' %}
