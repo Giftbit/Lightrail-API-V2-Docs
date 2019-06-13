@@ -142,7 +142,7 @@ value:
   discountSellerLiability: "In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Value must be a discount, ie `discount: true`."
   endDate: "Date when the Value expires."
   frozen: "If `true` the Value is frozen and cannot be transacted with."
-  generateCode: "Parameters to generate a code. The code generated will be stored securely. Required if `code` is not set. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`."
+  generateCode: "Parameters to generate a unique code. The code generated will be stored securely. We recommend using the default length and character set. To do so, simply set to an empty object. ie `generateCode: {}`."
   id: "The ID you choose to represent the Value."
   idPurpose: "Two Values can't have the same ID, guaranteeing repeated calls won't create extra resources."
   isGenericCode: "If `true` the code is to be shared publicly and not secret. If `false` the code is treated as a secret. Defaults to false if not provided."
