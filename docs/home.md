@@ -112,8 +112,8 @@ Also, note the `sources` property in the request. It includes three sources, two
       {
          "rail":"stripe",
          "chargeId":"ch_1DymsVCM9MOvFvZK11KdlGZr",
-         "charge":{
-            // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
+         "charge":  {
+            // ...full Stripe charge response: for an example, see the endpoint reference at https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
          },
          "amount":-7400
       }

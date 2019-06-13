@@ -404,8 +404,8 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
       {
          "rail":"stripe",
          "chargeId":"ch_1DynnSCM9MOvFvZK7BGHlNLE",
-         "charge":{
-            // ...full Stripe charge response: for an example, see the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
+         "charge":  {
+            // ...full Stripe charge response: for an example, see the endpoint reference at https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
          },
          "amount":-2150
       }
