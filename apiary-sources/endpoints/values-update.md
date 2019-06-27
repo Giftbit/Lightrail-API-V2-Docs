@@ -17,6 +17,7 @@
         + pretax (boolean, optional) - {{value.pretax}}
         + discount (boolean, optional) - {{value.discount}}
         + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
+        + genericCodeOptions (GenericCodeOptions, optional) - To update requires `isGenericCode: true`. Note, property `isGenericCode` cannot be updated.
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + balanceRule (Rule, optional) - {{value.balanceRule}}
         + startDate (string, optional) - {{value.startDate}}
