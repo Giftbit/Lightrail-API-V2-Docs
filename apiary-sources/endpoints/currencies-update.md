@@ -3,7 +3,7 @@
 + Parameter
     + code (string) - the code of the Currency to modify.
 
-+ Request (application/merge-patch+json)
++ Request (application/json)
 
     {{patch.merge}}
 

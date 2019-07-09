@@ -3,7 +3,7 @@
 + Parameter
     + id (string) - the ID of the Value to modify.
 
-+ Request (application/merge-patch+json)
++ Request (application/json)
 
     {{patch.merge}}
 
