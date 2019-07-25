@@ -424,6 +424,25 @@
       "body": {
         "id": "{UUID()}"
       }
+    },
+    {
+      "callId": "createGenericCode1",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "isGenericCode": true,
+        "genericCodeOptions": {
+          "perContact": {
+            "usesRemaining": 1
+          }
+        },
+        "balanceRule": {
+          "rule": "500 + value.balanceChange",
+          "explanation": "$5 off purchase"
+        }
+      }
     }
   ]
 }

@@ -4,6 +4,8 @@
     + showCode (boolean, optional) - {{value.showCode}}  This is useful when using the `generateCode` param and you want to see the generated code.
 
 + Request (application/json)
+    This is an example of creating a unique Value using a Program to set most of its properties.
+
     + Headers
     
             {{header.authorization}}
@@ -41,3 +43,21 @@
     + Body
     
             {REQUEST_REPLACEMENT:createValue1.response.body}
+
++ Request (application/json) 
+    This is an example of creating a generic code.
+
+   + Headers
+    
+            Authorization: Bearer <API_KEY>
+    
+    + Body
+    
+            {REQUEST_REPLACEMENT:createGenericCode1.body}
+        
++ Response 201 (application/json)
+
+    + Body
+    
+            {REQUEST_REPLACEMENT:createGenericCode1.response.body}
+        
