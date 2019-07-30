@@ -1,5 +1,5 @@
-### Create Issuance[POST /programs/{id}/issuances]
-[Value](#reference/0/values) is usually created by issuing it from a [Program](#reference/0/programs) in the web app. Each block of Values issued at once is tracked as an Issuance. Issuances are tracked for downloading secured codes after creation.
+### Create Issuance [POST /programs/{id}/issuances]
+An Issuance creates many [Values](#reference/0/values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#reference/0/values/create-a-value) instead.
 
 + Parameter
     + id (string) - the ID of the Program to issue Value from.
@@ -22,7 +22,6 @@
         + endDate (string, optional) - {{issuance.endDate}}
         + redemptionRule (Rule, optional) - {{issuance.redemptionRule}}
         + balanceRule (Rule, optional) - {{issuance.balanceRule}}
-        + tags (array[string], optional) - {{tags}} These are applied to each Value.
         + metadata (object, optional) - {{issuance.metadata}} `metadata` from the Program is inherited but any keys specified will override those of the Program.
         
     + Body

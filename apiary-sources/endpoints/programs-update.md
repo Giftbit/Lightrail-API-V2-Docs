@@ -24,7 +24,6 @@
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}} {{patch.alsoChangeValues}}
         + fixedInitialUsesRemaining (array[number], optional) -  {{program.fixedInitialUsesRemaining}} {{patch.alsoChangeValues}}
         + discountSellerLiability (number, optional) - {{program.discountSellerLiability}}
-        + tags (array[string], optional) - {{tags}}
         + startDate (string, optional) - {{program.startDate}} {{patch.alsoChangeValues}}
         + endDate (string, optional) - {{program.endDate}} {{patch.alsoChangeValues}}
         + metadata (object, optional) - {{program.metadata}}

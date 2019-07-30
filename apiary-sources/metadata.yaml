@@ -1,4 +1,3 @@
-tags: "Segmentation tags. (support coming soon)"
 createdDate: "Date of creation."
 updatedDate: "Date of last update."
 contact:
@@ -35,7 +34,6 @@ filter:
   pretax: "Filter by whether or not the Value is applied pretax."
   programId: "Filter by Program ID."
   startDate: "Filter by startDate."
-  tags: "Filter by tag. (support coming soon)"
   transactionType: "Filter by the transactionType."
   updatedDate: "Filter by updatedDate."
   usesRemaining: "Filter by number of uses remaining."

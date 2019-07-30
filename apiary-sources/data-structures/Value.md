@@ -18,7 +18,6 @@
 + balanceRule (Rule) - {{value.balanceRule}}
 + startDate (string) - {{value.startDate}}
 + endDate (string) - {{value.endDate}}
-+ tags (array[string]) - {{tags}}
 + metadata (object) - {{value.metadata}}
 + createdDate (string) - {{createdDate}}
 + updatedDate (string) - {{updatedDate}}

@@ -34,7 +34,7 @@
 
             [{REQUEST_REPLACEMENT:createValue1.response.body}]
 
-### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?isGenericCode}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List Values [GET /values{?limit}{?showCode}{?programId}{?currency}{?contactId}{?isGenericCode}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
@@ -54,7 +54,6 @@
     + endDate (string, optional) - {{filter.endDate}}  {{filter.ops.date}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + updatedDate (string, optional) - {{filter.updatedDate}}  {{filter.ops.date}}
-    + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
 
 + Request (application/json)
     + Headers
