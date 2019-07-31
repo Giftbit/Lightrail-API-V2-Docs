@@ -10,7 +10,6 @@
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}
-        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{contact.metadata}}
 
     + Body

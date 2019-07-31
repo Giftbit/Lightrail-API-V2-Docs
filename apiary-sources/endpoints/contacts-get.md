@@ -15,12 +15,11 @@
 
             {REQUEST_REPLACEMENT:createContact1.response.body}
 
-### List Contacts [GET /contacts{?limit}{?id}{?tags}{?firstName}{?lastName}{?email}{?valueId}]
+### List Contacts [GET /contacts{?limit}{?id}{?firstName}{?lastName}{?email}{?valueId}]
         
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
     + id (string, optional) - {{filter.id}}  {{filter.ops.in}}
-    + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
     + firstName (string, optional) - {{filter.firstName}}  {{filter.ops.string}}
     + lastName (string, optional) - {{filter.lastName}}  {{filter.ops.string}}
     + email (string, optional) - {{filter.email}}  {{filter.ops.string}}

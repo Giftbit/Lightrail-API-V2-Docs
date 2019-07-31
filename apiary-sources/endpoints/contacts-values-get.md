@@ -1,4 +1,4 @@
-### List a Contact's Values [GET /contacts/{id}/values{?limit}{?programId}{?currency}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}{?tags}]
+### List a Contact's Values [GET /contacts/{id}/values{?limit}{?programId}{?currency}{?balance}{?usesRemaining}{?discount}{?active}{?frozen}{?canceled}{?pretax}{?startDate}{?endDate}{?createdDate}{?updatedDate}]
 
 + Parameter
     + id (string) - The ID of the Contact to get the Values of.
@@ -16,7 +16,6 @@
     + endDate (string, optional) - {{filter.endDate}}  {{filter.ops.date}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + updatedDate (string, optional) - {{filter.updatedDate}}  {{filter.ops.date}}
-    + tags (string, optional) - {{filter.tags}}  {{filter.ops.in}}
 
 + Request (application/json)
     + Headers

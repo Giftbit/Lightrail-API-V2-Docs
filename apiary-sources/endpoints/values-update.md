@@ -22,7 +22,6 @@
         + balanceRule (Rule, optional) - {{value.balanceRule}}
         + startDate (string, optional) - {{value.startDate}}
         + endDate (string, optional) - {{value.endDate}}
-        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{value.metadata}}
         
     + Body
