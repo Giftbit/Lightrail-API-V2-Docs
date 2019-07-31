@@ -30,7 +30,6 @@
         + usesRemaining (number, optional) - {{value.usesRemaining}}
         + startDate (string, optional) - {{value.startDate}}
         + endDate (string, optional) - {{value.endDate}}
-        + tags (array[string], optional) - {{tags}}
         + metadata (object, optional) - {{value.metadata}} If `programId` is set `metadata` from the Program is inherited but any keys specified will override those of the Program.
         
     + Body
@@ -60,4 +59,3 @@
     + Body
     
             {REQUEST_REPLACEMENT:createGenericCode1.response.body}
-        

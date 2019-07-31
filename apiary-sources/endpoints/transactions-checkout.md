@@ -72,16 +72,16 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
                 "messageCode": "TransactionExists"
             }
 
-+ Response 422 (application/json)
++ Response 409 (application/json)
 
-    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD (or equivalent). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You may wish to handle this error by asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
+    Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD ([or equivalent](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You can handle this error by forgiving the small charge and setting `forgiveSubMinAmount=true` on the Stripe source, asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
 
     + Body
 
             {
                 "statusCode": 409,
-                "message": "Failed to charge credit card: amount '25' for Stripe was too small.",
+                "message": "The transaction cannot be processed because it contains a Stripe charge (45) below the minimum (50).  Please see the documentation on `allowRemainder` and `source.forgiveSubMinCharges` or create a fee to raise the total charge.",
                 "messageCode": "StripeAmountTooSmall",
-                "stripeError": {...}
+                "amount": 45,
+                "minAmount": 50
             }
-

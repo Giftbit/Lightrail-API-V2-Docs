@@ -7,8 +7,10 @@
 ## StripeOrLightrailTransactionParty (LightrailTransactionParty)
 + rail (string) - The payment rail. Must belong to [`lightrail`, `stripe`]. Must be used in combination with one of the following identifiers.
 + source (string) - `stripe`: a tokenized credit card for Stripe.  
-+ customer (string) - `stripe`: a Stripe customer ID (uses customer's default source).  
++ customer (string) - `stripe`: a Stripe customer ID (uses customer's default source).
 + maxAmount (number) - `stripe`: the maximum amount that can be charged to the given Stripe source.
++ minAmount (number) - `stripe`: the minimum amount that can be charged to the given Stripe source.  If unset [Stripe's default for the currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts) will be used.  Setting a lower number is not recommended unless the settlement currency is different from the transaction currency.
++ forgiveSubMinAmount (boolean) - `stripe`: if true charge amounts below `minAmount` will be forgiven (not charged so that the transaction may complete).  This amount will be tracked in the response `totals.forgiven`.  Has no effect if the top level `allowRemainder=true`.  
 + additionalStripeParams (AdditionalStripeChargeParams) - `stripe`: additional parameters passed to Stripe when creating a charge.  See [Stripe's documentation](https://stripe.com/docs/api) for more information.
 
 ## TransactionParty (StripeOrLightrailTransactionParty)
