@@ -23,7 +23,7 @@
 + paidStripe (number) - The amount paid from Stripe payment sources.
 + paidInternal (number) - The amount paid from Internal payment sources.
 + remainder (number) - {{transaction.remainderResponse}}
-+ forgiven (number) - The amount forgiven (left uncharged) usually because the amount is too small to be processed.
++ forgiven (number) - The amount forgiven (will not be charged).  This happens when `forgiveSubMinAmount=true` and the amount is below the minimum a payment rail will process.
 + marketplace (TransactionTotalsMarketplace) - Marketplace totals calculated if any marketplace behaviour has been configured (by setting the LineItem `marketplaceRate`).
 
 ## TransactionTotalsMarketplace (object)
