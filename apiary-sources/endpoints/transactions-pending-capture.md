@@ -18,7 +18,7 @@ Capturing a pending Transaction is not possible when one of the Values is frozen
         
     + Body
         
-                    {REQUEST_REPLACEMENT:pendingCapture.body}
+            {REQUEST_REPLACEMENT:pendingCapture.body}
         
 + Response 200 (application/json)
     + Attributes (Transaction)
@@ -26,3 +26,17 @@ Capturing a pending Transaction is not possible when one of the Values is frozen
     + Body
 
             {REQUEST_REPLACEMENT:pendingCapture.response.body}
+
++ Response 409 (application/json)
+
+    A Transaction cannot be captured if a Value in the Transaction is frozen.
+    
+    + Attributes (RestError)
+
+    + Body
+
+            {
+                "statusCode": 409,
+                "message": "Cannot capture Transaction because value 'transactionId' is frozen.",
+                "messageCode": "ValueFrozen"
+            }

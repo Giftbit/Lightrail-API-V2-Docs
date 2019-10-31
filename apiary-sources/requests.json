@@ -88,12 +88,9 @@
       }
     },
     {
-      "callId": "detachValue1",
-      "method": "POST",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/detach",
-      "body": {
-        "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
-      }
+      "callId": "listValue1Contacts",
+      "method": "GET",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}/contacts?limit=1"
     },
     {
       "callId": "listContactsValue1",
@@ -101,9 +98,12 @@
       "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values?limit=1"
     },
     {
-      "callId": "listValue1Contacts",
-      "method": "GET",
-      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}/contacts"
+      "callId": "detachValue1",
+      "method": "POST",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/detach",
+      "body": {
+        "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
+      }
     },
     {
       "callId": "updateValue1",

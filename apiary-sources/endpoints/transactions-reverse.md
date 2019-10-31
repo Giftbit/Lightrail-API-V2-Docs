@@ -30,6 +30,8 @@ Reversing a Transaction is not possible when: the Transaction is pending (must b
 + Response 409 (application/json)
 
     A Transaction cannot be reversed if it requires moving more balance from a Value than is available.
+    
+    + Attributes (RestError)
 
     + Body
 
@@ -41,7 +43,9 @@ Reversing a Transaction is not possible when: the Transaction is pending (must b
 
 + Response 422 (application/json)
 
-    A Transaction cannot be reversed if it is not the last Transaction in the Transaction Chain. 
+    A Transaction cannot be reversed if it is not the last Transaction in the Transaction Chain.
+    
+    + Attributes (RestError)
 
     + Body
 
