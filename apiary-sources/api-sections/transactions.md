@@ -12,4 +12,3 @@ Lightrail Values cannot be transacted against if they are inactive, canceled, fr
 {% include 'generated/endpoints/transactions-pending-capture.md' %}
 {% include 'generated/endpoints/transactions-pending-void.md' %}
 {% include 'generated/endpoints/transactions-get.md' %}
-

@@ -63,6 +63,8 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
 + Response 409 (application/json)
 
     Idempotency error: you cannot create use a Transaction `id` more than once, for the same or a different Transaction request.
+    
+    + Attributes (RestError)
 
     + Body
 
@@ -75,7 +77,7 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
 + Response 409 (application/json)
 
     Stripe minimum charge error: Stripe will not process charges for less than $0.50 USD ([or equivalent](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts)). This error can be triggered in a split tender transaction if the customer does not have quite enough balance in their account or on their gift card. You can handle this error by forgiving the small charge and setting `forgiveSubMinAmount=true` on the Stripe source, asking your customer to top up their account balance, or by adding a "minimum credit card amount fee" line item to the order that covers the difference. 
-
+    
     + Body
 
             {

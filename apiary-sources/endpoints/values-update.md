@@ -14,6 +14,7 @@
     + Attributes
         + active (boolean, optional) - {{value.active}}
         + frozen (boolean, optional) - {{value.frozen}}
+        + canceled (boolean, optional) - {{value.canceled}}
         + pretax (boolean, optional) - {{value.pretax}}
         + discount (boolean, optional) - {{value.discount}}
         + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}

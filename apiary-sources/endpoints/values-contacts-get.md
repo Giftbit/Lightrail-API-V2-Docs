@@ -19,7 +19,7 @@
             MaxLimit: 1000
             Link: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
         
-    + Attributes (array[Contacts])
+    + Attributes (array[Contact])
 
     + Body
 
