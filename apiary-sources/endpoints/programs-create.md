@@ -19,7 +19,7 @@
         + fixedInitialBalances (array[number], optional) -  {{program.fixedInitialBalances}}
         + fixedInitialUsesRemaining (array[number], optional) -  {{program.fixedInitialUsesRemaining}}
         + discountSellerLiability (number, optional) - {{program.discountSellerLiability}}
-        + discountSellerLiabilityRule (DiscountSellerLiabilityRule, optional) - {{program.discountSellerLiabilityRule}}
+        + discountSellerLiabilityRule (Rule, optional) - {{program.discountSellerLiabilityRule}}
         + startDate (string, optional) - {{program.startDate}}
         + endDate (string, optional) - {{program.endDate}}
         + metadata (object, optional) - {{program.metadata}}

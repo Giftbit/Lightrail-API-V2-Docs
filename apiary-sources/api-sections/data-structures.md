@@ -6,8 +6,6 @@
 
 {% include 'data-structures/Contact.md' %}
 
-{% include 'data-structures/DiscountSellerLiabilityRule.md' %}
-
 {% include 'data-structures/Issuance.md' %}
 
 {% include 'data-structures/LineItem.md' %}

@@ -14,7 +14,7 @@
 + pretax (boolean) - {{value.pretax}}
 + discount (boolean) - {{value.discount}}
 + discountSellerLiability (number) - {{value.discountSellerLiability}}
-+ discountSellerLiabilityRule (DiscountSellerLiabilityRule) - {{value.discountSellerLiabilityRule}}
++ discountSellerLiabilityRule (Rule) - {{value.discountSellerLiabilityRule}}
 + redemptionRule (Rule) - {{value.redemptionRule}}
 + balanceRule (Rule) - {{value.balanceRule}}
 + startDate (string) - {{value.startDate}}
