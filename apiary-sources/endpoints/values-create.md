@@ -25,6 +25,7 @@
         + frozen (boolean, optional) - {{value.frozen}}
         + discount (boolean, optional) - {{value.discount}}
         + discountSellerLiability (number, optional) - {{value.discountSellerLiability}}
+        + discountSellerLiabilityRule (DiscountSellerLiabilityRule, optional) - {{value.discountSellerLiabilityRule}}
         + redemptionRule (Rule, optional) - {{value.redemptionRule}}
         + balanceRule (Rule, optional) - {{value.balanceRule}}
         + usesRemaining (number, optional) - {{value.usesRemaining}}
