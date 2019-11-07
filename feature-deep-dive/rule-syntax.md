@@ -183,7 +183,7 @@ every([1, 2, 3], x => x > 0) → true
 
 `filter(list: any[], condition: (listElement: any) => boolean) → any[]`
 
-Get a subset of a list whose members meet the condition.
+Get the subset of the list whose members meet the condition.
 
 ```javascript
 filter([1, 2, 3], x => x % 2 == 0) → [2]
