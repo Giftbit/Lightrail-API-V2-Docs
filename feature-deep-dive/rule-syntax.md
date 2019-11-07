@@ -214,6 +214,30 @@ findIndex([1, 2, 3], x => x % 2 == 0) → 1
 ['a', 'b', 'c', 'd'].findIndex(x => x == 'e') → -1
 ```
 
+### findLast
+
+`findLast(list: any[], condition: (listElement: any) => boolean) → any`
+
+Get the last element of a list that meets the given condition.  Returns null if the condition is never met.
+
+```javascript
+find([1, 2, 3], x => x % 2 == 0) → 2
+['a', 'b', 'c', 'd'].find(x => x != 'a') → 'd'
+['a', 'b', 'c', 'd'].find(x => x == 'e') → null
+```
+
+### findLastIndex
+
+`findLastIndex(list: any[], condition: (listElement: any) => boolean) → number`
+
+Get the index of the last element of a list that meets a given condition.  Returns -1 if the condition is never met.
+
+```javascript
+findIndex([1, 2, 3], x => x % 2 == 0) → 1
+['a', 'b', 'c', 'd'].findIndex(x => x != 'a') → 3
+['a', 'b', 'c', 'd'].findIndex(x => x == 'e') → -1
+```
+
 ### floor
 
 `floor(value: number) → number`
