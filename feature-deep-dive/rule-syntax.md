@@ -172,7 +172,7 @@ ceil(-12.34) → -12
 
 `every(list: any[], condition: (listElement: any) => boolean) → boolean`
 
-Test whether every item in a list meets the given condition.
+Test whether every item in a list meets the condition.
 
 ```javascript
 every([1, 2, 3], x => x > 0) → true
@@ -183,7 +183,7 @@ every([1, 2, 3], x => x > 0) → true
 
 `filter(list: any[], condition: (listElement: any) => boolean) → any[]`
 
-Get a subset of a list whose members meet the given condition.
+Get a subset of a list whose members meet the condition.
 
 ```javascript
 filter([1, 2, 3], x => x % 2 == 0) → [2]
@@ -194,7 +194,7 @@ filter([1, 2, 3], x => x % 2 == 0) → [2]
 
 `find(list: any[], condition: (listElement: any) => boolean) → any`
 
-Get the first element of a list that meets the given condition.  Returns null if the condition is never met.
+Get the first element of a list that meets the condition.  Returns `null` if the condition is never met.
 
 ```javascript
 find([1, 2, 3], x => x % 2 == 0) → 2
@@ -206,7 +206,7 @@ find([1, 2, 3], x => x % 2 == 0) → 2
 
 `findIndex(list: any[], condition: (listElement: any) => boolean) → number`
 
-Get the index of the first element of a list that meets a given condition.  Returns -1 if the condition is never met.
+Get the index of the first element of a list that meets the condition.  Returns `-1` if the condition is never met.
 
 ```javascript
 findIndex([1, 2, 3], x => x % 2 == 0) → 1
@@ -218,24 +218,24 @@ findIndex([1, 2, 3], x => x % 2 == 0) → 1
 
 `findLast(list: any[], condition: (listElement: any) => boolean) → any`
 
-Get the last element of a list that meets the given condition.  Returns null if the condition is never met.
+Get the last element of a list that meets the condition.  Returns `null` if the condition is never met.
 
 ```javascript
-find([1, 2, 3], x => x % 2 == 0) → 2
-['a', 'b', 'c', 'd'].find(x => x != 'a') → 'd'
-['a', 'b', 'c', 'd'].find(x => x == 'e') → null
+findLast([1, 2, 3], x => x % 2 == 0) → 2
+['a', 'b', 'c', 'd'].findLast(x => x != 'a') → 'd'
+['a', 'b', 'c', 'd'].findLast(x => x == 'e') → null
 ```
 
 ### findLastIndex
 
 `findLastIndex(list: any[], condition: (listElement: any) => boolean) → number`
 
-Get the index of the last element of a list that meets a given condition.  Returns -1 if the condition is never met.
+Get the index of the last element of a list that meets the condition.  Returns -`1` if the condition is never met.
 
 ```javascript
-findIndex([1, 2, 3], x => x % 2 == 0) → 1
-['a', 'b', 'c', 'd'].findIndex(x => x != 'a') → 3
-['a', 'b', 'c', 'd'].findIndex(x => x == 'e') → -1
+findLastIndex([1, 2, 3], x => x % 2 == 0) → 1
+['a', 'b', 'c', 'd'].findLastIndex(x => x != 'a') → 3
+['a', 'b', 'c', 'd'].findLastIndex(x => x == 'e') → -1
 ```
 
 ### floor
@@ -254,7 +254,7 @@ floor(-12.34) → -13
 
 `isNaN(value: number) → boolean`
 
-Test whether the number is NaN. NaN is a special case of number resulting from the operation `0 / 0`.
+Test whether the number is `NaN`. `NaN` is a special case of number resulting from the operation `0 / 0`.
 
 ```javascript
 isNaN(0 / 0) → true
@@ -267,7 +267,7 @@ isNaN(null) → false
 
 `isNull(variable: any) → boolean`
 
-Test whether the value is null.
+Test whether the value is `null`.
 
 ```javascript
 isNull(null) → true
@@ -340,7 +340,7 @@ reduce([1, 1, 2, 3, 5, 8], (accumulator, item) => accumulator + item, 0) → 20
 
 `round(value: number) → number`
 
-Round the number to the nearest integer, where any number ending in exactly .5 is rounded up.
+Round the number to the nearest integer, where any number ending in exactly `.5` is rounded up.
 
 ```javascript
 round(1) → 1
@@ -353,7 +353,7 @@ round(13.5) → 14
 
 `roundBankers(value: number) → number`
 
-Round the number to the nearest integer, where any number ending in exactly .5 is rounded to the nearest even integer.
+Round the number to the nearest integer, where any number ending in exactly `.5` is rounded to the nearest even integer.
 
 ```javascript
 roundBankers(1) → 1
@@ -450,7 +450,7 @@ values({itemId: '33bbb2bf-c270-41d9-ab42-9eeba99fa69c', size: 'medium', quantity
 
 Identifiers are used in variable names, map dot notation and lambda parameter names.
 
-An identifier must start with a letter (a-z, A_Z), underscore (_), or dollar sign ($).  Following characters can also be digits (0-9).  Identifiers are case sensitive.
+An identifier must start with a letter (a-z, A-Z), underscore (_), or dollar sign ($).  Following characters can also be digits (0-9).  Identifiers are case sensitive.
 
 ## Operator precedence
 
