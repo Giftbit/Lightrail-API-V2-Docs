@@ -14,8 +14,8 @@ Some query filter properties support operators for more powerful filtering.  The
 | ne       | Not equal to (!=). |
 | in       | Equals one of the members of a comma-separated list.  Literal commas must be escaped (\\,). |
 | like     | Equal to with wildcard support.  Percent signs (%) in the value are wild.  This operator is only supported on string properties. |
-| isNull   | Set [true, false]. Equal to null (true) or not equal to null (false). |
-| orNull   | Set [true, false]. Allows other filters acting on the same property to also match if the property is equal to null (true) or not equal to null (false). |
+| isNull   | Equal to null (true) or not equal to null (false). |
+| orNull   | Allows other filters acting on the same property to also include results if the property is equal to null (true), or, not equal to null (false). |
 
 **Examples**
 
@@ -23,7 +23,7 @@ Some query filter properties support operators for more powerful filtering.  The
 `https://api.lightrail.com/v2/contacts?email.in=mia.wallace@example.com,mia_wallace@example.com`
 
 2. List [Values](#reference/0/values/list-values) where `currency` equals "USD" and `balance` greater than or equal to $10:
-`https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000` searches for 
+`https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000`  
 
 3. List [Contacts](#reference/0/contacts/list-contacts) where `email` address is "like" `%@gmail.com` where `%` acts as a wild card (ie: ends with @gmail.com).
 `https://api.lightrail.com/v2/contacts?email.like=%@gmail.com` 
