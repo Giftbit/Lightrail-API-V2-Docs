@@ -15,7 +15,7 @@ Some query filter properties support operators for more powerful filtering.  The
 | in       | Equals one of the members of a comma-separated list.  Literal commas must be escaped (\\,). |
 | like     | Equal to with wildcard support.  Percent signs (%) in the value are wild.  This operator is only supported on string properties. |
 | isNull   | Set [true, false]. Equal to null (true) or not equal to null (false). |
-| orNull   | Set [true, false]. Allows other filters acting on same property to also match if the property is equal to null (true) or not equal to null (false). |
+| orNull   | Set [true, false]. Allows other filters acting on the same property to also match if the property is equal to null (true) or not equal to null (false). |
 
 **Examples**
 
