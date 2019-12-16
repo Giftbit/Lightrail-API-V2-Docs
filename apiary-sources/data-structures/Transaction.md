@@ -2,11 +2,11 @@
 + id (string) - {{transaction.id}}
 + transactionType (string) - {{transaction.transactionType}}
 + currency (string) - {{currency.code}}
-+ tax (Tax, optional) 
-+ steps (array[TransactionStep]) - {{transaction.steps}}
-+ totals (TransactionTotals) - Totals calculated for checkout transactions.
-+ lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction.
-+ paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction.
++ tax (Tax, optional) - Tax calculation details for checkout transactions. Will be `null` for other transaction types.
++ steps (array[LightrailTransactionStep, StripeTransactionStep, InternalTransactionStep]) - {{transaction.steps}}
++ totals (TransactionTotals) - Totals calculated for checkout transactions. Will be `null` for other transaction types.
++ lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction. Will be `null` for other transaction types.
++ paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction. Will be `null` for other transaction types.
 + simulated (boolean) - {{transaction.simulated}}
 + pending (boolean) - {{transaction.pendingResponse}}
 + pendingVoidDate (string) - {{transaction.pendingVoidDate}}

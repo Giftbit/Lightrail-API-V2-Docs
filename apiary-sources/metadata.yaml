@@ -108,7 +108,7 @@ transaction:
   simulate: "If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change."
   simulated: "If `true` the Transaction was simulated."
   source: "Supported rails: `[\"lightrail\", \"stripe\"]`."
-  steps: "An array of Transaction steps."
+  steps: "An array of `lightrail`, `stripe`, and/or `internal` Transaction steps. Attributes depend on the payment rail used for the step."
   transactionType: "The type of the Transaction, eg: `debit`, `credit`, `checkout`..."
   lineItem:
     type: "Must be either `product`, `shipping` or `fee`."
@@ -123,8 +123,10 @@ transaction:
     lineTotal:
       subtotal: "The total cost of the items. ie `unitPrice * quantity`."
       taxable: "The taxable amount. ie `price - pretaxDiscount`."
-      tax: "The taxable amount multiplied by the taxRate for the item. Uses 'bankers rounding'."
+      tax: "The taxable amount multiplied by the taxRate for the item. Uses 'bankers rounding' by default."
       discount: "The discount"
+      sellerDiscount: "The amount of discount the seller is responsible for providing for the line item. Calculated if marketplaceRate is set on the line item and/or a Value with a discountSellerLiabilityRule is used to pay for the item."
+      remainder: "The amount remaining to be paid for the line item after the transaction has been processed. Will be 0 unless the transaction has `allowRemainder: true`."
       payable: "The cost of the line item after tax and discounts have been applied."
   checkout:
     metadata: "Any additional data you want to store for the item. All metadata will also be saved on any Stripe charge(s)."

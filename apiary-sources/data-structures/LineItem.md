@@ -10,19 +10,13 @@
 + metadata (object) - {{transaction.lineItem.metadata}}
 
 ## LineItemResponse (LineItem)
-+ valuesApplied (array[LineItemPromotions])
 + lineTotal (LineTotal)
-
-## LineItemPromotions (object)
-+ id (string) - {{value.id}}
-+ redemptionRule (string) - {{value.redemptionRule}}
-+ ruleExplanation (string) - {{value.ruleExplanation}}
-+ amount (number) - The value of the discount.
-+ pretax (boolean) - {{value.pretax}}
 
 ## LineTotal (object)
 + subtotal (number) - {{transaction.lineItem.lineTotal.subtotal}}
 + taxable (number) - {{transaction.lineItem.lineTotal.taxable}}
 + tax (number) - {{transaction.lineItem.lineTotal.tax}}
 + discount (number) - {{transaction.lineItem.lineTotal.discount}}
++ sellerDiscount (number) - {{transaction.lineItem.lineTotal.sellerDiscount}}
++ remainder (number) - {{transaction.lineItem.lineTotal.remainder}}
 + payable (number) - {{transaction.lineItem.lineTotal.payable}}
