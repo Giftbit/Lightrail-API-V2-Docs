@@ -1,6 +1,6 @@
 ### Debit [POST /transactions/debit]
 
-Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, calculate discount or taxes.
+Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, or calculate discounts or taxes.
 
 + Request (application/json)
 

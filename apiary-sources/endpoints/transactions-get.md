@@ -49,7 +49,7 @@ A Transaction Chain is an ordered list of Transactions and results from creating
     + transactionType (string, optional) - {{filter.transactionType}}  {{filter.ops.in}}
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
-    + valueId (string, optional) - Filter by Value ID used in the Transaction.  {{filter.ops.in}}
+    + valueId (string, optional) - Filter by Value ID used in the Transaction.
 
 + Request (application/json)
     + Headers
