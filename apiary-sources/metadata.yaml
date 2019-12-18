@@ -97,7 +97,6 @@ program:
 transaction:
   allowRemainder: "If `true` the Transaction will go through using whatever amount is available: this might not cover the full amount of the Transaction. The remainder (i.e. amount still owing) will be indicated."
   createdDate: "Date when the Transaction was created."
-  destination: "Only supported rail is `\"lightrail\"` and must it refer to a single Value."
   id: "The ID you choose to represent the Transaction."
   idPurpose: "Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice."
   metadata: "Arbitrary data associated with the Transaction."
@@ -107,8 +106,7 @@ transaction:
   remainderResponse: "The amount still owing, if a remainder is allowed by setting `allowRemainder: true`."
   simulate: "If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change."
   simulated: "If `true` the Transaction was simulated."
-  source: "Supported rails: `[\"lightrail\", \"stripe\"]`."
-  steps: "An array of `lightrail`, `stripe`, and/or `internal` Transaction steps. Attributes depend on the payment rail used for the step."
+  steps: "An array of Transaction steps. A Transaction may have steps from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes."
   transactionType: "The type of the Transaction, eg: `debit`, `credit`, `checkout`..."
   lineItem:
     type: "Must be either `product`, `shipping` or `fee`."

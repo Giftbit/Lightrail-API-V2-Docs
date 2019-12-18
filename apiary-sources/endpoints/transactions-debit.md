@@ -10,10 +10,10 @@ Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler a
         
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
-        + source (LightrailTransactionParty, required) - The rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
-        + amount (number, required) - The amount to debit.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
-        + uses (number, optional) - The number of `usesRemaining` to add.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        + source (LightrailTransactionParty, required) - The payment rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + currency (string, required) - {{currency.code}}
+        + amount (number) - The amount to debit.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        + uses (number) - The number of `usesRemaining` to debit.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + pending (boolean, optional) - {{transaction.pending}}

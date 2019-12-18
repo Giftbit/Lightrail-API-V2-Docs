@@ -1,8 +1,8 @@
 ## LineItem (object)
 + type (string) - {{transaction.lineItem.type}}
++ unitPrice (number, required) -  {{transaction.lineItem.unitPrice}}
 + productId (string) -  {{transaction.lineItem.productId}}
 + variantId (string) - {{transaction.lineItem.variantId}}
-+ unitPrice (number) -  {{transaction.lineItem.unitPrice}}
 + quantity (number) -  {{transaction.lineItem.quantity}}
 + taxRate (number) - {{transaction.lineItem.taxRate}}
 + marketplaceRate (number) - {{transaction.lineItem.marketplaceRate}}

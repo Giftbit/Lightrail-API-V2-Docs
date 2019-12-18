@@ -6,7 +6,7 @@
 + steps (array[LightrailTransactionStep, StripeTransactionStep, InternalTransactionStep]) - {{transaction.steps}}
 + totals (TransactionTotals) - Totals calculated for checkout transactions. Will be `null` for other transaction types.
 + lineItems (array[LineItemResponse]) - Data on each LineItem in a checkout transaction. Will be `null` for other transaction types.
-+ paymentSources (array[TransactionParty]) - Sources used in a checkout Transaction. Will be `null` for other transaction types.
++ paymentSources (array[LightrailTransactionParty, StripeTransactionParty, InternalTransactionParty]) - An array of payment sources used in a checkout transaction (will be `null` for other transaction types). Sources may be from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes.
 + simulated (boolean) - {{transaction.simulated}}
 + pending (boolean) - {{transaction.pendingResponse}}
 + pendingVoidDate (string) - {{transaction.pendingVoidDate}}
