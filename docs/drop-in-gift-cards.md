@@ -428,6 +428,3 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
 
 ## Customization and Advanced UI
 The appearance of components is fully customizable. Using Lightrail UI you can also attach event listeners to the components to respond to customer activity. For more information on this usage, see [Lightrail UI](#lightrail-ui).
-
-## Support
-Contact us any time at [hello@lightrail.com](mailto:hello@lightrail.com) —- we are here to help.

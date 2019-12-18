@@ -351,6 +351,3 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 ![Code redemption theming - 3](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/code-remption-theming-1.png)
 
 **Note:** #17 provides a label to pass for the completed redemption step. #18 is the the href for where the button will redirect users on redemption completion.
-
-## Support
-Contact us any time at hello@lightrail.com —- we are here to help.
