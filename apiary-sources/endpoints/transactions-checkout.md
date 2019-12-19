@@ -26,8 +26,8 @@ Error responses: If using the `stripe` rail, it is possible for checkout transac
     + Attributes
         + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
         + currency (string, required) - {{currency.code}}
-        + lineItems (array[LineItem])
-        + sources (array[TransactionParty])
+        + lineItems (array[LineItem], required)
+        + sources (array[LightrailTransactionParty, StripeTransactionParty, InternalTransactionParty], required) - An array of payment sources to use for the checkout transaction. Supported payment rails: `lightrail`, `stripe`, `internal`.
         + simulate (boolean, optional) - {{transaction.simulate}}
         + allowRemainder (boolean, optional) - {{transaction.allowRemainder}}
         + pending (boolean, optional) - {{transaction.pending}}
