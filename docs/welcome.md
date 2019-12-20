@@ -1,7 +1,5 @@
 # Welcome to Lightrail
 
-#### Welcome to Lightrail
-
 <p class="intro">Lightrail is an API and Webapp that enables you to create cutting-edge payment experiences.</p> 
 
 The payment landscape is diversifying. To stay ahead of the curve, an increasing number of channels such promotions, gift cards, and loyalty points in addition to traditional payment methods must be utilized. Lightrail enables you to create and manage these new channels. Without Lightrail, collecting payment from multi-channel sources becomes a technically complicated problem. Lightrail simplifies this problem, enabling you to accept payment from all these sources within a single Checkout API request. 
