@@ -23,10 +23,10 @@ ____
 
 Lightrail enables the ability to easily attach Value to your customers. This can be done from Webapp, REST API, or during a checkout transaction step. 
 
-#### Manually Attach
+### Manually Attach
 
 For example, in the Webapp you can search for Contact and select “Attach Value”. This can be a newly created on-demand Value or an existing Value. A good example of this would be a user contacting Customer Support to report an issue they were having with purchasing a product. A Customer Support representative could look up the user, and immediately attach a Value (say 15% off their next purchase) to their account from a “Customer Support Issues Program”. 
 
-#### Programatically Attach
+### Programatically Attach
 
 As mentioned above you can also attach Value, or trigger, a Direct-to-wallet promotion programatically when a user takes a certain action. Let’s say that you’re offering a promotion for returning/logged in users when they make a purchase of $100 or more. In your shopping cart you would need to listen for an event like this and trigger (via API call) a Direct-to-wallet promotion to be attached to the user. You would then need to notify your user using your existing channels, whether that be in-app after they’ve checked out or via email, etc.
