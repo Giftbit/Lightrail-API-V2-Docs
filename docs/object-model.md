@@ -2,7 +2,7 @@
 
 <p class="intro">Lightrail’s API and Webapp enables you to create and mange all types of customer value: promotions, gift cards, referral credits, refund credits, and loyalty points. Within Lightrail, these are stored as what we call a Value.</p>
 
-## Values
+### Values
 
 Values are the core financial object in Lightrail. Values can have a `balance` or a `balanceRule`, which can be used to represent percentage discounts or more sophisticated promotions. See our Balance Rule Documentation for more information. 
 
@@ -10,7 +10,7 @@ Values have a `usesRemaining` property indicating how many times they can be use
 
 Values can also have `redemptionRules` which enable sophisticated promotions. For example, you may want a promotion to apply to a particular product SKU or the promotion to apply only if the subtotal is above a certain amount. See our Redemption Rule Documentation for more information.
 
-## Programs
+### Programs
 
 #### Creating and Organizing Values
 
