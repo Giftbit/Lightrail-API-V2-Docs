@@ -4,6 +4,9 @@
 
 <table>
     <tr>
+        <td>
+            <img style="width: 230px" src="https://paper-attachments.dropbox.com/s_03718CA23EE783698F52E99F0E867CD3645B20041BCBBDDBF9E4CBB0ECB76838_1576859095339_image.png" />
+        </td>
         <td valign="top">
             <p>Examples of Customer Value that could be in a Wallet are:</p>
             <ul>
@@ -13,11 +16,10 @@
                 <li>They endorse social posts by tagging friends earn loyalty point</li>
             </ul>
         </td>
-        <td>
-        <img style="height: 100px" src="https://paper-attachments.dropbox.com/s_03718CA23EE783698F52E99F0E867CD3645B20041BCBBDDBF9E4CBB0ECB76838_1576859095339_image.png" />
-        </td>
     </tr>
 </table>
+
+____
 
 Lightrail enables the ability to easily attach Value to your customers. This can be done from Webapp, REST API, or during a checkout transaction step. 
 
