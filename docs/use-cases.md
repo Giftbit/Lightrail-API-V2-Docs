@@ -216,7 +216,7 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 
 ## Drop-in Gift Cards  
 
-## Quickstart
+### Quickstart
 Lightrail's Drop-in Gift Card solution makes it easy to offer gift cards to your customers. 
 Integrating into Lightrail is an easy process that can be completed in no more than a few hours.
 
@@ -642,7 +642,7 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
 }
 ```
 
-### Lightrail UI
+#### Lightrail UI
 
 Lightrail UI is a javascript library that powers Lightrail's Drop-in Gift Card solution. Lightrail UI makes it easy to embed drop-in components into your page, interact with them, and respond to customer activity.
 
