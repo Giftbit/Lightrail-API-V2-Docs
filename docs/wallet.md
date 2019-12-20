@@ -4,11 +4,13 @@
 
 <table>
     <tr>
+        <td colspan="2">Examples of Customer Value that could be in a Wallet are:</td>
+    </tr>
+    <tr>
         <td>
             <img style="width: 230px" src="https://paper-attachments.dropbox.com/s_03718CA23EE783698F52E99F0E867CD3645B20041BCBBDDBF9E4CBB0ECB76838_1576859095339_image.png" />
         </td>
         <td valign="top">
-            <p>Examples of Customer Value that could be in a Wallet are:</p>
             <ul>
                 <li>Upon signing up your service, a user receives a one-time discounts of 20% off their first purchase</li>
                 <li>They were given a giftcard for their birthday and redeem the code to their profile/Wallet</li>
