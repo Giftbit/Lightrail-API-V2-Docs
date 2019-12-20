@@ -5,7 +5,7 @@
 <table>
     <tr>
         <td>
-            Examples of Customer Value that could be in a Wallet are:
+            <p>Examples of Customer Value that could be in a Wallet are:</p>
             <ul>
                 <li>Upon signing up your service, a user receives a one-time discounts of 20% off their first purchase</li>
                 <li>They were given a giftcard for their birthday and redeem the code to their profile/Wallet</li>
