@@ -1,5 +1,7 @@
 # Checkout Integration
 
+Lorem ipsum something something
+
 ## Where does Lightrail fit in?
 
 ---
