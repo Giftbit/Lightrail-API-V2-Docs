@@ -2,11 +2,10 @@
 
 <p class="intro">Lightrail enables the concept of a Wallet. A Wallet is a framework for thinking about all Customer Value that is attached to a given user.</p> 
 
-Examples of Customer Value that could be in a Wallet are:
-
 <table>
     <tr>
-        <td valign="top">
+        <td>
+            Examples of Customer Value that could be in a Wallet are:
             <ul>
                 <li>Upon signing up your service, a user receives a one-time discounts of 20% off their first purchase</li>
                 <li>They were given a giftcard for their birthday and redeem the code to their profile/Wallet</li>
