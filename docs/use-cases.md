@@ -216,9 +216,7 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 
 ## Drop-in Gift Cards  
 
-### Quickstart
-Lightrail's Drop-in Gift Card solution makes it easy to offer gift cards to your customers. 
-Integrating into Lightrail is an easy process that can be completed in no more than a few hours.
+<p class="intro">Lightrail's Drop-in Gift Card solution makes it easy to offer gift cards to your customers. Integrating into Lightrail is an easy process that can be completed in no more than a few hours.</p> 
 
 The solution is component based, using elements generated from our client-side library Lightrail UI.
 When your customers receive a gift card, they can easily redeem and apply the gift card value to their account.
