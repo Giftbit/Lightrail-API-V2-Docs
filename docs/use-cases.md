@@ -214,9 +214,9 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 
 ---
 
-# Drop-in Gift Cards  
+## Drop-in Gift Cards  
 
-## Quickstart
+### Quickstart
 Lightrail's Drop-in Gift Card solution makes it easy to offer gift cards to your customers. 
 Integrating into Lightrail is an easy process that can be completed in no more than a few hours.
 
