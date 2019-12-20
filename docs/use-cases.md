@@ -216,7 +216,7 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 
 ## Drop-in Gift Cards  
 
-### Quickstart
+## Quickstart
 Lightrail's Drop-in Gift Card solution makes it easy to offer gift cards to your customers. 
 Integrating into Lightrail is an easy process that can be completed in no more than a few hours.
 
@@ -498,7 +498,7 @@ The transaction is handled by backend methods. You'll need to set up two endpoin
 
 A brief example of the simulate/charge flow follows. For more details on the usage of the `/transactions/checkout` endpoint, see [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout).
 
-##### Simulate a Charge / Balance Check
+#### Simulate a Charge / Balance Check
 When your customer chooses to use their account credit, you need to see whether the account can cover the requested amount and whether the customer has any other attached value that can be used for the transaction. Our API makes it easy to post a split-tender charge where part of the transaction is covered by a Lightrail account, and part is covered by Stripe.
 
 The following is an example of the call that must be made by your simulation endpoint.
@@ -535,7 +535,7 @@ The `sources` array specifies the payment sources: in this case, the Contact who
 
 The `simulate` flag tells Lightrail to calculate the amounts that each source can cover without actually charging them. Stripe is not called; it is assumed that any remaining amount not covered by Lightrail will be successfully charged to the credit card.
 
-##### Post the Charge
+#### Post the Charge
 To complete the transaction, simply send the same request again without the `simulate` flag (or with `"simulate": false`).
 
 The following is an example of the call that must be made by your charge endpoint. 
@@ -642,14 +642,12 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
 }
 ```
 
-### Customization and Advanced UI
-The appearance of components is fully customizable. Using Lightrail UI you can also attach event listeners to the components to respond to customer activity. 
-
-Read on for more information on this usage.
-
 ### Lightrail UI
 
 Lightrail UI is a javascript library that powers Lightrail's Drop-in Gift Card solution. Lightrail UI makes it easy to embed drop-in components into your page, interact with them, and respond to customer activity.
+
+#### Customization and Advanced UI
+The appearance of components is fully customizable. Using Lightrail UI you can also attach event listeners to the components to respond to customer activity.
 
 #### Overview Example
 Here's a basic example of how you can add a Card Purchase Dialog to your page using the Lightrail UI library.
