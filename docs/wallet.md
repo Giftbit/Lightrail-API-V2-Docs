@@ -19,7 +19,7 @@
     </tr>
 </table>
 
-____
+<br/>
 
 Lightrail enables the ability to easily attach Value to your customers. This can be done from Webapp, REST API, or during a checkout transaction step. 
 
