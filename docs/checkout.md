@@ -20,12 +20,12 @@ Line items represent a shopping cart and contain all of the information required
 
     "lineItems":[
           {
-             "productId":"shoes-pid-133241",
+             "productId": "shoes-pid-133241",
              "unitPrice":4999,
              "taxRate":0.05
           },
           {
-             "productId":"hat-pid-43545",
+             "productId": "hat-pid-43545",
              "unitPrice":1799,
              "taxRate":0.05
           }
@@ -35,12 +35,12 @@ Line items represent a shopping cart and contain all of the information required
 The `sources` property in the `checkout` endpoint contains a list of payment sources. 
 A `source` consists of an object with a `rail` identifier along with some additional data. Rail refers to “payment rail” and is used to differentiate where a particular source must be charged. 
 
-Promotions, gift cards, and loyalty points you’ve created within Lightrail will all be accessed via `"rail``"``:` `"``lightrail``"`. Credit card processing is done via Stripe through `"``rail``"``:` `"``stripe``"`. There’s one more `"``rail``"``:` `"``internal``"` which means internal to your system. It means you’re tracking the collection of funds as it is outside of Lightrail and Stripe. For example, this allows you to migrate off a legacy gift card system you might have.
+Promotions, gift cards, and loyalty points you’ve created within Lightrail will all be accessed via `"rail": "lightrail"`. Credit card processing is done via Stripe through `"rail": "stripe"`. There’s one more `"rail": "internal"` which means internal to your system. It means you’re tracking the collection of funds as it is outside of Lightrail and Stripe. For example, this allows you to migrate off a legacy gift card system you might have.
 
 See the [full endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for details. 
 
 #### Rail: Lightrail
-With `"rail":"lightrail"` you’ll supply an identifier of an object in Lightrail. The following is an example of supplying a Lightrail payment source.
+With `"rail": "lightrail"` you’ll supply an identifier of an object in Lightrail. The following is an example of supplying a Lightrail payment source.
 
     { 
         "rail": "lightrail",
@@ -66,32 +66,32 @@ Usage:
 
 The `source` is a tokenized credit card, created from Stripe Elements.
 
-Checkout Example
+### Checkout Example
 
 Suppose a Customer has a promotion attached to their Contact. The remainder they will pay via credit card. The following is an example of the Checkout Request and Response. 
 Request: `POST /transactions/checkout`
 
     {
-       "id":"sample-transaction-123",
-       "currency":"USD",
+       "id": "sample-transaction-123",
+       "currency": "USD",
        "sources":[
           {
-             "rail":"lightrail",
-             "contactId":"sample-contact-id-123"
+             "rail": "lightrail",
+             "contactId": "sample-contact-id-123"
           },
           {
-             "rail":"stripe",
-             "source":"tok_visa"
+             "rail": "stripe",
+             "source": "tok_visa"
           }
        ],
        "lineItems":[
           {
-             "productId":"shoes-pid-133241",
+             "productId": "shoes-pid-133241",
              "unitPrice":4999,
              "taxRate":0.05
           },
           {
-             "productId":"hat-pid-43545",
+             "productId": "hat-pid-43545",
              "unitPrice":1799,
              "taxRate":0.05
           }
@@ -102,21 +102,21 @@ Request: `POST /transactions/checkout`
 Response:
 
     {
-       "id":"sample-transaction-123",
-       "transactionType":"checkout",
-       "currency":"USD",
-       "createdDate":"2019-12-20T21:34:13.000Z",
+       "id": "sample-transaction-123",
+       "transactionType": "checkout",
+       "currency": "USD",
+       "createdDate": "2019-12-20T21:34:13.000Z",
        "tax":{
-          "roundingMode":"HALF_EVEN"
+          "roundingMode": "HALF_EVEN"
        },
        "paymentSources":[
           {
-             "rail":"lightrail",
-             "contactId":"sample-contact-id-123"
+             "rail": "lightrail",
+             "contactId": "sample-contact-id-123"
           },
           {
-             "rail":"stripe",
-             "source":"tok_visa"
+             "rail": "stripe",
+             "source": "tok_visa"
           }
        ],
        "totals":{
@@ -133,7 +133,7 @@ Response:
        },
        "lineItems":[
           {
-             "productId":"shoes-pid-133241",
+             "productId": "shoes-pid-133241",
              "unitPrice":4999,
              "taxRate":0.05,
              "quantity":1,
@@ -147,7 +147,7 @@ Response:
              }
           },
           {
-             "productId":"hat-pid-43545",
+             "productId": "hat-pid-43545",
              "unitPrice":1799,
              "taxRate":0.05,
              "quantity":1,
@@ -163,9 +163,9 @@ Response:
        ],
        "steps":[
           {
-             "rail":"lightrail",
-             "valueId":"sample-value-id-123",
-             "contactId":"sample-contact-id-123",
+             "rail": "lightrail",
+             "valueId": "sample-value-id-123",
+             "contactId": "sample-contact-id-123",
              "code":null,
              "balanceBefore":null,
              "balanceChange":-1360,
@@ -175,7 +175,7 @@ Response:
              "usesRemainingAfter":0
           },
           {
-             "rail":"stripe",
+             "rail": "stripe",
              "chargeId":null,
              "charge":null,
              "amount":-5710
@@ -183,22 +183,22 @@ Response:
        ],
        "pending":false,
        "metadata":null,
-       "createdBy":"user-5022fccf827647ee9cfb63b779d62193-TEST"
+       "createdBy": "user-5022fccf827647ee9cfb63b779d62193-TEST"
     }
 
 As you can see, Lightrail handles the complexity of applying the promotion, calculating tax and charging the various payment sources. In this example the customer was discounted $13.60 and paid the remaining $57.60 via credit card. Lightrail returns a summary and detailed information of the transaction so that it's easy to display a breakdown to the customer. 
 
 
-
+<!-- OLD 
 
 **Request**: `POST /transactions/checkout`
 ```json
 {
-   "id":"example-checkout-id-123",
-   "currency":"USD",
+   "id": "example-checkout-id-123",
+   "currency": "USD",
    "lineItems":[
       {
-         "productId":"pid_shoes2123",
+         "productId": "pid_shoes2123",
          "unitPrice":10000,
          "taxRate":0.05,
          "quantity":1
@@ -206,16 +206,16 @@ As you can see, Lightrail handles the complexity of applying the promotion, calc
    ],
    "sources":[
       {
-         "rail":"lightrail",
-         "contactId":"cus_123"
+         "rail": "lightrail",
+         "contactId": "cus_123"
       },
       {
-         "rail":"lightrail",
-         "code":"BLACKFRIDAY"
+         "rail": "lightrail",
+         "code": "BLACKFRIDAY"
       },
       {
-         "rail":"stripe",
-         "source":"tok_visa"
+         "rail": "stripe",
+         "source": "tok_visa"
       }
    ]
 }
@@ -232,12 +232,12 @@ Also, note the `sources` property in the request. It includes three sources, two
 **Response**: `201 OK`
 ```json
 {
-   "id":"example-checkout-id-123",
-   "transactionType":"checkout",
-   "currency":"USD",
-   "createdDate":"2018-01-31T21:15:17.000Z",
+   "id": "example-checkout-id-123",
+   "transactionType": "checkout",
+   "currency": "USD",
+   "createdDate": "2018-01-31T21:15:17.000Z",
    "tax":{
-      "roundingMode":"HALF_EVEN"
+      "roundingMode": "HALF_EVEN"
    },
    "totals":{
       "subtotal":10000,
@@ -252,7 +252,7 @@ Also, note the `sources` property in the request. It includes three sources, two
    },
    "lineItems":[
       {
-         "productId":"pid_shoes2123",
+         "productId": "pid_shoes2123",
          "unitPrice":10000,
          "taxRate":0.05,
          "quantity":1,
@@ -268,10 +268,10 @@ Also, note the `sources` property in the request. It includes three sources, two
    ],
    "steps":[
       {
-         "rail":"lightrail",
-         "valueId":"BlackFriday Promo",
+         "rail": "lightrail",
+         "valueId": "BlackFriday Promo",
          "contactId":null,
-         "code":"BLACKFRIDAY",
+         "code": "BLACKFRIDAY",
          "balanceBefore":null,
          "balanceAfter":null,
          "balanceChange":-2000,
@@ -280,9 +280,9 @@ Also, note the `sources` property in the request. It includes three sources, two
          "usesRemainingChange":null
       },
       {
-         "rail":"lightrail",
-         "valueId":"$10 GC",
-         "contactId":"cus_123",
+         "rail": "lightrail",
+         "valueId": "$10 GC",
+         "contactId": "cus_123",
          "code":null,
          "balanceBefore":1000,
          "balanceAfter":0,
@@ -292,8 +292,8 @@ Also, note the `sources` property in the request. It includes three sources, two
          "usesRemainingChange":null
       },
       {
-         "rail":"stripe",
-         "chargeId":"ch_1DymsVCM9MOvFvZK11KdlGZr",
+         "rail": "stripe",
+         "chargeId": "ch_1DymsVCM9MOvFvZK11KdlGZr",
          "charge":  {
             // ...full Stripe charge response: for an example, see the endpoint reference at https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
          },
@@ -302,21 +302,21 @@ Also, note the `sources` property in the request. It includes three sources, two
    ],
    "paymentSources":[
       {
-         "rail":"lightrail",
-         "contactId":"cus_123"
+         "rail": "lightrail",
+         "contactId": "cus_123"
       },
       {
-         "rail":"lightrail",
-         "code":"BLACKFRIDAY"
+         "rail": "lightrail",
+         "code": "BLACKFRIDAY"
       },
       {
-         "rail":"stripe",
-         "source":"tok_visa"
+         "rail": "stripe",
+         "source": "tok_visa"
       }
    ],
    "pending":false,
    "metadata":null,
-   "createdBy":"user-5022fccf827647ee9cfb63b779d62193-TEST"
+   "createdBy": "user-5022fccf827647ee9cfb63b779d62193-TEST"
 }
 ``` 
 
@@ -394,3 +394,6 @@ The `source` is a tokenized credit card, created from Stripe Elements.
  
 
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
+ 
+ 
+ --> 
