@@ -1,6 +1,6 @@
 # Object Model
 
-Lightrail’s API and Webapp enables you to create and mange all types of customer value: promotions, gift cards, referral credits, refund credits, and loyalty points. Within Lightrail, these are stored as what we call a Value.
+<p class="intro">Lightrail’s API and Webapp enables you to create and mange all types of customer value: promotions, gift cards, referral credits, refund credits, and loyalty points. Within Lightrail, these are stored as what we call a Value.</p>
 
 ## Values
 
