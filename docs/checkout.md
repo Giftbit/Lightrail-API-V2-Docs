@@ -2,7 +2,7 @@
 
 <p class= "intro">The Checkout endpoint unifies payment allowing you to charge multiple sources, including credit cards, all within a single step.</p>
 
-Accepting multiple payment methods is complicated because it requires logic to ensure that each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout Endpoint calculates the subtotal, applies any relevant customer value (e.g. promotion, gift card), and charges the user's credit card, if applicable, all in a single request. 
+Accepting multiple payment methods is complicated because it requires logic to ensure that each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout Endpoint calculates the subtotal, applies any relevant customer value (e.g. promotion, gift card), and charges the customer's credit card, if applicable, all in a single request. 
 
 ### Where does the Checkout API fit in? 
 
@@ -12,8 +12,8 @@ When a customer of yours wants to make a purchase, you need to accept payment. I
 
 Checkout can be broken into two primary components:
 
-- line items - the customer's shopping cart
-- payment sources - the customer's methods of payment
+- line items: the customer's shopping cart
+- payment sources: the customer's methods of payment
 
 #### Line Items
 Line items represent a shopping cart and contain all of the information required for Lightrail to calculate the transaction. Below is an example shopping cart with two line items. Note, by including the `taxRate`, Lightrail automatically calculates and charges for any tax that must be collected.
