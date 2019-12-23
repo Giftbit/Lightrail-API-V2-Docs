@@ -4,7 +4,7 @@
 
 Modern payment experiences involve using different types of values to influence consumers—such as gift cards, promotions, loyalty points, and referral credits. These emerging types of values can be categorized as customer value. Your business can create, process, and manage all types of customer value using Lightrail. 
 
-Lightrail’s API enables two primary capabilities that enable customer value as a secure, flexible, and effective tool for your business and growth team. Those two capabilities are 
+Lightrail’s API enables two primary capabilities that enable customer value as a secure, flexible, and effective tool for your business and growth team. Those two capabilities are:
 
 <ol>
 <li>a digital wallet for each of your customers, and</li> 
