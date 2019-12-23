@@ -23,4 +23,4 @@ Contacts represent your customers. Contacts can have Values attached to them, wh
  
 ### Object Model Diagram
 
-<img style="width: 500px" src="https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/development/docs/assets/object-model.png" alt="Object Model Diagram" />
+<img style="width: 500px" src="https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/object-model.png" alt="Object Model Diagram" />
