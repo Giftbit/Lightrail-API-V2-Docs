@@ -17,7 +17,7 @@ Lightrail is an API-first tool that allows you to build-in and customize your pa
 
 #### Incentivize Your Customers
 
-Lightrail enables you to build Customer Wallet solutions where all of the the promotions, gift cards, and loyalty points are associated with that customer’s identity. Lightrail believes that With this you can create frictionless payment experiences. 
+Lightrail enables you to build Customer Wallet solutions where all of the the promotions, gift cards, and loyalty points are associated with that customer’s identity. Lightrail believes that with this you can create frictionless payment experiences. 
 
 #### Checkout
 The Checkout API Endpoint allows you to submit a customer's shopping cart for payment processing. Lightrail will calculate the subtotal from the line items in the shopping cart, apply any Lightrail discounts or pre-paid sources, and finally charge the credit card all in a single request. Lightrail handles the complexity of charging these sources in the correct order creating a seamless payment experience for your customer.
