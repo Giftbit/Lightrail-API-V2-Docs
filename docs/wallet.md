@@ -21,11 +21,11 @@
 
 <br/>
 
-Lightrail enables the ability to easily attach Value to your customers. This can be done from Webapp, REST API, or during a checkout transaction step. 
+Lightrail enables the ability to easily attach Value to your customers. This can be done from web app, REST API, or during a checkout transaction step. 
 
 #### Manually Attach
 
-For example, in the Webapp you can search for Contact and select “Attach Value”. This can be a newly created on-demand Value or an existing Value. A good example of this would be a user contacting Customer Support to report an issue they were having with purchasing a product. A Customer Support representative could look up the user, and immediately attach a Value (say 15% off their next purchase) to their account from a “Customer Support Issues Program”. 
+For example, in the web app you can search for Contact and select “Attach Value”. This can be a newly created on-demand Value or an existing Value. A good example of this would be a user contacting Customer Support to report an issue they were having with purchasing a product. A Customer Support representative could look up the user, and immediately attach a Value (say 15% off their next purchase) to their account from a “Customer Support Issues Program”. 
 
 #### Programatically Attach
 

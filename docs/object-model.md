@@ -1,6 +1,6 @@
 # Object Model
 
-<p class="intro">Lightrail’s API and Webapp enables you to create and mange all types of customer value: promotions, gift cards, referral credits, refund credits, and loyalty points. Within Lightrail, these are stored as what we call a Value.</p>
+<p class="intro">Lightrail’s API and web app enables you to create and mange all types of customer value: promotions, gift cards, referral credits, refund credits, and loyalty points. Within Lightrail, these are stored as what we call a Value.</p>
 
 ### Values
 
@@ -14,7 +14,7 @@ Values can also have `redemptionRules` which enable sophisticated promotions. Fo
 
 #### Creating and Organizing Values
 
-Programs act as a template for newly-created Values. So, for the different types of Values you create within Lightrail, it is recommended to create them from different Programs. Programs provide a template for all the Values that are created within that Program. Programs also enable organization and aggregated statistics on Values. Programs makes it really easy to see how a certain promotion you’re running is performing. Programs can be created through the API or Webapp. 
+Programs act as a template for newly-created Values. So, for the different types of Values you create within Lightrail, it is recommended to create them from different Programs. Programs provide a template for all the Values that are created within that Program. Programs also enable organization and aggregated statistics on Values. Programs makes it really easy to see how a certain promotion you’re running is performing. Programs can be created through the API or web app. 
 
 ### Contacts
 

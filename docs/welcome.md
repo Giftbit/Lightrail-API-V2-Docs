@@ -1,6 +1,6 @@
 # Welcome to Lightrail
 
-<p class="intro">Lightrail is an API and webapp that allows you to create modern payment experiences.</p>
+<p class="intro">Lightrail is an API and web app that allows you to create modern payment experiences.</p>
 
 Modern payment experiences involve using different types of values to influence consumers—such as gift cards, promotions, loyalty points, and referral credits. These emerging types of values can be categorized as customer value. Your business can create, process, and manage all types of customer value using Lightrail. 
 
