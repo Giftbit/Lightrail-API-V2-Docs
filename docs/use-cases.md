@@ -1,7 +1,7 @@
 # Use Cases
 
 <p class="intro">
-Lightrail supports many Use Cases for how you can use Customer Value. We offer the ability to do Points Programs, Referrals, Generic and Unique Codes, Discount and Dollar-off Promotions, Digital Giftcards and many more. 
+Lightrail supports many use cases for how you can use customer value. We offer the ability to do Points Programs, Referrals, Generic and Unique Codes, Discount and Dollar-off Promotions, Digital Giftcards and many more. 
 </p>
 
 ---

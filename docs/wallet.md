@@ -1,6 +1,6 @@
 # Wallet
 
-<p class="intro">Lightrail enables the concept of a Wallet. A Wallet is a framework for thinking about all Customer Value that is attached to a given user.</p> 
+<p class="intro">Lightrail enables the concept of a Wallet within your application or service. A Wallet is a framework for thinking about the many types of customer value attached to one of your users that will be available for them to spend when making a payment.</p>
 
 <table class="no-border">
     <tr>
@@ -8,7 +8,7 @@
             <img alt="wallet" style="width: 200px" src="https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/developement/docs/assets/wallet.png" />
         </td>
         <td>
-            <p>Examples of Customer Value that could be in a Wallet are:</p>
+            <p>Examples of customer value that could be in a Wallet are:</p>
             <ul>
                 <li>Upon signing up your service, a user receives a one-time discounts of 20% off their first purchase</li>
                 <li>They were given a giftcard for their birthday and redeem the code to their profile/Wallet</li>

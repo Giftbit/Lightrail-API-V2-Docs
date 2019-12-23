@@ -2,11 +2,11 @@
 
 <p class="intro">The Checkout endpoint unifies payment allowing you to charge multiple sources, including credit cards, all within a single step.</p>
 
-Accepting multiple payment methods is complicated because it requires logic to ensure each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout Endpoint calculates the subtotal, applies any relevant Customer Value (eg. promotion, gift card), and charges the user’s credit card, if applicable, all in a single request. 
+Accepting multiple payment methods is complicated because it requires logic to ensure each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout Endpoint calculates the subtotal, applies any relevant customer value (eg. promotion, gift card), and charges the user’s credit card, if applicable, all in a single request. 
 
 ### Where does the Checkout API fit in? 
 
-When a customer of yours wants to make a purchase, you need to accept payment. It’s at this step of that you would make a Checkout API Request sending the items they are purchasing along with any payment methods for the purchase. Checkout can also be used to simulate a purchase, allowing you to display to your customer what Customer Value applies to their transaction before you actually process the transaction. 
+When a customer of yours wants to make a purchase, you need to accept payment. It’s at this step of that you would make a Checkout API Request sending the items they are purchasing along with any payment methods for the purchase. Checkout can also be used to simulate a purchase, allowing you to display to your customer what customer value applies to their transaction before you actually process the transaction. 
 
 ### How does the Checkout API work? 
 
