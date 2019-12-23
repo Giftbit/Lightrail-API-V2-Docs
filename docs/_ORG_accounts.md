@@ -121,6 +121,3 @@ Alternatively, since the account is associated with the Contact, you can directl
 ```
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/orders` endpoint.
-
-### Support
-Want more information on your accounts or loyalty points use-case? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 

@@ -78,6 +78,3 @@ This will automatically use the promotion along with any other Values attached t
 ```
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
-
-### Support
-Want more information on promotions? [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
