@@ -1162,6 +1162,7 @@ You can set the marketplace rate, which is the marketplace’s commission rate, 
 The marketplace or seller, the driver, in our example must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party, the marketplace or the seller, is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
 See request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
 
-You can make promotions only applicable to certain activities, locations, or merchants. Eg. promotion is only applicable for yoga studios in LA. This is supported by the Value redemptionRule attribute. 
+#### Restricting Usage
+You can make promotions only applicable to certain activities, locations, or merchants. Eg. promotion is only applicable for rides in LA. This is supported by the Value redemptionRule attribute. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  
