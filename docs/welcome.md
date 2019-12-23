@@ -2,7 +2,7 @@
 
 <p class="intro">Lightrail’s API and web app enable you to create modern payment experiences that influence customers.</p>
 
-Businesses use different types of values—such as gift cards, promotions, loyalty points, and referral credits—to influence consumers. These different types of values can together be categorized as <em>customer value</em> and are part of the payment experience. Lightrail’s API and web app enables you to create, process, and manage customer value across your business.
+Businesses use different types of values—such as gift cards, promotions, loyalty points, and referral credits—to influence consumers. These different types of values can together be categorized as _customer value_ and are part of the payment experience. Lightrail’s API and web app enables you to create, process, and manage customer value across your business.
  
 Lightrail’s API enables two primary capabilities that enable customer value as a secure, flexible, and effective tool for your business and growth team. Those two capabilities are:
 
