@@ -29,7 +29,7 @@ See our examples below to get started with:
 - [Promotions](#use-cases/promotions)
 - [Gift cards](#use-cases/drop-in-gift-cards)
 - [Accounts and loyalty points](#use-cases/accounts-and-points)
-- [Checkout](#checkout)
+- [Checkout](#checkout-integration/checkout-integration)
 
 <!--
 - [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
