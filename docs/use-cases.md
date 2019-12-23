@@ -126,7 +126,7 @@ Alternatively, since the account is associated with the Contact, you can directl
 }
 ```
 
-See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/orders` endpoint.
+See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
 
 ---
 
