@@ -1150,7 +1150,7 @@ Values are applied to checkout item by item. The property `value.balanceChange` 
 ### Rule Syntax
 For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md).
 
-## Marketplaces
+## Marketplace
 Beyond single brand e-commerce integrations Lightrail supports more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
 To highlight some of the additional functionality, consider the ride sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must payout the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Lightrail supports a diverse set of configurations to model these different scenarios.    
