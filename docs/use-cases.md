@@ -1151,18 +1151,18 @@ Values are applied to checkout item by item. The property `value.balanceChange` 
 For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md).
 
 ## Marketplace
-Beyond single brand e-commerce integrations Lightrail supports more sophisticated requirements of marketplaces and multi-merchant coalitions. 
+Beyond single brand e-commerce integrations, Lightrail supports more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
-To highlight some of the additional functionality, consider the ride sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must payout the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Lightrail supports a diverse set of configurations to model these different scenarios.    
+To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must payout the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
 
 #### Marketplace Commission Rate
 You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under `lineItems` request attribute. 
 
 #### Liability
-The marketplace or seller, the driver, in our example must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party, the marketplace or the seller, is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
+The marketplace or seller, the driver, in our example, must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party, the marketplace, or the seller, is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
 See request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
 
 #### Restricting Usage
-You can make promotions only applicable to certain activities, locations, or merchants. Eg. promotion is only applicable for rides in LA. This is supported by the Value redemptionRule attribute. 
+You can make promotions only applicable to certain activities, locations, or merchants. For example, the promotion is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  
