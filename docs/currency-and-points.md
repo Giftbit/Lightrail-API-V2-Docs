@@ -1,6 +1,6 @@
 # Currency and Points
 
-Lightrail supports any currency including custom currencies you create.    
+Lightrail supports any standard 3-character [ISO currency code](https://en.wikipedia.org/wiki/ISO_4217) including custom currencies you create.    
 
 Example custom currency:
 ``` 
