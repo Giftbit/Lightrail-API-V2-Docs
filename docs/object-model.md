@@ -21,4 +21,4 @@ Programs act as a template for newly-created Values. So, for the different types
 Contacts represent your customers. Contacts can have Values attached to them which enables you to easily create a customer wallet for them in your app or service. By attaching Values to a Contact, all customer value (promotions, gift cards, loyalty points, etc.) that the customer they may have is centralized in one place. Attached Values makes multi-tender payments really easy for you to build and also create a frictionless payment experience for your customer. You simply need to provide the Contact identifier as a payment source in the Checkout Transaction. Doing so will cause any applicable Values they have to be considered for the transaction.
 
 
-![Object Model Diagram](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/object-model.png)
+![Object Model Diagram](https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/development/docs/assets/object-model.png)

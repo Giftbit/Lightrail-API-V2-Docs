@@ -5,7 +5,7 @@
 <table class="no-border">
     <tr>
         <td>
-            <img alt="wallet" style="width: 200px" src="https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/master/docs/assets/wallet.png" />
+            <img alt="wallet" style="width: 200px" src="https://raw.githubusercontent.com/Giftbit/Lightrail-API-V2-Docs/developement/docs/assets/wallet.png" />
         </td>
         <td>
             <p>Examples of Customer Value that could be in a Wallet are:</p>
