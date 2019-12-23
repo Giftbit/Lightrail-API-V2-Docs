@@ -13,7 +13,7 @@ Lightrail’s API enables two primary capabilities that enable customer value as
 
 #### Who Is Lightrail For? 
 
-Lightrail is an API-first tool that allows you to build and customize your customer value experiences. Lightrail requires integration into Lightrail is flexible and supports single brand e-commerce requirements, subscriptions businesses, and also more sophisticated requirements of marketplaces and multi-merchant coalitions. 
+Lightrail is an API-first tool that enables you to customize your customer value experiences. Lightrail requires integration into Lightrail is flexible and supports single brand e-commerce requirements, subscriptions businesses, and also more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
 #### Incentivize Your Customers
 
