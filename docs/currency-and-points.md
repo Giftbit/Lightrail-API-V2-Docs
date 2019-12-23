@@ -1,5 +1,5 @@
 # Currency and Points
 
-<p class="intro">Lightrail supports any currency including custom currencies you create.</p>
+Lightrail supports any currency including custom currencies you create.
 
-See [Accounts and Points](#) for more information.
+See [Accounts and Points](#use-cases/accounts-and-points) for more information.

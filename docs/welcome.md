@@ -1,8 +1,8 @@
 # Welcome to Lightrail
 
-<p class="intro">Lightrail is an API and Webapp that enables you to create cutting-edge payment experiences.</p> 
+<p class="intro">Lightrail is an API and webapp that allows you to create modern payment experiences. Modern payment experiences involve using different types of values to influence consumers—such as gift cards, promotions, loyalty points, and referral credits. These emerging types of values can be categorized as customer value. Your business can create, process, and manage all types of customer value using Lightrail.   </p> 
 
-The payment landscape is diversifying. To stay ahead of the curve, an increasing number of channels such promotions, gift cards, and loyalty points in addition to traditional payment methods must be utilized. Lightrail enables you to create and manage these new channels. Without Lightrail, collecting payment from multi-channel sources becomes a technically complicated problem. Lightrail simplifies this problem, enabling you to accept payment from all these sources within a single Checkout API request. 
+Lightrail’s API enables two primary capabilities that enable customer value as a secure, flexible, and effective tool for your business and growth team. Those two capabilities are (1) a digital wallet for each of your customers, and (2) a checkout integration that simplifies multi-tender payments with rule-based customer value. 
 
 #### Who Is Lightrail For? 
 
@@ -19,10 +19,10 @@ The Checkout API Endpoint allows you to submit a customer's shopping cart for pa
 #### Getting Started
 See our examples below to get started with:
 
-- [Promotions](#)
-- [Gift cards](#)
-- [Accounts and loyalty points](#)
-- [Checkout](#)
+- [Promotions](#use-cases/promotions)
+- [Gift cards](#use-cases/drop-in-gift-cards)
+- [Accounts and loyalty points](#use-cases/accounts-and-points)
+- [Checkout](#checkout)
 
 <!--
 - [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
