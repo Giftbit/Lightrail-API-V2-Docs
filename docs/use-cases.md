@@ -4,7 +4,6 @@
 Lightrail supports many use cases for how you can use customer value. We offer the ability to do Points Programs, Referrals, Generic and Unique Codes, Discount and Dollar-off Promotions, Digital Giftcards and many more. 
 </p>
 
----
 ## Accounts and Points
 Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
 Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "account" associated with the customer.  
