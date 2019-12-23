@@ -31,11 +31,4 @@ See our examples below to get started with:
 - [Accounts and loyalty points](#use-cases/accounts-and-points)
 - [Checkout](#checkout-integration/checkout-integration)
 
-<!--
-- [Promotions](https://www.lightrail.com/docs/#promotions/getting-started-with-promotions)
-- [Gift cards](https://www.lightrail.com/docs/#drop-in-gift-cards/drop-in-gift-cards)
-- [Accounts and loyalty points](https://www.lightrail.com/docs/#accounts/accounts-and-points)
-- [Checkout](https://lightrailapi.docs.apiary.io/#reference/0/transactions/process-an-order)
--->
-
 [Contact us](mailto:hello@lightrail.com) any time if you have any questions, we're here to help. 
