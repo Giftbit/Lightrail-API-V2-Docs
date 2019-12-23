@@ -1000,7 +1000,10 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 ---
 
 ## Redemption Rules and Balance Rules
-Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. Redemption rules determine if a Value can be used and evaluate to true or false. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
+
+<p class="intro">Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout.</p>
+
+Redemption rules determine if a Value can be used and evaluate to true or false. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.
 
 **Example 1: $5 off transactions over $100** 
 
