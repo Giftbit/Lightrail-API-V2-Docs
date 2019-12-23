@@ -14,7 +14,7 @@ Values can also have `redemptionRules`, which enable sophisticated promotions. F
 
 #### Creating and Organizing Values
 
-Programs act as a template for newly-created Values. So, for the different types of Values you create within Lightrail, it is recommended to create them from different Programs. Programs provide a template for all the Values that are created within that Program. Programs also enable organization and aggregated statistics on Values. Programs make it easy to see how a particular promotion you're running is performing. Programs are created through the web app or API. 
+Programs act as a template for creating new Values. So, for the different types of Values you create within Lightrail, it is recommended to create them from different Programs. Programs provide a template for all the Values that are created within that Program. Programs also enable organization and aggregated statistics on Values. Programs make it easy to see how a particular promotion you're running is performing. Programs are created through the web app or API. 
 
 ### Contacts
 
