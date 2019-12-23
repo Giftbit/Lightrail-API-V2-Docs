@@ -1,9 +1,9 @@
 # Welcome to Lightrail
 
-<p class="intro">Lightrail is an API and web app that allows you to create modern payment experiences.</p>
+<p class="intro">Lightrail’s API and web app enable you to create modern payment experiences that influence customers.</p>
 
-Modern payment experiences involve using different types of values to influence consumers—such as gift cards, promotions, loyalty points, and referral credits. These emerging types of value can be categorized as customer value. Your business can create, process, and manage all types of customer value using Lightrail. 
-
+Businesses use different types of values—such as gift cards, promotions, loyalty points, and referral credits—to influence consumers. These different types of values can together be categorized as <em>customer value</em> and are part of the payment experience. Lightrail’s API and web app enables you to create, process, and manage customer value across your business.
+ 
 Lightrail’s API enables two primary capabilities that enable customer value as a secure, flexible, and effective tool for your business and growth team. Those two capabilities are:
 
 <ol>
@@ -13,11 +13,7 @@ Lightrail’s API enables two primary capabilities that enable customer value as
 
 #### Who Is Lightrail For? 
 
-Lightrail is an API-first tool that enables you to customize your customer value experiences. Lightrail requires integration into Lightrail is flexible and supports single brand e-commerce requirements, subscriptions businesses, and also more sophisticated requirements of marketplaces and multi-merchant coalitions. 
-
-#### Incentivize Your Customers
-
-Lightrail enables you to build Customer Wallet solutions where all of the promotions, gift cards, and loyalty points are associated with that customer's identity. Lightrail believes that with this, you can create frictionless payment experiences. 
+Lightrail is an API-first platform that you integrate into your tech stack to create a custom payment experience. Lightrail is used by development-oriented startups and modern enterprise businesses. Lightrail is flexible. It supports single brand e-commerce requirements, subscriptions businesses, and the more sophisticated requirements of marketplaces and multi-merchant coalitions.
 
 #### Checkout
 The Checkout API Endpoint allows you to submit a customer's shopping cart for payment processing. Lightrail calculates the subtotal from the line items in the shopping cart, applies any Lightrail discounts or pre-paid sources, and finally charges the credit card all in a single request. Lightrail handles the complexity of charging these sources in the correct order creating a seamless payment experience for your customer.
