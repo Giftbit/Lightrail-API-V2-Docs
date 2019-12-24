@@ -6,9 +6,9 @@ Lightrail supports many use cases for how you can use customer value. We offer t
 
 ## Accounts and Points
 Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
-Typically this is used for integrations where a customer can earn value, such as dollars or credits and we think of this value as an "account" associated with the customer.  
+Typically this is used for integrations where a customer can earn value, such as dollars or credits. We think of this value as an "account" associated with the customer.  
 
-Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in app rewards or promotions. 
+Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in-app rewards or promotions. 
 
 Like all other Lightrail value, accounts are backed by `Values`. 
 
@@ -16,10 +16,10 @@ Like all other Lightrail value, accounts are backed by `Values`.
 To get started with accounts, you first need to create a `Program` which defines the default parameters for your accounts.
 
 #### Creating a Program
-The `Program` will define the basic properties like currency for the accounts (`Values`) that will be created from it. 
+The `Program` will define basic properties like currency for the accounts (`Values`) that will be created from it. 
 Below are the required and optional attributes needed for creating a `Program` for an account or a loyalty points use-case.   
 
-Creating an account `Program`. Note, typically Programs are created through the app (coming soon!). 
+Creating an account `Program`. Note, typically Programs are created through the app. 
 
 `POST https://api.lightrail.com/v2/programs`
 ```json
@@ -36,14 +36,13 @@ Creating an account `Program`. Note, typically Programs are created through the 
 Below is the list of attributes commonly used when creating an Account Program. For full attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
- - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `true`). Typically should be `false` for Account Programs.
- - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). Set this to `false` for Account Programs.
+ - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `false`). Typically should be `false` for Account Programs.
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `false`). Set this to `false` for Account Programs.
  - **name** (_optional_): A human-readable name for the Program.
- - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ### Creating an Account
-Request to create an account.  
+Creating an account for a customer means creating a `Value` from your Accounts `Program`: 
 
 `POST https://api.lightrail.com/v2/values`
 ```json
@@ -56,17 +55,17 @@ Request to create an account.
 ``` 
 
 #### Attributes
-Below is the list of attributes commonly used when creating an Account from a Program. For full attribute details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+Below is the list of attributes commonly used when creating an account from a Program. For full attribute details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **contactId** (_required_): Unique ID for the Customer.
 - **balance** (_optional_): An integer greater than or equal to 0 representing the initial balance of the Account.
 
 ### Common Requests  
-Below are the most common requests made when interacting with Accounts.
+Below are the most common requests made when interacting with accounts.
 
 #### Crediting
-Crediting is used when adding value to an Account.
+Crediting is used when adding value to an account.
 
 `POST https://api.lightrail.com/v2/transactions/credit`
 ```json
@@ -85,7 +84,7 @@ Crediting is used when adding value to an Account.
 }  
 ```
 
-See full credit endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/credit). 
+See full `credit` endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/credit). 
 
 #### Debiting
 Debiting is used when removing value from an account.
@@ -106,10 +105,10 @@ Debiting is used when removing value from an account.
 }
 ```
 
-See full debit endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/debit).
+See full `debit` endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/debit).
 
 #### Using Accounts as a Payment Source in Checkout
-Checkout uses the `/transactions/checkout` endpoint. To use an Account directly as a payment source simply provide the following in the sources property of the request. 
+Checkout uses the `/transactions/checkout` endpoint. To use an account directly as a payment source simply provide the following in the `sources` property of the request. 
 
 ```json
 {
@@ -118,7 +117,7 @@ Checkout uses the `/transactions/checkout` endpoint. To use an Account directly 
 }
 ```
 
-Alternatively, since the account is associated with the Contact, you can directly use the `contactId` as a payment source. This will consider all `Values` associated with the Contact.
+Alternatively, since the account is associated with the Contact, you can directly use the `contactId` as a payment source. This will cause all `Values` associated with the Contact to be considered as payment sources.
 ```json
 {
     "rail": "lightrail",
@@ -131,16 +130,17 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 ---
 
 ## Promotions
-Lightrail enables a wide variety of promotion use-cases. A few common examples are:
+Lightrail supports a wide variety of promotion use cases. A few common examples are:
+
  1. Personalized promotion associated with a customer.
  2. A site wide promotion code that can be entered during checkout.
  3. Unique promotion code delivered to a potential customer.  
  
 Promotions can be valid for a percentage or dollar-off discount. 
-These variations are all determined by properties on the `Value` which represent the promotion.
+These variations are all determined by properties on the `Value` which represents the promotion.
 
 ### Getting Started with Promotions
-To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
+To get started with promotions, you first need to create a `Program` which defines the default parameters for your promotion.
 
 Let's look at an example of creating a sign-up promotion which will be attached to new sign-ups for $5 off their first purchase.  
 
@@ -170,14 +170,13 @@ Below is the list of attributes commonly used when creating a Promotion Program.
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **name** (_optional_): A human-readable name for the Program.
- - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer. Set to `true` (default: `true`). 
- - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). 
+ - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer. Set to `true` (default: `false`). 
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `false`). 
  - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. 
- - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a Checkout - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
+ - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a checkout transaction - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
  - **redemptionRule**: A Redemption Rule controlling when the Value can be used in checkout. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
- - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ### Attaching the Promotion to a Contact 
@@ -1151,18 +1150,18 @@ Values are applied to checkout item by item. The property `value.balanceChange` 
 For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md).
 
 ## Marketplace
-Beyond single brand e-commerce integrations, Lightrail supports more sophisticated requirements of marketplaces and multi-merchant coalitions. 
+Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
-To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must payout the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
+To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must pay out the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be fully liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
 
 #### Marketplace Commission Rate
-You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under `lineItems` request attribute. 
+You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under the `lineItems` request attribute. 
 
 #### Liability
-The marketplace or seller, the driver, in our example, must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party, the marketplace, or the seller, is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
-See request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+The marketplace or seller (the driver, in our example), must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party-the marketplace or the seller-is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
+See the request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
 
 #### Restricting Usage
-You can make promotions only applicable to certain activities, locations, or merchants. For example, the promotion is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
+You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  

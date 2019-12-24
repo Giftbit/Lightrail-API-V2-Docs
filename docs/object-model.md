@@ -8,7 +8,7 @@ Values are the core financial object in Lightrail. Values can have a `balance` o
 
 Values have a `usesRemaining` property indicating how many times they can be used. Many promotions are single-use, whereas a gift card can be used indefinitely until its balance is empty. 
 
-Values can also have `redemptionRules`, which enable sophisticated promotions. For example, you may want a promotion to apply to a particular product SKU or the promotion to apply only if the subtotal is above a certain amount. See our [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
+Values can also have `redemptionRules`, which enable sophisticated promotions. For example, you may want a promotion to apply to a particular product SKU or apply only if the subtotal is above a certain amount. See our [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
 
 ### Programs
 

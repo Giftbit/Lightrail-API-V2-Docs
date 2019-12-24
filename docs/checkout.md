@@ -1,12 +1,12 @@
 # Checkout Integration
 
-<p class= "intro">The Checkout endpoint unifies payment allowing you to charge multiple sources, including credit cards, all within a single step.</p>
+<p class= "intro">The Checkout endpoint unifies payment. It allows you to charge multiple sources, including credit cards, in a single step.</p>
 
-Accepting multiple payment methods is complicated because it requires logic to ensure that each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout Endpoint calculates the subtotal, applies any relevant customer value (e.g. promotion, gift card), and charges the customer's credit card, if applicable, all in a single request. 
+Accepting multiple payment methods is complicated because it requires logic to ensure that each payment source is charged in the correct order, for the right amount, and with transactional consistency. The Checkout endpoint calculates the subtotal, applies any relevant customer value (e.g. promotion, gift card), and charges the customer's credit card, if applicable, all in a single request. 
 
 ### Where does the Checkout API fit in? 
 
-When a customer of yours wants to make a purchase, you need to accept payment. It's at this step that you would make a Checkout API Request sending the items they are purchasing along with any payment methods for the purchase. Checkout can also be used to simulate a purchase, allowing you to display to your customer what customer value applies to their transaction before you process the transaction. 
+When a customer of yours wants to make a purchase, you need to accept payment. It's at this step that you would make a Checkout API Request, sending details of the items they are purchasing along with any payment methods for the purchase. Checkout can also be used to simulate a purchase, allowing you to display to your customer what customer value applies to their transaction before you process the transaction. 
 
 ### How does the Checkout API work? 
 
@@ -36,7 +36,7 @@ Line items represent a shopping cart and contain all of the information required
 The `sources` property in the `checkout` endpoint contains a list of payment sources. 
 A `source` consists of an object with a `rail` identifier along with some additional data. Rail refers to "payment rail" and is used to differentiate where a particular source must be charged. 
 
-Promotions, gift cards, and loyalty points you've created within Lightrail are all accessed via `"rail": "lightrail"`. Credit card processing is done via Stripe through `"rail": "stripe"`. There's one more `"rail": "internal"` which means internal to your system. It means you're tracking the collection of funds as it is outside of Lightrail and Stripe. For example, this allows you to migrate off a legacy gift card system you might have.
+Promotions, gift cards, and loyalty points you've created within Lightrail are all accessed via `"rail": "lightrail"`. Credit card processing is done via Stripe through `"rail": "stripe"`. There's one more `"rail": "internal"` which represents value that is internal to your system. It means you're tracking the collection of funds, outside of Lightrail and Stripe. For example, this allows you to migrate off a legacy gift card system you might have.
 
 See the [full endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for details. 
 
@@ -71,7 +71,8 @@ The `source` is a tokenized credit card created from Stripe Elements.
 
 ### Checkout Example
 
-Suppose a Customer has a promotion attached to their Contact and provide their credit card to cover what's outstanding. The following is an example of the Checkout Request and Response. 
+Suppose a customer has a promotion attached to their Lightrail Contact record and provides their credit card to cover what's outstanding. The following is an example of the Checkout request and response. 
+
 Request: `POST /transactions/checkout`
 ```json
     {
