@@ -130,16 +130,17 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 ---
 
 ## Promotions
-Lightrail enables a wide variety of promotion use-cases. A few common examples are:
+Lightrail supports a wide variety of promotion use cases. A few common examples are:
+
  1. Personalized promotion associated with a customer.
  2. A site wide promotion code that can be entered during checkout.
  3. Unique promotion code delivered to a potential customer.  
  
 Promotions can be valid for a percentage or dollar-off discount. 
-These variations are all determined by properties on the `Value` which represent the promotion.
+These variations are all determined by properties on the `Value` which represents the promotion.
 
 ### Getting Started with Promotions
-To get started with promotions, you first need to create a `Program` which defines the default parameters for the promotion you want to create.
+To get started with promotions, you first need to create a `Program` which defines the default parameters for your promotion.
 
 Let's look at an example of creating a sign-up promotion which will be attached to new sign-ups for $5 off their first purchase.  
 
@@ -169,14 +170,13 @@ Below is the list of attributes commonly used when creating a Promotion Program.
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **name** (_optional_): A human-readable name for the Program.
- - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer. Set to `true` (default: `true`). 
- - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `true`). 
+ - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer. Set to `true` (default: `false`). 
+ - **pretax** (_optional_): Determines whether the Values in this Program are applied before taxes (default: `false`). 
  - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. 
- - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a Checkout - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
+ - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a checkout transaction - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
  - **redemptionRule**: A Redemption Rule controlling when the Value can be used in checkout. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
- - **tags** (_optional_): Segmentation tags.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ### Attaching the Promotion to a Contact 
