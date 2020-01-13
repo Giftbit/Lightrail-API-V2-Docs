@@ -1184,10 +1184,14 @@ See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-
 
 ---
 
-## Referral
+## Referral Programs
+
+Lightrail enables the ability to incentivize your  
 
 Setup two programs
+
 Program 1: To generate and track unique referral codes
+
 Program 2: To give account credit to user’s that successfully refer someone
 
 
