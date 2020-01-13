@@ -4,6 +4,11 @@
 Lightrail supports many use cases for how you can use customer value. We offer the ability to do Points Programs, Referrals, Generic and Unique Codes, Discount and Dollar-off Promotions, Digital Giftcards and many more. 
 </p>
 
+
+
+
+
+
 ## Accounts and Points
 Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
 Typically this is used for integrations where a customer can earn value, such as dollars or credits. We think of this value as an "account" associated with the customer.  
@@ -28,7 +33,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
     "currency": "USD",
     "name": "Accounts USD",
     "discount": false,
-    "pretax": false,
+    "pretax": false
 }
 ``` 
 
@@ -129,6 +134,11 @@ See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkou
 
 ---
 
+
+
+
+
+
 ## Promotions
 Lightrail supports a wide variety of promotion use cases. A few common examples are:
 
@@ -211,6 +221,12 @@ This will automatically use the promotion along with any other Values attached t
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
 
 ---
+
+
+
+
+
+
 
 ## Drop-in Gift Cards  
 
@@ -1165,3 +1181,62 @@ See the request attribute `discountSellerLiability` under the [create value endp
 You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  
+
+---
+
+## Referral
+
+Setup two programs
+Program 1: To generate and track unique referral codes
+Program 2: To give account credit to user’s that successfully refer someone
+
+
+### Program 1
+
+You will use this program to generate a ‘generic code’ for each one of your users.
+
+Include the users contactId in the generic code’s metadata. 
+
+This generic code will be the code that your users share with their friends so that the friend gets a credit/promotions on their first order (eg. $10 off your first order). The generic code can be distributed by your users in many ways, including a deep link where the recipient of the code does not need to enter anything.
+
+This referral code is programmatically available, so you can embed it in your transactional emails, within your app, or in custom links.
+
+Lightrail recommends that the referral code is applied immediately when then new user creates an account in your app. Lightrail enables the referral credit to be immediately applied to the wallet of the new user.
+
+To prevent fraud and abuse, Lightrail recommends you set a limit on the number of `uses` the generic code has (eg. 100). You can manually increase this number later if you have an outstanding user that is providing you many, legitimate referrals. This will prevent users from broadcasting: Posting referral links on coupon sites or other locations your company does not approve of.
+
+On a booking or transaction, you pass in a flag to indicate whether it was a user’s firstTransaction: true with the checkout Transaction
+
+You will have to create generic codes programmatically for each one of your users. Make sure to put the UUID of your refer-ing user in the metadata of the generic code, as well as the Program ID of Program #2.
+
+When the new user makes their first transaction, Lightrail will apply their credit to their order.
+Lightrail tracks that the new user has successfully made their first transaction. Details of the transaction will be associated with this program
+
+### Program 2
+
+You will use this program to add credit to the wallet of the refer-ing user. This user will get an increase of credit every time someone they refers has successfully transacted.
+
+Issue the referrer a Value from Program 2 when you create the generic code. Use a deterministic ID like: contactID-referrerCredit
+
+#### Paying Referrers
+On a daily basis, query checkout transactions made from Program 1. 
+
+Depending on how quickly refer-ers are paid out, consider filtering for Transactions with a createdDate greater than a week earlier.
+
+You can minimize how many Transactions you need to process by adding a createdDate minimum so that it’s not an ever increasing list. 
+
+Ie `GET .../transactions?createdDate.gt=2019-04-16&createdDate.lte=2019-05-16`
+
+For all the Transactions you retrieved you’ll need to lookup the generic code (refer-ers code) that the promotion in the Transaction was attached from (attachedFromValueId flag). 
+
+The generic code should have the refer-ers contactId in its metadata.  
+
+With the refer-ers contactId you can credit their value from ProgramId using /transactions/credit. You’ll use the ID of the Value which you determinstically set to contactID-referrerCredit
+
+For the credit transaction ID base it off the checkout transaction ID.
+
+#### checkoutTransactionId-credit
+Note, it is safe to retry these credit calls since the API is idempotent. If a referer was already credited the API will indicate the Transaction already exists.
+
+### Suggestions
+Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled)
