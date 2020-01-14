@@ -1095,7 +1095,7 @@ Consider deferring the issuance of a payout to the refer-er until you have confi
 
 ---
 
-## Redemption Rules and Balance Rules
+## Redemption & Balance Rules
 
 <p class="intro">Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout.</p>
 
