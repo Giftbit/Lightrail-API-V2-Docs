@@ -1013,6 +1013,88 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 
 ---
 
+## Marketplace
+Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
+
+To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must pay out the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be fully liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
+
+#### Marketplace Commission Rate
+You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under the `lineItems` request attribute. 
+
+#### Liability
+The marketplace or seller (the driver, in our example), must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party-the marketplace or the seller-is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
+See the request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+
+#### Restricting Usage
+You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
+See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
+ 
+
+---
+
+## Referral Programs
+
+Lightrail enables the ability to incentivize your  
+
+Setup two programs
+
+Program 1: To generate and track unique referral codes
+
+Program 2: To give account credit to user’s that successfully refer someone
+
+
+### Program 1
+
+You will use this program to generate a ‘generic code’ for each one of your users.
+
+Include the users contactId in the generic code’s metadata. 
+
+This generic code will be the code that your users share with their friends so that the friend gets a credit/promotions on their first order (eg. $10 off your first order). The generic code can be distributed by your users in many ways, including a deep link where the recipient of the code does not need to enter anything.
+
+This referral code is programmatically available, so you can embed it in your transactional emails, within your app, or in custom links.
+
+Lightrail recommends that the referral code is applied immediately when then new user creates an account in your app. Lightrail enables the referral credit to be immediately applied to the wallet of the new user.
+
+To prevent fraud and abuse, Lightrail recommends you set a limit on the number of `uses` the generic code has (eg. 100). You can manually increase this number later if you have an outstanding user that is providing you many, legitimate referrals. This will prevent users from broadcasting: Posting referral links on coupon sites or other locations your company does not approve of.
+
+On a booking or transaction, you pass in a flag to indicate whether it was a user’s firstTransaction: true with the checkout Transaction
+
+You will have to create generic codes programmatically for each one of your users. Make sure to put the UUID of your refer-ing user in the metadata of the generic code, as well as the Program ID of Program #2.
+
+When the new user makes their first transaction, Lightrail will apply their credit to their order.
+Lightrail tracks that the new user has successfully made their first transaction. Details of the transaction will be associated with this program
+
+### Program 2
+
+You will use this program to add credit to the wallet of the refer-ing user. This user will get an increase of credit every time someone they refers has successfully transacted.
+
+Issue the referrer a Value from Program 2 when you create the generic code. Use a deterministic ID like: contactID-referrerCredit
+
+#### Paying Referrers
+On a daily basis, query checkout transactions made from Program 1. 
+
+Depending on how quickly refer-ers are paid out, consider filtering for Transactions with a createdDate greater than a week earlier.
+
+You can minimize how many Transactions you need to process by adding a createdDate minimum so that it’s not an ever increasing list. 
+
+Ie `GET .../transactions?createdDate.gt=2019-04-16&createdDate.lte=2019-05-16`
+
+For all the Transactions you retrieved you’ll need to lookup the generic code (refer-ers code) that the promotion in the Transaction was attached from (attachedFromValueId flag). 
+
+The generic code should have the refer-ers contactId in its metadata.  
+
+With the refer-ers contactId you can credit their value from ProgramId using /transactions/credit. You’ll use the ID of the Value which you determinstically set to contactID-referrerCredit
+
+For the credit transaction ID base it off the checkout transaction ID.
+
+#### checkoutTransactionId-credit
+Note, it is safe to retry these credit calls since the API is idempotent. If a referer was already credited the API will indicate the Transaction already exists.
+
+### Suggestions
+Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled)
+
+---
+
 ## Redemption Rules and Balance Rules
 
 <p class="intro">Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout.</p>
@@ -1164,83 +1246,3 @@ Values are applied to checkout item by item. The property `value.balanceChange` 
 
 ### Rule Syntax
 For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md).
-
-## Marketplace
-Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
-
-To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must pay out the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be fully liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
-
-#### Marketplace Commission Rate
-You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under the `lineItems` request attribute. 
-
-#### Liability
-The marketplace or seller (the driver, in our example), must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party-the marketplace or the seller-is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
-See the request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
-
-#### Restricting Usage
-You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
-See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
- 
-
----
-
-## Referral Programs
-
-Lightrail enables the ability to incentivize your  
-
-Setup two programs
-
-Program 1: To generate and track unique referral codes
-
-Program 2: To give account credit to user’s that successfully refer someone
-
-
-### Program 1
-
-You will use this program to generate a ‘generic code’ for each one of your users.
-
-Include the users contactId in the generic code’s metadata. 
-
-This generic code will be the code that your users share with their friends so that the friend gets a credit/promotions on their first order (eg. $10 off your first order). The generic code can be distributed by your users in many ways, including a deep link where the recipient of the code does not need to enter anything.
-
-This referral code is programmatically available, so you can embed it in your transactional emails, within your app, or in custom links.
-
-Lightrail recommends that the referral code is applied immediately when then new user creates an account in your app. Lightrail enables the referral credit to be immediately applied to the wallet of the new user.
-
-To prevent fraud and abuse, Lightrail recommends you set a limit on the number of `uses` the generic code has (eg. 100). You can manually increase this number later if you have an outstanding user that is providing you many, legitimate referrals. This will prevent users from broadcasting: Posting referral links on coupon sites or other locations your company does not approve of.
-
-On a booking or transaction, you pass in a flag to indicate whether it was a user’s firstTransaction: true with the checkout Transaction
-
-You will have to create generic codes programmatically for each one of your users. Make sure to put the UUID of your refer-ing user in the metadata of the generic code, as well as the Program ID of Program #2.
-
-When the new user makes their first transaction, Lightrail will apply their credit to their order.
-Lightrail tracks that the new user has successfully made their first transaction. Details of the transaction will be associated with this program
-
-### Program 2
-
-You will use this program to add credit to the wallet of the refer-ing user. This user will get an increase of credit every time someone they refers has successfully transacted.
-
-Issue the referrer a Value from Program 2 when you create the generic code. Use a deterministic ID like: contactID-referrerCredit
-
-#### Paying Referrers
-On a daily basis, query checkout transactions made from Program 1. 
-
-Depending on how quickly refer-ers are paid out, consider filtering for Transactions with a createdDate greater than a week earlier.
-
-You can minimize how many Transactions you need to process by adding a createdDate minimum so that it’s not an ever increasing list. 
-
-Ie `GET .../transactions?createdDate.gt=2019-04-16&createdDate.lte=2019-05-16`
-
-For all the Transactions you retrieved you’ll need to lookup the generic code (refer-ers code) that the promotion in the Transaction was attached from (attachedFromValueId flag). 
-
-The generic code should have the refer-ers contactId in its metadata.  
-
-With the refer-ers contactId you can credit their value from ProgramId using /transactions/credit. You’ll use the ID of the Value which you determinstically set to contactID-referrerCredit
-
-For the credit transaction ID base it off the checkout transaction ID.
-
-#### checkoutTransactionId-credit
-Note, it is safe to retry these credit calls since the API is idempotent. If a referer was already credited the API will indicate the Transaction already exists.
-
-### Suggestions
-Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled)
