@@ -10,7 +10,8 @@ Lightrail supports many use cases for how you can use customer value. We offer t
 
 
 ## Accounts and Points
-Accounts or Loyalty Point solutions are used when tracking value associated with a customer.  
+<p class="intro">Accounts or Loyalty Point solutions are used when tracking value associated with a customer.</p>
+  
 Typically this is used for integrations where a customer can earn value, such as dollars or credits. We think of this value as an "account" associated with the customer.  
 
 Your customer's account may represent value that can be used during checkout or it may represent points or credits that can be redeemed for in-app rewards or promotions. 
