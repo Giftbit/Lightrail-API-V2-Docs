@@ -1030,22 +1030,33 @@ You can make promotions only applicable to certain activities, locations, or mer
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  
 
+
+
+
+
+
+
+
 ---
 
 ## Referral Programs
 
-Lightrail enables the ability to incentivize your  
-
-Setup two programs
-
-Program 1: To generate and track unique referral codes
-
-Program 2: To give account credit to user’s that successfully refer someone
+Referral Programs are a great way to incentivize both new and existing customers. Referrals can help you drive engagement, increase word-of-mouth around your brand, and drive down customer acquisition costs. 
 
 
-### Program 1
+### How to setup a Referral Program
 
-You will use this program to generate a ‘generic code’ for each one of your users.
+To get started with a Referral Program, you will need to create two separate Programs. 
+
+1. To generate and track unique referral codes
+1. To give account credit to user’s that successfully refer someone
+
+There are a few other settings that 
+
+
+### Creating the first Program
+
+You will use this program to generate a generic code for each one of your users.
 
 Include the users contactId in the generic code’s metadata. 
 
@@ -1064,7 +1075,7 @@ You will have to create generic codes programmatically for each one of your user
 When the new user makes their first transaction, Lightrail will apply their credit to their order.
 Lightrail tracks that the new user has successfully made their first transaction. Details of the transaction will be associated with this program
 
-### Program 2
+### Creating the second Program
 
 You will use this program to add credit to the wallet of the refer-ing user. This user will get an increase of credit every time someone they refers has successfully transacted.
 
@@ -1090,8 +1101,17 @@ For the credit transaction ID base it off the checkout transaction ID.
 #### checkoutTransactionId-credit
 Note, it is safe to retry these credit calls since the API is idempotent. If a referer was already credited the API will indicate the Transaction already exists.
 
-### Suggestions
-Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled)
+#### Suggestions
+Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled).
+
+
+
+
+
+
+
+
+
 
 ---
 
