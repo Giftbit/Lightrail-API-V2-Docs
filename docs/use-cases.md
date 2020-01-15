@@ -1041,7 +1041,7 @@ See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-
 
 ## Referral Programs
 
-Referral Programs are a great way to incentivize both new and existing customers. Referrals can help you drive engagement, increase word-of-mouth around your brand, and drive down customer acquisition costs. 
+<p class="intro">Referral Programs are a great way to incentivize both new and existing customers. Referrals can help you drive engagement, increase word-of-mouth around your brand, and drive down customer acquisition costs.</p> 
 
 
 ### How to setup a Referral Program
