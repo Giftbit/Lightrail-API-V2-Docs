@@ -1049,10 +1049,11 @@ See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-
 
 To get started with a Referral Program, you will need to create two separate Programs. 
 
-1. To generate and track unique referral codes
-1. To give account credit to user’s that successfully refer someone
+1. To generate and track unique referral codes (Program 1)
+1. To give account credit to user’s that successfully refer someone (Program 2)
 
-There are a few other settings that 
+There are a few other requirements needed in order to make this work: 
+- Program 1 will you will need to  
 
 
 ### Creating the first Program
