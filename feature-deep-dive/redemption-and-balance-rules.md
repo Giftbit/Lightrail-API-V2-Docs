@@ -1,5 +1,9 @@
 # Redemption Rules and Balance Rules
-Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. Redemption Rules determine if a Value can be used and evaluate to true or false. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
+Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. 
+
+Redemption Rules evaluate to true or false and determine if the Value their set on can be used in Checkout; they do not affect whether other Values can be used in Checkout since the other Value's Redemption Rules determine that.  
+
+Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.  
 
 **Example 1: $5 off transactions over $100** 
 
@@ -41,7 +45,7 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```
 
 ## How Rules Work
-Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), the transaction metadata (`metadata`), and the current Value being applied (`value`). Values are applied one by one during checkout.
+Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context, described below. Redemption Rules Values are applied one by one during checkout and determine whether the Value their set on can be applied. 
 
 ### Rule Context 
 ```json
@@ -102,15 +106,15 @@ If you want to limit promotions (Values with `discount: true`) to one promotion 
 }
 ``` 
 
- ## Limiting to One Promotion per Line Item
- If you want to limit promotions (Values with `discount: true`) to one promotion per `lineItem` you must include the following `redemptionRule` on all of your promotions.
- ```json
- {
-     "redemptionRule": {
-         "rule": "currentLineItem.lineTotal.discount == 0",
-         "explanation": "Limited to 1 promotion per line item."
-     }
- }
+## Limiting to One Promotion per Line Item
+If you want to limit promotions (Values with `discount: true`) to one promotion per `lineItem` you must include the following `redemptionRule` on all of your promotions.
+```json
+{
+    "redemptionRule": {
+        "rule": "currentLineItem.lineTotal.discount == 0",
+        "explanation": "Limited to 1 promotion per line item."
+    }
+}
  ``` 
 
 ## Examples Continued
