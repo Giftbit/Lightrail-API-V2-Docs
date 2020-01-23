@@ -1,5 +1,5 @@
 # Redemption Rules and Balance Rules
-Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. Redemption Rules evaluate to true or false and determine if the Value their set on can be used in Checkout; they do not affect whether other Values can be used in Checkout since the other Value's Redemption Rules determine that. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Balance Rules and Redemption Rules are typically used for promotions that represent a discount to the customer.   
+Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. Redemption Rules evaluate to true or false and determine if the Value their set on can be used in Checkout; they do not affect whether other Values can be used since the other Value's Redemption Rules determine that. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Balance Rules and Redemption Rules are typically used for promotions that represent a discount to the customer.   
 
 **Example 1: $5 off transactions over $100** 
 
