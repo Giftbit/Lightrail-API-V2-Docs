@@ -1042,10 +1042,10 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
 }
 ```
 
-## How Rules Work
+### How Rules Work
 Values are applied one by one to each line item in turn during checkout. Balance Rules and Redemption Rules are evaluated for each line item. Rules operate on a rule context, described below. Redemption Rules only determine whether the Value they're set on can be applied and do not affect whether other Values can be applied. 
 
-### Rule Context 
+#### Rule Context 
 ```json
 {
     "currentLineItem": {
@@ -1093,10 +1093,10 @@ Values are applied one by one to each line item in turn during checkout. Balance
 
 You can think of the Rule Context as a simple map which the Rules evaluate on.
 
-## Limiting How Many Promotions Can Be Applied to Checkout 
+### Limiting How Many Promotions Can Be Applied to Checkout 
 By default, any number of Values can be applied to a checkout Transaction. If you want to limit promotions (Values with discount: true) to one promotion per Transaction or one per line item you must include the corresponding Redemption Rule on all of your promotions. Remember that each Value's applicability is determined by its own Redemption Rule and Balance Rule and not affected by rules set on other Values.
 
-### Limiting to One Promotion per Checkout
+#### Limiting to One Promotion per Checkout
 If you want to limit promotions (Values with `discount: true`) to one promotion per Transaction you must include the following `redemptionRule` on all of your promotions.
 ```json
 {
@@ -1107,7 +1107,7 @@ If you want to limit promotions (Values with `discount: true`) to one promotion 
 }
 ``` 
 
-### Limiting to One Promotion per Line Item
+#### Limiting to One Promotion per Line Item
 If you want to limit promotions (Values with `discount: true`) to one promotion per `lineItem` you must include the following `redemptionRule` on all of your promotions.
 ```json
 {
@@ -1118,7 +1118,7 @@ If you want to limit promotions (Values with `discount: true`) to one promotion 
 }
  ``` 
 
-## Examples Continued
+### Examples Continued
 **50% off everything, limited to one promotion per transaction**
 
 Create Value request - `POST https://api.lightrail.com/v2/values`:
