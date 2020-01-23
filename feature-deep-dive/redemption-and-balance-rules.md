@@ -1,5 +1,5 @@
 # Redemption Rules and Balance Rules
-Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during Checkout. Redemption Rules evaluate to true or false and determine if the Value their set on can be applied; they do not affect whether other Values can be used since the other Value's Redemption Rules determine that. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Balance Rules and Redemption Rules are typically used for promotions that represent a discount to the customer.   
+Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout. A Value's Redemption Rule evaluates to true or false and determines if that Value can be applied. This does not affect whether other Values can be used since each Value's own Redemption Rule determines whether or not it can be applied. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number in the context of a particular Transaction. Balance Rules and Redemption Rules are typically used for promotions that represent a discount to the customer.   
 
 **Example 1: $5 off transactions over $100** 
 
@@ -41,7 +41,7 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```
 
 ## How Rules Work
-Balance and Redemption Rules are evaluated for each line item during Checkout. Rules operate on a Rule Context, described below. Values are applied one by one during Checkout. Redemption Rules only determine whether the Value their set on can be applied and do not affect whether other Values can be applied. 
+Values are applied one by one to each line item in turn during checkout. Balance Rules and Redemption Rules are evaluated for each line item during checkout. Rules operate on a rule context, described below. Redemption Rules only determine whether the Value they're set on can be applied and do not affect whether other Values can be applied. 
 
 ### Rule Context 
 ```json
@@ -151,7 +151,7 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
     "discount": true
 }
 ```
-Values are applied to Checkout item by item. The Rule Context property `value.balanceChange` keeps track of the total amount paid by the Value as it gets applied to each item. Note, it is a negative since it represents the change in balance. Also, to enforce that at most one promotion is applied to each line item the redemptionRule `"currentLineItem.lineTotal.discount == 0"` must be set on all promotions.  
+Values are applied to checkout item by item. The Rule Context property `value.balanceChange` keeps track of the total amount paid by the Value as it gets applied to each item. Note, it is a negative since it represents the change in balance. Also, to enforce that at most one promotion is applied to each line item the redemptionRule `"currentLineItem.lineTotal.discount == 0"` must be set on all promotions.  
 
 **25% off transactions over $100 and limited to 1 promotion per transaction**
 
