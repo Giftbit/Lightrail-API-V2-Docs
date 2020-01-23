@@ -41,7 +41,7 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```
 
 ## How Rules Work
-Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context, described below. Redemption Rules Values are applied one by one during checkout and determine whether the Value their set on can be applied. 
+Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context, described below. Values are applied one by one during Checkout. Redemption Rules only determine whether the Value their set on can be applied and do not affect whether other Values can be applied. 
 
 ### Rule Context 
 ```json
