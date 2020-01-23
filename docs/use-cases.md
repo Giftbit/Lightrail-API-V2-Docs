@@ -1001,13 +1001,13 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 
 <p class="intro">Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout.</p>
 
-Redemption rules determine if a Value can be used and evaluate to true or false. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number. Rules are typically used for promotions and represent a discount to the customer. Let's look at a few common examples.
+A Value's Redemption Rule evaluates to true or false and determines if that Value can be applied. This does not affect whether other Values can be used since each Value's own Redemption Rule determines whether or not it can be applied. Balance Rules enable more advanced balance behaviour, such as percent off, and evaluate to a number in the context of a particular Transaction. Balance Rules and Redemption Rules are typically used for promotions that represent a discount to the customer.   
 
 **Example 1: $5 off transactions over $100** 
 
 In this case, the Value would simply have a balance of $5 and the Redemption Rule would require that the transaction subtotal is over $100.
 
-Create Value request:
+Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```json
 {
     "id": "example",
@@ -1023,9 +1023,9 @@ Create Value request:
 
 **Example 2: 50% off red hats**
 
-This example requires the use of a Balance Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to an item with productId `red-hat`. The Balance Rule causes the Value to be worth 50% of the item's subtotal.
+This example requires the use of a Balance Rule in combination with a Redemption Rule. The Redemption Rule restricts the Value to apply strictly to an item with `productId: red-hat`. The Balance Rule causes the Value to be worth 50% of the item's subtotal.
 
-Create Value request:
+Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```json
 {
     "id": "example",
@@ -1042,10 +1042,10 @@ Create Value request:
 }
 ```
 
-### How Rules Work
-Balance and Redemption Rules are evaluated for each line item during checkout. Rules operate on a Rule Context which contains the current line item (`currentLineItem`), the transaction totals (`totals`), a list of all of the line items in the transaction (`lineItems`), the transaction metadata (`metadata`), and the current Value being applied (`value`) - Value's are applied one by one during checkout.
+## How Rules Work
+Values are applied one by one to each line item in turn during checkout. Balance Rules and Redemption Rules are evaluated for each line item. Rules operate on a rule context, described below. Redemption Rules only determine whether the Value they're set on can be applied and do not affect whether other Values can be applied. 
 
-#### Rule Context 
+### Rule Context 
 ```json
 {
     "currentLineItem": {
@@ -1085,17 +1085,43 @@ Balance and Redemption Rules are evaluated for each line item during checkout. R
     ],
     "metadata": "object",
     "value": {
-        "balanceChange": "number"
+        "balanceChange": "number",
+        "metadata": "object"
     }
 }
 ```
 
-You can think of the Rule Context being created as a simple map which the Rules evaluate on. 
+You can think of the Rule Context as a simple map which the Rules evaluate on.
 
-### Examples Continued
-**50% off everything**
+## Limiting How Many Promotions Can Be Applied to Checkout 
+By default, any number of Values can be applied to a checkout Transaction. If you want to limit promotions (Values with discount: true) to one promotion per Transaction or one per line item you must include the corresponding Redemption Rule on all of your promotions. Remember that each Value's applicability is determined by its own Redemption Rule and Balance Rule and not affected by rules set on other Values.
 
-Create Value request:
+### Limiting to One Promotion per Checkout
+If you want to limit promotions (Values with `discount: true`) to one promotion per Transaction you must include the following `redemptionRule` on all of your promotions.
+```json
+{
+    "redemptionRule": {
+        "rule": "!(lineItems.find(item => item.lineTotal.discount > 0)) || value.balanceChange < 0",
+        "explanation": "Limited to 1 promotion per transaction."
+    }
+}
+``` 
+
+### Limiting to One Promotion per Line Item
+If you want to limit promotions (Values with `discount: true`) to one promotion per `lineItem` you must include the following `redemptionRule` on all of your promotions.
+```json
+{
+    "redemptionRule": {
+        "rule": "currentLineItem.lineTotal.discount == 0",
+        "explanation": "Limited to 1 promotion per line item."
+    }
+}
+ ``` 
+
+## Examples Continued
+**50% off everything, limited to one promotion per transaction**
+
+Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```json
 {
     "id": "example",
@@ -1104,13 +1130,17 @@ Create Value request:
          "rule": "currentLineItem.lineTotal.subtotal * 0.5",
          "explanation": "50% off line item's subtotal."
      },
+    "redemptionRule": {
+        "rule": "!(lineItems.find(item => item.lineTotal.discount > 0)) || value.balanceChange < 0",
+        "explanation": "Limited to 1 promotion per transaction."
+    },
     "discount": true
 }
 ```
 
 **Up to $5 off order, limiting to one discount per line item**
 
-Create Value request:
+Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```json
 {
     "id": "example",
@@ -1126,17 +1156,19 @@ Create Value request:
     "discount": true
 }
 ```
-Values are applied to checkout item by item. The property `value.balanceChange` keeps track of the total amount paid by the Value as it's applied to each item. Note, it is a negative since it represents balance change. Also, to enforce that at most one promotion is applied to each line item the redemptionRule `"currentLineItem.lineTotal.discount == 0"` must be set on all promotions.  
+Values are applied to checkout item by item. The Rule Context property `value.balanceChange` keeps track of the total amount paid by the Value as it gets applied to each item. Note, it is a negative since it represents the change in balance. Also, to enforce that at most one promotion is applied to each line item the redemptionRule `"currentLineItem.lineTotal.discount == 0"` must be set on all promotions.  
 
-**25% off transactions over $100 and limited to 1 promotion per item**
+**25% off transactions over $100 and limited to 1 promotion per transaction**
+
+Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```json
 {
     "id": "example",
     "currency": "USD",
     "balance": 500,
     "redemptionRule": {
-        "rule": "totals.subtotal >= 10000 && currentLineItem.lineTotal.discount == 0",
-        "explanation": "Applies to orders over $100. Limited to 1 discount per item."
+        "rule": "totals.subtotal >= 10000 && (!(lineItems.find(item => item.lineTotal.discount > 0)) || value.balanceChange < 0)",
+        "explanation": "Applies to orders over $100. Limited to 1 discount per transaction."
     },
     "balanceRule": {
         "rule": "currentLineItem.lineTotal.subtotal * 0.25",
