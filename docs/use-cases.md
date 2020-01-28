@@ -1077,7 +1077,7 @@ The `redemptionRule` as written, is required to make sure that the referral code
 
 ### Step 2: Creating the Referral Credit Program
 
-This is the `Program` you will use to credit **the referring** users who successfully refers a new user(s).  We will again define the default parameters for the `Value`s we use to credit.
+This is the `Program` you will use to credit **the referring** users who successfully refers a new user(s).  We will again define the default parameters for the `Values` we use to credit.
 
 #### Call to Create Credit Program:
 
@@ -1127,7 +1127,7 @@ When an existing user requests their referral code two things need to happen.
 - **id**: Use a [deterministic](https://en.wikipedia.org/wiki/Deterministic_system) ID for the referral code (i.e. `<contactId>-referral-code-id`).
     - You’ll use this to lookup a user’s referral code.
 - **code**: We have used the referring user’s first name as part of the code to add some personalization, but this could completely random if need be.
-- **genericCodeOptions**: Here we define the `perContact` attributes that fit our example. The receiving user will get $20 (`"``balance``"``: 2000`) towards their first purchase (`"usesRemaining": 1`).
+- **genericCodeOptions**: Here we define the `perContact` attributes that fit our example. The receiving user will get $20 (`"balance": 2000`) towards their first purchase (`"usesRemaining": 1`).
 - **metadata**: Set `referringContactId` in the metadata. This is required for the Referral Program `redemptionRule` to work in `checkout` 
 - You may wish to set other `Value` attributes that pertain to your use case, such as `startDate` and  `endDate` etc., but we’ll be excluding them from the example for brevity.
 
@@ -1246,7 +1246,7 @@ referringCreditFunction(tx: LightrailCheckoutTransaction) {
 ### Summary
 
 Our example scenario we created the following:
-- Two `Program`s
+- Two `Programs`
     - One for generic referral codes 
     - One for referring users credits
 - One `Value` that will be our generic referral code
