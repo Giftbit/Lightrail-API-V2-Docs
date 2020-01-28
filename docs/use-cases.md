@@ -1029,18 +1029,6 @@ See the request attribute `discountSellerLiability` under the [create value endp
 #### Restricting Usage
 You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
- 
-
- _______              ______                                         __           
-|       \            /      \                                       |  \          
-| $$$$$$$\  ______  |  $$$$$$\ ______    ______    ______   ______  | $$  _______ 
-| $$__| $$ /      \ | $$_  \$$/      \  /      \  /      \ |      \ | $$ /       \
-| $$    $$|  $$$$$$\| $$ \   |  $$$$$$\|  $$$$$$\|  $$$$$$\ \$$$$$$\| $$|  $$$$$$$
-| $$$$$$$\| $$    $$| $$$$   | $$    $$| $$   \$$| $$   \$$/      $$| $$ \$$    \ 
-| $$  | $$| $$$$$$$$| $$     | $$$$$$$$| $$      | $$     |  $$$$$$$| $$ _\$$$$$$\
-| $$  | $$ \$$     \| $$      \$$     \| $$      | $$      \$$    $$| $$|       $$
- \$$   \$$  \$$$$$$$ \$$       \$$$$$$$ \$$       \$$       \$$$$$$$ \$$ \$$$$$$$ 
-
 
 ---
 
@@ -1056,15 +1044,12 @@ _In our example API calls we will suppose that we're offering both, the referrin
     
 _**Note**: A successful referral needs to meet your business requirements for what you deem success, taking into consideration things like refunds, captures, order fulfillment etc._
 
-
 ### How to set up your Referrals 
 
 To get started with a Referral Program, you will create two separate Programs:
 
-
 1. To generate and track unique referral codes ("Referral Program")
 1. To give account credit to users that successfully refer someone ("Credit Program")
-
 
 ### Step 1: Creating the Referral Program
 
@@ -1146,7 +1131,6 @@ When an existing user requests their referral code two things need to happen.
 - **metadata**: Set `referringContactId` in the metadata. This is required for the Referral Program `redemptionRule` to work in `checkout` 
 - You may wish to set other `Value` attributes that pertain to your use case, such as `startDate` and  `endDate` etc., but we’ll be excluding them from the example for brevity.
 
-
 ### Step 4: Generating the Value for the Credit Program
 
 #### Call to Create a Credit Value for the Existing User
@@ -1163,8 +1147,6 @@ When an existing user requests their referral code two things need to happen.
 
 #### Important Note: 
 - **balance**: The Value is created with `"balance": 0` so that when they successfully refer a new user this `Value` will be credited.  
-
----
 
 ### Step 5: Attaching the Value to the Contact
 
@@ -1203,9 +1185,6 @@ _**Note**: It’s important to wait for the response before attaching the `Value
 
 Once they’ve attached the referral code, the discount will be automatically applied during their first checkout.
 
----
-
-
 ### Step 6: Modifying Checkout to Support Referrals
 
 If you’re an existing Lightrail user, you will need to modify your checkout calls to include both `purchaseCount` and `purchasingContactId` in the requests in order to make this work. If you’re new to Lightrail and just getting set up, we suggest including this information from the beginning even if you’re not interested in referrals now, because it will save you down the road should you become interested later.
@@ -1243,8 +1222,6 @@ What this will allow is that if the checking out user has a `"purchaseCount": 0`
 - **metadata**: Both `purchasingContactId` and `purchaseCount` are extremely important to include for referrals to work. This is the glue between the referral code `redemptionRule`, and _referrer_ and _referred_ user receiving their offers.
 - You can use `"simulate": true` to test the `checkout` request above and see the discount if you wish to show the discounted savings to the user before submitting the transaction.
 
----
-
 ### Step 7: Paying Referrers
 
 When the the request to `checkout` is submitted and you receive a successful response you’ll then want to call your internal system to kick off the request to credit the `Value` set up earlier for the referrer (`referring-jamie-referral-code-id`).
@@ -1265,10 +1242,6 @@ referringCreditFunction(tx: LightrailCheckoutTransaction) {
   }
 }
 ```
-    
----
-
-
 
 ### Summary
 
