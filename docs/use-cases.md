@@ -1031,89 +1031,267 @@ You can make promotions only applicable to certain activities, locations, or mer
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
  
 
-
-
-
-
-
+ _______              ______                                         __           
+|       \            /      \                                       |  \          
+| $$$$$$$\  ______  |  $$$$$$\ ______    ______    ______   ______  | $$  _______ 
+| $$__| $$ /      \ | $$_  \$$/      \  /      \  /      \ |      \ | $$ /       \
+| $$    $$|  $$$$$$\| $$ \   |  $$$$$$\|  $$$$$$\|  $$$$$$\ \$$$$$$\| $$|  $$$$$$$
+| $$$$$$$\| $$    $$| $$$$   | $$    $$| $$   \$$| $$   \$$/      $$| $$ \$$    \ 
+| $$  | $$| $$$$$$$$| $$     | $$$$$$$$| $$      | $$     |  $$$$$$$| $$ _\$$$$$$\
+| $$  | $$ \$$     \| $$      \$$     \| $$      | $$      \$$    $$| $$|       $$
+ \$$   \$$  \$$$$$$$ \$$       \$$$$$$$ \$$       \$$       \$$$$$$$ \$$ \$$$$$$$ 
 
 
 ---
 
-## Referral Programs
+## Referral Programs 
+ 
+<p class="intro">Referrals are an effective type of promotion for acquisition and growth. Referral value needs to be a cohesive part of your payment experience, just like a promotion or gift card.</p>
 
-<p class="intro">Referral Programs are a great way to incentivize both new and existing customers. Referrals can help you drive engagement, increase word-of-mouth around your brand, and drive down customer acquisition costs.</p> 
+You can use Lightrail to create a referral program that works like other best-in-class referral programs. Lightrail provides the core infrastructure for you referral program but will require some development effort to fully implement. 
 
+_In the following scenario, we will be demonstrating a referral flow that supposes an existing customer is requesting a referral code on-demand to share with their friends, but it’s possible to augment this flow to distribute your referral codes as you see fit._
 
-### How to setup a Referral Program
-
-To get started with a Referral Program, you will need to create two separate Programs. 
-
-1. To generate and track unique referral codes (Program 1)
-1. To give account credit to user’s that successfully refer someone (Program 2)
-
-There are a few other requirements needed in order to make this work: 
-- Program 1 will you will need to  
+_In our example API calls we will suppose that we're offering both, the referring person and the referred person $20 USD each for a successfully referred new customer.  As you can see we’ve used USD, but any currency (including points) will work._
+    
+_**Note**: A successful referral needs to meet your business requirements for what you deem success, taking into consideration things like refunds, captures, order fulfillment etc._
 
 
-### Creating the first Program
+### How to set up your Referrals 
 
-You will use this program to generate a generic code for each one of your users.
-
-Include the users contactId in the generic code’s metadata. 
-
-This generic code will be the code that your users share with their friends so that the friend gets a credit/promotions on their first order (eg. $10 off your first order). The generic code can be distributed by your users in many ways, including a deep link where the recipient of the code does not need to enter anything.
-
-This referral code is programmatically available, so you can embed it in your transactional emails, within your app, or in custom links.
-
-Lightrail recommends that the referral code is applied immediately when then new user creates an account in your app. Lightrail enables the referral credit to be immediately applied to the wallet of the new user.
-
-To prevent fraud and abuse, Lightrail recommends you set a limit on the number of `uses` the generic code has (eg. 100). You can manually increase this number later if you have an outstanding user that is providing you many, legitimate referrals. This will prevent users from broadcasting: Posting referral links on coupon sites or other locations your company does not approve of.
-
-On a booking or transaction, you pass in a flag to indicate whether it was a user’s firstTransaction: true with the checkout Transaction
-
-You will have to create generic codes programmatically for each one of your users. Make sure to put the UUID of your refer-ing user in the metadata of the generic code, as well as the Program ID of Program #2.
-
-When the new user makes their first transaction, Lightrail will apply their credit to their order.
-Lightrail tracks that the new user has successfully made their first transaction. Details of the transaction will be associated with this program
-
-### Creating the second Program
-
-You will use this program to add credit to the wallet of the refer-ing user. This user will get an increase of credit every time someone they refers has successfully transacted.
-
-Issue the referrer a Value from Program 2 when you create the generic code. Use a deterministic ID like: contactID-referrerCredit
-
-#### Paying Referrers
-On a daily basis, query checkout transactions made from Program 1. 
-
-Depending on how quickly refer-ers are paid out, consider filtering for Transactions with a createdDate greater than a week earlier.
-
-You can minimize how many Transactions you need to process by adding a createdDate minimum so that it’s not an ever increasing list. 
-
-Ie `GET .../transactions?createdDate.gt=2019-04-16&createdDate.lte=2019-05-16`
-
-For all the Transactions you retrieved you’ll need to lookup the generic code (refer-ers code) that the promotion in the Transaction was attached from (attachedFromValueId flag). 
-
-The generic code should have the refer-ers contactId in its metadata.  
-
-With the refer-ers contactId you can credit their value from ProgramId using /transactions/credit. You’ll use the ID of the Value which you determinstically set to contactID-referrerCredit
-
-For the credit transaction ID base it off the checkout transaction ID.
-
-#### checkoutTransactionId-credit
-Note, it is safe to retry these credit calls since the API is idempotent. If a referer was already credited the API will indicate the Transaction already exists.
-
-#### Suggestions
-Consider deferring the issuance of a payout to the refer-er until you have confidence that the new user’s transaction is successful (and won’t be refunded or cancelled).
+To get started with a Referral Program, you will create two separate Programs:
 
 
+1. To generate and track unique referral codes ("Referral Program")
+1. To give account credit to users that successfully refer someone ("Credit Program")
+
+
+### Step 1: Creating the Referral Program
+
+The first `Program` we will create will define the default parameters you will use to programmatically generate a generic code `Value` for each one of your users who request a referral code. We will cover the on-demand `Value` creation in **Step 3**.
+
+#### Call to Create Referral Program:
+
+`POST https://api.lightrail.com/v2/programs`
+```json
+{
+  "id": "referral-program-id",
+  "currency": "USD",
+  "name": "Referral Program",
+  "discount": true,
+  "pretax": true,
+  "redemptionRule": {
+    "rule": "metadata.purchaseCount == 0 && !!metadata.purchasingContactId && !!value.metadata.referringContactId && metadata.purchasingContactId != value.metadata.referringContactId",
+    "explanation": "Must be used on first purchase and can't be used by referrer."
+  } 
+}
+```
+
+#### Important Note: 
+The `redemptionRule` as written, is required to make sure that the referral code is only able to be used by new users.  The `metadata` properties this rule depends on will be set in other calls we address below.
+
+### Step 2: Creating the Referral Credit Program
+
+This is the `Program` you will use to credit **the referring** users who successfully refers a new user(s).  We will again define the default parameters for the `Value`s we use to credit.
+
+#### Call to Create Credit Program:
+
+`POST https://api.lightrail.com/v2/programs`
+```json
+{
+  "id": "credit-program-id",
+  "currency": "USD",
+  "name": "Credit Program",
+  "discount": true,
+  "pretax": false
+}
+```
+
+### Step 3: Creating Referral Codes
+
+Again, this example referral flow is suggesting that you will be allowing your customers to request a referral code and you will be programmatically generating the following `Values`.
+
+When an existing user requests their referral code two things need to happen. 
+
+1. Generate a Referral Code from the Referral Program
+1. Generate a Value to be credited from the Credit Program (details in **Step 4**)
+
+#### Call to Create a Referral Code for the Existing User
+
+`POST https://api.lightrail.com/v2/values`
+```json
+{
+  "id": "referring-jamie-referral-code-id",
+  "programId": "referral-program-id",
+  "isGenericCode": true,
+  "code": "JAMIE_GIVES_20",
+  "genericCodeOptions": {
+    "perContact": {
+      "usesRemaining": 1,
+      "balance": 2000
+    }
+  },
+  "metadata": {
+    "referringContactId": "referring-jamie-contact-id"
+  }
+}
+```
+
+#### Important Notes:
+
+- **id**: Use a [deterministic](https://en.wikipedia.org/wiki/Deterministic_system) ID for the referral code (i.e. `<contactId>-referral-code-id`).
+    - You’ll use this to lookup a user’s referral code.
+- **code**: We have used the referring user’s first name as part of the code to add some personalization, but this could completely random if need be.
+- **genericCodeOptions**: Here we define the `perContact` attributes that fit our example. The receiving user will get $20 (`"``balance``"``: 2000`) towards their first purchase (`"usesRemaining": 1`).
+- **metadata**: Set `referringContactId` in the metadata. This is required for the Referral Program `redemptionRule` to work in `checkout` 
+- You may wish to set other `Value` attributes that pertain to your use case, such as `startDate` and  `endDate` etc., but we’ll be excluding them from the example for brevity.
+
+
+### Step 4: Generating the Value for the Credit Program
+
+#### Call to Create a Credit Value for the Existing User
+
+`POST https://api.lightrail.com/v2/values`
+```json
+{
+  "id": "referring-jamie-credit-id",
+  "programId": "referral-credit-program-id",
+  "contactId": "referring-jamie-contact-id",
+  "balance": 0
+}
+```
+
+#### Important Note: 
+- **balance**: The Value is created with `"balance": 0` so that when they successfully refer a new user this `Value` will be credited.  
+
+---
+
+### Step 5: Attaching the Value to the Contact
+
+In this step, we will be demonstrating how to create the new user and attach the referral code to the user. There are a number of ways a referred user could have received the code—via email, text message, word-of-mouth, etc. You will need _somewhere_ for a new user to “Register” and enter a referral code. 
+
+Here we will suppose you have a form field on a `/register` page that allows a new user to enter the referral code. We will also suppose that when your user requested the referral code, your site provides a shareable link to the registration page to help them with distributing it to their friends. This way you could pass the `code` along in a link to auto-populate the form field on the registration page for them like so: 
+`https://yourcompany.com/register?code=JAMIE_GIVES_20`. 
+
+The same link/code strategy would also work well if you wanted to control the email sending and wanted to embed the link in a branded email. In this case your referral page could just have a field for your users to enter the email addresses of friends they wanted to share the `code` with.
+
+Using this method your site can include some code to check the query string for a `code` and if present, show it in the “Referral Code” in the form field for them.
+
+#### Call to Create a Contact from the Register form
+
+`POST https://api.lightrail.com/v2/contacts`
+```json
+{
+  "id": "referred-tim-contact-id",
+  "firstName": "Tim",
+  "lastName": "Tam",
+  "email": "timtam@email.com"
+}
+```
+Once the `Contact` has been created you can now attach the referral code `Value` to the `Contact`.
+
+_**Note**: It’s important to wait for the response before attaching the `Value`_
+
+#### Call to Attach Value to Contact
+
+`POST https://api.lightrail.com/v2/contacts/<contactId>/values/attach`
+```json
+{
+  "code": "JAMIE_GIVES_20"
+}
+```
+
+Once they’ve attached the referral code, the discount will be automatically applied during their first checkout.
+
+---
+
+
+### Step 6: Modifying Checkout to Support Referrals
+
+If you’re an existing Lightrail user, you will need to modify your checkout calls to include both `purchaseCount` and `purchasingContactId` in the requests in order to make this work. If you’re new to Lightrail and just getting set up, we suggest including this information from the beginning even if you’re not interested in referrals now, because it will save you down the road should you become interested later.
+
+What this will allow is that if the checking out user has a `"purchaseCount": 0` and the referral code attached to their `Contact` account, the discount will be automatically applied.
+
+#### Call to Checkout
+
+`POST https://api.lightrail.com/v2/transactions/checkout`
+```json
+{
+  "id": "referred-tim-purchase-id",
+  "currency": "USD",
+  "sources": [
+    { 
+      "rail": "lightrail", 
+      "contactId": "referred-tim-contact-id" 
+    }
+  ],
+  "lineItems": [
+    {
+      "unitPrice": 5000
+    }
+  ],
+  "allowRemainder": true,
+  "metadata": {
+    "purchasingContactId": "referred-tim-contact-id",
+    "purchaseCount": 0
+  }
+}
+```
+
+#### Important Notes:
+
+- **metadata**: Both `purchasingContactId` and `purchaseCount` are extremely important to include for referrals to work. This is the glue between the referral code `redemptionRule`, and _referrer_ and _referred_ user receiving their offers.
+- You can use `"simulate": true` to test the `checkout` request above and see the discount if you wish to show the discounted savings to the user before submitting the transaction.
+
+---
+
+### Step 7: Paying Referrers
+
+When the the request to `checkout` is submitted and you receive a successful response you’ll then want to call your internal system to kick off the request to credit the `Value` set up earlier for the referrer (`referring-jamie-referral-code-id`).
+
+Here is a pseudo-code version of that call:
+
+```js
+// This lives in your internal system code and it will be called upon a successful response (201) from the checkout call
+referringCreditFunction(tx: LightrailCheckoutTransaction) {
+  // Check that it is the user's first purchase and that there is a "lightrail step"  
+  if (tx.metadata["purchaseCount"] == 0 && steps.find(step => step.rail == "lightrail")) {
+    // for each LR step, lookup value, check metadata for a referring contact id
+    for each value in steps:
+      value = getValue(valueId)
+      if (value.metadata.referringContactId !== null) {
+        // credit referrer
+    }
+  }
+}
+```
+    
+---
 
 
 
+### Summary
 
+Our example scenario we created the following:
+- Two `Program`s
+    - One for generic referral codes 
+    - One for referring users credits
+- One `Value` that will be our generic referral code
+- One `Value` that will allow us to credit the referring user when a successful referral is completed
 
+We mentioned that we were supposing the referral codes were created on-demand when someone wished to shared a referral. Additionally we supposed the referred user would have a `/register` page they would need to fill out in order to add the referral code to their account  to get the offer. There are number of variations possible and if you have any questions about configuring something different, please [reach out](mailto:hello@lightrail.com). We would love help!
 
+There are a few additional points of note:
+- Currently the Lightrail API allows Jamie to attach code to himself, but by following the `redemptionRule` outlined above, he cannot spend it.
+- Only new users making their first purchase can use a referral code.
+- Redemption is safe because if `metadata` properties are mistakenly omitted it won't apply.
+- The `Value` ID of Jamie's referral code must be stored in user's internal system or it must be deterministic.
+    - This allows a Lightrail user to look up a `Contact`'s referral code.
+    - This allows a Lightrail user to look up a `Contact` to view the attached values and therefore contacts they've referred
+        - additional look ups are required to tell if those referred users have spent their credits
+    - In the event a referred user returned the item that they (the receiver), and the giver were issued referral money for, you would be able to debit the original credited `Value`
 
+If you have any questions or comments, please get in touch with us at [hello@lightrail.com](mailto:hello@lightrail.com)
 
 ---
 
