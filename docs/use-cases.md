@@ -1038,11 +1038,13 @@ See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-
 
 You can use Lightrail to create a best-in-class referral program. Lightrail provides the core infrastructure for your referral program but will require some development effort to fully implement. 
 
+<div class="callout">
 _In the following scenario, we will demonstrate a sample referral flow. An existing customer, Jamie, will refer a new user, Tim. This flow supposes that Jamie creates a personal referral code to share with friends, but you can change or augment this flow as you see fit._
 
 _In our example API calls we will suppose that we're offering both the referring person and the referred person $20 USD each for a successfully referred new customer. As you can see we’ve used USD, but any currency (including points) will work._
     
 _**Note**: Your business will need to determine what makes a referral successful. In this example, the referrer will receive their credit after the new user has signed up andmade their first purchase. In your flow, you make wish to add extra conditions, eg: wait until after the order has been fulfilled, or until the end of the refund window, or until a pending order has been finalized, etc._
+</div>
 
 ### How to set up your Referrals 
 
