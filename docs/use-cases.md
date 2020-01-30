@@ -1046,6 +1046,9 @@ We will cover the steps for creating a personal referral code for an existing us
   } 
 }
 ```
+```javacript
+const jamie: boolean = 0;
+```
 
 #### Important Note:
 The `redemptionRule` as written, is required to make sure that the referral code can only be used by new users. The metadata properties this rule depends on will be set in other calls we address below. 
