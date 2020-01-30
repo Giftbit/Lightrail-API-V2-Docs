@@ -1027,10 +1027,8 @@ To get started with a Referral Program, you will create two separate Programs:
 
 ### Step 1: Creating the Referral Program
 
-<tab>
 The first `Program` will define the parameters for personal referral codes that your existing users can generate and give to their friends. 
 We will cover the steps for creating a personal referral code for an existing user in **Step 3**.
-</tab>
 
 #### Call to Create Referral Program:
 
@@ -1047,9 +1045,6 @@ We will cover the steps for creating a personal referral code for an existing us
     "explanation": "Must be used on first purchase and can't be used by referrer."
   } 
 }
-```
-```javacript
-const jamie: boolean = 0;
 ```
 
 #### Important Note:
