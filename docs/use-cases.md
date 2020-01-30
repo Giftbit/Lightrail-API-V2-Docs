@@ -1256,7 +1256,7 @@ There are a few additional points of note:
 
 If you have any questions or comments, please get in touch with us at [hello@lightrail.com](mailto:hello@lightrail.com)
 
-## Redemption & Balance Rules
+## Redemption and Balance Rules
 
 <p class="intro">Redemption Rules and Balance Rules are extra conditions placed on Values that are evaluated during checkout.</p>
 
