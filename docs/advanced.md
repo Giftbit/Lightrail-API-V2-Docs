@@ -145,9 +145,9 @@ max(1, 2, '3') → 3
 max(null, null) → 0
 ```
 
-#### Functions
+### Functions
 
-##### abs
+#### abs
 
 `abs(value: number) → number`
 
@@ -158,7 +158,7 @@ abs(1) → 1
 abs(-1) → 1
 ```
 
-##### ceil
+#### ceil
 
 `ceil(value: number) → number`
 
@@ -170,7 +170,7 @@ ceil(1.2345) → 2
 ceil(-12.34) → -12
 ```
 
-##### every
+#### every
 
 `every(list: any[], condition: (listElement: any) => boolean) → boolean`
 
@@ -181,7 +181,7 @@ every([1, 2, 3], x => x > 0) → true
 ['a', 'b', 'c', 'd'].every(x => x == 'a') → false
 ```
 
-##### filter
+#### filter
 
 `filter(list: any[], condition: (listElement: any) => boolean) → any[]`
 
@@ -192,7 +192,7 @@ filter([1, 2, 3], x => x % 2 == 0) → [2]
 ['a', 'b', 'c', 'd'].filter(x => x != 'a') → ['b', 'c', 'd']
 ```
 
-##### find
+#### find
 
 `find(list: any[], condition: (listElement: any) => boolean) → any`
 
@@ -204,7 +204,7 @@ find([1, 2, 3], x => x % 2 == 0) → 2
 ['a', 'b', 'c', 'd'].find(x => x == 'e') → null
 ```
 
-##### findIndex
+#### findIndex
 
 `findIndex(list: any[], condition: (listElement: any) => boolean) → number`
 
@@ -216,7 +216,7 @@ findIndex([1, 2, 3], x => x % 2 == 0) → 1
 ['a', 'b', 'c', 'd'].findIndex(x => x == 'e') → -1
 ```
 
-##### findLast
+#### findLast
 
 `findLast(list: any[], condition: (listElement: any) => boolean) → any`
 
@@ -228,7 +228,7 @@ findLast([1, 2, 3], x => x % 2 == 0) → 2
 ['a', 'b', 'c', 'd'].findLast(x => x == 'e') → null
 ```
 
-##### findLastIndex
+#### findLastIndex
 
 `findLastIndex(list: any[], condition: (listElement: any) => boolean) → number`
 
@@ -240,7 +240,7 @@ findLastIndex([1, 2, 3], x => x % 2 == 0) → 1
 ['a', 'b', 'c', 'd'].findLastIndex(x => x == 'e') → -1
 ```
 
-##### floor
+#### floor
 
 `floor(value: number) → number`
 
@@ -252,7 +252,7 @@ floor(1.2345) → 1
 floor(-12.34) → -13
 ```
 
-##### isNaN
+#### isNaN
 
 `isNaN(value: number) → boolean`
 
@@ -265,7 +265,7 @@ isNaN("NaN") → false
 isNaN(null) → false
 ```
 
-##### isNull
+#### isNull
 
 `isNull(variable: any) → boolean`
 
@@ -278,7 +278,7 @@ isNull('') → false
 isNull('null') → false
 ```
 
-##### keys
+#### keys
 
 `keys(m: map) → string[]`
 
@@ -289,7 +289,7 @@ keys(null) → []
 keys({itemId: '33bbb2bf-c270-41d9-ab42-9eeba99fa69c', size: 'medium', quantity:6}) → ['itemId', 'size', 'quantity']
 ```
 
-##### map
+#### map
 
 `map(list: any[], (listElement: any) => any) → any[]`
 
@@ -301,7 +301,7 @@ map([1, 2, 3], x => x * 3) → [3, 6, 9]
 ['a', 'b', 'c'].map(x => x + x + x) → ['aaa', 'bbb', 'ccc']
 ```
 
-##### max
+#### max
 
 `max(...values: number | number[]) → number`
 
@@ -314,7 +314,7 @@ max(1, [2, -11]) → 2
 max(1, [2, -11], [[99, -88], 23]) → 99
 ```
 
-##### min
+#### min
 
 `min(...values: number | number[]) → number`
 
@@ -327,7 +327,7 @@ min(1, [2, -11]) → -11
 min(1, [2, -11], [[99, -88], 23]) → -88
 ```
 
-##### reduce
+#### reduce
 
 `reduce(list: any[], callback: (accumulator: any, listElement: any, listElementIndex: number, list: any[]) => any, any) → any`
 
@@ -338,7 +338,7 @@ reduce([1, 1, 2, 3, 5, 8], (accumulator, item) => accumulator + item, 0) → 20
 [8, 16, 4, 32, 2, 64, 1].reduce((accumulator, item) => accumulator > item ? accumulator : item, 0) → 64
 ```
 
-##### round
+#### round
 
 `round(value: number) → number`
 
@@ -351,7 +351,7 @@ round(12.5) → 13
 round(13.5) → 14
 ```
 
-##### roundBankers
+#### roundBankers
 
 `roundBankers(value: number) → number`
 
@@ -364,7 +364,7 @@ roundBankers(12.5) → 12
 roundBankers(13.5) → 14
 ```
 
-##### size
+#### size
 
 `size(value: any[] | number) → number`
 
@@ -379,7 +379,7 @@ size([1, 2, 3]) → 3
 ['one', 'two', 'three'].size() → 3
 ```
 
-##### some
+#### some
 
 `map(list: any[], condition: (listElement: any) => boolean) → boolean`
 
@@ -390,7 +390,7 @@ some([1, 2, 3], x => x > 0) → true
 ['a', 'b', 'c', 'd'].some(x => x == 'a') → true
 ```
 
-##### substring
+#### substring
 
 `substring(haystack: string, start: number = 0, end: number = maxint) → string`
 
@@ -403,7 +403,7 @@ substring('foobar', 3) → 'bar'
 'foobar'.substring(3, 3) → ''
 ```
 
-##### sum
+#### sum
 
 `sum(...values: number | number[]) → number`
 
@@ -415,7 +415,7 @@ sum(5, 5, 5) → 15
 [1, 2, 3, 4, 5, -10].sum() → 5
 ```
 
-##### toLowerCase
+#### toLowerCase
 
 `toLowerCase(s: string) → string`
 
@@ -426,7 +426,7 @@ toLowerCase('Hello World') → 'hello world'
 'HoW aRe YoU'.toLowerCase() → 'how are you'
 ```
 
-##### toUpperCase
+#### toUpperCase
 
 `toUpperCase(s: string) → string`
 
@@ -437,7 +437,7 @@ toUpperCase('Hello World') → 'HELLO WORLD'
 'HoW aRe YoU'.toUpperCase() → 'HOW ARE YOU'
 ```
 
-##### values
+#### values
 
 `values(m: map) → any[]`
 
@@ -448,13 +448,13 @@ values(null) → []
 values({itemId: '33bbb2bf-c270-41d9-ab42-9eeba99fa69c', size: 'medium', quantity:6}) → ['33bbb2bf-c270-41d9-ab42-9eeba99fa69c', 'medium', 6]
 ```
 
-#### Identifiers
+### Identifiers
 
 Identifiers are used in variable names, map dot notation and lambda parameter names.
 
 An identifier must start with a letter (a-z, A-Z), underscore (_), or dollar sign ($).  Following characters can also be digits (0-9).  Identifiers are case sensitive.
 
-#### Operator precedence
+### Operator precedence
 
 Operators are evaluated in the following order, with higher operators being evaluated first.
 
@@ -471,7 +471,7 @@ Operators are evaluated in the following order, with higher operators being eval
 - logical or `||`
 - ternary conditional `? :`
 
-#### Types
+### Types
 
 - null (`null`)
 - boolean (`false`, `true`)
@@ -481,7 +481,7 @@ Operators are evaluated in the following order, with higher operators being eval
 - map (`{}`, `{a: 'alpha', 'numbers': [1, 2, 3], c: {nested: true}}`, ...)
 - lambda (`a => a == 1`, ...) (only available as a function argument)
 
-#### Type coercion
+### Type coercion
 
 | target  | source  | value        | condition          |
 | ------- | ------- | ------------ | ------------------ |
