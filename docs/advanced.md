@@ -1,6 +1,6 @@
 # Advanced
 
-## Lightrail Rule Syntax
+### Lightrail Rule Syntax
 
 Lightrail Rules is a simple language for defining powerful configuration logic.
 

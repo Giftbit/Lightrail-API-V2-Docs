@@ -4,11 +4,6 @@
 Lightrail supports many use cases for how you can use customer value. We offer the ability to do Points Programs, Referrals, Generic and Unique Codes, Discount and Dollar-off Promotions, Digital Giftcards and many more. 
 </p>
 
-
-
-
-
-
 ## Accounts and Points
 <p class="intro">Accounts or Loyalty Point solutions are used when tracking value associated with a customer.</p>
   
@@ -133,13 +128,6 @@ Alternatively, since the account is associated with the Contact, you can directl
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
 
----
-
-
-
-
-
-
 ## Promotions
 Lightrail supports a wide variety of promotion use cases. A few common examples are:
 
@@ -220,14 +208,6 @@ This will automatically use the promotion along with any other Values attached t
 ```
 
 See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
-
----
-
-
-
-
-
-
 
 ## Drop-in Gift Cards  
 
@@ -760,9 +740,9 @@ This is to ensure that any iframes etc added to the page will be cleaned up.
 Allows you to attach handlers to specific component events.
 
 ```javascript
-    component.on("ready", function(){
-        componentIsReadyDoACustomThing();
-    });
+component.on("ready", function(){
+    componentIsReadyDoACustomThing();
+});
 ```
 
 Events Dispatched by all components:
@@ -783,8 +763,8 @@ This will return an object with the option values that have been set, as well as
 You can also see a full list of options for each component below in [Component Customization](#lightrail-ui/component-customization).
 
 ```javascript
-    var options = component.getOptions();
-    console.log(options);
+var options = component.getOptions();
+console.log(options);
 ```
 
 ---
@@ -796,12 +776,10 @@ Set / replace the components options object. These options aren't automatically 
 so if you use this, you should re-mount the component by calling `unmount()` and `mount()`.
 
 ```javascript
-    var options = component.setOptions({theme_bg_primary: "#eee"});
-    console.log(options);
+var options = component.setOptions({theme_bg_primary: "#eee"});
+console.log(options);
 ```
-
 ---
-
 
 #### Card Purchase Dialog
 
@@ -811,21 +789,21 @@ By default it's hidden and can be opened by calling the `open()` method.
 Alternatively, a launch button can be added to your page by adding the correct properties to the options object. *View [customization](#lightrail-ui/gift-card-purchase-theming) for more info.*
 
 ```javascript
-        var cardPurchaseDialog = lightrailUI.components.cardPurchaseDialog({theme_bg_primary: "#ccc"});
+var cardPurchaseDialog = lightrailUI.components.cardPurchaseDialog({theme_bg_primary: "#ccc"});
 
-        cardPurchaseDialog.on("ready", function(response){
-            cardPurchaseDialog.open();
-        });
+cardPurchaseDialog.on("ready", function(response){
+    cardPurchaseDialog.open();
+});
 
-        cardPurchaseDialog.on("purchaseComplete", function(response){
-            startConfetti();
-        });
-        
-        cardPurchaseDialog.on("close", function(response){
-           stopConfetti(); 
-        });
-        
-        cardPurchaseDialog.mount();
+cardPurchaseDialog.on("purchaseComplete", function(response){
+    startConfetti();
+});
+
+cardPurchaseDialog.on("close", function(response){
+   stopConfetti(); 
+});
+
+cardPurchaseDialog.mount();
 ```
 
 ** Card Purchase Events**
@@ -848,15 +826,15 @@ Once a user redeems a gift code, you can respond by handling the "redemption" ev
 Alternatively, you can use the "success_btn_cta_label" and "success_btn_cta_href" params to setup a redirect button within the component.
 
 ```javascript
-        var options = {fullcode: 1235813};
-        var codeRedemption = lightrailUI.components.codeRedemption(options);
+var options = {fullcode: 1235813};
+var codeRedemption = lightrailUI.components.codeRedemption(options);
 
-        codeRedemption.on("redemption", function(response){
-            writeConfimationToScreen(response.cardAmountCents, currency);
-            updateAccountBalanceDisplay(response.accountBalanceCents, currency);
-        });
-        
-        cardPurchaseDialog.mount("#redemption-container");
+codeRedemption.on("redemption", function(response){
+    writeConfimationToScreen(response.cardAmountCents, currency);
+    updateAccountBalanceDisplay(response.accountBalanceCents, currency);
+});
+
+cardPurchaseDialog.mount("#redemption-container");
 ```
 
 **Code Redemption Events**
@@ -874,11 +852,11 @@ LightrailUI(shopperToken).fetchAccountBalance(handler) allows you to fetch the a
 
 Usage:
 ```javascript
-        lightrailUI.fetchAccountBalance(function(response){
-            var balanceInCents = response.balanceInCents;
-            var currency = response.currency;
-            var formattedBalance = response.formattedBalance;
-        });
+lightrailUI.fetchAccountBalance(function(response){
+    var balanceInCents = response.balanceInCents;
+    var currency = response.currency;
+    var formattedBalance = response.formattedBalance;
+});
 ```
 
 **Note:** We do some very basic formatting to produce the formattedBalance property right now, if you want to support other currency symbols or custom formatting please use the balanceInCents value along with currency to format the value.
@@ -890,9 +868,9 @@ LightrailUI(shopperToken).displayAccountBalance(Element | id | classname) will w
 
 ie:
 ```javascript
-    lightrailUI.displayAccountBalance("#account-balance");
+lightrailUI.displayAccountBalance("#account-balance");
 
-    //ie: <p>Balance: <span id="account-balance">$50</span> </p>
+//ie: <p>Balance: <span id="account-balance">$50</span> </p>
 ```
 
 ### Component Customization
@@ -917,13 +895,13 @@ Should you have any questions regarding theming, please contact hello@lightrail.
 **Example:**
 
 ```javascript
-    var options = {
-        theme_bg_primary: "#FF0",
-        theme_btn_color_gift_amount_hover: "white"
-    };
+var options = {
+    theme_bg_primary: "#FF0",
+    theme_btn_color_gift_amount_hover: "white"
+};
 
-    var cardPurchseDialog = lightrailUI.components.cardPurchaseDialog(options);
-    cardPurchseDialog.mount();
+var cardPurchseDialog = lightrailUI.components.cardPurchaseDialog(options);
+cardPurchseDialog.mount();
 ```
 
 Below is a comprehensive list of values accepted by the **Card Purchase Dialog Component**. 
@@ -977,14 +955,14 @@ _*All overrides are optional_
 **Example:**
 
 ```javascript
-    var options = {
-        fullcode: "EMAIL_URL_PARAM_VALUE",
-        theme_bg_primary: "#FF0",
-        theme_btn_color_gift_amount_hover: "white"
-    };
+var options = {
+    fullcode: "EMAIL_URL_PARAM_VALUE",
+    theme_bg_primary: "#FF0",
+    theme_btn_color_gift_amount_hover: "white"
+};
 
-    var codeRedemption = lightrailUI.components.codeRedemption(options);
-    codeRedemption.mount("#code-redemption-container");
+var codeRedemption = lightrailUI.components.codeRedemption(options);
+codeRedemption.mount("#code-redemption-container");
 ````
 
 Below is a comprehensive list of values accepted by the **Code Redemption Component**.
@@ -1012,8 +990,6 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 
 **Note:** #17 provides a label to pass for the completed redemption step. #18 is the the href for where the button will redirect users on redemption completion.
 
----
-
 ## Marketplace
 Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
@@ -1029,8 +1005,6 @@ See the request attribute `discountSellerLiability` under the [create value endp
 #### Restricting Usage
 You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
-
----
 
 ## Referral Programs 
  
@@ -1242,7 +1216,7 @@ When the the request to `checkout` is submitted and you receive a successful res
 
 Here is a pseudo-code version of that call:
 
-```js
+```javascript
 // This lives in your internal system code and it will be called upon a successful response (201) from the checkout call
 referringCreditFunction(tx: LightrailCheckoutTransaction) {
   // Check that it is the user's first purchase and that there is a "lightrail step"  
@@ -1281,8 +1255,6 @@ There are a few additional points of note:
     - In the event that a new user who received a referral credit returns the item that they purchased, you can choose to remove their referral credit (rather than refunding it) and/or remove the credit that was issued to the referrer.
 
 If you have any questions or comments, please get in touch with us at [hello@lightrail.com](mailto:hello@lightrail.com)
-
----
 
 ## Redemption & Balance Rules
 
@@ -1466,4 +1438,4 @@ Create Value request - `POST https://api.lightrail.com/v2/values`:
 ```
 
 ### Rule Syntax
-For more information on rule syntax please see [Rule Sytnax](https://github.com/Giftbit/Lightrail-API-V2-Docs/blob/master/feature-deep-dive/rule-syntax.md).
+For more information on rule syntax please see [Rule Sytnax](#advanced/lightrail-rule-syntax).
