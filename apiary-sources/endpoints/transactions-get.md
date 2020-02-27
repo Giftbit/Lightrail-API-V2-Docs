@@ -42,7 +42,7 @@ A Transaction Chain is an ordered list of Transactions and results from creating
 
             {REQUEST_REPLACEMENT:transactionChain.response.body}
 
-### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?currency}{?valueId}]
+### List Transactions [GET /transactions{?limit}{?transactionType}{?createdDate}{?currency}{?valueId}{?tag}]
 
 + Parameter
     + limit (number, optional) - {{pagination.limit}}
@@ -50,6 +50,7 @@ A Transaction Chain is an ordered list of Transactions and results from creating
     + createdDate (string, optional) - {{filter.createdDate}}  {{filter.ops.date}}
     + currency (string, optional) - {{filter.currency}}  {{filter.ops.in}}
     + valueId (string, optional) - Filter by Value ID used in the Transaction.
+    + tag (string, optional) - Filter by a tag on a Transaction. See for example [List a Contact's Transactions](#reference/0/transactions/list-transactions-for-a-contact)
 
 + Request (application/json)
     + Headers
