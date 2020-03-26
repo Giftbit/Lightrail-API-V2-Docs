@@ -8,7 +8,7 @@ Webhooks can be used to notify your application when an event occurs in your Lig
 
 #### What Is a Webhook
 
-A Webhook consists of a list of events it's subscribed to along with a URL where it will deliver matching events. Lightrail delivers events via a simple HTTP request and includes a signature that allows you to verify that it was Lightrail who sent you the notification.
+A Webhook consists of a list of events it's subscribed to along with a URL where matching events will be delivered. Lightrail delivers events via a simple HTTP request and includes a signature that allows you to verify that it was Lightrail who sent the request.
 
 #### When to Use Webhooks
 
