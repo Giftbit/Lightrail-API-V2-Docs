@@ -1,6 +1,6 @@
 # Webhooks
 
-<p class= "intro">Get notified when events occur in your Lightrail account.</p>
+<p class= "intro">Get notified when events occur in Lightrail.</p>
 
 <br/>
 
@@ -8,21 +8,90 @@ Webhooks can be used to notify your application when an event occurs in your Lig
 
 #### What Is a Webhook
 
-A Webhook consists of a list of events it's subscribed to along with a URL where matching events will be delivered. Lightrail delivers events via a simple HTTP request and includes a signature that allows you to verify that it was Lightrail who sent the request.
+Webhooks are notifications that are sent from Lightrail to your system when certain Lightrail events take place. A Lightrail Webhook consists of a list of events that you wish to be notified about and a URL (that you control) where you will receive event notifications when they occur. Lightrail events will be delivered as simple HTTP requests. They include a header signature that allows you to verify that the request comes from Lightrail and a body with the event details.
 
 #### When to Use Webhooks
 
-Use webhooks when you want to trigger a reaction or an additional workflow. Webhooks are particularly useful when events occur from actions that weren't performed directly by your application. In such cases, webhooks help keep data in your application consistent with your Lightrail account. 
+Use Webhooks when you want to trigger a reaction or an additional workflow. Webhooks are particularly useful when events occur from actions that weren't performed directly by your application. In such cases, Webhooks help keep data in your application consistent with your Lightrail account. 
 
 Examples of such events are:
 <ul>
-    <li>A new promotion is created within your Lightrail account from one of your team members using the Lightrail web app.</li>
-    <li>Pending transactions that are never captured will automatically void via a void transaction.</li>
-    <li>A credit card charge in Stripe that originally succeeded is later marked as fradulent (see example below).</li>
+    <li>Events triggered through the use of the Lightrail web app.</li>
+    <li>Pending transactions that are never captured will automatically void after a given amount of time.</li>
+    <li>A credit card charge in Stripe that originally succeeded is later marked as fraudulent (see example below).</li>
 </ul>
 
+What these events would trigger in your application is up to you! Perhaps you want to send customers an email when a promotion is applied to their account, or maybe you want to send your data to a data analytics service. 
+
 ##### Responding to Changes From Stripe
-With Lightrail's integration with Stripe, charges may be successful at the time the checkout transaction is created but can later get marked as fraudulent in Stripe. In the event a charge is marked as fraudulent, Lightrail automatically reverses the checkout transaction and freezes all associated Values in Lightrail, preventing them from being used until unfrozen. In your system, you likely have the notion of an order which corresponds to the checkout transaction in Lightrail. Using Lightrail webhooks, you can listen for reverse transactions an appropriately mark the corresponding orders in your system as reversed. This helps keep data consistency across Stripe, Lightrail, and your application.
+Credit card charges may be successful at the time the checkout transaction is created in Lightrail but can later get marked as fraudulent in Stripe. In the event a charge is marked as fraudulent, Lightrail automatically reverses the checkout transaction and freezes all associated Values in Lightrail, preventing them from being used until unfrozen. In your system, you likely have the notion of an order which corresponds to the checkout transaction in Lightrail. Using Lightrail Webhooks, you can listen for reverse transactions an appropriately mark the corresponding orders in your system as reversed. This helps keep data consistency across Stripe, Lightrail, and your application.
 
 #### Creating a Webhook
-Webhooks can be created from the [webhooks](https://www.lightrail.com/app/#/account/webhook) section of your Lightrail account. 
+The first step in setting up Webhooks is creating an endpoint where events can be delivered.
+
+##### Setting Up a Webhook Endpoint
+The purpose of the Webhook endpoint to provide a URL that Lightrail can notify when an event occurs. The Webhook endpoint will receive the event, verify that it is from Lightrail, and trigger the follow-up action you want to take. 
+
+**Your Webhook Endpoint Specifications:**
+- Accepts POST requests with `contentType: application/json`.
+- URL must be secure (https). 
+- Check the header signature to verify the event was sent from Lightrail (more on this below).
+- Must return a `2xx` HTTP status code. Any other response will indicate to Lightrail that you did not receive the event. Lightrail will retry delivering the event for up to 3 days.
+- Must respond quickly. If complex follow-up logic needs to occur, it should be architected in such a way that your endpoint responds to Lightrail before beginning any additional work. 
+
+**Lightrail Event Specifications**
+- Events will be delivered at least once.
+- Events may not arrive in the same order as they occurred in Lightrail.
+- Events have a unique ID which can be used for idempotency on your side to handle events that occasionally delivered twice. 
+
+###### Verifying Signatures
+The goal of verifying the signature is to check the event was sent by Lightrail. 
+
+The events you receive from Lightrail will include a signature in the request header `Lightrail-Signature`. The signature is a hash of the payload using the Webhook secret(s). If there are multiple secrets, to support secret rotation, the signature header will include multiple comma-separated signatures. The signature uses an HMAC digest using the request payload  to compute the hash. 
+
+**Client Libraries**
+Coming soon...
+
+**Manual**
+The signature can be manually calculated using the Webhook `secret` and the request JSON payload. See the following typescript snippet for an example of how to verify signatures manually.
+
+```typescript
+import * as crypto from "crypto";
+
+/**
+ * Verifies if the signature was signed by Lightrail.
+ * @param signatureHeader: request header "Lightrail-Signature"
+ * @param secret:  the Webhook secret (shouldn't be hardcoded in codebase)
+ * @param payload: request body as JSON string
+ */
+export function verifySignature(signatureHeader: string, secret: string, payload: string): boolean {
+    const eventSignatures = signatureHeader.split(",");
+    const signature: string = crypto
+        .createHmac("sha256", secret)
+        .update(payload)
+        .digest("hex");
+    // uses crypto.timingSafeEqual to protect against timing attacks (see: https://codahale.com/a-lesson-in-timing-attacks) 
+    return eventSignatures.reduce((prev, cur) => prev || crypto.timingSafeEqual(Buffer.from(cur), Buffer.from(signature)), false);
+}
+````
+
+##### Creating a Webhook Subscription in Lightrail 
+Webhooks can be created from the [Webhooks](https://www.lightrail.com/app/#/account/Webhook) section of your Lightrail account.
+
+##### Supported Event Types
+The following is the list of all events in Lightrail that you can subscribe to. Note, `"*"` acts as a wildcard that can be used to match **all** existing and future event types. 
+```
+"lightrail.contact.created"
+"lightrail.contact.deleted"
+"lightrail.contact.updated"
+"lightrail.currency.created"
+"lightrail.currency.deleted"
+"lightrail.currency.updated"
+"lightrail.program.created"
+"lightrail.program.deleted"
+"lightrail.program.updated"
+"lightrail.transaction.created"
+"lightrail.value.created"
+"lightrail.value.deleted"
+"lightrail.value.updated"  
+```
