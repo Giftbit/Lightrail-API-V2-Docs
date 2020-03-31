@@ -451,17 +451,7 @@
       "body": {
         "id": "webhook1",
         "url": "https://example.com/callbackUrl",
-        "events": ["doesnt.match.anything"]
-      }
-    },
-    {
-      "callId": "createWebhook",
-      "method": "POST",
-      "endpoint": "/webhooks",
-      "body": {
-        "id": "webhook1",
-        "url": "https://example.com/callbackUrl",
-        "events": ["doesnt.match.anything"]
+        "events": ["*"]
       }
     },
     {

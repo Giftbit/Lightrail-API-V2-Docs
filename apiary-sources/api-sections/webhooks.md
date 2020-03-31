@@ -1,6 +1,6 @@
 ## Webhooks [/webhooks]
 
-Webhooks can be used to notify your application when an event occurs in your Lightrail account; this enables you to react to events and trigger additional workflows.  
+Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
 
 {% include 'generated/endpoints/webhooks-create.md' %}
 {% include 'generated/endpoints/webhooks-get.md' %}
