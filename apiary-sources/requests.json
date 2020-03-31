@@ -469,7 +469,7 @@
       "method": "PATCH",
       "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}",
       "body": {
-        "events": ["also.doesnt.match.anything"]
+        "events": ["lightrail.value.*"]
       }
     },
     {
