@@ -10,5 +10,5 @@
 
 ## WebhookSecret (object)
 + id (string) - {{webhook.secret.id}}
-+ id (string) - {{webhook.secret.secret}}
++ secret (string) - {{webhook.secret.secret}}
 + createdDate (string) - {{webhook.secret.createdDate}}

@@ -8,7 +8,6 @@
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{webhook.id}}
         + url (string, required) - {{webhook.url}}
         + events (array[string], required) - {{webhook.events}}
         + active (boolean, optional) - {{webhook.active}}
