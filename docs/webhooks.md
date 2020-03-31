@@ -94,5 +94,5 @@ The following is the list of all events in Lightrail that you can subscribe to. 
 "lightrail.program.updated"
 "lightrail.transaction.created"
 "lightrail.value.created"
-"lightrail.value.deleted"
+"lightrail.value.updated"  
 ```
