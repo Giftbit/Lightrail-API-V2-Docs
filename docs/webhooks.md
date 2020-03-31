@@ -32,7 +32,7 @@ The first step in setting up Webhooks is creating an endpoint where events can b
 #### Setting Up a Webhook Endpoint
 The purpose of the Webhook endpoint to provide a URL that Lightrail can notify when an event occurs. The Webhook endpoint will receive the event, verify that it is from Lightrail, and trigger the follow-up action you want to take. 
 
-**Your Webhook Endpoint Specifications:**
+**Your Webhook Endpoint Specifications**
 - Accepts POST requests with `contentType: application/json`.
 - URL must be secure (https). 
 - Check the header signature to verify the event was sent from Lightrail (more on this below).
@@ -44,15 +44,17 @@ The purpose of the Webhook endpoint to provide a URL that Lightrail can notify w
 - Events may not arrive in the same order as they occurred in Lightrail.
 - Events have a unique ID which can be used for idempotency on your side to handle events that occasionally delivered twice. 
 
-##### Verifying Signatures
+#### Verifying Signatures
 The goal of verifying the signature is to check the event was sent by Lightrail. 
 
 The events you receive from Lightrail will include a signature in the request header `Lightrail-Signature`. The signature is a hash of the payload using the Webhook secret(s). If there are multiple secrets, to support secret rotation, the signature header will include multiple comma-separated signatures. The signature uses an HMAC digest using the request payload  to compute the hash. 
 
 **Client Libraries**
+
 Coming soon...
 
 **Manual**
+
 The signature can be manually calculated using the Webhook `secret` and the request JSON payload. See the following typescript snippet for an example of how to verify signatures manually.
 
 ```typescript
