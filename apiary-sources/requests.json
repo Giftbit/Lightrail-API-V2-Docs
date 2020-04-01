@@ -443,6 +443,45 @@
           "explanation": "$5 off purchase"
         }
       }
+    },
+    {
+      "callId": "createWebhook",
+      "method": "POST",
+      "endpoint": "/webhooks",
+      "body": {
+        "id": "webhook1",
+        "url": "https://example.com/callbackUrl",
+        "events": ["*"]
+      }
+    },
+    {
+      "callId": "getWebhook",
+      "method": "GET",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
+    },
+    {
+      "callId": "listWebhooks",
+      "method": "GET",
+      "endpoint": "/webhooks"
+    },
+    {
+      "callId": "updateWebhook",
+      "method": "PATCH",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}",
+      "body": {
+        "events": ["lightrail.value.*"]
+      }
+    },
+    {
+      "callId": "createWebhookSecret",
+      "method": "POST",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}/secrets",
+      "body": {}
+    },
+    {
+      "callId": "deleteWebhook",
+      "method": "DELETE",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
     }
   ]
 }
