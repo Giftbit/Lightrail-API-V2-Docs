@@ -159,3 +159,13 @@ value:
     code: "Assign a code."
     contactId: "Directly attach to a Contact."
     programId: "Create as part of a Program and copy default properties from it."
+webhook:
+  id: "The ID of the webhook."
+  url: "The URL to send the event to."
+  secret:
+    id: "The ID of the secret."
+    secret: "The webhook's secret which is used to generate the header signature on event deliveries. This allows you to validate the event was sent by Lightrail."
+    createdDate: "The date the secret was created."
+  events: "List of comma-separated events. The `'*'` wild card is supported: for example, use `'*'` to match all events or use `'lightrail.value.*'` to match all Value related events. You can view the full list of supported event types [here](https://www.lightrail.com/docs/#webhooks/supported-event-types)."
+  active: "If false, the Webhook will not send events."
+  createdBy: "The ID of the user who created the webhook."

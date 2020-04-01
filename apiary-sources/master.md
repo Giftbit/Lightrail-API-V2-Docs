@@ -27,4 +27,6 @@ HOST: https://api.lightrail.com/v2/
 
 {% include 'api-sections/currencies.md' %}
 
+{% include 'api-sections/webhooks.md' %}
+
 {% include 'api-sections/data-structures.md' %}
