@@ -47,7 +47,7 @@ A webhook endpoint is a URL that Lightrail can notify when an event occurs. The 
 #### Verifying Signatures
 The goal of verifying the signature is to check the event was sent by Lightrail. 
 
-The events you receive from Lightrail will include a signature in the request header `Lightrail-Signature`. The signature is a hash of the payload using the Wwbhook secret(s). If there are multiple secrets, to support secret rotation, the signature header will include multiple comma-separated signatures. The signature uses an HMAC digest using the request payload  to compute the hash. 
+The events you receive from Lightrail will include a signature in the request header `Lightrail-Signature`. The signature is a hash of the payload using the webhook's secret(s). If there are multiple secrets, to support secret rotation, the signature header will include multiple comma-separated signatures. The signature uses an HMAC digest using the request payload  to compute the hash. 
 
 **Client Libraries**
 
