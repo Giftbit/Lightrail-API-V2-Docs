@@ -1,7 +1,5 @@
 # Client Libraries
-If you are planning to integrate with Lightrail, before embarking on development, check out this list to see if we already have a client library suitable for your project.
-
-### Languages
+Using our client libraries can help expedite the development process. See the following for a list of supported languages.   
 
 #### Node (JavaScript & TypeScript)
 - [Lightrail JavaScript Client](https://github.com/Giftbit/lightrail-client-javascript)
