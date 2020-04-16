@@ -51,8 +51,22 @@ The events you receive from Lightrail will include a signature in the request he
 
 **Client Libraries**
 
-Coming soon...
+Webhook signature verification is supported by the following client Libraries: 
+- [Lightrail JavaScript Client](https://github.com/Giftbit/lightrail-client-javascript)
+- [Lightrail Java Client](https://github.com/Giftbit/lightrail-client-java)
 
+```typescript
+/**
+ * Signature verification using the Node client library:
+ * Note the argument `webhookSecret` shouldn't be hardcoded in your codebase.
+ */ 
+if (Lightrail.webhooks.verifySignature(signature, payload, webhookSecret)) {
+    // Valid signature. Do whatever processing you want with event.
+} else {
+    // Invalid signature. Ignore event and perhaps log suspicious activity. 
+}
+``` 
+ 
 **Manual**
 
 The signature can be manually calculated using the webhook `secret` and the request JSON payload. See the following typescript snippet for an example of how to verify signatures manually.
@@ -63,13 +77,13 @@ import * as crypto from "crypto";
 /**
  * Verifies if the signature was signed by Lightrail.
  * @param signatureHeader: request header "Lightrail-Signature"
- * @param secret:  the Webhook secret (shouldn't be hardcoded in codebase)
+ * @param webhookSecret:  the Webhook secret (shouldn't be hardcoded in codebase)
  * @param payload: request body as JSON string
  */
-export function verifySignature(signatureHeader: string, secret: string, payload: string): boolean {
+export function verifySignature(signatureHeader: string, webhookSecret: string, payload: string): boolean {
     const eventSignatures = signatureHeader.split(",");
     const signature: string = crypto
-        .createHmac("sha256", secret)
+        .createHmac("sha256", webhookSecret)
         .update(payload)
         .digest("hex");
     // constant time string comparison to prevent timing attacks (see: https://codahale.com/a-lesson-in-timing-attacks) 
