@@ -1,5 +1,5 @@
 # Client Libraries
-Here is the list of Lightrail client libraries for different languages and technologies. If you are planning to integrate with Lightrail, before embarking on development check out this list to see if we already have a client library suitable for your project.
+If you are planning to integrate with Lightrail, before embarking on development, check out this list to see if we already have a client library suitable for your project.
 
 ### Languages
 
@@ -11,4 +11,3 @@ Here is the list of Lightrail client libraries for different languages and techn
 
 #### Ruby
 - [Lightrail Ruby Client](https://github.com/Giftbit/lightrail-client-ruby)
-
