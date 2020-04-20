@@ -53,7 +53,7 @@ while (callsToDo) {
         }
         calls.put(key, call)
     }
-    callsToDo = callsToDo.findAll { it.value.response.status != 200 && it.value.response.status != 201 }
+    callsToDo = callsToDo.findAll { it.value.response.status != 200 && it.value.response.status != 201 && it.value.response.status != 204}
 }
 
 File outputDirectory = new File("generated/endpoints");
