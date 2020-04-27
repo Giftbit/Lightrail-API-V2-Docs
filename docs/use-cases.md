@@ -1488,12 +1488,13 @@ Here is a pseudo-code version of that call:
 // This lives in your internal system code and it will be called upon a successful response (201) from the checkout call
 referringCreditFunction(tx: LightrailCheckoutTransaction) {
   // Check that it is the user's first purchase and that there is a "lightrail step"  
-  if (tx.metadata["purchaseCount"] == 0 && steps.find(step => step.rail == "lightrail")) {
+  if (tx.metadata["purchaseCount"] == 0 && tx.steps.find(step => step.rail == "lightrail")) {
     // for each LR step, lookup value, check metadata for a referring contact id
-    for each value in steps:
-      value = getValue(valueId)
+    for (const step in tx.steps) {
+      const value = getValue(step.valueId)
       if (value.metadata.referringContactId !== null) {
         // credit referrer
+      }
     }
   }
 }
