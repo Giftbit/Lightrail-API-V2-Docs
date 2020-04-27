@@ -1013,6 +1013,11 @@ See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-
 //////////////
 //////////////
 //////////////
+//////////////
+//////////////
+//////////////
+//////////////
+//////////////
 
 
 
@@ -1026,7 +1031,7 @@ _In the following scenario, we will demonstrate a sample referral flow. An exist
 
 _In our example API calls we will suppose that we're offering both the referring person and the referred person $20 USD each for a successfully referred new customer. As you can see we’ve used USD, but any currency (including points) will work._
     
-_**Note**: Your business will need to determine what makes a referral successful. In this example, the referrer will receive their credit after the new user has signed up andmade their first purchase. In your flow, you make wish to add extra conditions, eg: wait until after the order has been fulfilled, or until the end of the refund window, or until a pending order has been finalized, etc._
+_**Note**: Your business will need to determine what makes a referral successful. In this example, the referrer will receive their credit after the new user has signed up and made their first purchase. In your flow, you make wish to add extra conditions, eg: wait until after the order has been fulfilled, or until the end of the refund window, or until a pending order has been finalized, etc._
 
 ### How to set up your Referrals 
 
@@ -1270,6 +1275,9 @@ If you have any questions or comments, please get in touch with us at [hello@lig
 //////////////
 //////////////
 //////////////
+//////////////
+//////////////
+//////////////
 
 
 
@@ -1385,7 +1393,6 @@ In this step, you’ll create a unique `Value` and attach it to the existing use
 ```json
 {
   "id": "referring-jamie-credit-id",
-  "programId": "referral-credit-program-id",
   "contactId": "referring-jamie-contact-id",
   "balance": 0
 }
