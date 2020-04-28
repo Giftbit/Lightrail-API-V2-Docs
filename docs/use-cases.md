@@ -1506,6 +1506,8 @@ referringCreditFunction(tx: LightrailCheckoutTransaction) {
 }
 ```
 
+Alternatively, rather than putting this step in your core checkout logic, you can create a webhook which would execute the above logic. See our [webhook documentation](#webhooks) for more information about webhooks.   
+
 ### Summary
 
 In our example scenario we created the following:
