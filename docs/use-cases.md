@@ -377,8 +377,6 @@ For full `checkout` request details, see the [Transaction / Checkout endpoint re
 #### Important Note:
 You can use `"simulate": true` to test the `checkout` request before submitting the transaction.
 
-
-----------
 ### Balance Check
 
 In order for customers to be able to easily check the remaining `balance` on their gift card, you can provide a page that accepts a gift card `code` and looks up the `Value`. Lightrail recommends using a [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) challenge-response system to ensure the user is human. See the [Values](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code) [endpoint to retrieve the value by code](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code).
