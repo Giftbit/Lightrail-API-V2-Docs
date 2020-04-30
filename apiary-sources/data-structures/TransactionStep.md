@@ -1,6 +1,6 @@
 ## LightrailTransactionStep (object)
 + rail (string) - The payment rail: `lightrail`.
-+ id (string) - The id of the Value transacted with.
++ valueId (string) - The id of the Value transacted with.
 + currency (string) - The currency of the Value transacted with.
 + contactId (string) - The ID of the Contact associated with the Value.
 + code (string) - {{value.code}}
