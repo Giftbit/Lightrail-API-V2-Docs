@@ -620,6 +620,7 @@ referringCreditFunction(tx: LightrailCheckoutTransaction) {
       const value = getValue(step.valueId)
       if (value.metadata.referringContactId !== null) {
         // credit referrer
+      }
     }
   }
 }
