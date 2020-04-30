@@ -295,7 +295,7 @@ Gift cards are represented in Lightrail as Values and will be created from the P
 
 1. You will need a page on your website where the customer can purchase the gift card. You can use [Lightrail’s checkout functionality](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout), or use your existing payment handling flow to process payment for the gift card. 
 1. Once the gift card has been paid for, you make a call to Lightrail to create the `Value` that will represent the gift card. For full `Value` creation details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
-1. Send the recipient the gift card code. This is dependent on your use case and the distribution is entirely up to you. The recipient will need the Value’s code to [register it to their account/wallet](#use-cases/register-the-gift-card-to-an-account-or-wallet), use it in a [checkout transaction](#use-cases/accepting-the-gift-card-in-checkout), or [check the balance](#use-cases/balance-check)). 
+1. Send the recipient the gift card code. This is dependent on your use case and the distribution is entirely up to you. The recipient will need the Value’s code to [register it to their account/wallet](#use-cases/register-the-gift-card-to-an-account-or-wallet), use it in a [checkout transaction](#use-cases/accepting-the-gift-card-in-checkout), or [check the balance](#use-cases/balance-check). 
 
  
 #### Call to Create Gift Card Value in Step 2:
