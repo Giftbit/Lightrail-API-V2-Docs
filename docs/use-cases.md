@@ -990,6 +990,9 @@ Below is a comprehensive list of values accepted by the **Code Redemption Compon
 
 **Note:** #17 provides a label to pass for the completed redemption step. #18 is the the href for where the button will redirect users on redemption completion.
 
+
+
+
 ## Marketplace
 Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
 
@@ -1007,280 +1010,181 @@ You can make promotions only applicable to certain activities, locations, or mer
 See the [Redemption Rule documentation](#use-cases/redemption-rules-and-balance-rules) for more information.
 
 
-
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-
-
-
-## Gift Card Programs 
+## Gift Cards
+<p class="intro">Lightrail enables you to create a custom gift card solution with ease and optimize your gift cards for acquisition, engagement, and retention.</p>
  
-<p class="intro">Gift Cards are an effective type of promotion for acquisition and growth.</p>
+Lightrail provides the core infrastructure to power your gift cards. Some development effort is required for implementation — we’re here to make that process as easy as possible.
 
-Lightrail provides the core infrastructure for your gift card program but will require some development effort to fully implement. 
+#### Intention and Audience
+This document explains how to set up gift cards using Lightrail to work within an e-commerce checkout that uses [Stripe](https://stripe.com/) or a similar payment processor.  The intended audience is technical people who are comfortable making API calls, or those who understand typical REST HTTP Methods.
 
-_In the following scenario, we will demonstrate a sample referral flow. An existing customer, Jamie, will refer a new user, Tim. This flow supposes that Jamie creates a personal referral code to share with friends, but you can change or augment this flow as you see fit._
+### Overview
 
-_In our example API calls we will suppose that we're offering both the referring person and the referred person $20 USD each for a successfully referred new customer. As you can see we’ve used USD, but any currency (including points) will work._
-    
-_**Note**: Your business will need to determine what makes a referral successful. In this example, the referrer will receive their credit after the new user has signed up and made their first purchase. In your flow, you make wish to add extra conditions, eg: wait until after the order has been fulfilled, or until the end of the refund window, or until a pending order has been finalized, etc._
+There are typically four key elements of the gift card experience. 
 
-### How to set up your Referrals 
+1. The consumer buying experience
+2. Registering the gift card to an account or wallet as a recipient
+3. Accepting gift cards in checkout as a payment method
+4. Checking the balance of a gift card
 
-To get started with a Referral Program, you will create two separate Programs:
+#### Getting Started
+For our example we will assume you are creating a section of your website that allows your customers to buy gift cards and send them to a recipient, and that there needs to be a means for accepting the gift card code in the checkout experience. Gift cards are identified by a unique code which is the primary way recipients will interact with the gift card value.
+The gift card will also need to be delivered to the recipient — for example via email, SMS, displayed on a web page, downloaded, etc.  For brevity we will omit the delivery step from this example and assume you will use your usual customer communication flow.
 
-1. To generate and track personal referral codes ("Referral Program")
-1. To give account credit to users that successfully refer someone ("Referrer Credit Program")
+### Consumer Buying Experience
 
-### Step 1: Creating the Referral Program
+#### Setting up Gift Cards
+To get started with gift cards, [create a](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) to organize and provide a template for your gift card Values. [Values](https://www.lightrail.com/docs/#object-model/values) are the core object in Lightrail which represent the gift card balance and unique gift code. Values can also be used to represent other types of promotions and customer value in Lightrail, so Programs allow for the definition of common gift card defaults such as:
 
-The first `Program` will define the parameters for personal referral codes that your existing users can generate and give to their friends. 
-We will cover the steps for creating a personal referral code for an existing user in **Step 3**.
+- No expiry date
+- Variable denominations
+    - Range eg. $0-$2000 
+    - Fixed eg. $5, $10, $20, $50, $100 etc.
+- Post-tax in checkout
+- No rules or conditions for redemption
+- Unlimited uses
 
-#### Call to Create Referral Program:
+Additionally, Lightrail’s web app includes Program performance stats to help you understand and assess a Program’s success. 
 
+For full `Program` attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program). 
+
+#### Creating the Gift Card Program
+This Program will define the parameters of the Values that will be created and used for the gift card.
+
+#### Call to Create a Gift Card Program that allows you to issue gift cards from $0 — $2000:
 `POST https://api.lightrail.com/v2/programs`
 ```json
 {
-  "id": "referral-program-id",
+  "id": "range-gift-card-program-id",
+  "name": "Range Gift Card Program",
   "currency": "USD",
-  "name": "Referral Program",
-  "discount": true,
-  "pretax": true,
-  "redemptionRule": {
-    "rule": "metadata.purchaseCount == 0 && !!metadata.purchasingContactId && !!value.metadata.referringContactId && metadata.purchasingContactId != value.metadata.referringContactId",
-    "explanation": "Must be used on first purchase and can't be used by referrer."
-  } 
-}
-```
-
-#### Important Note:
-The `redemptionRule` as written, is required to make sure that the referral code can only be used by new users. The metadata properties this rule depends on will be set in other calls we address below. 
-
-### Step 2: Creating the Referrer Credit Program
-
-This is the `Program` you will use to credit **the referring** users who successfully refers a new user(s).
-
-#### Call to Create Credit Program:
-
-`POST https://api.lightrail.com/v2/programs`
-```json
-{
-  "id": "credit-program-id",
-  "currency": "USD",
-  "name": "Credit Program",
-  "discount": true,
-  "pretax": false
-}
-```
-
-### Step 3: Creating Referral Codes
-
-In this step, an existing user creates a personal referral code that they can distribute to their friends. This is accomplished by using the Referral Program (created in Step 1) to generate a “generic value” with a specific code that the existing user can distribute to their friends.
-
-When an existing user creates their referral code two things need to happen. 
-
-1. Generate a Referral Code from the Referral Program
-1. Generate a Value to be credited from the Credit Program (this is a Value that will be attached to the referrer and will store the credit they receive when new users sign up using their referral code: details in **Step 4**)
-
-
-#### Call to Create a Referral Code for the Existing User
-
-`POST https://api.lightrail.com/v2/values`
-```json
-{
-  "id": "jamie-referral-code-id",
-  "programId": "referral-program-id",
-  "isGenericCode": true,
-  "code": "JAMIE_GIVES_20",
-  "genericCodeOptions": {
-    "perContact": {
-      "usesRemaining": 1,
-      "balance": 2000
-    }
-  },
-  "metadata": {
-    "referringContactId": "referring-jamie-contact-id"
-  }
+  "minInitialBalance": 0,
+  "maxInitialBalance": 200000,
+  "discount": false,
+  "pretax": false,
+  "startDate": null,
+  "endDate": null
 }
 ```
 
 #### Important Notes:
+- **metadata**: If you are interested in distributing your gift cards in an email, you can use `metadata` to support things like **company logos**, **email subject**, and **message**. For full `Program` attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+- **minInitialBalance / maxInitialBalance**: This sets the minimum and maximum balance range that a gift card Value can be issued for. Lightrail stores currency in the the smallest whole unit, so `200000` USD is $2000.00. 
+    Alternately you could set `fixedInitialBalances`  as a list of exact balances that are permissible. 
 
-- **id**: Use a [deterministic](https://en.wikipedia.org/wiki/Deterministic_system) ID for the referral code (i.e. `<contactId>-referral-code-id`).
-    - You’ll use this to lookup a user’s referral code. 
-- **code**: We have used the referring user’s first name as part of the code to add some personalization, but this could completely random if need be.
-- **genericCodeOptions**: Here we define the `perContact` attributes that fit our example. The receiving user will get $20 (`"balance": 2000`) towards their first purchase (`"usesRemaining": 1`).
-- **metadata**: Set `referringContactId` in the metadata. This is required for the Referral Program `redemptionRule` to work in `checkout` 
-- You may wish to set other `Value` attributes that pertain to your use case, such as `startDate` and  `endDate` etc., but we’ll be excluding them from the example for brevity.
+#### Selling gift cards
+Gift cards are represented in Lightrail as Values and will be created from the Program we set up earlier. For our example we will demonstrate creating the Value at the time of purchase, and we will be creating them from our *Range Program*.
 
-### Step 4: Generating the Value for the Referrer Credit Program
+#### Selling a gift card follows these basic steps:
 
-In this step, you’ll create a unique `Value` and attach it to the existing user — the referrer. When new users sign up using the existing user’s referral code, you’ll give credit to the existing user by adding balance to this `Value`.
+1. You will need a page on your website where the customer can purchase the gift card. You can use [Lightrail’s checkout functionality](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout), or use your existing payment handling flow to process payment for the gift card. 
+1. Once the gift card has been paid for, you make a call to Lightrail to create the `Value` that will represent the gift card. For full `Value` creation details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+1. Send the recipient the gift card code. This is dependent on your use case and the distribution is entirely up to you. The recipient will need the Value’s code to register it to their account/wallet ([LINK TO REG SECTION](http://#)), use it in a checkout transaction ([LINK TO ACCEPT IN CHECKOUT](http://#)), or check the balance ([LINK TO BALANCE CHECK](http://#)). 
 
-#### Call to Create a Credit Value for the Existing User
-
+ 
+#### Call to Create Gift Card Value in Step 2:
 `POST https://api.lightrail.com/v2/values`
 ```json
 {
-  "id": "referring-jamie-credit-id",
-  "programId": "referral-credit-program-id",
-  "contactId": "referring-jamie-contact-id",
-  "balance": 0
+  "id": "b4b3598a-857d-4f6c-b",
+  "programId": "range-gift-card-program-id",
+  "balance": 5000,
+  "generateCode": {} // leave this object blank to accept the defaults
 }
 ```
 
-#### Important Note:     
-- **balance**: The Value is created with `"balance": 0` so that when they successfully refer a new user this `Value` will be credited.  
+The parameter `generateCode` tells the server to generate our gift card code for us. The generated code is returned in the response. We’ll use `GIFT-CARD-DEMO-1234-5678` for the rest of the example.
 
-### Step 5: Attaching the Value to the Contact
- 
-In this step, we will be demonstrating how to create the new user and attach the referral code to the user. There are a number of ways a referred user could have received the code—via email, text message, word-of-mouth, etc. You will need _somewhere_ for a new user to “Register” and enter a referral code. 
+#### Important Notes:
+- **id**: This is the ID you choose to represent the Value. Lightrail recommends [UUID v4](https://en.wikipedia.org/wiki/Universally_unique_identifier) as an excellent way to generate an `id`.
+- **programId**: It is important to use the `programId` to ensure the `Value` will be created and tracked under the appropriate *Range Program*. This ensures that the defaults set in the Program will apply to the gift card Value .
+- **balance**: Amounts are represented in cents. Since we defined our `Program` to use USD, the `5000` represents $50.00.
+- **generateCode:** This property generates a unique code. We recommend using the default length and character set. To do so, simply set this to an empty object, i.e. `generateCode: {}`. Alternatively you can set the `code` property to a unique code of your choosing. This can be completely random or follow a pattern that makes sense for your organization. 
+- **metadata:** You may want to use the Value’s `metadata` property to include the associated payment `id` you would receive from your payment provider. This will help you cross reference the transaction later.
+- In this example we have omitted properties that were already set in the `Program`, such as `discount`, `pretax`, `startDate`, and `endDate`, however these can be overridden on a per `Value` basis if need be.
 
-Here we will suppose you have a form field on a `/register` page that allows a new user to enter the referral code. We will also suppose that when your user requested the referral code, your site provides a shareable link to the registration page to help them with distributing it to their friends. This way you could pass the `code` along in a link to auto-populate the form field on the registration page for them like so: 
-`https://yourcompany.com/register?code=JAMIE_GIVES_20`. 
+### Register the Gift Card to an Account or Wallet
 
-The same link/code strategy would work well if you allowed your existing users to distribute their referral codes in a branded email, which could contain the code embedded in a link. In this case your referral page could just have a field for your users to enter the email addresses of friends they wanted to share the `code` with.
+Gift cards can be used anonymously, but the easiest way for a recipient to use a gift card as a payment source is to register it to their account or wallet. This means [creating a Lightrail](https://lightrailapi.docs.apiary.io/#reference/0/contacts/create-a-contact) `[Contact](https://lightrailapi.docs.apiary.io/#reference/0/contacts/create-a-contact)` record for the recipient and attaching the gift card `Value` to that `Contact`. For brevity we will assume that the contact record already exists — otherwise, see the API docs.
 
-Using this method your site can check the query string for a `code` and if present, show it in the “Referral Code” in the form field for them.
+Once you’ve attached the gift card to the Contact, the balance will be automatically available in their checkout. 
 
-#### Call to Create a Contact from the Register form
+Using the ID of the existing Contact, you can now attach the gift card `Value` to the `Contact`:
 
-This call will create a `Contact` record for the new user, who is signing up after being referred by an existing user.
-
-`POST https://api.lightrail.com/v2/contacts`
+`POST https://api.lightrail.com/v2/contacts/<contactId>/values/attach`
 ```json
 {
-  "id": "referred-tim-contact-id",
-  "firstName": "Tim",
-  "lastName": "Tam",
-  "email": "timtam@email.com"
-}
-```
-Once their `Contact` record has been created, you will apply their referral credit by attaching the referral code `Value` to the new `Contact`.
-
-_**Note**: It’s important to wait for the response before attaching the `Value`_
-
-#### Call to Attach Value to Contact
-
-Using the ID of the `Contact` you just created, you can attach the referral code `Value`:
-
-`POST https://api.lightrail.com/v2/contacts/<NEW-contactId>/values/attach`
-```json
-{
-  "code": "JAMIE_GIVES_20"
+  "code": "GIFT-CARD-DEMO-1234-5678"
 }
 ```
 
-Once you’ve attached the referral code to the new `Contact`, the discount will be automatically applied during their first checkout.
+For the rest of this example, we’ll assume that you’ve attached the gift card to a contact with ID `CONTACT-ABCD-1234-EFGH`. We’ll use that ID in the checkout step.
 
-### Step 6: Modifying Checkout to Support Referrals
 
-If you’re an existing Lightrail user, you will need to modify your checkout calls to include both `purchaseCount` and `purchasingContactId` in the request metadata. This will provide the required context for the Redemption Rule on the referral code `Value` be properly evaluated, and give credit to both your new users and your existing user who sent out the referral.
+### Accepting the Gift Card in Checkout
 
-If you’re new to Lightrail and just getting set up, we suggest including this information from the beginning.
+Now that we’ve attached the gift card `Value` to the `Contact`, for the next step in this example we’ll assume that this person is logged in to your site, has an item in their cart, and is ready to checkout. 
 
-The new metadata properties should be populated as follows:
-`purchaseCount` should reflect the number of purchases that have been made by the contact checking out. In the case of a new user who has just signed up, this will be `0`.
-`purchasingContactId` is the ID of the contact making the purchase, i.e., the new user’s `contactId`. It should be the same as the `contactId` listed in the payment sources.
+We will supply the `contactId` as one of the payment `sources` in the `checkout` call. When a `contactId` is present, Lightrail will use any Values attached to the contact that are not frozen, expired, or otherwise can’t be applied to the transaction. 
 
-Because the referral code `Value` was attached to the new user in the previous step, when their `contactId` is used as a payment source with these metadata properties set, the discount will be automatically applied to their purchase.
+Lightrail allows you to split payment over multiple payment sources, which makes it easy for your customers to checkout for amounts greater than the balance of their attached Values. For our example, we will demonstrate how the attached gift card would be used in combination with Stripe.
+
+Alternatively, you could allow for anonymous users by providing the gift card `code` as a source instead of the `contactId`.
+
+For full `checkout` request details, see the [Transaction / Checkout endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout). 
 
 #### Call to Checkout
-
 `POST https://api.lightrail.com/v2/transactions/checkout`
+
 ```json
 {
-  "id": "referred-tim-purchase-id",
+  "id": "transaction-id-FGHI-9876",
   "currency": "USD",
   "sources": [
     { 
-      "rail": "lightrail", 
-      "contactId": "referred-tim-contact-id" 
+      "rail": "lightrail",
+      "contactId": "CONTACT-ABCD-1234-EFGH" 
+    },
+    {
+      "rail": "stripe",
+      "source": "tok_visa"
     }
   ],
   "lineItems": [
     {
-      "unitPrice": 5000
+      "unitPrice": 8500
     }
-  ],
-  "allowRemainder": true,
-  "metadata": {
-    "purchasingContactId": "referred-tim-contact-id",
-    "purchaseCount": 0
-  }
+  ]
 }
-```
+```    
+    
+#### Important Note:
+You can use `"simulate": true` to test the `checkout` request before submitting the transaction.
 
-#### Important Notes:
 
-- **metadata**: Both `purchasingContactId` and `purchaseCount` are extremely important to include for referrals to work. This is the glue between the referral code `redemptionRule`, and is required for both the referrer (existing user) and the referred (new user) to receive their referral offers.
-- You can use `"simulate": true` to test the `checkout` request above and see the discount if you wish to show the discounted savings to the user before submitting the transaction.
+----------
+### Balance Check
 
-### Step 7: Paying Referrers
+In order for customers to be able to easily check the remaining `balance` on their gift card, you can provide a page that accepts a gift card `code` and looks up the `Value`. Lightrail recommends using a [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) challenge-response system to ensure the user is human. See the [Values](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code) [endpoint to retrieve the value by code](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code).
 
-When the the request to `checkout` is submitted and you receive a successful response you’ll then call your internal system to credit the `Value` set up earlier for the referrer (`jamie-referral-code-id`).
+`GET https://api.lightrail.com/v2/values?code=GIFT-CARD-DEMO-1234-5678`
 
-Here is a pseudo-code version of that call:
-
-```javascript
-// This lives in your internal system code and it will be called upon a successful response (201) from the checkout call
-referringCreditFunction(tx: LightrailCheckoutTransaction) {
-  // Check that it is the user's first purchase and that there is a "lightrail step"  
-  if (tx.metadata["purchaseCount"] == 0 && steps.find(step => step.rail == "lightrail")) {
-    // for each LR step, lookup value, check metadata for a referring contact id
-    for each value in steps:
-      value = getValue(valueId)
-      if (value.metadata.referringContactId !== null) {
-        // credit referrer
-    }
+**RESPONSE**
+```json
+[
+  {
+    "id": "b4b3598a-857d-4f6c-b",
+    "currency": "USD",
+    "balance": 5000,
+    "programId": "range-gift-card-program-id",
+    "contactId": "CONTACT-ABCD-1234-EFGH",
+    "code": "…5678",
+    ... // additional properties omitted for brevity
   }
-}
+]  
 ```
-
-### Summary
-
-In our example scenario we created the following:
-- Two `Programs`
-    - One for creating personal referral codes that existing users can distribute to their friends 
-    - One for crediting existing users when new users sign up using their referral codes
-- One `Value` that will be our generic referral code
-- One `Value` that will allow us to credit the referring user when a successful referral is completed
-
-In this example scenario, referral codes were created on demand, programmatically, for existing users who wished to invite new users. New users who received a referral code would register on your site at a `/register` page, which would create a new `Contact` record for them and attach the referral code `Value`. 
-
-There are many possible variations to this scenario — if you have any questions about configuring something different, please [reach out](mailto:hello@lightrail.com). We are here to help.
-
-There are a few additional points of note:
-- Currently the Lightrail API allows Jamie to attach the referral code to himself, but the Redemption Rule on the referral code `Value` prevents him from spending it.
-- In this scenario, only new users making their first purchase can use a referral code.
-- Referral codes can’t be accidentally applied to ineligible purchases, because if the metadata properties outlined in Step 6 are omitted, the `Value` won’t be applied.
-- The Value’s ID of Jamie's referral code must be stored in your internal system or it must be deterministic.
-    - This allows you to look up a Contact's referral code.
-    - This allows you to look up a Contact to view the attached values and therefore contacts they've referred
-        - additional look ups are required to tell if those referred users have spent their credits
-    - In the event that a new user who received a referral credit returns the item that they purchased, you can choose to remove their referral credit (rather than refunding it) and/or remove the credit that was issued to the referrer.
 
 If you have any questions or comments, please get in touch with us at [hello@lightrail.com](mailto:hello@lightrail.com)
-
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-//////////////
-
-
-
 
 ## Referral Programs 
  
@@ -1393,6 +1297,7 @@ In this step, you’ll create a unique `Value` and attach it to the existing use
 ```json
 {
   "id": "referring-jamie-credit-id",
+  "programId": "credit-program-id",
   "contactId": "referring-jamie-contact-id",
   "balance": 0
 }
