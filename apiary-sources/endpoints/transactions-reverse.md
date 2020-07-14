@@ -13,7 +13,7 @@ Reversing a Transaction is not possible when: the Transaction is pending (must b
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}} {{whitespace.id}}
         + metadata (object, optional) - {{transaction.metadata}}
      
     + Body

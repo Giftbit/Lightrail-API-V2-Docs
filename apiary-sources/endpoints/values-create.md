@@ -11,10 +11,10 @@
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{value.id}}  {{value.idPurpose}}
+        + id (string, required) - {{value.id}}  {{value.idPurpose}} {{whitespace.id}}
         + programId (string, optional) - {{value.create.programId}}
         + contactId (string, optional) - {{value.create.contactId}}
-        + code (string, optional) - {{value.create.code}}
+        + code (string, optional) - {{value.create.code}} {{whitespace.code}} {{whitespace.valueCodeNote}}
         + isGenericCode (boolean) - {{value.isGenericCode}}
         + genericCodeOptions (GenericCodeOptions, optional)
         + generateCode (CodeGeneration, optional) - {{value.generateCode}}

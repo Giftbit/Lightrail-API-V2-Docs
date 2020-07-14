@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{contact.id}}  {{contact.idPurpose}}
+        + id (string, required) - {{contact.id}}  {{contact.idPurpose}} {{whitespace.id}}
         + firstName (string, optional) - {{contact.firstName}}
         + lastName (string, optional) - {{contact.lastName}}
         + email (string, optional) - {{contact.email}}

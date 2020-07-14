@@ -10,7 +10,7 @@ An Issuance creates many [Values](#reference/0/values) in bulk and is tracked fo
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{issuance.id}}  {{issuance.idPurpose}}
+        + id (string, required) - {{issuance.id}}  {{issuance.idPurpose}} {{whitespace.id}}
         + name (string, required) - {{issuance.name}}
         + count (number, required) - {{issuance.count}}
         + generateCode (CodeGeneration, optional) - {{issuance.generateCode}}

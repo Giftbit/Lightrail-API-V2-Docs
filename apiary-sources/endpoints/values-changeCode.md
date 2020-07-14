@@ -9,7 +9,7 @@
             {{header.authorization}}
 
     + Attributes
-        + code (string, optional) - {{value.code}}
+        + code (string, optional) - {{value.code}} {{whitespace.code}}
         + generateCode (CodeGeneration, optional) - {{value.generateCode}}
         
         

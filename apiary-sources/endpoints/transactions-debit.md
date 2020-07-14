@@ -9,7 +9,7 @@ Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler a
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}} {{whitespace.id}}
         + source (LightrailTransactionParty, required) - The payment rail to debit.  Only `lightrail` rails that refer to a specific Value are supported.
         + currency (string, required) - {{currency.code}}
         + amount (number) - The amount to debit.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.

@@ -13,7 +13,7 @@ Capturing a pending Transaction is not possible when one of the Values is frozen
             {{header.authorization}}
             
     + Attributes
-        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}} {{whitespace.id}}
         + metadata (object, optional) - {{transaction.metadata}}
         
     + Body

@@ -1,6 +1,6 @@
 ## LightrailTransactionParty (object)
 + rail (string, required) - The payment rail: `lightrail`. Must be used in combination with one of the following identifiers.
-+ code (string) - The code of a Gift Card or Promotion.
++ code (string) - The code of a Gift Card or Promotion. {{whitespace.valueCodeNote}}
 + contactId (string) - A Contact's ID.  This is shorthand for all Values that a Contact is associated with.
 + valueId (string) - A Value's ID.
 

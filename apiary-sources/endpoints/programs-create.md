@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + id (string, required) - {{program.id}}  {{program.idPurpose}}
+        + id (string, required) - {{program.id}}  {{program.idPurpose}} {{whitespace.id}}
         + name (string, required) - {{program.name}}
         + currency (string, required) - {{currency.code}}
         + discount (boolean, optional) - {{program.discount}}

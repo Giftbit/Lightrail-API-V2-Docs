@@ -6,7 +6,7 @@
             {{header.authorization}}
         
     + Attributes
-        + code (string, required) - {{currency.code}}
+        + code (string, required) - {{currency.code}} {{whitespace.code}}
         + name (string, required) - {{currency.name}}
         + symbol (number, required) - {{currency.symbol}}
         + decimalPlaces (number, required) - {{currency.decimalPlaces}}

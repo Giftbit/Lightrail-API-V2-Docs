@@ -19,7 +19,7 @@
 ### Get a Value by Code [GET /values{?code}{?showCode}]
 
 + Parameter
-    + code (string) - the code (secret or generic) of the Value to get.
+    + code (string) - the code (secret or generic) of the Value to get. {{whitespace.valueCodeNote}}
     + showCode (boolean, optional) - {{value.showCode}}
 
 + Request (application/json)

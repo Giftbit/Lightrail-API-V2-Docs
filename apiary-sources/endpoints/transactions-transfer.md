@@ -9,7 +9,7 @@ Transfer value from a Lightrail or Stripe payment source to a Lightrail payment 
             {{header.authorization}}
 
     + Attributes
-        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}}
+        + id (string, required) - {{transaction.id}}  {{transaction.idPurpose}} {{whitespace.id}}
         + source (LightrailTransactionParty, StripeTransactionParty, required) - The payment rail to debit.  Must be a `stripe` or `lightrail` rail that refers to a specific Value.
         + destination (LightrailTransactionParty, required) - The payment rail to credit. Must refer to a single `lightrail` Value.
         + amount (number, required) - The amount to transfer, > 0.
