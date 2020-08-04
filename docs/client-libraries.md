@@ -9,3 +9,6 @@ Using our client libraries can help expedite the development process. See the fo
 
 #### Ruby
 - [Lightrail Ruby Client](https://github.com/Giftbit/lightrail-client-ruby)
+
+#### Command line tools
+- [Lightrail CSV Importer](https://github.com/Giftbit/lightrail-csv-importer) imports Values and Contacts into your Lightrail account by an interactive script.
