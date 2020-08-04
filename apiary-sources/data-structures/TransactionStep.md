@@ -7,6 +7,7 @@
 + balanceBefore (number) - The `balance` of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
 + balanceAfter (number) - The `balance` of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
 + balanceChange (number) - The net change of the `balance` of the Value for the Transaction.  When the Value has a `balanceRule` rather than a `balance` this number will still be set to indicate the value of the rule.
++ balanceRule (Rule) - The `balanceRule` of the Value at the time of the Transaction. Only recorded for `checkout` Transactions. 
 + usesRemainingBefore (number) - The `usesRemaining` of the Value before the Transaction.  `null` when the Value does not have a `usesRemaining`.
 + usesRemainingAfter (number) - The `usesRemaining` of the Value after the Transaction.  `null` when the Value does not have a `usesRemaining`.
 + usesRemainingChange (number) - The net change of the `usesRemaining` of the Value for the Transaction.
