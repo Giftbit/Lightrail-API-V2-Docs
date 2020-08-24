@@ -20,6 +20,7 @@
 + startDate (string) - {{value.startDate}}
 + endDate (string) - {{value.endDate}}
 + metadata (object) - {{value.metadata}}
-+ createdDate (string) - {{createdDate}}
-+ updatedDate (string) - {{updatedDate}}
++ createdDate (string) - {{value.createdDate}}
++ updatedDate (string) - {{value.updatedDate}}
 + updatedContactIdDate (string) - {{value.updatedContactIdDate}}
++ createdBy (string) - {{value.createdBy}}

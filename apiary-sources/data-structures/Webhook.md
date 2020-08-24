@@ -4,8 +4,8 @@
 + events (array[string]) - {{webhook.events}}
 + secrets (array[WebhookSecret]) - A list of secrets used for the signed header signature.
 + active (boolean) - {{webhook.active}}
-+ createdDate (string) - {{createdDate}}
-+ updatedDate (string) - {{updatedDate}}
++ createdDate (string) - {{webhook.createdDate}}
++ updatedDate (string) - {{webhook.updatedDate}}
 + createdBy (string) - {{webhook.createdBy}}
 
 ## WebhookSecret (object)

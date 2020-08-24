@@ -14,6 +14,7 @@
 + discountSellerLiability (number) - {{program.discountSellerLiability}}
 + startDate (string) - {{program.startDate}}
 + endDate (string) - {{program.endDate}}
++ metadata (object) - {{program.metadata}}
 + createdDate (string) - {{program.createdDate}}
 + updatedDate (string) - {{program.updatedDate}}
-+ metadata (object) - {{program.metadata}}
++ createdBy (string) - {{program.createdBy}}

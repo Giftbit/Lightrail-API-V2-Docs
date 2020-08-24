@@ -9,5 +9,6 @@
 + redemptionRule (Rule) - {{issuance.redemptionRule}}
 + balanceRule (Rule) - {{issuance.balanceRule}}
 + metadata (object) - {{issuance.metadata}}
-+ createdDate (string) - {{createdDate}}
-+ updatedDate (string) - {{updatedDate}}
++ createdDate (string) - {{issuance.createdDate}}
++ updatedDate (string) - {{issuance.updatedDate}}
++ createdBy (string) - {{issuance.createdBy}}
