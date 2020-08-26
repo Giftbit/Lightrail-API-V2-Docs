@@ -635,6 +635,8 @@ paths:
                 updatedDate: 2020-08-26T18:04:44.000Z
       deprecated: false
     get:
+      tags:
+        - Contacts
       summary: List Contacts
       description: ''
       operationId: ListContacts
@@ -1096,12 +1098,10 @@ paths:
       deprecated: false
   /values:
     post:
+      tags:
+        - Values
       summary: Create a Value
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: CreateaValue
       parameters:
         - name: showCode
@@ -1132,12 +1132,10 @@ paths:
                 $ref: '#/components/schemas/Value'
       deprecated: false
     get:
+      tags:
+        - Values
       summary: Get a Value by Code
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: GetaValuebyCode
       parameters:
         - name: code
@@ -1174,12 +1172,10 @@ paths:
       deprecated: false
   /values/{id}:
     get:
+      tags:
+        - Values
       summary: Get a Value
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: GetaValue
       parameters:
         - name: id
@@ -1214,12 +1210,10 @@ paths:
                 $ref: '#/components/schemas/Value'
       deprecated: false
     patch:
+      tags:
+        - Values
       summary: Update a Value
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: UpdateaValue
       parameters:
         - name: id
@@ -1249,12 +1243,10 @@ paths:
       deprecated: false
   /values/{id}/changeCode:
     post:
+      tags:
+        - Values
       summary: Change a Value's code
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: ChangeaValuescode
       parameters:
         - name: id
@@ -1282,12 +1274,10 @@ paths:
       deprecated: false
   /values/{id}/transactions:
     get:
+      tags:
+        - Values
       summary: List a Value's Transactions
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: ListaValue'sTransactions
       parameters:
         - name: id
@@ -1365,12 +1355,10 @@ paths:
       deprecated: false
   /values/{id}/contacts:
     get:
+      tags:
+        - Values
       summary: List a Value's Attached Contacts
-      description: >-
-        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-
-        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      description: ''
       operationId: ListaValue'sAttachedContacts
       parameters:
         - name: id
@@ -1467,12 +1455,9 @@ paths:
       deprecated: false
   /programs:
     post:
+      tags:
+        - Programs
       summary: Create Program
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
       operationId: CreateProgram
       parameters: []
       requestBody:
@@ -1500,12 +1485,10 @@ paths:
                 $ref: '#/components/schemas/Program'
       deprecated: false
     get:
+      tags:
+        - Programs
       summary: List Programs
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: ListPrograms
       parameters:
         - name: limit
@@ -1598,12 +1581,10 @@ paths:
       deprecated: false
   /programs/{id}:
     get:
+      tags:
+        - Programs
       summary: Get a Program
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: GetaProgram
       parameters:
         - name: id
@@ -1631,12 +1612,10 @@ paths:
                 $ref: '#/components/schemas/Program'
       deprecated: false
     patch:
+      tags:
+        - Programs
       summary: Update a Program
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: UpdateaProgram
       parameters:
         - name: id
@@ -1665,12 +1644,10 @@ paths:
                 $ref: '#/components/schemas/Contact'
       deprecated: false
     delete:
+      tags:
+        - Programs
       summary: Delete a Program
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: DeleteaProgram
       parameters:
         - name: id
@@ -1703,12 +1680,12 @@ paths:
       deprecated: false
   /programs/{id}/issuances:
     post:
+      tags:
+        - Programs
+        - Issuances
       summary: Create Issuance
       description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.An Issuance creates many [Values](#reference/0/values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#reference/0/values/create-a-value) instead.
+        An Issuance creates many [Values](#reference/0/values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#reference/0/values/create-a-value) instead.
       operationId: CreateIssuance
       parameters:
         - name: id
@@ -1735,12 +1712,11 @@ paths:
                 $ref: '#/components/schemas/Issuance'
       deprecated: false
     get:
+      tags:
+        - Programs
+        - Issuances
       summary: List Issuances
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: ListIssuances
       parameters:
         - name: id
@@ -1782,12 +1758,11 @@ paths:
       deprecated: false
   /programs/{programId}/issuances/{issuanceId}:
     get:
+      tags:
+        - Programs
+        - Issuances
       summary: Get an Issuance
-      description: >-
-        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
-
-
-        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      description: ''
       operationId: GetanIssuance
       parameters:
         - name: issuanceId
@@ -3689,3 +3664,13 @@ tags:
       Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
 
       Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
+  - name: Values
+    description: >-
+      A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+      Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+  - name: Programs
+    description: >-
+      Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+      Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
