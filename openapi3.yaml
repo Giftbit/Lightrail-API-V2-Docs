@@ -1,0 +1,3691 @@
+openapi: 3.0.0
+info:
+  title: Lightrail Documentation
+  description: >-
+    Welcome to Lightrail. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect multi-tender payment in a unified checkout solution. Create an account to generate API keys and begin testing.
+
+
+    [Create an account](https://www.lightrail.com/app/#/auth/register)
+
+
+    ## Authentication
+
+
+    Authentication is done via an authorization header. You can retrieve your Lightrail API key [here](https://www.lightrail.com).
+
+
+    In requests to Lightrail you must include the following header:
+
+
+    ```
+
+    Authorization: Bearer <API_KEY>
+
+    ```
+
+
+    ## Dates & Durations
+
+
+    All dates and durations are sent and received in ISO 8601 format.
+
+
+    Date format: `YYYY-MM-DDTHH:MM:SS.SSSZ`
+
+
+    Example date: `2007-04-05T14:30:00.000Z`
+
+
+    Duration format: `PnYnMnDTnHnMnS`
+
+
+    Example duration: `P7DT12H`
+
+
+    ## Filtering
+
+
+    Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs), [Transactions](#reference/0/transactions)) have filters for retrieving a subset of the entries.
+
+
+    Some query filter properties support operators for more powerful filtering.  The operator is specified after the property and a dot (eg: `balance.ne` for balance not equal to).
+
+
+    | operator | description |
+
+    |----------|-------------|
+
+    | lt       | Less than (&lt;). |
+
+    | lte      | Less than or equal to (&lt;=). |
+
+    | gt       | Greater than (&gt;). |
+
+    | gte      | Greater than or equal to (&gt;=). |
+
+    | eq       | Equal to (==).  This is the default where no operator is specified. |
+
+    | ne       | Not equal to (!=). |
+
+    | in       | Equals one of the members of a comma-separated list.  Literal commas must be escaped (\\,). |
+
+    | like     | Equal to with wildcard support.  Percent signs (%) in the value are wild.  This operator is only supported on string properties. |
+
+    | isNull   | Equal to null (true) or not equal to null (false). |
+
+    | orNull   | Allows other filters acting on the same property to also include results if the property is equal to null (true), or, not equal to null (false). |
+
+
+    **Examples**
+
+
+    1. List [Contacts](#reference/0/contacts/list-contacts) where `email` equals "mia.wallace@example.com" or "mia_wallace@example.com":
+
+    `https://api.lightrail.com/v2/contacts?email.in=mia.wallace@example.com,mia_wallace@example.com`
+
+
+    2. List [Values](#reference/0/values/list-values) where `currency` equals "USD" and `balance` greater than or equal to $10:
+
+    `https://api.lightrail.com/v2/values?currency=USD&balance.gte=1000`
+
+
+    3. List [Contacts](#reference/0/contacts/list-contacts) where `email` address is "like" `%@gmail.com` where `%` acts as a wild card (ie: ends with @gmail.com).
+
+    `https://api.lightrail.com/v2/contacts?email.like=%@gmail.com`
+
+
+    4. List [Programs](#reference/0/programs/list-programs) where `endDate` is greater than date or `null` (ie: filtering for non-expired).
+
+    `https://api.lightrail.com/v2/programs?endDate.gt=2019-11-08T12:00:00.000Z&endDate.orNull=true`
+
+
+    ## Paging
+
+
+    Resources that may contain lots of entries ([Contacts](#reference/0/contacts/list-contacts), [Values](#reference/0/values/list-values), [Programs](#reference/0/programs/list-programs)) may not return all results in a single response.  Instead they return a number of results limited by the `limit` query parameter.
+
+
+    Retrieving results after the first page means following links in the [Link header](https://tools.ietf.org/html/rfc5988).  Here's an example Link header...
+
+
+    ```text
+
+    (all line-breaks are inserted here for clarity and don't exist in production)
+
+
+    Link:
+      <https://api/lightrail.com/v2/contacts?limit=100>;
+        rel="first",
+      <https://api/lightrail.com/v2/contacts?limit=100&before=eyJpZCI6ImplZmYgaXMgYXdlc29tZSJ9>;
+        rel="prev",
+      <https://api/lightrail.com/v2/contacts?limit=100&next=eyJpZCI6ImplbiBpcyBhd2Vzb21lIHRvbyJ9>;
+        rel="next",
+      <https://api/lightrail.com/v2/contacts?limit=100&last=true>;
+        rel="last"
+    ```
+
+
+    This example has links to the first page, the previous page, the next page, and the last page.  When already at the first page there will only be links to the next and last.  When already at the last page there will only be links to the first and prev.  If there are no results to page though or only one page there will not be any links.
+
+
+    It's important to follow the links in the Link header and not construct the URLs on your own.
+
+
+    ## Errors
+
+
+    Lightrail uses the following HTTP status codes to indicate an error:
+
+
+    | code | meaning |
+
+    |------|---------|
+
+    | 400  | The request could not be understood.  eg: JSON body could not be parsed. |
+
+    | 401  | Authentication missing. |
+
+    | 403  | The operation is not allowed for the given authentication. |
+
+    | 404  | The resource was not found.  eg: There is no Contact for the given ID. |
+
+    | 409  | The operation could not be performed because of the state of the system.  eg: There is not enough balance for a Transaction to complete. |
+
+    | 422  | The request was understood but has a logical problem.  eg: Attempting to credit a negative amount. If using the `stripe` payment rail, most Stripe errors will result in a `422`. |
+
+    | 424  | The request failed due to a failed third party dependency (such as an error calling Stripe). This can indicate that Lightrail and a third party are an inconsistent state. eg: While attempting to reverse a checkout Transaction with two Stripe charges, the first charge is refunded but the second refund fails. Refunds in Stripe cannot be undone which leaves the system in a state that it cannot automatically recover from. Note, this status code is extremely rare and represents a worst-case scenario for which some intervening action will be necessary. |
+
+    | 429  | Too many requests in a given amount of time. |
+
+    | 500  | Internal server error.  Please [contact us](mailto:hello@lightrail.com) with details of your request and we'll look into it. |
+
+
+    Lightrail errors contain a JSON body with the following properties:
+
+
+    | property    | always present | purpose |
+
+    |-------------|----------------|---------|
+
+    | message     | yes            | English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates. |
+
+    | statusCode  | yes            | The HTTP status code. |
+
+    | messageCode | no             | A constant corresponding to the message.  This can be used to take action in response to the error. |
+
+    | stripeError | no             | When using the `stripe` rail: the full error response from Stripe in case of an error charging a credit card. |
+
+
+    An example:
+
+
+    ```json
+
+    {
+        "message": "Insufficient balance for the transaction.",
+        "statusCode": 409,
+        "messageCode": "InsufficientBalance"
+    }
+
+    ```
+
+
+    ## Support
+
+
+    [Contact us](mailto:hello@lightrail.com) any time if you have any questions.  We're here to help.
+  contact: {}
+  version: '1.0'
+servers:
+  - url: https://api.lightrail.com/v2/
+    variables: {}
+paths:
+  /currencies:
+    post:
+      tags:
+        - Advanced
+      summary: Create a Currency
+      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      operationId: CreateaCurrency
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateaCurrencyrequest'
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+      deprecated: false
+    get:
+      tags:
+        - Advanced
+      summary: List Currencies
+      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      operationId: ListCurrencies
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Currency'
+                description: ''
+      deprecated: false
+  /currencies/{code}:
+    get:
+      tags:
+        - Advanced
+      summary: Get a Currency
+      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      operationId: GetaCurrency
+      parameters:
+        - name: code
+          in: path
+          description: the code of the Currency to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+      deprecated: false
+    patch:
+      tags:
+        - Advanced
+      summary: Update a Currency
+      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      operationId: UpdateaCurrency
+      parameters:
+        - name: code
+          in: path
+          description: the code of the Currency to modify.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: Applies a JSON merge. Only members that are present are changed and all others are left untouched.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateaCurrencyrequest'
+            example:
+              name: Zimbabwe Dollars
+              symbol: Z$
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Currency'
+      deprecated: false
+    delete:
+      tags:
+        - Advanced
+      summary: Delete a Currency
+      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      operationId: DeleteaCurrency
+      parameters:
+        - name: code
+          in: path
+          description: the code of the Currency to delete.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteaCurrencyresponse'
+              example:
+                success: true
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Currency 'USD' is in use.
+                messageCode: CurrencyInUse
+      deprecated: false
+  /webhooks:
+    post:
+      tags:
+        - Advanced
+      summary: Create Webhook
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: CreateWebhook
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWebhookrequest'
+            example:
+              events:
+                - '*'
+              id: webhook1
+              url: https://example.com/callbackUrl
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+              example:
+                active: true
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:56.922Z
+                events:
+                  - '*'
+                id: webhook1
+                secrets:
+                  - createdDate: 2020-08-26T18:04:56.931Z
+                    id: 4625e9f1-0a00-4922-bd95-e1f4787a8a0b
+                    secret: HTNMIJM4TTHK6JDM
+                updatedDate: 2020-08-26T18:04:56.922Z
+                url: https://example.com/callbackUrl
+      deprecated: false
+    get:
+      tags:
+        - Advanced
+      summary: List Webhooks
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: ListWebhooks
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Webhook'
+                description: ''
+              example:
+                - active: true
+                  createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                  createdDate: 2020-08-26T18:04:56.922Z
+                  events:
+                    - '*'
+                  id: webhook1
+                  secrets:
+                    - createdDate: 2020-08-26T18:04:56.931Z
+                      id: 4625e9f1-0a00-4922-bd95-e1f4787a8a0b
+                      secret: …6JDM
+                  updatedDate: 2020-08-26T18:04:56.922Z
+                  url: https://example.com/callbackUrl
+      deprecated: false
+  /webhooks/{id}:
+    get:
+      tags:
+        - Advanced
+      summary: Get Webhook
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: GetWebhook
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+              example:
+                active: true
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:56.922Z
+                events:
+                  - '*'
+                id: webhook1
+                secrets:
+                  - createdDate: 2020-08-26T18:04:56.931Z
+                    id: 4625e9f1-0a00-4922-bd95-e1f4787a8a0b
+                    secret: …6JDM
+                updatedDate: 2020-08-26T18:04:56.922Z
+                url: https://example.com/callbackUrl
+      deprecated: false
+    patch:
+      tags:
+        - Advanced
+      summary: Update Webhook
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: UpdateWebhook
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWebhookrequest'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Webhook'
+              example:
+                active: true
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:56.922Z
+                events:
+                  - lightrail.value.*
+                id: webhook1
+                secrets:
+                  - createdDate: 2020-08-26T18:04:56.931Z
+                    id: 4625e9f1-0a00-4922-bd95-e1f4787a8a0b
+                    secret: …6JDM
+                updatedDate: 2020-08-26T18:04:57.734Z
+                url: https://example.com/callbackUrl
+      deprecated: false
+    delete:
+      tags:
+        - Advanced
+      summary: Delete Webhook
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: DeleteWebhook
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        204:
+          description: ''
+          headers: {}
+      deprecated: false
+  /webhooks/{id}/secrets/{secretId}:
+    get:
+      tags:
+        - Advanced
+      summary: Get Secret
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: GetSecret
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: secretId
+          in: path
+          description: The ID of the secret.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSecret'
+              example:
+                id: ae5ebfa3-69a9-4946-a17d-886f87ee69c9
+                secret: F5MUORROLVRSPGDP
+                createdDate: 2020-03-26T20:48:01.251Z
+      deprecated: false
+    delete:
+      tags:
+        - Advanced
+      summary: Delete Secret
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: DeleteSecret
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: secretId
+          in: path
+          description: '- The ID of the secret.'
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        204:
+          description: ''
+          headers: {}
+      deprecated: false
+  /webhooks/{id}/secrets:
+    post:
+      tags:
+        - Advanced
+      summary: Create Secret
+      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      operationId: CreateSecret
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the webhook.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookSecret'
+              example:
+                id: ae5ebfa3-69a9-4946-a17d-886f87ee69c9
+                secret: F5MUORROLVRSPGDP
+                createdDate: 2020-03-26T20:48:01.251Z
+      deprecated: false
+  /contacts:
+    post:
+      tags:
+        - Contacts
+      summary: Create a Contact
+      description: ''
+      operationId: CreateaContact
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateaContactrequest'
+            examples:
+              CreateaContactrequest:
+                $ref: '#/components/examples/CreateaContactrequest'
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+              example:
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:44.000Z
+                email: thedude@example.com
+                firstName: Jeffrey
+                id: f3036399-0963-4c3d-9
+                lastName: Lebowski
+                metadata:
+                  alias: El Duderino
+                updatedDate: 2020-08-26T18:04:44.000Z
+      deprecated: false
+    get:
+      summary: List Contacts
+      description: ''
+      operationId: ListContacts
+      parameters:
+        - name: limit
+          in: query
+          description: The max number of items to get.
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: id
+          in: query
+          description: Filter by ID.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: firstName
+          in: query
+          description: 'Filter by the firstName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          description: 'Filter by the lastName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: 'Filter by email.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: valueId
+          in: query
+          description: 'Filter by Value ID. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+                description: ''
+              example:
+                - createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                  createdDate: 2020-08-26T18:04:44.000Z
+                  email: thedude@example.com
+                  firstName: Jeffrey
+                  id: f3036399-0963-4c3d-9
+                  lastName: Lebowski
+                  metadata:
+                    alias: El Duderino
+                  updatedDate: 2020-08-26T18:04:44.000Z
+      deprecated: false
+  /contacts/{id}:
+    get:
+      tags:
+        - Contacts
+      summary: Get a Contact
+      description: ''
+      operationId: GetaContact
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Contact to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+              example:
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:44.000Z
+                email: thedude@example.com
+                firstName: Jeffrey
+                id: f3036399-0963-4c3d-9
+                lastName: Lebowski
+                metadata:
+                  alias: El Duderino
+                updatedDate: 2020-08-26T18:04:44.000Z
+      deprecated: false
+    patch:
+      tags:
+        - Contacts
+      summary: Update a Contact
+      description: ''
+      operationId: UpdateaContact
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Contact to update.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: Applies a JSON merge. Only members that are present are changed and all others are left untouched.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateaContactrequest'
+            example:
+              firstName: The Dude
+              metadata:
+                alias: El Duderino
+                note: Into the whole 'brevity thing'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+              example:
+                createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                createdDate: 2020-08-26T18:04:44.000Z
+                email: thedude@example.com
+                firstName: The Dude
+                id: f3036399-0963-4c3d-9
+                lastName: Lebowski
+                metadata:
+                  alias: El Duderino
+                  note: Into the whole 'brevity thing'
+                updatedDate: 2020-08-26T18:04:45.000Z
+      deprecated: false
+    delete:
+      tags:
+        - Contacts
+      summary: Delete a Contact
+      description: ''
+      operationId: DeleteaContact
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Contact to delete.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteaContactresponse'
+              example:
+                success: true
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Contact 'unique-id-123' is in use
+                messageCode: ContactInUse
+      deprecated: false
+  /contacts/{id}/values/attach:
+    post:
+      tags:
+        - Contacts
+      summary: Attach a Contact to a Value
+      description: >-
+        If attaching a Unique Value (`isGenericCode=false`) the Value's `contactId` will be set to the ID of the Contact attached to it. If attaching a Generic Code (`isGenericCode=true`) it depends on whether the Generic Code has `genericCodeOptions.perContact` properties set. If set, attaching will result in a new Value being created using the perContact properties for the new Value's `balance` and `usesRemaining`. If not set, the Generic Code will be shared and the Contact will receive a reference to the Generic Code. You can [list the Value's Contacts](#reference/0/values/list-a-value's-attached-contacts) to see all Contacts attached to the Value.
+      operationId: AttachaContacttoaValue
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Contact to attach Value to.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachaContacttoaValuerequest'
+            example:
+              valueId: 5a15757b-3026-48eb-8
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      deprecated: false
+  /contacts/{id}/values/detach:
+    post:
+      tags:
+        - Contacts
+      summary: Detach a Contact from a Value
+      description: ''
+      operationId: DetachaContactfromaValue
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Contact to detach the Value from.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetachaContactfromaValuerequest'
+            example:
+              valueId: 5a15757b-3026-48eb-8
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      deprecated: false
+  /contacts/{id}/values:
+    get:
+      tags:
+        - Contacts
+      summary: List a Contact's Values
+      description: ''
+      operationId: ListaContact'sValues
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the Contact to get the Values of.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The max number of items to get.
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: programId
+          in: query
+          description: Filter by Program ID.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: Filter by currency.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: balance
+          in: query
+          description: 'Filter by balance.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: usesRemaining
+          in: query
+          description: 'Filter by number of uses remaining.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: discount
+          in: query
+          description: Filter by discount.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: active
+          in: query
+          description: Filter active/inactive.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: frozen
+          in: query
+          description: Filter frozen/unfrozen.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: canceled
+          in: query
+          description: Filter canceled.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: pretax
+          in: query
+          description: Filter by whether or not the Value is applied pretax.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: startDate
+          in: query
+          description: 'Filter by startDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: 'Filter by endDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: createdDate
+          in: query
+          description: 'Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: updatedDate
+          in: query
+          description: 'Filter by updatedDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Value'
+                description: ''
+      deprecated: false
+  /values:
+    post:
+      summary: Create a Value
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: CreateaValue
+      parameters:
+        - name: showCode
+          in: query
+          description: Show the full code for the Value.  This is useful when using the `generateCode` param and you want to see the generated code.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+      requestBody:
+        description: This is an example of creating a unique Value using a Program to set most of its properties.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateaValuerequest'
+            example:
+              balance: 500
+              id: 5a15757b-3026-48eb-8
+              programId: 65d2c3c4-c594-4a3b-8
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+      deprecated: false
+    get:
+      summary: Get a Value by Code
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: GetaValuebyCode
+      parameters:
+        - name: code
+          in: query
+          description: the code (secret or generic) of the Value to get.
+          required: true
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: showCode
+          in: query
+          description: Show the full code for the Value.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+      deprecated: false
+  /values/{id}:
+    get:
+      summary: Get a Value
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: GetaValue
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Value to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: showCode
+          in: query
+          description: Show the full code for the Value.
+          style: form
+          explode: true
+          schema:
+            type: boolean
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+      deprecated: false
+    patch:
+      summary: Update a Value
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: UpdateaValue
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Value to modify.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: Applies a JSON merge. Only members that are present are changed and all others are left untouched.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateaValuerequest'
+            example:
+              frozen: true
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+      deprecated: false
+  /values/{id}/changeCode:
+    post:
+      summary: Change a Value's code
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: ChangeaValuescode
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Value to change the code of.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangeaValuescoderequest'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Value'
+      deprecated: false
+  /values/{id}/transactions:
+    get:
+      summary: List a Value's Transactions
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: ListaValue'sTransactions
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Value to get the Transactions of.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: transactionType
+          in: query
+          description: Filter by the transactionType.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: createdDate
+          in: query
+          description: 'Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: Filter by currency.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                description: ''
+      deprecated: false
+  /values/{id}/contacts:
+    get:
+      summary: List a Value's Attached Contacts
+      description: >-
+        A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+
+        Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+      operationId: ListaValue'sAttachedContacts
+      parameters:
+        - name: id
+          in: path
+          description: The ID of the Value to get the Contacts of.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: limit
+          in: query
+          description: The max number of items to get.
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: firstName
+          in: query
+          description: 'Filter by the firstName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: lastName
+          in: query
+          description: 'Filter by the lastName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: email
+          in: query
+          description: 'Filter by email.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: valueId
+          in: query
+          description: ''
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+                description: ''
+              example:
+                - createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+                  createdDate: 2020-08-26T18:04:44.000Z
+                  email: thedude@example.com
+                  firstName: The Dude
+                  id: f3036399-0963-4c3d-9
+                  lastName: Lebowski
+                  metadata:
+                    alias: El Duderino
+                    note: Into the whole 'brevity thing'
+                  updatedDate: 2020-08-26T18:04:45.000Z
+      deprecated: false
+  /programs:
+    post:
+      summary: Create Program
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: CreateProgram
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProgramrequest'
+            example:
+              currency: USD
+              discount: true
+              fixedInitialBalances:
+                - 500
+              id: 65d2c3c4-c594-4a3b-8
+              name: Spring Promotion USD
+              pretax: true
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Program'
+      deprecated: false
+    get:
+      summary: List Programs
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: ListPrograms
+      parameters:
+        - name: limit
+          in: query
+          description: The max number of items to get.
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: id
+          in: query
+          description: Filter by ID. This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: Filter by currency. This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: startDate
+          in: query
+          description: 'Filter by startDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: endDate
+          in: query
+          description: 'Filter by endDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: createdDate
+          in: query
+          description: 'Filter by createdDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: updatedDate
+          in: query
+          description: 'Filter by updatedDate. This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Program'
+                description: ''
+      deprecated: false
+  /programs/{id}:
+    get:
+      summary: Get a Program
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: GetaProgram
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Program to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Program'
+      deprecated: false
+    patch:
+      summary: Update a Program
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: UpdateaProgram
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Program to modify.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: "Applies a JSON merge. Only members that are present are changed and all others are left untouched. \nNote that updating a Program does not automatically update the attributes of Values that have already been generated through it. Only new Values generated afterwards will reflect the changes. If you want existing Values to reflect your changes, you will need to update them in a separate step."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateaProgramrequest'
+            example:
+              name: Spring Promo US Dollars
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+      deprecated: false
+    delete:
+      summary: Delete a Program
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: DeleteaProgram
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Promotion Program to delete.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteaProgramresponse'
+              example:
+                success: true
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Program 'abc123' is in use.
+                messageCode: ProgramInUse
+      deprecated: false
+  /programs/{id}/issuances:
+    post:
+      summary: Create Issuance
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.An Issuance creates many [Values](#reference/0/values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#reference/0/values/create-a-value) instead.
+      operationId: CreateIssuance
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Program to issue Value from.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateIssuancerequest'
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issuance'
+      deprecated: false
+    get:
+      summary: List Issuances
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: ListIssuances
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Program to get Issuances from.
+          required: true
+          style: simple
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issuance'
+                description: ''
+      deprecated: false
+  /programs/{programId}/issuances/{issuanceId}:
+    get:
+      summary: Get an Issuance
+      description: >-
+        Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
+
+
+        Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+      operationId: GetanIssuance
+      parameters:
+        - name: issuanceId
+          in: path
+          description: the ID of the Issuance to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: programId
+          in: path
+          description: the ID of the Program of the Issuance.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issuance'
+      deprecated: false
+  /transactions/checkout:
+    post:
+      summary: Checkout
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.The checkout endpoint collects all payment for a purchase.  It can apply all Lightrail promotions, calculate tax, debit funds from Lightrail and charge credit cards through Stripe. Your Stripe account must be [connected to Lightrail](https://www.lightrail.com/app/#/account/api) in order for Lightrail to make charges on your behalf.
+
+
+        Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended as a stop-gap solution to support transitioning from legacy systems.
+
+
+        Error responses: If using the `stripe` rail, it is possible for checkout transactions to fail for reasons outside of Lightrail's control, such as an invalid card token or a card being declined. Stripe errors will be passed on in full under the `stripeError` key in the response.
+      operationId: Checkout
+      parameters: []
+      requestBody:
+        description: "Data used in example:\n\n- Purchasing: \n    - 2x $5 socks (8% tax rate)\n    - 1x $1.99 chocolate bar  (5% tax rate)\n    - 1x $3.49 shipping (0% tax rate)\n\n- Payment Sources:\n    - Contact with prepaid account and a chocolate bar promotion.\n        - Account has $10.\n        - Sock promo is for 20% off retail price of socks.\n    - Credit card"
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Checkoutrequest'
+            example:
+              currency: USD
+              id: bee5f0cb-7b3a-48fc-8
+              lineItems:
+                - productId: socks
+                  quantity: 2
+                  taxRate: 0.080000000000000002
+                  unitPrice: 500
+                - productId: chocolate_bar
+                  taxRate: 0.050000000000000003
+                  unitPrice: 199
+                - productId: shipping
+                  taxRate: 0
+                  unitPrice: 349
+              sources:
+                - contactId: f3036399-0963-4c3d-9
+                  rail: lightrail
+                - rail: stripe
+                  source: tok_visa
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeRestError'
+              example:
+                statusCode: 409
+                message: Insufficient balance for the transaction.
+                messageCode: InsufficientBalance
+      deprecated: false
+  /transactions/debit:
+    post:
+      summary: Debit
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, or calculate discounts or taxes.
+      operationId: Debit
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Debitrequest'
+            example:
+              amount: 1000
+              currency: USD
+              id: 22013c66-9113-446d-9
+              metadata:
+                note: Reduce loyalty points after 3mo contact inactivity
+              source:
+                rail: lightrail
+                valueId: 95a2ca21-fa1b-430e-9
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Insufficient balance for the transaction.
+                messageCode: InsufficientBalance
+      deprecated: false
+  /transactions/credit:
+    post:
+      summary: Credit
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Credit (add an amount to) a Lightrail payment destination.
+      operationId: Credit
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Creditrequest'
+            example:
+              amount: 2500
+              currency: USD
+              destination:
+                rail: lightrail
+                valueId: 95a2ca21-fa1b-430e-9
+              id: c0853756-ad31-442e-8
+              metadata:
+                note: Frequent buyer bonus
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      deprecated: false
+  /transactions/transfer:
+    post:
+      summary: Transfer
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
+      operationId: Transfer
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Transferrequest'
+            example:
+              amount: 100
+              currency: USD
+              destination:
+                rail: lightrail
+                valueId: 8bd51876-6687-44a8-8
+              id: 650fbd67-7d0e-4eb3-a
+              metadata:
+                reference: 'customer request to move funds. ref: #4948173593'
+              source:
+                rail: lightrail
+                valueId: 2a0c46c4-7b1a-457f-a
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StripeRestError'
+              example:
+                statusCode: 409
+                message: Insufficient balance for the transaction.
+                messageCode: InsufficientBalance
+      deprecated: false
+  /transactions/{id}/reverse:
+    post:
+      summary: Reverse
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Reverses any balance changes, usesRemaining changes and Stripe charges of a Transaction. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
+
+
+        Reversing a Transaction is not possible when: the Transaction is pending (must be voided or captured), one of the Values is frozen, the Transaction is a transfer from one Value to another and there is insufficient balance to reverse it.
+      operationId: Reverse
+      parameters:
+        - name: id
+          in: path
+          description: The ID of any Transaction to reverse.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reverserequest'
+            example:
+              id: f8e4d669-baa9-419f-a
+        required: true
+      responses:
+        201:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Insufficient balance for the transaction.
+                messageCode: InsufficientBalance
+        422:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 422
+                message: Cannot reverse Transaction that is not last in the Transaction Chain. See documentation for more information on the Transaction Chain.
+                messageCode: TransactionNotReversible
+      deprecated: false
+  /transactions/{id}/capture:
+    post:
+      summary: Capture Pending
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Secures a pending Transaction and adds the capture to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided unless it is captured before the `pendingVoidDate`.
+
+
+        Capturing a pending Transaction is not possible when one of the Values is frozen.
+      operationId: CapturePending
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the pending Transaction to capture.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CapturePendingrequest'
+            example:
+              id: 71867b15-de13-4bd1-9
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+        409:
+          description: Unexpected error in API call. See HTTP response body for details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              example:
+                statusCode: 409
+                message: Cannot capture Transaction because value 'transactionId' is frozen.
+                messageCode: ValueFrozen
+      deprecated: false
+  /transactions/{id}/void:
+    post:
+      summary: Void Pending
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Releases a pending Transaction and adds the void to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided but voiding it manually releases the funds sooner.
+      operationId: VoidPending
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the pending Transaction to void.
+          required: true
+          style: simple
+          schema:
+            type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoidPendingrequest'
+            example:
+              id: 178097c6-28b3-43bb-b
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      deprecated: false
+  /transactions/{id}:
+    get:
+      summary: Get a Transaction
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
+      operationId: GetaTransaction
+      parameters:
+        - name: id
+          in: path
+          description: the ID of the Transaction to get.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+      deprecated: false
+  /transactions/{id}/chain:
+    get:
+      summary: Get Transaction Chain
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Get all Transactions in a Transaction Chain.
+
+
+        A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are [reverse](#reference/0/transactions/reverse), [capture pending](#reference/0/transactions/capture-pending) and [void pending](#reference/0/transactions/void-pending). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to understand the current state of a Transaction.
+      operationId: GetTransactionChain
+      parameters:
+        - name: id
+          in: path
+          description: The ID of any Transaction in the chain to look up.
+          required: true
+          style: simple
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                description: ''
+      deprecated: false
+  /transactions:
+    get:
+      summary: List Transactions
+      description: >-
+        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+
+        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
+      operationId: ListTransactions
+      parameters:
+        - name: limit
+          in: query
+          description: The max number of items to get.
+          style: form
+          explode: true
+          schema:
+            type: number
+            format: double
+        - name: transactionType
+          in: query
+          description: Filter by the transactionType.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: createdDate
+          in: query
+          description: 'Filter by createdDate.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`.  See [filtering](#introduction/filtering) for more information.'
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: currency
+          in: query
+          description: Filter by currency.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: valueId
+          in: query
+          description: Filter by Value ID used in the Transaction.
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: Content-Type
+          in: header
+          description: ''
+          required: true
+          style: simple
+          schema:
+            type: string
+            example: application/json
+      responses:
+        200:
+          description: ''
+          headers:
+            Limit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 100
+            MaxLimit:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1000
+            Link:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                description: ''
+      deprecated: false
+components:
+  schemas:
+    CodeGeneration:
+      title: CodeGeneration
+      required:
+        - length
+      type: object
+      properties:
+        length:
+          type: number
+          description: The number of random characters in the code.  This number must be at least 5 to accommodate a reasonable amount of randomness.
+        charset:
+          type: string
+          description: The set of characters to use for the random part of the code.  Defaults to all numbers and upper case letters.
+        prefix:
+          type: string
+          description: Text prepended before the random characters in the code.
+        suffix:
+          type: string
+          description: Text appended after the random characters in the code.
+    Currency:
+      title: Currency
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        name:
+          type: number
+          description: 'Long name for the currency, eg: `Dollars`.'
+        symbol:
+          type: number
+          description: 'Currency symbol used for formatting, eg: `$`.'
+        decimalPlaces:
+          type: number
+          description: 'The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.'
+        createdDate:
+          type: string
+          description: Date when the Currency was created.
+        updatedDate:
+          type: string
+          description: Date when the Currency was last updated.
+        createdBy:
+          type: string
+          description: The ID of the user who created the Currency.
+    Contact:
+      title: Contact
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Contact.
+        firstName:
+          type: string
+          description: The Contact's first name.
+        lastName:
+          type: string
+          description: The Contact's last name.
+        email:
+          type: string
+          description: The Contact's email.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Contact.
+        createdDate:
+          type: string
+          description: Date when the Contact was created.
+        updatedDate:
+          type: string
+          description: Date when the Contact was last updated.
+        createdBy:
+          type: string
+          description: The ID of the user who created the Contact.
+    Issuance:
+      title: Issuance
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Issuance.  Two Issuances can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        programId:
+          type: string
+          description: The ID of the program it was created from.
+        count:
+          type: number
+          description: The numbers of Values to issue. Must be between 1-10000.
+        balance:
+          type: number
+          description: The balance to set on each Value. This can be constrained by the Program's `minInitialBalance` and `maxInitialBalance` or must be in the `fixedInitialBalances` array.
+        usesRemaining:
+          type: number
+          description: The usesRemaining to set on each Value. This can be restricted to Values defined by the Program's `fixedInitialUsesRemaining`.
+        startDate:
+          type: string
+          description: Override the Program's startDate for the Value.
+        endDate:
+          type: string
+          description: Override the Program's endDate for the Value.
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Issuance.
+        createdDate:
+          type: string
+          description: Date when the Issuance was created.
+        updatedDate:
+          type: string
+          description: Date when the Issuance was last updated.
+        createdBy:
+          type: string
+          description: The ID of the user who created the Issuance.
+    LineItem:
+      title: LineItem
+      required:
+        - unitPrice
+      type: object
+      properties:
+        type:
+          type: string
+          description: Must be either `product`, `shipping` or `fee`.
+        unitPrice:
+          type: number
+          description: The unit price of the item.
+        productId:
+          type: string
+          description: The ID of the product.
+        variantId:
+          type: string
+          description: The variant ID of a product. (Can be used to store SKU.)
+        quantity:
+          type: number
+          description: The number of items. Defaults to 1 if not provided.
+        taxRate:
+          type: number
+          description: Tax rate for the item. This is needed when a Transaction contains items that have different tax rates.
+        marketplaceRate:
+          type: number
+          description: A number between 0 and 1 for the marketplace's commission rate. If this number is set on any lineItems then the `marketplace` section of totals will be calculated.
+        tags:
+          type: array
+          items:
+            type: string
+          description: A list of tags associated with the item. For example, 'seasonal' or 'clothing'.
+        metadata:
+          type: object
+          description: Any additional data you want to store for the item.
+    LineItemResponse:
+      title: LineItemResponse
+      allOf:
+        - $ref: '#/components/schemas/LineItem'
+        - type: object
+          properties:
+            lineTotal:
+              $ref: '#/components/schemas/LineTotal'
+    LineTotal:
+      title: LineTotal
+      type: object
+      properties:
+        subtotal:
+          type: number
+          description: The total cost of the items. ie `unitPrice * quantity`.
+        taxable:
+          type: number
+          description: The taxable amount. ie `price - pretaxDiscount`.
+        tax:
+          type: number
+          description: The taxable amount multiplied by the taxRate for the item. Uses 'bankers rounding' by default.
+        discount:
+          type: number
+          description: The discount
+        sellerDiscount:
+          type: number
+          description: The amount of discount the seller is responsible for providing for the line item. Calculated if marketplaceRate is set on the line item and/or a Value with a discountSellerLiabilityRule is used to pay for the item.
+        remainder:
+          type: number
+          description: 'The amount remaining to be paid for the line item after the transaction has been processed. Will be 0 unless the transaction has `allowRemainder: true`.'
+        payable:
+          type: number
+          description: The cost of the line item after tax and discounts have been applied.
+    Program:
+      title: Program
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Program.
+        name:
+          type: string
+          description: A human-readable name for the Program.
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        discount:
+          type: boolean
+          description: If true Values created in the Program will be marked as a discount on checkout.
+        pretax:
+          type: boolean
+          description: If true the balance on Values created in the Program is applied on checkout before tax is calculated.
+        active:
+          type: boolean
+          description: Whether Values created in the Program are active and can be used upon creation.
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        minInitialBalance:
+          type: number
+        maxInitialBalance:
+          type: number
+        fixedInitialBalances:
+          type: array
+          items:
+            type: number
+          description: A list of exact balances Values created in the Program can be created with.
+        fixedInitialUsesRemaining:
+          type: number
+          description: A list of exact usesRemaining the Value can be created with.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) Applies to Values created in the Program. In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Program must be a discount, ie `discount: true`.'
+        startDate:
+          type: string
+          description: Earliest date that Values created in the Program can be active.
+        endDate:
+          type: string
+          description: Latest date that Values created in the Program can be active.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Program. Values will inherit this `metadata` but may override any keys.
+        createdDate:
+          type: string
+          description: Date when the Program was created.
+        updatedDate:
+          type: string
+          description: Date when the Program was last updated.
+        createdBy:
+          type: string
+          description: The ID of the user who created the Program.
+    RestError:
+      title: RestError
+      type: object
+      properties:
+        statusCode:
+          type: number
+          description: the HTTP status code.
+        message:
+          type: string
+          description: an English explanation of the error.  This is for display purposes only as the explanation may be formatted or change between system updates.
+        messageCode:
+          type: string
+          description: A constant corresponding to the message.  This can be used to take action in response to the error.
+    StripeRestError:
+      title: StripeRestError
+      allOf:
+        - $ref: '#/components/schemas/RestError'
+        - type: object
+          properties:
+            stripeError:
+              type: object
+              description: 'When using the `stripe` rail: the full error response from Stripe in case of an error charging a credit card.'
+    Rule:
+      title: Rule
+      type: object
+      properties:
+        rule:
+          type: string
+          description: the Lightrail Rule text of the rule.
+        explanation:
+          type: string
+          description: a description of the rule. You may choose to pass the explanation through to the end user.
+    Tax:
+      title: Tax
+      type: object
+      properties:
+        roundingMode:
+          type: string
+          description: 'The rounding mode used for tax calculations. Modes: `"HALF_EVEN"`, `"HALF_UP"`. Defaults to `"HALF_EVEN"`, also known as bankers rounding, which is the standard for most financial calculations.'
+    Transaction:
+      title: Transaction
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.
+        transactionType:
+          type: string
+          description: 'The type of the Transaction, eg: `debit`, `credit`, `checkout`...'
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        tax:
+          $ref: '#/components/schemas/Tax'
+        steps:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightrailTransactionStep'
+          description: An array of Transaction steps. A Transaction may have steps from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes.
+        totals:
+          $ref: '#/components/schemas/TransactionTotals'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItemResponse'
+          description: Data on each LineItem in a checkout transaction. Will be `null` for other transaction types.
+        paymentSources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightrailTransactionParty'
+          description: An array of payment sources used in a checkout transaction (will be `null` for other transaction types). Sources may be from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes.
+        simulated:
+          type: boolean
+          description: If `true` the Transaction was simulated.
+        pending:
+          type: boolean
+          description: If `true` the Transaction was created as pending and does not complete until captured.  Not all transactionTypes can be created as pending.
+        pendingVoidDate:
+          type: string
+          description: Date after which the pending Transaction will be automatically [voided](#reference/0/transactions/void-pending).  It cannot be [captured](#reference/0/transactions/capture-pending) after this Date.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+        createdDate:
+          type: string
+          description: Date when the Transaction was created.
+        createdBy:
+          type: string
+          description: The ID of the user who created the Transaction.
+    TransactionTotals:
+      title: TransactionTotals
+      type: object
+      properties:
+        subtotal:
+          type: number
+          description: The sum of all products, services and fees before tax or discounts.
+        tax:
+          type: number
+          description: The amount of tax to be collected.
+        discount:
+          type: number
+          description: The total amount of discounts applied.
+        discountLightrail:
+          type: number
+          description: The amount discounted from Lightrail payment sources.
+        payable:
+          type: number
+          description: The amount payable by the customer. Calculated as `payable = subtotal + tax - discount`.
+        paidLightrail:
+          type: number
+          description: The amount paid from Lightrail payment sources.
+        paidStripe:
+          type: number
+          description: The amount paid from Stripe payment sources.
+        paidInternal:
+          type: number
+          description: The amount paid from Internal payment sources.
+        remainder:
+          type: number
+          description: 'The amount still owing, if a remainder is allowed by setting `allowRemainder: true`.'
+        forgiven:
+          type: number
+          description: The amount forgiven (will not be charged).  This happens when `forgiveSubMinAmount=true` and the amount is below the minimum a payment rail will process.
+        marketplace:
+          $ref: '#/components/schemas/TransactionTotalsMarketplace'
+    TransactionTotalsMarketplace:
+      title: TransactionTotalsMarketplace
+      type: object
+      properties:
+        sellerDiscount:
+          type: number
+          description: The amount of discount the seller is responsible for providing (comes from Values with `discountSellerLiability` > 0).
+        sellerGross:
+          type: number
+          description: The amount payable to the seller before discounts.
+        sellerNet:
+          type: number
+          description: The amount payable to the seller after discounts.
+    LightrailTransactionParty:
+      title: LightrailTransactionParty
+      required:
+        - rail
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `lightrail`. Must be used in combination with one of the following identifiers.'
+        code:
+          type: string
+          description: The code of a Gift Card or Promotion.
+        contactId:
+          type: string
+          description: A Contact's ID.  This is shorthand for all Values that a Contact is associated with.
+        valueId:
+          type: string
+          description: A Value's ID.
+    StripeTransactionParty:
+      title: StripeTransactionParty
+      required:
+        - rail
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `stripe`. Must be used in combination with a `source` or `customer` identifier.'
+        source:
+          type: string
+          description: A tokenized credit card for Stripe.
+        customer:
+          type: string
+          description: A Stripe customer ID (uses customer's default source).
+        maxAmount:
+          type: number
+          description: The maximum amount that can be charged to the given Stripe source.
+        minAmount:
+          type: number
+          description: The minimum amount that can be charged to the given Stripe source.  If unset [Stripe's default for the currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts) will be used.  Setting a lower number is not recommended unless the settlement currency is different from the transaction currency.
+        forgiveSubMinAmount:
+          type: boolean
+          description: If `true` charge amounts below `minAmount` will be forgiven (not charged so that the transaction may complete).  This amount will be tracked in the response `totals.forgiven`.  Has no effect if the top level `allowRemainder=true`.
+        additionalStripeParams:
+          $ref: '#/components/schemas/AdditionalStripeChargeParams'
+    InternalTransactionParty:
+      title: InternalTransactionParty
+      required:
+        - rail
+        - internalId
+        - balance
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `internal`.'
+        internalId:
+          type: string
+          description: The ID of the internal value.
+        balance:
+          type: number
+          description: The amount of internal value stored.
+        beforeLightrail:
+          type: boolean
+          description: 'If true this value is applied before Lightrail Values, otherwise it will be applied after (default: false).'
+    AdditionalStripeChargeParams:
+      title: AdditionalStripeChargeParams
+      type: object
+      properties:
+        application_fee:
+          type: string
+        application_fee_amount:
+          type: number
+        description:
+          type: string
+        on_behalf_of:
+          type: string
+        receipt_email:
+          type: string
+        shipping:
+          $ref: '#/components/schemas/AdditionalStripeChargeParams_Shipping'
+        statement_descriptor:
+          type: string
+        transfer_group:
+          type: string
+    AdditionalStripeChargeParams_Shipping:
+      title: AdditionalStripeChargeParams_Shipping
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/AdditionalStripeChargeParams_Shipping_Address'
+        carrier:
+          type: string
+        name:
+          type: string
+        phone:
+          type: string
+        tracking_number:
+          type: string
+    AdditionalStripeChargeParams_Shipping_Address:
+      title: AdditionalStripeChargeParams_Shipping_Address
+      type: object
+      properties:
+        city:
+          type: string
+        country:
+          type: string
+        line1:
+          type: string
+        line2:
+          type: string
+        postal_code:
+          type: string
+        state:
+          type: string
+    LightrailTransactionStep:
+      title: LightrailTransactionStep
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `lightrail`.'
+        valueId:
+          type: string
+          description: The id of the Value transacted with.
+        currency:
+          type: string
+          description: The currency of the Value transacted with.
+        contactId:
+          type: string
+          description: The ID of the Contact associated with the Value.
+        code:
+          type: string
+          description: 'The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.'
+        balanceBefore:
+          type: number
+          description: The `balance` of the Value before the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
+        balanceAfter:
+          type: number
+          description: The `balance` of the Value after the Transaction.  `null` when the Value does not have a `balance` (and thus has a `balanceRule`).
+        balanceChange:
+          type: number
+          description: The net change of the `balance` of the Value for the Transaction.  When the Value has a `balanceRule` rather than a `balance` this number will still be set to indicate the value of the rule.
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        usesRemainingBefore:
+          type: number
+          description: The `usesRemaining` of the Value before the Transaction.  `null` when the Value does not have a `usesRemaining`.
+        usesRemainingAfter:
+          type: number
+          description: The `usesRemaining` of the Value after the Transaction.  `null` when the Value does not have a `usesRemaining`.
+        usesRemainingChange:
+          type: number
+          description: The net change of the `usesRemaining` of the Value for the Transaction.
+    StripeTransactionStep:
+      title: StripeTransactionStep
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `stripe`.'
+        amount:
+          type: number
+          description: the amount of the charge.
+        chargeId:
+          type: string
+          description: the ID of the Stripe charge.
+        charge:
+          type: object
+          description: the Stripe Charge object, if applicable.
+    InternalTransactionStep:
+      title: InternalTransactionStep
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `internal`.'
+        internalId:
+          type: string
+          description: the ID of the internal value transacted with.
+        balanceBefore:
+          type: number
+          description: The balance of the internal value before the Transaction.
+        balanceAfter:
+          type: number
+          description: The balance of the internal value after the Transaction.
+        balanceChange:
+          type: number
+          description: The net change of the balance of the internal value for the Transaction.
+    Value:
+      title: Value
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Value.
+        programId:
+          type: string
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        contactId:
+          type: string
+          description: The ID of the Contact that has claimed this Value.
+        code:
+          type: string
+          description: 'The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.'
+        isGenericCode:
+          type: boolean
+          description: If `true` the code is to be shared publicly and not secret. If `false` the code is treated as a secret. Defaults to false if not provided.
+        genericCodeOptions:
+          $ref: '#/components/schemas/GenericCodeOptions'
+        balance:
+          type: number
+          description: The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500. For generic codes that have a `perContact.balance` the `balance` can control maximum liability and will be drawn down by the `perContact.balance` when attached to a Contact.
+        usesRemaining:
+          type: number
+          description: The number of times the Value can be used in checkout. When this number reaches 0 the Value can no longer be used in checkout. For generic codes that have a `perContact.usesRemaining` the `usesRemaining` can control maximum uses and will be drawn down by the `perContact.usesRemaining` when attached to a Contact.
+        active:
+          type: boolean
+          description: Whether the Value is active and can be used upon creation.
+        frozen:
+          type: boolean
+          description: If `true` the Value is frozen.  When frozen new Transactions cannot be created; pending Transactions can be voided.
+        canceled:
+          type: boolean
+          description: If `true` the Value is canceled.  When canceled new Transactions cannot be created but existing Transactions can be reversed; pending Transactions can be captured or voided.
+        pretax:
+          type: boolean
+          description: If `true` the Value's balance is applied on checkout before tax is calculated.
+        discount:
+          type: boolean
+          description: If `true` the Value will be marked as a discount on checkout.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Value must be a discount, ie `discount: true`.'
+        discountSellerLiabilityRule:
+          $ref: '#/components/schemas/Rule'
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        startDate:
+          type: string
+          description: Date when the Value becomes available.
+        endDate:
+          type: string
+          description: Date when the Value expires.  When expired new Transactions cannot be created but existing Transactions can be reversed; pending Transactions can be captured or voided.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Value.
+        createdDate:
+          type: string
+          description: Date when the Value was created.
+        updatedDate:
+          type: string
+          description: Date when the Value was last updated.
+        updatedContactIdDate:
+          type: string
+          description: Date of the last contactId update (Contact attached).
+        createdBy:
+          type: string
+          description: The ID of the user who created the Value.
+    GenericCodeOptions:
+      title: GenericCodeOptions
+      required:
+        - perContact
+      type: object
+      properties:
+        perContact:
+          $ref: '#/components/schemas/PerContact'
+    PerContact:
+      title: PerContact
+      type: object
+      properties:
+        balance:
+          type: number
+          description: The balance, as an integer in the smallest unit of currency, available to each Contact that the code is attached to. If an overall balance is set on the Value, the `perContact.balance` will be subtracted from the overall `balance` each time the Value is attached. This allows the Value's `balance` to be used as a liability control and represents the total amount that can be spent in checkout.
+        usesRemaining:
+          type: number
+          description: The usesRemaining available to each Contact that the code is attached to. If an overall usesRemaining is set on the Value, the perContact.usesRemaining will be subtracted from the overall usesRemaining each time the Value is attached. This allows the Value's `usesRemaining` to be used as a liability control and represents how many times the generic code can be used in total.
+    Webhook:
+      title: Webhook
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the webhook.
+        url:
+          type: string
+          description: The URL to send the event to.
+        events:
+          type: array
+          items:
+            type: string
+          description: "Array of string event names. The `'*'` wild card is supported: for example, use `['*']` to match all events or use `['lightrail.value.*', 'lightrail.transaction.*']` to match all Value and Transaction related events. You can view the full list of supported event types [here](https://www.lightrail.com/docs/#webhooks/supported-event-types)."
+        secrets:
+          type: array
+          items:
+            $ref: '#/components/schemas/WebhookSecret'
+          description: A list of secrets used for the signed header signature.
+        active:
+          type: boolean
+          description: If false, the webhook will not send events.
+        createdDate:
+          type: string
+          description: Date when the webhook was created.
+        updatedDate:
+          type: string
+          description: Date when the webhook was last updated.
+        createdBy:
+          type: string
+          description: The ID of the user who created the webhook.
+    WebhookSecret:
+      title: WebhookSecret
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the secret.
+        secret:
+          type: string
+          description: The webhook's secret which is used to generate the header signature on event deliveries. This allows you to validate the event was sent by Lightrail.
+        createdDate:
+          type: string
+          description: The date the secret was created.
+    AttachaContacttoaValuerequest:
+      title: AttachaContacttoaValuerequest
+      type: object
+      properties:
+        valueId:
+          type: string
+          description: The `id` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
+        code:
+          type: string
+          description: The `code` of the Value to attach to the Contact.  One of `valueId` or `code` must be specified.
+    BalanceRule:
+      title: BalanceRule
+      required:
+        - explanation
+        - rule
+      type: object
+      properties:
+        explanation:
+          type: string
+        rule:
+          type: string
+      example:
+        explanation: $5 off purchase
+        rule: 500 + value.balanceChange
+    CapturePendingrequest:
+      title: CapturePendingrequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+    ChangeaValuescoderequest:
+      title: ChangeaValue'scoderequest
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'The code. Unless `isGenericCode` is set to true the code will be treated as a secret and only the last four digits are displayed with an ellipsis, eg: `…ABCD`.'
+        generateCode:
+          $ref: '#/components/schemas/CodeGeneration'
+    Checkoutrequest:
+      title: Checkoutrequest
+      required:
+        - id
+        - currency
+        - lineItems
+        - sources
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        lineItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineItem'
+          description: ''
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/LightrailTransactionParty'
+          description: 'An array of payment sources to use for the checkout transaction. Supported payment rails: `lightrail`, `stripe`, `internal`.'
+        simulate:
+          type: boolean
+          description: If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
+        allowRemainder:
+          type: boolean
+          description: 'If `true` the Transaction will go through using whatever amount is available: this might not cover the full amount of the Transaction. The remainder (i.e. amount still owing) will be indicated.'
+        pending:
+          type: boolean
+          description: If `true` the Transaction is created as pending for the default duration. The pending duration can be customized by passing in an ISO duration string instead of a boolean. A pending Transaction will be automatically [voided](#reference/0/transactions/void-pending) after the pending duration if not [captured](#reference/0/transactions/capture-pending).
+        tax:
+          $ref: '#/components/schemas/Tax'
+        metadata:
+          type: object
+          description: Any additional data you want to store for the item. All metadata will also be saved on any Stripe charge(s).
+    CreateaContactrequest:
+      title: CreateaContactrequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Contact.  Two Contacts can't have the same ID, guaranteeing repeated calls won't create extra resources.  We recommend not using email addresses as IDs because users can change email addresses but the ID can't be changed.
+        firstName:
+          type: string
+          description: The Contact's first name.
+        lastName:
+          type: string
+          description: The Contact's last name.
+        email:
+          type: string
+          description: The Contact's email.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Contact.
+    CreateaCurrencyrequest:
+      title: CreateaCurrencyrequest
+      required:
+        - code
+        - name
+        - symbol
+        - decimalPlaces
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        name:
+          type: string
+          description: 'Long name for the currency, eg: `Dollars`.'
+        symbol:
+          type: number
+          description: 'Currency symbol used for formatting, eg: `$`.'
+        decimalPlaces:
+          type: number
+          description: 'The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.'
+    CreateaValuerequest:
+      title: CreateaValuerequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Value.  Two Values can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        programId:
+          type: string
+          description: Create as part of a Program and copy default properties from it.
+        contactId:
+          type: string
+          description: Directly attach to a Contact.
+        code:
+          type: string
+          description: Assign a code.
+        isGenericCode:
+          type: boolean
+          description: If `true` the code is to be shared publicly and not secret. If `false` the code is treated as a secret. Defaults to false if not provided.
+        genericCodeOptions:
+          $ref: '#/components/schemas/GenericCodeOptions'
+        generateCode:
+          $ref: '#/components/schemas/CodeGeneration'
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`. Required if `programId` is not set.'
+        balance:
+          type: number
+          description: The amount of money available in a Value. This is always an integer greater than or equal to 0 representing the smallest units of the currency. For example, $25 USD = 2500. For generic codes that have a `perContact.balance` the `balance` can control maximum liability and will be drawn down by the `perContact.balance` when attached to a Contact.
+        pretax:
+          type: boolean
+          description: If `true` the Value's balance is applied on checkout before tax is calculated.
+        active:
+          type: boolean
+          description: Whether the Value is active and can be used upon creation.
+        frozen:
+          type: boolean
+          description: If `true` the Value is frozen.  When frozen new Transactions cannot be created; pending Transactions can be voided.
+        discount:
+          type: boolean
+          description: If `true` the Value will be marked as a discount on checkout.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Value must be a discount, ie `discount: true`.'
+        discountSellerLiabilityRule:
+          $ref: '#/components/schemas/Rule'
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        usesRemaining:
+          type: number
+          description: The number of times the Value can be used in checkout. When this number reaches 0 the Value can no longer be used in checkout. For generic codes that have a `perContact.usesRemaining` the `usesRemaining` can control maximum uses and will be drawn down by the `perContact.usesRemaining` when attached to a Contact.
+        startDate:
+          type: string
+          description: Date when the Value becomes available.
+        endDate:
+          type: string
+          description: Date when the Value expires.  When expired new Transactions cannot be created but existing Transactions can be reversed; pending Transactions can be captured or voided.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Value. If `programId` is set `metadata` from the Program is inherited but any keys specified will override those of the Program.
+    CreateIssuancerequest:
+      title: CreateIssuancerequest
+      required:
+        - id
+        - name
+        - count
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Issuance.  Two Issuances can't have the same ID, guaranteeing repeated calls won't create extra resources.
+        name:
+          type: string
+          description: A human-readable name for the Issuance.
+        count:
+          type: number
+          description: The numbers of Values to issue. Must be between 1-10000.
+        generateCode:
+          $ref: '#/components/schemas/CodeGeneration'
+        code:
+          type: string
+          description: The code to set on the Value. This is only available when `count` is 1.
+        isGenericCode:
+          type: boolean
+          description: If true the code is to be shared publicly and not secret. If `false` the code is treated as a secret. Defaults to `false` if not provided. This is only available when `count` is 1.
+        balance:
+          type: number
+          description: The balance to set on each Value. This can be constrained by the Program's `minInitialBalance` and `maxInitialBalance` or must be in the `fixedInitialBalances` array.
+        usesRemaining:
+          type: number
+          description: The usesRemaining to set on each Value. This can be restricted to Values defined by the Program's `fixedInitialUsesRemaining`.
+        startDate:
+          type: string
+          description: Override the Program's startDate for the Value.
+        endDate:
+          type: string
+          description: Override the Program's endDate for the Value.
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Issuance. `metadata` from the Program is inherited but any keys specified will override those of the Program.
+    CreateProgramrequest:
+      title: CreateProgramrequest
+      required:
+        - id
+        - name
+        - currency
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Program.
+        name:
+          type: string
+          description: A human-readable name for the Program.
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        discount:
+          type: boolean
+          description: If true Values created in the Program will be marked as a discount on checkout.
+        pretax:
+          type: boolean
+          description: If true the balance on Values created in the Program is applied on checkout before tax is calculated.
+        active:
+          type: boolean
+          description: Whether Values created in the Program are active and can be used upon creation.
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        minInitialBalance:
+          type: number
+          description: The minimum balance Values created in the Program can be created with.
+        maxInitialBalance:
+          type: number
+          description: The maximum balance Values created in the Program can be created with.
+        fixedInitialBalances:
+          type: array
+          items:
+            type: number
+          description: A list of exact balances Values created in the Program can be created with.
+        fixedInitialUsesRemaining:
+          type: array
+          items:
+            type: number
+          description: A list of exact usesRemaining the Value can be created with.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) Applies to Values created in the Program. In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Program must be a discount, ie `discount: true`.'
+        discountSellerLiabilityRule:
+          $ref: '#/components/schemas/Rule'
+        startDate:
+          type: string
+          description: Earliest date that Values created in the Program can be active.
+        endDate:
+          type: string
+          description: Latest date that Values created in the Program can be active.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Program. Values will inherit this `metadata` but may override any keys.
+    CreateWebhookrequest:
+      title: CreateWebhookrequest
+      required:
+        - id
+        - url
+        - events
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID of the webhook.
+        url:
+          type: string
+          description: The URL to send the event to.
+        events:
+          type: array
+          items:
+            type: string
+          description: "Array of string event names. The `'*'` wild card is supported: for example, use `['*']` to match all events or use `['lightrail.value.*', 'lightrail.transaction.*']` to match all Value and Transaction related events. You can view the full list of supported event types [here](https://www.lightrail.com/docs/#webhooks/supported-event-types)."
+        active:
+          type: boolean
+          description: If false, the webhook will not send events.
+    Creditrequest:
+      title: Creditrequest
+      required:
+        - id
+        - destination
+        - currency
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        destination:
+          $ref: '#/components/schemas/LightrailTransactionParty'
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        amount:
+          type: number
+          description: The amount to credit.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        uses:
+          type: number
+          description: The number of `usesRemaining` to add.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        simulate:
+          type: boolean
+          description: If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+    Debitrequest:
+      title: Debitrequest
+      required:
+        - id
+        - source
+        - currency
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        source:
+          $ref: '#/components/schemas/LightrailTransactionParty'
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        amount:
+          type: number
+          description: The amount to debit.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        uses:
+          type: number
+          description: The number of `usesRemaining` to debit.  Defaults to 0.  Must be > 0 if specified.  One of `amount` or `uses` must be specified.
+        simulate:
+          type: boolean
+          description: If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
+        allowRemainder:
+          type: boolean
+          description: 'If `true` the Transaction will go through using whatever amount is available: this might not cover the full amount of the Transaction. The remainder (i.e. amount still owing) will be indicated.'
+        pending:
+          type: boolean
+          description: If `true` the Transaction is created as pending for the default duration. The pending duration can be customized by passing in an ISO duration string instead of a boolean. A pending Transaction will be automatically [voided](#reference/0/transactions/void-pending) after the pending duration if not [captured](#reference/0/transactions/capture-pending).
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+    DeleteaContactresponse:
+      title: DeleteaContactresponse
+      required:
+        - success
+      type: object
+      properties:
+        success:
+          type: boolean
+      example:
+        success: true
+    DeleteaCurrencyresponse:
+      title: DeleteaCurrencyresponse
+      required:
+        - success
+      type: object
+      properties:
+        success:
+          type: boolean
+      example:
+        success: true
+    DeleteaProgramresponse:
+      title: DeleteaProgramresponse
+      required:
+        - success
+      type: object
+      properties:
+        success:
+          type: boolean
+      example:
+        success: true
+    DetachaContactfromaValuerequest:
+      title: DetachaContactfromaValuerequest
+      required:
+        - valueId
+      type: object
+      properties:
+        valueId:
+          type: string
+          description: The `id` of the Value to detach from the Contact.
+    GenericCodeOptions1:
+      title: GenericCodeOptions1
+      required:
+        - perContact
+      type: object
+      properties:
+        perContact:
+          $ref: '#/components/schemas/PerContact1'
+      example:
+        perContact:
+          usesRemaining: 1
+    PerContact1:
+      title: PerContact1
+      required:
+        - usesRemaining
+      type: object
+      properties:
+        usesRemaining:
+          type: integer
+          format: int32
+      example:
+        usesRemaining: 1
+    Reverserequest:
+      title: Reverserequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+    Transferrequest:
+      title: Transferrequest
+      required:
+        - id
+        - source
+        - destination
+        - amount
+        - currency
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        source:
+          $ref: '#/components/schemas/LightrailTransactionParty'
+        destination:
+          $ref: '#/components/schemas/LightrailTransactionParty'
+        amount:
+          type: number
+          description: The amount to transfer, > 0.
+        currency:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
+        simulate:
+          type: boolean
+          description: If `true` the Transaction is simulated and no changes take place. If the Transaction is repeated with `simulate=false` it is not guaranteed to behave the same way as the underlying Values can change.
+        allowRemainder:
+          type: boolean
+          description: 'If `true` the Transaction will go through using whatever amount is available: this might not cover the full amount of the Transaction. The remainder (i.e. amount still owing) will be indicated.'
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+    UpdateaContactrequest:
+      title: UpdateaContactrequest
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Contact.  If present must match the ID in the path.
+        firstName:
+          type: string
+          description: The Contact's first name.
+        lastName:
+          type: string
+          description: The Contact's last name.
+        email:
+          type: string
+          description: The Contact's email.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Contact.
+    UpdateaCurrencyrequest:
+      title: UpdateaCurrencyrequest
+      type: object
+      properties:
+        code:
+          type: string
+          description: 'Short code for a currency, eg: `USD`, `FUNBUX`. If present must match the code in the path.'
+        name:
+          type: string
+          description: 'Long name for the currency, eg: `Dollars`.'
+        symbol:
+          type: string
+          description: 'Currency symbol used for formatting, eg: `$`.'
+        decimalPlaces:
+          type: number
+          description: 'The number of decimal places used in formatting, eg: US Dollars are stored in cents so `decimalPlaces` is `2`.'
+    UpdateaProgramrequest:
+      title: UpdateaProgramrequest
+      type: object
+      properties:
+        name:
+          type: string
+          description: A human-readable name for the Program.
+        active:
+          type: boolean
+          description: Whether Values created in the Program are active and can be used upon creation.
+        discount:
+          type: boolean
+          description: If true Values created in the Program will be marked as a discount on checkout. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        pretax:
+          type: boolean
+          description: If true the balance on Values created in the Program is applied on checkout before tax is calculated. Default is `true`. If updating this member, you likely also want to update any existing Values already created through this Program.
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        minInitialBalance:
+          type: number
+          description: The minimum balance Values created in the Program can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        maxInitialBalance:
+          type: number
+          description: The maximum balance Values created in the Program can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        fixedInitialBalances:
+          type: array
+          items:
+            type: number
+          description: A list of exact balances Values created in the Program can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        fixedInitialUsesRemaining:
+          type: array
+          items:
+            type: number
+          description: A list of exact usesRemaining the Value can be created with. If updating this member, you likely also want to update any existing Values already created through this Program.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) Applies to Values created in the Program. In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Program must be a discount, ie `discount: true`.'
+        startDate:
+          type: string
+          description: Earliest date that Values created in the Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        endDate:
+          type: string
+          description: Latest date that Values created in the Program can be active. If updating this member, you likely also want to update any existing Values already created through this Program.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Program. Values will inherit this `metadata` but may override any keys.
+    UpdateaValuerequest:
+      title: UpdateaValuerequest
+      type: object
+      properties:
+        active:
+          type: boolean
+          description: Whether the Value is active and can be used upon creation.
+        frozen:
+          type: boolean
+          description: If `true` the Value is frozen.  When frozen new Transactions cannot be created; pending Transactions can be voided.
+        canceled:
+          type: boolean
+          description: If `true` the Value is canceled.  When canceled new Transactions cannot be created but existing Transactions can be reversed; pending Transactions can be captured or voided.
+        pretax:
+          type: boolean
+          description: If `true` the Value's balance is applied on checkout before tax is calculated.
+        discount:
+          type: boolean
+          description: If `true` the Value will be marked as a discount on checkout.
+        discountSellerLiability:
+          type: number
+          description: '(Note: deprecated, please use discountSellerLiabilityRule.) In a marketplace, can be set as a number between 0 and 1 for the ratio of the discount the seller is liable for. For example, set at 0 the marketplace is entirely liable for the discount, at 1 the seller is entirely liable for the discount). The Value must be a discount, ie `discount: true`.'
+        genericCodeOptions:
+          $ref: '#/components/schemas/GenericCodeOptions'
+        redemptionRule:
+          $ref: '#/components/schemas/Rule'
+        balanceRule:
+          $ref: '#/components/schemas/Rule'
+        startDate:
+          type: string
+          description: Date when the Value becomes available.
+        endDate:
+          type: string
+          description: Date when the Value expires.  When expired new Transactions cannot be created but existing Transactions can be reversed; pending Transactions can be captured or voided.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Value.
+    UpdateWebhookrequest:
+      title: UpdateWebhookrequest
+      required:
+        - url
+        - events
+      type: object
+      properties:
+        url:
+          type: string
+          description: The URL to send the event to.
+        events:
+          type: array
+          items:
+            type: string
+          description: "Array of string event names. The `'*'` wild card is supported: for example, use `['*']` to match all events or use `['lightrail.value.*', 'lightrail.transaction.*']` to match all Value and Transaction related events. You can view the full list of supported event types [here](https://www.lightrail.com/docs/#webhooks/supported-event-types)."
+        active:
+          type: boolean
+          description: If false, the webhook will not send events.
+    VoidPendingrequest:
+      title: VoidPendingrequest
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
+        metadata:
+          type: object
+          description: Arbitrary data associated with the Transaction.
+  examples:
+    CreateaContactrequest:
+      value:
+        email: thedude@example.com
+        firstName: Jeffrey
+        id: f3036399-0963-4c3d-9
+        lastName: Lebowski
+        metadata:
+          alias: El Duderino
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Advanced
+    description: ''
+  - name: Contacts
+    description: >-
+      Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
+
+      Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
