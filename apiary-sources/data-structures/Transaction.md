@@ -10,8 +10,9 @@
 + simulated (boolean) - {{transaction.simulated}}
 + pending (boolean) - {{transaction.pendingResponse}}
 + pendingVoidDate (string) - {{transaction.pendingVoidDate}}
-+ createdDate (string) - {{transaction.createdDate}}
 + metadata (object) - {{transaction.metadata}}
++ createdDate (string) - {{transaction.createdDate}}
++ createdBy (string) - {{transaction.createdBy}}
 
 ## TransactionTotals (object)
 + subtotal (number) - The sum of all products, services and fees before tax or discounts.
