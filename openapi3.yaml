@@ -203,9 +203,9 @@ paths:
   /currencies:
     post:
       tags:
-        - Advanced
+        - Currencies
       summary: Create a Currency
-      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      description: ''
       operationId: CreateaCurrency
       parameters: []
       requestBody:
@@ -226,9 +226,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - Advanced
+        - Currencies
       summary: List Currencies
-      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      description: ''
       operationId: ListCurrencies
       parameters: []
       responses:
@@ -246,9 +246,9 @@ paths:
   /currencies/{code}:
     get:
       tags:
-        - Advanced
+        - Currencies
       summary: Get a Currency
-      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      description: ''
       operationId: GetaCurrency
       parameters:
         - name: code
@@ -269,9 +269,9 @@ paths:
       deprecated: false
     patch:
       tags:
-        - Advanced
+        - Currencies
       summary: Update a Currency
-      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      description: ''
       operationId: UpdateaCurrency
       parameters:
         - name: code
@@ -302,9 +302,9 @@ paths:
       deprecated: false
     delete:
       tags:
-        - Advanced
+        - Currencies
       summary: Delete a Currency
-      description: A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
+      description: ''
       operationId: DeleteaCurrency
       parameters:
         - name: code
@@ -338,9 +338,9 @@ paths:
   /webhooks:
     post:
       tags:
-        - Advanced
+        - Webhooks
       summary: Create Webhook
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: ''
       operationId: CreateWebhook
       parameters: []
       requestBody:
@@ -379,9 +379,9 @@ paths:
       deprecated: false
     get:
       tags:
-        - Advanced
+        - Webhooks
       summary: List Webhooks
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: ''
       operationId: ListWebhooks
       parameters: []
       responses:
@@ -412,9 +412,9 @@ paths:
   /webhooks/{id}:
     get:
       tags:
-        - Advanced
+        - Webhooks
       summary: Get Webhook
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: ''
       operationId: GetWebhook
       parameters:
         - name: id
@@ -448,9 +448,9 @@ paths:
       deprecated: false
     patch:
       tags:
-        - Advanced
+        - Webhooks
       summary: Update Webhook
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: ''
       operationId: UpdateWebhook
       parameters:
         - name: id
@@ -491,9 +491,9 @@ paths:
       deprecated: false
     delete:
       tags:
-        - Advanced
+        - Webhooks
       summary: Delete Webhook
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: ''
       operationId: DeleteWebhook
       parameters:
         - name: id
@@ -511,9 +511,9 @@ paths:
   /webhooks/{id}/secrets/{secretId}:
     get:
       tags:
-        - Advanced
+        - Webhooks
       summary: Get Secret
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: Get the secret used to sign the requests.
       operationId: GetSecret
       parameters:
         - name: id
@@ -545,9 +545,9 @@ paths:
       deprecated: false
     delete:
       tags:
-        - Advanced
+        - Webhooks
       summary: Delete Secret
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: Delete the secret used to sign requests
       operationId: DeleteSecret
       parameters:
         - name: id
@@ -559,7 +559,7 @@ paths:
             type: string
         - name: secretId
           in: path
-          description: '- The ID of the secret.'
+          description: The ID of the secret.
           required: true
           style: simple
           schema:
@@ -572,9 +572,9 @@ paths:
   /webhooks/{id}/secrets:
     post:
       tags:
-        - Advanced
+        - Webhooks
       summary: Create Secret
-      description: Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
+      description: Create a new secret for this webhook.  This will not delete other secrets.  Having multiple secrets allows rotating secrets with 0 downtime.
       operationId: CreateSecret
       parameters:
         - name: id
@@ -1682,7 +1682,6 @@ paths:
     post:
       tags:
         - Programs
-        - Issuances
       summary: Create Issuance
       description: >-
         An Issuance creates many [Values](#reference/0/values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#reference/0/values/create-a-value) instead.
@@ -1714,7 +1713,6 @@ paths:
     get:
       tags:
         - Programs
-        - Issuances
       summary: List Issuances
       description: ''
       operationId: ListIssuances
@@ -1760,7 +1758,6 @@ paths:
     get:
       tags:
         - Programs
-        - Issuances
       summary: Get an Issuance
       description: ''
       operationId: GetanIssuance
@@ -1798,16 +1795,13 @@ paths:
       deprecated: false
   /transactions/checkout:
     post:
+      tags:
+        - Transactions
       summary: Checkout
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.The checkout endpoint collects all payment for a purchase.  It can apply all Lightrail promotions, calculate tax, debit funds from Lightrail and charge credit cards through Stripe. Your Stripe account must be [connected to Lightrail](https://www.lightrail.com/app/#/account/api) in order for Lightrail to make charges on your behalf.
-
+        The checkout endpoint collects all payment for a purchase.  It can apply all Lightrail promotions, calculate tax, debit funds from Lightrail and charge credit cards through Stripe. Your Stripe account must be [connected to Lightrail](https://www.lightrail.com/app/#/account/api) in order for Lightrail to make charges on your behalf.
 
         Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended as a stop-gap solution to support transitioning from legacy systems.
-
 
         Error responses: If using the `stripe` rail, it is possible for checkout transactions to fail for reasons outside of Lightrail's control, such as an invalid card token or a card being declined. Stripe errors will be passed on in full under the `stripeError` key in the response.
       operationId: Checkout
@@ -1859,12 +1853,11 @@ paths:
       deprecated: false
   /transactions/debit:
     post:
+      tags:
+        - Transactions
       summary: Debit
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, or calculate discounts or taxes.
+        Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, or calculate discounts or taxes.
       operationId: Debit
       parameters: []
       requestBody:
@@ -1904,12 +1897,11 @@ paths:
       deprecated: false
   /transactions/credit:
     post:
+      tags:
+        - Transactions
       summary: Credit
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Credit (add an amount to) a Lightrail payment destination.
+        Credit (add an amount to) a Lightrail payment destination.
       operationId: Credit
       parameters: []
       requestBody:
@@ -1939,12 +1931,11 @@ paths:
       deprecated: false
   /transactions/transfer:
     post:
+      tags:
+        - Transactions
       summary: Transfer
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
+        Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
       operationId: Transfer
       parameters: []
       requestBody:
@@ -1987,13 +1978,11 @@ paths:
       deprecated: false
   /transactions/{id}/reverse:
     post:
+      tags:
+        - Transactions
       summary: Reverse
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Reverses any balance changes, usesRemaining changes and Stripe charges of a Transaction. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
-
+        Reverses any balance changes, usesRemaining changes and Stripe charges of a Transaction. Reverse adds a Transaction to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).
 
         Reversing a Transaction is not possible when: the Transaction is pending (must be voided or captured), one of the Values is frozen, the Transaction is a transfer from one Value to another and there is insufficient balance to reverse it.
       operationId: Reverse
@@ -2045,12 +2034,11 @@ paths:
       deprecated: false
   /transactions/{id}/capture:
     post:
+      tags:
+        - Transactions
       summary: Capture Pending
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Secures a pending Transaction and adds the capture to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided unless it is captured before the `pendingVoidDate`.
+        Secures a pending Transaction and adds the capture to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided unless it is captured before the `pendingVoidDate`.
 
 
         Capturing a pending Transaction is not possible when one of the Values is frozen.
@@ -2093,12 +2081,11 @@ paths:
       deprecated: false
   /transactions/{id}/void:
     post:
+      tags:
+        - Transactions
       summary: Void Pending
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Releases a pending Transaction and adds the void to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided but voiding it manually releases the funds sooner.
+        Releases a pending Transaction and adds the void to the [Transaction Chain](#reference/0/transactions/get-transaction-chain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided but voiding it manually releases the funds sooner.
       operationId: VoidPending
       parameters:
         - name: id
@@ -2128,12 +2115,10 @@ paths:
       deprecated: false
   /transactions/{id}:
     get:
+      tags:
+        - Transactions
       summary: Get a Transaction
-      description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
+      description: ''
       operationId: GetaTransaction
       parameters:
         - name: id
@@ -2162,13 +2147,11 @@ paths:
       deprecated: false
   /transactions/{id}/chain:
     get:
+      tags:
+        - Transactions
       summary: Get Transaction Chain
       description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.Get all Transactions in a Transaction Chain.
-
+        Get all Transactions in a Transaction Chain.
 
         A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are [reverse](#reference/0/transactions/reverse), [capture pending](#reference/0/transactions/capture-pending) and [void pending](#reference/0/transactions/void-pending). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to understand the current state of a Transaction.
       operationId: GetTransactionChain
@@ -2220,12 +2203,10 @@ paths:
       deprecated: false
   /transactions:
     get:
+      tags:
+        - Transactions
       summary: List Transactions
-      description: >-
-        Transactions can add and remove balance on Lightrail Values or create Stripe charges.
-
-
-        Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
+      description: ''
       operationId: ListTransactions
       parameters:
         - name: limit
@@ -3657,20 +3638,29 @@ components:
 security:
   - httpBearer: []
 tags:
-  - name: Advanced
-    description: ''
+  - name: Currencies
+    description: >-
+      A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
   - name: Contacts
     description: >-
       Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
 
       Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
-  - name: Values
-    description: >-
-      A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
-
-      Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
   - name: Programs
     description: >-
       Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.
 
       Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
+  - name: Transactions
+    description: >-
+      Transactions can add and remove balance on Lightrail Values or create Stripe charges.
+
+      Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
+  - name: Values
+    description: >-
+      A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#reference/0/programs/create-issuance) from a [Program](#reference/0/programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
+
+      Most Values will be accessed by a code, or attached to a [Contact](#reference/0/contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#reference/0/transactions/checkout) by only specifying the Contact.
+  - name: Webhooks
+    description: >-
+      Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
