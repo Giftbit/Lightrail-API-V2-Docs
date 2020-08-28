@@ -194,10 +194,12 @@ info:
 
 
     [Contact us](mailto:hello@lightrail.com) any time if you have any questions.  We're here to help.
-  contact: {}
+  contact:
+    name: Lightrail Support
+    email: hello@lightrail.com
   version: '1.0'
 servers:
-  - url: https://api.lightrail.com/v2/
+  - url: https://api.lightrail.com/v2
     variables: {}
 paths:
   /currencies:
@@ -597,14 +599,7 @@ paths:
       description: ''
       operationId: ListContacts
       parameters:
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: id
           in: query
           description: Filter by ID.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
@@ -640,14 +635,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -696,14 +683,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -773,14 +752,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -906,14 +877,7 @@ paths:
           style: simple
           schema:
             type: string
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: programId
           in: query
           description: Filter by Program ID.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
@@ -1007,14 +971,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1096,14 +1052,7 @@ paths:
       description: ''
       operationId: ListValues
       parameters:
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: showCode
           in: query
           description: Show the full code for the Value.
@@ -1218,14 +1167,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1321,14 +1262,6 @@ paths:
           explode: true
           schema:
             type: boolean
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1426,6 +1359,7 @@ paths:
           style: simple
           schema:
             type: string
+        - $ref: '#/components/parameters/limit'
         - name: transactionType
           in: query
           description: Filter by the transactionType.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
@@ -1447,21 +1381,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: limit
-          in: query
-          description: ''
-          style: form
-          explode: true
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1507,14 +1426,7 @@ paths:
           style: simple
           schema:
             type: string
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: firstName
           in: query
           description: 'Filter by the firstName.  This filter supports operators: `lt`, `lte`, `gt`, `gte`, `eq`, `ne`, `like`.  See [filtering](#introduction/filtering) for more information.'
@@ -1536,21 +1448,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: valueId
-          in: query
-          description: ''
-          style: form
-          explode: true
-          schema:
-            type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1620,14 +1517,7 @@ paths:
       description: ''
       operationId: ListPrograms
       parameters:
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: id
           in: query
           description: Filter by ID. This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
@@ -1670,14 +1560,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1726,14 +1608,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -1921,14 +1795,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -2259,14 +2125,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -2294,14 +2152,6 @@ paths:
           style: simple
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -2343,14 +2193,7 @@ paths:
       description: ''
       operationId: ListTransactions
       parameters:
-        - name: limit
-          in: query
-          description: The max number of items to get.
-          style: form
-          explode: true
-          schema:
-            type: number
-            format: double
+        - $ref: '#/components/parameters/limit'
         - name: transactionType
           in: query
           description: Filter by the transactionType.  This filter supports the operators `eq`, `in`.  See [filtering](#introduction/filtering) for more information.
@@ -2379,14 +2222,6 @@ paths:
           explode: true
           schema:
             type: string
-        - name: Content-Type
-          in: header
-          description: ''
-          required: true
-          style: simple
-          schema:
-            type: string
-            example: application/json
       responses:
         200:
           description: ''
@@ -3759,6 +3594,16 @@ components:
         metadata:
           type: object
           description: Arbitrary data associated with the Transaction.
+  parameters:
+    limit:
+      name: limit
+      in: query
+      description: The max number of items to get.
+      style: form
+      explode: true
+      schema:
+        type: number
+        format: integer
   examples:
     listCurrencies1Response:
       value:
@@ -5045,14 +4890,14 @@ components:
 security:
   - httpBearer: []
 tags:
-  - name: Currencies
-    description: >-
-      A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
   - name: Contacts
     description: >-
       Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
 
       Values can be [attached](#reference/0/contacts/attach-a-contact-to-a-value) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#reference/0/transactions/checkout) simply by specifying the Contact checking out.
+  - name: Currencies
+    description: >-
+      A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
   - name: Programs
     description: >-
       Programs organize [Values](#reference/0/values) and Values can be [issued](#reference/0/programs/create-issuance) from Programs.  Programs are typically created through the web app.

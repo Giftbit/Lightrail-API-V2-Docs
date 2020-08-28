@@ -3,3 +3,4 @@
 *.iml
 target/
 apiary-sources/generated
+/node_modules/

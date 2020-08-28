@@ -1,0 +1,26 @@
+{
+  "name": "lightrail-api-v2-docs",
+  "version": "1.0.0",
+  "description": "If you are looking for the official Lightrail documentation please go to https://lightrailapi.docs.apiary.io/#. This repository is for internal Lightrail use and is responsible for generating the API Blueprint file that is hosted by Apiary.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "speccy lint openapi3.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Giftbit/Lightrail-API-V2-Docs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Giftbit/Lightrail-API-V2-Docs/issues"
+  },
+  "homepage": "https://github.com/Giftbit/Lightrail-API-V2-Docs#readme",
+  "dependencies": {
+    "speccy": "^0.11.0"
+  }
+}
