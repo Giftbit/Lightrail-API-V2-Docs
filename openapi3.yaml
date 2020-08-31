@@ -2554,7 +2554,10 @@ components:
         steps:
           type: array
           items:
-            $ref: '#/components/schemas/LightrailTransactionStep'
+            oneOf:
+              - $ref: '#/components/schemas/LightrailTransactionStep'
+              - $ref: '#/components/schemas/StripeTransactionStep'
+              - $ref: '#/components/schemas/InternalTransactionStep'
           description: An array of Transaction steps. A Transaction may have steps from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes.
         totals:
           $ref: '#/components/schemas/TransactionTotals'
@@ -2566,7 +2569,10 @@ components:
         paymentSources:
           type: array
           items:
-            $ref: '#/components/schemas/LightrailTransactionParty'
+            oneOf:
+              - $ref: '#/components/schemas/LightrailTransactionParty'
+              - $ref: '#/components/schemas/StripeTransactionParty'
+              - $ref: '#/components/schemas/InternalTransactionParty'
           description: An array of payment sources used in a checkout transaction (will be `null` for other transaction types). Sources may be from different payment rails (`lightrail` | `stripe` | `internal`), which will have different attributes.
         simulated:
           type: boolean
@@ -2637,6 +2643,7 @@ components:
           description: The amount payable to the seller after discounts.
     LightrailTransactionParty:
       title: LightrailTransactionParty
+      description: A Value in Lightrail.  If `contactId` is specified a Value attached to the Contact will be used.
       required:
         - rail
       type: object
@@ -2650,6 +2657,22 @@ components:
         contactId:
           type: string
           description: A Contact's ID.  This is shorthand for all Values that a Contact is associated with.
+        valueId:
+          type: string
+          description: A Value's ID.
+    LightrailUniqueTransactionParty:
+      title: LightrailUniqueTransactionParty
+      description: A Value in Lightrail.  A `contactId` cannot be specified because a specifiec Value must be chosen.
+      required:
+        - rail
+      type: object
+      properties:
+        rail:
+          type: string
+          description: 'The payment rail: `lightrail`. Must be used in combination with one of the following identifiers.'
+        code:
+          type: string
+          description: The code of a Gift Card or Promotion.
         valueId:
           type: string
           description: A Value's ID.
@@ -3028,7 +3051,10 @@ components:
         sources:
           type: array
           items:
-            $ref: '#/components/schemas/LightrailTransactionParty'
+            oneOf:
+              - $ref: '#/components/schemas/LightrailTransactionParty'
+              - $ref: '#/components/schemas/StripeTransactionParty'
+              - $ref: '#/components/schemas/InternalTransactionParty'
           description: 'An array of payment sources to use for the checkout transaction. Supported payment rails: `lightrail`, `stripe`, `internal`.'
         simulate:
           type: boolean
@@ -3288,7 +3314,7 @@ components:
           type: string
           description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         destination:
-          $ref: '#/components/schemas/LightrailTransactionParty'
+          $ref: '#/components/schemas/LightrailUniqueTransactionParty'
         currency:
           type: string
           description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
@@ -3316,7 +3342,7 @@ components:
           type: string
           description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         source:
-          $ref: '#/components/schemas/LightrailTransactionParty'
+          $ref: '#/components/schemas/LightrailUniqueTransactionParty'
         currency:
           type: string
           description: 'Short code for a currency, eg: `USD`, `FUNBUX`.'
@@ -3425,9 +3451,11 @@ components:
           type: string
           description: The ID you choose to represent the Transaction.  Two Transactions can't have the same ID, guaranteeing the Transaction can't happen twice.
         source:
-          $ref: '#/components/schemas/LightrailTransactionParty'
+          oneOf:
+            - $ref: '#/components/schemas/LightrailTransactionParty'
+            - $ref: '#/components/schemas/StripeTransactionParty'
         destination:
-          $ref: '#/components/schemas/LightrailTransactionParty'
+          $ref: '#/components/schemas/LightrailUniqueTransactionParty'
         amount:
           type: number
           description: The amount to transfer, > 0.
@@ -4048,6 +4076,8 @@ components:
           - rail: stripe
             source: tok_visa
     checkoutExample1Response:
+      summary: Checkout with Lightrail and credit card
+      description: "Data used in example:\n\n- Purchasing: \n    - 2x $5 socks (8% tax rate)\n    - 1x $1.99 chocolate bar  (5% tax rate)\n    - 1x $3.49 shipping (0% tax rate)\n\n- Payment Sources:\n    - Contact with prepaid account and a chocolate bar promotion.\n        - Account has $10.\n        - Sock promo is for 20% off retail price of socks.\n    - Credit card"
       value:
         id: 885ddc50-de22-46aa-a
         transactionType: checkout

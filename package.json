@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "speccy lint openapi3.yaml"
+    "lint": "speccy lint openapi3.yaml"
   },
   "repository": {
     "type": "git",
