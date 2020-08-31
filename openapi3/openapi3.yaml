@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Lightrail Documentation
-  description: >-
+  description: |-
     Welcome to Lightrail. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect multi-tender payment in a unified checkout solution. Create an account to generate API keys and begin testing.
 
     [Create an account](https://www.lightrail.com/app/#/auth/register)
@@ -64,7 +64,7 @@ info:
 
     Retrieving results after the first page means following links in the [Link header](https://tools.ietf.org/html/rfc5988).  Here's an example Link header...
 
-    ```
+    ```text
     (all line-breaks are inserted here for clarity and don't exist in production)
 
     Link:
@@ -472,7 +472,7 @@ paths:
       tags:
         - Contacts
       summary: Attach a Contact to a Value
-      description: >-
+      description: |-
         Attaching a Value to a Contact will associate the Value with the Contact. The Contact then "has" that Value. In a checkout Transaction, specifying the `contactId` as a payment source will resolve to all associated Values for the Contact to be considered for the Transaction.
 
         If attaching a Unique Value (`isGenericCode=false`) the Value's `contactId` will be set to the ID of the Contact attached to it. If attaching a Generic Code (`isGenericCode=true`) it depends on whether the Generic Code has `genericCodeOptions.perContact` properties set. If set, attaching will result in a new Value being created using the perContact properties for the new Value's `balance` and `usesRemaining`. If not set, the Generic Code will be shared and the Contact will receive a reference to the Generic Code. You can [list the Value's Contacts](#tag/Values/list-a-value's-attached-contacts) to see all Contacts attached to the Value.
@@ -1280,7 +1280,7 @@ paths:
       tags:
         - Programs
       summary: Create an Issuance
-      description: >-
+      description: |-
         An Issuance creates many [Values](#tag/Values) in bulk and is tracked for downloading secure codes after creation.  This is primarily used by the web app.  When creating only a few Values use [Create Value](#tag/Values/create-a-value) instead.
       operationId: CreateIssuance
       parameters:
@@ -1381,7 +1381,7 @@ paths:
       tags:
         - Transactions
       summary: Checkout
-      description: >-
+      description: |-
         The checkout endpoint collects all payment for a purchase.  It can apply all Lightrail promotions, calculate tax, debit funds from Lightrail and charge credit cards through Stripe. Your Stripe account must be [connected to Lightrail](https://www.lightrail.com/app/#/account/api) in order for Lightrail to make charges on your behalf.
 
         Lightrail and Stripe payment sources are referred to as the payment rails `lightrail` and `stripe` respectively. There is also an `internal` payment rail which can be used to represent any other payment source. This is intended as a stop-gap solution to support transitioning from legacy systems.
@@ -1424,7 +1424,7 @@ paths:
       tags:
         - Transactions
       summary: Debit
-      description: >-
+      description: |-
         Debit (remove an amount from) a Lightrail payment source.  Debiting is simpler and less powerful than checkout.  It does not apply the promotion logic of `balanceRules`, or calculate discounts or taxes.
       operationId: Debit
       parameters: []
@@ -1464,7 +1464,7 @@ paths:
       tags:
         - Transactions
       summary: Credit
-      description: >-
+      description: |-
         Credit (add an amount to) a Lightrail payment destination.
       operationId: Credit
       parameters: []
@@ -1494,7 +1494,7 @@ paths:
       tags:
         - Transactions
       summary: Transfer
-      description: >-
+      description: |-
         Transfer value from a Lightrail or Stripe payment source to a Lightrail payment destination.
       operationId: Transfer
       parameters: []
@@ -1534,7 +1534,7 @@ paths:
       tags:
         - Transactions
       summary: Reverse
-      description: >-
+      description: |-
         Reverses any balance changes, usesRemaining changes and Stripe charges of a Transaction. Reverse adds a Transaction to the [Transaction Chain](#operation/GetTransactionChain).
 
         Reversing a Transaction is not possible when: the Transaction is pending (must be voided or captured), one of the Values is frozen, the Transaction is a transfer from one Value to another and there is insufficient balance to reverse it.
@@ -1593,7 +1593,7 @@ paths:
       tags:
         - Transactions
       summary: Capture Pending
-      description: >-
+      description: |-
         Secures a pending Transaction and adds the capture to the [Transaction Chain](#operation/GetTransactionChain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided unless it is captured before the `pendingVoidDate`.
 
         Capturing a pending Transaction is not possible when one of the Values is frozen.
@@ -1642,7 +1642,7 @@ paths:
       tags:
         - Transactions
       summary: Void Pending
-      description: >-
+      description: |-
         Releases a pending Transaction and adds the void to the [Transaction Chain](#operation/GetTransactionChain).  A pending Transaction is created when it is created with `pending=true`.  A pending Transaction will be automatically voided but voiding it manually releases the funds sooner.
       operationId: VoidPending
       parameters:
@@ -1702,7 +1702,7 @@ paths:
       tags:
         - Transactions
       summary: Get Transaction Chain
-      description: >-
+      description: |-
         Get all Transactions in a Transaction Chain.
 
         A Transaction Chain is an ordered list of Transactions and results from creating Transactions that depend on another; such Transactions are [reverse](#operation/Reverse), [capture pending](#operation/CapturePending) and [void pending](#operation/VoidPending). The Transaction Chain can be retrieved using any Transaction ID in the chain and can be used to understand the current state of a Transaction.
@@ -1792,7 +1792,6 @@ paths:
               examples:
                 listTransactions1Response:
                   $ref: '#/components/examples/listTransactions1Response'
-
   /webhooks:
     post:
       tags:
@@ -4743,28 +4742,28 @@ security:
   - httpBearer: []
 tags:
   - name: Contacts
-    description: >-
+    description: |-
       Contacts are the people or businesses who buy products or services from you.  They're identified by a unique `id`, which typically corresponds to an existing identifier in your system.
 
       Values can be [attached](#operation/AttachContactToValue) to Contacts.  All (applicable) Value attached to a Contact will be used in a [checkout Transaction](#operation/Checkout) simply by specifying the Contact checking out.
   - name: Currencies
-    description: >-
+    description: |-
       A Currency is a unit of money in Lightrail.  It can be a standard currency such as `USD`, or a made up currency such as `FUNBUX`.  All currencies must be created before they are used, though they are typically created on initial setup in the web app.
   - name: Programs
-    description: >-
+    description: |-
       Programs organize [Values](#tag/Values) and Values can be [issued](#operation/CreateIssuance) from Programs.  Programs are typically created through the web app.
 
       Programs are most commonly used to define and organize promotion campaigns. For example, the Value issued for a new user promotion that gives them a 5% discount on their first purchase should behave differently from the Value for a "TEN-DOLLAR-TUESDAYS" promotion. These different promotions will also need to be tracked and analyzed separately, all of which can happen in the web app.
   - name: Transactions
-    description: >-
+    description: |-
       Transactions can add and remove balance on Lightrail Values or create Stripe charges.
 
       Lightrail Values cannot be transacted against if they are inactive, canceled, frozen, have not yet started or have ended.
   - name: Values
-    description: >-
+    description: |-
       A Value (naturally) represents value in the Lightrail system.  This includes a gift card, a promotion, a coupon, store credit, etc.  Values can be created one at a time or [issued](#operation/CreateIssuance) from a [Program](#tag/Programs).  Issuing Value from a Program makes it part of that Program which keeps different ways of using Value organized.
 
       Most Values will be accessed by a code, or attached to a [Contact](#tag/Contacts).  All Values attached to a Contact can be used in a [checkout Transaction](#operation/Checkout) by only specifying the Contact.
   - name: Webhooks
-    description: >-
+    description: |-
       Webhooks can notify your application when Lightrail events occur. They enable you to react to events and trigger additional workflows.
