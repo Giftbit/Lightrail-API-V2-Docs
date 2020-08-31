@@ -80,6 +80,9 @@ async function refreshExamples(openApi: OpenApi): Promise<void> {
         if (call.allowFailure) {
             request.ok(() => true);
         }
+        if (call.statusCode) {
+            request.ok(response => response.status === call.statusCode);
+        }
         const response = previousResponses[call.callId] = await request;
 
         const requestId = `${call.callId}Request`;

@@ -43,7 +43,7 @@
       "body": {
         "id": "{REQUEST_REPLACEMENT:createContact1.body.id}"
       },
-      "allowFailure": true
+      "statusCode": 409
     },
     {
       "callId": "listContacts1",
@@ -78,6 +78,22 @@
       }
     },
     {
+      "callId": "createProgramExists1",
+      "method": "POST",
+      "endpoint": "/programs",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "name": "Spring Promotion USD",
+        "currency": "USD",
+        "pretax": true,
+        "discount": true,
+        "fixedInitialBalances": [
+          500
+        ]
+      },
+      "statusCode": 409
+    },
+    {
       "callId": "listPrograms1",
       "method": "GET",
       "endpoint": "/programs?limit=1"
@@ -99,6 +115,17 @@
         "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
         "balance": 500
       }
+    },
+    {
+      "callId": "createValueExists1",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createValue1.body.id}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "balance": 500
+      },
+      "statusCode": 409
     },
     {
       "callId": "listValues1",
@@ -513,7 +540,7 @@
       "callId": "deleteCurrencyInUse1",
       "method": "DELETE",
       "endpoint": "/currencies/USD",
-      "allowFailure": true
+      "statusCode": 409
     }
   ]
 }

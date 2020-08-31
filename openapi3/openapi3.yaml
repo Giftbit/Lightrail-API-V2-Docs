@@ -145,7 +145,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -160,7 +160,7 @@ paths:
       parameters: []
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -189,7 +189,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -224,7 +224,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -246,7 +246,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -255,7 +255,7 @@ paths:
               example:
                 success: true
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -283,7 +283,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -293,7 +293,7 @@ paths:
                 createContact1Response:
                   $ref: '#/components/examples/createContact1Response'
         409:
-          description: ''
+          description: Conflict
           headers: {}
           content:
             application/json:
@@ -347,7 +347,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -382,7 +382,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -424,7 +424,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -449,7 +449,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -458,7 +458,7 @@ paths:
               example:
                 success: true
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -497,7 +497,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -507,7 +507,7 @@ paths:
                 attachValue1Response:
                   $ref: '#/components/examples/attachValue1Response'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -539,7 +539,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -549,7 +549,7 @@ paths:
                 detachValue1Response:
                   $ref: '#/components/examples/detachValue1Response'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -665,7 +665,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -712,7 +712,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Value created successfully.
           headers: {}
           content:
             application/json:
@@ -723,6 +723,15 @@ paths:
                   $ref: '#/components/examples/createValue1Response'
                 createGenericCode1Response:
                   $ref: '#/components/examples/createGenericCode1Response'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              examples:
+                createValueExists1:
+                  $ref: '#/components/examples/createValueExists1Response'
     get:
       tags:
         - Values
@@ -855,7 +864,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -897,7 +906,7 @@ paths:
             type: boolean
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -929,7 +938,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -965,7 +974,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1013,7 +1022,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1067,7 +1076,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1104,7 +1113,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1113,6 +1122,15 @@ paths:
               examples:
                 createProgram1Response:
                   $ref: '#/components/examples/createProgram1Response'
+        409:
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+              examples:
+                createValueExists1:
+                  $ref: '#/components/examples/createProgramExists1Response'
     get:
       tags:
         - Programs
@@ -1165,7 +1183,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1200,7 +1218,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1232,7 +1250,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1257,7 +1275,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1266,7 +1284,7 @@ paths:
               example:
                 success: true
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1303,7 +1321,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1328,7 +1346,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1370,7 +1388,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1400,7 +1418,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1410,7 +1428,7 @@ paths:
                 checkoutExample1Response:
                   $ref: '#/components/examples/checkoutExample1Response'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1440,7 +1458,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1450,7 +1468,7 @@ paths:
                 debitTransaction1Response:
                   $ref: '#/components/examples/debitTransaction1Response'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1480,7 +1498,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1510,7 +1528,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1520,7 +1538,7 @@ paths:
                 transferResponse:
                   $ref: '#/components/examples/transferResponse'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1559,7 +1577,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1569,7 +1587,7 @@ paths:
                 reverseCheckoutResponse:
                   $ref: '#/components/examples/reverseCheckoutResponse'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1579,7 +1597,7 @@ paths:
                 message: Insufficient balance for the transaction.
                 messageCode: InsufficientBalance
         422:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Unprocessable entity
           content:
             application/json:
               schema:
@@ -1618,7 +1636,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1628,7 +1646,7 @@ paths:
                 pendingCaptureResponse:
                   $ref: '#/components/examples/pendingCaptureResponse'
         409:
-          description: Unexpected error in API call. See HTTP response body for details.
+          description: Conflict
           content:
             application/json:
               schema:
@@ -1665,7 +1683,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1691,7 +1709,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1717,7 +1735,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1774,7 +1792,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers:
             Limit:
               $ref: '#/components/headers/Limit'
@@ -1812,7 +1830,7 @@ paths:
         required: true
       responses:
         201:
-          description: ''
+          description: Created
           headers: {}
           content:
             application/json:
@@ -1830,7 +1848,7 @@ paths:
       parameters: []
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1859,7 +1877,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1894,7 +1912,7 @@ paths:
         required: true
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1945,7 +1963,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -1997,7 +2015,7 @@ paths:
             type: string
       responses:
         200:
-          description: ''
+          description: Success
           headers: {}
           content:
             application/json:
@@ -3407,7 +3425,7 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createContact1Request:
       value:
-        id: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
         firstName: Jeffrey
         lastName: Lebowski
         email: thedude@example.com
@@ -3421,31 +3439,31 @@ components:
         messageCode: CurrencyInUse
     createContact1Response:
       value:
-        id: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
         firstName: Jeffrey
         lastName: Lebowski
         email: thedude@example.com
         metadata:
           alias: El Duderino
-        createdDate: '2020-08-31T22:47:16.000Z'
-        updatedDate: '2020-08-31T22:47:16.000Z'
+        createdDate: '2020-08-31T23:57:10.000Z'
+        updatedDate: '2020-08-31T23:57:10.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createContactExists1Response:
       summary: Contact exists
       value:
-        message: A Contact with id '9c137f9b-795c-4d88-8548-28de37fa2f00' already exists.
+        message: A Contact with id 'c1484390-5292-4fb7-b5b9-0cfd9b5a8440' already exists.
         statusCode: 409
         messageCode: ContactIdExists
     listContacts1Response:
       value:
-        - id: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        - id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
           firstName: Jeffrey
           lastName: Lebowski
           email: thedude@example.com
           metadata:
             alias: El Duderino
-          createdDate: '2020-08-31T22:47:16.000Z'
-          updatedDate: '2020-08-31T22:47:16.000Z'
+          createdDate: '2020-08-31T23:57:10.000Z'
+          updatedDate: '2020-08-31T23:57:10.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateContact1Request:
       value:
@@ -3455,19 +3473,19 @@ components:
           note: Into the whole 'brevity thing'
     updateContact1Response:
       value:
-        id: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
         firstName: The Dude
         lastName: Lebowski
         email: thedude@example.com
         metadata:
           alias: El Duderino
           note: Into the whole 'brevity thing'
-        createdDate: '2020-08-31T22:47:16.000Z'
-        updatedDate: '2020-08-31T22:47:17.000Z'
+        createdDate: '2020-08-31T23:57:10.000Z'
+        updatedDate: '2020-08-31T23:57:10.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createProgram1Request:
       value:
-        id: 1691e33b-bc47-488b-a010-8377230a8e81
+        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         name: Spring Promotion USD
         currency: USD
         pretax: true
@@ -3476,7 +3494,7 @@ components:
           - 500
     createProgram1Response:
       value:
-        id: 1691e33b-bc47-488b-a010-8377230a8e81
+        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         name: Spring Promotion USD
         currency: USD
         discount: true
@@ -3494,12 +3512,18 @@ components:
         startDate: null
         endDate: null
         metadata: null
-        createdDate: '2020-08-31T22:47:17.000Z'
-        updatedDate: '2020-08-31T22:47:17.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:11.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+    createProgramExists1Response:
+      summary: Program exists
+      value:
+        message: A Program with id '6acb1a94-dcc3-4291-b054-6dbdb4e2fd92' already exists.
+        statusCode: 409
+        messageCode: ProgramIdExists
     listPrograms1Response:
       value:
-        - id: 1691e33b-bc47-488b-a010-8377230a8e81
+        - id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
           name: Spring Promotion USD
           currency: USD
           discount: true
@@ -3517,15 +3541,15 @@ components:
           startDate: null
           endDate: null
           metadata: null
-          createdDate: '2020-08-31T22:47:17.000Z'
-          updatedDate: '2020-08-31T22:47:17.000Z'
+          createdDate: '2020-08-31T23:57:11.000Z'
+          updatedDate: '2020-08-31T23:57:11.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateProgram1Request:
       value:
         name: Spring Promo US Dollars
     updateProgram1Response:
       value:
-        id: 1691e33b-bc47-488b-a010-8377230a8e81
+        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         name: Spring Promo US Dollars
         currency: USD
         discount: true
@@ -3543,21 +3567,23 @@ components:
         startDate: null
         endDate: null
         metadata: null
-        createdDate: '2020-08-31T22:47:17.000Z'
-        updatedDate: '2020-08-31T22:47:17.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:11.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createValue1Request:
+      summary: Create Value in Program
       value:
-        id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         balance: 500
     createValue1Response:
+      summary: Create Value in Program
       value:
-        id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         issuanceId: null
         code: null
         isGenericCode: false
@@ -3574,17 +3600,23 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:18.000Z'
-        updatedDate: '2020-08-31T22:47:18.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:11.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+    createValueExists1Response:
+      summary: Value exists
+      value:
+        message: A Value with id '16381e93-ae0b-429c-8a46-a1e2f91c659b' already exists.
+        statusCode: 409
+        messageCode: ValueIdExists
     listValues1Response:
       value:
-        - id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        - id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
           currency: USD
           balance: 500
           usesRemaining: null
-          programId: 1691e33b-bc47-488b-a010-8377230a8e81
+          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
           issuanceId: null
           contactId: null
           code: null
@@ -3601,22 +3633,22 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T22:47:18.000Z'
-          updatedDate: '2020-08-31T22:47:18.000Z'
+          createdDate: '2020-08-31T23:57:11.000Z'
+          updatedDate: '2020-08-31T23:57:11.000Z'
           updatedContactIdDate: null
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     attachValue1Request:
       value:
-        valueId: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        valueId: 16381e93-ae0b-429c-8a46-a1e2f91c659b
     attachValue1Response:
       value:
-        id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         issuanceId: null
-        contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
         code: null
         isGenericCode: false
         pretax: true
@@ -3631,31 +3663,31 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:18.000Z'
-        updatedDate: '2020-08-31T22:47:18.000Z'
-        updatedContactIdDate: '2020-08-31T22:47:18.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:12.000Z'
+        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listValue1ContactsResponse:
       value:
-        - id: 9c137f9b-795c-4d88-8548-28de37fa2f00
+        - id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
           firstName: The Dude
           lastName: Lebowski
           email: thedude@example.com
           metadata:
             alias: El Duderino
             note: Into the whole 'brevity thing'
-          createdDate: '2020-08-31T22:47:16.000Z'
-          updatedDate: '2020-08-31T22:47:17.000Z'
+          createdDate: '2020-08-31T23:57:10.000Z'
+          updatedDate: '2020-08-31T23:57:10.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listContactsValue1Response:
       value:
-        - id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        - id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
           currency: USD
           balance: 500
           usesRemaining: null
-          programId: 1691e33b-bc47-488b-a010-8377230a8e81
+          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
           issuanceId: null
-          contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+          contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
           code: null
           isGenericCode: false
           pretax: true
@@ -3670,20 +3702,20 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T22:47:18.000Z'
-          updatedDate: '2020-08-31T22:47:18.000Z'
-          updatedContactIdDate: '2020-08-31T22:47:18.000Z'
+          createdDate: '2020-08-31T23:57:11.000Z'
+          updatedDate: '2020-08-31T23:57:12.000Z'
+          updatedContactIdDate: '2020-08-31T23:57:12.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     detachValue1Request:
       value:
-        valueId: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        valueId: 16381e93-ae0b-429c-8a46-a1e2f91c659b
     detachValue1Response:
       value:
-        id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         issuanceId: null
         contactId: null
         code: null
@@ -3700,20 +3732,20 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:18.000Z'
-        updatedDate: '2020-08-31T22:47:18.000Z'
-        updatedContactIdDate: '2020-08-31T22:47:18.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:12.000Z'
+        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateValue1Request:
       value:
         frozen: true
     updateValue1Response:
       value:
-        id: c9497bb6-3876-48df-8b01-0a92ced3d3c0
+        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         issuanceId: null
         contactId: null
         code: null
@@ -3730,32 +3762,32 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:18.000Z'
-        updatedDate: '2020-08-31T22:47:19.000Z'
-        updatedContactIdDate: '2020-08-31T22:47:18.000Z'
+        createdDate: '2020-08-31T23:57:11.000Z'
+        updatedDate: '2020-08-31T23:57:13.000Z'
+        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     creditTransaction1Request:
       value:
-        id: b73fc5db-391e-4668-941e-9dc55fac1639
+        id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
         destination:
           rail: lightrail
-          valueId: f648b708-1a1d-4106-9b5f-c43edacddb8b
+          valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
         amount: 2500
         currency: USD
         metadata:
           note: Frequent buyer bonus
     creditTransaction1Response:
       value:
-        id: b73fc5db-391e-4668-941e-9dc55fac1639
+        id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
         transactionType: credit
         currency: USD
-        createdDate: '2020-08-31T22:47:19.000Z'
+        createdDate: '2020-08-31T23:57:13.000Z'
         tax: null
         totals: null
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: f648b708-1a1d-4106-9b5f-c43edacddb8b
+            valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
             contactId: null
             code: null
             balanceBefore: 500
@@ -3772,27 +3804,27 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     debitTransaction1Request:
       value:
-        id: 01f1a737-025a-4248-a1a3-27a856e3c9a7
+        id: 9c22b707-494e-4c79-ae0c-50ad22941456
         source:
           rail: lightrail
-          valueId: f648b708-1a1d-4106-9b5f-c43edacddb8b
+          valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
         amount: 1000
         currency: USD
         metadata:
           note: Reduce loyalty points after 3mo contact inactivity
     debitTransaction1Response:
       value:
-        id: 01f1a737-025a-4248-a1a3-27a856e3c9a7
+        id: 9c22b707-494e-4c79-ae0c-50ad22941456
         transactionType: debit
         currency: USD
-        createdDate: '2020-08-31T22:47:19.000Z'
+        createdDate: '2020-08-31T23:57:13.000Z'
         tax: null
         totals:
           remainder: 0
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: f648b708-1a1d-4106-9b5f-c43edacddb8b
+            valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
             contactId: null
             code: null
             balanceBefore: 3000
@@ -3809,28 +3841,29 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listTransactions1Response:
       value:
-        - id: f648b708-1a1d-4106-9b5f-c43edacddb8b
-          transactionType: initialBalance
+        - id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
+          transactionType: credit
           currency: USD
           totals: null
           lineItems: null
           paymentSources: null
           steps:
             - rail: lightrail
-              valueId: f648b708-1a1d-4106-9b5f-c43edacddb8b
+              valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
               contactId: null
               code: null
-              balanceBefore: 0
-              balanceAfter: 500
-              balanceChange: 500
+              balanceBefore: 500
+              balanceAfter: 3000
+              balanceChange: 2500
               balanceRule: null
               usesRemainingBefore: null
               usesRemainingAfter: null
               usesRemainingChange: null
-          metadata: null
+          metadata:
+            note: Frequent buyer bonus
           tax: null
           pending: false
-          createdDate: '2020-08-31T22:47:19.000Z'
+          createdDate: '2020-08-31T23:57:13.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     checkoutExample1Request:
       summary: Checkout with Lightrail and credit card
@@ -3848,10 +3881,10 @@ components:
                 - Sock promo is for 20% off retail price of socks.
             - Credit card
       value:
-        id: bb9b13ea-fd61-4692-9587-189578325765
+        id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
         sources:
           - rail: lightrail
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
           - rail: stripe
             source: tok_visa
         lineItems:
@@ -3882,10 +3915,10 @@ components:
                 - Sock promo is for 20% off retail price of socks.
             - Credit card
       value:
-        id: bb9b13ea-fd61-4692-9587-189578325765
+        id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
         transactionType: checkout
         currency: USD
-        createdDate: '2020-08-31T22:47:20.000Z'
+        createdDate: '2020-08-31T23:57:14.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -3935,8 +3968,8 @@ components:
               payable: 209
         steps:
           - rail: lightrail
-            valueId: 6ca055fc-16d3-4a74-9188-05b80f21ac6a
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
             code: null
             balanceBefore: null
             balanceChange: -200
@@ -3948,8 +3981,8 @@ components:
               rule: currentLineItem.lineTotal.subtotal * 0.20
               explanation: 20% off socks
           - rail: lightrail
-            valueId: c688ea6e-8592-4d9e-8cb8-e4ccc126fe37
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
             code: null
             balanceBefore: 1000
             balanceChange: -1000
@@ -3959,16 +3992,16 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: stripe
-            chargeId: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+            chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
             charge:
-              id: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+              id: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
               object: charge
               amount: 422
               amount_refunded: 0
               application: ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz
               application_fee: null
               application_fee_amount: null
-              balance_transaction: txn_1HMLmZCM9MOvFvZKAOWql59w
+              balance_transaction: txn_1HMMsCCM9MOvFvZKd3Z0pY20
               billing_details:
                 address:
                   city: null
@@ -3982,7 +4015,7 @@ components:
                 phone: null
               calculated_statement_descriptor: Stripe
               captured: true
-              created: 1598914042
+              created: 1598918235
               currency: usd
               customer: null
               description: null
@@ -3995,8 +4028,8 @@ components:
               invoice: null
               livemode: false
               metadata:
-                lightrailTransactionId: bb9b13ea-fd61-4692-9587-189578325765
-                lightrailTransactionSources: '[{"rail":"lightrail","valueId":"6ca055fc-16d3-4a74-9188-05b80f21ac6a"},{"rail":"lightrail","valueId":"c688ea6e-8592-4d9e-8cb8-e4ccc126fe37"}]'
+                lightrailTransactionId: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
+                lightrailTransactionSources: '[{"rail":"lightrail","valueId":"d09954c6-48cc-4ff6-843e-aa0278b79a7b"},{"rail":"lightrail","valueId":"ad8808d4-71e6-4364-833e-ee4c293ad8e0"}]'
                 lightrailUserId: user-c0e4bc89ec714e6199199e8322459e2e-TEST
               on_behalf_of: null
               order: null
@@ -4004,12 +4037,12 @@ components:
                 network_status: approved_by_network
                 reason: null
                 risk_level: normal
-                risk_score: 12
+                risk_score: 61
                 seller_message: Payment complete.
                 type: authorized
               paid: true
               payment_intent: null
-              payment_method: card_1HMLmYCM9MOvFvZKRERVx1sx
+              payment_method: card_1HMMsBCM9MOvFvZKjBxGxa9z
               payment_method_details:
                 card:
                   brand: visa
@@ -4030,18 +4063,18 @@ components:
                 type: card
               receipt_email: null
               receipt_number: null
-              receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMLmYCM9MOvFvZK0Ex9NkiI/rcpt_HwEFMcKmq5Na7nsobyaKmyDyXMsMWlS'
+              receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/rcpt_HwFMlJ0vHebGC8Iv3ztZi1x8HYDV7iF'
               refunded: false
               refunds:
                 object: list
                 data: []
                 has_more: false
                 total_count: 0
-                url: /v1/charges/ch_1HMLmYCM9MOvFvZK0Ex9NkiI/refunds
+                url: /v1/charges/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/refunds
               review: null
               shipping: null
               source:
-                id: card_1HMLmYCM9MOvFvZKRERVx1sx
+                id: card_1HMMsBCM9MOvFvZKjBxGxa9z
                 object: card
                 address_city: null
                 address_country: null
@@ -4073,7 +4106,7 @@ components:
             amount: -422
         paymentSources:
           - rail: lightrail
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
           - rail: stripe
             source: tok_visa
         pending: false
@@ -4081,13 +4114,13 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     reverseCheckoutRequest:
       value:
-        id: f2ed040f-71ad-40c1-a1b8-11f98ba47e85
+        id: aa337c16-04e1-4627-988c-394c1a5f07ab
     reverseCheckoutResponse:
       value:
-        id: f2ed040f-71ad-40c1-a1b8-11f98ba47e85
+        id: aa337c16-04e1-4627-988c-394c1a5f07ab
         transactionType: reverse
         currency: USD
-        createdDate: '2020-08-31T22:47:23.000Z'
+        createdDate: '2020-08-31T23:57:16.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -4104,8 +4137,8 @@ components:
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: 6ca055fc-16d3-4a74-9188-05b80f21ac6a
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
             code: null
             balanceBefore: null
             balanceChange: 200
@@ -4117,8 +4150,8 @@ components:
               rule: currentLineItem.lineTotal.subtotal * 0.20
               explanation: 20% off socks
           - rail: lightrail
-            valueId: c688ea6e-8592-4d9e-8cb8-e4ccc126fe37
-            contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+            valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
+            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
             code: null
             balanceBefore: 0
             balanceChange: 1000
@@ -4128,17 +4161,17 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: stripe
-            chargeId: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+            chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
             charge:
-              id: re_1HMLmaCM9MOvFvZKmtAnuUiH
+              id: re_1HMMsDCM9MOvFvZKFPoV1M2X
               object: refund
               amount: 422
-              balance_transaction: txn_1HMLmaCM9MOvFvZKuYXvgiRT
-              charge: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
-              created: 1598914044
+              balance_transaction: txn_1HMMsDCM9MOvFvZKUJFx4KeP
+              charge: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+              created: 1598918237
               currency: usd
               metadata:
-                reason: Being refunded as part of reverse transaction f2ed040f-71ad-40c1-a1b8-11f98ba47e85.
+                reason: Being refunded as part of reverse transaction aa337c16-04e1-4627-988c-394c1a5f07ab.
               payment_intent: null
               reason: null
               receipt_number: null
@@ -4152,7 +4185,7 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     transactionChainResponse:
       value:
-        - id: bb9b13ea-fd61-4692-9587-189578325765
+        - id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
           transactionType: checkout
           currency: USD
           totals:
@@ -4202,13 +4235,13 @@ components:
                 payable: 209
           paymentSources:
             - rail: lightrail
-              contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
             - rail: stripe
               source: tok_visa
           steps:
             - rail: lightrail
-              valueId: 6ca055fc-16d3-4a74-9188-05b80f21ac6a
-              contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+              valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
+              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
               code: null
               balanceBefore: null
               balanceAfter: null
@@ -4220,8 +4253,8 @@ components:
               usesRemainingAfter: null
               usesRemainingChange: null
             - rail: lightrail
-              valueId: c688ea6e-8592-4d9e-8cb8-e4ccc126fe37
-              contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+              valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
+              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
               code: null
               balanceBefore: 1000
               balanceAfter: 0
@@ -4232,16 +4265,16 @@ components:
               usesRemainingChange: null
             - rail: stripe
               amount: -422
-              chargeId: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+              chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
               charge:
-                id: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+                id: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
                 object: charge
                 amount: 422
                 amount_refunded: 0
                 application: ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz
                 application_fee: null
                 application_fee_amount: null
-                balance_transaction: txn_1HMLmZCM9MOvFvZKAOWql59w
+                balance_transaction: txn_1HMMsCCM9MOvFvZKd3Z0pY20
                 billing_details:
                   address:
                     city: null
@@ -4255,7 +4288,7 @@ components:
                   phone: null
                 calculated_statement_descriptor: Stripe
                 captured: true
-                created: 1598914042
+                created: 1598918235
                 currency: usd
                 customer: null
                 description: null
@@ -4268,8 +4301,8 @@ components:
                 invoice: null
                 livemode: false
                 metadata:
-                  lightrailTransactionId: bb9b13ea-fd61-4692-9587-189578325765
-                  lightrailTransactionSources: '[{"rail":"lightrail","valueId":"6ca055fc-16d3-4a74-9188-05b80f21ac6a"},{"rail":"lightrail","valueId":"c688ea6e-8592-4d9e-8cb8-e4ccc126fe37"}]'
+                  lightrailTransactionId: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
+                  lightrailTransactionSources: '[{"rail":"lightrail","valueId":"d09954c6-48cc-4ff6-843e-aa0278b79a7b"},{"rail":"lightrail","valueId":"ad8808d4-71e6-4364-833e-ee4c293ad8e0"}]'
                   lightrailUserId: user-c0e4bc89ec714e6199199e8322459e2e-TEST
                 on_behalf_of: null
                 order: null
@@ -4277,12 +4310,12 @@ components:
                   network_status: approved_by_network
                   reason: null
                   risk_level: normal
-                  risk_score: 12
+                  risk_score: 61
                   seller_message: Payment complete.
                   type: authorized
                 paid: true
                 payment_intent: null
-                payment_method: card_1HMLmYCM9MOvFvZKRERVx1sx
+                payment_method: card_1HMMsBCM9MOvFvZKjBxGxa9z
                 payment_method_details:
                   card:
                     brand: visa
@@ -4303,18 +4336,18 @@ components:
                   type: card
                 receipt_email: null
                 receipt_number: null
-                receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMLmYCM9MOvFvZK0Ex9NkiI/rcpt_HwEFMcKmq5Na7nsobyaKmyDyXMsMWlS'
+                receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/rcpt_HwFMlJ0vHebGC8Iv3ztZi1x8HYDV7iF'
                 refunded: false
                 refunds:
                   object: list
                   data: []
                   has_more: false
                   total_count: 0
-                  url: /v1/charges/ch_1HMLmYCM9MOvFvZK0Ex9NkiI/refunds
+                  url: /v1/charges/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/refunds
                 review: null
                 shipping: null
                 source:
-                  id: card_1HMLmYCM9MOvFvZKRERVx1sx
+                  id: card_1HMMsBCM9MOvFvZKjBxGxa9z
                   object: card
                   address_city: null
                   address_country: null
@@ -4347,9 +4380,9 @@ components:
           tax:
             roundingMode: HALF_EVEN
           pending: false
-          createdDate: '2020-08-31T22:47:20.000Z'
+          createdDate: '2020-08-31T23:57:14.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
-        - id: f2ed040f-71ad-40c1-a1b8-11f98ba47e85
+        - id: aa337c16-04e1-4627-988c-394c1a5f07ab
           transactionType: reverse
           currency: USD
           totals:
@@ -4367,8 +4400,8 @@ components:
           paymentSources: null
           steps:
             - rail: lightrail
-              valueId: 6ca055fc-16d3-4a74-9188-05b80f21ac6a
-              contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+              valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
+              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
               code: null
               balanceBefore: null
               balanceAfter: null
@@ -4380,8 +4413,8 @@ components:
               usesRemainingAfter: null
               usesRemainingChange: null
             - rail: lightrail
-              valueId: c688ea6e-8592-4d9e-8cb8-e4ccc126fe37
-              contactId: 9c137f9b-795c-4d88-8548-28de37fa2f00
+              valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
+              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
               code: null
               balanceBefore: 0
               balanceAfter: 1000
@@ -4392,17 +4425,17 @@ components:
               usesRemainingChange: null
             - rail: stripe
               amount: 422
-              chargeId: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
+              chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
               charge:
-                id: re_1HMLmaCM9MOvFvZKmtAnuUiH
+                id: re_1HMMsDCM9MOvFvZKFPoV1M2X
                 object: refund
                 amount: 422
-                balance_transaction: txn_1HMLmaCM9MOvFvZKuYXvgiRT
-                charge: ch_1HMLmYCM9MOvFvZK0Ex9NkiI
-                created: 1598914044
+                balance_transaction: txn_1HMMsDCM9MOvFvZKUJFx4KeP
+                charge: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+                created: 1598918237
                 currency: usd
                 metadata:
-                  reason: Being refunded as part of reverse transaction f2ed040f-71ad-40c1-a1b8-11f98ba47e85.
+                  reason: Being refunded as part of reverse transaction aa337c16-04e1-4627-988c-394c1a5f07ab.
                 payment_intent: null
                 reason: null
                 receipt_number: null
@@ -4413,21 +4446,21 @@ components:
           tax:
             roundingMode: HALF_EVEN
           pending: false
-          createdDate: '2020-08-31T22:47:23.000Z'
+          createdDate: '2020-08-31T23:57:16.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     changeGenerateCodeValue1Request:
       value:
         generateCode: {}
     changeGenerateCodeValue1Response:
       value:
-        id: 68d46f86-150e-4a59-acaa-964d88e202c9
+        id: 66ed873d-933a-4ebe-baab-fc59a3226ba1
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         issuanceId: null
         contactId: null
-        code: …PNSZ
+        code: …7H7U
         isGenericCode: false
         pretax: true
         active: true
@@ -4441,36 +4474,36 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:25.000Z'
-        updatedDate: '2020-08-31T22:47:25.000Z'
+        createdDate: '2020-08-31T23:57:18.000Z'
+        updatedDate: '2020-08-31T23:57:18.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     transferRequest:
       value:
-        id: c1a2de8a-aac8-4e9a-bfa8-945b4d430e9d
+        id: 2ea9c0e3-4292-44cb-b884-d20dd45b02ed
         source:
           rail: lightrail
-          valueId: bc0758ab-68b9-40b7-86b5-243cc362de15
+          valueId: dd5d1b8d-7b6c-44dc-87b7-fc42642e9a8b
         destination:
           rail: lightrail
-          valueId: ead3d066-2d33-493b-8d72-e9cef7421614
+          valueId: e24371ed-e75c-4e17-93f3-6e8997abffeb
         amount: 100
         currency: USD
         metadata:
           reference: 'customer request to move funds. ref: #4948173593'
     transferResponse:
       value:
-        id: c1a2de8a-aac8-4e9a-bfa8-945b4d430e9d
+        id: 2ea9c0e3-4292-44cb-b884-d20dd45b02ed
         transactionType: transfer
         currency: USD
-        createdDate: '2020-08-31T22:47:26.000Z'
+        createdDate: '2020-08-31T23:57:18.000Z'
         tax: null
         totals:
           remainder: 0
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: bc0758ab-68b9-40b7-86b5-243cc362de15
+            valueId: dd5d1b8d-7b6c-44dc-87b7-fc42642e9a8b
             contactId: null
             code: null
             balanceBefore: 500
@@ -4481,7 +4514,7 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: lightrail
-            valueId: ead3d066-2d33-493b-8d72-e9cef7421614
+            valueId: e24371ed-e75c-4e17-93f3-6e8997abffeb
             contactId: null
             code: null
             balanceBefore: 500
@@ -4498,16 +4531,16 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createIssuanceRequest:
       value:
-        id: 8c8117b8-dc93-420a-87ee-527f6a33e4c5
+        id: ef58b78e-e7fc-4c9e-a06f-44e514037985
         name: My First Issuance
         count: 10
         generateCode: {}
         balance: 500
     createIssuanceResponse:
       value:
-        id: 8c8117b8-dc93-420a-87ee-527f6a33e4c5
+        id: ef58b78e-e7fc-4c9e-a06f-44e514037985
         name: My First Issuance
-        programId: 1691e33b-bc47-488b-a010-8377230a8e81
+        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
         count: 10
         balance: 500
         redemptionRule: null
@@ -4517,14 +4550,14 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:26.000Z'
-        updatedDate: '2020-08-31T22:47:26.000Z'
+        createdDate: '2020-08-31T23:57:19.000Z'
+        updatedDate: '2020-08-31T23:57:19.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listIssuancesResponse:
       value:
-        - id: 8c8117b8-dc93-420a-87ee-527f6a33e4c5
+        - id: ef58b78e-e7fc-4c9e-a06f-44e514037985
           name: My First Issuance
-          programId: 1691e33b-bc47-488b-a010-8377230a8e81
+          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
           count: 10
           balance: 500
           redemptionRule: null
@@ -4534,18 +4567,18 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T22:47:26.000Z'
-          updatedDate: '2020-08-31T22:47:26.000Z'
+          createdDate: '2020-08-31T23:57:19.000Z'
+          updatedDate: '2020-08-31T23:57:19.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     pendingVoidRequest:
       value:
-        id: 3fff6a0c-ea40-4373-9f14-8b8fd7a1dbac
+        id: 7164f3ab-dd7b-4e39-b5d6-925b476d6322
     pendingVoidResponse:
       value:
-        id: 3fff6a0c-ea40-4373-9f14-8b8fd7a1dbac
+        id: 7164f3ab-dd7b-4e39-b5d6-925b476d6322
         transactionType: void
         currency: USD
-        createdDate: '2020-08-31T22:47:28.000Z'
+        createdDate: '2020-08-31T23:57:21.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -4562,14 +4595,14 @@ components:
         lineItems: null
         steps:
           - rail: stripe
-            chargeId: ch_1HMLmdCM9MOvFvZKpLfRsbUq
+            chargeId: ch_1HMMsGCM9MOvFvZK5D2C8dzP
             charge:
-              id: re_1HMLmeCM9MOvFvZKnbLE995h
+              id: re_1HMMsHCM9MOvFvZK6NnLitmk
               object: refund
               amount: 2782
               balance_transaction: null
-              charge: ch_1HMLmdCM9MOvFvZKpLfRsbUq
-              created: 1598914048
+              charge: ch_1HMMsGCM9MOvFvZK5D2C8dzP
+              created: 1598918241
               currency: usd
               metadata:
                 reason: not specified
@@ -4586,13 +4619,13 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     pendingCaptureRequest:
       value:
-        id: 754e6623-f605-4950-a115-c288bd4a3582
+        id: 649bff4f-4600-4f61-8201-7e3b2f2beefd
     pendingCaptureResponse:
       value:
-        id: 754e6623-f605-4950-a115-c288bd4a3582
+        id: 649bff4f-4600-4f61-8201-7e3b2f2beefd
         transactionType: capture
         currency: USD
-        createdDate: '2020-08-31T22:47:29.000Z'
+        createdDate: '2020-08-31T23:57:22.000Z'
         tax: null
         totals: null
         lineItems: null
@@ -4602,9 +4635,10 @@ components:
         metadata: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createGenericCode1Request:
-      description: This is an example of creating a generic code.
+      summary: Create generic code
+      description: This is an example of creating a generic code.  The exact code will be generated on the server.
       value:
-        id: d5911a21-17b6-4013-803e-c390db400d98
+        id: ff7ac38c-121f-45ec-9508-14c2b76e1ff5
         currency: USD
         isGenericCode: true
         genericCodeOptions:
@@ -4614,9 +4648,9 @@ components:
           rule: 500 + value.balanceChange
           explanation: $5 off purchase
     createGenericCode1Response:
-      description: This is an example of creating a generic code.
+      summary: Create generic code
       value:
-        id: d5911a21-17b6-4013-803e-c390db400d98
+        id: ff7ac38c-121f-45ec-9508-14c2b76e1ff5
         currency: USD
         balance: null
         usesRemaining: null
@@ -4642,8 +4676,8 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T22:47:29.000Z'
-        updatedDate: '2020-08-31T22:47:29.000Z'
+        createdDate: '2020-08-31T23:57:22.000Z'
+        updatedDate: '2020-08-31T23:57:22.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createWebhookRequest:
@@ -4658,12 +4692,12 @@ components:
         url: 'https://example.com/callbackUrl'
         events:
           - '*'
-        createdDate: '2020-08-31T22:47:31.089Z'
-        updatedDate: '2020-08-31T22:47:31.089Z'
+        createdDate: '2020-08-31T23:57:23.211Z'
+        updatedDate: '2020-08-31T23:57:23.211Z'
         secrets:
-          - id: be9354c1-8e65-432a-b539-ba8750d22f7d
-            secret: QLURVKFP0S6ENCWH
-            createdDate: '2020-08-31T22:47:31.090Z'
+          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
+            secret: RPQDAVGTVL65BIN0
+            createdDate: '2020-08-31T23:57:23.211Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
         active: true
     getWebhookResponse:
@@ -4671,28 +4705,28 @@ components:
         id: webhook1
         url: 'https://example.com/callbackUrl'
         secrets:
-          - id: be9354c1-8e65-432a-b539-ba8750d22f7d
-            secret: …NCWH
-            createdDate: '2020-08-31T22:47:31.090Z'
+          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
+            secret: …BIN0
+            createdDate: '2020-08-31T23:57:23.211Z'
         events:
           - '*'
         active: true
-        createdDate: '2020-08-31T22:47:31.089Z'
-        updatedDate: '2020-08-31T22:47:31.089Z'
+        createdDate: '2020-08-31T23:57:23.211Z'
+        updatedDate: '2020-08-31T23:57:23.211Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listWebhooksResponse:
       value:
         - id: webhook1
           url: 'https://example.com/callbackUrl'
           secrets:
-            - id: be9354c1-8e65-432a-b539-ba8750d22f7d
-              secret: …NCWH
-              createdDate: '2020-08-31T22:47:31.090Z'
+            - id: 356a4725-5b41-4182-ab86-4263fbf98f20
+              secret: …BIN0
+              createdDate: '2020-08-31T23:57:23.211Z'
           events:
             - '*'
           active: true
-          createdDate: '2020-08-31T22:47:31.089Z'
-          updatedDate: '2020-08-31T22:47:31.089Z'
+          createdDate: '2020-08-31T23:57:23.211Z'
+          updatedDate: '2020-08-31T23:57:23.211Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateWebhookRequest:
       value:
@@ -4703,20 +4737,20 @@ components:
         id: webhook1
         url: 'https://example.com/callbackUrl'
         secrets:
-          - id: be9354c1-8e65-432a-b539-ba8750d22f7d
-            secret: …NCWH
-            createdDate: '2020-08-31T22:47:31.090Z'
+          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
+            secret: …BIN0
+            createdDate: '2020-08-31T23:57:23.211Z'
         events:
           - lightrail.value.*
         active: true
-        createdDate: '2020-08-31T22:47:31.089Z'
-        updatedDate: '2020-08-31T22:47:32.171Z'
+        createdDate: '2020-08-31T23:57:23.211Z'
+        updatedDate: '2020-08-31T23:57:23.851Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createWebhookSecretResponse:
       value:
-        id: 74a40c3d-5a25-4fd2-a4f5-608aa32d8831
-        secret: SPWMWNM6CJOSPECZ
-        createdDate: '2020-08-31T22:47:32.671Z'
+        id: 56b58ed3-2a74-4686-90ae-d7a5a3ef197c
+        secret: I97XKS2LNBA00RNY
+        createdDate: '2020-08-31T23:57:24.151Z'
   headers:
     Limit:
       description: The limit on the number of items returned.
@@ -4729,10 +4763,10 @@ components:
         type: string
       example: 1000
     Link:
-      description: Links to the first, previous, next and last pages in this paginated endpoint.  See [paging](#section/Paging) for more information.
+      description: 'Links to the first, previous, next and last pages in this paginated endpoint.  See [paging](#section/Paging) for more information.'
       schema:
         type: string
-      example: <URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"
+      example: '<URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"'
   securitySchemes:
     httpBearer:
       type: http
