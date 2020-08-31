@@ -1,6 +1,6 @@
 # OpenAPI 3 Documentation
 
-This directory holds the [OpenAPI 3 (formerly Swagger)](https://swagger.io/) specification for Lightrail.
+This directory holds the [OpenAPI 3 (formerly Swagger)](https://swagger.io/docs/specification/about/) specification for Lightrail.
 
 You can open this file in [Insomnia](https://insomnia.rest/) or [Postman](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/) to start playing with the rest calls.
 

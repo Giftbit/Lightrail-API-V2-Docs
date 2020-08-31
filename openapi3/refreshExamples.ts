@@ -96,7 +96,7 @@ async function refreshExamples(openApi: OpenApi): Promise<void> {
     }
 
     if (unupdatedExamples.length) {
-        throw new Error(`The following examples were not updated: ${unupdatedExamples.join()}`);
+        throw new Error(`The following examples were not updated: ${unupdatedExamples.join()}.  Check that is has a matching call in requests.json and ends in 'Request' or 'Response'.`);
     }
 }
 

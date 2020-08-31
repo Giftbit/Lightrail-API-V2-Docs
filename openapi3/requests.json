@@ -13,6 +13,11 @@
       "allowFailure": true
     },
     {
+      "callId": "getCurrency1",
+      "method": "GET",
+      "endpoint": "/currencies/USD"
+    },
+    {
       "callId": "listCurrencies1",
       "method": "GET",
       "endpoint": "/currencies"
@@ -30,6 +35,15 @@
           "alias": "El Duderino"
         }
       }
+    },
+    {
+      "callId": "createContactExists1",
+      "method": "POST",
+      "endpoint": "/contacts",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createContact1.body.id}"
+      },
+      "allowFailure": true
     },
     {
       "callId": "listContacts1",
@@ -494,6 +508,12 @@
       "callId": "deleteWebhook",
       "method": "DELETE",
       "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
+    },
+    {
+      "callId": "deleteCurrencyInUse1",
+      "method": "DELETE",
+      "endpoint": "/currencies/USD",
+      "allowFailure": true
     }
   ]
 }
