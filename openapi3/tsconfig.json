@@ -1,0 +1,11 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "noImplicitAny": false,
+    "noImplicitThis": true,
+    "sourceMap": false,
+    "target": "es6"
+  }
+}
