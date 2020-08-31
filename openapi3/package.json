@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "lint": "speccy lint openapi3.yaml",
+    "lint": "yamllint openapi3.yaml && speccy lint openapi3.yaml",
     "refreshExamples": "ts-node refreshExamples"
   },
   "repository": {
@@ -22,10 +22,18 @@
   },
   "homepage": "https://github.com/Giftbit/Lightrail-API-V2-Docs#readme",
   "dependencies": {
+    "@types/dotenv-safe": "^8.1.1",
+    "@types/js-yaml": "^3.12.5",
+    "@types/node": "^14.6.2",
+    "@types/superagent": "^4.1.10",
     "@types/uuid": "^8.3.0",
+    "dotenv-safe": "^8.2.0",
+    "js-yaml": "^3.14.0",
     "speccy": "^0.11.0",
+    "superagent": "^6.1.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.0",
+    "yaml-lint": "^1.2.4"
   }
 }

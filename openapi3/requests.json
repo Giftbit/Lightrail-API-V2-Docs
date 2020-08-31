@@ -1,6 +1,18 @@
 {
   "calls": [
     {
+      "callId": "createUsd",
+      "method": "POST",
+      "endpoint": "/currencies",
+      "body": {
+        "code": "USD",
+        "name": "USD",
+        "symbol": "$",
+        "decimalPlaces": 2
+      },
+      "allowFailure": true
+    },
+    {
       "callId": "listCurrencies1",
       "method": "GET",
       "endpoint": "/currencies"

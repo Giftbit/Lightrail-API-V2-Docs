@@ -5,6 +5,7 @@
     "module": "commonjs",
     "noImplicitAny": false,
     "noImplicitThis": true,
+    "resolveJsonModule": true,
     "sourceMap": false,
     "target": "es6"
   }
