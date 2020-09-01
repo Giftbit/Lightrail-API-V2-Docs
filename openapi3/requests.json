@@ -211,6 +211,24 @@
       }
     },
     {
+      "callId": "debitTransactionInsufficientBalance1",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+        },
+        "amount": 10000000,
+        "currency": "USD",
+        "metadata": {
+          "note": "Reduce loyalty points after 3mo contact inactivity"
+        }
+      },
+      "statusCode": 409
+    },
+    {
       "callId": "listTransactions1",
       "method": "GET",
       "endpoint": "/transactions?limit=1"
@@ -371,6 +389,28 @@
           "reference": "customer request to move funds. ref: #4948173593"
         }
       }
+    },
+    {
+      "callId": "transferInsufficientBalance",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:valueForTransferSource.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:valueForTransferDestination.body.id}"
+        },
+        "amount": 1000000,
+        "currency": "USD",
+        "metadata": {
+          "reference": "customer request to move funds. ref: #4948173593"
+        }
+      },
+      "statusCode": 409
     },
     {
       "callId": "createIssuance",

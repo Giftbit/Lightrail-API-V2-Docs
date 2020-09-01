@@ -1473,10 +1473,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RestError'
-              example:
-                statusCode: 409
-                message: Insufficient balance for the transaction.
-                messageCode: InsufficientBalance
+              examples:
+                debitTransactionInsufficientBalance1Response:
+                  $ref: '#/components/examples/debitTransactionInsufficientBalance1Response'
   /transactions/credit:
     post:
       tags:
@@ -1543,10 +1542,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StripeRestError'
-              example:
-                statusCode: 409
-                message: Insufficient balance for the transaction.
-                messageCode: InsufficientBalance
+              examples:
+                transferInsufficientBalanceResponse:
+                  $ref: '#/components/examples/transferInsufficientBalanceResponse'
   /transactions/{id}/reverse:
     post:
       tags:
@@ -3425,7 +3423,7 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createContact1Request:
       value:
-        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        id: 46df9c60-76ee-4c4a-b06b-96cba42660be
         firstName: Jeffrey
         lastName: Lebowski
         email: thedude@example.com
@@ -3439,31 +3437,31 @@ components:
         messageCode: CurrencyInUse
     createContact1Response:
       value:
-        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        id: 46df9c60-76ee-4c4a-b06b-96cba42660be
         firstName: Jeffrey
         lastName: Lebowski
         email: thedude@example.com
         metadata:
           alias: El Duderino
-        createdDate: '2020-08-31T23:57:10.000Z'
-        updatedDate: '2020-08-31T23:57:10.000Z'
+        createdDate: '2020-09-01T00:10:17.000Z'
+        updatedDate: '2020-09-01T00:10:17.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createContactExists1Response:
       summary: Contact exists
       value:
-        message: A Contact with id 'c1484390-5292-4fb7-b5b9-0cfd9b5a8440' already exists.
+        message: A Contact with id '46df9c60-76ee-4c4a-b06b-96cba42660be' already exists.
         statusCode: 409
         messageCode: ContactIdExists
     listContacts1Response:
       value:
-        - id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        - id: 46df9c60-76ee-4c4a-b06b-96cba42660be
           firstName: Jeffrey
           lastName: Lebowski
           email: thedude@example.com
           metadata:
             alias: El Duderino
-          createdDate: '2020-08-31T23:57:10.000Z'
-          updatedDate: '2020-08-31T23:57:10.000Z'
+          createdDate: '2020-09-01T00:10:17.000Z'
+          updatedDate: '2020-09-01T00:10:17.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateContact1Request:
       value:
@@ -3473,19 +3471,19 @@ components:
           note: Into the whole 'brevity thing'
     updateContact1Response:
       value:
-        id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        id: 46df9c60-76ee-4c4a-b06b-96cba42660be
         firstName: The Dude
         lastName: Lebowski
         email: thedude@example.com
         metadata:
           alias: El Duderino
           note: Into the whole 'brevity thing'
-        createdDate: '2020-08-31T23:57:10.000Z'
-        updatedDate: '2020-08-31T23:57:10.000Z'
+        createdDate: '2020-09-01T00:10:17.000Z'
+        updatedDate: '2020-09-01T00:10:17.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createProgram1Request:
       value:
-        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        id: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         name: Spring Promotion USD
         currency: USD
         pretax: true
@@ -3494,7 +3492,7 @@ components:
           - 500
     createProgram1Response:
       value:
-        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        id: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         name: Spring Promotion USD
         currency: USD
         discount: true
@@ -3512,18 +3510,18 @@ components:
         startDate: null
         endDate: null
         metadata: null
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:11.000Z'
+        createdDate: '2020-09-01T00:10:17.000Z'
+        updatedDate: '2020-09-01T00:10:17.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createProgramExists1Response:
       summary: Program exists
       value:
-        message: A Program with id '6acb1a94-dcc3-4291-b054-6dbdb4e2fd92' already exists.
+        message: A Program with id '7c2635f7-546a-45c7-8c1b-52c8693d5f44' already exists.
         statusCode: 409
         messageCode: ProgramIdExists
     listPrograms1Response:
       value:
-        - id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        - id: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
           name: Spring Promotion USD
           currency: USD
           discount: true
@@ -3541,15 +3539,15 @@ components:
           startDate: null
           endDate: null
           metadata: null
-          createdDate: '2020-08-31T23:57:11.000Z'
-          updatedDate: '2020-08-31T23:57:11.000Z'
+          createdDate: '2020-09-01T00:10:17.000Z'
+          updatedDate: '2020-09-01T00:10:17.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateProgram1Request:
       value:
         name: Spring Promo US Dollars
     updateProgram1Response:
       value:
-        id: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        id: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         name: Spring Promo US Dollars
         currency: USD
         discount: true
@@ -3567,23 +3565,23 @@ components:
         startDate: null
         endDate: null
         metadata: null
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:11.000Z'
+        createdDate: '2020-09-01T00:10:17.000Z'
+        updatedDate: '2020-09-01T00:10:18.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createValue1Request:
       summary: Create Value in Program
       value:
-        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         balance: 500
     createValue1Response:
       summary: Create Value in Program
       value:
-        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         issuanceId: null
         code: null
         isGenericCode: false
@@ -3600,23 +3598,23 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:11.000Z'
+        createdDate: '2020-09-01T00:10:18.000Z'
+        updatedDate: '2020-09-01T00:10:18.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createValueExists1Response:
       summary: Value exists
       value:
-        message: A Value with id '16381e93-ae0b-429c-8a46-a1e2f91c659b' already exists.
+        message: A Value with id '11ae4b41-66c6-4d56-86a7-e791b99f88f1' already exists.
         statusCode: 409
         messageCode: ValueIdExists
     listValues1Response:
       value:
-        - id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        - id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
           currency: USD
           balance: 500
           usesRemaining: null
-          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+          programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
           issuanceId: null
           contactId: null
           code: null
@@ -3633,22 +3631,22 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T23:57:11.000Z'
-          updatedDate: '2020-08-31T23:57:11.000Z'
+          createdDate: '2020-09-01T00:10:18.000Z'
+          updatedDate: '2020-09-01T00:10:18.000Z'
           updatedContactIdDate: null
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     attachValue1Request:
       value:
-        valueId: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        valueId: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
     attachValue1Response:
       value:
-        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         issuanceId: null
-        contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
         code: null
         isGenericCode: false
         pretax: true
@@ -3663,31 +3661,31 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:12.000Z'
-        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
+        createdDate: '2020-09-01T00:10:18.000Z'
+        updatedDate: '2020-09-01T00:10:19.000Z'
+        updatedContactIdDate: '2020-09-01T00:10:19.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listValue1ContactsResponse:
       value:
-        - id: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+        - id: 46df9c60-76ee-4c4a-b06b-96cba42660be
           firstName: The Dude
           lastName: Lebowski
           email: thedude@example.com
           metadata:
             alias: El Duderino
             note: Into the whole 'brevity thing'
-          createdDate: '2020-08-31T23:57:10.000Z'
-          updatedDate: '2020-08-31T23:57:10.000Z'
+          createdDate: '2020-09-01T00:10:17.000Z'
+          updatedDate: '2020-09-01T00:10:17.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listContactsValue1Response:
       value:
-        - id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        - id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
           currency: USD
           balance: 500
           usesRemaining: null
-          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+          programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
           issuanceId: null
-          contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+          contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
           code: null
           isGenericCode: false
           pretax: true
@@ -3702,20 +3700,20 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T23:57:11.000Z'
-          updatedDate: '2020-08-31T23:57:12.000Z'
-          updatedContactIdDate: '2020-08-31T23:57:12.000Z'
+          createdDate: '2020-09-01T00:10:18.000Z'
+          updatedDate: '2020-09-01T00:10:19.000Z'
+          updatedContactIdDate: '2020-09-01T00:10:19.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     detachValue1Request:
       value:
-        valueId: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        valueId: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
     detachValue1Response:
       value:
-        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         issuanceId: null
         contactId: null
         code: null
@@ -3732,20 +3730,20 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:12.000Z'
-        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
+        createdDate: '2020-09-01T00:10:18.000Z'
+        updatedDate: '2020-09-01T00:10:19.000Z'
+        updatedContactIdDate: '2020-09-01T00:10:19.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateValue1Request:
       value:
         frozen: true
     updateValue1Response:
       value:
-        id: 16381e93-ae0b-429c-8a46-a1e2f91c659b
+        id: 11ae4b41-66c6-4d56-86a7-e791b99f88f1
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         issuanceId: null
         contactId: null
         code: null
@@ -3762,32 +3760,32 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:11.000Z'
-        updatedDate: '2020-08-31T23:57:13.000Z'
-        updatedContactIdDate: '2020-08-31T23:57:12.000Z'
+        createdDate: '2020-09-01T00:10:18.000Z'
+        updatedDate: '2020-09-01T00:10:19.000Z'
+        updatedContactIdDate: '2020-09-01T00:10:19.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     creditTransaction1Request:
       value:
-        id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
+        id: 34fb454e-4640-4a2a-9f26-059c941b9eda
         destination:
           rail: lightrail
-          valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
+          valueId: f4c6d78a-a099-4299-a82d-d0358fd7af2f
         amount: 2500
         currency: USD
         metadata:
           note: Frequent buyer bonus
     creditTransaction1Response:
       value:
-        id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
+        id: 34fb454e-4640-4a2a-9f26-059c941b9eda
         transactionType: credit
         currency: USD
-        createdDate: '2020-08-31T23:57:13.000Z'
+        createdDate: '2020-09-01T00:10:20.000Z'
         tax: null
         totals: null
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
+            valueId: f4c6d78a-a099-4299-a82d-d0358fd7af2f
             contactId: null
             code: null
             balanceBefore: 500
@@ -3804,27 +3802,27 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     debitTransaction1Request:
       value:
-        id: 9c22b707-494e-4c79-ae0c-50ad22941456
+        id: 12da981c-234e-4fca-8633-bc431c66ecea
         source:
           rail: lightrail
-          valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
+          valueId: f4c6d78a-a099-4299-a82d-d0358fd7af2f
         amount: 1000
         currency: USD
         metadata:
           note: Reduce loyalty points after 3mo contact inactivity
     debitTransaction1Response:
       value:
-        id: 9c22b707-494e-4c79-ae0c-50ad22941456
+        id: 12da981c-234e-4fca-8633-bc431c66ecea
         transactionType: debit
         currency: USD
-        createdDate: '2020-08-31T23:57:13.000Z'
+        createdDate: '2020-09-01T00:10:20.000Z'
         tax: null
         totals:
           remainder: 0
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
+            valueId: f4c6d78a-a099-4299-a82d-d0358fd7af2f
             contactId: null
             code: null
             balanceBefore: 3000
@@ -3839,9 +3837,15 @@ components:
         metadata:
           note: Reduce loyalty points after 3mo contact inactivity
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+    debitTransactionInsufficientBalance1Response:
+      summary: Insufficient balance
+      value:
+        message: Insufficient balance for the transaction.
+        statusCode: 409
+        messageCode: InsufficientBalance
     listTransactions1Response:
       value:
-        - id: bdb44c7e-ecf0-4860-ac5d-be970c3cad92
+        - id: 34fb454e-4640-4a2a-9f26-059c941b9eda
           transactionType: credit
           currency: USD
           totals: null
@@ -3849,7 +3853,7 @@ components:
           paymentSources: null
           steps:
             - rail: lightrail
-              valueId: 574d6b04-0fa5-4d80-a7ef-ca0590f7bb9d
+              valueId: f4c6d78a-a099-4299-a82d-d0358fd7af2f
               contactId: null
               code: null
               balanceBefore: 500
@@ -3863,7 +3867,7 @@ components:
             note: Frequent buyer bonus
           tax: null
           pending: false
-          createdDate: '2020-08-31T23:57:13.000Z'
+          createdDate: '2020-09-01T00:10:20.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     checkoutExample1Request:
       summary: Checkout with Lightrail and credit card
@@ -3881,10 +3885,10 @@ components:
                 - Sock promo is for 20% off retail price of socks.
             - Credit card
       value:
-        id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
+        id: 7ad7caf1-78b3-4129-bfa2-38363702b627
         sources:
           - rail: lightrail
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
           - rail: stripe
             source: tok_visa
         lineItems:
@@ -3915,10 +3919,10 @@ components:
                 - Sock promo is for 20% off retail price of socks.
             - Credit card
       value:
-        id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
+        id: 7ad7caf1-78b3-4129-bfa2-38363702b627
         transactionType: checkout
         currency: USD
-        createdDate: '2020-08-31T23:57:14.000Z'
+        createdDate: '2020-09-01T00:10:21.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -3968,8 +3972,8 @@ components:
               payable: 209
         steps:
           - rail: lightrail
-            valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            valueId: bc27a594-bc25-4e8e-82a2-ead73653abb2
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
             code: null
             balanceBefore: null
             balanceChange: -200
@@ -3981,8 +3985,8 @@ components:
               rule: currentLineItem.lineTotal.subtotal * 0.20
               explanation: 20% off socks
           - rail: lightrail
-            valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            valueId: 8b238524-779b-4800-b931-8040f86d1cab
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
             code: null
             balanceBefore: 1000
             balanceChange: -1000
@@ -3992,16 +3996,16 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: stripe
-            chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+            chargeId: ch_1HMN4sCM9MOvFvZKbYGGbQCU
             charge:
-              id: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+              id: ch_1HMN4sCM9MOvFvZKbYGGbQCU
               object: charge
               amount: 422
               amount_refunded: 0
               application: ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz
               application_fee: null
               application_fee_amount: null
-              balance_transaction: txn_1HMMsCCM9MOvFvZKd3Z0pY20
+              balance_transaction: txn_1HMN4sCM9MOvFvZKjDZVCmSV
               billing_details:
                 address:
                   city: null
@@ -4015,7 +4019,7 @@ components:
                 phone: null
               calculated_statement_descriptor: Stripe
               captured: true
-              created: 1598918235
+              created: 1598919022
               currency: usd
               customer: null
               description: null
@@ -4028,8 +4032,8 @@ components:
               invoice: null
               livemode: false
               metadata:
-                lightrailTransactionId: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
-                lightrailTransactionSources: '[{"rail":"lightrail","valueId":"d09954c6-48cc-4ff6-843e-aa0278b79a7b"},{"rail":"lightrail","valueId":"ad8808d4-71e6-4364-833e-ee4c293ad8e0"}]'
+                lightrailTransactionId: 7ad7caf1-78b3-4129-bfa2-38363702b627
+                lightrailTransactionSources: '[{"rail":"lightrail","valueId":"bc27a594-bc25-4e8e-82a2-ead73653abb2"},{"rail":"lightrail","valueId":"8b238524-779b-4800-b931-8040f86d1cab"}]'
                 lightrailUserId: user-c0e4bc89ec714e6199199e8322459e2e-TEST
               on_behalf_of: null
               order: null
@@ -4037,12 +4041,12 @@ components:
                 network_status: approved_by_network
                 reason: null
                 risk_level: normal
-                risk_score: 61
+                risk_score: 42
                 seller_message: Payment complete.
                 type: authorized
               paid: true
               payment_intent: null
-              payment_method: card_1HMMsBCM9MOvFvZKjBxGxa9z
+              payment_method: card_1HMN4sCM9MOvFvZK5y2rQsg8
               payment_method_details:
                 card:
                   brand: visa
@@ -4051,7 +4055,7 @@ components:
                     address_postal_code_check: null
                     cvc_check: null
                   country: US
-                  exp_month: 8
+                  exp_month: 9
                   exp_year: 2021
                   fingerprint: vnMoEG5eZVxSMPc7
                   funding: credit
@@ -4063,18 +4067,18 @@ components:
                 type: card
               receipt_email: null
               receipt_number: null
-              receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/rcpt_HwFMlJ0vHebGC8Iv3ztZi1x8HYDV7iF'
+              receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMN4sCM9MOvFvZKbYGGbQCU/rcpt_HwFaMDzvRYyVYf1ze296f9JJZ1MtN0s'
               refunded: false
               refunds:
                 object: list
                 data: []
                 has_more: false
                 total_count: 0
-                url: /v1/charges/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/refunds
+                url: /v1/charges/ch_1HMN4sCM9MOvFvZKbYGGbQCU/refunds
               review: null
               shipping: null
               source:
-                id: card_1HMMsBCM9MOvFvZKjBxGxa9z
+                id: card_1HMN4sCM9MOvFvZK5y2rQsg8
                 object: card
                 address_city: null
                 address_country: null
@@ -4089,7 +4093,7 @@ components:
                 customer: null
                 cvc_check: null
                 dynamic_last4: null
-                exp_month: 8
+                exp_month: 9
                 exp_year: 2021
                 fingerprint: vnMoEG5eZVxSMPc7
                 funding: credit
@@ -4106,7 +4110,7 @@ components:
             amount: -422
         paymentSources:
           - rail: lightrail
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
           - rail: stripe
             source: tok_visa
         pending: false
@@ -4114,13 +4118,13 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     reverseCheckoutRequest:
       value:
-        id: aa337c16-04e1-4627-988c-394c1a5f07ab
+        id: 62b84bd2-a5ac-48fb-8897-72474f6661fb
     reverseCheckoutResponse:
       value:
-        id: aa337c16-04e1-4627-988c-394c1a5f07ab
+        id: 62b84bd2-a5ac-48fb-8897-72474f6661fb
         transactionType: reverse
         currency: USD
-        createdDate: '2020-08-31T23:57:16.000Z'
+        createdDate: '2020-09-01T00:10:22.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -4137,8 +4141,8 @@ components:
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            valueId: bc27a594-bc25-4e8e-82a2-ead73653abb2
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
             code: null
             balanceBefore: null
             balanceChange: 200
@@ -4150,8 +4154,8 @@ components:
               rule: currentLineItem.lineTotal.subtotal * 0.20
               explanation: 20% off socks
           - rail: lightrail
-            valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
-            contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+            valueId: 8b238524-779b-4800-b931-8040f86d1cab
+            contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
             code: null
             balanceBefore: 0
             balanceChange: 1000
@@ -4161,17 +4165,17 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: stripe
-            chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+            chargeId: ch_1HMN4sCM9MOvFvZKbYGGbQCU
             charge:
-              id: re_1HMMsDCM9MOvFvZKFPoV1M2X
+              id: re_1HMN4tCM9MOvFvZKNPOqALoa
               object: refund
               amount: 422
-              balance_transaction: txn_1HMMsDCM9MOvFvZKUJFx4KeP
-              charge: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
-              created: 1598918237
+              balance_transaction: txn_1HMN4tCM9MOvFvZKP67e5Wuj
+              charge: ch_1HMN4sCM9MOvFvZKbYGGbQCU
+              created: 1598919023
               currency: usd
               metadata:
-                reason: Being refunded as part of reverse transaction aa337c16-04e1-4627-988c-394c1a5f07ab.
+                reason: Being refunded as part of reverse transaction 62b84bd2-a5ac-48fb-8897-72474f6661fb.
               payment_intent: null
               reason: null
               receipt_number: null
@@ -4185,7 +4189,7 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     transactionChainResponse:
       value:
-        - id: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
+        - id: 7ad7caf1-78b3-4129-bfa2-38363702b627
           transactionType: checkout
           currency: USD
           totals:
@@ -4235,13 +4239,13 @@ components:
                 payable: 209
           paymentSources:
             - rail: lightrail
-              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+              contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
             - rail: stripe
               source: tok_visa
           steps:
             - rail: lightrail
-              valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
-              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+              valueId: bc27a594-bc25-4e8e-82a2-ead73653abb2
+              contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
               code: null
               balanceBefore: null
               balanceAfter: null
@@ -4253,8 +4257,8 @@ components:
               usesRemainingAfter: null
               usesRemainingChange: null
             - rail: lightrail
-              valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
-              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+              valueId: 8b238524-779b-4800-b931-8040f86d1cab
+              contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
               code: null
               balanceBefore: 1000
               balanceAfter: 0
@@ -4265,16 +4269,16 @@ components:
               usesRemainingChange: null
             - rail: stripe
               amount: -422
-              chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+              chargeId: ch_1HMN4sCM9MOvFvZKbYGGbQCU
               charge:
-                id: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+                id: ch_1HMN4sCM9MOvFvZKbYGGbQCU
                 object: charge
                 amount: 422
                 amount_refunded: 0
                 application: ca_Bg76g9LV6IsnS40GKfnFrdlAOFohjAtz
                 application_fee: null
                 application_fee_amount: null
-                balance_transaction: txn_1HMMsCCM9MOvFvZKd3Z0pY20
+                balance_transaction: txn_1HMN4sCM9MOvFvZKjDZVCmSV
                 billing_details:
                   address:
                     city: null
@@ -4288,7 +4292,7 @@ components:
                   phone: null
                 calculated_statement_descriptor: Stripe
                 captured: true
-                created: 1598918235
+                created: 1598919022
                 currency: usd
                 customer: null
                 description: null
@@ -4301,8 +4305,8 @@ components:
                 invoice: null
                 livemode: false
                 metadata:
-                  lightrailTransactionId: 11df1b42-39f2-4f99-a3f2-d812d4461ae0
-                  lightrailTransactionSources: '[{"rail":"lightrail","valueId":"d09954c6-48cc-4ff6-843e-aa0278b79a7b"},{"rail":"lightrail","valueId":"ad8808d4-71e6-4364-833e-ee4c293ad8e0"}]'
+                  lightrailTransactionId: 7ad7caf1-78b3-4129-bfa2-38363702b627
+                  lightrailTransactionSources: '[{"rail":"lightrail","valueId":"bc27a594-bc25-4e8e-82a2-ead73653abb2"},{"rail":"lightrail","valueId":"8b238524-779b-4800-b931-8040f86d1cab"}]'
                   lightrailUserId: user-c0e4bc89ec714e6199199e8322459e2e-TEST
                 on_behalf_of: null
                 order: null
@@ -4310,12 +4314,12 @@ components:
                   network_status: approved_by_network
                   reason: null
                   risk_level: normal
-                  risk_score: 61
+                  risk_score: 42
                   seller_message: Payment complete.
                   type: authorized
                 paid: true
                 payment_intent: null
-                payment_method: card_1HMMsBCM9MOvFvZKjBxGxa9z
+                payment_method: card_1HMN4sCM9MOvFvZK5y2rQsg8
                 payment_method_details:
                   card:
                     brand: visa
@@ -4324,7 +4328,7 @@ components:
                       address_postal_code_check: null
                       cvc_check: null
                     country: US
-                    exp_month: 8
+                    exp_month: 9
                     exp_year: 2021
                     fingerprint: vnMoEG5eZVxSMPc7
                     funding: credit
@@ -4336,18 +4340,18 @@ components:
                   type: card
                 receipt_email: null
                 receipt_number: null
-                receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/rcpt_HwFMlJ0vHebGC8Iv3ztZi1x8HYDV7iF'
+                receipt_url: 'https://pay.stripe.com/receipts/acct_1BOVE6CM9MOvFvZK/ch_1HMN4sCM9MOvFvZKbYGGbQCU/rcpt_HwFaMDzvRYyVYf1ze296f9JJZ1MtN0s'
                 refunded: false
                 refunds:
                   object: list
                   data: []
                   has_more: false
                   total_count: 0
-                  url: /v1/charges/ch_1HMMsBCM9MOvFvZKHr8Gg9eM/refunds
+                  url: /v1/charges/ch_1HMN4sCM9MOvFvZKbYGGbQCU/refunds
                 review: null
                 shipping: null
                 source:
-                  id: card_1HMMsBCM9MOvFvZKjBxGxa9z
+                  id: card_1HMN4sCM9MOvFvZK5y2rQsg8
                   object: card
                   address_city: null
                   address_country: null
@@ -4362,7 +4366,7 @@ components:
                   customer: null
                   cvc_check: null
                   dynamic_last4: null
-                  exp_month: 8
+                  exp_month: 9
                   exp_year: 2021
                   fingerprint: vnMoEG5eZVxSMPc7
                   funding: credit
@@ -4380,9 +4384,9 @@ components:
           tax:
             roundingMode: HALF_EVEN
           pending: false
-          createdDate: '2020-08-31T23:57:14.000Z'
+          createdDate: '2020-09-01T00:10:21.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
-        - id: aa337c16-04e1-4627-988c-394c1a5f07ab
+        - id: 62b84bd2-a5ac-48fb-8897-72474f6661fb
           transactionType: reverse
           currency: USD
           totals:
@@ -4400,8 +4404,8 @@ components:
           paymentSources: null
           steps:
             - rail: lightrail
-              valueId: d09954c6-48cc-4ff6-843e-aa0278b79a7b
-              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+              valueId: bc27a594-bc25-4e8e-82a2-ead73653abb2
+              contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
               code: null
               balanceBefore: null
               balanceAfter: null
@@ -4413,8 +4417,8 @@ components:
               usesRemainingAfter: null
               usesRemainingChange: null
             - rail: lightrail
-              valueId: ad8808d4-71e6-4364-833e-ee4c293ad8e0
-              contactId: c1484390-5292-4fb7-b5b9-0cfd9b5a8440
+              valueId: 8b238524-779b-4800-b931-8040f86d1cab
+              contactId: 46df9c60-76ee-4c4a-b06b-96cba42660be
               code: null
               balanceBefore: 0
               balanceAfter: 1000
@@ -4425,17 +4429,17 @@ components:
               usesRemainingChange: null
             - rail: stripe
               amount: 422
-              chargeId: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
+              chargeId: ch_1HMN4sCM9MOvFvZKbYGGbQCU
               charge:
-                id: re_1HMMsDCM9MOvFvZKFPoV1M2X
+                id: re_1HMN4tCM9MOvFvZKNPOqALoa
                 object: refund
                 amount: 422
-                balance_transaction: txn_1HMMsDCM9MOvFvZKUJFx4KeP
-                charge: ch_1HMMsBCM9MOvFvZKHr8Gg9eM
-                created: 1598918237
+                balance_transaction: txn_1HMN4tCM9MOvFvZKP67e5Wuj
+                charge: ch_1HMN4sCM9MOvFvZKbYGGbQCU
+                created: 1598919023
                 currency: usd
                 metadata:
-                  reason: Being refunded as part of reverse transaction aa337c16-04e1-4627-988c-394c1a5f07ab.
+                  reason: Being refunded as part of reverse transaction 62b84bd2-a5ac-48fb-8897-72474f6661fb.
                 payment_intent: null
                 reason: null
                 receipt_number: null
@@ -4446,21 +4450,21 @@ components:
           tax:
             roundingMode: HALF_EVEN
           pending: false
-          createdDate: '2020-08-31T23:57:16.000Z'
+          createdDate: '2020-09-01T00:10:22.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     changeGenerateCodeValue1Request:
       value:
         generateCode: {}
     changeGenerateCodeValue1Response:
       value:
-        id: 66ed873d-933a-4ebe-baab-fc59a3226ba1
+        id: 8783287c-d446-46e8-9a59-ba2f403c2950
         currency: USD
         balance: 500
         usesRemaining: null
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         issuanceId: null
         contactId: null
-        code: …7H7U
+        code: …KJU8
         isGenericCode: false
         pretax: true
         active: true
@@ -4474,36 +4478,36 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:18.000Z'
-        updatedDate: '2020-08-31T23:57:18.000Z'
+        createdDate: '2020-09-01T00:10:24.000Z'
+        updatedDate: '2020-09-01T00:10:24.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     transferRequest:
       value:
-        id: 2ea9c0e3-4292-44cb-b884-d20dd45b02ed
+        id: a49b7928-6550-4d45-b777-57fd05bffe22
         source:
           rail: lightrail
-          valueId: dd5d1b8d-7b6c-44dc-87b7-fc42642e9a8b
+          valueId: b013c7cf-287c-43de-a9c1-79b71cd4d294
         destination:
           rail: lightrail
-          valueId: e24371ed-e75c-4e17-93f3-6e8997abffeb
+          valueId: 46bcf40f-6e5f-4961-9aad-e490320d2727
         amount: 100
         currency: USD
         metadata:
           reference: 'customer request to move funds. ref: #4948173593'
     transferResponse:
       value:
-        id: 2ea9c0e3-4292-44cb-b884-d20dd45b02ed
+        id: a49b7928-6550-4d45-b777-57fd05bffe22
         transactionType: transfer
         currency: USD
-        createdDate: '2020-08-31T23:57:18.000Z'
+        createdDate: '2020-09-01T00:10:25.000Z'
         tax: null
         totals:
           remainder: 0
         lineItems: null
         steps:
           - rail: lightrail
-            valueId: dd5d1b8d-7b6c-44dc-87b7-fc42642e9a8b
+            valueId: b013c7cf-287c-43de-a9c1-79b71cd4d294
             contactId: null
             code: null
             balanceBefore: 500
@@ -4514,7 +4518,7 @@ components:
             usesRemainingAfter: null
             balanceRule: null
           - rail: lightrail
-            valueId: e24371ed-e75c-4e17-93f3-6e8997abffeb
+            valueId: 46bcf40f-6e5f-4961-9aad-e490320d2727
             contactId: null
             code: null
             balanceBefore: 500
@@ -4529,18 +4533,24 @@ components:
         metadata:
           reference: 'customer request to move funds. ref: #4948173593'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
+    transferInsufficientBalanceResponse:
+      summary: Insufficient balance
+      value:
+        message: Insufficient balance for the transaction.
+        statusCode: 409
+        messageCode: InsufficientBalance
     createIssuanceRequest:
       value:
-        id: ef58b78e-e7fc-4c9e-a06f-44e514037985
+        id: e1a86ada-bf39-42c4-8724-03b20da525db
         name: My First Issuance
         count: 10
         generateCode: {}
         balance: 500
     createIssuanceResponse:
       value:
-        id: ef58b78e-e7fc-4c9e-a06f-44e514037985
+        id: e1a86ada-bf39-42c4-8724-03b20da525db
         name: My First Issuance
-        programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+        programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
         count: 10
         balance: 500
         redemptionRule: null
@@ -4550,14 +4560,14 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:19.000Z'
-        updatedDate: '2020-08-31T23:57:19.000Z'
+        createdDate: '2020-09-01T00:10:25.000Z'
+        updatedDate: '2020-09-01T00:10:25.000Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listIssuancesResponse:
       value:
-        - id: ef58b78e-e7fc-4c9e-a06f-44e514037985
+        - id: e1a86ada-bf39-42c4-8724-03b20da525db
           name: My First Issuance
-          programId: 6acb1a94-dcc3-4291-b054-6dbdb4e2fd92
+          programId: 7c2635f7-546a-45c7-8c1b-52c8693d5f44
           count: 10
           balance: 500
           redemptionRule: null
@@ -4567,18 +4577,18 @@ components:
           startDate: null
           endDate: null
           metadata: {}
-          createdDate: '2020-08-31T23:57:19.000Z'
-          updatedDate: '2020-08-31T23:57:19.000Z'
+          createdDate: '2020-09-01T00:10:25.000Z'
+          updatedDate: '2020-09-01T00:10:25.000Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     pendingVoidRequest:
       value:
-        id: 7164f3ab-dd7b-4e39-b5d6-925b476d6322
+        id: 19efc6c1-9302-4ff7-97af-ffdc12479ede
     pendingVoidResponse:
       value:
-        id: 7164f3ab-dd7b-4e39-b5d6-925b476d6322
+        id: 19efc6c1-9302-4ff7-97af-ffdc12479ede
         transactionType: void
         currency: USD
-        createdDate: '2020-08-31T23:57:21.000Z'
+        createdDate: '2020-09-01T00:10:27.000Z'
         tax:
           roundingMode: HALF_EVEN
         totals:
@@ -4595,14 +4605,14 @@ components:
         lineItems: null
         steps:
           - rail: stripe
-            chargeId: ch_1HMMsGCM9MOvFvZK5D2C8dzP
+            chargeId: ch_1HMN4wCM9MOvFvZKQKUkxqF6
             charge:
-              id: re_1HMMsHCM9MOvFvZK6NnLitmk
+              id: re_1HMN4xCM9MOvFvZKaK0TRAMx
               object: refund
               amount: 2782
               balance_transaction: null
-              charge: ch_1HMMsGCM9MOvFvZK5D2C8dzP
-              created: 1598918241
+              charge: ch_1HMN4wCM9MOvFvZKQKUkxqF6
+              created: 1598919027
               currency: usd
               metadata:
                 reason: not specified
@@ -4619,13 +4629,13 @@ components:
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     pendingCaptureRequest:
       value:
-        id: 649bff4f-4600-4f61-8201-7e3b2f2beefd
+        id: bbec7a73-92d0-4428-b074-bc24a683085c
     pendingCaptureResponse:
       value:
-        id: 649bff4f-4600-4f61-8201-7e3b2f2beefd
+        id: bbec7a73-92d0-4428-b074-bc24a683085c
         transactionType: capture
         currency: USD
-        createdDate: '2020-08-31T23:57:22.000Z'
+        createdDate: '2020-09-01T00:10:28.000Z'
         tax: null
         totals: null
         lineItems: null
@@ -4638,7 +4648,7 @@ components:
       summary: Create generic code
       description: This is an example of creating a generic code.  The exact code will be generated on the server.
       value:
-        id: ff7ac38c-121f-45ec-9508-14c2b76e1ff5
+        id: 1e99ac9e-3707-431c-a36d-777cca7e2c1e
         currency: USD
         isGenericCode: true
         genericCodeOptions:
@@ -4650,7 +4660,7 @@ components:
     createGenericCode1Response:
       summary: Create generic code
       value:
-        id: ff7ac38c-121f-45ec-9508-14c2b76e1ff5
+        id: 1e99ac9e-3707-431c-a36d-777cca7e2c1e
         currency: USD
         balance: null
         usesRemaining: null
@@ -4676,8 +4686,8 @@ components:
         startDate: null
         endDate: null
         metadata: {}
-        createdDate: '2020-08-31T23:57:22.000Z'
-        updatedDate: '2020-08-31T23:57:22.000Z'
+        createdDate: '2020-09-01T00:10:28.000Z'
+        updatedDate: '2020-09-01T00:10:28.000Z'
         updatedContactIdDate: null
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createWebhookRequest:
@@ -4692,12 +4702,12 @@ components:
         url: 'https://example.com/callbackUrl'
         events:
           - '*'
-        createdDate: '2020-08-31T23:57:23.211Z'
-        updatedDate: '2020-08-31T23:57:23.211Z'
+        createdDate: '2020-09-01T00:10:28.688Z'
+        updatedDate: '2020-09-01T00:10:28.688Z'
         secrets:
-          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
-            secret: RPQDAVGTVL65BIN0
-            createdDate: '2020-08-31T23:57:23.211Z'
+          - id: bbc9b5a1-664c-4c62-8aba-b1126fa1ebf9
+            secret: BYJ76EHLIU9Q02DC
+            createdDate: '2020-09-01T00:10:28.688Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
         active: true
     getWebhookResponse:
@@ -4705,28 +4715,28 @@ components:
         id: webhook1
         url: 'https://example.com/callbackUrl'
         secrets:
-          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
-            secret: …BIN0
-            createdDate: '2020-08-31T23:57:23.211Z'
+          - id: bbc9b5a1-664c-4c62-8aba-b1126fa1ebf9
+            secret: …02DC
+            createdDate: '2020-09-01T00:10:28.688Z'
         events:
           - '*'
         active: true
-        createdDate: '2020-08-31T23:57:23.211Z'
-        updatedDate: '2020-08-31T23:57:23.211Z'
+        createdDate: '2020-09-01T00:10:28.688Z'
+        updatedDate: '2020-09-01T00:10:28.688Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     listWebhooksResponse:
       value:
         - id: webhook1
           url: 'https://example.com/callbackUrl'
           secrets:
-            - id: 356a4725-5b41-4182-ab86-4263fbf98f20
-              secret: …BIN0
-              createdDate: '2020-08-31T23:57:23.211Z'
+            - id: bbc9b5a1-664c-4c62-8aba-b1126fa1ebf9
+              secret: …02DC
+              createdDate: '2020-09-01T00:10:28.688Z'
           events:
             - '*'
           active: true
-          createdDate: '2020-08-31T23:57:23.211Z'
-          updatedDate: '2020-08-31T23:57:23.211Z'
+          createdDate: '2020-09-01T00:10:28.688Z'
+          updatedDate: '2020-09-01T00:10:28.688Z'
           createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     updateWebhookRequest:
       value:
@@ -4737,20 +4747,20 @@ components:
         id: webhook1
         url: 'https://example.com/callbackUrl'
         secrets:
-          - id: 356a4725-5b41-4182-ab86-4263fbf98f20
-            secret: …BIN0
-            createdDate: '2020-08-31T23:57:23.211Z'
+          - id: bbc9b5a1-664c-4c62-8aba-b1126fa1ebf9
+            secret: …02DC
+            createdDate: '2020-09-01T00:10:28.688Z'
         events:
           - lightrail.value.*
         active: true
-        createdDate: '2020-08-31T23:57:23.211Z'
-        updatedDate: '2020-08-31T23:57:23.851Z'
+        createdDate: '2020-09-01T00:10:28.688Z'
+        updatedDate: '2020-09-01T00:10:29.668Z'
         createdBy: user-c0e4bc89ec714e6199199e8322459e2e-TEST
     createWebhookSecretResponse:
       value:
-        id: 56b58ed3-2a74-4686-90ae-d7a5a3ef197c
-        secret: I97XKS2LNBA00RNY
-        createdDate: '2020-08-31T23:57:24.151Z'
+        id: a44d4d46-c7fe-48a1-9f96-97b80b106a4f
+        secret: E3VTU92HB60G228O
+        createdDate: '2020-09-01T00:10:29.948Z'
   headers:
     Limit:
       description: The limit on the number of items returned.
