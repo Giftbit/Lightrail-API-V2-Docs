@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "If you are looking for the official Lightrail documentation please go to https://lightrailapi.docs.apiary.io/#. This repository is for internal Lightrail use and is responsible for generating the API Blueprint file that is hosted by Apiary.",
   "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
+  "directories": {},
   "scripts": {
+    "build": "npm run clean && npm run lint && redoc-cli bundle openapi3.yaml --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\" && mkdir dist && mv redoc-static.html dist/index.html",
+    "clean": "rimraf ./dist",
     "lint": "yamllint openapi3.yaml && speccy lint openapi3.yaml",
+    "start": "redoc-cli serve openapi3.yaml --watch --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\"",
     "refreshExamples": "ts-node refreshExamples"
   },
   "repository": {
@@ -29,6 +30,8 @@
     "@types/uuid": "^8.3.0",
     "dotenv-safe": "^8.2.0",
     "js-yaml": "^3.14.0",
+    "redoc-cli": "^0.9.12",
+    "rimraf": "^3.0.2",
     "speccy": "^0.11.0",
     "superagent": "^6.1.0",
     "ts-node": "^9.0.0",

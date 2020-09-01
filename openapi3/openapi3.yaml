@@ -2,31 +2,25 @@ openapi: 3.0.0
 info:
   title: Lightrail Documentation
   description: |-
-    Welcome to Lightrail. Lightrail makes it easy to create gift cards, manage customer account credit, run promotional discount programs, and collect multi-tender payment in a unified checkout solution. Create an account to generate API keys and begin testing.
+    ## Introduction
+    Welcome to Lightrail. Lightrail is accessed through REST calls and [JSON](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON)-encoded data.  You can build in to the API using one of our [libraries](https://www.lightrail.com/docs/#client-libraries/client-libraries) or directly with the REST/HTTP client of your choice.
 
-    [Create an account](https://www.lightrail.com/app/#/auth/register)
+    You can test drive the API with a REST client like [Insomnia](https://support.insomnia.rest/article/52-importing-and-exporting-data) or [Postman](https://learning.postman.com/docs/integrations/available-integrations/working-with-openAPI/).  Download the OpenAPI spec using the download button above, import it, configure a test mode [API key](#section/Authentication) from Lightrail and start playing.
 
-    ## Authentication
+    If you're just starting to learn about Lightrail start with the [object model documentation](https://www.lightrail.com/docs/#object-model/object-model).
 
-    Authentication is done via an authorization header. You can retrieve your Lightrail API key [here](https://www.lightrail.com).
-
-    In requests to Lightrail you must include the following header:
-
-    ```
-    Authorization: Bearer <API_KEY>
-    ```
-
-    ## Dates & Durations
+    ## Dates and Durations
     All dates and durations are sent and received in ISO 8601 format.
 
     Date format: `YYYY-MM-DDTHH:MM:SS.SSSZ`
+
     Example date: `2007-04-05T14:30:00.000Z`
 
     Duration format: `PnYnMnDTnHnMnS`
+
     Example duration: `P7DT12H`
 
     ## Filtering
-
     Resources that may contain lots of entries ([Contacts](#operation/ListContacts), [Values](#operation/ListValues), [Programs](#tag/Programs/list-programs), [Transactions](#operation/ListTransactions)) have filters for retrieving a subset of the entries.
 
     Some query filter properties support operators for more powerful filtering.  The operator is specified after the property and a dot (eg: `balance.ne` for balance not equal to).
@@ -45,7 +39,6 @@ info:
     | orNull   | Allows other filters acting on the same property to also include results if the property is equal to null (true), or, not equal to null (false). |
 
     **Examples**
-
     1. List [Contacts](#operation/ListContacts) where `email` equals "mia.wallace@example.com" or "mia_wallace@example.com":
     `https://api.lightrail.com/v2/contacts?email.in=mia.wallace@example.com,mia_wallace@example.com`
 
@@ -59,7 +52,6 @@ info:
     `https://api.lightrail.com/v2/programs?endDate.gt=2019-11-08T12:00:00.000Z&endDate.orNull=true`
 
     ## Paging
-
     Resources that may contain lots of entries ([Contacts](#operation/ListContacts), [Values](#operation/ListValues), [Programs](#tag/Programs/list-programs)) may not return all results in a single response.  Instead they return a number of results limited by the `limit` query parameter.
 
     Retrieving results after the first page means following links in the [Link header](https://tools.ietf.org/html/rfc5988).  Here's an example Link header...
@@ -83,7 +75,6 @@ info:
     It's important to follow the links in the Link header and not construct the URLs on your own.
 
     ## Errors
-
     Lightrail uses the following HTTP status codes to indicate an error:
 
     | code | meaning |
@@ -118,7 +109,6 @@ info:
     ```
 
     ## Support
-
     [Contact us](mailto:hello@lightrail.com) any time if you have any questions.  We're here to help.
   contact:
     name: Lightrail Support
@@ -4778,12 +4768,22 @@ components:
         type: string
       example: '<URL>; rel="first", <URL>; rel="prev", <URL>; rel="next", <URL>; rel="last"'
   securitySchemes:
-    httpBearer:
+    Bearer:
       type: http
       scheme: bearer
       bearerFormat: <API_KEY>
+      description: |
+        Lightrail authenticates your calls with an API key.  You can retrieve your Lightrail API key from [the Lightrail website](https://www.lightrail.com/app/#/account/api).
+
+        Your API key carries many privileges, so keep it secure!  Do not share it publicly, embed it in publicly assessible web pages or source code.
+
+        To use your API key in a request include in the following header:
+
+        ```
+        Authorization: Bearer <API_KEY>
+        ```
 security:
-  - httpBearer: []
+  - Bearer: []
 tags:
   - name: Contacts
     description: |-
