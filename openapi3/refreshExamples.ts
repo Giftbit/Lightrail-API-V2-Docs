@@ -12,6 +12,7 @@ interface OpenApi {
         examples: {
             [key: string]: {
                 value: any;
+                summary?: string;
             }
         }
     }
@@ -88,12 +89,18 @@ async function refreshExamples(openApi: OpenApi): Promise<void> {
         const requestId = `${call.callId}Request`;
         if (openApi.components.examples[requestId] && call.body) {
             openApi.components.examples[requestId].value = call.body;
+            if (call.summary) {
+                openApi.components.examples[requestId].summary = call.summary;
+            }
             unupdatedExamples.splice(unupdatedExamples.indexOf(requestId), 1);
         }
 
         const responseId = `${call.callId}Response`;
         if (openApi.components.examples[responseId]) {
             openApi.components.examples[responseId].value = response.body;
+            if (call.summary) {
+                openApi.components.examples[responseId].summary = call.summary;
+            }
             unupdatedExamples.splice(unupdatedExamples.indexOf(responseId), 1);
         }
     }

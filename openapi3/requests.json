@@ -13,17 +13,17 @@
       "allowFailure": true
     },
     {
-      "callId": "getCurrency1",
+      "callId": "getCurrency",
       "method": "GET",
       "endpoint": "/currencies/USD"
     },
     {
-      "callId": "listCurrencies1",
+      "callId": "listCurrencies",
       "method": "GET",
       "endpoint": "/currencies"
     },
     {
-      "callId": "createContact1",
+      "callId": "createContact",
       "method": "POST",
       "endpoint": "/contacts",
       "body": {
@@ -37,23 +37,24 @@
       }
     },
     {
-      "callId": "createContactExists1",
+      "callId": "createContactAlreadyExists",
+      "summary": "Contact exists",
       "method": "POST",
       "endpoint": "/contacts",
       "body": {
-        "id": "{REQUEST_REPLACEMENT:createContact1.body.id}"
+        "id": "{REQUEST_REPLACEMENT:createContact.body.id}"
       },
       "statusCode": 409
     },
     {
-      "callId": "listContacts1",
+      "callId": "listContacts",
       "method": "GET",
       "endpoint": "/contacts?limit=1"
     },
     {
-      "callId": "updateContact1",
+      "callId": "updateContact",
       "method": "PATCH",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}",
       "body": {
         "firstName": "The Dude",
         "metadata": {
@@ -63,7 +64,7 @@
       }
     },
     {
-      "callId": "createProgram1",
+      "callId": "createProgram",
       "method": "POST",
       "endpoint": "/programs",
       "body": {
@@ -78,11 +79,12 @@
       }
     },
     {
-      "callId": "createProgramExists1",
+      "callId": "createProgramAlreadyExists",
+      "summary": "Program exists",
       "method": "POST",
       "endpoint": "/programs",
       "body": {
-        "id": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "id": "{REQUEST_REPLACEMENT:createProgram.body.id}",
         "name": "Spring Promotion USD",
         "currency": "USD",
         "pretax": true,
@@ -94,72 +96,131 @@
       "statusCode": 409
     },
     {
-      "callId": "listPrograms1",
+      "callId": "listPrograms",
       "method": "GET",
       "endpoint": "/programs?limit=1"
     },
     {
       "callId": "updateProgram1",
       "method": "PATCH",
-      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}",
       "body": {
         "name": "Spring Promo US Dollars"
       }
     },
     {
       "callId": "createValue1",
+      "summary": "Gift card in Program",
       "method": "POST",
       "endpoint": "/values",
       "body": {
         "id": "{UUID()}",
-        "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
-        "balance": 500
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
+        "balance": 500,
+        "generateCode": {}
       }
     },
     {
-      "callId": "createValueExists1",
+      "callId": "createValue2",
+      "summary": "Gift card attached to Contact",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 500,
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
+      }
+    },
+    {
+      "callId": "createValue3",
+      "summary": "Unique promo code",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "generateCode": {},
+        "usesRemaining": 1,
+        "balanceRule": {
+          "rule": "500 + value.balanceChange",
+          "explanation": "$5 off purchase"
+        },
+        "redemptionRule": {
+          "rule": "!(lineItems.find(item => item.lineTotal.discount > 0)) || value.balanceChange < 0",
+          "explanation": "Limited to 1 promotion per transaction."
+        },
+        "pretax": true,
+        "discount": true
+      }
+    },
+    {
+      "callId": "createValue4",
+      "summary": "Generic promo code",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "isGenericCode": true,
+        "genericCodeOptions": {
+          "perContact": {
+            "usesRemaining": 1
+          }
+        },
+        "balanceRule": {
+          "rule": "currentLineItem.lineTotal.subtotal * 0.15",
+          "explanation": "%15 off your order"
+        },
+        "pretax": true,
+        "discount": true
+      }
+    },
+    {
+      "callId": "createValueAlreadyExists",
+      "summary": "Value exists",
       "method": "POST",
       "endpoint": "/values",
       "body": {
         "id": "{REQUEST_REPLACEMENT:createValue1.body.id}",
-        "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
         "balance": 500
       },
       "statusCode": 409
     },
     {
-      "callId": "listValues1",
+      "callId": "listValues",
       "method": "GET",
       "endpoint": "/values?limit=1"
     },
     {
-      "callId": "attachValue1",
+      "callId": "attachValue",
       "method": "POST",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/attach",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values/attach",
       "body": {
         "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
       }
     },
     {
-      "callId": "listValue1Contacts",
+      "callId": "listValueContacts",
       "method": "GET",
       "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}/contacts?limit=1"
     },
     {
-      "callId": "listContactsValue1",
+      "callId": "listContactsValue",
       "method": "GET",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values?limit=1"
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values?limit=1"
     },
     {
-      "callId": "detachValue1",
+      "callId": "detachValue",
       "method": "POST",
-      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact1.body.id}/values/detach",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values/detach",
       "body": {
         "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
       }
     },
     {
-      "callId": "updateValue1",
+      "callId": "updateValue",
       "method": "PATCH",
       "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}",
       "body": {
@@ -167,7 +228,7 @@
       }
     },
     {
-      "callId": "createValue2ForTransactions",
+      "callId": "createValueForCreditAndDebit",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -177,14 +238,14 @@
       }
     },
     {
-      "callId": "creditTransaction1",
+      "callId": "creditTransaction",
       "method": "POST",
       "endpoint": "/transactions/credit",
       "body": {
         "id": "{UUID()}",
         "destination": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
         },
         "amount": 2500,
         "currency": "USD",
@@ -194,14 +255,14 @@
       }
     },
     {
-      "callId": "debitTransaction1",
+      "callId": "debitTransaction",
       "method": "POST",
       "endpoint": "/transactions/debit",
       "body": {
         "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
         },
         "amount": 1000,
         "currency": "USD",
@@ -211,14 +272,15 @@
       }
     },
     {
-      "callId": "debitTransactionInsufficientBalance1",
+      "callId": "debitTransactionInsufficientBalance",
+      "summary": "Insufficient balance",
       "method": "POST",
       "endpoint": "/transactions/debit",
       "body": {
         "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:createValue2ForTransactions.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
         },
         "amount": 10000000,
         "currency": "USD",
@@ -229,23 +291,23 @@
       "statusCode": 409
     },
     {
-      "callId": "listTransactions1",
+      "callId": "listTransactions",
       "method": "GET",
       "endpoint": "/transactions?limit=1"
     },
     {
-      "callId": "createValue1ForCheckoutExample",
+      "callId": "createValue1ForCheckout",
       "method": "POST",
       "endpoint": "/values",
       "body": {
         "id": "{UUID()}",
         "currency": "USD",
         "balance": 1000,
-        "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
       }
     },
     {
-      "callId": "createValue2ForCheckoutExample",
+      "callId": "createValue2ForCheckout",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -261,7 +323,7 @@
       }
     },
     {
-      "callId": "createValue3ForCheckoutExample",
+      "callId": "createValue3ForCheckout",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -277,11 +339,12 @@
           "rule": "currentLineItem.lineTotal.subtotal * 0.20",
           "explanation": "20% off socks"
         },
-        "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
       }
     },
     {
-      "callId": "checkoutExample1",
+      "callId": "checkout1",
+      "summary": "Checkout with Lightrail and credit card",
       "method": "POST",
       "endpoint": "/transactions/checkout",
       "body": {
@@ -289,7 +352,7 @@
         "sources": [
           {
             "rail": "lightrail",
-            "contactId": "{REQUEST_REPLACEMENT:createContact1.body.id}"
+            "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
           },
           {
             "rail": "stripe",
@@ -320,7 +383,7 @@
     {
       "callId": "reverseCheckout",
       "method": "POST",
-      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkoutExample1.body.id}/reverse",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/reverse",
       "body": {
         "id": "{UUID()}"
       }
@@ -328,29 +391,29 @@
     {
       "callId": "transactionChain",
       "method": "GET",
-      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkoutExample1.body.id}/chain"
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/chain"
     },
     {
-      "callId": "generateCodeValue1",
+      "callId": "createValueForChangeCode",
       "method": "POST",
       "endpoint": "/values",
       "body": {
         "id": "{UUID()}",
-        "programId": "{REQUEST_REPLACEMENT:createProgram1.body.id}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
         "balance": 500,
         "generateCode": {}
       }
     },
     {
-      "callId": "changeGenerateCodeValue1",
+      "callId": "changeCode",
       "method": "POST",
-      "endpoint": "/values/{REQUEST_REPLACEMENT:generateCodeValue1.body.id}/changeCode",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValueForChangeCode.body.id}/changeCode",
       "body": {
         "generateCode": {}
       }
     },
     {
-      "callId": "valueForTransferSource",
+      "callId": "createValueForTransferSource",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -360,7 +423,7 @@
       }
     },
     {
-      "callId": "valueForTransferDestination",
+      "callId": "createValueForTransferDestination",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -377,11 +440,11 @@
         "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:valueForTransferSource.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
         },
         "destination": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:valueForTransferDestination.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
         },
         "amount": 100,
         "currency": "USD",
@@ -392,17 +455,18 @@
     },
     {
       "callId": "transferInsufficientBalance",
+      "summary": "Insufficient balance",
       "method": "POST",
       "endpoint": "/transactions/transfer",
       "body": {
         "id": "{UUID()}",
         "source": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:valueForTransferSource.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
         },
         "destination": {
           "rail": "lightrail",
-          "valueId": "{REQUEST_REPLACEMENT:valueForTransferDestination.body.id}"
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
         },
         "amount": 1000000,
         "currency": "USD",
@@ -415,7 +479,7 @@
     {
       "callId": "createIssuance",
       "method": "POST",
-      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}/issuances",
       "body": {
         "id": "{UUID()}",
         "name": "My First Issuance",
@@ -427,7 +491,7 @@
     {
       "callId": "listIssuances",
       "method": "GET",
-      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram1.body.id}/issuances?limit=1"
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}/issuances?limit=1"
     },
     {
       "callId": "valueForPendingVoid",
@@ -519,25 +583,6 @@
       }
     },
     {
-      "callId": "createGenericCode1",
-      "method": "POST",
-      "endpoint": "/values",
-      "body": {
-        "id": "{UUID()}",
-        "currency": "USD",
-        "isGenericCode": true,
-        "genericCodeOptions": {
-          "perContact": {
-            "usesRemaining": 1
-          }
-        },
-        "balanceRule": {
-          "rule": "500 + value.balanceChange",
-          "explanation": "$5 off purchase"
-        }
-      }
-    },
-    {
       "callId": "createWebhook",
       "method": "POST",
       "endpoint": "/webhooks",
@@ -577,7 +622,8 @@
       "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
     },
     {
-      "callId": "deleteCurrencyInUse1",
+      "callId": "deleteCurrencyInUse",
+      "summary": "Currency in use",
       "method": "DELETE",
       "endpoint": "/currencies/USD",
       "statusCode": 409
