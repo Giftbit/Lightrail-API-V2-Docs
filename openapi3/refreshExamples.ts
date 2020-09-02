@@ -7,7 +7,7 @@ import uuid = require("uuid");
 
 const openApiFileName = "./openapi3.yaml";
 
-interface OpenApi {
+interface OpenApiSpec {
     components: {
         examples: {
             [key: string]: {
@@ -22,7 +22,13 @@ interface OpenApi {
 type ResponseMap = {[key: string]: superagent.Response};
 
 /**
- * Has no loop-detection.
+ * Recursively go through objects and replace template strings.
+ * Supports:
+ * - {UUID()} - a randomly generated UUID
+ * - {REQUEST_REPLACEMENT:<callId>.body.<path>} - part of a previous request where <callId>
+ *     is the callId of that request and <path> is dot-notation path to part of the body.
+ *
+ * There is no loop-detection.
  */
 function runReplacements<T>(obj: T, context: {previousResponses: ResponseMap}): T {
     if (!obj) {
@@ -57,7 +63,11 @@ function runReplacements<T>(obj: T, context: {previousResponses: ResponseMap}): 
     return obj;
 }
 
-async function refreshExamples(openApi: OpenApi): Promise<void> {
+/**
+ * Update the `components.examples` section of an OpenAPI spec with
+ * the requests specified in the JSON.
+ */
+async function refreshExamples(openApi: OpenApiSpec): Promise<void> {
     console.log("Making API requests...");
 
     const previousResponses: ResponseMap = {};
@@ -123,7 +133,7 @@ async function main(): Promise<void> {
     const openApiString = fs.readFileSync(openApiFileName, "utf-8");
     const openApi = yaml.safeLoad(openApiString, {
         onWarning: e => console.warn(e)
-    }) as OpenApi;
+    }) as OpenApiSpec;
 
     await refreshExamples(openApi);
 
@@ -135,8 +145,8 @@ async function main(): Promise<void> {
     // We only want to update the "examples" section.
     console.log("Writing", openApiFileName, "...");
     const mergedOpenApiString = openApiString.substring(0, openApiString.indexOf("\n  examples:"))
-        + updatedOpenApiString.substring(updatedOpenApiString.indexOf("\n  examples:"), updatedOpenApiString.indexOf("security:"))
-        + openApiString.substring(openApiString.indexOf("security:"))
+        + updatedOpenApiString.substring(updatedOpenApiString.indexOf("\n  examples:"), updatedOpenApiString.indexOf("  headers:"))
+        + openApiString.substring(openApiString.indexOf("  headers:"))
     fs.writeFileSync(openApiFileName, mergedOpenApiString, "utf-8");
 }
 
