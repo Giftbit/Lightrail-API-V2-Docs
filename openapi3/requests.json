@@ -110,7 +110,8 @@
     },
     {
       "callId": "createValue1",
-      "summary": "Gift card in Program",
+      "summary": "Gift card with code",
+      "description": "This gift card will have a balance of $5, inherit properties from a Program and have a random code.",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -123,6 +124,7 @@
     {
       "callId": "createValue2",
       "summary": "Gift card attached to Contact",
+      "description": "This gift card will have a balance of $5 and be attached to a specific Contact.",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -135,6 +137,7 @@
     {
       "callId": "createValue3",
       "summary": "Unique promo code",
+      "description": "This unique promo code will be worth $5 off a purchase.  It can only be used once and is a pretax discount.",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -157,6 +160,7 @@
     {
       "callId": "createValue4",
       "summary": "Generic promo code",
+      "description": "This generic promo code if worth %15 off an order.  It can be used by every Contact once.  To enforce this restriction it cannot be used anonymously at checkout.  It is a pretax discount.",
       "method": "POST",
       "endpoint": "/values",
       "body": {
@@ -238,6 +242,17 @@
       }
     },
     {
+      "callId": "createFrozenValueForTransactions",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 500,
+        "frozen": true
+      }
+    },
+    {
       "callId": "creditTransaction",
       "method": "POST",
       "endpoint": "/transactions/credit",
@@ -253,6 +268,38 @@
           "note": "Frequent buyer bonus"
         }
       }
+    },
+    {
+      "callId": "creditTransactionAlreadyExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:creditTransaction.body.id}",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "creditTransactionFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "{UUID()}",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD"
+      },
+      "statusCode": 409
     },
     {
       "callId": "debitTransaction",
@@ -287,6 +334,38 @@
         "metadata": {
           "note": "Reduce loyalty points after 3mo contact inactivity"
         }
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "debitTransactionAlreadyExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:debitTransaction.body.id}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "debitTransactionFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "amount": 10000000,
+        "currency": "USD"
       },
       "statusCode": 409
     },
@@ -389,6 +468,16 @@
       }
     },
     {
+      "callId": "reverseCheckoutAlreadyReversed",
+      "summary": "Transaction already reversed",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/reverse",
+      "body": {
+        "id": "{UUID()}"
+      },
+      "statusCode": 409
+    },
+    {
       "callId": "transactionChain",
       "method": "GET",
       "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/chain"
@@ -473,6 +562,46 @@
         "metadata": {
           "reference": "customer request to move funds. ref: #4948173593"
         }
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "transferTransactionExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:transfer.body.id}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 1,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "transferFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 1,
+        "currency": "USD"
       },
       "statusCode": 409
     },
