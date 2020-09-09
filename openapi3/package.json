@@ -1,8 +1,9 @@
 {
   "name": "lightrail-api-v2-docs",
   "scripts": {
-    "build": "npm run clean && npm run lint && redoc-cli bundle openapi3.yaml --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\" && mkdir dist && mv redoc-static.html dist/index.html",
+    "build": "npm run clean && npm run lint && redoc-cli bundle openapi3.yaml --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\" && mkdir dist && mv redoc-static.html dist/index.html && cp static/* dist/",
     "clean": "rimraf ./dist",
+    "deploy": "./deploy.sh",
     "lint": "yamllint openapi3.yaml && speccy lint openapi3.yaml",
     "start": "redoc-cli serve openapi3.yaml --watch --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\"",
     "refreshExamples": "ts-node refreshExamples"
