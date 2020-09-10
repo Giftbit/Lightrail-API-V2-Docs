@@ -1,0 +1,761 @@
+{
+  "calls": [
+    {
+      "callId": "createUsd",
+      "method": "POST",
+      "endpoint": "/currencies",
+      "body": {
+        "code": "USD",
+        "name": "USD",
+        "symbol": "$",
+        "decimalPlaces": 2
+      },
+      "allowFailure": true
+    },
+    {
+      "callId": "getCurrency",
+      "method": "GET",
+      "endpoint": "/currencies/USD"
+    },
+    {
+      "callId": "listCurrencies",
+      "method": "GET",
+      "endpoint": "/currencies"
+    },
+    {
+      "callId": "createContact",
+      "method": "POST",
+      "endpoint": "/contacts",
+      "body": {
+        "id": "{UUID()}",
+        "firstName": "Jeffrey",
+        "lastName": "Lebowski",
+        "email": "thedude@example.com",
+        "metadata": {
+          "alias": "El Duderino"
+        }
+      }
+    },
+    {
+      "callId": "createContactAlreadyExists",
+      "summary": "Contact exists",
+      "method": "POST",
+      "endpoint": "/contacts",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createContact.body.id}"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "listContacts",
+      "method": "GET",
+      "endpoint": "/contacts?limit=1"
+    },
+    {
+      "callId": "updateContact",
+      "method": "PATCH",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}",
+      "body": {
+        "firstName": "The Dude",
+        "metadata": {
+          "alias": "El Duderino",
+          "note": "Into the whole 'brevity thing'"
+        }
+      }
+    },
+    {
+      "callId": "createProgram",
+      "method": "POST",
+      "endpoint": "/programs",
+      "body": {
+        "id": "{UUID()}",
+        "name": "Spring Promotion USD",
+        "currency": "USD",
+        "pretax": true,
+        "discount": true,
+        "fixedInitialBalances": [
+          500
+        ]
+      }
+    },
+    {
+      "callId": "createProgramAlreadyExists",
+      "summary": "Program exists",
+      "method": "POST",
+      "endpoint": "/programs",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createProgram.body.id}",
+        "name": "Spring Promotion USD",
+        "currency": "USD",
+        "pretax": true,
+        "discount": true,
+        "fixedInitialBalances": [
+          500
+        ]
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "listPrograms",
+      "method": "GET",
+      "endpoint": "/programs?limit=1"
+    },
+    {
+      "callId": "updateProgram1",
+      "method": "PATCH",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}",
+      "body": {
+        "name": "Spring Promo US Dollars"
+      }
+    },
+    {
+      "callId": "createValue1",
+      "summary": "Gift card with code",
+      "description": "This gift card will have a balance of $5, inherit properties from a Program and have a random code.",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
+        "balance": 500,
+        "generateCode": {}
+      }
+    },
+    {
+      "callId": "createValue2",
+      "summary": "Gift card attached to Contact",
+      "description": "This gift card will have a balance of $5 and be attached to a specific Contact.",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 500,
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
+      }
+    },
+    {
+      "callId": "createValue3",
+      "summary": "Unique promo code",
+      "description": "This unique promo code will be worth $5 off a purchase.  It can only be used once and is a pretax discount.",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "generateCode": {},
+        "usesRemaining": 1,
+        "balanceRule": {
+          "rule": "500 + value.balanceChange",
+          "explanation": "$5 off purchase"
+        },
+        "redemptionRule": {
+          "rule": "!(lineItems.find(item => item.lineTotal.discount > 0)) || value.balanceChange < 0",
+          "explanation": "Limited to 1 promotion per transaction."
+        },
+        "pretax": true,
+        "discount": true
+      }
+    },
+    {
+      "callId": "createValue4",
+      "summary": "Generic promo code",
+      "description": "This generic promo code if worth %15 off an order.  It can be used by every Contact once.  To enforce this restriction it cannot be used anonymously at checkout.  It is a pretax discount.",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "isGenericCode": true,
+        "genericCodeOptions": {
+          "perContact": {
+            "usesRemaining": 1
+          }
+        },
+        "balanceRule": {
+          "rule": "currentLineItem.lineTotal.subtotal * 0.15",
+          "explanation": "%15 off your order"
+        },
+        "pretax": true,
+        "discount": true
+      }
+    },
+    {
+      "callId": "createValueAlreadyExists",
+      "summary": "Value exists",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:createValue1.body.id}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
+        "balance": 500
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "listValues",
+      "method": "GET",
+      "endpoint": "/values?limit=1"
+    },
+    {
+      "callId": "attachValue",
+      "method": "POST",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values/attach",
+      "body": {
+        "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
+      }
+    },
+    {
+      "callId": "listValueContacts",
+      "method": "GET",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}/contacts?limit=1"
+    },
+    {
+      "callId": "listContactsValue",
+      "method": "GET",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values?limit=1"
+    },
+    {
+      "callId": "detachValue",
+      "method": "POST",
+      "endpoint": "/contacts/{REQUEST_REPLACEMENT:createContact.body.id}/values/detach",
+      "body": {
+        "valueId": "{REQUEST_REPLACEMENT:createValue1.body.id}"
+      }
+    },
+    {
+      "callId": "updateValue",
+      "method": "PATCH",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValue1.body.id}",
+      "body": {
+        "frozen": true
+      }
+    },
+    {
+      "callId": "createValueForCreditAndDebit",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 500
+      }
+    },
+    {
+      "callId": "createFrozenValueForTransactions",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 500,
+        "frozen": true
+      }
+    },
+    {
+      "callId": "creditTransaction",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "{UUID()}",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD",
+        "metadata": {
+          "note": "Frequent buyer bonus"
+        }
+      }
+    },
+    {
+      "callId": "creditTransactionAlreadyExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:creditTransaction.body.id}",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "creditTransactionFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/credit",
+      "body": {
+        "id": "{UUID()}",
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "amount": 2500,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "debitTransaction",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 1000,
+        "currency": "USD",
+        "metadata": {
+          "note": "Reduce loyalty points after 3mo contact inactivity"
+        }
+      }
+    },
+    {
+      "callId": "debitTransactionInsufficientBalance",
+      "summary": "Insufficient balance",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 10000000,
+        "currency": "USD",
+        "metadata": {
+          "note": "Reduce loyalty points after 3mo contact inactivity"
+        }
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "debitTransactionAlreadyExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:debitTransaction.body.id}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForCreditAndDebit.body.id}"
+        },
+        "amount": 1000,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "debitTransactionFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "amount": 10000000,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "listTransactions",
+      "method": "GET",
+      "endpoint": "/transactions?limit=1"
+    },
+    {
+      "callId": "createValue1ForCheckout",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 1000,
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
+      }
+    },
+    {
+      "callId": "createValue2ForCheckout",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "balance": 50,
+        "discount": true,
+        "pretax": true,
+        "redemptionRule": {
+          "rule": "currentLineItem.productId == 'chocolate_bar'",
+          "explanation": "$0.50 off a chocolate bar"
+        }
+      }
+    },
+    {
+      "callId": "createValue3ForCheckout",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "currency": "USD",
+        "discount": true,
+        "pretax": true,
+        "redemptionRule": {
+          "rule": "currentLineItem.productId == 'socks'",
+          "explanation": "20% off socks"
+        },
+        "balanceRule": {
+          "rule": "currentLineItem.lineTotal.subtotal * 0.20",
+          "explanation": "20% off socks"
+        },
+        "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
+      }
+    },
+    {
+      "callId": "checkout1",
+      "summary": "Checkout with Lightrail and credit card",
+      "method": "POST",
+      "endpoint": "/transactions/checkout",
+      "body": {
+        "id": "{UUID()}",
+        "sources": [
+          {
+            "rail": "lightrail",
+            "contactId": "{REQUEST_REPLACEMENT:createContact.body.id}"
+          },
+          {
+            "rail": "stripe",
+            "source": "tok_visa"
+          }
+        ],
+        "lineItems": [
+          {
+            "productId": "socks",
+            "unitPrice": 500,
+            "quantity": 2,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "chocolate_bar",
+            "unitPrice": 199,
+            "taxRate": 0.05
+          },
+          {
+            "productId": "shipping",
+            "unitPrice": 349,
+            "taxRate": 0.0
+          }
+        ],
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "reverseCheckout",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/reverse",
+      "body": {
+        "id": "{UUID()}"
+      }
+    },
+    {
+      "callId": "reverseCheckoutAlreadyReversed",
+      "summary": "Transaction already reversed",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/reverse",
+      "body": {
+        "id": "{UUID()}"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "transactionChain",
+      "method": "GET",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:checkout1.body.id}/chain"
+    },
+    {
+      "callId": "createValueForChangeCode",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
+        "balance": 500,
+        "generateCode": {}
+      }
+    },
+    {
+      "callId": "changeCode",
+      "method": "POST",
+      "endpoint": "/values/{REQUEST_REPLACEMENT:createValueForChangeCode.body.id}/changeCode",
+      "body": {
+        "generateCode": {}
+      }
+    },
+    {
+      "callId": "createValueForTransferSource",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "createValueForTransferDestination",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "transfer",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 100,
+        "currency": "USD",
+        "metadata": {
+          "reference": "customer request to move funds. ref: #4948173593"
+        }
+      }
+    },
+    {
+      "callId": "transferInsufficientBalance",
+      "summary": "Insufficient balance",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 1000000,
+        "currency": "USD",
+        "metadata": {
+          "reference": "customer request to move funds. ref: #4948173593"
+        }
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "transferTransactionExists",
+      "summary": "Transaction exists",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{REQUEST_REPLACEMENT:transfer.body.id}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferSource.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 1,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "transferFrozen",
+      "summary": "Value frozen",
+      "method": "POST",
+      "endpoint": "/transactions/transfer",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createFrozenValueForTransactions.body.id}"
+        },
+        "destination": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:createValueForTransferDestination.body.id}"
+        },
+        "amount": 1,
+        "currency": "USD"
+      },
+      "statusCode": 409
+    },
+    {
+      "callId": "createIssuance",
+      "method": "POST",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}/issuances",
+      "body": {
+        "id": "{UUID()}",
+        "name": "My First Issuance",
+        "count": 10,
+        "generateCode": {},
+        "balance": 500
+      }
+    },
+    {
+      "callId": "listIssuances",
+      "method": "GET",
+      "endpoint": "/programs/{REQUEST_REPLACEMENT:createProgram.body.id}/issuances?limit=1"
+    },
+    {
+      "callId": "valueForPendingVoid",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "txForPendingVoid",
+      "method": "POST",
+      "endpoint": "/transactions/checkout",
+      "body": {
+        "id": "{UUID()}",
+        "sources": [
+          {
+            "rail": "lightrail",
+            "contactId": "{REQUEST_REPLACEMENT:valueForPendingVoid.body.id}"
+          },
+          {
+            "rail": "stripe",
+            "source": "tok_visa"
+          }
+        ],
+        "lineItems": [
+          {
+            "productId": "avacado",
+            "unitPrice": 89,
+            "quantity": 2,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "bread",
+            "unitPrice": 399,
+            "taxRate": 0.08
+          },
+          {
+            "productId": "toaster",
+            "unitPrice": 1999,
+            "taxRate": 0.08
+          }
+        ],
+        "currency": "USD",
+        "pending": true
+      }
+    },
+    {
+      "callId": "pendingVoid",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:txForPendingVoid.body.id}/void",
+      "body": {
+        "id": "{UUID()}"
+      }
+    },
+    {
+      "callId": "valueForPendingCapture",
+      "method": "POST",
+      "endpoint": "/values",
+      "body": {
+        "id": "{UUID()}",
+        "balance": 500,
+        "currency": "USD"
+      }
+    },
+    {
+      "callId": "txForPendingCapture",
+      "method": "POST",
+      "endpoint": "/transactions/debit",
+      "body": {
+        "id": "{UUID()}",
+        "source": {
+          "rail": "lightrail",
+          "valueId": "{REQUEST_REPLACEMENT:valueForPendingCapture.body.id}"
+        },
+        "amount": 300,
+        "currency": "USD",
+        "pending": true
+      }
+    },
+    {
+      "callId": "pendingCapture",
+      "method": "POST",
+      "endpoint": "/transactions/{REQUEST_REPLACEMENT:txForPendingCapture.body.id}/capture",
+      "body": {
+        "id": "{UUID()}"
+      }
+    },
+    {
+      "callId": "createWebhook",
+      "method": "POST",
+      "endpoint": "/webhooks",
+      "body": {
+        "id": "webhook1",
+        "url": "https://example.com/callbackUrl",
+        "events": ["*"]
+      }
+    },
+    {
+      "callId": "getWebhook",
+      "method": "GET",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
+    },
+    {
+      "callId": "listWebhooks",
+      "method": "GET",
+      "endpoint": "/webhooks"
+    },
+    {
+      "callId": "updateWebhook",
+      "method": "PATCH",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}",
+      "body": {
+        "events": ["lightrail.value.*"]
+      }
+    },
+    {
+      "callId": "createWebhookSecret",
+      "method": "POST",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}/secrets",
+      "body": {}
+    },
+    {
+      "callId": "deleteWebhook",
+      "method": "DELETE",
+      "endpoint": "/webhooks/{REQUEST_REPLACEMENT:createWebhook.body.id}"
+    },
+    {
+      "callId": "deleteCurrencyInUse",
+      "summary": "Currency in use",
+      "method": "DELETE",
+      "endpoint": "/currencies/USD",
+      "statusCode": 409
+    }
+  ]
+}

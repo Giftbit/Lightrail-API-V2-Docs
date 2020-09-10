@@ -1,0 +1,31 @@
+{
+  "name": "lightrail-api-v2-docs",
+  "scripts": {
+    "build": "npm run clean && npm run lint && redoc-cli bundle openapi3.yaml --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\" --options.theme.typography.fontFamily=\"calibre-regular, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;\" --options.theme.typography.headings.fontFamily=\"calibre-light, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;\" && mkdir dist && mv redoc-static.html dist/index.html && cp static/* dist/",
+    "clean": "rimraf ./dist",
+    "deploy": "./deploy.sh",
+    "lint": "yamllint openapi3.yaml && speccy lint openapi3.yaml",
+    "start": "redoc-cli serve openapi3.yaml --watch --options.menuToggle --options.expandResponses=\"200,201\" --options.sortPropsAlphabetically --options.requiredPropsFirst --options.theme.colors.primary.main=\"#006CFF\" --options.theme.sidebar.backgroundColor=\"#f2f5f7\" --options.theme.typography.fontFamily=\"calibre-regular, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;\" --options.theme.typography.headings.fontFamily=\"calibre-light, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;\"",
+    "refreshExamples": "ts-node refreshExamples"
+  },
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv-safe": "^8.1.1",
+    "@types/js-yaml": "^3.12.5",
+    "@types/node": "^14.6.2",
+    "@types/superagent": "^4.1.10",
+    "@types/uuid": "^8.3.0",
+    "dotenv-safe": "^8.2.0",
+    "js-yaml": "^3.14.0",
+    "redoc": "^2.0.0-rc.40",
+    "redoc-cli": "^0.9.12",
+    "rimraf": "^3.0.2",
+    "speccy": "^0.11.0",
+    "superagent": "^6.1.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2",
+    "uuid": "^8.3.0",
+    "yaml-lint": "^1.2.4"
+  }
+}

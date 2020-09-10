@@ -3,3 +3,6 @@
 *.iml
 target/
 apiary-sources/generated
+openapi3/node_modules/
+openapi3/.env
+openapi3/dist/
