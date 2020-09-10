@@ -15,3 +15,7 @@ You can preview the HTML-rendered documentation with `npm run start`.  The previ
 The `components.examples` section is updated automatically with calls defined in `requests.json`.  To run the script and replace the examples: `npm run refreshExamples`.
 
 Finally, you can render the HTML version of the doc with `npm run build`.
+
+## Deploying
+
+There's a deploy script (`./deploy.sh` or `npm run deploy`) that will deploy to whatever AWS credentials are currently in your environment.  This repo is publicly accessible so there are no secrets in that script.  Keep it that way.

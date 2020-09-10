@@ -113,7 +113,7 @@ info:
   contact:
     name: Lightrail Support
     email: hello@lightrail.com
-  version: '1.0'
+  version: 'v2'
 servers:
   - url: https://api.lightrail.com/v2
     variables: {}
