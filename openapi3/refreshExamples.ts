@@ -145,8 +145,8 @@ async function main(): Promise<void> {
     // We only want to update the "examples" section.
     console.log("Writing", openApiFileName, "...");
     const mergedOpenApiString = openApiString.substring(0, openApiString.indexOf("\n  examples:"))
-        + updatedOpenApiString.substring(updatedOpenApiString.indexOf("\n  examples:"), updatedOpenApiString.indexOf("  headers:"))
-        + openApiString.substring(openApiString.indexOf("  headers:"))
+        + updatedOpenApiString.substring(updatedOpenApiString.indexOf("\n  examples:"), updatedOpenApiString.indexOf("\n  headers:"))
+        + openApiString.substring(openApiString.indexOf("\n  headers:"))
     fs.writeFileSync(openApiFileName, mergedOpenApiString, "utf-8");
 }
 

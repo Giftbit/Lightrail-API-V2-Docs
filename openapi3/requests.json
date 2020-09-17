@@ -113,7 +113,7 @@
       "summary": "Gift card with code",
       "description": "This gift card will have a balance of $5, inherit properties from a Program and have a random code.",
       "method": "POST",
-      "endpoint": "/values",
+      "endpoint": "/values?showCode=true",
       "body": {
         "id": "{UUID()}",
         "programId": "{REQUEST_REPLACEMENT:createProgram.body.id}",
@@ -196,6 +196,11 @@
       "callId": "listValues",
       "method": "GET",
       "endpoint": "/values?limit=1"
+    },
+    {
+      "callId": "listValuesByCode",
+      "method": "GET",
+      "endpoint": "/values?code={REQUEST_REPLACEMENT:createValue1.body.code}"
     },
     {
       "callId": "attachValue",

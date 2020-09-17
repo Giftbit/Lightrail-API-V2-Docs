@@ -34,7 +34,7 @@ Creating an account `Program`. Note, typically Programs are created through the 
 ``` 
 
 #### Attributes
-Below is the list of attributes commonly used when creating an Account Program. For full attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+Below is the list of attributes commonly used when creating an Account Program. For full attribute details, see the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram).
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **discount** (_optional_): Determines whether the Values in this Program represent a discount to the customer (default: `false`). Typically should be `false` for Account Programs.
@@ -56,7 +56,7 @@ Creating an account for a customer means creating a `Value` from your Accounts `
 ``` 
 
 #### Attributes
-Below is the list of attributes commonly used when creating an account from a Program. For full attribute details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+Below is the list of attributes commonly used when creating an account from a Program. For full attribute details, see the [Values endpoint reference](https://apidocs.lightrail.com/#operation/CreateValue).
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **contactId** (_required_): Unique ID for the Customer.
@@ -85,7 +85,7 @@ Crediting is used when adding value to an account.
 }  
 ```
 
-See full `credit` endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/credit). 
+See full `credit` endpoint details [here](https://apidocs.lightrail.com/#operation/Credit). 
 
 #### Debiting
 Debiting is used when removing value from an account.
@@ -106,7 +106,7 @@ Debiting is used when removing value from an account.
 }
 ```
 
-See full `debit` endpoint details [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/debit).
+See full `debit` endpoint details [here](https://apidocs.lightrail.com/#operation/Debit).
 
 #### Using Accounts as a Payment Source in Checkout
 Checkout uses the `/transactions/checkout` endpoint. To use an account directly as a payment source simply provide the following in the `sources` property of the request. 
@@ -126,7 +126,7 @@ Alternatively, since the account is associated with the Contact, you can directl
 }
 ```
 
-See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
+See [here](https://apidocs.lightrail.com/#operation/Checkout) for full documentation of the `/transactions/checkout` endpoint.
 
 ## Promotions
 Lightrail supports a wide variety of promotion use cases. A few common examples are:
@@ -145,7 +145,7 @@ Let's look at an example of creating a sign-up promotion which will be attached 
 
 #### Creating a Program for a Customer Promotion
 The `Program` will define the basic properties for the promotional `Values` that will be created from it. 
-Below are the required and common optional attributes needed for creating a `Program` for promotions. For full attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+Below are the required and common optional attributes needed for creating a `Program` for promotions. For full attribute details, see the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram).
 
 Example of creating a `Program` for a $5 promotion:  
 
@@ -165,7 +165,7 @@ Example of creating a `Program` for a $5 promotion:
 ``` 
 
 #### Attributes
-Below is the list of attributes commonly used when creating a Promotion Program. For full attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+Below is the list of attributes commonly used when creating a Promotion Program. For full attribute details, see the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram).
  - **id** (_required_): Unique idempotent ID for the Program.
  - **currency** (_required_): Currency code. Can be a standard ISO form such as USD or CAD but can also be any branded currency, eg: `megabucks`.
  - **name** (_optional_): A human-readable name for the Program.
@@ -174,8 +174,8 @@ Below is the list of attributes commonly used when creating a Promotion Program.
  - **minInitialBalance** (_optional_): The minimum balance the Values in this Program can be created with.
  - **maxInitialBalance** (_optional_): The maximum balance the Values in this Program can be created with.  
  - **fixedInitialBalances** (_optional_): A list of exact balances the Values in this Program can be created with. 
- - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a checkout transaction - for example, a percent-off discount. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
- - **redemptionRule**: A Redemption Rule controlling when the Value can be used in checkout. See the [endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for usage details.
+ - **balanceRule**: A Balance Rule controlling the effective balance of the Value in a checkout transaction - for example, a percent-off discount. See the [endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram) for usage details.
+ - **redemptionRule**: A Redemption Rule controlling when the Value can be used in checkout. See the [endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram) for usage details.
  - **metadata** (_optional_): Arbitrary data associated with the Program.
 
 ### Attaching the Promotion to a Contact 
@@ -191,7 +191,7 @@ This request attaches a new Value to a Contact, so that this promotion will be a
 ``` 
 
 #### Attributes
-Below is the list of attributes used when creating a promotional Value from a Program. For full Value creation attribute details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+Below is the list of attributes used when creating a promotional Value from a Program. For full Value creation attribute details, see the [Values endpoint reference](https://apidocs.lightrail.com/#operation/CreateValue).
 - **id** (_required_): Unique idempotent id for the Value.
 - **programId** (_required_): The programId of the Program this Value is in.
 - **contactId** (_required_): Unique ID for the Contact.
@@ -207,7 +207,7 @@ This will automatically use the promotion along with any other Values attached t
 }
 ```
 
-See [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for full documentation of the `/transactions/checkout` endpoint.
+See [here](https://apidocs.lightrail.com/#operation/Checkout) for full documentation of the `/transactions/checkout` endpoint.
 
 ## Marketplace
 Beyond single brand e-commerce integrations, Lightrail supports the more sophisticated requirements of marketplaces and multi-merchant coalitions. 
@@ -215,11 +215,11 @@ Beyond single brand e-commerce integrations, Lightrail supports the more sophist
 To highlight some of the additional functionality, consider the ride-sharing marketplace example. Here the marketplace, the platform, takes a fee for any rides purchased through the app. The marketplace must pay out the drivers for any completed rides. Suppose the marketplace wants to offer a promotion giving customers 50% off their first ride. Depending on the requirements, the marketplace may need to be fully liable for that promotion. Alternatively, it might be a promotion that has shared liability between the marketplace and the driver. Finally, a promotion may not apply to all purchases. Perhaps the promotion is restricted by location. Lightrail supports a diverse set of configurations to model these different scenarios.    
 
 #### Marketplace Commission Rate
-You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for more information. Details of `marketplaceRate` can be found under the `lineItems` request attribute. 
+You can set the marketplace rate, which is the marketplace’s commission rate, on each line item in checkout. This enables you to have items that have variable fees. See the [checkout endpoint](https://apidocs.lightrail.com/#operation/Checkout) for more information. Details of `marketplaceRate` can be found under the `lineItems` request attribute. 
 
 #### Liability
 The marketplace or seller (the driver, in our example), must be responsible for the promotional liability. You can create promotions that discount your service fees only. This gives you fine control over which party-the marketplace or the seller-is liable for the discount. For example, you (or your merchants) can create promotions that discount their seller amount only.
-See the request attribute `discountSellerLiability` under the [create value endpoint](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+See the request attribute `discountSellerLiability` under the [create value endpoint](https://apidocs.lightrail.com/#operation/CreateValue).
 
 #### Restricting Usage
 You can make promotions only applicable to certain activities, locations, or merchants. For example, a promotion that is only applicable for rides in LA. The Value `redemptionRule` attribute supports this. 
@@ -250,7 +250,7 @@ The gift card will also need to be delivered to the recipient — for example vi
 ### Consumer Buying Experience
 
 #### Setting up Gift Cards
-To get started with gift cards, [create a](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) to organize and provide a template for your gift card Values. [Values](https://www.lightrail.com/docs/#object-model/values) are the core object in Lightrail which represent the gift card balance and unique gift code. Values can also be used to represent other types of promotions and customer value in Lightrail, so Programs allow for the definition of common gift card defaults such as:
+To get started with gift cards, [create a Program](https://apidocs.lightrail.com/#operation/CreateProgram) to organize and provide a template for your gift card Values. [Values](https://www.lightrail.com/docs/#object-model/values) are the core object in Lightrail which represent the gift card balance and unique gift code. Values can also be used to represent other types of promotions and customer value in Lightrail, so Programs allow for the definition of common gift card defaults such as:
 
 - No expiry date
 - Variable denominations
@@ -262,7 +262,7 @@ To get started with gift cards, [create a](https://lightrailapi.docs.apiary.io/#
 
 Additionally, Lightrail’s web app includes Program performance stats to help you understand and assess a Program’s success. 
 
-For full `Program` attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program). 
+For full `Program` attribute details, see the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram). 
 
 #### Creating the Gift Card Program
 This Program will define the parameters of the Values that will be created and used for the gift card.
@@ -284,7 +284,7 @@ This Program will define the parameters of the Values that will be created and u
 ```
 
 #### Important Notes:
-- **metadata**: If you are interested in distributing your gift cards in an email, you can use `metadata` to support things like **company logos**, **email subject**, and **message**. For full `Program` attribute details, see the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program).
+- **metadata**: If you are interested in distributing your gift cards in an email, you can use `metadata` to support things like **company logos**, **email subject**, and **message**. For full `Program` attribute details, see the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram).
 - **minInitialBalance / maxInitialBalance**: This sets the minimum and maximum balance range that a gift card Value can be issued for. Lightrail stores currency in the the smallest whole unit, so `200000` USD is $2000.00. 
     Alternately you could set `fixedInitialBalances`  as a list of exact balances that are permissible. 
 
@@ -293,8 +293,8 @@ Gift cards are represented in Lightrail as Values and will be created from the P
 
 #### Selling a gift card follows these basic steps:
 
-1. You will need a page on your website where the customer can purchase the gift card. You can use [Lightrail’s checkout functionality](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout), or use your existing payment handling flow to process payment for the gift card. 
-1. Once the gift card has been paid for, you make a call to Lightrail to create the `Value` that will represent the gift card. For full `Value` creation details, see the [Values endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/values/create-a-value).
+1. You will need a page on your website where the customer can purchase the gift card. You can use [Lightrail’s checkout functionality](https://apidocs.lightrail.com/#operation/Checkout), or use your existing payment handling flow to process payment for the gift card. 
+1. Once the gift card has been paid for, you make a call to Lightrail to create the `Value` that will represent the gift card. For full `Value` creation details, see the [Values endpoint reference](https://apidocs.lightrail.com/#operation/CreateValue).
 1. Send the recipient the gift card code. This is dependent on your use case and the distribution is entirely up to you. The recipient will need the Value’s code to [register it to their account/wallet](#use-cases/register-the-gift-card-to-an-account-or-wallet), use it in a [checkout transaction](#use-cases/accepting-the-gift-card-in-checkout), or [check the balance](#use-cases/balance-check). 
 
  
@@ -321,7 +321,7 @@ The parameter `generateCode` tells the server to generate our gift card code for
 
 ### Register the Gift Card to an Account or Wallet
 
-Gift cards can be used anonymously, but the easiest way for a recipient to use a gift card as a payment source is to register it to their account or wallet. This means [creating a Lightrail](https://lightrailapi.docs.apiary.io/#reference/0/contacts/create-a-contact) `[Contact](https://lightrailapi.docs.apiary.io/#reference/0/contacts/create-a-contact)` record for the recipient and attaching the gift card `Value` to that `Contact`. For brevity we will assume that the contact record already exists — otherwise, see the API docs.
+Gift cards can be used anonymously, but the easiest way for a recipient to use a gift card as a payment source is to register it to their account or wallet. This means [creating a Lightrail Contact](https://apidocs.lightrail.com/#operation/CreateContact) record for the recipient and attaching the gift card `Value` to that `Contact`. For brevity we will assume that the contact record already exists — otherwise, see the API docs.
 
 Once you’ve attached the gift card to the Contact, the balance will be automatically available in their checkout. 
 
@@ -347,7 +347,7 @@ Lightrail allows you to split payment over multiple payment sources, which makes
 
 Alternatively, you could allow for anonymous users by providing the gift card `code` as a source instead of the `contactId`.
 
-For full `checkout` request details, see the [Transaction / Checkout endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout). 
+For full `checkout` request details, see the [Transaction / Checkout endpoint reference](https://apidocs.lightrail.com/#operation/Checkout). 
 
 #### Call to Checkout
 `POST https://api.lightrail.com/v2/transactions/checkout`
@@ -379,7 +379,7 @@ You can use `"simulate": true` to test the `checkout` request before submitting 
 
 ### Balance Check
 
-In order for customers to be able to easily check the remaining `balance` on their gift card, you can provide a page that accepts a gift card `code` and looks up the `Value`. Lightrail recommends using a [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) challenge-response system to ensure the user is human. See the [Values](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code) [endpoint to retrieve the value by code](https://lightrailapi.docs.apiary.io/#reference/0/values/get-a-value-by-code).
+In order for customers to be able to easily check the remaining `balance` on their gift card, you can provide a page that accepts a gift card `code` and looks up the `Value`. Lightrail recommends using a [CAPTCHA](https://en.wikipedia.org/wiki/CAPTCHA) challenge-response system to ensure the user is human. See the [Values endpoint to retrieve the value by code](https://apidocs.lightrail.com/#operation/ListValues).
 
 `GET https://api.lightrail.com/v2/values?code=GIFT-CARD-DEMO-1234-5678`
 

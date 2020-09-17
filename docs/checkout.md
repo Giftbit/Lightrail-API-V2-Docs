@@ -38,7 +38,7 @@ A `source` consists of an object with a `rail` identifier along with some additi
 
 Promotions, gift cards, and loyalty points you've created within Lightrail are all accessed via `"rail": "lightrail"`. Credit card processing is done via Stripe through `"rail": "stripe"`. There's one more `"rail": "internal"` which represents value that is internal to your system. It means you're tracking the collection of funds, outside of Lightrail and Stripe. For example, this allows you to migrate off a legacy gift card system you might have.
 
-See the [full endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout) for details. 
+See the [full endpoint reference](https://apidocs.lightrail.com/#operation/Checkout) for details.
 
 #### Rail: Lightrail
 With `"rail": "lightrail"` you'll supply an identifier of an object in Lightrail. The following is an example of supplying a Lightrail payment source.

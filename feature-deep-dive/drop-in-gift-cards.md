@@ -34,7 +34,7 @@ The request body will simply be a JSON string, which will be stored as your shar
 Note that while you are in test mode the shared secret can be any string. Once you switch to live mode it should be set to something secure and unguessable. 
 
 #### Create Drop-in Gift Card Program
-Create the [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) that will be used to set defaults for gift cards (currency, allowable gift card amounts, etc): 
+Create the [Program](https://apidocs.lightrail.com/#operation/CreateProgram) that will be used to set defaults for gift cards (currency, allowable gift card amounts, etc): 
 
 `POST https://api.lightrail.com/v2/programs`
 ```json
@@ -48,7 +48,7 @@ Create the [Program](https://lightrailapi.docs.apiary.io/#reference/0/programs/c
 }
 ```
 
-See the [Programs endpoint reference](https://lightrailapi.docs.apiary.io/#reference/0/programs/create-program) for details on what parameters can be set.
+See the [Programs endpoint reference](https://apidocs.lightrail.com/#operation/CreateProgram) for details on what parameters can be set.
 
 #### Drop-in Configuration
 Is done through the API. This example uses the fictional company "Rocketship" to represent your company. 
@@ -279,7 +279,7 @@ The transaction is handled by backend methods. You'll need to set up two endpoin
 1. simulate transactions (check the customer's account balance),
 1. post the transaction and redirect your customer to a success page. 
 
-A brief example of the simulate/charge flow follows. For more details on the usage of the `/transactions/checkout` endpoint, see [here](https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout).
+A brief example of the simulate/charge flow follows. For more details on the usage of the `/transactions/checkout` endpoint, see [here](https://apidocs.lightrail.com/#operation/Checkout).
 
 #### Simulate a Charge / Balance Check
 When your customer chooses to use their account credit, you need to see whether the account can cover the requested amount and whether the customer has any other attached value that can be used for the transaction. Our API makes it easy to post a split-tender charge where part of the transaction is covered by a Lightrail account, and part is covered by Stripe.
@@ -404,7 +404,7 @@ At this point, the charge has been posted to both Lightrail and Stripe. You can 
          "rail":"stripe",
          "chargeId":"ch_1DynnSCM9MOvFvZK7BGHlNLE",
          "charge":  {
-            // ...full Stripe charge response: for an example, see the endpoint reference at https://lightrailapi.docs.apiary.io/#reference/0/transactions/checkout)
+            // ...full Stripe charge response: for an example, see the endpoint reference at https://apidocs.lightrail.com/#operation/Checkout)
          },
          "amount":-2150
       }
