@@ -224,7 +224,7 @@ paths:
       tags:
         - Currencies
       summary: Delete a Currency
-      description: ''
+      description: Currencies can only be deleted when they have not been used in any Transactions (because Transactions can never be altered and the Transaction currency must be valid).
       operationId: DeleteCurrency
       parameters:
         - name: code
