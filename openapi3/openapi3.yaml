@@ -550,7 +550,7 @@ paths:
         - Contacts
       summary: List a Contact's Values
       description: ''
-      operationId: ListaContact'sValues
+      operationId: ListContactsValues
       parameters:
         - name: id
           in: path
