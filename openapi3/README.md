@@ -10,7 +10,7 @@ Working on the spec file (openapi3.yaml) requires tools and scripts executed wit
 
 Most of the file is edited by hand.  The [online Swagger editor](https://editor.swagger.io/) can help a bit.  Alternately [Insomnia Designer](https://insomnia.rest/) provides a nice tree view for navigating around the file, but it doesn't save the file in place, so you need to copy/paste to get your changes out.
 
-You can preview the HTML-rendered documentation with `npm run start`.  The preview will update automatically on file changes, but you need to reload your browser manually.
+You can preview the HTML-rendered documentation with `npm run start`.  The server will update automatically on file changes, but you need to reload your browser manually.
 
 The `components.examples` section is updated automatically with calls defined in `requests.json`.  To run the script and replace the examples: `npm run refreshExamples`.
 
